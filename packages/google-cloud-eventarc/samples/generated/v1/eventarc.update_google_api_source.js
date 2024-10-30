@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+function main(googleApiSource) {
+  // [START eventarc_v1_generated_Eventarc_UpdateGoogleApiSource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,21 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The GoogleApiSource to be updated.
    */
-  // const name = 'abc123'
+  // const googleApiSource = {}
+  /**
+   *  Optional. The fields to be updated; only fields explicitly provided are
+   *  updated. If no field mask is provided, all provided fields in the request
+   *  are updated. To update all fields, provide a field mask of "*".
+   */
+  // const updateMask = {}
+  /**
+   *  Optional. If set to true, and the GoogleApiSource is not found, a new
+   *  GoogleApiSource will be created. In this situation, `update_mask` is
+   *  ignored.
+   */
+  // const allowMissing = true
   /**
    *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
@@ -44,20 +56,20 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callUpdateGoogleApiSource() {
     // Construct request
     const request = {
-      name,
+      googleApiSource,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
+    const [operation] = await eventarcClient.updateGoogleApiSource(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callUpdateGoogleApiSource();
+  // [END eventarc_v1_generated_Eventarc_UpdateGoogleApiSource_async]
 }
 
 process.on('unhandledRejection', err => {

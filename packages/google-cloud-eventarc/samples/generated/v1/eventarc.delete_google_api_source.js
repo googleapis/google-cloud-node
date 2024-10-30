@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  // [START eventarc_v1_generated_Eventarc_DeleteGoogleApiSource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,19 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The name of the GoogleApiSource to be deleted.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If provided, the MessageBus will only be deleted if the etag
+   *  matches the current etag on the resource.
+   */
+  // const etag = 'abc123'
+  /**
+   *  Optional. If set to true, and the MessageBus is not found, the request will
+   *  succeed but no action will be taken on the server.
+   */
+  // const allowMissing = true
   /**
    *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
@@ -44,20 +54,20 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callDeleteGoogleApiSource() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
+    const [operation] = await eventarcClient.deleteGoogleApiSource(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callDeleteGoogleApiSource();
+  // [END eventarc_v1_generated_Eventarc_DeleteGoogleApiSource_async]
 }
 
 process.on('unhandledRejection', err => {

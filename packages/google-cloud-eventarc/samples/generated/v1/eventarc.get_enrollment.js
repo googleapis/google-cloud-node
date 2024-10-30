@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  // [START eventarc_v1_generated_Eventarc_GetEnrollment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,14 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The name of the Enrollment to get.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. If set, validate the request and preview the review, but do not
-   *  post it.
-   */
-  // const validateOnly = true
 
   // Imports the Eventarc library
   const {EventarcClient} = require('@google-cloud/eventarc').v1;
@@ -44,20 +39,19 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callGetEnrollment() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
-    const [response] = await operation.promise();
+    const response = await eventarcClient.getEnrollment(request);
     console.log(response);
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callGetEnrollment();
+  // [END eventarc_v1_generated_Eventarc_GetEnrollment_async]
 }
 
 process.on('unhandledRejection', err => {

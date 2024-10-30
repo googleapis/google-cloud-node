@@ -81,6 +81,7 @@
                          * @property {google.cloud.eventarc.v1.Channel.State|null} [state] Channel state
                          * @property {string|null} [activationToken] Channel activationToken
                          * @property {string|null} [cryptoKeyName] Channel cryptoKeyName
+                         * @property {boolean|null} [satisfiesPzs] Channel satisfiesPzs
                          */
     
                         /**
@@ -170,6 +171,14 @@
                          */
                         Channel.prototype.cryptoKeyName = "";
     
+                        /**
+                         * Channel satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.satisfiesPzs = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -226,6 +235,8 @@
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.activationToken);
                             if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.cryptoKeyName);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.satisfiesPzs);
                             return writer;
                         };
     
@@ -294,6 +305,10 @@
                                     }
                                 case 11: {
                                         message.cryptoKeyName = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.satisfiesPzs = reader.bool();
                                         break;
                                     }
                                 default:
@@ -372,6 +387,9 @@
                             if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
                                 if (!$util.isString(message.cryptoKeyName))
                                     return "cryptoKeyName: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
                             return null;
                         };
     
@@ -433,6 +451,8 @@
                                 message.activationToken = String(object.activationToken);
                             if (object.cryptoKeyName != null)
                                 message.cryptoKeyName = String(object.cryptoKeyName);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             return message;
                         };
     
@@ -458,6 +478,7 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.activationToken = "";
                                 object.cryptoKeyName = "";
+                                object.satisfiesPzs = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -480,6 +501,8 @@
                                 object.activationToken = message.activationToken;
                             if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
                                 object.cryptoKeyName = message.cryptoKeyName;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
                             return object;
                         };
     
@@ -1699,6 +1722,521 @@
                         return FilteringAttribute;
                     })();
     
+                    v1.Enrollment = (function() {
+    
+                        /**
+                         * Properties of an Enrollment.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IEnrollment
+                         * @property {string|null} [name] Enrollment name
+                         * @property {string|null} [uid] Enrollment uid
+                         * @property {string|null} [etag] Enrollment etag
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Enrollment createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Enrollment updateTime
+                         * @property {Object.<string,string>|null} [labels] Enrollment labels
+                         * @property {Object.<string,string>|null} [annotations] Enrollment annotations
+                         * @property {string|null} [displayName] Enrollment displayName
+                         * @property {string|null} [celMatch] Enrollment celMatch
+                         * @property {string|null} [messageBus] Enrollment messageBus
+                         * @property {string|null} [destination] Enrollment destination
+                         */
+    
+                        /**
+                         * Constructs a new Enrollment.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents an Enrollment.
+                         * @implements IEnrollment
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IEnrollment=} [properties] Properties to set
+                         */
+                        function Enrollment(properties) {
+                            this.labels = {};
+                            this.annotations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Enrollment name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.name = "";
+    
+                        /**
+                         * Enrollment uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.uid = "";
+    
+                        /**
+                         * Enrollment etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.etag = "";
+    
+                        /**
+                         * Enrollment createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.createTime = null;
+    
+                        /**
+                         * Enrollment updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.updateTime = null;
+    
+                        /**
+                         * Enrollment labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Enrollment annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Enrollment displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.displayName = "";
+    
+                        /**
+                         * Enrollment celMatch.
+                         * @member {string} celMatch
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.celMatch = "";
+    
+                        /**
+                         * Enrollment messageBus.
+                         * @member {string} messageBus
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.messageBus = "";
+    
+                        /**
+                         * Enrollment destination.
+                         * @member {string} destination
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         */
+                        Enrollment.prototype.destination = "";
+    
+                        /**
+                         * Creates a new Enrollment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IEnrollment=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.Enrollment} Enrollment instance
+                         */
+                        Enrollment.create = function create(properties) {
+                            return new Enrollment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Enrollment message. Does not implicitly {@link google.cloud.eventarc.v1.Enrollment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IEnrollment} message Enrollment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Enrollment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
+                            if (message.celMatch != null && Object.hasOwnProperty.call(message, "celMatch"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.celMatch);
+                            if (message.messageBus != null && Object.hasOwnProperty.call(message, "messageBus"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.messageBus);
+                            if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.destination);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Enrollment message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Enrollment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IEnrollment} message Enrollment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Enrollment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Enrollment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.Enrollment} Enrollment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Enrollment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Enrollment(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 8: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.celMatch = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.messageBus = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.destination = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Enrollment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.Enrollment} Enrollment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Enrollment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Enrollment message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Enrollment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.celMatch != null && message.hasOwnProperty("celMatch"))
+                                if (!$util.isString(message.celMatch))
+                                    return "celMatch: string expected";
+                            if (message.messageBus != null && message.hasOwnProperty("messageBus"))
+                                if (!$util.isString(message.messageBus))
+                                    return "messageBus: string expected";
+                            if (message.destination != null && message.hasOwnProperty("destination"))
+                                if (!$util.isString(message.destination))
+                                    return "destination: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Enrollment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.Enrollment} Enrollment
+                         */
+                        Enrollment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.Enrollment)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.Enrollment();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Enrollment.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Enrollment.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Enrollment.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Enrollment.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.celMatch != null)
+                                message.celMatch = String(object.celMatch);
+                            if (object.messageBus != null)
+                                message.messageBus = String(object.messageBus);
+                            if (object.destination != null)
+                                message.destination = String(object.destination);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Enrollment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {google.cloud.eventarc.v1.Enrollment} message Enrollment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Enrollment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.annotations = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.etag = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.displayName = "";
+                                object.celMatch = "";
+                                object.messageBus = "";
+                                object.destination = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.celMatch != null && message.hasOwnProperty("celMatch"))
+                                object.celMatch = message.celMatch;
+                            if (message.messageBus != null && message.hasOwnProperty("messageBus"))
+                                object.messageBus = message.messageBus;
+                            if (message.destination != null && message.hasOwnProperty("destination"))
+                                object.destination = message.destination;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Enrollment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Enrollment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Enrollment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.Enrollment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Enrollment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.Enrollment";
+                        };
+    
+                        return Enrollment;
+                    })();
+    
                     v1.Eventarc = (function() {
     
                         /**
@@ -2322,6 +2860,699 @@
                          * @instance
                          * @param {google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest} request UpdateGoogleChannelConfigRequest message or plain object
                          * @returns {Promise<google.cloud.eventarc.v1.GoogleChannelConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|getMessageBus}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef GetMessageBusCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.MessageBus} [response] MessageBus
+                         */
+    
+                        /**
+                         * Calls GetMessageBus.
+                         * @function getMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetMessageBusRequest} request GetMessageBusRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.GetMessageBusCallback} callback Node-style callback called with the error, if any, and MessageBus
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.getMessageBus = function getMessageBus(request, callback) {
+                            return this.rpcCall(getMessageBus, $root.google.cloud.eventarc.v1.GetMessageBusRequest, $root.google.cloud.eventarc.v1.MessageBus, request, callback);
+                        }, "name", { value: "GetMessageBus" });
+    
+                        /**
+                         * Calls GetMessageBus.
+                         * @function getMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetMessageBusRequest} request GetMessageBusRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.MessageBus>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|listMessageBuses}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef ListMessageBusesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ListMessageBusesResponse} [response] ListMessageBusesResponse
+                         */
+    
+                        /**
+                         * Calls ListMessageBuses.
+                         * @function listMessageBuses
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesRequest} request ListMessageBusesRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.ListMessageBusesCallback} callback Node-style callback called with the error, if any, and ListMessageBusesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.listMessageBuses = function listMessageBuses(request, callback) {
+                            return this.rpcCall(listMessageBuses, $root.google.cloud.eventarc.v1.ListMessageBusesRequest, $root.google.cloud.eventarc.v1.ListMessageBusesResponse, request, callback);
+                        }, "name", { value: "ListMessageBuses" });
+    
+                        /**
+                         * Calls ListMessageBuses.
+                         * @function listMessageBuses
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesRequest} request ListMessageBusesRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ListMessageBusesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|listMessageBusEnrollments}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef ListMessageBusEnrollmentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse} [response] ListMessageBusEnrollmentsResponse
+                         */
+    
+                        /**
+                         * Calls ListMessageBusEnrollments.
+                         * @function listMessageBusEnrollments
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest} request ListMessageBusEnrollmentsRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.ListMessageBusEnrollmentsCallback} callback Node-style callback called with the error, if any, and ListMessageBusEnrollmentsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.listMessageBusEnrollments = function listMessageBusEnrollments(request, callback) {
+                            return this.rpcCall(listMessageBusEnrollments, $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest, $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse, request, callback);
+                        }, "name", { value: "ListMessageBusEnrollments" });
+    
+                        /**
+                         * Calls ListMessageBusEnrollments.
+                         * @function listMessageBusEnrollments
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest} request ListMessageBusEnrollmentsRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|createMessageBus}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef CreateMessageBusCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateMessageBus.
+                         * @function createMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateMessageBusRequest} request CreateMessageBusRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.CreateMessageBusCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.createMessageBus = function createMessageBus(request, callback) {
+                            return this.rpcCall(createMessageBus, $root.google.cloud.eventarc.v1.CreateMessageBusRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateMessageBus" });
+    
+                        /**
+                         * Calls CreateMessageBus.
+                         * @function createMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateMessageBusRequest} request CreateMessageBusRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|updateMessageBus}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef UpdateMessageBusCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateMessageBus.
+                         * @function updateMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateMessageBusRequest} request UpdateMessageBusRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.UpdateMessageBusCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.updateMessageBus = function updateMessageBus(request, callback) {
+                            return this.rpcCall(updateMessageBus, $root.google.cloud.eventarc.v1.UpdateMessageBusRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateMessageBus" });
+    
+                        /**
+                         * Calls UpdateMessageBus.
+                         * @function updateMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateMessageBusRequest} request UpdateMessageBusRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|deleteMessageBus}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef DeleteMessageBusCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteMessageBus.
+                         * @function deleteMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteMessageBusRequest} request DeleteMessageBusRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.DeleteMessageBusCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.deleteMessageBus = function deleteMessageBus(request, callback) {
+                            return this.rpcCall(deleteMessageBus, $root.google.cloud.eventarc.v1.DeleteMessageBusRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteMessageBus" });
+    
+                        /**
+                         * Calls DeleteMessageBus.
+                         * @function deleteMessageBus
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteMessageBusRequest} request DeleteMessageBusRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|getEnrollment}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef GetEnrollmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.Enrollment} [response] Enrollment
+                         */
+    
+                        /**
+                         * Calls GetEnrollment.
+                         * @function getEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetEnrollmentRequest} request GetEnrollmentRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.GetEnrollmentCallback} callback Node-style callback called with the error, if any, and Enrollment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.getEnrollment = function getEnrollment(request, callback) {
+                            return this.rpcCall(getEnrollment, $root.google.cloud.eventarc.v1.GetEnrollmentRequest, $root.google.cloud.eventarc.v1.Enrollment, request, callback);
+                        }, "name", { value: "GetEnrollment" });
+    
+                        /**
+                         * Calls GetEnrollment.
+                         * @function getEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetEnrollmentRequest} request GetEnrollmentRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.Enrollment>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|listEnrollments}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef ListEnrollmentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ListEnrollmentsResponse} [response] ListEnrollmentsResponse
+                         */
+    
+                        /**
+                         * Calls ListEnrollments.
+                         * @function listEnrollments
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsRequest} request ListEnrollmentsRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.ListEnrollmentsCallback} callback Node-style callback called with the error, if any, and ListEnrollmentsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.listEnrollments = function listEnrollments(request, callback) {
+                            return this.rpcCall(listEnrollments, $root.google.cloud.eventarc.v1.ListEnrollmentsRequest, $root.google.cloud.eventarc.v1.ListEnrollmentsResponse, request, callback);
+                        }, "name", { value: "ListEnrollments" });
+    
+                        /**
+                         * Calls ListEnrollments.
+                         * @function listEnrollments
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsRequest} request ListEnrollmentsRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ListEnrollmentsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|createEnrollment}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef CreateEnrollmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateEnrollment.
+                         * @function createEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateEnrollmentRequest} request CreateEnrollmentRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.CreateEnrollmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.createEnrollment = function createEnrollment(request, callback) {
+                            return this.rpcCall(createEnrollment, $root.google.cloud.eventarc.v1.CreateEnrollmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateEnrollment" });
+    
+                        /**
+                         * Calls CreateEnrollment.
+                         * @function createEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateEnrollmentRequest} request CreateEnrollmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|updateEnrollment}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef UpdateEnrollmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateEnrollment.
+                         * @function updateEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateEnrollmentRequest} request UpdateEnrollmentRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.UpdateEnrollmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.updateEnrollment = function updateEnrollment(request, callback) {
+                            return this.rpcCall(updateEnrollment, $root.google.cloud.eventarc.v1.UpdateEnrollmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateEnrollment" });
+    
+                        /**
+                         * Calls UpdateEnrollment.
+                         * @function updateEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateEnrollmentRequest} request UpdateEnrollmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|deleteEnrollment}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef DeleteEnrollmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteEnrollment.
+                         * @function deleteEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteEnrollmentRequest} request DeleteEnrollmentRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.DeleteEnrollmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.deleteEnrollment = function deleteEnrollment(request, callback) {
+                            return this.rpcCall(deleteEnrollment, $root.google.cloud.eventarc.v1.DeleteEnrollmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteEnrollment" });
+    
+                        /**
+                         * Calls DeleteEnrollment.
+                         * @function deleteEnrollment
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteEnrollmentRequest} request DeleteEnrollmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|getPipeline}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef GetPipelineCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.Pipeline} [response] Pipeline
+                         */
+    
+                        /**
+                         * Calls GetPipeline.
+                         * @function getPipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetPipelineRequest} request GetPipelineRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.GetPipelineCallback} callback Node-style callback called with the error, if any, and Pipeline
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.getPipeline = function getPipeline(request, callback) {
+                            return this.rpcCall(getPipeline, $root.google.cloud.eventarc.v1.GetPipelineRequest, $root.google.cloud.eventarc.v1.Pipeline, request, callback);
+                        }, "name", { value: "GetPipeline" });
+    
+                        /**
+                         * Calls GetPipeline.
+                         * @function getPipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetPipelineRequest} request GetPipelineRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.Pipeline>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|listPipelines}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef ListPipelinesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ListPipelinesResponse} [response] ListPipelinesResponse
+                         */
+    
+                        /**
+                         * Calls ListPipelines.
+                         * @function listPipelines
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListPipelinesRequest} request ListPipelinesRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.ListPipelinesCallback} callback Node-style callback called with the error, if any, and ListPipelinesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.listPipelines = function listPipelines(request, callback) {
+                            return this.rpcCall(listPipelines, $root.google.cloud.eventarc.v1.ListPipelinesRequest, $root.google.cloud.eventarc.v1.ListPipelinesResponse, request, callback);
+                        }, "name", { value: "ListPipelines" });
+    
+                        /**
+                         * Calls ListPipelines.
+                         * @function listPipelines
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListPipelinesRequest} request ListPipelinesRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ListPipelinesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|createPipeline}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef CreatePipelineCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreatePipeline.
+                         * @function createPipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreatePipelineRequest} request CreatePipelineRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.CreatePipelineCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.createPipeline = function createPipeline(request, callback) {
+                            return this.rpcCall(createPipeline, $root.google.cloud.eventarc.v1.CreatePipelineRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreatePipeline" });
+    
+                        /**
+                         * Calls CreatePipeline.
+                         * @function createPipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreatePipelineRequest} request CreatePipelineRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|updatePipeline}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef UpdatePipelineCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdatePipeline.
+                         * @function updatePipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdatePipelineRequest} request UpdatePipelineRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.UpdatePipelineCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.updatePipeline = function updatePipeline(request, callback) {
+                            return this.rpcCall(updatePipeline, $root.google.cloud.eventarc.v1.UpdatePipelineRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdatePipeline" });
+    
+                        /**
+                         * Calls UpdatePipeline.
+                         * @function updatePipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdatePipelineRequest} request UpdatePipelineRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|deletePipeline}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef DeletePipelineCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeletePipeline.
+                         * @function deletePipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeletePipelineRequest} request DeletePipelineRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.DeletePipelineCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.deletePipeline = function deletePipeline(request, callback) {
+                            return this.rpcCall(deletePipeline, $root.google.cloud.eventarc.v1.DeletePipelineRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeletePipeline" });
+    
+                        /**
+                         * Calls DeletePipeline.
+                         * @function deletePipeline
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeletePipelineRequest} request DeletePipelineRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|getGoogleApiSource}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef GetGoogleApiSourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.GoogleApiSource} [response] GoogleApiSource
+                         */
+    
+                        /**
+                         * Calls GetGoogleApiSource.
+                         * @function getGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetGoogleApiSourceRequest} request GetGoogleApiSourceRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.GetGoogleApiSourceCallback} callback Node-style callback called with the error, if any, and GoogleApiSource
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.getGoogleApiSource = function getGoogleApiSource(request, callback) {
+                            return this.rpcCall(getGoogleApiSource, $root.google.cloud.eventarc.v1.GetGoogleApiSourceRequest, $root.google.cloud.eventarc.v1.GoogleApiSource, request, callback);
+                        }, "name", { value: "GetGoogleApiSource" });
+    
+                        /**
+                         * Calls GetGoogleApiSource.
+                         * @function getGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetGoogleApiSourceRequest} request GetGoogleApiSourceRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.GoogleApiSource>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|listGoogleApiSources}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef ListGoogleApiSourcesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ListGoogleApiSourcesResponse} [response] ListGoogleApiSourcesResponse
+                         */
+    
+                        /**
+                         * Calls ListGoogleApiSources.
+                         * @function listGoogleApiSources
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesRequest} request ListGoogleApiSourcesRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.ListGoogleApiSourcesCallback} callback Node-style callback called with the error, if any, and ListGoogleApiSourcesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.listGoogleApiSources = function listGoogleApiSources(request, callback) {
+                            return this.rpcCall(listGoogleApiSources, $root.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest, $root.google.cloud.eventarc.v1.ListGoogleApiSourcesResponse, request, callback);
+                        }, "name", { value: "ListGoogleApiSources" });
+    
+                        /**
+                         * Calls ListGoogleApiSources.
+                         * @function listGoogleApiSources
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesRequest} request ListGoogleApiSourcesRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ListGoogleApiSourcesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|createGoogleApiSource}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef CreateGoogleApiSourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateGoogleApiSource.
+                         * @function createGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest} request CreateGoogleApiSourceRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.CreateGoogleApiSourceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.createGoogleApiSource = function createGoogleApiSource(request, callback) {
+                            return this.rpcCall(createGoogleApiSource, $root.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateGoogleApiSource" });
+    
+                        /**
+                         * Calls CreateGoogleApiSource.
+                         * @function createGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest} request CreateGoogleApiSourceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|updateGoogleApiSource}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef UpdateGoogleApiSourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateGoogleApiSource.
+                         * @function updateGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest} request UpdateGoogleApiSourceRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.UpdateGoogleApiSourceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.updateGoogleApiSource = function updateGoogleApiSource(request, callback) {
+                            return this.rpcCall(updateGoogleApiSource, $root.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateGoogleApiSource" });
+    
+                        /**
+                         * Calls UpdateGoogleApiSource.
+                         * @function updateGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest} request UpdateGoogleApiSourceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|deleteGoogleApiSource}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef DeleteGoogleApiSourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteGoogleApiSource.
+                         * @function deleteGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest} request DeleteGoogleApiSourceRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.DeleteGoogleApiSourceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.deleteGoogleApiSource = function deleteGoogleApiSource(request, callback) {
+                            return this.rpcCall(deleteGoogleApiSource, $root.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteGoogleApiSource" });
+    
+                        /**
+                         * Calls DeleteGoogleApiSource.
+                         * @function deleteGoogleApiSource
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest} request DeleteGoogleApiSourceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -7904,6 +9135,7023 @@
                         return GetGoogleChannelConfigRequest;
                     })();
     
+                    v1.GetMessageBusRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGetMessageBusRequest
+                         * @property {string|null} [name] GetMessageBusRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GetMessageBusRequest.
+                         * @implements IGetMessageBusRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGetMessageBusRequest=} [properties] Properties to set
+                         */
+                        function GetMessageBusRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMessageBusRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @instance
+                         */
+                        GetMessageBusRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMessageBusRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetMessageBusRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GetMessageBusRequest} GetMessageBusRequest instance
+                         */
+                        GetMessageBusRequest.create = function create(properties) {
+                            return new GetMessageBusRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMessageBusRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetMessageBusRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetMessageBusRequest} message GetMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMessageBusRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMessageBusRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetMessageBusRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetMessageBusRequest} message GetMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMessageBusRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMessageBusRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GetMessageBusRequest} GetMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMessageBusRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GetMessageBusRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMessageBusRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GetMessageBusRequest} GetMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMessageBusRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMessageBusRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMessageBusRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMessageBusRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GetMessageBusRequest} GetMessageBusRequest
+                         */
+                        GetMessageBusRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GetMessageBusRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GetMessageBusRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMessageBusRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GetMessageBusRequest} message GetMessageBusRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMessageBusRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMessageBusRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMessageBusRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMessageBusRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.GetMessageBusRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMessageBusRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.GetMessageBusRequest";
+                        };
+    
+                        return GetMessageBusRequest;
+                    })();
+    
+                    v1.ListMessageBusesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMessageBusesRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListMessageBusesRequest
+                         * @property {string|null} [parent] ListMessageBusesRequest parent
+                         * @property {number|null} [pageSize] ListMessageBusesRequest pageSize
+                         * @property {string|null} [pageToken] ListMessageBusesRequest pageToken
+                         * @property {string|null} [orderBy] ListMessageBusesRequest orderBy
+                         * @property {string|null} [filter] ListMessageBusesRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListMessageBusesRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListMessageBusesRequest.
+                         * @implements IListMessageBusesRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesRequest=} [properties] Properties to set
+                         */
+                        function ListMessageBusesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMessageBusesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @instance
+                         */
+                        ListMessageBusesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMessageBusesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @instance
+                         */
+                        ListMessageBusesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMessageBusesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @instance
+                         */
+                        ListMessageBusesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListMessageBusesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @instance
+                         */
+                        ListMessageBusesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListMessageBusesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @instance
+                         */
+                        ListMessageBusesRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListMessageBusesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesRequest} ListMessageBusesRequest instance
+                         */
+                        ListMessageBusesRequest.create = function create(properties) {
+                            return new ListMessageBusesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusesRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesRequest} message ListMessageBusesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusesRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesRequest} message ListMessageBusesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesRequest} ListMessageBusesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListMessageBusesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesRequest} ListMessageBusesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMessageBusesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMessageBusesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMessageBusesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesRequest} ListMessageBusesRequest
+                         */
+                        ListMessageBusesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListMessageBusesRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListMessageBusesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMessageBusesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListMessageBusesRequest} message ListMessageBusesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMessageBusesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMessageBusesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMessageBusesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMessageBusesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMessageBusesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListMessageBusesRequest";
+                        };
+    
+                        return ListMessageBusesRequest;
+                    })();
+    
+                    v1.ListMessageBusesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMessageBusesResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListMessageBusesResponse
+                         * @property {Array.<google.cloud.eventarc.v1.IMessageBus>|null} [messageBuses] ListMessageBusesResponse messageBuses
+                         * @property {string|null} [nextPageToken] ListMessageBusesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMessageBusesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMessageBusesResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListMessageBusesResponse.
+                         * @implements IListMessageBusesResponse
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesResponse=} [properties] Properties to set
+                         */
+                        function ListMessageBusesResponse(properties) {
+                            this.messageBuses = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMessageBusesResponse messageBuses.
+                         * @member {Array.<google.cloud.eventarc.v1.IMessageBus>} messageBuses
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @instance
+                         */
+                        ListMessageBusesResponse.prototype.messageBuses = $util.emptyArray;
+    
+                        /**
+                         * ListMessageBusesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @instance
+                         */
+                        ListMessageBusesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMessageBusesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @instance
+                         */
+                        ListMessageBusesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMessageBusesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesResponse} ListMessageBusesResponse instance
+                         */
+                        ListMessageBusesResponse.create = function create(properties) {
+                            return new ListMessageBusesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusesResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesResponse} message ListMessageBusesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.messageBuses != null && message.messageBuses.length)
+                                for (var i = 0; i < message.messageBuses.length; ++i)
+                                    $root.google.cloud.eventarc.v1.MessageBus.encode(message.messageBuses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusesResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusesResponse} message ListMessageBusesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesResponse} ListMessageBusesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListMessageBusesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.messageBuses && message.messageBuses.length))
+                                            message.messageBuses = [];
+                                        message.messageBuses.push($root.google.cloud.eventarc.v1.MessageBus.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesResponse} ListMessageBusesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMessageBusesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMessageBusesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.messageBuses != null && message.hasOwnProperty("messageBuses")) {
+                                if (!Array.isArray(message.messageBuses))
+                                    return "messageBuses: array expected";
+                                for (var i = 0; i < message.messageBuses.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.MessageBus.verify(message.messageBuses[i]);
+                                    if (error)
+                                        return "messageBuses." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMessageBusesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusesResponse} ListMessageBusesResponse
+                         */
+                        ListMessageBusesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListMessageBusesResponse)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListMessageBusesResponse();
+                            if (object.messageBuses) {
+                                if (!Array.isArray(object.messageBuses))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListMessageBusesResponse.messageBuses: array expected");
+                                message.messageBuses = [];
+                                for (var i = 0; i < object.messageBuses.length; ++i) {
+                                    if (typeof object.messageBuses[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.ListMessageBusesResponse.messageBuses: object expected");
+                                    message.messageBuses[i] = $root.google.cloud.eventarc.v1.MessageBus.fromObject(object.messageBuses[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListMessageBusesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMessageBusesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListMessageBusesResponse} message ListMessageBusesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMessageBusesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.messageBuses = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.messageBuses && message.messageBuses.length) {
+                                object.messageBuses = [];
+                                for (var j = 0; j < message.messageBuses.length; ++j)
+                                    object.messageBuses[j] = $root.google.cloud.eventarc.v1.MessageBus.toObject(message.messageBuses[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMessageBusesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMessageBusesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMessageBusesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMessageBusesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListMessageBusesResponse";
+                        };
+    
+                        return ListMessageBusesResponse;
+                    })();
+    
+                    v1.ListMessageBusEnrollmentsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMessageBusEnrollmentsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListMessageBusEnrollmentsRequest
+                         * @property {string|null} [parent] ListMessageBusEnrollmentsRequest parent
+                         * @property {number|null} [pageSize] ListMessageBusEnrollmentsRequest pageSize
+                         * @property {string|null} [pageToken] ListMessageBusEnrollmentsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMessageBusEnrollmentsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListMessageBusEnrollmentsRequest.
+                         * @implements IListMessageBusEnrollmentsRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest=} [properties] Properties to set
+                         */
+                        function ListMessageBusEnrollmentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMessageBusEnrollmentsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @instance
+                         */
+                        ListMessageBusEnrollmentsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMessageBusEnrollmentsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @instance
+                         */
+                        ListMessageBusEnrollmentsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMessageBusEnrollmentsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @instance
+                         */
+                        ListMessageBusEnrollmentsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListMessageBusEnrollmentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest} ListMessageBusEnrollmentsRequest instance
+                         */
+                        ListMessageBusEnrollmentsRequest.create = function create(properties) {
+                            return new ListMessageBusEnrollmentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusEnrollmentsRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest} message ListMessageBusEnrollmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusEnrollmentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusEnrollmentsRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest} message ListMessageBusEnrollmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusEnrollmentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusEnrollmentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest} ListMessageBusEnrollmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusEnrollmentsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusEnrollmentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest} ListMessageBusEnrollmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusEnrollmentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMessageBusEnrollmentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMessageBusEnrollmentsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMessageBusEnrollmentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest} ListMessageBusEnrollmentsRequest
+                         */
+                        ListMessageBusEnrollmentsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMessageBusEnrollmentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest} message ListMessageBusEnrollmentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMessageBusEnrollmentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMessageBusEnrollmentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMessageBusEnrollmentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMessageBusEnrollmentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMessageBusEnrollmentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest";
+                        };
+    
+                        return ListMessageBusEnrollmentsRequest;
+                    })();
+    
+                    v1.ListMessageBusEnrollmentsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMessageBusEnrollmentsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListMessageBusEnrollmentsResponse
+                         * @property {Array.<string>|null} [enrollments] ListMessageBusEnrollmentsResponse enrollments
+                         * @property {string|null} [nextPageToken] ListMessageBusEnrollmentsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMessageBusEnrollmentsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMessageBusEnrollmentsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListMessageBusEnrollmentsResponse.
+                         * @implements IListMessageBusEnrollmentsResponse
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse=} [properties] Properties to set
+                         */
+                        function ListMessageBusEnrollmentsResponse(properties) {
+                            this.enrollments = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMessageBusEnrollmentsResponse enrollments.
+                         * @member {Array.<string>} enrollments
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @instance
+                         */
+                        ListMessageBusEnrollmentsResponse.prototype.enrollments = $util.emptyArray;
+    
+                        /**
+                         * ListMessageBusEnrollmentsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @instance
+                         */
+                        ListMessageBusEnrollmentsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMessageBusEnrollmentsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @instance
+                         */
+                        ListMessageBusEnrollmentsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMessageBusEnrollmentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse} ListMessageBusEnrollmentsResponse instance
+                         */
+                        ListMessageBusEnrollmentsResponse.create = function create(properties) {
+                            return new ListMessageBusEnrollmentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusEnrollmentsResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse} message ListMessageBusEnrollmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusEnrollmentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enrollments != null && message.enrollments.length)
+                                for (var i = 0; i < message.enrollments.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.enrollments[i]);
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMessageBusEnrollmentsResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse} message ListMessageBusEnrollmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMessageBusEnrollmentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusEnrollmentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse} ListMessageBusEnrollmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusEnrollmentsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.enrollments && message.enrollments.length))
+                                            message.enrollments = [];
+                                        message.enrollments.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMessageBusEnrollmentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse} ListMessageBusEnrollmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMessageBusEnrollmentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMessageBusEnrollmentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMessageBusEnrollmentsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enrollments != null && message.hasOwnProperty("enrollments")) {
+                                if (!Array.isArray(message.enrollments))
+                                    return "enrollments: array expected";
+                                for (var i = 0; i < message.enrollments.length; ++i)
+                                    if (!$util.isString(message.enrollments[i]))
+                                        return "enrollments: string[] expected";
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMessageBusEnrollmentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse} ListMessageBusEnrollmentsResponse
+                         */
+                        ListMessageBusEnrollmentsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse();
+                            if (object.enrollments) {
+                                if (!Array.isArray(object.enrollments))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse.enrollments: array expected");
+                                message.enrollments = [];
+                                for (var i = 0; i < object.enrollments.length; ++i)
+                                    message.enrollments[i] = String(object.enrollments[i]);
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMessageBusEnrollmentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse} message ListMessageBusEnrollmentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMessageBusEnrollmentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.enrollments = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.enrollments && message.enrollments.length) {
+                                object.enrollments = [];
+                                for (var j = 0; j < message.enrollments.length; ++j)
+                                    object.enrollments[j] = message.enrollments[j];
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMessageBusEnrollmentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMessageBusEnrollmentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMessageBusEnrollmentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMessageBusEnrollmentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse";
+                        };
+    
+                        return ListMessageBusEnrollmentsResponse;
+                    })();
+    
+                    v1.CreateMessageBusRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface ICreateMessageBusRequest
+                         * @property {string|null} [parent] CreateMessageBusRequest parent
+                         * @property {google.cloud.eventarc.v1.IMessageBus|null} [messageBus] CreateMessageBusRequest messageBus
+                         * @property {string|null} [messageBusId] CreateMessageBusRequest messageBusId
+                         * @property {boolean|null} [validateOnly] CreateMessageBusRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a CreateMessageBusRequest.
+                         * @implements ICreateMessageBusRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.ICreateMessageBusRequest=} [properties] Properties to set
+                         */
+                        function CreateMessageBusRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateMessageBusRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @instance
+                         */
+                        CreateMessageBusRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateMessageBusRequest messageBus.
+                         * @member {google.cloud.eventarc.v1.IMessageBus|null|undefined} messageBus
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @instance
+                         */
+                        CreateMessageBusRequest.prototype.messageBus = null;
+    
+                        /**
+                         * CreateMessageBusRequest messageBusId.
+                         * @member {string} messageBusId
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @instance
+                         */
+                        CreateMessageBusRequest.prototype.messageBusId = "";
+    
+                        /**
+                         * CreateMessageBusRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @instance
+                         */
+                        CreateMessageBusRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateMessageBusRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateMessageBusRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.CreateMessageBusRequest} CreateMessageBusRequest instance
+                         */
+                        CreateMessageBusRequest.create = function create(properties) {
+                            return new CreateMessageBusRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMessageBusRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreateMessageBusRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateMessageBusRequest} message CreateMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMessageBusRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.messageBus != null && Object.hasOwnProperty.call(message, "messageBus"))
+                                $root.google.cloud.eventarc.v1.MessageBus.encode(message.messageBus, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.messageBusId != null && Object.hasOwnProperty.call(message, "messageBusId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.messageBusId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMessageBusRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreateMessageBusRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateMessageBusRequest} message CreateMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMessageBusRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateMessageBusRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.CreateMessageBusRequest} CreateMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMessageBusRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.CreateMessageBusRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.messageBus = $root.google.cloud.eventarc.v1.MessageBus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.messageBusId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateMessageBusRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.CreateMessageBusRequest} CreateMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMessageBusRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateMessageBusRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateMessageBusRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.messageBus != null && message.hasOwnProperty("messageBus")) {
+                                var error = $root.google.cloud.eventarc.v1.MessageBus.verify(message.messageBus);
+                                if (error)
+                                    return "messageBus." + error;
+                            }
+                            if (message.messageBusId != null && message.hasOwnProperty("messageBusId"))
+                                if (!$util.isString(message.messageBusId))
+                                    return "messageBusId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateMessageBusRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.CreateMessageBusRequest} CreateMessageBusRequest
+                         */
+                        CreateMessageBusRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.CreateMessageBusRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.CreateMessageBusRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.messageBus != null) {
+                                if (typeof object.messageBus !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.CreateMessageBusRequest.messageBus: object expected");
+                                message.messageBus = $root.google.cloud.eventarc.v1.MessageBus.fromObject(object.messageBus);
+                            }
+                            if (object.messageBusId != null)
+                                message.messageBusId = String(object.messageBusId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateMessageBusRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.CreateMessageBusRequest} message CreateMessageBusRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateMessageBusRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.messageBus = null;
+                                object.messageBusId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.messageBus != null && message.hasOwnProperty("messageBus"))
+                                object.messageBus = $root.google.cloud.eventarc.v1.MessageBus.toObject(message.messageBus, options);
+                            if (message.messageBusId != null && message.hasOwnProperty("messageBusId"))
+                                object.messageBusId = message.messageBusId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateMessageBusRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateMessageBusRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateMessageBusRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.CreateMessageBusRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateMessageBusRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.CreateMessageBusRequest";
+                        };
+    
+                        return CreateMessageBusRequest;
+                    })();
+    
+                    v1.UpdateMessageBusRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IUpdateMessageBusRequest
+                         * @property {google.cloud.eventarc.v1.IMessageBus|null} [messageBus] UpdateMessageBusRequest messageBus
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMessageBusRequest updateMask
+                         * @property {boolean|null} [allowMissing] UpdateMessageBusRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateMessageBusRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents an UpdateMessageBusRequest.
+                         * @implements IUpdateMessageBusRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IUpdateMessageBusRequest=} [properties] Properties to set
+                         */
+                        function UpdateMessageBusRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateMessageBusRequest messageBus.
+                         * @member {google.cloud.eventarc.v1.IMessageBus|null|undefined} messageBus
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @instance
+                         */
+                        UpdateMessageBusRequest.prototype.messageBus = null;
+    
+                        /**
+                         * UpdateMessageBusRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @instance
+                         */
+                        UpdateMessageBusRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateMessageBusRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @instance
+                         */
+                        UpdateMessageBusRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateMessageBusRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @instance
+                         */
+                        UpdateMessageBusRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateMessageBusRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateMessageBusRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.UpdateMessageBusRequest} UpdateMessageBusRequest instance
+                         */
+                        UpdateMessageBusRequest.create = function create(properties) {
+                            return new UpdateMessageBusRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMessageBusRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdateMessageBusRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateMessageBusRequest} message UpdateMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMessageBusRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.messageBus != null && Object.hasOwnProperty.call(message, "messageBus"))
+                                $root.google.cloud.eventarc.v1.MessageBus.encode(message.messageBus, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMessageBusRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdateMessageBusRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateMessageBusRequest} message UpdateMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMessageBusRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateMessageBusRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.UpdateMessageBusRequest} UpdateMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMessageBusRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.UpdateMessageBusRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.messageBus = $root.google.cloud.eventarc.v1.MessageBus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateMessageBusRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.UpdateMessageBusRequest} UpdateMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMessageBusRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateMessageBusRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateMessageBusRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.messageBus != null && message.hasOwnProperty("messageBus")) {
+                                var error = $root.google.cloud.eventarc.v1.MessageBus.verify(message.messageBus);
+                                if (error)
+                                    return "messageBus." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateMessageBusRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.UpdateMessageBusRequest} UpdateMessageBusRequest
+                         */
+                        UpdateMessageBusRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.UpdateMessageBusRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.UpdateMessageBusRequest();
+                            if (object.messageBus != null) {
+                                if (typeof object.messageBus !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateMessageBusRequest.messageBus: object expected");
+                                message.messageBus = $root.google.cloud.eventarc.v1.MessageBus.fromObject(object.messageBus);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateMessageBusRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateMessageBusRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.UpdateMessageBusRequest} message UpdateMessageBusRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateMessageBusRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.messageBus = null;
+                                object.updateMask = null;
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.messageBus != null && message.hasOwnProperty("messageBus"))
+                                object.messageBus = $root.google.cloud.eventarc.v1.MessageBus.toObject(message.messageBus, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateMessageBusRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateMessageBusRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateMessageBusRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.UpdateMessageBusRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateMessageBusRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.UpdateMessageBusRequest";
+                        };
+    
+                        return UpdateMessageBusRequest;
+                    })();
+    
+                    v1.DeleteMessageBusRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IDeleteMessageBusRequest
+                         * @property {string|null} [name] DeleteMessageBusRequest name
+                         * @property {string|null} [etag] DeleteMessageBusRequest etag
+                         * @property {boolean|null} [allowMissing] DeleteMessageBusRequest allowMissing
+                         * @property {boolean|null} [validateOnly] DeleteMessageBusRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new DeleteMessageBusRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a DeleteMessageBusRequest.
+                         * @implements IDeleteMessageBusRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IDeleteMessageBusRequest=} [properties] Properties to set
+                         */
+                        function DeleteMessageBusRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteMessageBusRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @instance
+                         */
+                        DeleteMessageBusRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteMessageBusRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @instance
+                         */
+                        DeleteMessageBusRequest.prototype.etag = "";
+    
+                        /**
+                         * DeleteMessageBusRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @instance
+                         */
+                        DeleteMessageBusRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * DeleteMessageBusRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @instance
+                         */
+                        DeleteMessageBusRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new DeleteMessageBusRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteMessageBusRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.DeleteMessageBusRequest} DeleteMessageBusRequest instance
+                         */
+                        DeleteMessageBusRequest.create = function create(properties) {
+                            return new DeleteMessageBusRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMessageBusRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeleteMessageBusRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteMessageBusRequest} message DeleteMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMessageBusRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMessageBusRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeleteMessageBusRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteMessageBusRequest} message DeleteMessageBusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMessageBusRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteMessageBusRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.DeleteMessageBusRequest} DeleteMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMessageBusRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.DeleteMessageBusRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteMessageBusRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.DeleteMessageBusRequest} DeleteMessageBusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMessageBusRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteMessageBusRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteMessageBusRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteMessageBusRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.DeleteMessageBusRequest} DeleteMessageBusRequest
+                         */
+                        DeleteMessageBusRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.DeleteMessageBusRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.DeleteMessageBusRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteMessageBusRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.DeleteMessageBusRequest} message DeleteMessageBusRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteMessageBusRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteMessageBusRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteMessageBusRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteMessageBusRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.DeleteMessageBusRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteMessageBusRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.DeleteMessageBusRequest";
+                        };
+    
+                        return DeleteMessageBusRequest;
+                    })();
+    
+                    v1.GetEnrollmentRequest = (function() {
+    
+                        /**
+                         * Properties of a GetEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGetEnrollmentRequest
+                         * @property {string|null} [name] GetEnrollmentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GetEnrollmentRequest.
+                         * @implements IGetEnrollmentRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGetEnrollmentRequest=} [properties] Properties to set
+                         */
+                        function GetEnrollmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetEnrollmentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @instance
+                         */
+                        GetEnrollmentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetEnrollmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetEnrollmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GetEnrollmentRequest} GetEnrollmentRequest instance
+                         */
+                        GetEnrollmentRequest.create = function create(properties) {
+                            return new GetEnrollmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetEnrollmentRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetEnrollmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetEnrollmentRequest} message GetEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEnrollmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetEnrollmentRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetEnrollmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetEnrollmentRequest} message GetEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEnrollmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetEnrollmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GetEnrollmentRequest} GetEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEnrollmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GetEnrollmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetEnrollmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GetEnrollmentRequest} GetEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEnrollmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetEnrollmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetEnrollmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetEnrollmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GetEnrollmentRequest} GetEnrollmentRequest
+                         */
+                        GetEnrollmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GetEnrollmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GetEnrollmentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetEnrollmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GetEnrollmentRequest} message GetEnrollmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetEnrollmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetEnrollmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetEnrollmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetEnrollmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.GetEnrollmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetEnrollmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.GetEnrollmentRequest";
+                        };
+    
+                        return GetEnrollmentRequest;
+                    })();
+    
+                    v1.ListEnrollmentsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListEnrollmentsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListEnrollmentsRequest
+                         * @property {string|null} [parent] ListEnrollmentsRequest parent
+                         * @property {number|null} [pageSize] ListEnrollmentsRequest pageSize
+                         * @property {string|null} [pageToken] ListEnrollmentsRequest pageToken
+                         * @property {string|null} [orderBy] ListEnrollmentsRequest orderBy
+                         * @property {string|null} [filter] ListEnrollmentsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListEnrollmentsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListEnrollmentsRequest.
+                         * @implements IListEnrollmentsRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsRequest=} [properties] Properties to set
+                         */
+                        function ListEnrollmentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEnrollmentsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @instance
+                         */
+                        ListEnrollmentsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListEnrollmentsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @instance
+                         */
+                        ListEnrollmentsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListEnrollmentsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @instance
+                         */
+                        ListEnrollmentsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListEnrollmentsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @instance
+                         */
+                        ListEnrollmentsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListEnrollmentsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @instance
+                         */
+                        ListEnrollmentsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListEnrollmentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsRequest} ListEnrollmentsRequest instance
+                         */
+                        ListEnrollmentsRequest.create = function create(properties) {
+                            return new ListEnrollmentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEnrollmentsRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListEnrollmentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsRequest} message ListEnrollmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEnrollmentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEnrollmentsRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListEnrollmentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsRequest} message ListEnrollmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEnrollmentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEnrollmentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsRequest} ListEnrollmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEnrollmentsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListEnrollmentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEnrollmentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsRequest} ListEnrollmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEnrollmentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEnrollmentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEnrollmentsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEnrollmentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsRequest} ListEnrollmentsRequest
+                         */
+                        ListEnrollmentsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListEnrollmentsRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListEnrollmentsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEnrollmentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListEnrollmentsRequest} message ListEnrollmentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEnrollmentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEnrollmentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEnrollmentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEnrollmentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEnrollmentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListEnrollmentsRequest";
+                        };
+    
+                        return ListEnrollmentsRequest;
+                    })();
+    
+                    v1.ListEnrollmentsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListEnrollmentsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListEnrollmentsResponse
+                         * @property {Array.<google.cloud.eventarc.v1.IEnrollment>|null} [enrollments] ListEnrollmentsResponse enrollments
+                         * @property {string|null} [nextPageToken] ListEnrollmentsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListEnrollmentsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListEnrollmentsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListEnrollmentsResponse.
+                         * @implements IListEnrollmentsResponse
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsResponse=} [properties] Properties to set
+                         */
+                        function ListEnrollmentsResponse(properties) {
+                            this.enrollments = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEnrollmentsResponse enrollments.
+                         * @member {Array.<google.cloud.eventarc.v1.IEnrollment>} enrollments
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @instance
+                         */
+                        ListEnrollmentsResponse.prototype.enrollments = $util.emptyArray;
+    
+                        /**
+                         * ListEnrollmentsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @instance
+                         */
+                        ListEnrollmentsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListEnrollmentsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @instance
+                         */
+                        ListEnrollmentsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListEnrollmentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsResponse} ListEnrollmentsResponse instance
+                         */
+                        ListEnrollmentsResponse.create = function create(properties) {
+                            return new ListEnrollmentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEnrollmentsResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListEnrollmentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsResponse} message ListEnrollmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEnrollmentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enrollments != null && message.enrollments.length)
+                                for (var i = 0; i < message.enrollments.length; ++i)
+                                    $root.google.cloud.eventarc.v1.Enrollment.encode(message.enrollments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEnrollmentsResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListEnrollmentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListEnrollmentsResponse} message ListEnrollmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEnrollmentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEnrollmentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsResponse} ListEnrollmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEnrollmentsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListEnrollmentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.enrollments && message.enrollments.length))
+                                            message.enrollments = [];
+                                        message.enrollments.push($root.google.cloud.eventarc.v1.Enrollment.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEnrollmentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsResponse} ListEnrollmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEnrollmentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEnrollmentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEnrollmentsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enrollments != null && message.hasOwnProperty("enrollments")) {
+                                if (!Array.isArray(message.enrollments))
+                                    return "enrollments: array expected";
+                                for (var i = 0; i < message.enrollments.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.Enrollment.verify(message.enrollments[i]);
+                                    if (error)
+                                        return "enrollments." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEnrollmentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListEnrollmentsResponse} ListEnrollmentsResponse
+                         */
+                        ListEnrollmentsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListEnrollmentsResponse)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListEnrollmentsResponse();
+                            if (object.enrollments) {
+                                if (!Array.isArray(object.enrollments))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListEnrollmentsResponse.enrollments: array expected");
+                                message.enrollments = [];
+                                for (var i = 0; i < object.enrollments.length; ++i) {
+                                    if (typeof object.enrollments[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.ListEnrollmentsResponse.enrollments: object expected");
+                                    message.enrollments[i] = $root.google.cloud.eventarc.v1.Enrollment.fromObject(object.enrollments[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListEnrollmentsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEnrollmentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListEnrollmentsResponse} message ListEnrollmentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEnrollmentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.enrollments = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.enrollments && message.enrollments.length) {
+                                object.enrollments = [];
+                                for (var j = 0; j < message.enrollments.length; ++j)
+                                    object.enrollments[j] = $root.google.cloud.eventarc.v1.Enrollment.toObject(message.enrollments[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEnrollmentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEnrollmentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEnrollmentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListEnrollmentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEnrollmentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListEnrollmentsResponse";
+                        };
+    
+                        return ListEnrollmentsResponse;
+                    })();
+    
+                    v1.CreateEnrollmentRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface ICreateEnrollmentRequest
+                         * @property {string|null} [parent] CreateEnrollmentRequest parent
+                         * @property {google.cloud.eventarc.v1.IEnrollment|null} [enrollment] CreateEnrollmentRequest enrollment
+                         * @property {string|null} [enrollmentId] CreateEnrollmentRequest enrollmentId
+                         * @property {boolean|null} [validateOnly] CreateEnrollmentRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a CreateEnrollmentRequest.
+                         * @implements ICreateEnrollmentRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.ICreateEnrollmentRequest=} [properties] Properties to set
+                         */
+                        function CreateEnrollmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateEnrollmentRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @instance
+                         */
+                        CreateEnrollmentRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateEnrollmentRequest enrollment.
+                         * @member {google.cloud.eventarc.v1.IEnrollment|null|undefined} enrollment
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @instance
+                         */
+                        CreateEnrollmentRequest.prototype.enrollment = null;
+    
+                        /**
+                         * CreateEnrollmentRequest enrollmentId.
+                         * @member {string} enrollmentId
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @instance
+                         */
+                        CreateEnrollmentRequest.prototype.enrollmentId = "";
+    
+                        /**
+                         * CreateEnrollmentRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @instance
+                         */
+                        CreateEnrollmentRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateEnrollmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateEnrollmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.CreateEnrollmentRequest} CreateEnrollmentRequest instance
+                         */
+                        CreateEnrollmentRequest.create = function create(properties) {
+                            return new CreateEnrollmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEnrollmentRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreateEnrollmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateEnrollmentRequest} message CreateEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEnrollmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.enrollment != null && Object.hasOwnProperty.call(message, "enrollment"))
+                                $root.google.cloud.eventarc.v1.Enrollment.encode(message.enrollment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.enrollmentId != null && Object.hasOwnProperty.call(message, "enrollmentId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.enrollmentId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEnrollmentRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreateEnrollmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateEnrollmentRequest} message CreateEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEnrollmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateEnrollmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.CreateEnrollmentRequest} CreateEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEnrollmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.CreateEnrollmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enrollment = $root.google.cloud.eventarc.v1.Enrollment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enrollmentId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateEnrollmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.CreateEnrollmentRequest} CreateEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEnrollmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateEnrollmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateEnrollmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.enrollment != null && message.hasOwnProperty("enrollment")) {
+                                var error = $root.google.cloud.eventarc.v1.Enrollment.verify(message.enrollment);
+                                if (error)
+                                    return "enrollment." + error;
+                            }
+                            if (message.enrollmentId != null && message.hasOwnProperty("enrollmentId"))
+                                if (!$util.isString(message.enrollmentId))
+                                    return "enrollmentId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateEnrollmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.CreateEnrollmentRequest} CreateEnrollmentRequest
+                         */
+                        CreateEnrollmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.CreateEnrollmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.CreateEnrollmentRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.enrollment != null) {
+                                if (typeof object.enrollment !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.CreateEnrollmentRequest.enrollment: object expected");
+                                message.enrollment = $root.google.cloud.eventarc.v1.Enrollment.fromObject(object.enrollment);
+                            }
+                            if (object.enrollmentId != null)
+                                message.enrollmentId = String(object.enrollmentId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateEnrollmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.CreateEnrollmentRequest} message CreateEnrollmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateEnrollmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.enrollment = null;
+                                object.enrollmentId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.enrollment != null && message.hasOwnProperty("enrollment"))
+                                object.enrollment = $root.google.cloud.eventarc.v1.Enrollment.toObject(message.enrollment, options);
+                            if (message.enrollmentId != null && message.hasOwnProperty("enrollmentId"))
+                                object.enrollmentId = message.enrollmentId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateEnrollmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateEnrollmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateEnrollmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.CreateEnrollmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateEnrollmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.CreateEnrollmentRequest";
+                        };
+    
+                        return CreateEnrollmentRequest;
+                    })();
+    
+                    v1.UpdateEnrollmentRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IUpdateEnrollmentRequest
+                         * @property {google.cloud.eventarc.v1.IEnrollment|null} [enrollment] UpdateEnrollmentRequest enrollment
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateEnrollmentRequest updateMask
+                         * @property {boolean|null} [allowMissing] UpdateEnrollmentRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateEnrollmentRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents an UpdateEnrollmentRequest.
+                         * @implements IUpdateEnrollmentRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IUpdateEnrollmentRequest=} [properties] Properties to set
+                         */
+                        function UpdateEnrollmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateEnrollmentRequest enrollment.
+                         * @member {google.cloud.eventarc.v1.IEnrollment|null|undefined} enrollment
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @instance
+                         */
+                        UpdateEnrollmentRequest.prototype.enrollment = null;
+    
+                        /**
+                         * UpdateEnrollmentRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @instance
+                         */
+                        UpdateEnrollmentRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateEnrollmentRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @instance
+                         */
+                        UpdateEnrollmentRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateEnrollmentRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @instance
+                         */
+                        UpdateEnrollmentRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateEnrollmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateEnrollmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.UpdateEnrollmentRequest} UpdateEnrollmentRequest instance
+                         */
+                        UpdateEnrollmentRequest.create = function create(properties) {
+                            return new UpdateEnrollmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEnrollmentRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdateEnrollmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateEnrollmentRequest} message UpdateEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEnrollmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enrollment != null && Object.hasOwnProperty.call(message, "enrollment"))
+                                $root.google.cloud.eventarc.v1.Enrollment.encode(message.enrollment, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEnrollmentRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdateEnrollmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateEnrollmentRequest} message UpdateEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEnrollmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateEnrollmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.UpdateEnrollmentRequest} UpdateEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEnrollmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.UpdateEnrollmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enrollment = $root.google.cloud.eventarc.v1.Enrollment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateEnrollmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.UpdateEnrollmentRequest} UpdateEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEnrollmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateEnrollmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateEnrollmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enrollment != null && message.hasOwnProperty("enrollment")) {
+                                var error = $root.google.cloud.eventarc.v1.Enrollment.verify(message.enrollment);
+                                if (error)
+                                    return "enrollment." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateEnrollmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.UpdateEnrollmentRequest} UpdateEnrollmentRequest
+                         */
+                        UpdateEnrollmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.UpdateEnrollmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.UpdateEnrollmentRequest();
+                            if (object.enrollment != null) {
+                                if (typeof object.enrollment !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateEnrollmentRequest.enrollment: object expected");
+                                message.enrollment = $root.google.cloud.eventarc.v1.Enrollment.fromObject(object.enrollment);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateEnrollmentRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateEnrollmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.UpdateEnrollmentRequest} message UpdateEnrollmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateEnrollmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.enrollment = null;
+                                object.updateMask = null;
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.enrollment != null && message.hasOwnProperty("enrollment"))
+                                object.enrollment = $root.google.cloud.eventarc.v1.Enrollment.toObject(message.enrollment, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateEnrollmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateEnrollmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateEnrollmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.UpdateEnrollmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateEnrollmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.UpdateEnrollmentRequest";
+                        };
+    
+                        return UpdateEnrollmentRequest;
+                    })();
+    
+                    v1.DeleteEnrollmentRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IDeleteEnrollmentRequest
+                         * @property {string|null} [name] DeleteEnrollmentRequest name
+                         * @property {string|null} [etag] DeleteEnrollmentRequest etag
+                         * @property {boolean|null} [allowMissing] DeleteEnrollmentRequest allowMissing
+                         * @property {boolean|null} [validateOnly] DeleteEnrollmentRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new DeleteEnrollmentRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a DeleteEnrollmentRequest.
+                         * @implements IDeleteEnrollmentRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IDeleteEnrollmentRequest=} [properties] Properties to set
+                         */
+                        function DeleteEnrollmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteEnrollmentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @instance
+                         */
+                        DeleteEnrollmentRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteEnrollmentRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @instance
+                         */
+                        DeleteEnrollmentRequest.prototype.etag = "";
+    
+                        /**
+                         * DeleteEnrollmentRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @instance
+                         */
+                        DeleteEnrollmentRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * DeleteEnrollmentRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @instance
+                         */
+                        DeleteEnrollmentRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new DeleteEnrollmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteEnrollmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.DeleteEnrollmentRequest} DeleteEnrollmentRequest instance
+                         */
+                        DeleteEnrollmentRequest.create = function create(properties) {
+                            return new DeleteEnrollmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEnrollmentRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeleteEnrollmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteEnrollmentRequest} message DeleteEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEnrollmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEnrollmentRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeleteEnrollmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteEnrollmentRequest} message DeleteEnrollmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEnrollmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteEnrollmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.DeleteEnrollmentRequest} DeleteEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEnrollmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.DeleteEnrollmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteEnrollmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.DeleteEnrollmentRequest} DeleteEnrollmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEnrollmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteEnrollmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteEnrollmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteEnrollmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.DeleteEnrollmentRequest} DeleteEnrollmentRequest
+                         */
+                        DeleteEnrollmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.DeleteEnrollmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.DeleteEnrollmentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteEnrollmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.DeleteEnrollmentRequest} message DeleteEnrollmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteEnrollmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteEnrollmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteEnrollmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteEnrollmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.DeleteEnrollmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteEnrollmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.DeleteEnrollmentRequest";
+                        };
+    
+                        return DeleteEnrollmentRequest;
+                    })();
+    
+                    v1.GetPipelineRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGetPipelineRequest
+                         * @property {string|null} [name] GetPipelineRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GetPipelineRequest.
+                         * @implements IGetPipelineRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGetPipelineRequest=} [properties] Properties to set
+                         */
+                        function GetPipelineRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPipelineRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @instance
+                         */
+                        GetPipelineRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPipelineRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetPipelineRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GetPipelineRequest} GetPipelineRequest instance
+                         */
+                        GetPipelineRequest.create = function create(properties) {
+                            return new GetPipelineRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPipelineRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetPipelineRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetPipelineRequest} message GetPipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPipelineRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPipelineRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetPipelineRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetPipelineRequest} message GetPipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPipelineRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPipelineRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GetPipelineRequest} GetPipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPipelineRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GetPipelineRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPipelineRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GetPipelineRequest} GetPipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPipelineRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPipelineRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPipelineRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPipelineRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GetPipelineRequest} GetPipelineRequest
+                         */
+                        GetPipelineRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GetPipelineRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GetPipelineRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPipelineRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GetPipelineRequest} message GetPipelineRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPipelineRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPipelineRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPipelineRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPipelineRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.GetPipelineRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPipelineRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.GetPipelineRequest";
+                        };
+    
+                        return GetPipelineRequest;
+                    })();
+    
+                    v1.ListPipelinesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPipelinesRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListPipelinesRequest
+                         * @property {string|null} [parent] ListPipelinesRequest parent
+                         * @property {number|null} [pageSize] ListPipelinesRequest pageSize
+                         * @property {string|null} [pageToken] ListPipelinesRequest pageToken
+                         * @property {string|null} [orderBy] ListPipelinesRequest orderBy
+                         * @property {string|null} [filter] ListPipelinesRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListPipelinesRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListPipelinesRequest.
+                         * @implements IListPipelinesRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListPipelinesRequest=} [properties] Properties to set
+                         */
+                        function ListPipelinesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPipelinesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @instance
+                         */
+                        ListPipelinesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPipelinesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @instance
+                         */
+                        ListPipelinesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPipelinesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @instance
+                         */
+                        ListPipelinesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListPipelinesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @instance
+                         */
+                        ListPipelinesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListPipelinesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @instance
+                         */
+                        ListPipelinesRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListPipelinesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListPipelinesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesRequest} ListPipelinesRequest instance
+                         */
+                        ListPipelinesRequest.create = function create(properties) {
+                            return new ListPipelinesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPipelinesRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListPipelinesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListPipelinesRequest} message ListPipelinesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPipelinesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPipelinesRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListPipelinesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListPipelinesRequest} message ListPipelinesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPipelinesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPipelinesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesRequest} ListPipelinesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPipelinesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListPipelinesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPipelinesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesRequest} ListPipelinesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPipelinesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPipelinesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPipelinesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPipelinesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesRequest} ListPipelinesRequest
+                         */
+                        ListPipelinesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListPipelinesRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListPipelinesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPipelinesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListPipelinesRequest} message ListPipelinesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPipelinesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPipelinesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPipelinesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPipelinesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPipelinesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListPipelinesRequest";
+                        };
+    
+                        return ListPipelinesRequest;
+                    })();
+    
+                    v1.ListPipelinesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPipelinesResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListPipelinesResponse
+                         * @property {Array.<google.cloud.eventarc.v1.IPipeline>|null} [pipelines] ListPipelinesResponse pipelines
+                         * @property {string|null} [nextPageToken] ListPipelinesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListPipelinesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListPipelinesResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListPipelinesResponse.
+                         * @implements IListPipelinesResponse
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListPipelinesResponse=} [properties] Properties to set
+                         */
+                        function ListPipelinesResponse(properties) {
+                            this.pipelines = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPipelinesResponse pipelines.
+                         * @member {Array.<google.cloud.eventarc.v1.IPipeline>} pipelines
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @instance
+                         */
+                        ListPipelinesResponse.prototype.pipelines = $util.emptyArray;
+    
+                        /**
+                         * ListPipelinesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @instance
+                         */
+                        ListPipelinesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListPipelinesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @instance
+                         */
+                        ListPipelinesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListPipelinesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListPipelinesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesResponse} ListPipelinesResponse instance
+                         */
+                        ListPipelinesResponse.create = function create(properties) {
+                            return new ListPipelinesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPipelinesResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListPipelinesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListPipelinesResponse} message ListPipelinesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPipelinesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pipelines != null && message.pipelines.length)
+                                for (var i = 0; i < message.pipelines.length; ++i)
+                                    $root.google.cloud.eventarc.v1.Pipeline.encode(message.pipelines[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPipelinesResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListPipelinesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListPipelinesResponse} message ListPipelinesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPipelinesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPipelinesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesResponse} ListPipelinesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPipelinesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListPipelinesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.pipelines && message.pipelines.length))
+                                            message.pipelines = [];
+                                        message.pipelines.push($root.google.cloud.eventarc.v1.Pipeline.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPipelinesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesResponse} ListPipelinesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPipelinesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPipelinesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPipelinesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pipelines != null && message.hasOwnProperty("pipelines")) {
+                                if (!Array.isArray(message.pipelines))
+                                    return "pipelines: array expected";
+                                for (var i = 0; i < message.pipelines.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.Pipeline.verify(message.pipelines[i]);
+                                    if (error)
+                                        return "pipelines." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPipelinesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListPipelinesResponse} ListPipelinesResponse
+                         */
+                        ListPipelinesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListPipelinesResponse)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListPipelinesResponse();
+                            if (object.pipelines) {
+                                if (!Array.isArray(object.pipelines))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListPipelinesResponse.pipelines: array expected");
+                                message.pipelines = [];
+                                for (var i = 0; i < object.pipelines.length; ++i) {
+                                    if (typeof object.pipelines[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.ListPipelinesResponse.pipelines: object expected");
+                                    message.pipelines[i] = $root.google.cloud.eventarc.v1.Pipeline.fromObject(object.pipelines[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListPipelinesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPipelinesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListPipelinesResponse} message ListPipelinesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPipelinesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.pipelines = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.pipelines && message.pipelines.length) {
+                                object.pipelines = [];
+                                for (var j = 0; j < message.pipelines.length; ++j)
+                                    object.pipelines[j] = $root.google.cloud.eventarc.v1.Pipeline.toObject(message.pipelines[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPipelinesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPipelinesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPipelinesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListPipelinesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPipelinesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListPipelinesResponse";
+                        };
+    
+                        return ListPipelinesResponse;
+                    })();
+    
+                    v1.CreatePipelineRequest = (function() {
+    
+                        /**
+                         * Properties of a CreatePipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface ICreatePipelineRequest
+                         * @property {string|null} [parent] CreatePipelineRequest parent
+                         * @property {google.cloud.eventarc.v1.IPipeline|null} [pipeline] CreatePipelineRequest pipeline
+                         * @property {string|null} [pipelineId] CreatePipelineRequest pipelineId
+                         * @property {boolean|null} [validateOnly] CreatePipelineRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreatePipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a CreatePipelineRequest.
+                         * @implements ICreatePipelineRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.ICreatePipelineRequest=} [properties] Properties to set
+                         */
+                        function CreatePipelineRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreatePipelineRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @instance
+                         */
+                        CreatePipelineRequest.prototype.parent = "";
+    
+                        /**
+                         * CreatePipelineRequest pipeline.
+                         * @member {google.cloud.eventarc.v1.IPipeline|null|undefined} pipeline
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @instance
+                         */
+                        CreatePipelineRequest.prototype.pipeline = null;
+    
+                        /**
+                         * CreatePipelineRequest pipelineId.
+                         * @member {string} pipelineId
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @instance
+                         */
+                        CreatePipelineRequest.prototype.pipelineId = "";
+    
+                        /**
+                         * CreatePipelineRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @instance
+                         */
+                        CreatePipelineRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreatePipelineRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreatePipelineRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.CreatePipelineRequest} CreatePipelineRequest instance
+                         */
+                        CreatePipelineRequest.create = function create(properties) {
+                            return new CreatePipelineRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePipelineRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreatePipelineRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreatePipelineRequest} message CreatePipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePipelineRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pipeline != null && Object.hasOwnProperty.call(message, "pipeline"))
+                                $root.google.cloud.eventarc.v1.Pipeline.encode(message.pipeline, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.pipelineId != null && Object.hasOwnProperty.call(message, "pipelineId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pipelineId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePipelineRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreatePipelineRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreatePipelineRequest} message CreatePipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePipelineRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreatePipelineRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.CreatePipelineRequest} CreatePipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePipelineRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.CreatePipelineRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pipeline = $root.google.cloud.eventarc.v1.Pipeline.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pipelineId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreatePipelineRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.CreatePipelineRequest} CreatePipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePipelineRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreatePipelineRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreatePipelineRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pipeline != null && message.hasOwnProperty("pipeline")) {
+                                var error = $root.google.cloud.eventarc.v1.Pipeline.verify(message.pipeline);
+                                if (error)
+                                    return "pipeline." + error;
+                            }
+                            if (message.pipelineId != null && message.hasOwnProperty("pipelineId"))
+                                if (!$util.isString(message.pipelineId))
+                                    return "pipelineId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreatePipelineRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.CreatePipelineRequest} CreatePipelineRequest
+                         */
+                        CreatePipelineRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.CreatePipelineRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.CreatePipelineRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pipeline != null) {
+                                if (typeof object.pipeline !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.CreatePipelineRequest.pipeline: object expected");
+                                message.pipeline = $root.google.cloud.eventarc.v1.Pipeline.fromObject(object.pipeline);
+                            }
+                            if (object.pipelineId != null)
+                                message.pipelineId = String(object.pipelineId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreatePipelineRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.CreatePipelineRequest} message CreatePipelineRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreatePipelineRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pipeline = null;
+                                object.pipelineId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pipeline != null && message.hasOwnProperty("pipeline"))
+                                object.pipeline = $root.google.cloud.eventarc.v1.Pipeline.toObject(message.pipeline, options);
+                            if (message.pipelineId != null && message.hasOwnProperty("pipelineId"))
+                                object.pipelineId = message.pipelineId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreatePipelineRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreatePipelineRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreatePipelineRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.CreatePipelineRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreatePipelineRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.CreatePipelineRequest";
+                        };
+    
+                        return CreatePipelineRequest;
+                    })();
+    
+                    v1.UpdatePipelineRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdatePipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IUpdatePipelineRequest
+                         * @property {google.cloud.eventarc.v1.IPipeline|null} [pipeline] UpdatePipelineRequest pipeline
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePipelineRequest updateMask
+                         * @property {boolean|null} [allowMissing] UpdatePipelineRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdatePipelineRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdatePipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents an UpdatePipelineRequest.
+                         * @implements IUpdatePipelineRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IUpdatePipelineRequest=} [properties] Properties to set
+                         */
+                        function UpdatePipelineRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdatePipelineRequest pipeline.
+                         * @member {google.cloud.eventarc.v1.IPipeline|null|undefined} pipeline
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @instance
+                         */
+                        UpdatePipelineRequest.prototype.pipeline = null;
+    
+                        /**
+                         * UpdatePipelineRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @instance
+                         */
+                        UpdatePipelineRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdatePipelineRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @instance
+                         */
+                        UpdatePipelineRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdatePipelineRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @instance
+                         */
+                        UpdatePipelineRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdatePipelineRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdatePipelineRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.UpdatePipelineRequest} UpdatePipelineRequest instance
+                         */
+                        UpdatePipelineRequest.create = function create(properties) {
+                            return new UpdatePipelineRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePipelineRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdatePipelineRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdatePipelineRequest} message UpdatePipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePipelineRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pipeline != null && Object.hasOwnProperty.call(message, "pipeline"))
+                                $root.google.cloud.eventarc.v1.Pipeline.encode(message.pipeline, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePipelineRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdatePipelineRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdatePipelineRequest} message UpdatePipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePipelineRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdatePipelineRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.UpdatePipelineRequest} UpdatePipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePipelineRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.UpdatePipelineRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.pipeline = $root.google.cloud.eventarc.v1.Pipeline.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdatePipelineRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.UpdatePipelineRequest} UpdatePipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePipelineRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdatePipelineRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdatePipelineRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pipeline != null && message.hasOwnProperty("pipeline")) {
+                                var error = $root.google.cloud.eventarc.v1.Pipeline.verify(message.pipeline);
+                                if (error)
+                                    return "pipeline." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdatePipelineRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.UpdatePipelineRequest} UpdatePipelineRequest
+                         */
+                        UpdatePipelineRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.UpdatePipelineRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.UpdatePipelineRequest();
+                            if (object.pipeline != null) {
+                                if (typeof object.pipeline !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdatePipelineRequest.pipeline: object expected");
+                                message.pipeline = $root.google.cloud.eventarc.v1.Pipeline.fromObject(object.pipeline);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdatePipelineRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdatePipelineRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.UpdatePipelineRequest} message UpdatePipelineRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdatePipelineRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pipeline = null;
+                                object.updateMask = null;
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.pipeline != null && message.hasOwnProperty("pipeline"))
+                                object.pipeline = $root.google.cloud.eventarc.v1.Pipeline.toObject(message.pipeline, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdatePipelineRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdatePipelineRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdatePipelineRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.UpdatePipelineRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdatePipelineRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.UpdatePipelineRequest";
+                        };
+    
+                        return UpdatePipelineRequest;
+                    })();
+    
+                    v1.DeletePipelineRequest = (function() {
+    
+                        /**
+                         * Properties of a DeletePipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IDeletePipelineRequest
+                         * @property {string|null} [name] DeletePipelineRequest name
+                         * @property {string|null} [etag] DeletePipelineRequest etag
+                         * @property {boolean|null} [allowMissing] DeletePipelineRequest allowMissing
+                         * @property {boolean|null} [validateOnly] DeletePipelineRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new DeletePipelineRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a DeletePipelineRequest.
+                         * @implements IDeletePipelineRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IDeletePipelineRequest=} [properties] Properties to set
+                         */
+                        function DeletePipelineRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeletePipelineRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @instance
+                         */
+                        DeletePipelineRequest.prototype.name = "";
+    
+                        /**
+                         * DeletePipelineRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @instance
+                         */
+                        DeletePipelineRequest.prototype.etag = "";
+    
+                        /**
+                         * DeletePipelineRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @instance
+                         */
+                        DeletePipelineRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * DeletePipelineRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @instance
+                         */
+                        DeletePipelineRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new DeletePipelineRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeletePipelineRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.DeletePipelineRequest} DeletePipelineRequest instance
+                         */
+                        DeletePipelineRequest.create = function create(properties) {
+                            return new DeletePipelineRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePipelineRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeletePipelineRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeletePipelineRequest} message DeletePipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePipelineRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePipelineRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeletePipelineRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeletePipelineRequest} message DeletePipelineRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePipelineRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeletePipelineRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.DeletePipelineRequest} DeletePipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePipelineRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.DeletePipelineRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeletePipelineRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.DeletePipelineRequest} DeletePipelineRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePipelineRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeletePipelineRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeletePipelineRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeletePipelineRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.DeletePipelineRequest} DeletePipelineRequest
+                         */
+                        DeletePipelineRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.DeletePipelineRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.DeletePipelineRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeletePipelineRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.DeletePipelineRequest} message DeletePipelineRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeletePipelineRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeletePipelineRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeletePipelineRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeletePipelineRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.DeletePipelineRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeletePipelineRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.DeletePipelineRequest";
+                        };
+    
+                        return DeletePipelineRequest;
+                    })();
+    
+                    v1.GetGoogleApiSourceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGetGoogleApiSourceRequest
+                         * @property {string|null} [name] GetGoogleApiSourceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GetGoogleApiSourceRequest.
+                         * @implements IGetGoogleApiSourceRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGetGoogleApiSourceRequest=} [properties] Properties to set
+                         */
+                        function GetGoogleApiSourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetGoogleApiSourceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @instance
+                         */
+                        GetGoogleApiSourceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetGoogleApiSourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetGoogleApiSourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GetGoogleApiSourceRequest} GetGoogleApiSourceRequest instance
+                         */
+                        GetGoogleApiSourceRequest.create = function create(properties) {
+                            return new GetGoogleApiSourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetGoogleApiSourceRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetGoogleApiSourceRequest} message GetGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGoogleApiSourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetGoogleApiSourceRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetGoogleApiSourceRequest} message GetGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGoogleApiSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetGoogleApiSourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GetGoogleApiSourceRequest} GetGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGoogleApiSourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GetGoogleApiSourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetGoogleApiSourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GetGoogleApiSourceRequest} GetGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGoogleApiSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetGoogleApiSourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetGoogleApiSourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetGoogleApiSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GetGoogleApiSourceRequest} GetGoogleApiSourceRequest
+                         */
+                        GetGoogleApiSourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GetGoogleApiSourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GetGoogleApiSourceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetGoogleApiSourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GetGoogleApiSourceRequest} message GetGoogleApiSourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetGoogleApiSourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetGoogleApiSourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetGoogleApiSourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetGoogleApiSourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.GetGoogleApiSourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetGoogleApiSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.GetGoogleApiSourceRequest";
+                        };
+    
+                        return GetGoogleApiSourceRequest;
+                    })();
+    
+                    v1.ListGoogleApiSourcesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListGoogleApiSourcesRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListGoogleApiSourcesRequest
+                         * @property {string|null} [parent] ListGoogleApiSourcesRequest parent
+                         * @property {number|null} [pageSize] ListGoogleApiSourcesRequest pageSize
+                         * @property {string|null} [pageToken] ListGoogleApiSourcesRequest pageToken
+                         * @property {string|null} [orderBy] ListGoogleApiSourcesRequest orderBy
+                         * @property {string|null} [filter] ListGoogleApiSourcesRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListGoogleApiSourcesRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListGoogleApiSourcesRequest.
+                         * @implements IListGoogleApiSourcesRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesRequest=} [properties] Properties to set
+                         */
+                        function ListGoogleApiSourcesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGoogleApiSourcesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @instance
+                         */
+                        ListGoogleApiSourcesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListGoogleApiSourcesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @instance
+                         */
+                        ListGoogleApiSourcesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListGoogleApiSourcesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @instance
+                         */
+                        ListGoogleApiSourcesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListGoogleApiSourcesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @instance
+                         */
+                        ListGoogleApiSourcesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListGoogleApiSourcesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @instance
+                         */
+                        ListGoogleApiSourcesRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListGoogleApiSourcesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesRequest} ListGoogleApiSourcesRequest instance
+                         */
+                        ListGoogleApiSourcesRequest.create = function create(properties) {
+                            return new ListGoogleApiSourcesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGoogleApiSourcesRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListGoogleApiSourcesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesRequest} message ListGoogleApiSourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGoogleApiSourcesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGoogleApiSourcesRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListGoogleApiSourcesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesRequest} message ListGoogleApiSourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGoogleApiSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGoogleApiSourcesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesRequest} ListGoogleApiSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGoogleApiSourcesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGoogleApiSourcesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesRequest} ListGoogleApiSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGoogleApiSourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGoogleApiSourcesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGoogleApiSourcesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGoogleApiSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesRequest} ListGoogleApiSourcesRequest
+                         */
+                        ListGoogleApiSourcesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGoogleApiSourcesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListGoogleApiSourcesRequest} message ListGoogleApiSourcesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGoogleApiSourcesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGoogleApiSourcesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGoogleApiSourcesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGoogleApiSourcesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGoogleApiSourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListGoogleApiSourcesRequest";
+                        };
+    
+                        return ListGoogleApiSourcesRequest;
+                    })();
+    
+                    v1.ListGoogleApiSourcesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListGoogleApiSourcesResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListGoogleApiSourcesResponse
+                         * @property {Array.<google.cloud.eventarc.v1.IGoogleApiSource>|null} [googleApiSources] ListGoogleApiSourcesResponse googleApiSources
+                         * @property {string|null} [nextPageToken] ListGoogleApiSourcesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListGoogleApiSourcesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListGoogleApiSourcesResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListGoogleApiSourcesResponse.
+                         * @implements IListGoogleApiSourcesResponse
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesResponse=} [properties] Properties to set
+                         */
+                        function ListGoogleApiSourcesResponse(properties) {
+                            this.googleApiSources = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGoogleApiSourcesResponse googleApiSources.
+                         * @member {Array.<google.cloud.eventarc.v1.IGoogleApiSource>} googleApiSources
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @instance
+                         */
+                        ListGoogleApiSourcesResponse.prototype.googleApiSources = $util.emptyArray;
+    
+                        /**
+                         * ListGoogleApiSourcesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @instance
+                         */
+                        ListGoogleApiSourcesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListGoogleApiSourcesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @instance
+                         */
+                        ListGoogleApiSourcesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListGoogleApiSourcesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesResponse} ListGoogleApiSourcesResponse instance
+                         */
+                        ListGoogleApiSourcesResponse.create = function create(properties) {
+                            return new ListGoogleApiSourcesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGoogleApiSourcesResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListGoogleApiSourcesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesResponse} message ListGoogleApiSourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGoogleApiSourcesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.googleApiSources != null && message.googleApiSources.length)
+                                for (var i = 0; i < message.googleApiSources.length; ++i)
+                                    $root.google.cloud.eventarc.v1.GoogleApiSource.encode(message.googleApiSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGoogleApiSourcesResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListGoogleApiSourcesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListGoogleApiSourcesResponse} message ListGoogleApiSourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGoogleApiSourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGoogleApiSourcesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesResponse} ListGoogleApiSourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGoogleApiSourcesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListGoogleApiSourcesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.googleApiSources && message.googleApiSources.length))
+                                            message.googleApiSources = [];
+                                        message.googleApiSources.push($root.google.cloud.eventarc.v1.GoogleApiSource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGoogleApiSourcesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesResponse} ListGoogleApiSourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGoogleApiSourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGoogleApiSourcesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGoogleApiSourcesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.googleApiSources != null && message.hasOwnProperty("googleApiSources")) {
+                                if (!Array.isArray(message.googleApiSources))
+                                    return "googleApiSources: array expected";
+                                for (var i = 0; i < message.googleApiSources.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.GoogleApiSource.verify(message.googleApiSources[i]);
+                                    if (error)
+                                        return "googleApiSources." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGoogleApiSourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListGoogleApiSourcesResponse} ListGoogleApiSourcesResponse
+                         */
+                        ListGoogleApiSourcesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListGoogleApiSourcesResponse)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListGoogleApiSourcesResponse();
+                            if (object.googleApiSources) {
+                                if (!Array.isArray(object.googleApiSources))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListGoogleApiSourcesResponse.googleApiSources: array expected");
+                                message.googleApiSources = [];
+                                for (var i = 0; i < object.googleApiSources.length; ++i) {
+                                    if (typeof object.googleApiSources[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.ListGoogleApiSourcesResponse.googleApiSources: object expected");
+                                    message.googleApiSources[i] = $root.google.cloud.eventarc.v1.GoogleApiSource.fromObject(object.googleApiSources[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListGoogleApiSourcesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGoogleApiSourcesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListGoogleApiSourcesResponse} message ListGoogleApiSourcesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGoogleApiSourcesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.googleApiSources = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.googleApiSources && message.googleApiSources.length) {
+                                object.googleApiSources = [];
+                                for (var j = 0; j < message.googleApiSources.length; ++j)
+                                    object.googleApiSources[j] = $root.google.cloud.eventarc.v1.GoogleApiSource.toObject(message.googleApiSources[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGoogleApiSourcesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGoogleApiSourcesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGoogleApiSourcesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.ListGoogleApiSourcesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGoogleApiSourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.ListGoogleApiSourcesResponse";
+                        };
+    
+                        return ListGoogleApiSourcesResponse;
+                    })();
+    
+                    v1.CreateGoogleApiSourceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface ICreateGoogleApiSourceRequest
+                         * @property {string|null} [parent] CreateGoogleApiSourceRequest parent
+                         * @property {google.cloud.eventarc.v1.IGoogleApiSource|null} [googleApiSource] CreateGoogleApiSourceRequest googleApiSource
+                         * @property {string|null} [googleApiSourceId] CreateGoogleApiSourceRequest googleApiSourceId
+                         * @property {boolean|null} [validateOnly] CreateGoogleApiSourceRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a CreateGoogleApiSourceRequest.
+                         * @implements ICreateGoogleApiSourceRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest=} [properties] Properties to set
+                         */
+                        function CreateGoogleApiSourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateGoogleApiSourceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        CreateGoogleApiSourceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateGoogleApiSourceRequest googleApiSource.
+                         * @member {google.cloud.eventarc.v1.IGoogleApiSource|null|undefined} googleApiSource
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        CreateGoogleApiSourceRequest.prototype.googleApiSource = null;
+    
+                        /**
+                         * CreateGoogleApiSourceRequest googleApiSourceId.
+                         * @member {string} googleApiSourceId
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        CreateGoogleApiSourceRequest.prototype.googleApiSourceId = "";
+    
+                        /**
+                         * CreateGoogleApiSourceRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        CreateGoogleApiSourceRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateGoogleApiSourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.CreateGoogleApiSourceRequest} CreateGoogleApiSourceRequest instance
+                         */
+                        CreateGoogleApiSourceRequest.create = function create(properties) {
+                            return new CreateGoogleApiSourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateGoogleApiSourceRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreateGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest} message CreateGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateGoogleApiSourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.googleApiSource != null && Object.hasOwnProperty.call(message, "googleApiSource"))
+                                $root.google.cloud.eventarc.v1.GoogleApiSource.encode(message.googleApiSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.googleApiSourceId != null && Object.hasOwnProperty.call(message, "googleApiSourceId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.googleApiSourceId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateGoogleApiSourceRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreateGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest} message CreateGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateGoogleApiSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateGoogleApiSourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.CreateGoogleApiSourceRequest} CreateGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateGoogleApiSourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.googleApiSource = $root.google.cloud.eventarc.v1.GoogleApiSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.googleApiSourceId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateGoogleApiSourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.CreateGoogleApiSourceRequest} CreateGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateGoogleApiSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateGoogleApiSourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateGoogleApiSourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.googleApiSource != null && message.hasOwnProperty("googleApiSource")) {
+                                var error = $root.google.cloud.eventarc.v1.GoogleApiSource.verify(message.googleApiSource);
+                                if (error)
+                                    return "googleApiSource." + error;
+                            }
+                            if (message.googleApiSourceId != null && message.hasOwnProperty("googleApiSourceId"))
+                                if (!$util.isString(message.googleApiSourceId))
+                                    return "googleApiSourceId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateGoogleApiSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.CreateGoogleApiSourceRequest} CreateGoogleApiSourceRequest
+                         */
+                        CreateGoogleApiSourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.googleApiSource != null) {
+                                if (typeof object.googleApiSource !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.CreateGoogleApiSourceRequest.googleApiSource: object expected");
+                                message.googleApiSource = $root.google.cloud.eventarc.v1.GoogleApiSource.fromObject(object.googleApiSource);
+                            }
+                            if (object.googleApiSourceId != null)
+                                message.googleApiSourceId = String(object.googleApiSourceId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateGoogleApiSourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.CreateGoogleApiSourceRequest} message CreateGoogleApiSourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateGoogleApiSourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.googleApiSource = null;
+                                object.googleApiSourceId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.googleApiSource != null && message.hasOwnProperty("googleApiSource"))
+                                object.googleApiSource = $root.google.cloud.eventarc.v1.GoogleApiSource.toObject(message.googleApiSource, options);
+                            if (message.googleApiSourceId != null && message.hasOwnProperty("googleApiSourceId"))
+                                object.googleApiSourceId = message.googleApiSourceId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateGoogleApiSourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateGoogleApiSourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateGoogleApiSourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.CreateGoogleApiSourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateGoogleApiSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.CreateGoogleApiSourceRequest";
+                        };
+    
+                        return CreateGoogleApiSourceRequest;
+                    })();
+    
+                    v1.UpdateGoogleApiSourceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IUpdateGoogleApiSourceRequest
+                         * @property {google.cloud.eventarc.v1.IGoogleApiSource|null} [googleApiSource] UpdateGoogleApiSourceRequest googleApiSource
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateGoogleApiSourceRequest updateMask
+                         * @property {boolean|null} [allowMissing] UpdateGoogleApiSourceRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateGoogleApiSourceRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents an UpdateGoogleApiSourceRequest.
+                         * @implements IUpdateGoogleApiSourceRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest=} [properties] Properties to set
+                         */
+                        function UpdateGoogleApiSourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateGoogleApiSourceRequest googleApiSource.
+                         * @member {google.cloud.eventarc.v1.IGoogleApiSource|null|undefined} googleApiSource
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        UpdateGoogleApiSourceRequest.prototype.googleApiSource = null;
+    
+                        /**
+                         * UpdateGoogleApiSourceRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        UpdateGoogleApiSourceRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateGoogleApiSourceRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        UpdateGoogleApiSourceRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateGoogleApiSourceRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @instance
+                         */
+                        UpdateGoogleApiSourceRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateGoogleApiSourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest} UpdateGoogleApiSourceRequest instance
+                         */
+                        UpdateGoogleApiSourceRequest.create = function create(properties) {
+                            return new UpdateGoogleApiSourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGoogleApiSourceRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest} message UpdateGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGoogleApiSourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.googleApiSource != null && Object.hasOwnProperty.call(message, "googleApiSource"))
+                                $root.google.cloud.eventarc.v1.GoogleApiSource.encode(message.googleApiSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGoogleApiSourceRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest} message UpdateGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGoogleApiSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateGoogleApiSourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest} UpdateGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGoogleApiSourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.googleApiSource = $root.google.cloud.eventarc.v1.GoogleApiSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateGoogleApiSourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest} UpdateGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGoogleApiSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateGoogleApiSourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateGoogleApiSourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.googleApiSource != null && message.hasOwnProperty("googleApiSource")) {
+                                var error = $root.google.cloud.eventarc.v1.GoogleApiSource.verify(message.googleApiSource);
+                                if (error)
+                                    return "googleApiSource." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateGoogleApiSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest} UpdateGoogleApiSourceRequest
+                         */
+                        UpdateGoogleApiSourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest();
+                            if (object.googleApiSource != null) {
+                                if (typeof object.googleApiSource !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest.googleApiSource: object expected");
+                                message.googleApiSource = $root.google.cloud.eventarc.v1.GoogleApiSource.fromObject(object.googleApiSource);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateGoogleApiSourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest} message UpdateGoogleApiSourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateGoogleApiSourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.googleApiSource = null;
+                                object.updateMask = null;
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.googleApiSource != null && message.hasOwnProperty("googleApiSource"))
+                                object.googleApiSource = $root.google.cloud.eventarc.v1.GoogleApiSource.toObject(message.googleApiSource, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateGoogleApiSourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateGoogleApiSourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateGoogleApiSourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateGoogleApiSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest";
+                        };
+    
+                        return UpdateGoogleApiSourceRequest;
+                    })();
+    
+                    v1.DeleteGoogleApiSourceRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IDeleteGoogleApiSourceRequest
+                         * @property {string|null} [name] DeleteGoogleApiSourceRequest name
+                         * @property {string|null} [etag] DeleteGoogleApiSourceRequest etag
+                         * @property {boolean|null} [allowMissing] DeleteGoogleApiSourceRequest allowMissing
+                         * @property {boolean|null} [validateOnly] DeleteGoogleApiSourceRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new DeleteGoogleApiSourceRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a DeleteGoogleApiSourceRequest.
+                         * @implements IDeleteGoogleApiSourceRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest=} [properties] Properties to set
+                         */
+                        function DeleteGoogleApiSourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteGoogleApiSourceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @instance
+                         */
+                        DeleteGoogleApiSourceRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteGoogleApiSourceRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @instance
+                         */
+                        DeleteGoogleApiSourceRequest.prototype.etag = "";
+    
+                        /**
+                         * DeleteGoogleApiSourceRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @instance
+                         */
+                        DeleteGoogleApiSourceRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * DeleteGoogleApiSourceRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @instance
+                         */
+                        DeleteGoogleApiSourceRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new DeleteGoogleApiSourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest} DeleteGoogleApiSourceRequest instance
+                         */
+                        DeleteGoogleApiSourceRequest.create = function create(properties) {
+                            return new DeleteGoogleApiSourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteGoogleApiSourceRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest} message DeleteGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteGoogleApiSourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteGoogleApiSourceRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest} message DeleteGoogleApiSourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteGoogleApiSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteGoogleApiSourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest} DeleteGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteGoogleApiSourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteGoogleApiSourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest} DeleteGoogleApiSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteGoogleApiSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteGoogleApiSourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteGoogleApiSourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteGoogleApiSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest} DeleteGoogleApiSourceRequest
+                         */
+                        DeleteGoogleApiSourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteGoogleApiSourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest} message DeleteGoogleApiSourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteGoogleApiSourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteGoogleApiSourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteGoogleApiSourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteGoogleApiSourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteGoogleApiSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest";
+                        };
+    
+                        return DeleteGoogleApiSourceRequest;
+                    })();
+    
                     v1.OperationMetadata = (function() {
     
                         /**
@@ -8256,6 +16504,818 @@
                         return OperationMetadata;
                     })();
     
+                    v1.GoogleApiSource = (function() {
+    
+                        /**
+                         * Properties of a GoogleApiSource.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGoogleApiSource
+                         * @property {string|null} [name] GoogleApiSource name
+                         * @property {string|null} [uid] GoogleApiSource uid
+                         * @property {string|null} [etag] GoogleApiSource etag
+                         * @property {google.protobuf.ITimestamp|null} [createTime] GoogleApiSource createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] GoogleApiSource updateTime
+                         * @property {Object.<string,string>|null} [labels] GoogleApiSource labels
+                         * @property {Object.<string,string>|null} [annotations] GoogleApiSource annotations
+                         * @property {string|null} [displayName] GoogleApiSource displayName
+                         * @property {string|null} [destination] GoogleApiSource destination
+                         * @property {string|null} [cryptoKeyName] GoogleApiSource cryptoKeyName
+                         * @property {google.cloud.eventarc.v1.ILoggingConfig|null} [loggingConfig] GoogleApiSource loggingConfig
+                         */
+    
+                        /**
+                         * Constructs a new GoogleApiSource.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GoogleApiSource.
+                         * @implements IGoogleApiSource
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGoogleApiSource=} [properties] Properties to set
+                         */
+                        function GoogleApiSource(properties) {
+                            this.labels = {};
+                            this.annotations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleApiSource name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.name = "";
+    
+                        /**
+                         * GoogleApiSource uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.uid = "";
+    
+                        /**
+                         * GoogleApiSource etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.etag = "";
+    
+                        /**
+                         * GoogleApiSource createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.createTime = null;
+    
+                        /**
+                         * GoogleApiSource updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.updateTime = null;
+    
+                        /**
+                         * GoogleApiSource labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * GoogleApiSource annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * GoogleApiSource displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.displayName = "";
+    
+                        /**
+                         * GoogleApiSource destination.
+                         * @member {string} destination
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.destination = "";
+    
+                        /**
+                         * GoogleApiSource cryptoKeyName.
+                         * @member {string} cryptoKeyName
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.cryptoKeyName = "";
+    
+                        /**
+                         * GoogleApiSource loggingConfig.
+                         * @member {google.cloud.eventarc.v1.ILoggingConfig|null|undefined} loggingConfig
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         */
+                        GoogleApiSource.prototype.loggingConfig = null;
+    
+                        /**
+                         * Creates a new GoogleApiSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGoogleApiSource=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GoogleApiSource} GoogleApiSource instance
+                         */
+                        GoogleApiSource.create = function create(properties) {
+                            return new GoogleApiSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleApiSource message. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGoogleApiSource} message GoogleApiSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleApiSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
+                            if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.destination);
+                            if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.cryptoKeyName);
+                            if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                                $root.google.cloud.eventarc.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleApiSource message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGoogleApiSource} message GoogleApiSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleApiSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleApiSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GoogleApiSource} GoogleApiSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleApiSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GoogleApiSource(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 8: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.destination = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.cryptoKeyName = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleApiSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GoogleApiSource} GoogleApiSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleApiSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleApiSource message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleApiSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.destination != null && message.hasOwnProperty("destination"))
+                                if (!$util.isString(message.destination))
+                                    return "destination: string expected";
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                if (!$util.isString(message.cryptoKeyName))
+                                    return "cryptoKeyName: string expected";
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                                var error = $root.google.cloud.eventarc.v1.LoggingConfig.verify(message.loggingConfig);
+                                if (error)
+                                    return "loggingConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleApiSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GoogleApiSource} GoogleApiSource
+                         */
+                        GoogleApiSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GoogleApiSource)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GoogleApiSource();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.destination != null)
+                                message.destination = String(object.destination);
+                            if (object.cryptoKeyName != null)
+                                message.cryptoKeyName = String(object.cryptoKeyName);
+                            if (object.loggingConfig != null) {
+                                if (typeof object.loggingConfig !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleApiSource.loggingConfig: object expected");
+                                message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.fromObject(object.loggingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleApiSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GoogleApiSource} message GoogleApiSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleApiSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.annotations = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.etag = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.displayName = "";
+                                object.destination = "";
+                                object.cryptoKeyName = "";
+                                object.loggingConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.destination != null && message.hasOwnProperty("destination"))
+                                object.destination = message.destination;
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                object.cryptoKeyName = message.cryptoKeyName;
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                                object.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.toObject(message.loggingConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleApiSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleApiSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleApiSource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.GoogleApiSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleApiSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.GoogleApiSource";
+                        };
+    
+                        return GoogleApiSource;
+                    })();
+    
+                    v1.LoggingConfig = (function() {
+    
+                        /**
+                         * Properties of a LoggingConfig.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface ILoggingConfig
+                         * @property {google.cloud.eventarc.v1.LoggingConfig.LogSeverity|null} [logSeverity] LoggingConfig logSeverity
+                         */
+    
+                        /**
+                         * Constructs a new LoggingConfig.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a LoggingConfig.
+                         * @implements ILoggingConfig
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.ILoggingConfig=} [properties] Properties to set
+                         */
+                        function LoggingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LoggingConfig logSeverity.
+                         * @member {google.cloud.eventarc.v1.LoggingConfig.LogSeverity} logSeverity
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @instance
+                         */
+                        LoggingConfig.prototype.logSeverity = 0;
+    
+                        /**
+                         * Creates a new LoggingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ILoggingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.LoggingConfig} LoggingConfig instance
+                         */
+                        LoggingConfig.create = function create(properties) {
+                            return new LoggingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LoggingConfig message. Does not implicitly {@link google.cloud.eventarc.v1.LoggingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ILoggingConfig} message LoggingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LoggingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.logSeverity != null && Object.hasOwnProperty.call(message, "logSeverity"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.logSeverity);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LoggingConfig message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.LoggingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ILoggingConfig} message LoggingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LoggingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LoggingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.LoggingConfig} LoggingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LoggingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.LoggingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.logSeverity = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LoggingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.LoggingConfig} LoggingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LoggingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LoggingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LoggingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.logSeverity != null && message.hasOwnProperty("logSeverity"))
+                                switch (message.logSeverity) {
+                                default:
+                                    return "logSeverity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LoggingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.LoggingConfig} LoggingConfig
+                         */
+                        LoggingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.LoggingConfig)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.LoggingConfig();
+                            switch (object.logSeverity) {
+                            default:
+                                if (typeof object.logSeverity === "number") {
+                                    message.logSeverity = object.logSeverity;
+                                    break;
+                                }
+                                break;
+                            case "LOG_SEVERITY_UNSPECIFIED":
+                            case 0:
+                                message.logSeverity = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.logSeverity = 1;
+                                break;
+                            case "DEBUG":
+                            case 2:
+                                message.logSeverity = 2;
+                                break;
+                            case "INFO":
+                            case 3:
+                                message.logSeverity = 3;
+                                break;
+                            case "NOTICE":
+                            case 4:
+                                message.logSeverity = 4;
+                                break;
+                            case "WARNING":
+                            case 5:
+                                message.logSeverity = 5;
+                                break;
+                            case "ERROR":
+                            case 6:
+                                message.logSeverity = 6;
+                                break;
+                            case "CRITICAL":
+                            case 7:
+                                message.logSeverity = 7;
+                                break;
+                            case "ALERT":
+                            case 8:
+                                message.logSeverity = 8;
+                                break;
+                            case "EMERGENCY":
+                            case 9:
+                                message.logSeverity = 9;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LoggingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.LoggingConfig} message LoggingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LoggingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.logSeverity = options.enums === String ? "LOG_SEVERITY_UNSPECIFIED" : 0;
+                            if (message.logSeverity != null && message.hasOwnProperty("logSeverity"))
+                                object.logSeverity = options.enums === String ? $root.google.cloud.eventarc.v1.LoggingConfig.LogSeverity[message.logSeverity] === undefined ? message.logSeverity : $root.google.cloud.eventarc.v1.LoggingConfig.LogSeverity[message.logSeverity] : message.logSeverity;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LoggingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LoggingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LoggingConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.LoggingConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LoggingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.LoggingConfig";
+                        };
+    
+                        /**
+                         * LogSeverity enum.
+                         * @name google.cloud.eventarc.v1.LoggingConfig.LogSeverity
+                         * @enum {number}
+                         * @property {number} LOG_SEVERITY_UNSPECIFIED=0 LOG_SEVERITY_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} DEBUG=2 DEBUG value
+                         * @property {number} INFO=3 INFO value
+                         * @property {number} NOTICE=4 NOTICE value
+                         * @property {number} WARNING=5 WARNING value
+                         * @property {number} ERROR=6 ERROR value
+                         * @property {number} CRITICAL=7 CRITICAL value
+                         * @property {number} ALERT=8 ALERT value
+                         * @property {number} EMERGENCY=9 EMERGENCY value
+                         */
+                        LoggingConfig.LogSeverity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "LOG_SEVERITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "DEBUG"] = 2;
+                            values[valuesById[3] = "INFO"] = 3;
+                            values[valuesById[4] = "NOTICE"] = 4;
+                            values[valuesById[5] = "WARNING"] = 5;
+                            values[valuesById[6] = "ERROR"] = 6;
+                            values[valuesById[7] = "CRITICAL"] = 7;
+                            values[valuesById[8] = "ALERT"] = 8;
+                            values[valuesById[9] = "EMERGENCY"] = 9;
+                            return values;
+                        })();
+    
+                        return LoggingConfig;
+                    })();
+    
                     v1.GoogleChannelConfig = (function() {
     
                         /**
@@ -8511,6 +17571,4260 @@
                         return GoogleChannelConfig;
                     })();
     
+                    v1.MessageBus = (function() {
+    
+                        /**
+                         * Properties of a MessageBus.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IMessageBus
+                         * @property {string|null} [name] MessageBus name
+                         * @property {string|null} [uid] MessageBus uid
+                         * @property {string|null} [etag] MessageBus etag
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MessageBus createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MessageBus updateTime
+                         * @property {Object.<string,string>|null} [labels] MessageBus labels
+                         * @property {Object.<string,string>|null} [annotations] MessageBus annotations
+                         * @property {string|null} [displayName] MessageBus displayName
+                         * @property {string|null} [cryptoKeyName] MessageBus cryptoKeyName
+                         * @property {google.cloud.eventarc.v1.ILoggingConfig|null} [loggingConfig] MessageBus loggingConfig
+                         */
+    
+                        /**
+                         * Constructs a new MessageBus.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a MessageBus.
+                         * @implements IMessageBus
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IMessageBus=} [properties] Properties to set
+                         */
+                        function MessageBus(properties) {
+                            this.labels = {};
+                            this.annotations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MessageBus name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.name = "";
+    
+                        /**
+                         * MessageBus uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.uid = "";
+    
+                        /**
+                         * MessageBus etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.etag = "";
+    
+                        /**
+                         * MessageBus createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.createTime = null;
+    
+                        /**
+                         * MessageBus updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.updateTime = null;
+    
+                        /**
+                         * MessageBus labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * MessageBus annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * MessageBus displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.displayName = "";
+    
+                        /**
+                         * MessageBus cryptoKeyName.
+                         * @member {string} cryptoKeyName
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.cryptoKeyName = "";
+    
+                        /**
+                         * MessageBus loggingConfig.
+                         * @member {google.cloud.eventarc.v1.ILoggingConfig|null|undefined} loggingConfig
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         */
+                        MessageBus.prototype.loggingConfig = null;
+    
+                        /**
+                         * Creates a new MessageBus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IMessageBus=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.MessageBus} MessageBus instance
+                         */
+                        MessageBus.create = function create(properties) {
+                            return new MessageBus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MessageBus message. Does not implicitly {@link google.cloud.eventarc.v1.MessageBus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IMessageBus} message MessageBus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MessageBus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
+                            if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.cryptoKeyName);
+                            if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                                $root.google.cloud.eventarc.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MessageBus message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.MessageBus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IMessageBus} message MessageBus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MessageBus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MessageBus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.MessageBus} MessageBus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MessageBus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.MessageBus(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 8: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.cryptoKeyName = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MessageBus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.MessageBus} MessageBus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MessageBus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MessageBus message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MessageBus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                if (!$util.isString(message.cryptoKeyName))
+                                    return "cryptoKeyName: string expected";
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                                var error = $root.google.cloud.eventarc.v1.LoggingConfig.verify(message.loggingConfig);
+                                if (error)
+                                    return "loggingConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MessageBus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.MessageBus} MessageBus
+                         */
+                        MessageBus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.MessageBus)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.MessageBus();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.MessageBus.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.MessageBus.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.MessageBus.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.MessageBus.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.cryptoKeyName != null)
+                                message.cryptoKeyName = String(object.cryptoKeyName);
+                            if (object.loggingConfig != null) {
+                                if (typeof object.loggingConfig !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.MessageBus.loggingConfig: object expected");
+                                message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.fromObject(object.loggingConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MessageBus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {google.cloud.eventarc.v1.MessageBus} message MessageBus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MessageBus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.annotations = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.etag = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.displayName = "";
+                                object.cryptoKeyName = "";
+                                object.loggingConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                object.cryptoKeyName = message.cryptoKeyName;
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                                object.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.toObject(message.loggingConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MessageBus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MessageBus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MessageBus
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.MessageBus
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MessageBus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.MessageBus";
+                        };
+    
+                        return MessageBus;
+                    })();
+    
+                    v1.Pipeline = (function() {
+    
+                        /**
+                         * Properties of a Pipeline.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IPipeline
+                         * @property {string|null} [name] Pipeline name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Pipeline createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Pipeline updateTime
+                         * @property {Object.<string,string>|null} [labels] Pipeline labels
+                         * @property {string|null} [uid] Pipeline uid
+                         * @property {Object.<string,string>|null} [annotations] Pipeline annotations
+                         * @property {string|null} [displayName] Pipeline displayName
+                         * @property {Array.<google.cloud.eventarc.v1.Pipeline.IDestination>|null} [destinations] Pipeline destinations
+                         * @property {Array.<google.cloud.eventarc.v1.Pipeline.IMediation>|null} [mediations] Pipeline mediations
+                         * @property {string|null} [cryptoKeyName] Pipeline cryptoKeyName
+                         * @property {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat|null} [inputPayloadFormat] Pipeline inputPayloadFormat
+                         * @property {google.cloud.eventarc.v1.ILoggingConfig|null} [loggingConfig] Pipeline loggingConfig
+                         * @property {google.cloud.eventarc.v1.Pipeline.IRetryPolicy|null} [retryPolicy] Pipeline retryPolicy
+                         * @property {string|null} [etag] Pipeline etag
+                         */
+    
+                        /**
+                         * Constructs a new Pipeline.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a Pipeline.
+                         * @implements IPipeline
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IPipeline=} [properties] Properties to set
+                         */
+                        function Pipeline(properties) {
+                            this.labels = {};
+                            this.annotations = {};
+                            this.destinations = [];
+                            this.mediations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Pipeline name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.name = "";
+    
+                        /**
+                         * Pipeline createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.createTime = null;
+    
+                        /**
+                         * Pipeline updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.updateTime = null;
+    
+                        /**
+                         * Pipeline labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Pipeline uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.uid = "";
+    
+                        /**
+                         * Pipeline annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Pipeline displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.displayName = "";
+    
+                        /**
+                         * Pipeline destinations.
+                         * @member {Array.<google.cloud.eventarc.v1.Pipeline.IDestination>} destinations
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.destinations = $util.emptyArray;
+    
+                        /**
+                         * Pipeline mediations.
+                         * @member {Array.<google.cloud.eventarc.v1.Pipeline.IMediation>} mediations
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.mediations = $util.emptyArray;
+    
+                        /**
+                         * Pipeline cryptoKeyName.
+                         * @member {string} cryptoKeyName
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.cryptoKeyName = "";
+    
+                        /**
+                         * Pipeline inputPayloadFormat.
+                         * @member {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat|null|undefined} inputPayloadFormat
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.inputPayloadFormat = null;
+    
+                        /**
+                         * Pipeline loggingConfig.
+                         * @member {google.cloud.eventarc.v1.ILoggingConfig|null|undefined} loggingConfig
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.loggingConfig = null;
+    
+                        /**
+                         * Pipeline retryPolicy.
+                         * @member {google.cloud.eventarc.v1.Pipeline.IRetryPolicy|null|undefined} retryPolicy
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.retryPolicy = null;
+    
+                        /**
+                         * Pipeline etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.etag = "";
+    
+                        /**
+                         * Creates a new Pipeline instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IPipeline=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.Pipeline} Pipeline instance
+                         */
+                        Pipeline.create = function create(properties) {
+                            return new Pipeline(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Pipeline message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IPipeline} message Pipeline message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Pipeline.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.uid);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.displayName);
+                            if (message.destinations != null && message.destinations.length)
+                                for (var i = 0; i < message.destinations.length; ++i)
+                                    $root.google.cloud.eventarc.v1.Pipeline.Destination.encode(message.destinations[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.mediations != null && message.mediations.length)
+                                for (var i = 0; i < message.mediations.length; ++i)
+                                    $root.google.cloud.eventarc.v1.Pipeline.Mediation.encode(message.mediations[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.cryptoKeyName);
+                            if (message.inputPayloadFormat != null && Object.hasOwnProperty.call(message, "inputPayloadFormat"))
+                                $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.encode(message.inputPayloadFormat, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                                $root.google.cloud.eventarc.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.retryPolicy != null && Object.hasOwnProperty.call(message, "retryPolicy"))
+                                $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy.encode(message.retryPolicy, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Pipeline message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IPipeline} message Pipeline message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Pipeline.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Pipeline message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.Pipeline} Pipeline
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Pipeline.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.destinations && message.destinations.length))
+                                            message.destinations = [];
+                                        message.destinations.push($root.google.cloud.eventarc.v1.Pipeline.Destination.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.mediations && message.mediations.length))
+                                            message.mediations = [];
+                                        message.mediations.push($root.google.cloud.eventarc.v1.Pipeline.Mediation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        message.cryptoKeyName = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.inputPayloadFormat = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.retryPolicy = $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 99: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Pipeline message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.Pipeline} Pipeline
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Pipeline.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Pipeline message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Pipeline.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                                if (!Array.isArray(message.destinations))
+                                    return "destinations: array expected";
+                                for (var i = 0; i < message.destinations.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.Pipeline.Destination.verify(message.destinations[i]);
+                                    if (error)
+                                        return "destinations." + error;
+                                }
+                            }
+                            if (message.mediations != null && message.hasOwnProperty("mediations")) {
+                                if (!Array.isArray(message.mediations))
+                                    return "mediations: array expected";
+                                for (var i = 0; i < message.mediations.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.Pipeline.Mediation.verify(message.mediations[i]);
+                                    if (error)
+                                        return "mediations." + error;
+                                }
+                            }
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                if (!$util.isString(message.cryptoKeyName))
+                                    return "cryptoKeyName: string expected";
+                            if (message.inputPayloadFormat != null && message.hasOwnProperty("inputPayloadFormat")) {
+                                var error = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.verify(message.inputPayloadFormat);
+                                if (error)
+                                    return "inputPayloadFormat." + error;
+                            }
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                                var error = $root.google.cloud.eventarc.v1.LoggingConfig.verify(message.loggingConfig);
+                                if (error)
+                                    return "loggingConfig." + error;
+                            }
+                            if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy")) {
+                                var error = $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy.verify(message.retryPolicy);
+                                if (error)
+                                    return "retryPolicy." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Pipeline message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.Pipeline} Pipeline
+                         */
+                        Pipeline.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.Pipeline)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.Pipeline();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.destinations) {
+                                if (!Array.isArray(object.destinations))
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.destinations: array expected");
+                                message.destinations = [];
+                                for (var i = 0; i < object.destinations.length; ++i) {
+                                    if (typeof object.destinations[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.destinations: object expected");
+                                    message.destinations[i] = $root.google.cloud.eventarc.v1.Pipeline.Destination.fromObject(object.destinations[i]);
+                                }
+                            }
+                            if (object.mediations) {
+                                if (!Array.isArray(object.mediations))
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.mediations: array expected");
+                                message.mediations = [];
+                                for (var i = 0; i < object.mediations.length; ++i) {
+                                    if (typeof object.mediations[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.mediations: object expected");
+                                    message.mediations[i] = $root.google.cloud.eventarc.v1.Pipeline.Mediation.fromObject(object.mediations[i]);
+                                }
+                            }
+                            if (object.cryptoKeyName != null)
+                                message.cryptoKeyName = String(object.cryptoKeyName);
+                            if (object.inputPayloadFormat != null) {
+                                if (typeof object.inputPayloadFormat !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.inputPayloadFormat: object expected");
+                                message.inputPayloadFormat = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.fromObject(object.inputPayloadFormat);
+                            }
+                            if (object.loggingConfig != null) {
+                                if (typeof object.loggingConfig !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.loggingConfig: object expected");
+                                message.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.fromObject(object.loggingConfig);
+                            }
+                            if (object.retryPolicy != null) {
+                                if (typeof object.retryPolicy !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Pipeline.retryPolicy: object expected");
+                                message.retryPolicy = $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy.fromObject(object.retryPolicy);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Pipeline message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {google.cloud.eventarc.v1.Pipeline} message Pipeline
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Pipeline.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.destinations = [];
+                                object.mediations = [];
+                            }
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.annotations = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.uid = "";
+                                object.displayName = "";
+                                object.cryptoKeyName = "";
+                                object.inputPayloadFormat = null;
+                                object.loggingConfig = null;
+                                object.retryPolicy = null;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.destinations && message.destinations.length) {
+                                object.destinations = [];
+                                for (var j = 0; j < message.destinations.length; ++j)
+                                    object.destinations[j] = $root.google.cloud.eventarc.v1.Pipeline.Destination.toObject(message.destinations[j], options);
+                            }
+                            if (message.mediations && message.mediations.length) {
+                                object.mediations = [];
+                                for (var j = 0; j < message.mediations.length; ++j)
+                                    object.mediations[j] = $root.google.cloud.eventarc.v1.Pipeline.Mediation.toObject(message.mediations[j], options);
+                            }
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                object.cryptoKeyName = message.cryptoKeyName;
+                            if (message.inputPayloadFormat != null && message.hasOwnProperty("inputPayloadFormat"))
+                                object.inputPayloadFormat = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.toObject(message.inputPayloadFormat, options);
+                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                                object.loggingConfig = $root.google.cloud.eventarc.v1.LoggingConfig.toObject(message.loggingConfig, options);
+                            if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
+                                object.retryPolicy = $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy.toObject(message.retryPolicy, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Pipeline to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Pipeline.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Pipeline
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.Pipeline
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Pipeline.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline";
+                        };
+    
+                        Pipeline.MessagePayloadFormat = (function() {
+    
+                            /**
+                             * Properties of a MessagePayloadFormat.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @interface IMessagePayloadFormat
+                             * @property {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IProtobufFormat|null} [protobuf] MessagePayloadFormat protobuf
+                             * @property {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IAvroFormat|null} [avro] MessagePayloadFormat avro
+                             * @property {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IJsonFormat|null} [json] MessagePayloadFormat json
+                             */
+    
+                            /**
+                             * Constructs a new MessagePayloadFormat.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @classdesc Represents a MessagePayloadFormat.
+                             * @implements IMessagePayloadFormat
+                             * @constructor
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat=} [properties] Properties to set
+                             */
+                            function MessagePayloadFormat(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MessagePayloadFormat protobuf.
+                             * @member {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IProtobufFormat|null|undefined} protobuf
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @instance
+                             */
+                            MessagePayloadFormat.prototype.protobuf = null;
+    
+                            /**
+                             * MessagePayloadFormat avro.
+                             * @member {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IAvroFormat|null|undefined} avro
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @instance
+                             */
+                            MessagePayloadFormat.prototype.avro = null;
+    
+                            /**
+                             * MessagePayloadFormat json.
+                             * @member {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IJsonFormat|null|undefined} json
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @instance
+                             */
+                            MessagePayloadFormat.prototype.json = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * MessagePayloadFormat kind.
+                             * @member {"protobuf"|"avro"|"json"|undefined} kind
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @instance
+                             */
+                            Object.defineProperty(MessagePayloadFormat.prototype, "kind", {
+                                get: $util.oneOfGetter($oneOfFields = ["protobuf", "avro", "json"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new MessagePayloadFormat instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat=} [properties] Properties to set
+                             * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat} MessagePayloadFormat instance
+                             */
+                            MessagePayloadFormat.create = function create(properties) {
+                                return new MessagePayloadFormat(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MessagePayloadFormat message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat} message MessagePayloadFormat message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MessagePayloadFormat.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.protobuf != null && Object.hasOwnProperty.call(message, "protobuf"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat.encode(message.protobuf, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.avro != null && Object.hasOwnProperty.call(message, "avro"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat.encode(message.avro, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.json != null && Object.hasOwnProperty.call(message, "json"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat.encode(message.json, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MessagePayloadFormat message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat} message MessagePayloadFormat message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MessagePayloadFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MessagePayloadFormat message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat} MessagePayloadFormat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MessagePayloadFormat.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.protobuf = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.avro = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.json = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MessagePayloadFormat message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat} MessagePayloadFormat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MessagePayloadFormat.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MessagePayloadFormat message.
+                             * @function verify
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MessagePayloadFormat.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.protobuf != null && message.hasOwnProperty("protobuf")) {
+                                    properties.kind = 1;
+                                    {
+                                        var error = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat.verify(message.protobuf);
+                                        if (error)
+                                            return "protobuf." + error;
+                                    }
+                                }
+                                if (message.avro != null && message.hasOwnProperty("avro")) {
+                                    if (properties.kind === 1)
+                                        return "kind: multiple values";
+                                    properties.kind = 1;
+                                    {
+                                        var error = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat.verify(message.avro);
+                                        if (error)
+                                            return "avro." + error;
+                                    }
+                                }
+                                if (message.json != null && message.hasOwnProperty("json")) {
+                                    if (properties.kind === 1)
+                                        return "kind: multiple values";
+                                    properties.kind = 1;
+                                    {
+                                        var error = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat.verify(message.json);
+                                        if (error)
+                                            return "json." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MessagePayloadFormat message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat} MessagePayloadFormat
+                             */
+                            MessagePayloadFormat.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat)
+                                    return object;
+                                var message = new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat();
+                                if (object.protobuf != null) {
+                                    if (typeof object.protobuf !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.protobuf: object expected");
+                                    message.protobuf = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat.fromObject(object.protobuf);
+                                }
+                                if (object.avro != null) {
+                                    if (typeof object.avro !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.avro: object expected");
+                                    message.avro = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat.fromObject(object.avro);
+                                }
+                                if (object.json != null) {
+                                    if (typeof object.json !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.json: object expected");
+                                    message.json = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat.fromObject(object.json);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MessagePayloadFormat message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat} message MessagePayloadFormat
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MessagePayloadFormat.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.protobuf != null && message.hasOwnProperty("protobuf")) {
+                                    object.protobuf = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat.toObject(message.protobuf, options);
+                                    if (options.oneofs)
+                                        object.kind = "protobuf";
+                                }
+                                if (message.avro != null && message.hasOwnProperty("avro")) {
+                                    object.avro = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat.toObject(message.avro, options);
+                                    if (options.oneofs)
+                                        object.kind = "avro";
+                                }
+                                if (message.json != null && message.hasOwnProperty("json")) {
+                                    object.json = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat.toObject(message.json, options);
+                                    if (options.oneofs)
+                                        object.kind = "json";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MessagePayloadFormat to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MessagePayloadFormat.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MessagePayloadFormat
+                             * @function getTypeUrl
+                             * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MessagePayloadFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat";
+                            };
+    
+                            MessagePayloadFormat.JsonFormat = (function() {
+    
+                                /**
+                                 * Properties of a JsonFormat.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                                 * @interface IJsonFormat
+                                 */
+    
+                                /**
+                                 * Constructs a new JsonFormat.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                                 * @classdesc Represents a JsonFormat.
+                                 * @implements IJsonFormat
+                                 * @constructor
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IJsonFormat=} [properties] Properties to set
+                                 */
+                                function JsonFormat(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new JsonFormat instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IJsonFormat=} [properties] Properties to set
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat} JsonFormat instance
+                                 */
+                                JsonFormat.create = function create(properties) {
+                                    return new JsonFormat(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified JsonFormat message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IJsonFormat} message JsonFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                JsonFormat.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified JsonFormat message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IJsonFormat} message JsonFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                JsonFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a JsonFormat message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat} JsonFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                JsonFormat.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a JsonFormat message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat} JsonFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                JsonFormat.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a JsonFormat message.
+                                 * @function verify
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                JsonFormat.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a JsonFormat message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat} JsonFormat
+                                 */
+                                JsonFormat.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat)
+                                        return object;
+                                    return new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a JsonFormat message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat} message JsonFormat
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                JsonFormat.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this JsonFormat to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                JsonFormat.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for JsonFormat
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                JsonFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.JsonFormat";
+                                };
+    
+                                return JsonFormat;
+                            })();
+    
+                            MessagePayloadFormat.ProtobufFormat = (function() {
+    
+                                /**
+                                 * Properties of a ProtobufFormat.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                                 * @interface IProtobufFormat
+                                 * @property {string|null} [schemaDefinition] ProtobufFormat schemaDefinition
+                                 */
+    
+                                /**
+                                 * Constructs a new ProtobufFormat.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                                 * @classdesc Represents a ProtobufFormat.
+                                 * @implements IProtobufFormat
+                                 * @constructor
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IProtobufFormat=} [properties] Properties to set
+                                 */
+                                function ProtobufFormat(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ProtobufFormat schemaDefinition.
+                                 * @member {string} schemaDefinition
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @instance
+                                 */
+                                ProtobufFormat.prototype.schemaDefinition = "";
+    
+                                /**
+                                 * Creates a new ProtobufFormat instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IProtobufFormat=} [properties] Properties to set
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat} ProtobufFormat instance
+                                 */
+                                ProtobufFormat.create = function create(properties) {
+                                    return new ProtobufFormat(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ProtobufFormat message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IProtobufFormat} message ProtobufFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ProtobufFormat.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.schemaDefinition != null && Object.hasOwnProperty.call(message, "schemaDefinition"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.schemaDefinition);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ProtobufFormat message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IProtobufFormat} message ProtobufFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ProtobufFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ProtobufFormat message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat} ProtobufFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ProtobufFormat.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.schemaDefinition = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ProtobufFormat message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat} ProtobufFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ProtobufFormat.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ProtobufFormat message.
+                                 * @function verify
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ProtobufFormat.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.schemaDefinition != null && message.hasOwnProperty("schemaDefinition"))
+                                        if (!$util.isString(message.schemaDefinition))
+                                            return "schemaDefinition: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ProtobufFormat message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat} ProtobufFormat
+                                 */
+                                ProtobufFormat.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat)
+                                        return object;
+                                    var message = new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat();
+                                    if (object.schemaDefinition != null)
+                                        message.schemaDefinition = String(object.schemaDefinition);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ProtobufFormat message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat} message ProtobufFormat
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ProtobufFormat.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.schemaDefinition = "";
+                                    if (message.schemaDefinition != null && message.hasOwnProperty("schemaDefinition"))
+                                        object.schemaDefinition = message.schemaDefinition;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ProtobufFormat to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ProtobufFormat.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ProtobufFormat
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ProtobufFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.ProtobufFormat";
+                                };
+    
+                                return ProtobufFormat;
+                            })();
+    
+                            MessagePayloadFormat.AvroFormat = (function() {
+    
+                                /**
+                                 * Properties of an AvroFormat.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                                 * @interface IAvroFormat
+                                 * @property {string|null} [schemaDefinition] AvroFormat schemaDefinition
+                                 */
+    
+                                /**
+                                 * Constructs a new AvroFormat.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat
+                                 * @classdesc Represents an AvroFormat.
+                                 * @implements IAvroFormat
+                                 * @constructor
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IAvroFormat=} [properties] Properties to set
+                                 */
+                                function AvroFormat(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AvroFormat schemaDefinition.
+                                 * @member {string} schemaDefinition
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @instance
+                                 */
+                                AvroFormat.prototype.schemaDefinition = "";
+    
+                                /**
+                                 * Creates a new AvroFormat instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IAvroFormat=} [properties] Properties to set
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat} AvroFormat instance
+                                 */
+                                AvroFormat.create = function create(properties) {
+                                    return new AvroFormat(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AvroFormat message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IAvroFormat} message AvroFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AvroFormat.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.schemaDefinition != null && Object.hasOwnProperty.call(message, "schemaDefinition"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.schemaDefinition);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AvroFormat message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.IAvroFormat} message AvroFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AvroFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AvroFormat message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat} AvroFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AvroFormat.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.schemaDefinition = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AvroFormat message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat} AvroFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AvroFormat.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AvroFormat message.
+                                 * @function verify
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AvroFormat.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.schemaDefinition != null && message.hasOwnProperty("schemaDefinition"))
+                                        if (!$util.isString(message.schemaDefinition))
+                                            return "schemaDefinition: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AvroFormat message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat} AvroFormat
+                                 */
+                                AvroFormat.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat)
+                                        return object;
+                                    var message = new $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat();
+                                    if (object.schemaDefinition != null)
+                                        message.schemaDefinition = String(object.schemaDefinition);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AvroFormat message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat} message AvroFormat
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AvroFormat.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.schemaDefinition = "";
+                                    if (message.schemaDefinition != null && message.hasOwnProperty("schemaDefinition"))
+                                        object.schemaDefinition = message.schemaDefinition;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AvroFormat to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AvroFormat.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AvroFormat
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AvroFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.AvroFormat";
+                                };
+    
+                                return AvroFormat;
+                            })();
+    
+                            return MessagePayloadFormat;
+                        })();
+    
+                        Pipeline.Destination = (function() {
+    
+                            /**
+                             * Properties of a Destination.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @interface IDestination
+                             * @property {google.cloud.eventarc.v1.Pipeline.Destination.INetworkConfig|null} [networkConfig] Destination networkConfig
+                             * @property {google.cloud.eventarc.v1.Pipeline.Destination.IHttpEndpoint|null} [httpEndpoint] Destination httpEndpoint
+                             * @property {string|null} [workflow] Destination workflow
+                             * @property {string|null} [messageBus] Destination messageBus
+                             * @property {string|null} [topic] Destination topic
+                             * @property {google.cloud.eventarc.v1.Pipeline.Destination.IAuthenticationConfig|null} [authenticationConfig] Destination authenticationConfig
+                             * @property {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat|null} [outputPayloadFormat] Destination outputPayloadFormat
+                             */
+    
+                            /**
+                             * Constructs a new Destination.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @classdesc Represents a Destination.
+                             * @implements IDestination
+                             * @constructor
+                             * @param {google.cloud.eventarc.v1.Pipeline.IDestination=} [properties] Properties to set
+                             */
+                            function Destination(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Destination networkConfig.
+                             * @member {google.cloud.eventarc.v1.Pipeline.Destination.INetworkConfig|null|undefined} networkConfig
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Destination.prototype.networkConfig = null;
+    
+                            /**
+                             * Destination httpEndpoint.
+                             * @member {google.cloud.eventarc.v1.Pipeline.Destination.IHttpEndpoint|null|undefined} httpEndpoint
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Destination.prototype.httpEndpoint = null;
+    
+                            /**
+                             * Destination workflow.
+                             * @member {string|null|undefined} workflow
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Destination.prototype.workflow = null;
+    
+                            /**
+                             * Destination messageBus.
+                             * @member {string|null|undefined} messageBus
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Destination.prototype.messageBus = null;
+    
+                            /**
+                             * Destination topic.
+                             * @member {string|null|undefined} topic
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Destination.prototype.topic = null;
+    
+                            /**
+                             * Destination authenticationConfig.
+                             * @member {google.cloud.eventarc.v1.Pipeline.Destination.IAuthenticationConfig|null|undefined} authenticationConfig
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Destination.prototype.authenticationConfig = null;
+    
+                            /**
+                             * Destination outputPayloadFormat.
+                             * @member {google.cloud.eventarc.v1.Pipeline.IMessagePayloadFormat|null|undefined} outputPayloadFormat
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Destination.prototype.outputPayloadFormat = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Destination destinationDescriptor.
+                             * @member {"httpEndpoint"|"workflow"|"messageBus"|"topic"|undefined} destinationDescriptor
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             */
+                            Object.defineProperty(Destination.prototype, "destinationDescriptor", {
+                                get: $util.oneOfGetter($oneOfFields = ["httpEndpoint", "workflow", "messageBus", "topic"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Destination instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IDestination=} [properties] Properties to set
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Destination} Destination instance
+                             */
+                            Destination.create = function create(properties) {
+                                return new Destination(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Destination message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IDestination} message Destination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Destination.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.httpEndpoint != null && Object.hasOwnProperty.call(message, "httpEndpoint"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint.encode(message.httpEndpoint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.workflow != null && Object.hasOwnProperty.call(message, "workflow"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.workflow);
+                                if (message.messageBus != null && Object.hasOwnProperty.call(message, "messageBus"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.messageBus);
+                                if (message.authenticationConfig != null && Object.hasOwnProperty.call(message, "authenticationConfig"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.encode(message.authenticationConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.outputPayloadFormat != null && Object.hasOwnProperty.call(message, "outputPayloadFormat"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.encode(message.outputPayloadFormat, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.topic);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IDestination} message Destination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Destination.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Destination message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Destination} Destination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Destination.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Destination();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.networkConfig = $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.httpEndpoint = $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.workflow = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.messageBus = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.topic = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.authenticationConfig = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.outputPayloadFormat = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Destination message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Destination} Destination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Destination.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Destination message.
+                             * @function verify
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Destination.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
+                                    var error = $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig.verify(message.networkConfig);
+                                    if (error)
+                                        return "networkConfig." + error;
+                                }
+                                if (message.httpEndpoint != null && message.hasOwnProperty("httpEndpoint")) {
+                                    properties.destinationDescriptor = 1;
+                                    {
+                                        var error = $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint.verify(message.httpEndpoint);
+                                        if (error)
+                                            return "httpEndpoint." + error;
+                                    }
+                                }
+                                if (message.workflow != null && message.hasOwnProperty("workflow")) {
+                                    if (properties.destinationDescriptor === 1)
+                                        return "destinationDescriptor: multiple values";
+                                    properties.destinationDescriptor = 1;
+                                    if (!$util.isString(message.workflow))
+                                        return "workflow: string expected";
+                                }
+                                if (message.messageBus != null && message.hasOwnProperty("messageBus")) {
+                                    if (properties.destinationDescriptor === 1)
+                                        return "destinationDescriptor: multiple values";
+                                    properties.destinationDescriptor = 1;
+                                    if (!$util.isString(message.messageBus))
+                                        return "messageBus: string expected";
+                                }
+                                if (message.topic != null && message.hasOwnProperty("topic")) {
+                                    if (properties.destinationDescriptor === 1)
+                                        return "destinationDescriptor: multiple values";
+                                    properties.destinationDescriptor = 1;
+                                    if (!$util.isString(message.topic))
+                                        return "topic: string expected";
+                                }
+                                if (message.authenticationConfig != null && message.hasOwnProperty("authenticationConfig")) {
+                                    var error = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.verify(message.authenticationConfig);
+                                    if (error)
+                                        return "authenticationConfig." + error;
+                                }
+                                if (message.outputPayloadFormat != null && message.hasOwnProperty("outputPayloadFormat")) {
+                                    var error = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.verify(message.outputPayloadFormat);
+                                    if (error)
+                                        return "outputPayloadFormat." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Destination} Destination
+                             */
+                            Destination.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Destination)
+                                    return object;
+                                var message = new $root.google.cloud.eventarc.v1.Pipeline.Destination();
+                                if (object.networkConfig != null) {
+                                    if (typeof object.networkConfig !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.Destination.networkConfig: object expected");
+                                    message.networkConfig = $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig.fromObject(object.networkConfig);
+                                }
+                                if (object.httpEndpoint != null) {
+                                    if (typeof object.httpEndpoint !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.Destination.httpEndpoint: object expected");
+                                    message.httpEndpoint = $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint.fromObject(object.httpEndpoint);
+                                }
+                                if (object.workflow != null)
+                                    message.workflow = String(object.workflow);
+                                if (object.messageBus != null)
+                                    message.messageBus = String(object.messageBus);
+                                if (object.topic != null)
+                                    message.topic = String(object.topic);
+                                if (object.authenticationConfig != null) {
+                                    if (typeof object.authenticationConfig !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.Destination.authenticationConfig: object expected");
+                                    message.authenticationConfig = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.fromObject(object.authenticationConfig);
+                                }
+                                if (object.outputPayloadFormat != null) {
+                                    if (typeof object.outputPayloadFormat !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.Destination.outputPayloadFormat: object expected");
+                                    message.outputPayloadFormat = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.fromObject(object.outputPayloadFormat);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.Destination} message Destination
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Destination.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.networkConfig = null;
+                                    object.authenticationConfig = null;
+                                    object.outputPayloadFormat = null;
+                                }
+                                if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
+                                    object.networkConfig = $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig.toObject(message.networkConfig, options);
+                                if (message.httpEndpoint != null && message.hasOwnProperty("httpEndpoint")) {
+                                    object.httpEndpoint = $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint.toObject(message.httpEndpoint, options);
+                                    if (options.oneofs)
+                                        object.destinationDescriptor = "httpEndpoint";
+                                }
+                                if (message.workflow != null && message.hasOwnProperty("workflow")) {
+                                    object.workflow = message.workflow;
+                                    if (options.oneofs)
+                                        object.destinationDescriptor = "workflow";
+                                }
+                                if (message.messageBus != null && message.hasOwnProperty("messageBus")) {
+                                    object.messageBus = message.messageBus;
+                                    if (options.oneofs)
+                                        object.destinationDescriptor = "messageBus";
+                                }
+                                if (message.authenticationConfig != null && message.hasOwnProperty("authenticationConfig"))
+                                    object.authenticationConfig = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.toObject(message.authenticationConfig, options);
+                                if (message.outputPayloadFormat != null && message.hasOwnProperty("outputPayloadFormat"))
+                                    object.outputPayloadFormat = $root.google.cloud.eventarc.v1.Pipeline.MessagePayloadFormat.toObject(message.outputPayloadFormat, options);
+                                if (message.topic != null && message.hasOwnProperty("topic")) {
+                                    object.topic = message.topic;
+                                    if (options.oneofs)
+                                        object.destinationDescriptor = "topic";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Destination to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Destination.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Destination
+                             * @function getTypeUrl
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Destination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Destination";
+                            };
+    
+                            Destination.NetworkConfig = (function() {
+    
+                                /**
+                                 * Properties of a NetworkConfig.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                                 * @interface INetworkConfig
+                                 * @property {string|null} [networkAttachment] NetworkConfig networkAttachment
+                                 */
+    
+                                /**
+                                 * Constructs a new NetworkConfig.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                                 * @classdesc Represents a NetworkConfig.
+                                 * @implements INetworkConfig
+                                 * @constructor
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.INetworkConfig=} [properties] Properties to set
+                                 */
+                                function NetworkConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * NetworkConfig networkAttachment.
+                                 * @member {string} networkAttachment
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @instance
+                                 */
+                                NetworkConfig.prototype.networkAttachment = "";
+    
+                                /**
+                                 * Creates a new NetworkConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.INetworkConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig} NetworkConfig instance
+                                 */
+                                NetworkConfig.create = function create(properties) {
+                                    return new NetworkConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.INetworkConfig} message NetworkConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.networkAttachment != null && Object.hasOwnProperty.call(message, "networkAttachment"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkAttachment);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.INetworkConfig} message NetworkConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a NetworkConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig} NetworkConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.networkAttachment = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig} NetworkConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a NetworkConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                NetworkConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                        if (!$util.isString(message.networkAttachment))
+                                            return "networkAttachment: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig} NetworkConfig
+                                 */
+                                NetworkConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig();
+                                    if (object.networkAttachment != null)
+                                        message.networkAttachment = String(object.networkAttachment);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig} message NetworkConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                NetworkConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.networkAttachment = "";
+                                    if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                        object.networkAttachment = message.networkAttachment;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this NetworkConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                NetworkConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for NetworkConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                NetworkConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Destination.NetworkConfig";
+                                };
+    
+                                return NetworkConfig;
+                            })();
+    
+                            Destination.HttpEndpoint = (function() {
+    
+                                /**
+                                 * Properties of a HttpEndpoint.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                                 * @interface IHttpEndpoint
+                                 * @property {string|null} [uri] HttpEndpoint uri
+                                 * @property {string|null} [messageBindingTemplate] HttpEndpoint messageBindingTemplate
+                                 */
+    
+                                /**
+                                 * Constructs a new HttpEndpoint.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                                 * @classdesc Represents a HttpEndpoint.
+                                 * @implements IHttpEndpoint
+                                 * @constructor
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IHttpEndpoint=} [properties] Properties to set
+                                 */
+                                function HttpEndpoint(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * HttpEndpoint uri.
+                                 * @member {string} uri
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @instance
+                                 */
+                                HttpEndpoint.prototype.uri = "";
+    
+                                /**
+                                 * HttpEndpoint messageBindingTemplate.
+                                 * @member {string} messageBindingTemplate
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @instance
+                                 */
+                                HttpEndpoint.prototype.messageBindingTemplate = "";
+    
+                                /**
+                                 * Creates a new HttpEndpoint instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IHttpEndpoint=} [properties] Properties to set
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint} HttpEndpoint instance
+                                 */
+                                HttpEndpoint.create = function create(properties) {
+                                    return new HttpEndpoint(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified HttpEndpoint message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IHttpEndpoint} message HttpEndpoint message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                HttpEndpoint.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                    if (message.messageBindingTemplate != null && Object.hasOwnProperty.call(message, "messageBindingTemplate"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.messageBindingTemplate);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified HttpEndpoint message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IHttpEndpoint} message HttpEndpoint message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                HttpEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a HttpEndpoint message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint} HttpEndpoint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                HttpEndpoint.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.uri = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.messageBindingTemplate = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a HttpEndpoint message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint} HttpEndpoint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                HttpEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a HttpEndpoint message.
+                                 * @function verify
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                HttpEndpoint.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.uri != null && message.hasOwnProperty("uri"))
+                                        if (!$util.isString(message.uri))
+                                            return "uri: string expected";
+                                    if (message.messageBindingTemplate != null && message.hasOwnProperty("messageBindingTemplate"))
+                                        if (!$util.isString(message.messageBindingTemplate))
+                                            return "messageBindingTemplate: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a HttpEndpoint message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint} HttpEndpoint
+                                 */
+                                HttpEndpoint.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint)
+                                        return object;
+                                    var message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint();
+                                    if (object.uri != null)
+                                        message.uri = String(object.uri);
+                                    if (object.messageBindingTemplate != null)
+                                        message.messageBindingTemplate = String(object.messageBindingTemplate);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a HttpEndpoint message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint} message HttpEndpoint
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                HttpEndpoint.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.uri = "";
+                                        object.messageBindingTemplate = "";
+                                    }
+                                    if (message.uri != null && message.hasOwnProperty("uri"))
+                                        object.uri = message.uri;
+                                    if (message.messageBindingTemplate != null && message.hasOwnProperty("messageBindingTemplate"))
+                                        object.messageBindingTemplate = message.messageBindingTemplate;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this HttpEndpoint to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                HttpEndpoint.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for HttpEndpoint
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                HttpEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Destination.HttpEndpoint";
+                                };
+    
+                                return HttpEndpoint;
+                            })();
+    
+                            Destination.AuthenticationConfig = (function() {
+    
+                                /**
+                                 * Properties of an AuthenticationConfig.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                                 * @interface IAuthenticationConfig
+                                 * @property {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOidcToken|null} [googleOidc] AuthenticationConfig googleOidc
+                                 * @property {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOAuthToken|null} [oauthToken] AuthenticationConfig oauthToken
+                                 */
+    
+                                /**
+                                 * Constructs a new AuthenticationConfig.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination
+                                 * @classdesc Represents an AuthenticationConfig.
+                                 * @implements IAuthenticationConfig
+                                 * @constructor
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IAuthenticationConfig=} [properties] Properties to set
+                                 */
+                                function AuthenticationConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AuthenticationConfig googleOidc.
+                                 * @member {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOidcToken|null|undefined} googleOidc
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @instance
+                                 */
+                                AuthenticationConfig.prototype.googleOidc = null;
+    
+                                /**
+                                 * AuthenticationConfig oauthToken.
+                                 * @member {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOAuthToken|null|undefined} oauthToken
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @instance
+                                 */
+                                AuthenticationConfig.prototype.oauthToken = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * AuthenticationConfig authenticationMethodDescriptor.
+                                 * @member {"googleOidc"|"oauthToken"|undefined} authenticationMethodDescriptor
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @instance
+                                 */
+                                Object.defineProperty(AuthenticationConfig.prototype, "authenticationMethodDescriptor", {
+                                    get: $util.oneOfGetter($oneOfFields = ["googleOidc", "oauthToken"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new AuthenticationConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IAuthenticationConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig} AuthenticationConfig instance
+                                 */
+                                AuthenticationConfig.create = function create(properties) {
+                                    return new AuthenticationConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AuthenticationConfig message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IAuthenticationConfig} message AuthenticationConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AuthenticationConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.googleOidc != null && Object.hasOwnProperty.call(message, "googleOidc"))
+                                        $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken.encode(message.googleOidc, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.oauthToken != null && Object.hasOwnProperty.call(message, "oauthToken"))
+                                        $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken.encode(message.oauthToken, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AuthenticationConfig message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.IAuthenticationConfig} message AuthenticationConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AuthenticationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AuthenticationConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig} AuthenticationConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AuthenticationConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.googleOidc = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.oauthToken = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AuthenticationConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig} AuthenticationConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AuthenticationConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AuthenticationConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AuthenticationConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.googleOidc != null && message.hasOwnProperty("googleOidc")) {
+                                        properties.authenticationMethodDescriptor = 1;
+                                        {
+                                            var error = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken.verify(message.googleOidc);
+                                            if (error)
+                                                return "googleOidc." + error;
+                                        }
+                                    }
+                                    if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                        if (properties.authenticationMethodDescriptor === 1)
+                                            return "authenticationMethodDescriptor: multiple values";
+                                        properties.authenticationMethodDescriptor = 1;
+                                        {
+                                            var error = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken.verify(message.oauthToken);
+                                            if (error)
+                                                return "oauthToken." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AuthenticationConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig} AuthenticationConfig
+                                 */
+                                AuthenticationConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig();
+                                    if (object.googleOidc != null) {
+                                        if (typeof object.googleOidc !== "object")
+                                            throw TypeError(".google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.googleOidc: object expected");
+                                        message.googleOidc = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken.fromObject(object.googleOidc);
+                                    }
+                                    if (object.oauthToken != null) {
+                                        if (typeof object.oauthToken !== "object")
+                                            throw TypeError(".google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.oauthToken: object expected");
+                                        message.oauthToken = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken.fromObject(object.oauthToken);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AuthenticationConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig} message AuthenticationConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AuthenticationConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.googleOidc != null && message.hasOwnProperty("googleOidc")) {
+                                        object.googleOidc = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken.toObject(message.googleOidc, options);
+                                        if (options.oneofs)
+                                            object.authenticationMethodDescriptor = "googleOidc";
+                                    }
+                                    if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                        object.oauthToken = $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken.toObject(message.oauthToken, options);
+                                        if (options.oneofs)
+                                            object.authenticationMethodDescriptor = "oauthToken";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AuthenticationConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AuthenticationConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AuthenticationConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AuthenticationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig";
+                                };
+    
+                                AuthenticationConfig.OidcToken = (function() {
+    
+                                    /**
+                                     * Properties of an OidcToken.
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                     * @interface IOidcToken
+                                     * @property {string|null} [serviceAccount] OidcToken serviceAccount
+                                     * @property {string|null} [audience] OidcToken audience
+                                     */
+    
+                                    /**
+                                     * Constructs a new OidcToken.
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                     * @classdesc Represents an OidcToken.
+                                     * @implements IOidcToken
+                                     * @constructor
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOidcToken=} [properties] Properties to set
+                                     */
+                                    function OidcToken(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * OidcToken serviceAccount.
+                                     * @member {string} serviceAccount
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @instance
+                                     */
+                                    OidcToken.prototype.serviceAccount = "";
+    
+                                    /**
+                                     * OidcToken audience.
+                                     * @member {string} audience
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @instance
+                                     */
+                                    OidcToken.prototype.audience = "";
+    
+                                    /**
+                                     * Creates a new OidcToken instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOidcToken=} [properties] Properties to set
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken} OidcToken instance
+                                     */
+                                    OidcToken.create = function create(properties) {
+                                        return new OidcToken(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified OidcToken message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOidcToken} message OidcToken message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    OidcToken.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccount);
+                                        if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.audience);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified OidcToken message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOidcToken} message OidcToken message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    OidcToken.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an OidcToken message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken} OidcToken
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    OidcToken.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.serviceAccount = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.audience = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an OidcToken message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken} OidcToken
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    OidcToken.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an OidcToken message.
+                                     * @function verify
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    OidcToken.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            if (!$util.isString(message.serviceAccount))
+                                                return "serviceAccount: string expected";
+                                        if (message.audience != null && message.hasOwnProperty("audience"))
+                                            if (!$util.isString(message.audience))
+                                                return "audience: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an OidcToken message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken} OidcToken
+                                     */
+                                    OidcToken.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken)
+                                            return object;
+                                        var message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken();
+                                        if (object.serviceAccount != null)
+                                            message.serviceAccount = String(object.serviceAccount);
+                                        if (object.audience != null)
+                                            message.audience = String(object.audience);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an OidcToken message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken} message OidcToken
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    OidcToken.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.serviceAccount = "";
+                                            object.audience = "";
+                                        }
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            object.serviceAccount = message.serviceAccount;
+                                        if (message.audience != null && message.hasOwnProperty("audience"))
+                                            object.audience = message.audience;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this OidcToken to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    OidcToken.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for OidcToken
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    OidcToken.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OidcToken";
+                                    };
+    
+                                    return OidcToken;
+                                })();
+    
+                                AuthenticationConfig.OAuthToken = (function() {
+    
+                                    /**
+                                     * Properties of a OAuthToken.
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                     * @interface IOAuthToken
+                                     * @property {string|null} [serviceAccount] OAuthToken serviceAccount
+                                     * @property {string|null} [scope] OAuthToken scope
+                                     */
+    
+                                    /**
+                                     * Constructs a new OAuthToken.
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig
+                                     * @classdesc Represents a OAuthToken.
+                                     * @implements IOAuthToken
+                                     * @constructor
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOAuthToken=} [properties] Properties to set
+                                     */
+                                    function OAuthToken(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * OAuthToken serviceAccount.
+                                     * @member {string} serviceAccount
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @instance
+                                     */
+                                    OAuthToken.prototype.serviceAccount = "";
+    
+                                    /**
+                                     * OAuthToken scope.
+                                     * @member {string} scope
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @instance
+                                     */
+                                    OAuthToken.prototype.scope = "";
+    
+                                    /**
+                                     * Creates a new OAuthToken instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOAuthToken=} [properties] Properties to set
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken} OAuthToken instance
+                                     */
+                                    OAuthToken.create = function create(properties) {
+                                        return new OAuthToken(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified OAuthToken message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOAuthToken} message OAuthToken message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    OAuthToken.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccount);
+                                        if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.scope);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified OAuthToken message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.IOAuthToken} message OAuthToken message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    OAuthToken.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a OAuthToken message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken} OAuthToken
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    OAuthToken.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.serviceAccount = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.scope = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a OAuthToken message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken} OAuthToken
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    OAuthToken.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a OAuthToken message.
+                                     * @function verify
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    OAuthToken.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            if (!$util.isString(message.serviceAccount))
+                                                return "serviceAccount: string expected";
+                                        if (message.scope != null && message.hasOwnProperty("scope"))
+                                            if (!$util.isString(message.scope))
+                                                return "scope: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a OAuthToken message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken} OAuthToken
+                                     */
+                                    OAuthToken.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken)
+                                            return object;
+                                        var message = new $root.google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken();
+                                        if (object.serviceAccount != null)
+                                            message.serviceAccount = String(object.serviceAccount);
+                                        if (object.scope != null)
+                                            message.scope = String(object.scope);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a OAuthToken message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken} message OAuthToken
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    OAuthToken.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.serviceAccount = "";
+                                            object.scope = "";
+                                        }
+                                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                            object.serviceAccount = message.serviceAccount;
+                                        if (message.scope != null && message.hasOwnProperty("scope"))
+                                            object.scope = message.scope;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this OAuthToken to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    OAuthToken.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for OAuthToken
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    OAuthToken.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Destination.AuthenticationConfig.OAuthToken";
+                                    };
+    
+                                    return OAuthToken;
+                                })();
+    
+                                return AuthenticationConfig;
+                            })();
+    
+                            return Destination;
+                        })();
+    
+                        Pipeline.Mediation = (function() {
+    
+                            /**
+                             * Properties of a Mediation.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @interface IMediation
+                             * @property {google.cloud.eventarc.v1.Pipeline.Mediation.ITransformation|null} [transformation] Mediation transformation
+                             */
+    
+                            /**
+                             * Constructs a new Mediation.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @classdesc Represents a Mediation.
+                             * @implements IMediation
+                             * @constructor
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMediation=} [properties] Properties to set
+                             */
+                            function Mediation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Mediation transformation.
+                             * @member {google.cloud.eventarc.v1.Pipeline.Mediation.ITransformation|null|undefined} transformation
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @instance
+                             */
+                            Mediation.prototype.transformation = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Mediation mediationDescriptor.
+                             * @member {"transformation"|undefined} mediationDescriptor
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @instance
+                             */
+                            Object.defineProperty(Mediation.prototype, "mediationDescriptor", {
+                                get: $util.oneOfGetter($oneOfFields = ["transformation"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Mediation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMediation=} [properties] Properties to set
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Mediation} Mediation instance
+                             */
+                            Mediation.create = function create(properties) {
+                                return new Mediation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Mediation message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Mediation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMediation} message Mediation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Mediation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.transformation != null && Object.hasOwnProperty.call(message, "transformation"))
+                                    $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation.encode(message.transformation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Mediation message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Mediation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IMediation} message Mediation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Mediation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Mediation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Mediation} Mediation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Mediation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Mediation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.transformation = $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Mediation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Mediation} Mediation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Mediation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Mediation message.
+                             * @function verify
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Mediation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.transformation != null && message.hasOwnProperty("transformation")) {
+                                    properties.mediationDescriptor = 1;
+                                    {
+                                        var error = $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation.verify(message.transformation);
+                                        if (error)
+                                            return "transformation." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Mediation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.eventarc.v1.Pipeline.Mediation} Mediation
+                             */
+                            Mediation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Mediation)
+                                    return object;
+                                var message = new $root.google.cloud.eventarc.v1.Pipeline.Mediation();
+                                if (object.transformation != null) {
+                                    if (typeof object.transformation !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.Mediation.transformation: object expected");
+                                    message.transformation = $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation.fromObject(object.transformation);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Mediation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.Mediation} message Mediation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Mediation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.transformation != null && message.hasOwnProperty("transformation")) {
+                                    object.transformation = $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation.toObject(message.transformation, options);
+                                    if (options.oneofs)
+                                        object.mediationDescriptor = "transformation";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Mediation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Mediation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Mediation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Mediation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Mediation";
+                            };
+    
+                            Mediation.Transformation = (function() {
+    
+                                /**
+                                 * Properties of a Transformation.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                                 * @interface ITransformation
+                                 * @property {string|null} [transformationTemplate] Transformation transformationTemplate
+                                 */
+    
+                                /**
+                                 * Constructs a new Transformation.
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation
+                                 * @classdesc Represents a Transformation.
+                                 * @implements ITransformation
+                                 * @constructor
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Mediation.ITransformation=} [properties] Properties to set
+                                 */
+                                function Transformation(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Transformation transformationTemplate.
+                                 * @member {string} transformationTemplate
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @instance
+                                 */
+                                Transformation.prototype.transformationTemplate = "";
+    
+                                /**
+                                 * Creates a new Transformation instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Mediation.ITransformation=} [properties] Properties to set
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Mediation.Transformation} Transformation instance
+                                 */
+                                Transformation.create = function create(properties) {
+                                    return new Transformation(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Transformation message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Mediation.Transformation.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Mediation.ITransformation} message Transformation message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Transformation.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.transformationTemplate != null && Object.hasOwnProperty.call(message, "transformationTemplate"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.transformationTemplate);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Transformation message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.Mediation.Transformation.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Mediation.ITransformation} message Transformation message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Transformation.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Transformation message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Mediation.Transformation} Transformation
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Transformation.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.transformationTemplate = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Transformation message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Mediation.Transformation} Transformation
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Transformation.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Transformation message.
+                                 * @function verify
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Transformation.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.transformationTemplate != null && message.hasOwnProperty("transformationTemplate"))
+                                        if (!$util.isString(message.transformationTemplate))
+                                            return "transformationTemplate: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Transformation message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.eventarc.v1.Pipeline.Mediation.Transformation} Transformation
+                                 */
+                                Transformation.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation)
+                                        return object;
+                                    var message = new $root.google.cloud.eventarc.v1.Pipeline.Mediation.Transformation();
+                                    if (object.transformationTemplate != null)
+                                        message.transformationTemplate = String(object.transformationTemplate);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Transformation message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {google.cloud.eventarc.v1.Pipeline.Mediation.Transformation} message Transformation
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Transformation.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.transformationTemplate = "";
+                                    if (message.transformationTemplate != null && message.hasOwnProperty("transformationTemplate"))
+                                        object.transformationTemplate = message.transformationTemplate;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Transformation to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Transformation.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Transformation
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.eventarc.v1.Pipeline.Mediation.Transformation
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Transformation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.Mediation.Transformation";
+                                };
+    
+                                return Transformation;
+                            })();
+    
+                            return Mediation;
+                        })();
+    
+                        Pipeline.RetryPolicy = (function() {
+    
+                            /**
+                             * Properties of a RetryPolicy.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @interface IRetryPolicy
+                             * @property {number|null} [maxAttempts] RetryPolicy maxAttempts
+                             * @property {google.protobuf.IDuration|null} [minRetryDelay] RetryPolicy minRetryDelay
+                             * @property {google.protobuf.IDuration|null} [maxRetryDelay] RetryPolicy maxRetryDelay
+                             */
+    
+                            /**
+                             * Constructs a new RetryPolicy.
+                             * @memberof google.cloud.eventarc.v1.Pipeline
+                             * @classdesc Represents a RetryPolicy.
+                             * @implements IRetryPolicy
+                             * @constructor
+                             * @param {google.cloud.eventarc.v1.Pipeline.IRetryPolicy=} [properties] Properties to set
+                             */
+                            function RetryPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetryPolicy maxAttempts.
+                             * @member {number} maxAttempts
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @instance
+                             */
+                            RetryPolicy.prototype.maxAttempts = 0;
+    
+                            /**
+                             * RetryPolicy minRetryDelay.
+                             * @member {google.protobuf.IDuration|null|undefined} minRetryDelay
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @instance
+                             */
+                            RetryPolicy.prototype.minRetryDelay = null;
+    
+                            /**
+                             * RetryPolicy maxRetryDelay.
+                             * @member {google.protobuf.IDuration|null|undefined} maxRetryDelay
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @instance
+                             */
+                            RetryPolicy.prototype.maxRetryDelay = null;
+    
+                            /**
+                             * Creates a new RetryPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IRetryPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.eventarc.v1.Pipeline.RetryPolicy} RetryPolicy instance
+                             */
+                            RetryPolicy.create = function create(properties) {
+                                return new RetryPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetryPolicy message. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.RetryPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IRetryPolicy} message RetryPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetryPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.maxAttempts != null && Object.hasOwnProperty.call(message, "maxAttempts"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxAttempts);
+                                if (message.minRetryDelay != null && Object.hasOwnProperty.call(message, "minRetryDelay"))
+                                    $root.google.protobuf.Duration.encode(message.minRetryDelay, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.maxRetryDelay != null && Object.hasOwnProperty.call(message, "maxRetryDelay"))
+                                    $root.google.protobuf.Duration.encode(message.maxRetryDelay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetryPolicy message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Pipeline.RetryPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.IRetryPolicy} message RetryPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetryPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetryPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.eventarc.v1.Pipeline.RetryPolicy} RetryPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetryPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.maxAttempts = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.minRetryDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.maxRetryDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetryPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.eventarc.v1.Pipeline.RetryPolicy} RetryPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetryPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetryPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetryPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.maxAttempts != null && message.hasOwnProperty("maxAttempts"))
+                                    if (!$util.isInteger(message.maxAttempts))
+                                        return "maxAttempts: integer expected";
+                                if (message.minRetryDelay != null && message.hasOwnProperty("minRetryDelay")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.minRetryDelay);
+                                    if (error)
+                                        return "minRetryDelay." + error;
+                                }
+                                if (message.maxRetryDelay != null && message.hasOwnProperty("maxRetryDelay")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.maxRetryDelay);
+                                    if (error)
+                                        return "maxRetryDelay." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetryPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.eventarc.v1.Pipeline.RetryPolicy} RetryPolicy
+                             */
+                            RetryPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.eventarc.v1.Pipeline.RetryPolicy();
+                                if (object.maxAttempts != null)
+                                    message.maxAttempts = object.maxAttempts | 0;
+                                if (object.minRetryDelay != null) {
+                                    if (typeof object.minRetryDelay !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.RetryPolicy.minRetryDelay: object expected");
+                                    message.minRetryDelay = $root.google.protobuf.Duration.fromObject(object.minRetryDelay);
+                                }
+                                if (object.maxRetryDelay != null) {
+                                    if (typeof object.maxRetryDelay !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Pipeline.RetryPolicy.maxRetryDelay: object expected");
+                                    message.maxRetryDelay = $root.google.protobuf.Duration.fromObject(object.maxRetryDelay);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetryPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {google.cloud.eventarc.v1.Pipeline.RetryPolicy} message RetryPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetryPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.maxAttempts = 0;
+                                    object.minRetryDelay = null;
+                                    object.maxRetryDelay = null;
+                                }
+                                if (message.maxAttempts != null && message.hasOwnProperty("maxAttempts"))
+                                    object.maxAttempts = message.maxAttempts;
+                                if (message.minRetryDelay != null && message.hasOwnProperty("minRetryDelay"))
+                                    object.minRetryDelay = $root.google.protobuf.Duration.toObject(message.minRetryDelay, options);
+                                if (message.maxRetryDelay != null && message.hasOwnProperty("maxRetryDelay"))
+                                    object.maxRetryDelay = $root.google.protobuf.Duration.toObject(message.maxRetryDelay, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetryPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetryPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetryPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.eventarc.v1.Pipeline.RetryPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetryPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.eventarc.v1.Pipeline.RetryPolicy";
+                            };
+    
+                            return RetryPolicy;
+                        })();
+    
+                        return Pipeline;
+                    })();
+    
                     v1.Trigger = (function() {
     
                         /**
@@ -8528,6 +21842,8 @@
                          * @property {Object.<string,string>|null} [labels] Trigger labels
                          * @property {string|null} [channel] Trigger channel
                          * @property {Object.<string,google.cloud.eventarc.v1.IStateCondition>|null} [conditions] Trigger conditions
+                         * @property {string|null} [eventDataContentType] Trigger eventDataContentType
+                         * @property {boolean|null} [satisfiesPzs] Trigger satisfiesPzs
                          * @property {string|null} [etag] Trigger etag
                          */
     
@@ -8638,6 +21954,22 @@
                         Trigger.prototype.conditions = $util.emptyObject;
     
                         /**
+                         * Trigger eventDataContentType.
+                         * @member {string} eventDataContentType
+                         * @memberof google.cloud.eventarc.v1.Trigger
+                         * @instance
+                         */
+                        Trigger.prototype.eventDataContentType = "";
+    
+                        /**
+                         * Trigger satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.eventarc.v1.Trigger
+                         * @instance
+                         */
+                        Trigger.prototype.satisfiesPzs = false;
+    
+                        /**
                          * Trigger etag.
                          * @member {string} etag
                          * @memberof google.cloud.eventarc.v1.Trigger
@@ -8696,6 +22028,10 @@
                                     writer.uint32(/* id 15, wireType 2 =*/122).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.eventarc.v1.StateCondition.encode(message.conditions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.eventDataContentType != null && Object.hasOwnProperty.call(message, "eventDataContentType"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.eventDataContentType);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.satisfiesPzs);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -8816,6 +22152,14 @@
                                         message.conditions[key] = value;
                                         break;
                                     }
+                                case 16: {
+                                        message.eventDataContentType = reader.string();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -8914,6 +22258,12 @@
                                         return "conditions." + error;
                                 }
                             }
+                            if (message.eventDataContentType != null && message.hasOwnProperty("eventDataContentType"))
+                                if (!$util.isString(message.eventDataContentType))
+                                    return "eventDataContentType: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -8987,6 +22337,10 @@
                                     message.conditions[keys[i]] = $root.google.cloud.eventarc.v1.StateCondition.fromObject(object.conditions[keys[i]]);
                                 }
                             }
+                            if (object.eventDataContentType != null)
+                                message.eventDataContentType = String(object.eventDataContentType);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -9020,6 +22374,8 @@
                                 object.destination = null;
                                 object.transport = null;
                                 object.channel = "";
+                                object.eventDataContentType = "";
+                                object.satisfiesPzs = false;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -9054,6 +22410,10 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.conditions[keys2[j]] = $root.google.cloud.eventarc.v1.StateCondition.toObject(message.conditions[keys2[j]], options);
                             }
+                            if (message.eventDataContentType != null && message.hasOwnProperty("eventDataContentType"))
+                                object.eventDataContentType = message.eventDataContentType;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -9669,6 +23029,8 @@
                          * @property {string|null} [cloudFunction] Destination cloudFunction
                          * @property {google.cloud.eventarc.v1.IGKE|null} [gke] Destination gke
                          * @property {string|null} [workflow] Destination workflow
+                         * @property {google.cloud.eventarc.v1.IHttpEndpoint|null} [httpEndpoint] Destination httpEndpoint
+                         * @property {google.cloud.eventarc.v1.INetworkConfig|null} [networkConfig] Destination networkConfig
                          */
     
                         /**
@@ -9718,17 +23080,33 @@
                          */
                         Destination.prototype.workflow = null;
     
+                        /**
+                         * Destination httpEndpoint.
+                         * @member {google.cloud.eventarc.v1.IHttpEndpoint|null|undefined} httpEndpoint
+                         * @memberof google.cloud.eventarc.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.httpEndpoint = null;
+    
+                        /**
+                         * Destination networkConfig.
+                         * @member {google.cloud.eventarc.v1.INetworkConfig|null|undefined} networkConfig
+                         * @memberof google.cloud.eventarc.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.networkConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Destination descriptor.
-                         * @member {"cloudRun"|"cloudFunction"|"gke"|"workflow"|undefined} descriptor
+                         * @member {"cloudRun"|"cloudFunction"|"gke"|"workflow"|"httpEndpoint"|undefined} descriptor
                          * @memberof google.cloud.eventarc.v1.Destination
                          * @instance
                          */
                         Object.defineProperty(Destination.prototype, "descriptor", {
-                            get: $util.oneOfGetter($oneOfFields = ["cloudRun", "cloudFunction", "gke", "workflow"]),
+                            get: $util.oneOfGetter($oneOfFields = ["cloudRun", "cloudFunction", "gke", "workflow", "httpEndpoint"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -9764,6 +23142,10 @@
                                 $root.google.cloud.eventarc.v1.GKE.encode(message.gke, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.workflow != null && Object.hasOwnProperty.call(message, "workflow"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.workflow);
+                            if (message.httpEndpoint != null && Object.hasOwnProperty.call(message, "httpEndpoint"))
+                                $root.google.cloud.eventarc.v1.HttpEndpoint.encode(message.httpEndpoint, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
+                                $root.google.cloud.eventarc.v1.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -9812,6 +23194,14 @@
                                     }
                                 case 4: {
                                         message.workflow = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.httpEndpoint = $root.google.cloud.eventarc.v1.HttpEndpoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.networkConfig = $root.google.cloud.eventarc.v1.NetworkConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -9882,6 +23272,21 @@
                                 if (!$util.isString(message.workflow))
                                     return "workflow: string expected";
                             }
+                            if (message.httpEndpoint != null && message.hasOwnProperty("httpEndpoint")) {
+                                if (properties.descriptor === 1)
+                                    return "descriptor: multiple values";
+                                properties.descriptor = 1;
+                                {
+                                    var error = $root.google.cloud.eventarc.v1.HttpEndpoint.verify(message.httpEndpoint);
+                                    if (error)
+                                        return "httpEndpoint." + error;
+                                }
+                            }
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
+                                var error = $root.google.cloud.eventarc.v1.NetworkConfig.verify(message.networkConfig);
+                                if (error)
+                                    return "networkConfig." + error;
+                            }
                             return null;
                         };
     
@@ -9911,6 +23316,16 @@
                             }
                             if (object.workflow != null)
                                 message.workflow = String(object.workflow);
+                            if (object.httpEndpoint != null) {
+                                if (typeof object.httpEndpoint !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Destination.httpEndpoint: object expected");
+                                message.httpEndpoint = $root.google.cloud.eventarc.v1.HttpEndpoint.fromObject(object.httpEndpoint);
+                            }
+                            if (object.networkConfig != null) {
+                                if (typeof object.networkConfig !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Destination.networkConfig: object expected");
+                                message.networkConfig = $root.google.cloud.eventarc.v1.NetworkConfig.fromObject(object.networkConfig);
+                            }
                             return message;
                         };
     
@@ -9927,6 +23342,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.networkConfig = null;
                             if (message.cloudRun != null && message.hasOwnProperty("cloudRun")) {
                                 object.cloudRun = $root.google.cloud.eventarc.v1.CloudRun.toObject(message.cloudRun, options);
                                 if (options.oneofs)
@@ -9947,6 +23364,13 @@
                                 if (options.oneofs)
                                     object.descriptor = "workflow";
                             }
+                            if (message.httpEndpoint != null && message.hasOwnProperty("httpEndpoint")) {
+                                object.httpEndpoint = $root.google.cloud.eventarc.v1.HttpEndpoint.toObject(message.httpEndpoint, options);
+                                if (options.oneofs)
+                                    object.descriptor = "httpEndpoint";
+                            }
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
+                                object.networkConfig = $root.google.cloud.eventarc.v1.NetworkConfig.toObject(message.networkConfig, options);
                             return object;
                         };
     
@@ -10977,6 +24401,412 @@
                         };
     
                         return Pubsub;
+                    })();
+    
+                    v1.HttpEndpoint = (function() {
+    
+                        /**
+                         * Properties of a HttpEndpoint.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IHttpEndpoint
+                         * @property {string|null} [uri] HttpEndpoint uri
+                         */
+    
+                        /**
+                         * Constructs a new HttpEndpoint.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a HttpEndpoint.
+                         * @implements IHttpEndpoint
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IHttpEndpoint=} [properties] Properties to set
+                         */
+                        function HttpEndpoint(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HttpEndpoint uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @instance
+                         */
+                        HttpEndpoint.prototype.uri = "";
+    
+                        /**
+                         * Creates a new HttpEndpoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IHttpEndpoint=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.HttpEndpoint} HttpEndpoint instance
+                         */
+                        HttpEndpoint.create = function create(properties) {
+                            return new HttpEndpoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HttpEndpoint message. Does not implicitly {@link google.cloud.eventarc.v1.HttpEndpoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IHttpEndpoint} message HttpEndpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpEndpoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HttpEndpoint message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.HttpEndpoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IHttpEndpoint} message HttpEndpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HttpEndpoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.HttpEndpoint} HttpEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpEndpoint.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.HttpEndpoint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HttpEndpoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.HttpEndpoint} HttpEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HttpEndpoint message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HttpEndpoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HttpEndpoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.HttpEndpoint} HttpEndpoint
+                         */
+                        HttpEndpoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.HttpEndpoint)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.HttpEndpoint();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HttpEndpoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {google.cloud.eventarc.v1.HttpEndpoint} message HttpEndpoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HttpEndpoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HttpEndpoint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HttpEndpoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HttpEndpoint
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.HttpEndpoint
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HttpEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.HttpEndpoint";
+                        };
+    
+                        return HttpEndpoint;
+                    })();
+    
+                    v1.NetworkConfig = (function() {
+    
+                        /**
+                         * Properties of a NetworkConfig.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface INetworkConfig
+                         * @property {string|null} [networkAttachment] NetworkConfig networkAttachment
+                         */
+    
+                        /**
+                         * Constructs a new NetworkConfig.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a NetworkConfig.
+                         * @implements INetworkConfig
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.INetworkConfig=} [properties] Properties to set
+                         */
+                        function NetworkConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NetworkConfig networkAttachment.
+                         * @member {string} networkAttachment
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.networkAttachment = "";
+    
+                        /**
+                         * Creates a new NetworkConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.INetworkConfig=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.NetworkConfig} NetworkConfig instance
+                         */
+                        NetworkConfig.create = function create(properties) {
+                            return new NetworkConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.eventarc.v1.NetworkConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.INetworkConfig} message NetworkConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NetworkConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.networkAttachment != null && Object.hasOwnProperty.call(message, "networkAttachment"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkAttachment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.NetworkConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.INetworkConfig} message NetworkConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NetworkConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NetworkConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.NetworkConfig} NetworkConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NetworkConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.NetworkConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.networkAttachment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.NetworkConfig} NetworkConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NetworkConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NetworkConfig message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NetworkConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                if (!$util.isString(message.networkAttachment))
+                                    return "networkAttachment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.NetworkConfig} NetworkConfig
+                         */
+                        NetworkConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.NetworkConfig)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.NetworkConfig();
+                            if (object.networkAttachment != null)
+                                message.networkAttachment = String(object.networkAttachment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.NetworkConfig} message NetworkConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NetworkConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.networkAttachment = "";
+                            if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                object.networkAttachment = message.networkAttachment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NetworkConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NetworkConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NetworkConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.NetworkConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NetworkConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.NetworkConfig";
+                        };
+    
+                        return NetworkConfig;
                     })();
     
                     return v1;
@@ -16599,6 +30429,263 @@
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
                 return values;
+            })();
+    
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
             })();
     
             return api;
@@ -22775,6 +36862,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
                 /**
@@ -22917,6 +37005,14 @@
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -22977,6 +37073,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -23087,6 +37185,10 @@
                             }
                         case 1055: {
                                 message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -23235,6 +37337,11 @@
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
                         if (error)
                             return ".google.api.resourceReference." + error;
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     return null;
                 };
@@ -23455,6 +37562,11 @@
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     return message;
                 };
     
@@ -23489,6 +37601,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -23532,6 +37645,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     

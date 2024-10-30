@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+function main(parent) {
+  // [START eventarc_v1_generated_Eventarc_ListMessageBusEnrollments_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,14 +29,21 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The parent message bus to list enrollments on.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. If set, validate the request and preview the review, but do not
-   *  post it.
+   *  Optional. The maximum number of results to return on each page.
+   *  Note: The service may send fewer.
    */
-  // const validateOnly = true
+  // const pageSize = 1234
+  /**
+   *  Optional. The page token; provide the value from the `next_page_token`
+   *  field in a previous call to retrieve the subsequent page.
+   *  When paginating, all other parameters provided must match
+   *  the previous call that provided the page token.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Eventarc library
   const {EventarcClient} = require('@google-cloud/eventarc').v1;
@@ -44,20 +51,21 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callListMessageBusEnrollments() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = eventarcClient.listMessageBusEnrollmentsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callListMessageBusEnrollments();
+  // [END eventarc_v1_generated_Eventarc_ListMessageBusEnrollments_async]
 }
 
 process.on('unhandledRejection', err => {

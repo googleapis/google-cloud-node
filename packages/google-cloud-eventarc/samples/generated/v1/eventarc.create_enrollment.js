@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+function main(parent, enrollment, enrollmentId) {
+  // [START eventarc_v1_generated_Eventarc_CreateEnrollment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,18 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The parent collection in which to add this enrollment.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The enrollment to create.
+   */
+  // const enrollment = {}
+  /**
+   *  Required. The user-provided ID to be assigned to the Enrollment. It should
+   *  match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+   */
+  // const enrollmentId = 'abc123'
   /**
    *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
@@ -44,20 +53,22 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callCreateEnrollment() {
     // Construct request
     const request = {
-      name,
+      parent,
+      enrollment,
+      enrollmentId,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
+    const [operation] = await eventarcClient.createEnrollment(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callCreateEnrollment();
+  // [END eventarc_v1_generated_Eventarc_CreateEnrollment_async]
 }
 
 process.on('unhandledRejection', err => {

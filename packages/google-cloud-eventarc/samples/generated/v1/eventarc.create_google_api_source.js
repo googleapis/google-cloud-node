@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+function main(parent, googleApiSource, googleApiSourceId) {
+  // [START eventarc_v1_generated_Eventarc_CreateGoogleApiSource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,18 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The parent collection in which to add this google api source.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The google api source to create.
+   */
+  // const googleApiSource = {}
+  /**
+   *  Required. The user-provided ID to be assigned to the GoogleApiSource. It
+   *  should match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+   */
+  // const googleApiSourceId = 'abc123'
   /**
    *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
@@ -44,20 +53,22 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callCreateGoogleApiSource() {
     // Construct request
     const request = {
-      name,
+      parent,
+      googleApiSource,
+      googleApiSourceId,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
+    const [operation] = await eventarcClient.createGoogleApiSource(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callCreateGoogleApiSource();
+  // [END eventarc_v1_generated_Eventarc_CreateGoogleApiSource_async]
 }
 
 process.on('unhandledRejection', err => {

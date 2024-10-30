@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+function main(parent, pipeline, pipelineId) {
+  // [START eventarc_v1_generated_Eventarc_CreatePipeline_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,17 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The parent collection in which to add this pipeline.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The pipeline to create.
+   */
+  // const pipeline = {}
+  /**
+   *  Required. The user-provided ID to be assigned to the Pipeline.
+   */
+  // const pipelineId = 'abc123'
   /**
    *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
@@ -44,20 +52,22 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callCreatePipeline() {
     // Construct request
     const request = {
-      name,
+      parent,
+      pipeline,
+      pipelineId,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
+    const [operation] = await eventarcClient.createPipeline(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callCreatePipeline();
+  // [END eventarc_v1_generated_Eventarc_CreatePipeline_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START eventarc_v1_generated_Eventarc_DeleteChannel_async]
+function main(parent, messageBus, messageBusId) {
+  // [START eventarc_v1_generated_Eventarc_CreateMessageBus_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,18 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the channel to be deleted.
+   *  Required. The parent collection in which to add this message bus.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The message bus to create.
+   */
+  // const messageBus = {}
+  /**
+   *  Required. The user-provided ID to be assigned to the MessageBus. It should
+   *  match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$)
+   */
+  // const messageBusId = 'abc123'
   /**
    *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
@@ -44,20 +53,22 @@ function main(name) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteChannel() {
+  async function callCreateMessageBus() {
     // Construct request
     const request = {
-      name,
+      parent,
+      messageBus,
+      messageBusId,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteChannel(request);
+    const [operation] = await eventarcClient.createMessageBus(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteChannel();
-  // [END eventarc_v1_generated_Eventarc_DeleteChannel_async]
+  callCreateMessageBus();
+  // [END eventarc_v1_generated_Eventarc_CreateMessageBus_async]
 }
 
 process.on('unhandledRejection', err => {
