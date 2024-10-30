@@ -3685,6 +3685,8 @@
                          * @property {string|null} [customLabel_2] Attributes customLabel_2
                          * @property {string|null} [customLabel_3] Attributes customLabel_3
                          * @property {string|null} [customLabel_4] Attributes customLabel_4
+                         * @property {google.shopping.css.v1.IHeadlineOfferInstallment|null} [headlineOfferInstallment] Attributes headlineOfferInstallment
+                         * @property {google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null} [headlineOfferSubscriptionCost] Attributes headlineOfferSubscriptionCost
                          */
     
                         /**
@@ -4093,6 +4095,22 @@
                          * @instance
                          */
                         Attributes.prototype.customLabel_4 = null;
+    
+                        /**
+                         * Attributes headlineOfferInstallment.
+                         * @member {google.shopping.css.v1.IHeadlineOfferInstallment|null|undefined} headlineOfferInstallment
+                         * @memberof google.shopping.css.v1.Attributes
+                         * @instance
+                         */
+                        Attributes.prototype.headlineOfferInstallment = null;
+    
+                        /**
+                         * Attributes headlineOfferSubscriptionCost.
+                         * @member {google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null|undefined} headlineOfferSubscriptionCost
+                         * @memberof google.shopping.css.v1.Attributes
+                         * @instance
+                         */
+                        Attributes.prototype.headlineOfferSubscriptionCost = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -4566,6 +4584,10 @@
                                 writer.uint32(/* id 49, wireType 2 =*/394).string(message.customLabel_3);
                             if (message.customLabel_4 != null && Object.hasOwnProperty.call(message, "customLabel_4"))
                                 writer.uint32(/* id 50, wireType 2 =*/402).string(message.customLabel_4);
+                            if (message.headlineOfferInstallment != null && Object.hasOwnProperty.call(message, "headlineOfferInstallment"))
+                                $root.google.shopping.css.v1.HeadlineOfferInstallment.encode(message.headlineOfferInstallment, writer.uint32(/* id 51, wireType 2 =*/410).fork()).ldelim();
+                            if (message.headlineOfferSubscriptionCost != null && Object.hasOwnProperty.call(message, "headlineOfferSubscriptionCost"))
+                                $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.encode(message.headlineOfferSubscriptionCost, writer.uint32(/* id 52, wireType 2 =*/418).fork()).ldelim();
                             return writer;
                         };
     
@@ -4806,6 +4828,14 @@
                                     }
                                 case 50: {
                                         message.customLabel_4 = reader.string();
+                                        break;
+                                    }
+                                case 51: {
+                                        message.headlineOfferInstallment = $root.google.shopping.css.v1.HeadlineOfferInstallment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 52: {
+                                        message.headlineOfferSubscriptionCost = $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5104,6 +5134,16 @@
                                 if (!$util.isString(message.customLabel_4))
                                     return "customLabel_4: string expected";
                             }
+                            if (message.headlineOfferInstallment != null && message.hasOwnProperty("headlineOfferInstallment")) {
+                                var error = $root.google.shopping.css.v1.HeadlineOfferInstallment.verify(message.headlineOfferInstallment);
+                                if (error)
+                                    return "headlineOfferInstallment." + error;
+                            }
+                            if (message.headlineOfferSubscriptionCost != null && message.hasOwnProperty("headlineOfferSubscriptionCost")) {
+                                var error = $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.verify(message.headlineOfferSubscriptionCost);
+                                if (error)
+                                    return "headlineOfferSubscriptionCost." + error;
+                            }
                             return null;
                         };
     
@@ -5302,6 +5342,16 @@
                                 message.customLabel_3 = String(object.customLabel_3);
                             if (object.customLabel_4 != null)
                                 message.customLabel_4 = String(object.customLabel_4);
+                            if (object.headlineOfferInstallment != null) {
+                                if (typeof object.headlineOfferInstallment !== "object")
+                                    throw TypeError(".google.shopping.css.v1.Attributes.headlineOfferInstallment: object expected");
+                                message.headlineOfferInstallment = $root.google.shopping.css.v1.HeadlineOfferInstallment.fromObject(object.headlineOfferInstallment);
+                            }
+                            if (object.headlineOfferSubscriptionCost != null) {
+                                if (typeof object.headlineOfferSubscriptionCost !== "object")
+                                    throw TypeError(".google.shopping.css.v1.Attributes.headlineOfferSubscriptionCost: object expected");
+                                message.headlineOfferSubscriptionCost = $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.fromObject(object.headlineOfferSubscriptionCost);
+                            }
                             return message;
                         };
     
@@ -5338,6 +5388,8 @@
                                 object.productHeight = null;
                                 object.expirationDate = null;
                                 object.headlineOfferShippingPrice = null;
+                                object.headlineOfferInstallment = null;
+                                object.headlineOfferSubscriptionCost = null;
                             }
                             if (message.cppLink != null && message.hasOwnProperty("cppLink")) {
                                 object.cppLink = message.cppLink;
@@ -5558,6 +5610,10 @@
                                 if (options.oneofs)
                                     object._customLabel_4 = "customLabel_4";
                             }
+                            if (message.headlineOfferInstallment != null && message.hasOwnProperty("headlineOfferInstallment"))
+                                object.headlineOfferInstallment = $root.google.shopping.css.v1.HeadlineOfferInstallment.toObject(message.headlineOfferInstallment, options);
+                            if (message.headlineOfferSubscriptionCost != null && message.hasOwnProperty("headlineOfferSubscriptionCost"))
+                                object.headlineOfferSubscriptionCost = $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost.toObject(message.headlineOfferSubscriptionCost, options);
                             return object;
                         };
     
@@ -7624,6 +7680,589 @@
                         })();
     
                         return CssProductStatus;
+                    })();
+    
+                    v1.HeadlineOfferSubscriptionCost = (function() {
+    
+                        /**
+                         * Properties of a HeadlineOfferSubscriptionCost.
+                         * @memberof google.shopping.css.v1
+                         * @interface IHeadlineOfferSubscriptionCost
+                         * @property {google.shopping.css.v1.SubscriptionPeriod|null} [period] HeadlineOfferSubscriptionCost period
+                         * @property {number|Long|null} [periodLength] HeadlineOfferSubscriptionCost periodLength
+                         * @property {google.shopping.type.IPrice|null} [amount] HeadlineOfferSubscriptionCost amount
+                         */
+    
+                        /**
+                         * Constructs a new HeadlineOfferSubscriptionCost.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents a HeadlineOfferSubscriptionCost.
+                         * @implements IHeadlineOfferSubscriptionCost
+                         * @constructor
+                         * @param {google.shopping.css.v1.IHeadlineOfferSubscriptionCost=} [properties] Properties to set
+                         */
+                        function HeadlineOfferSubscriptionCost(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HeadlineOfferSubscriptionCost period.
+                         * @member {google.shopping.css.v1.SubscriptionPeriod} period
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @instance
+                         */
+                        HeadlineOfferSubscriptionCost.prototype.period = 0;
+    
+                        /**
+                         * HeadlineOfferSubscriptionCost periodLength.
+                         * @member {number|Long} periodLength
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @instance
+                         */
+                        HeadlineOfferSubscriptionCost.prototype.periodLength = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * HeadlineOfferSubscriptionCost amount.
+                         * @member {google.shopping.type.IPrice|null|undefined} amount
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @instance
+                         */
+                        HeadlineOfferSubscriptionCost.prototype.amount = null;
+    
+                        /**
+                         * Creates a new HeadlineOfferSubscriptionCost instance using the specified properties.
+                         * @function create
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {google.shopping.css.v1.IHeadlineOfferSubscriptionCost=} [properties] Properties to set
+                         * @returns {google.shopping.css.v1.HeadlineOfferSubscriptionCost} HeadlineOfferSubscriptionCost instance
+                         */
+                        HeadlineOfferSubscriptionCost.create = function create(properties) {
+                            return new HeadlineOfferSubscriptionCost(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HeadlineOfferSubscriptionCost message. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferSubscriptionCost.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {google.shopping.css.v1.IHeadlineOfferSubscriptionCost} message HeadlineOfferSubscriptionCost message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HeadlineOfferSubscriptionCost.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.period != null && Object.hasOwnProperty.call(message, "period"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.period);
+                            if (message.periodLength != null && Object.hasOwnProperty.call(message, "periodLength"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.periodLength);
+                            if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
+                                $root.google.shopping.type.Price.encode(message.amount, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HeadlineOfferSubscriptionCost message, length delimited. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferSubscriptionCost.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {google.shopping.css.v1.IHeadlineOfferSubscriptionCost} message HeadlineOfferSubscriptionCost message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HeadlineOfferSubscriptionCost.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HeadlineOfferSubscriptionCost message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.shopping.css.v1.HeadlineOfferSubscriptionCost} HeadlineOfferSubscriptionCost
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HeadlineOfferSubscriptionCost.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.period = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.periodLength = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.amount = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HeadlineOfferSubscriptionCost message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.shopping.css.v1.HeadlineOfferSubscriptionCost} HeadlineOfferSubscriptionCost
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HeadlineOfferSubscriptionCost.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HeadlineOfferSubscriptionCost message.
+                         * @function verify
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HeadlineOfferSubscriptionCost.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.period != null && message.hasOwnProperty("period"))
+                                switch (message.period) {
+                                default:
+                                    return "period: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.periodLength != null && message.hasOwnProperty("periodLength"))
+                                if (!$util.isInteger(message.periodLength) && !(message.periodLength && $util.isInteger(message.periodLength.low) && $util.isInteger(message.periodLength.high)))
+                                    return "periodLength: integer|Long expected";
+                            if (message.amount != null && message.hasOwnProperty("amount")) {
+                                var error = $root.google.shopping.type.Price.verify(message.amount);
+                                if (error)
+                                    return "amount." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HeadlineOfferSubscriptionCost message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.shopping.css.v1.HeadlineOfferSubscriptionCost} HeadlineOfferSubscriptionCost
+                         */
+                        HeadlineOfferSubscriptionCost.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost)
+                                return object;
+                            var message = new $root.google.shopping.css.v1.HeadlineOfferSubscriptionCost();
+                            switch (object.period) {
+                            default:
+                                if (typeof object.period === "number") {
+                                    message.period = object.period;
+                                    break;
+                                }
+                                break;
+                            case "SUBSCRIPTION_PERIOD_UNSPECIFIED":
+                            case 0:
+                                message.period = 0;
+                                break;
+                            case "MONTH":
+                            case 1:
+                                message.period = 1;
+                                break;
+                            case "YEAR":
+                            case 2:
+                                message.period = 2;
+                                break;
+                            }
+                            if (object.periodLength != null)
+                                if ($util.Long)
+                                    (message.periodLength = $util.Long.fromValue(object.periodLength)).unsigned = false;
+                                else if (typeof object.periodLength === "string")
+                                    message.periodLength = parseInt(object.periodLength, 10);
+                                else if (typeof object.periodLength === "number")
+                                    message.periodLength = object.periodLength;
+                                else if (typeof object.periodLength === "object")
+                                    message.periodLength = new $util.LongBits(object.periodLength.low >>> 0, object.periodLength.high >>> 0).toNumber();
+                            if (object.amount != null) {
+                                if (typeof object.amount !== "object")
+                                    throw TypeError(".google.shopping.css.v1.HeadlineOfferSubscriptionCost.amount: object expected");
+                                message.amount = $root.google.shopping.type.Price.fromObject(object.amount);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HeadlineOfferSubscriptionCost message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {google.shopping.css.v1.HeadlineOfferSubscriptionCost} message HeadlineOfferSubscriptionCost
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HeadlineOfferSubscriptionCost.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.period = options.enums === String ? "SUBSCRIPTION_PERIOD_UNSPECIFIED" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.periodLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.periodLength = options.longs === String ? "0" : 0;
+                                object.amount = null;
+                            }
+                            if (message.period != null && message.hasOwnProperty("period"))
+                                object.period = options.enums === String ? $root.google.shopping.css.v1.SubscriptionPeriod[message.period] === undefined ? message.period : $root.google.shopping.css.v1.SubscriptionPeriod[message.period] : message.period;
+                            if (message.periodLength != null && message.hasOwnProperty("periodLength"))
+                                if (typeof message.periodLength === "number")
+                                    object.periodLength = options.longs === String ? String(message.periodLength) : message.periodLength;
+                                else
+                                    object.periodLength = options.longs === String ? $util.Long.prototype.toString.call(message.periodLength) : options.longs === Number ? new $util.LongBits(message.periodLength.low >>> 0, message.periodLength.high >>> 0).toNumber() : message.periodLength;
+                            if (message.amount != null && message.hasOwnProperty("amount"))
+                                object.amount = $root.google.shopping.type.Price.toObject(message.amount, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HeadlineOfferSubscriptionCost to JSON.
+                         * @function toJSON
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HeadlineOfferSubscriptionCost.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HeadlineOfferSubscriptionCost
+                         * @function getTypeUrl
+                         * @memberof google.shopping.css.v1.HeadlineOfferSubscriptionCost
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HeadlineOfferSubscriptionCost.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.shopping.css.v1.HeadlineOfferSubscriptionCost";
+                        };
+    
+                        return HeadlineOfferSubscriptionCost;
+                    })();
+    
+                    v1.HeadlineOfferInstallment = (function() {
+    
+                        /**
+                         * Properties of a HeadlineOfferInstallment.
+                         * @memberof google.shopping.css.v1
+                         * @interface IHeadlineOfferInstallment
+                         * @property {number|Long|null} [months] HeadlineOfferInstallment months
+                         * @property {google.shopping.type.IPrice|null} [amount] HeadlineOfferInstallment amount
+                         * @property {google.shopping.type.IPrice|null} [downpayment] HeadlineOfferInstallment downpayment
+                         */
+    
+                        /**
+                         * Constructs a new HeadlineOfferInstallment.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents a HeadlineOfferInstallment.
+                         * @implements IHeadlineOfferInstallment
+                         * @constructor
+                         * @param {google.shopping.css.v1.IHeadlineOfferInstallment=} [properties] Properties to set
+                         */
+                        function HeadlineOfferInstallment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HeadlineOfferInstallment months.
+                         * @member {number|Long} months
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @instance
+                         */
+                        HeadlineOfferInstallment.prototype.months = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * HeadlineOfferInstallment amount.
+                         * @member {google.shopping.type.IPrice|null|undefined} amount
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @instance
+                         */
+                        HeadlineOfferInstallment.prototype.amount = null;
+    
+                        /**
+                         * HeadlineOfferInstallment downpayment.
+                         * @member {google.shopping.type.IPrice|null|undefined} downpayment
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @instance
+                         */
+                        HeadlineOfferInstallment.prototype.downpayment = null;
+    
+                        /**
+                         * Creates a new HeadlineOfferInstallment instance using the specified properties.
+                         * @function create
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {google.shopping.css.v1.IHeadlineOfferInstallment=} [properties] Properties to set
+                         * @returns {google.shopping.css.v1.HeadlineOfferInstallment} HeadlineOfferInstallment instance
+                         */
+                        HeadlineOfferInstallment.create = function create(properties) {
+                            return new HeadlineOfferInstallment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HeadlineOfferInstallment message. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferInstallment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {google.shopping.css.v1.IHeadlineOfferInstallment} message HeadlineOfferInstallment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HeadlineOfferInstallment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.months != null && Object.hasOwnProperty.call(message, "months"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.months);
+                            if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
+                                $root.google.shopping.type.Price.encode(message.amount, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.downpayment != null && Object.hasOwnProperty.call(message, "downpayment"))
+                                $root.google.shopping.type.Price.encode(message.downpayment, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HeadlineOfferInstallment message, length delimited. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferInstallment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {google.shopping.css.v1.IHeadlineOfferInstallment} message HeadlineOfferInstallment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HeadlineOfferInstallment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HeadlineOfferInstallment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.shopping.css.v1.HeadlineOfferInstallment} HeadlineOfferInstallment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HeadlineOfferInstallment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.css.v1.HeadlineOfferInstallment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.months = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.amount = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.downpayment = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HeadlineOfferInstallment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.shopping.css.v1.HeadlineOfferInstallment} HeadlineOfferInstallment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HeadlineOfferInstallment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HeadlineOfferInstallment message.
+                         * @function verify
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HeadlineOfferInstallment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.months != null && message.hasOwnProperty("months"))
+                                if (!$util.isInteger(message.months) && !(message.months && $util.isInteger(message.months.low) && $util.isInteger(message.months.high)))
+                                    return "months: integer|Long expected";
+                            if (message.amount != null && message.hasOwnProperty("amount")) {
+                                var error = $root.google.shopping.type.Price.verify(message.amount);
+                                if (error)
+                                    return "amount." + error;
+                            }
+                            if (message.downpayment != null && message.hasOwnProperty("downpayment")) {
+                                var error = $root.google.shopping.type.Price.verify(message.downpayment);
+                                if (error)
+                                    return "downpayment." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HeadlineOfferInstallment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.shopping.css.v1.HeadlineOfferInstallment} HeadlineOfferInstallment
+                         */
+                        HeadlineOfferInstallment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.shopping.css.v1.HeadlineOfferInstallment)
+                                return object;
+                            var message = new $root.google.shopping.css.v1.HeadlineOfferInstallment();
+                            if (object.months != null)
+                                if ($util.Long)
+                                    (message.months = $util.Long.fromValue(object.months)).unsigned = false;
+                                else if (typeof object.months === "string")
+                                    message.months = parseInt(object.months, 10);
+                                else if (typeof object.months === "number")
+                                    message.months = object.months;
+                                else if (typeof object.months === "object")
+                                    message.months = new $util.LongBits(object.months.low >>> 0, object.months.high >>> 0).toNumber();
+                            if (object.amount != null) {
+                                if (typeof object.amount !== "object")
+                                    throw TypeError(".google.shopping.css.v1.HeadlineOfferInstallment.amount: object expected");
+                                message.amount = $root.google.shopping.type.Price.fromObject(object.amount);
+                            }
+                            if (object.downpayment != null) {
+                                if (typeof object.downpayment !== "object")
+                                    throw TypeError(".google.shopping.css.v1.HeadlineOfferInstallment.downpayment: object expected");
+                                message.downpayment = $root.google.shopping.type.Price.fromObject(object.downpayment);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HeadlineOfferInstallment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {google.shopping.css.v1.HeadlineOfferInstallment} message HeadlineOfferInstallment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HeadlineOfferInstallment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.months = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.months = options.longs === String ? "0" : 0;
+                                object.amount = null;
+                                object.downpayment = null;
+                            }
+                            if (message.months != null && message.hasOwnProperty("months"))
+                                if (typeof message.months === "number")
+                                    object.months = options.longs === String ? String(message.months) : message.months;
+                                else
+                                    object.months = options.longs === String ? $util.Long.prototype.toString.call(message.months) : options.longs === Number ? new $util.LongBits(message.months.low >>> 0, message.months.high >>> 0).toNumber() : message.months;
+                            if (message.amount != null && message.hasOwnProperty("amount"))
+                                object.amount = $root.google.shopping.type.Price.toObject(message.amount, options);
+                            if (message.downpayment != null && message.hasOwnProperty("downpayment"))
+                                object.downpayment = $root.google.shopping.type.Price.toObject(message.downpayment, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HeadlineOfferInstallment to JSON.
+                         * @function toJSON
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HeadlineOfferInstallment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HeadlineOfferInstallment
+                         * @function getTypeUrl
+                         * @memberof google.shopping.css.v1.HeadlineOfferInstallment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HeadlineOfferInstallment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.shopping.css.v1.HeadlineOfferInstallment";
+                        };
+    
+                        return HeadlineOfferInstallment;
+                    })();
+    
+                    /**
+                     * SubscriptionPeriod enum.
+                     * @name google.shopping.css.v1.SubscriptionPeriod
+                     * @enum {number}
+                     * @property {number} SUBSCRIPTION_PERIOD_UNSPECIFIED=0 SUBSCRIPTION_PERIOD_UNSPECIFIED value
+                     * @property {number} MONTH=1 MONTH value
+                     * @property {number} YEAR=2 YEAR value
+                     */
+                    v1.SubscriptionPeriod = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SUBSCRIPTION_PERIOD_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MONTH"] = 1;
+                        values[valuesById[2] = "YEAR"] = 2;
+                        return values;
                     })();
     
                     v1.CssProductInputsService = (function() {
