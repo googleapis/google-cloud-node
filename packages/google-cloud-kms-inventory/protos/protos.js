@@ -6894,60 +6894,6 @@
                         return ExternalProtectionLevelOptions;
                     })();
     
-                    /**
-                     * ProtectionLevel enum.
-                     * @name google.cloud.kms.v1.ProtectionLevel
-                     * @enum {number}
-                     * @property {number} PROTECTION_LEVEL_UNSPECIFIED=0 PROTECTION_LEVEL_UNSPECIFIED value
-                     * @property {number} SOFTWARE=1 SOFTWARE value
-                     * @property {number} HSM=2 HSM value
-                     * @property {number} EXTERNAL=3 EXTERNAL value
-                     * @property {number} EXTERNAL_VPC=4 EXTERNAL_VPC value
-                     */
-                    v1.ProtectionLevel = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "PROTECTION_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "SOFTWARE"] = 1;
-                        values[valuesById[2] = "HSM"] = 2;
-                        values[valuesById[3] = "EXTERNAL"] = 3;
-                        values[valuesById[4] = "EXTERNAL_VPC"] = 4;
-                        return values;
-                    })();
-    
-                    /**
-                     * AccessReason enum.
-                     * @name google.cloud.kms.v1.AccessReason
-                     * @enum {number}
-                     * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
-                     * @property {number} CUSTOMER_INITIATED_SUPPORT=1 CUSTOMER_INITIATED_SUPPORT value
-                     * @property {number} GOOGLE_INITIATED_SERVICE=2 GOOGLE_INITIATED_SERVICE value
-                     * @property {number} THIRD_PARTY_DATA_REQUEST=3 THIRD_PARTY_DATA_REQUEST value
-                     * @property {number} GOOGLE_INITIATED_REVIEW=4 GOOGLE_INITIATED_REVIEW value
-                     * @property {number} CUSTOMER_INITIATED_ACCESS=5 CUSTOMER_INITIATED_ACCESS value
-                     * @property {number} GOOGLE_INITIATED_SYSTEM_OPERATION=6 GOOGLE_INITIATED_SYSTEM_OPERATION value
-                     * @property {number} REASON_NOT_EXPECTED=7 REASON_NOT_EXPECTED value
-                     * @property {number} MODIFIED_CUSTOMER_INITIATED_ACCESS=8 MODIFIED_CUSTOMER_INITIATED_ACCESS value
-                     * @property {number} MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION=9 MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION value
-                     * @property {number} GOOGLE_RESPONSE_TO_PRODUCTION_ALERT=10 GOOGLE_RESPONSE_TO_PRODUCTION_ALERT value
-                     * @property {number} CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING=11 CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING value
-                     */
-                    v1.AccessReason = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "CUSTOMER_INITIATED_SUPPORT"] = 1;
-                        values[valuesById[2] = "GOOGLE_INITIATED_SERVICE"] = 2;
-                        values[valuesById[3] = "THIRD_PARTY_DATA_REQUEST"] = 3;
-                        values[valuesById[4] = "GOOGLE_INITIATED_REVIEW"] = 4;
-                        values[valuesById[5] = "CUSTOMER_INITIATED_ACCESS"] = 5;
-                        values[valuesById[6] = "GOOGLE_INITIATED_SYSTEM_OPERATION"] = 6;
-                        values[valuesById[7] = "REASON_NOT_EXPECTED"] = 7;
-                        values[valuesById[8] = "MODIFIED_CUSTOMER_INITIATED_ACCESS"] = 8;
-                        values[valuesById[9] = "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION"] = 9;
-                        values[valuesById[10] = "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT"] = 10;
-                        values[valuesById[11] = "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING"] = 11;
-                        return values;
-                    })();
-    
                     v1.KeyAccessJustificationsPolicy = (function() {
     
                         /**
@@ -7242,6 +7188,60 @@
                         };
     
                         return KeyAccessJustificationsPolicy;
+                    })();
+    
+                    /**
+                     * ProtectionLevel enum.
+                     * @name google.cloud.kms.v1.ProtectionLevel
+                     * @enum {number}
+                     * @property {number} PROTECTION_LEVEL_UNSPECIFIED=0 PROTECTION_LEVEL_UNSPECIFIED value
+                     * @property {number} SOFTWARE=1 SOFTWARE value
+                     * @property {number} HSM=2 HSM value
+                     * @property {number} EXTERNAL=3 EXTERNAL value
+                     * @property {number} EXTERNAL_VPC=4 EXTERNAL_VPC value
+                     */
+                    v1.ProtectionLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PROTECTION_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SOFTWARE"] = 1;
+                        values[valuesById[2] = "HSM"] = 2;
+                        values[valuesById[3] = "EXTERNAL"] = 3;
+                        values[valuesById[4] = "EXTERNAL_VPC"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * AccessReason enum.
+                     * @name google.cloud.kms.v1.AccessReason
+                     * @enum {number}
+                     * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                     * @property {number} CUSTOMER_INITIATED_SUPPORT=1 CUSTOMER_INITIATED_SUPPORT value
+                     * @property {number} GOOGLE_INITIATED_SERVICE=2 GOOGLE_INITIATED_SERVICE value
+                     * @property {number} THIRD_PARTY_DATA_REQUEST=3 THIRD_PARTY_DATA_REQUEST value
+                     * @property {number} GOOGLE_INITIATED_REVIEW=4 GOOGLE_INITIATED_REVIEW value
+                     * @property {number} CUSTOMER_INITIATED_ACCESS=5 CUSTOMER_INITIATED_ACCESS value
+                     * @property {number} GOOGLE_INITIATED_SYSTEM_OPERATION=6 GOOGLE_INITIATED_SYSTEM_OPERATION value
+                     * @property {number} REASON_NOT_EXPECTED=7 REASON_NOT_EXPECTED value
+                     * @property {number} MODIFIED_CUSTOMER_INITIATED_ACCESS=8 MODIFIED_CUSTOMER_INITIATED_ACCESS value
+                     * @property {number} MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION=9 MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION value
+                     * @property {number} GOOGLE_RESPONSE_TO_PRODUCTION_ALERT=10 GOOGLE_RESPONSE_TO_PRODUCTION_ALERT value
+                     * @property {number} CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING=11 CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING value
+                     */
+                    v1.AccessReason = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CUSTOMER_INITIATED_SUPPORT"] = 1;
+                        values[valuesById[2] = "GOOGLE_INITIATED_SERVICE"] = 2;
+                        values[valuesById[3] = "THIRD_PARTY_DATA_REQUEST"] = 3;
+                        values[valuesById[4] = "GOOGLE_INITIATED_REVIEW"] = 4;
+                        values[valuesById[5] = "CUSTOMER_INITIATED_ACCESS"] = 5;
+                        values[valuesById[6] = "GOOGLE_INITIATED_SYSTEM_OPERATION"] = 6;
+                        values[valuesById[7] = "REASON_NOT_EXPECTED"] = 7;
+                        values[valuesById[8] = "MODIFIED_CUSTOMER_INITIATED_ACCESS"] = 8;
+                        values[valuesById[9] = "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION"] = 9;
+                        values[valuesById[10] = "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT"] = 10;
+                        values[valuesById[11] = "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING"] = 11;
+                        return values;
                     })();
     
                     return v1;
