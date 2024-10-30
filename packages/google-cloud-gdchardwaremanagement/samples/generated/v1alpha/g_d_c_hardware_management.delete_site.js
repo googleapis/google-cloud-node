@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListOrders_async]
+function main(name) {
+  // [START gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,15 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location to list orders in.
-   *  Format: `projects/{project}/locations/{location}`
-   *  To list orders across all locations, substitute `-` (the hyphen or
-   *  dash character) for the location and check the unreachable field in
-   *  the response message.
+   *  Required. The name of the site.
+   *  Format: `projects/{project}/locations/{location}/sites/{site}`
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  Optional. An optional unique identifier for this request. See
+   *  AIP-155 (https://google.aip.dev/155).
    */
-  // const pageSize = 1234
-  /**
-   *  Optional. A token identifying a page of results the server should return.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. Filtering condition. See AIP-160 (https://google.aip.dev/160).
-   */
-  // const filter = 'abc123'
-  /**
-   *  Optional. Hint for how to order the results.
-   */
-  // const orderBy = 'abc123'
+  // const requestId = 'abc123'
 
   // Imports the Gdchardwaremanagement library
   const {GDCHardwareManagementClient} = require('@google-cloud/gdchardwaremanagement').v1alpha;
@@ -60,21 +45,20 @@ function main(parent) {
   // Instantiates a client
   const gdchardwaremanagementClient = new GDCHardwareManagementClient();
 
-  async function callListOrders() {
+  async function callDeleteSite() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = gdchardwaremanagementClient.listOrdersAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await gdchardwaremanagementClient.deleteSite(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListOrders();
-  // [END gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListOrders_async]
+  callDeleteSite();
+  // [END gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -365,6 +365,12 @@ export class GDCHardwareManagementClient {
     const updateSiteMetadata = protoFilesRoot.lookup(
       '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteSiteResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteSiteMetadata = protoFilesRoot.lookup(
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createHardwareGroupResponse = protoFilesRoot.lookup(
       '.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup'
     ) as gax.protobuf.Type;
@@ -462,6 +468,11 @@ export class GDCHardwareManagementClient {
         this.operationsClient,
         updateSiteResponse.decode.bind(updateSiteResponse),
         updateSiteMetadata.decode.bind(updateSiteMetadata)
+      ),
+      deleteSite: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSiteResponse.decode.bind(deleteSiteResponse),
+        deleteSiteMetadata.decode.bind(deleteSiteMetadata)
       ),
       createHardwareGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -581,6 +592,7 @@ export class GDCHardwareManagementClient {
       'getSite',
       'createSite',
       'updateSite',
+      'deleteSite',
       'listHardwareGroups',
       'getHardwareGroup',
       'createHardwareGroup',
@@ -2483,6 +2495,146 @@ export class GDCHardwareManagementClient {
     >;
   }
   /**
+   * Deletes a site.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the site.
+   *   Format: `projects/{project}/locations/{location}/sites/{site}`
+   * @param {string} [request.requestId]
+   *   Optional. An optional unique identifier for this request. See
+   *   [AIP-155](https://google.aip.dev/155).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
+   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
+   */
+  deleteSite(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteSite(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSite(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSite(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSite(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteSite()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
+   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
+   */
+  async checkDeleteSiteProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSite,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
+    >;
+  }
+  /**
    * Creates a new hardware group in a given order.
    *
    * @param {Object} request
@@ -4087,6 +4239,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list orders in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list orders across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4190,6 +4346,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list orders in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list orders across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4241,6 +4401,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list orders in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list orders across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4291,6 +4455,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list sites in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list sites across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4394,6 +4562,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list sites in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list sites across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4445,6 +4617,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list sites in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list sites across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4699,6 +4875,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list hardware in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list hardware across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4802,6 +4982,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list hardware in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list hardware across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -4853,6 +5037,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list hardware in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list hardware across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5311,6 +5499,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list SKUs in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list SKUs across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5414,6 +5606,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list SKUs in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list SKUs across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5465,6 +5661,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list SKUs in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list SKUs across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5515,6 +5715,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list zones in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list zones across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5618,6 +5822,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list zones in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list zones across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
@@ -5669,6 +5877,10 @@ export class GDCHardwareManagementClient {
    * @param {string} request.parent
    *   Required. The project and location to list zones in.
    *   Format: `projects/{project}/locations/{location}`
+   *
+   *   To list zones across all locations, substitute `-` (the hyphen or
+   *   dash character) for the location and check the unreachable field in
+   *   the response message.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
    *   requested. If unspecified, server will pick an appropriate default.
