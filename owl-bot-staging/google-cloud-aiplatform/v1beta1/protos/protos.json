@@ -7363,6 +7363,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "clientConnectionConfig": {
+                          "type": "ClientConnectionConfig",
+                          "id": 23
+                        },
                         "satisfiesPzs": {
                           "type": "bool",
                           "id": 27,
@@ -7527,6 +7531,14 @@
                         }
                       }
                     },
+                    "ClientConnectionConfig": {
+                      "fields": {
+                        "inferenceTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        }
+                      }
+                    },
                     "EndpointService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -7617,6 +7629,34 @@
                             },
                             {
                               "(google.api.method_signature)": "endpoint,update_mask"
+                            }
+                          ]
+                        },
+                        "UpdateEndpointLongRunning": {
+                          "requestType": "UpdateEndpointLongRunningRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint.name=projects/*/locations/*/endpoints/*}:update",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "endpoint",
+                            "(google.longrunning.operation_info).response_type": "Endpoint",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateEndpointOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint.name=projects/*/locations/*/endpoints/*}:update",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Endpoint",
+                                "metadata_type": "UpdateEndpointOperationMetadata"
+                              }
                             }
                           ]
                         },
@@ -7846,6 +7886,25 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        }
+                      }
+                    },
+                    "UpdateEndpointLongRunningRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "Endpoint",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEndpointOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
                         }
                       }
                     },

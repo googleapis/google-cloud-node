@@ -335,6 +335,11 @@
                 "createEndpoint"
               ]
             },
+            "UpdateEndpointLongRunning": {
+              "methods": [
+                "updateEndpointLongRunning"
+              ]
+            },
             "DeleteEndpoint": {
               "methods": [
                 "deleteEndpoint"
@@ -380,6 +385,11 @@
             "CreateEndpoint": {
               "methods": [
                 "createEndpoint"
+              ]
+            },
+            "UpdateEndpointLongRunning": {
+              "methods": [
+                "updateEndpointLongRunning"
               ]
             },
             "DeleteEndpoint": {

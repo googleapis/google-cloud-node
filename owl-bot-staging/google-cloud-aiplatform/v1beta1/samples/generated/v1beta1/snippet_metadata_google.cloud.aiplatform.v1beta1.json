@@ -1412,6 +1412,46 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1beta1_generated_EndpointService_UpdateEndpointLongRunning_async",
+      "title": "DatasetService updateEndpointLongRunning Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an Endpoint with a long running operation.",
+      "canonical": true,
+      "file": "endpoint_service.update_endpoint_long_running.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEndpointLongRunning",
+        "fullName": "google.cloud.aiplatform.v1beta1.EndpointService.UpdateEndpointLongRunning",
+        "async": true,
+        "parameters": [
+          {
+            "name": "endpoint",
+            "type": ".google.cloud.aiplatform.v1beta1.Endpoint"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EndpointServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.EndpointServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateEndpointLongRunning",
+          "fullName": "google.cloud.aiplatform.v1beta1.EndpointService.UpdateEndpointLongRunning",
+          "service": {
+            "shortName": "EndpointService",
+            "fullName": "google.cloud.aiplatform.v1beta1.EndpointService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1beta1_generated_EndpointService_DeleteEndpoint_async",
       "title": "DatasetService deleteEndpoint Sample",
       "origin": "API_DEFINITION",
