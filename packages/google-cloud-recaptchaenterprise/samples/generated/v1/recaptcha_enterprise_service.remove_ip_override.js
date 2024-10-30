@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_async]
+function main(name, ipOverrideData) {
+  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RemoveIpOverride_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,20 +29,14 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the project that contains the keys that is
-   *  listed, in the format `projects/{project}`.
+   *  Required. The name of the key from which the IP override is removed, in the
+   *  format `projects/{project}/keys/{key}`.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Optional. The maximum number of keys to return. Default is 10. Max limit is
-   *  1000.
+   *  Required. IP override to be removed from the key.
    */
-  // const pageSize = 1234
-  /**
-   *  Optional. The next_page_token value returned from a previous.
-   *  ListKeysRequest, if any.
-   */
-  // const pageToken = 'abc123'
+  // const ipOverrideData = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;
@@ -50,21 +44,20 @@ function main(parent) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function callListKeys() {
+  async function callRemoveIpOverride() {
     // Construct request
     const request = {
-      parent,
+      name,
+      ipOverrideData,
     };
 
     // Run request
-    const iterable = recaptchaenterpriseClient.listKeysAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await recaptchaenterpriseClient.removeIpOverride(request);
+    console.log(response);
   }
 
-  callListKeys();
-  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_async]
+  callRemoveIpOverride();
+  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RemoveIpOverride_async]
 }
 
 process.on('unhandledRejection', err => {
