@@ -11,7 +11,6 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.TextToSpeech.V1",
                     "go_package": "cloud.google.com/go/texttospeech/apiv1/texttospeechpb;texttospeechpb",
                     "java_multiple_files": true,
@@ -252,12 +251,45 @@
                         }
                       }
                     },
+                    "MultiSpeakerMarkup": {
+                      "fields": {
+                        "turns": {
+                          "rule": "repeated",
+                          "type": "Turn",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Turn": {
+                          "fields": {
+                            "speaker": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "SynthesisInput": {
                       "oneofs": {
                         "inputSource": {
                           "oneof": [
                             "text",
-                            "ssml"
+                            "ssml",
+                            "multiSpeakerMarkup"
                           ]
                         }
                       },
@@ -269,6 +301,10 @@
                         "ssml": {
                           "type": "string",
                           "id": 2
+                        },
+                        "multiSpeakerMarkup": {
+                          "type": "MultiSpeakerMarkup",
+                          "id": 4
                         },
                         "customPronunciations": {
                           "type": "CustomPronunciations",
@@ -299,6 +335,13 @@
                         "customVoice": {
                           "type": "CustomVoiceParams",
                           "id": 4
+                        },
+                        "voiceClone": {
+                          "type": "VoiceCloneParams",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -374,6 +417,17 @@
                             "REPORTED_USAGE_UNSPECIFIED": 0,
                             "REALTIME": 1,
                             "OFFLINE": 2
+                          }
+                        }
+                      }
+                    },
+                    "VoiceCloneParams": {
+                      "fields": {
+                        "voiceCloningKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -534,7 +588,6 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.TextToSpeech.V1Beta1",
                     "go_package": "cloud.google.com/go/texttospeech/apiv1beta1/texttospeechpb;texttospeechpb",
                     "java_multiple_files": true,
@@ -789,12 +842,45 @@
                         }
                       }
                     },
+                    "MultiSpeakerMarkup": {
+                      "fields": {
+                        "turns": {
+                          "rule": "repeated",
+                          "type": "Turn",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Turn": {
+                          "fields": {
+                            "speaker": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "SynthesisInput": {
                       "oneofs": {
                         "inputSource": {
                           "oneof": [
                             "text",
-                            "ssml"
+                            "ssml",
+                            "multiSpeakerMarkup"
                           ]
                         }
                       },
@@ -806,6 +892,10 @@
                         "ssml": {
                           "type": "string",
                           "id": 2
+                        },
+                        "multiSpeakerMarkup": {
+                          "type": "MultiSpeakerMarkup",
+                          "id": 4
                         },
                         "customPronunciations": {
                           "type": "CustomPronunciations",
@@ -836,6 +926,13 @@
                         "customVoice": {
                           "type": "CustomVoiceParams",
                           "id": 4
+                        },
+                        "voiceClone": {
+                          "type": "VoiceCloneParams",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -911,6 +1008,17 @@
                             "REPORTED_USAGE_UNSPECIFIED": 0,
                             "REALTIME": 1,
                             "OFFLINE": 2
+                          }
+                        }
+                      }
+                    },
+                    "VoiceCloneParams": {
+                      "fields": {
+                        "voiceCloningKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }

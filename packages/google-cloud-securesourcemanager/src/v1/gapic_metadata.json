@@ -35,6 +35,11 @@
                 "testIamPermissionsRepo"
               ]
             },
+            "GetBranchRule": {
+              "methods": [
+                "getBranchRule"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -55,6 +60,21 @@
                 "deleteRepository"
               ]
             },
+            "CreateBranchRule": {
+              "methods": [
+                "createBranchRule"
+              ]
+            },
+            "UpdateBranchRule": {
+              "methods": [
+                "updateBranchRule"
+              ]
+            },
+            "DeleteBranchRule": {
+              "methods": [
+                "deleteBranchRule"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -67,6 +87,13 @@
                 "listRepositories",
                 "listRepositoriesStream",
                 "listRepositoriesAsync"
+              ]
+            },
+            "ListBranchRules": {
+              "methods": [
+                "listBranchRules",
+                "listBranchRulesStream",
+                "listBranchRulesAsync"
               ]
             }
           }
@@ -99,6 +126,11 @@
                 "testIamPermissionsRepo"
               ]
             },
+            "GetBranchRule": {
+              "methods": [
+                "getBranchRule"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -119,6 +151,21 @@
                 "deleteRepository"
               ]
             },
+            "CreateBranchRule": {
+              "methods": [
+                "createBranchRule"
+              ]
+            },
+            "UpdateBranchRule": {
+              "methods": [
+                "updateBranchRule"
+              ]
+            },
+            "DeleteBranchRule": {
+              "methods": [
+                "deleteBranchRule"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -131,6 +178,13 @@
                 "listRepositories",
                 "listRepositoriesStream",
                 "listRepositoriesAsync"
+              ]
+            },
+            "ListBranchRules": {
+              "methods": [
+                "listBranchRules",
+                "listBranchRulesStream",
+                "listBranchRulesAsync"
               ]
             }
           }
