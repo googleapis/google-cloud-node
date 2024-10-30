@@ -25539,6 +25539,34 @@
                             }
                           ]
                         },
+                        "StopNotebookRuntime": {
+                          "requestType": "StopNotebookRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/notebookRuntimes/*}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "StopNotebookRuntimeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "StopNotebookRuntimeOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/notebookRuntimes/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "StopNotebookRuntimeResponse",
+                                "metadata_type": "StopNotebookRuntimeOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "CreateNotebookExecutionJob": {
                           "requestType": "CreateNotebookExecutionJobRequest",
                           "responseType": "google.longrunning.Operation",
@@ -25956,6 +25984,29 @@
                       }
                     },
                     "StartNotebookRuntimeResponse": {
+                      "fields": {}
+                    },
+                    "StopNotebookRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntime"
+                          }
+                        }
+                      }
+                    },
+                    "StopNotebookRuntimeOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StopNotebookRuntimeResponse": {
                       "fields": {}
                     },
                     "CreateNotebookExecutionJobRequest": {
@@ -35431,7 +35482,9 @@
                             "inlineData",
                             "fileData",
                             "functionCall",
-                            "functionResponse"
+                            "functionResponse",
+                            "executableCode",
+                            "codeExecutionResult"
                           ]
                         },
                         "metadata": {
@@ -35472,6 +35525,20 @@
                         "functionResponse": {
                           "type": "FunctionResponse",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "executableCode": {
+                          "type": "ExecutableCode",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "codeExecutionResult": {
+                          "type": "CodeExecutionResult",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -36567,6 +36634,18 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "codeExecution": {
+                          "type": "CodeExecution",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CodeExecution": {
+                          "fields": {}
                         }
                       }
                     },
@@ -36700,6 +36779,60 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExecutableCode": {
+                      "fields": {
+                        "language": {
+                          "type": "Language",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "code": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Language": {
+                          "values": {
+                            "LANGUAGE_UNSPECIFIED": 0,
+                            "PYTHON": 1
+                          }
+                        }
+                      }
+                    },
+                    "CodeExecutionResult": {
+                      "fields": {
+                        "outcome": {
+                          "type": "Outcome",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "output": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Outcome": {
+                          "values": {
+                            "OUTCOME_UNSPECIFIED": 0,
+                            "OUTCOME_OK": 1,
+                            "OUTCOME_FAILED": 2,
+                            "OUTCOME_DEADLINE_EXCEEDED": 3
                           }
                         }
                       }
@@ -39632,6 +39765,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "clientConnectionConfig": {
+                          "type": "ClientConnectionConfig",
+                          "id": 23
+                        },
                         "satisfiesPzs": {
                           "type": "bool",
                           "id": 27,
@@ -39733,6 +39870,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "fasterDeploymentConfig": {
+                          "type": "FasterDeploymentConfig",
+                          "id": 23
                         }
                       }
                     },
@@ -39781,6 +39922,22 @@
                         "bigqueryDestination": {
                           "type": "BigQueryDestination",
                           "id": 3
+                        }
+                      }
+                    },
+                    "FasterDeploymentConfig": {
+                      "fields": {
+                        "fastTryoutEnabled": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ClientConnectionConfig": {
+                      "fields": {
+                        "inferenceTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
                         }
                       }
                     },
@@ -39874,6 +40031,34 @@
                             },
                             {
                               "(google.api.method_signature)": "endpoint,update_mask"
+                            }
+                          ]
+                        },
+                        "UpdateEndpointLongRunning": {
+                          "requestType": "UpdateEndpointLongRunningRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint.name=projects/*/locations/*/endpoints/*}:update",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "endpoint",
+                            "(google.longrunning.operation_info).response_type": "Endpoint",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateEndpointOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint.name=projects/*/locations/*/endpoints/*}:update",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Endpoint",
+                                "metadata_type": "UpdateEndpointOperationMetadata"
+                              }
                             }
                           ]
                         },
@@ -40103,6 +40288,25 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        }
+                      }
+                    },
+                    "UpdateEndpointLongRunningRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "Endpoint",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEndpointOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
                         }
                       }
                     },
