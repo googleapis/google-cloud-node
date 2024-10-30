@@ -1363,6 +1363,15 @@
                         }
                       }
                     },
+                    "KeyAccessJustificationsPolicy": {
+                      "fields": {
+                        "allowedAccessReasons": {
+                          "rule": "repeated",
+                          "type": "AccessReason",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ProtectionLevel": {
                       "values": {
                         "PROTECTION_LEVEL_UNSPECIFIED": 0,
@@ -1386,15 +1395,6 @@
                         "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION": 9,
                         "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT": 10,
                         "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING": 11
-                      }
-                    },
-                    "KeyAccessJustificationsPolicy": {
-                      "fields": {
-                        "allowedAccessReasons": {
-                          "rule": "repeated",
-                          "type": "AccessReason",
-                          "id": 1
-                        }
                       }
                     },
                     "KeyManagementService": {

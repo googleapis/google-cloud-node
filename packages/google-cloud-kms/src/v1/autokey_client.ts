@@ -805,8 +805,8 @@ export class AutokeyClient {
    *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} can subsequently be obtained by
    *   including the
    *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, at most
-   *   100 {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
+   *   in a subsequent request.  If unspecified, at most 100
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}.
@@ -908,8 +908,8 @@ export class AutokeyClient {
    *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} can subsequently be obtained by
    *   including the
    *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, at most
-   *   100 {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
+   *   in a subsequent request.  If unspecified, at most 100
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}.
@@ -967,8 +967,8 @@ export class AutokeyClient {
    *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} can subsequently be obtained by
    *   including the
    *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, at most
-   *   100 {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
+   *   in a subsequent request.  If unspecified, at most 100
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}.

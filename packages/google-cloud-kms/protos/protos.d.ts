@@ -4294,31 +4294,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** ProtectionLevel enum. */
-                enum ProtectionLevel {
-                    PROTECTION_LEVEL_UNSPECIFIED = 0,
-                    SOFTWARE = 1,
-                    HSM = 2,
-                    EXTERNAL = 3,
-                    EXTERNAL_VPC = 4
-                }
-
-                /** AccessReason enum. */
-                enum AccessReason {
-                    REASON_UNSPECIFIED = 0,
-                    CUSTOMER_INITIATED_SUPPORT = 1,
-                    GOOGLE_INITIATED_SERVICE = 2,
-                    THIRD_PARTY_DATA_REQUEST = 3,
-                    GOOGLE_INITIATED_REVIEW = 4,
-                    CUSTOMER_INITIATED_ACCESS = 5,
-                    GOOGLE_INITIATED_SYSTEM_OPERATION = 6,
-                    REASON_NOT_EXPECTED = 7,
-                    MODIFIED_CUSTOMER_INITIATED_ACCESS = 8,
-                    MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION = 9,
-                    GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 10,
-                    CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING = 11
-                }
-
                 /** Properties of a KeyAccessJustificationsPolicy. */
                 interface IKeyAccessJustificationsPolicy {
 
@@ -4414,6 +4389,31 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** ProtectionLevel enum. */
+                enum ProtectionLevel {
+                    PROTECTION_LEVEL_UNSPECIFIED = 0,
+                    SOFTWARE = 1,
+                    HSM = 2,
+                    EXTERNAL = 3,
+                    EXTERNAL_VPC = 4
+                }
+
+                /** AccessReason enum. */
+                enum AccessReason {
+                    REASON_UNSPECIFIED = 0,
+                    CUSTOMER_INITIATED_SUPPORT = 1,
+                    GOOGLE_INITIATED_SERVICE = 2,
+                    THIRD_PARTY_DATA_REQUEST = 3,
+                    GOOGLE_INITIATED_REVIEW = 4,
+                    CUSTOMER_INITIATED_ACCESS = 5,
+                    GOOGLE_INITIATED_SYSTEM_OPERATION = 6,
+                    REASON_NOT_EXPECTED = 7,
+                    MODIFIED_CUSTOMER_INITIATED_ACCESS = 8,
+                    MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION = 9,
+                    GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 10,
+                    CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING = 11
                 }
 
                 /** Represents a KeyManagementService */
