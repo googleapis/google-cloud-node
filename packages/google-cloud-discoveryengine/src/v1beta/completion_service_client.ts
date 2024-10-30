@@ -213,6 +213,9 @@ export class CompletionServiceClient {
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/evaluations/{evaluation}'
       ),
+      groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -227,6 +230,10 @@ export class CompletionServiceClient {
       projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
+      projectLocationCollectionDataStoreCompletionConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/completionConfig'
         ),
       projectLocationCollectionDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -264,9 +271,17 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
         ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+        ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
+        ),
+      projectLocationCollectionEngineCompletionConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/completionConfig'
         ),
       projectLocationCollectionEngineControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -298,6 +313,10 @@ export class CompletionServiceClient {
       projectLocationDataStoreBranchDocumentChunkPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
+      projectLocationDataStoreCompletionConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/completionConfig'
         ),
       projectLocationDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -334,6 +353,10 @@ export class CompletionServiceClient {
       projectLocationDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -579,6 +602,7 @@ export class CompletionServiceClient {
     // and create an API call method for each.
     const completionServiceStubMethods = [
       'completeQuery',
+      'advancedCompleteQuery',
       'importSuggestionDenyListEntries',
       'purgeSuggestionDenyListEntries',
       'importCompletionSuggestions',
@@ -835,6 +859,164 @@ export class CompletionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.completeQuery(request, options, callback);
+  }
+  /**
+   * Completes the user input with advanced keyword suggestions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.completionConfig
+   *   Required. The completion_config of the parent dataStore or engine resource
+   *   name for which the completion is performed, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/* /completionConfig`
+   *   `projects/* /locations/global/collections/default_collection/engines/* /completionConfig`.
+   * @param {string} request.query
+   *   Required. The typeahead input used to fetch suggestions. Maximum length is
+   *   128 characters.
+   *
+   *   The query can not be empty for most of the suggestion types. If it is
+   *   empty, an `INVALID_ARGUMENT` error is returned. The exception is when the
+   *   suggestion_types contains only the type `RECENT_SEARCH`, the query can
+   *   be an empty string. The is called "zero prefix" feature, which returns
+   *   user's recently searched queries given the empty query.
+   * @param {string} request.queryModel
+   *   Specifies the autocomplete data model. This overrides any model specified
+   *   in the Configuration > Autocomplete section of the Cloud console. Currently
+   *   supported values:
+   *
+   *   * `document` - Using suggestions generated from user-imported documents.
+   *   * `search-history` - Using suggestions generated from the past history of
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   API calls. Do not use it when there is no traffic for Search API.
+   *   * `user-event` - Using suggestions generated from user-imported search
+   *   events.
+   *   * `document-completable` - Using suggestions taken directly from
+   *   user-imported document fields marked as completable.
+   *
+   *   Default values:
+   *
+   *   * `document` is the default model for regular dataStores.
+   *   * `search-history` is the default model for site search dataStores.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   * @param {google.cloud.discoveryengine.v1beta.UserInfo} [request.userInfo]
+   *   Optional. Information about the end user.
+   *
+   *   This should be the same identifier information as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.user_info|UserEvent.user_info}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.user_info|SearchRequest.user_info}.
+   * @param {boolean} request.includeTailSuggestions
+   *   Indicates if tail suggestions should be returned if there are no
+   *   suggestions that match the full query. Even if set to true, if there are
+   *   suggestions that match the full query, those are returned and no
+   *   tail suggestions are returned.
+   * @param {google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest.BoostSpec} [request.boostSpec]
+   *   Optional. Specification to boost suggestions matching the condition.
+   * @param {number[]} [request.suggestionTypes]
+   *   Optional. Suggestion types to return. If empty or unspecified, query
+   *   suggestions are returned. Only one suggestion type is supported at the
+   *   moment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryResponse|AdvancedCompleteQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/completion_service.advanced_complete_query.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_CompletionService_AdvancedCompleteQuery_async
+   */
+  advancedCompleteQuery(
+    request?: protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  advancedCompleteQuery(
+    request: protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  advancedCompleteQuery(
+    request: protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  advancedCompleteQuery(
+    request?: protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryResponse,
+          | protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        completion_config: request.completionConfig ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.advancedCompleteQuery(request, options, callback);
   }
 
   /**
@@ -1808,6 +1990,65 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified groundingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} grounding_config
+   * @returns {string} Resource name string.
+   */
+  groundingConfigPath(
+    project: string,
+    location: string,
+    groundingConfig: string
+  ) {
+    return this.pathTemplates.groundingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      grounding_config: groundingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the grounding_config from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the grounding_config.
+   */
+  matchGroundingConfigFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).grounding_config;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -2173,6 +2414,91 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
       projectLocationCollectionDataStoreBranchDocumentChunkName
     ).chunk;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreCompletionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreCompletionConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName
+    ).data_store;
   }
 
   /**
@@ -3085,6 +3411,109 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineTargetSite resource name string.
    *
    * @param {string} project
@@ -3185,6 +3614,91 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCompletionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCompletionConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName
+    ).engine;
   }
 
   /**
@@ -4010,6 +4524,73 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreCompletionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreCompletionConfigPath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_data_store_completionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreCompletionConfigName(
+    projectLocationDataStoreCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.match(
+      projectLocationDataStoreCompletionConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_data_store_completionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreCompletionConfigName(
+    projectLocationDataStoreCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.match(
+      projectLocationDataStoreCompletionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_data_store_completionConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreCompletionConfigName(
+    projectLocationDataStoreCompletionConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.match(
+      projectLocationDataStoreCompletionConfigName
+    ).data_store;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreControl resource name string.
    *
    * @param {string} project
@@ -4754,6 +5335,91 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
