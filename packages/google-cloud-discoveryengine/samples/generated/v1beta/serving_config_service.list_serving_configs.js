@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. Full resource name of the parent resource. Format:
-   *  `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
+   *  `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
    */
   // const parent = 'abc123'
   /**

@@ -34,7 +34,7 @@ function main(groundingConfig) {
    */
   // const groundingConfig = 'abc123'
   /**
-   *  Answer candidate to check. Can have a maximum length of 1024 characters.
+   *  Answer candidate to check. It can have a maximum length of 4096 tokens.
    */
   // const answerCandidate = 'abc123'
   /**
