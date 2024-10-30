@@ -1961,6 +1961,12 @@ export class NotebookServiceClient {
     const startNotebookRuntimeMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.StartNotebookRuntimeOperationMetadata'
     ) as gax.protobuf.Type;
+    const stopNotebookRuntimeResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.StopNotebookRuntimeResponse'
+    ) as gax.protobuf.Type;
+    const stopNotebookRuntimeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.StopNotebookRuntimeOperationMetadata'
+    ) as gax.protobuf.Type;
     const createNotebookExecutionJobResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.NotebookExecutionJob'
     ) as gax.protobuf.Type;
@@ -2020,6 +2026,11 @@ export class NotebookServiceClient {
         this.operationsClient,
         startNotebookRuntimeResponse.decode.bind(startNotebookRuntimeResponse),
         startNotebookRuntimeMetadata.decode.bind(startNotebookRuntimeMetadata)
+      ),
+      stopNotebookRuntime: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        stopNotebookRuntimeResponse.decode.bind(stopNotebookRuntimeResponse),
+        stopNotebookRuntimeMetadata.decode.bind(stopNotebookRuntimeMetadata)
       ),
       createNotebookExecutionJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2102,6 +2113,7 @@ export class NotebookServiceClient {
       'deleteNotebookRuntime',
       'upgradeNotebookRuntime',
       'startNotebookRuntime',
+      'stopNotebookRuntime',
       'createNotebookExecutionJob',
       'getNotebookExecutionJob',
       'listNotebookExecutionJobs',
@@ -3481,6 +3493,145 @@ export class NotebookServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.StartNotebookRuntimeResponse,
       protos.google.cloud.aiplatform.v1.StartNotebookRuntimeOperationMetadata
+    >;
+  }
+  /**
+   * Stops a NotebookRuntime.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntime resource to be stopped.
+   *   Instead of checking whether the name is in valid NotebookRuntime resource
+   *   name format, directly throw NotFound exception if there is no such
+   *   NotebookRuntime in spanner.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.stop_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_StopNotebookRuntime_async
+   */
+  stopNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  stopNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.stopNotebookRuntime(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `stopNotebookRuntime()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.stop_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_StopNotebookRuntime_async
+   */
+  async checkStopNotebookRuntimeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.stopNotebookRuntime,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.StopNotebookRuntimeOperationMetadata
     >;
   }
   /**
