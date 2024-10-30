@@ -29,11 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the ETD custom module.
-   *  Its format is:
-   *    * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *    * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *    * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *  Required. The resource name of the Event Threat Detection custom module, in
+   *  one of the following formats:
+   *  * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *  * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *  * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
    */
   // const name = 'abc123'
 

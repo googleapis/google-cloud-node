@@ -520,7 +520,8 @@ export class SecurityCenterManagementClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets details of a single EffectiveSecurityHealthAnalyticsCustomModule.
+   * Gets details of a single
+   * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -528,9 +529,9 @@ export class SecurityCenterManagementClient {
    *   Required. The full resource name of the custom module, specified in one of
    *   the following formats:
    *
-   *   * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-   *   * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-   *   * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+   *   * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   *   * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   *   * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -625,12 +626,14 @@ export class SecurityCenterManagementClient {
     );
   }
   /**
-   * Retrieves a SecurityHealthAnalyticsCustomModule.
+   * Retrieves a
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the resource
+   *   Required. Name of the resource, in the format
+   *   `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -725,31 +728,38 @@ export class SecurityCenterManagementClient {
     );
   }
   /**
-   * Creates a resident SecurityHealthAnalyticsCustomModule at the scope of the
-   * given CRM parent, and also creates inherited
-   * SecurityHealthAnalyticsCustomModules for all CRM descendants of the given
-   * parent. These modules are enabled by default.
+   * Creates a resident
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * at the scope of the given organization, folder, or project, and also
+   * creates inherited `SecurityHealthAnalyticsCustomModule` resources for all
+   * folders and projects that are descendants of the given parent. These
+   * modules are enabled by default.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the parent organization, folder, or project of the
-   *   module, specified in one of the following formats:
+   *   module, in one of the following formats:
    *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
    *   * `projects/{project}/locations/{location}`
    * @param {google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
-   *   Required. The resource being created
+   *   Required. The resource being created.
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will
-   *   done for the request (no module will be created). An OK response indicates
-   *   the request is valid while an error response indicates the request is
-   *   invalid. Note that a subsequent request to actually create the module could
-   *   still fail because:
-   *    1. the state could have changed (e.g. IAM permission lost) or
-   *    2. A failure occurred during creation of the module.
-   *   Defaults to false.
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be created. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to create the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -844,29 +854,40 @@ export class SecurityCenterManagementClient {
     );
   }
   /**
-   * Updates the SecurityHealthAnalyticsCustomModule under the given name based
-   * on the given update mask. Updating the enablement state is supported on
-   * both resident and inherited modules (though resident modules cannot have an
-   * enablement state of "inherited"). Updating the display name and custom
-   * config of a module is supported on resident modules only.
+   * Updates the
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * under the given name based on the given update mask. Updating the
+   * enablement state is supported on both resident and inherited modules
+   * (though resident modules cannot have an enablement state of "inherited").
+   * Updating the display name and custom configuration of a module is supported
+   * on resident modules only.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. The only fields that can be
-   *   updated are `enablement_state` and `custom_config`. If empty or set to the
-   *   wildcard value `*`, both `enablement_state` and `custom_config` are
-   *   updated.
+   *   Required. The fields to update. The following values are valid:
+   *
+   *   * `custom_config`
+   *   * `enablement_state`
+   *
+   *   If you omit this field or set it to the wildcard value `*`, then all
+   *   eligible fields are updated.
    * @param {google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
-   *   Required. The resource being updated
+   *   Required. The resource being updated.
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will
-   *   done for the request (module will not be updated). An OK response indicates
-   *   the request is valid while an error response indicates the request is
-   *   invalid. Note that a subsequent request to actually update the module could
-   *   still fail because 1. the state could have changed (e.g. IAM permission
-   *   lost) or
-   *   2. A failure occurred while trying to update the module.
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be updated. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to update the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -962,28 +983,34 @@ export class SecurityCenterManagementClient {
     );
   }
   /**
-   * Deletes the specified SecurityHealthAnalyticsCustomModule and all of its
-   * descendants in the CRM hierarchy. This method is only supported for
-   * resident custom modules.
+   * Deletes the specified
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * and all of its descendants in the resource hierarchy. This method is only
+   * supported for resident custom modules.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the SHA custom module.
+   *   Required. The resource name of the SHA custom module, in one of the
+   *   following formats:
    *
-   *   Its format is:
-   *
-   *     * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *     * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *     * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+   *     * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+   *     * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+   *     * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will
-   *   done for the request (module will not be deleted). An OK response indicates
-   *   the request is valid while an error response indicates the request is
-   *   invalid. Note that a subsequent request to actually delete the module could
-   *   still fail because 1. the state could have changed (e.g. IAM permission
-   *   lost) or
-   *   2. A failure occurred while trying to delete the module.
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be deleted. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to delete the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during deletion of the module
+   *
+   *   Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1078,16 +1105,17 @@ export class SecurityCenterManagementClient {
     );
   }
   /**
-   * Simulates a given SecurityHealthAnalyticsCustomModule and Resource.
+   * Simulates the result of using a
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * to check a resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The relative resource name of the organization, project, or
-   *   folder. For more information about relative resource names, see [Relative
-   *   Resource
-   *   Name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *   Example: `organizations/{organization_id}`.
+   *   folder. For more information about relative resource names, see [AIP-122:
+   *   Resource names](https://google.aip.dev/122). Example:
+   *   `organizations/{organization_id}`.
    * @param {google.cloud.securitycentermanagement.v1.CustomConfig} request.customConfig
    *   Required. The custom configuration that you need to test.
    * @param {google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource} request.resource
@@ -1186,24 +1214,28 @@ export class SecurityCenterManagementClient {
     );
   }
   /**
-   * Gets an effective ETD custom module. Retrieves the effective module at the
-   * given level. The difference between an EffectiveCustomModule and a
-   * CustomModule is that the fields for an EffectiveCustomModule are computed
-   * from ancestors if needed. For example, the enablement_state for a
-   * CustomModule can be either ENABLED, DISABLED, or INHERITED. Where as the
-   * enablement_state for an EffectiveCustomModule is always computed to ENABLED
-   * or DISABLED (the effective enablement_state).
+   * Gets the effective Event Threat Detection custom module at the given level.
+   *
+   * The difference between an
+   * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}
+   * and an
+   * {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}
+   * is that the fields for an `EffectiveEventThreatDetectionCustomModule` are
+   * computed from ancestors if needed. For example, the enablement state for an
+   * `EventThreatDetectionCustomModule` can be `ENABLED`, `DISABLED`, or
+   * `INHERITED`. In contrast, the enablement state for an
+   * `EffectiveEventThreatDetectionCustomModule` is always computed as `ENABLED`
+   * or `DISABLED`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the ETD custom module.
+   *   Required. The resource name of the Event Threat Detection custom module, in
+   *   one of the following formats:
    *
-   *   Its format is:
-   *
-   *     * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
-   *     * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
-   *     * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
+   *   * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+   *   * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+   *   * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1303,13 +1335,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the ETD custom module.
+   *   Required. The resource name of the Event Threat Detection custom module, in
+   *   one of the following formats:
    *
-   *   Its format is:
-   *
-   *     * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *     * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *     * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *   * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1405,30 +1436,36 @@ export class SecurityCenterManagementClient {
   }
   /**
    * Creates a resident Event Threat Detection custom module at the scope of the
-   * given Resource Manager parent, and also creates inherited custom modules
-   * for all descendants of the given parent. These modules are enabled by
-   * default.
+   * given organization, folder, or project, and creates inherited custom
+   * modules for all descendants of the given parent. These modules are enabled
+   * by default.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent for the module. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent for the module, in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
    *   Required. The module to create. The
-   *   event_threat_detection_custom_module.name will be ignored and server
-   *   generated.
+   *   {@link protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule.name|EventThreatDetectionCustomModule.name}
+   *   field is ignored; Security Command Center generates the name.
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will
-   *   done for the request (no module will be created). An OK response indicates
-   *   the request is valid while an error response indicates the request is
-   *   invalid. Note that a subsequent request to actually create the module could
-   *   still fail because 1. the state could have changed (e.g. IAM permission
-   *   lost) or
-   *   2. A failure occurred during creation of the module.
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be created. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to create the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1533,21 +1570,23 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   EventThreatDetectionCustomModule resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
+   *   Required. The fields to update. If omitted, then all fields are updated.
    * @param {google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
-   *   Required. The module being updated
+   *   Required. The module being updated.
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will
-   *   done for the request (module will not be updated). An OK response indicates
-   *   the request is valid while an error response indicates the request is
-   *   invalid. Note that a subsequent request to actually update the module could
-   *   still fail because 1. the state could have changed (e.g. IAM permission
-   *   lost) or
-   *   2. A failure occurred while trying to update the module.
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be updated. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to update the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1644,27 +1683,32 @@ export class SecurityCenterManagementClient {
   }
   /**
    * Deletes the specified Event Threat Detection custom module and all of its
-   * descendants in the Resource Manager hierarchy. This method is only
-   * supported for resident custom modules.
+   * descendants in the resource hierarchy. This method is only supported for
+   * resident custom modules.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the ETD custom module.
+   *   Required. The resource name of the Event Threat Detection custom module, in
+   *   one of the following formats:
    *
-   *   Its format is:
-   *
-   *     * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *     * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-   *     * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *   * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+   *   * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will
-   *   done for the request (module will not be deleted). An OK response indicates
-   *   the request is valid while an error response indicates the request is
-   *   invalid. Note that a subsequent request to actually delete the module could
-   *   still fail because 1. the state could have changed (e.g. IAM permission
-   *   lost) or
-   *   2. A failure occurred while trying to delete the module.
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no module will be deleted. An `OK` response indicates that the
+   *   request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to delete the module could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during creation of the module
+   *
+   *   Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1764,16 +1808,15 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent to validate the Custom Module under.
+   *   Required. Resource name of the parent to validate the custom modules under,
+   *   in one of the following formats:
    *
-   *   Its format is:
-   *
-   *     * `organizations/{organization}/locations/{location}`.
+   *   * `organizations/{organization}/locations/{location}`
    * @param {string} request.rawText
    *   Required. The raw text of the module's contents. Used to generate error
    *   messages.
    * @param {string} request.type
-   *   Required. The type of the module (e.g. CONFIGURABLE_BAD_IP).
+   *   Required. The type of the module. For example, `CONFIGURABLE_BAD_IP`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1873,24 +1916,23 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The Security Command Center service to retrieve.
+   *   Required. The Security Command Center service to retrieve, in one of the
+   *   following formats:
    *
-   *   Formats:
+   *   * organizations/{organization}/locations/{location}/securityCenterServices/{service}
+   *   * folders/{folder}/locations/{location}/securityCenterServices/{service}
+   *   * projects/{project}/locations/{location}/securityCenterServices/{service}
    *
-   *     * organizations/{organization}/locations/{location}/securityCenterServices/{service}
-   *     * folders/{folder}/locations/{location}/securityCenterServices/{service}
-   *     * projects/{project}/locations/{location}/securityCenterServices/{service}
+   *   The following values are valid for `{service}`:
    *
-   *   The possible values for id {service} are:
-   *
-   *     * container-threat-detection
-   *     * event-threat-detection
-   *     * security-health-analytics
-   *     * vm-threat-detection
-   *     * web-security-scanner
+   *   * `container-threat-detection`
+   *   * `event-threat-detection`
+   *   * `security-health-analytics`
+   *   * `vm-threat-detection`
+   *   * `web-security-scanner`
    * @param {boolean} request.showEligibleModulesOnly
-   *   Flag that, when set, will be used to filter the ModuleSettings that are
-   *   in scope. The default setting is that all modules will be shown.
+   *   Set to `true` to show only modules that are in scope. By default, all
+   *   modules are shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1992,18 +2034,26 @@ export class SecurityCenterManagementClient {
    * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService} request.securityCenterService
    *   Required. The updated service.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Possible values:
+   *   Required. The fields to update. Accepts the following values:
    *
-   *     * "intended_enablement_state"
-   *     * "modules"
+   *   * `intended_enablement_state`
+   *   * `modules`
+   *
+   *   If omitted, then all eligible fields are updated.
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will be
-   *   done for the request (service will not be updated). An OK response
-   *   indicates that the request is valid, while an error response indicates that
-   *   the request is invalid. Note that a subsequent request to actually update
-   *   the service could still fail for one of the following reasons:
-   *   - The state could have changed (e.g. IAM permission lost).
-   *   - A failure occurred while trying to delete the module.
+   *   Optional. When set to `true`, the request will be validated (including IAM
+   *   checks), but no service will be updated. An `OK` response indicates that
+   *   the request is valid, while an error response indicates that the request is
+   *   invalid.
+   *
+   *   If the request is valid, a subsequent request to update the service could
+   *   still fail for one of the following reasons:
+   *
+   *   *  The state of your cloud resources changed; for example, you lost a
+   *      required IAM permission
+   *   *  An error occurred during update of the service
+   *
+   *   Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2100,25 +2150,30 @@ export class SecurityCenterManagementClient {
   }
 
   /**
-   * Returns a list of all EffectiveSecurityHealthAnalyticsCustomModules for the
-   * given parent. This includes resident modules defined at the scope of the
-   * parent, and inherited modules, inherited from CRM ancestors (no
-   * descendants).
+   * Returns a list of all
+   * {@link protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule|EffectiveSecurityHealthAnalyticsCustomModule}
+   * resources for the given parent. This includes resident modules defined at
+   * the scope of the parent, and inherited modules, inherited from ancestor
+   * organizations, folders, and projects (no descendants).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. specified in one
-   *   of the following formats:
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2215,17 +2270,21 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. specified in one
-   *   of the following formats:
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2268,17 +2327,21 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. specified in one
-   *   of the following formats:
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2316,15 +2379,17 @@ export class SecurityCenterManagementClient {
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule>;
   }
   /**
-   * Returns a list of all SecurityHealthAnalyticsCustomModules for the given
-   * parent. This includes resident modules defined at the scope of the parent,
-   * and inherited modules, inherited from CRM ancestors (no descendants).
+   * Returns a list of all
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * resources for the given parent. This includes resident modules defined at
+   * the scope of the parent, and inherited modules, inherited from ancestor
+   * organizations, folders, and projects (no descendants).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent organization, folder, or project in which to list
-   *   custom modules, specified in one of the following formats:
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
    *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
@@ -2333,7 +2398,11 @@ export class SecurityCenterManagementClient {
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2430,8 +2499,8 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent organization, folder, or project in which to list
-   *   custom modules, specified in one of the following formats:
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
    *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
@@ -2440,7 +2509,11 @@ export class SecurityCenterManagementClient {
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2482,8 +2555,8 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent organization, folder, or project in which to list
-   *   custom modules, specified in one of the following formats:
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, in one of the following formats:
    *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
@@ -2492,7 +2565,11 @@ export class SecurityCenterManagementClient {
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2528,14 +2605,16 @@ export class SecurityCenterManagementClient {
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule>;
   }
   /**
-   * Returns a list of all resident SecurityHealthAnalyticsCustomModules under
-   * the given CRM parent and all of the parent's CRM descendants.
+   * Returns a list of all resident
+   * {@link protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule|SecurityHealthAnalyticsCustomModule}
+   * resources under the given organization, folder, or project and all of its
+   * descendants.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the parent organization, folder, or project in which to
-   *   list custom modules, specified in one of the following formats:
+   *   list custom modules, in one of the following formats:
    *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
@@ -2544,7 +2623,11 @@ export class SecurityCenterManagementClient {
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2642,7 +2725,7 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the parent organization, folder, or project in which to
-   *   list custom modules, specified in one of the following formats:
+   *   list custom modules, in one of the following formats:
    *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
@@ -2651,7 +2734,11 @@ export class SecurityCenterManagementClient {
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2695,7 +2782,7 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the parent organization, folder, or project in which to
-   *   list custom modules, specified in one of the following formats:
+   *   list custom modules, in one of the following formats:
    *
    *   * `organizations/{organization}/locations/{location}`
    *   * `folders/{folder}/locations/{location}`
@@ -2704,7 +2791,11 @@ export class SecurityCenterManagementClient {
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2749,16 +2840,21 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2855,16 +2951,21 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2907,16 +3008,21 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list effective custom modules, in one of the
+   *   following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2954,30 +3060,29 @@ export class SecurityCenterManagementClient {
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule>;
   }
   /**
-   * Lists all Event Threat Detection custom modules for the given
-   * Resource Manager parent. This includes resident modules defined at the
-   * scope of the parent along with modules inherited from ancestors.
+   * Lists all Event Threat Detection custom modules for the given organization,
+   * folder, or project. This includes resident modules defined at the scope of
+   * the parent along with modules inherited from ancestors.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 configs will be returned.
+   *   fewer than this value. If unspecified, at most 10 modules will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
-   *   subsequent page.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
    *
-   *   When paginating, all other parameters provided to
-   *   `ListEventThreatDetectionCustomModules` must match the call that provided
-   *   the page token.
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3074,23 +3179,22 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 configs will be returned.
+   *   fewer than this value. If unspecified, at most 10 modules will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
-   *   subsequent page.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
    *
-   *   When paginating, all other parameters provided to
-   *   `ListEventThreatDetectionCustomModules` must match the call that provided
-   *   the page token.
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3132,23 +3236,22 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 configs will be returned.
+   *   fewer than this value. If unspecified, at most 10 modules will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
-   *   subsequent page.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
    *
-   *   When paginating, all other parameters provided to
-   *   `ListEventThreatDetectionCustomModules` must match the call that provided
-   *   the page token.
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3184,23 +3287,28 @@ export class SecurityCenterManagementClient {
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>;
   }
   /**
-   * Lists all resident Event Threat Detection custom modules under the
-   * given Resource Manager parent and its descendants.
+   * Lists all resident Event Threat Detection custom modules for the given
+   * organization, folder, or project and its descendants.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3297,17 +3405,22 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3350,17 +3463,22 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   `organizations/{organization}/locations/{location}`,
-   *   `folders/{folder}/locations/{location}`,
-   *   or
-   *   `projects/{project}/locations/{location}`
+   *   Required. Name of parent to list custom modules, in one of the following
+   *   formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3404,21 +3522,24 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent to list Security Command Center services.
+   *   Required. The name of the parent to list Security Command Center services,
+   *   in one of the following formats:
    *
-   *   Formats:
-   *
-   *     * organizations/{organization}/locations/{location}
-   *     * folders/{folder}/locations/{location}
-   *     * projects/{project}/locations/{location}
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {boolean} request.showEligibleModulesOnly
-   *   Flag that, when set, will be used to filter the ModuleSettings that are
-   *   in scope. The default setting is that all modules will be shown.
+   *   Flag that, when set, is used to filter the module settings that are shown.
+   *   The default setting is that all modules are shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3515,21 +3636,24 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent to list Security Command Center services.
+   *   Required. The name of the parent to list Security Command Center services,
+   *   in one of the following formats:
    *
-   *   Formats:
-   *
-   *     * organizations/{organization}/locations/{location}
-   *     * folders/{folder}/locations/{location}
-   *     * projects/{project}/locations/{location}
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {boolean} request.showEligibleModulesOnly
-   *   Flag that, when set, will be used to filter the ModuleSettings that are
-   *   in scope. The default setting is that all modules will be shown.
+   *   Flag that, when set, is used to filter the module settings that are shown.
+   *   The default setting is that all modules are shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3570,21 +3694,24 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent to list Security Command Center services.
+   *   Required. The name of the parent to list Security Command Center services,
+   *   in one of the following formats:
    *
-   *   Formats:
-   *
-   *     * organizations/{organization}/locations/{location}
-   *     * folders/{folder}/locations/{location}
-   *     * projects/{project}/locations/{location}
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The value returned by the last call indicating a continuation.
+   *   Optional. A pagination token returned from a previous request. Provide this
+   *   token to retrieve the next page of results.
+   *
+   *   When paginating, the rest of the request must match the request that
+   *   generated the page token.
    * @param {boolean} request.showEligibleModulesOnly
-   *   Flag that, when set, will be used to filter the ModuleSettings that are
-   *   in scope. The default setting is that all modules will be shown.
+   *   Flag that, when set, is used to filter the module settings that are shown.
+   *   The default setting is that all modules are shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

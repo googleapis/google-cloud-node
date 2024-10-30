@@ -267,6 +267,7 @@ export class PublisherClient {
     const publisherStubMethods = [
       'publishChannelConnectionEvents',
       'publishEvents',
+      'publish',
     ];
     for (const methodName of publisherStubMethods) {
       const callPromise = this.publisherStub.then(
@@ -596,6 +597,109 @@ export class PublisherClient {
       });
     this.initialize();
     return this.innerApiCalls.publishEvents(request, options, callback);
+  }
+  /**
+   * Publish events to a message bus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.messageBus
+   *   Required. The full name of the message bus to publish events to. Format:
+   *   `projects/{project}/locations/{location}/messageBuses/{messageBus}`.
+   * @param {google.cloud.eventarc.publishing.v1.CloudEvent} request.protoMessage
+   *   The Protobuf format of the CloudEvent being published. Specification can
+   *   be found here:
+   *   https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/protobuf-format.md
+   * @param {string} request.jsonMessage
+   *   The JSON format of the CloudEvent being published. Specification can be
+   *   found here:
+   *   https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+   * @param {Buffer} request.avroMessage
+   *   The Avro format of the CloudEvent being published. Specification can
+   *   be found here:
+   *   https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/avro-format.md
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.eventarc.publishing.v1.PublishResponse|PublishResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/publisher.publish.js</caption>
+   * region_tag:eventarcpublishing_v1_generated_Publisher_Publish_async
+   */
+  publish(
+    request?: protos.google.cloud.eventarc.publishing.v1.IPublishRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+      protos.google.cloud.eventarc.publishing.v1.IPublishRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  publish(
+    request: protos.google.cloud.eventarc.publishing.v1.IPublishRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+      | protos.google.cloud.eventarc.publishing.v1.IPublishRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  publish(
+    request: protos.google.cloud.eventarc.publishing.v1.IPublishRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+      | protos.google.cloud.eventarc.publishing.v1.IPublishRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  publish(
+    request?: protos.google.cloud.eventarc.publishing.v1.IPublishRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+          | protos.google.cloud.eventarc.publishing.v1.IPublishRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+      | protos.google.cloud.eventarc.publishing.v1.IPublishRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+      protos.google.cloud.eventarc.publishing.v1.IPublishRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        message_bus: request.messageBus ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.publish(request, options, callback);
   }
 
   /**

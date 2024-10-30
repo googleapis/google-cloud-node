@@ -29,9 +29,9 @@ function main(parent, rawText, type) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the parent to validate the Custom Module under.
-   *  Its format is:
-   *    * `organizations/{organization}/locations/{location}`.
+   *  Required. Resource name of the parent to validate the custom modules under,
+   *  in one of the following formats:
+   *  * `organizations/{organization}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
@@ -40,7 +40,7 @@ function main(parent, rawText, type) {
    */
   // const rawText = 'abc123'
   /**
-   *  Required. The type of the module (e.g. CONFIGURABLE_BAD_IP).
+   *  Required. The type of the module. For example, `CONFIGURABLE_BAD_IP`.
    */
   // const type = 'abc123'
 

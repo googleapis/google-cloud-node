@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveSecurityHealthAnalyticsCustomModule_async]
+function main(messageBus) {
+  // [START eventarcpublishing_v1_generated_Publisher_Publish_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,48 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The full resource name of the custom module, specified in one of
-   *  the following formats:
-   *  * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
-   *  * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
-   *  * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+   *  Required. The full name of the message bus to publish events to. Format:
+   *  `projects/{project}/locations/{location}/messageBuses/{messageBus}`.
    */
-  // const name = 'abc123'
+  // const messageBus = 'abc123'
+  /**
+   *  The Protobuf format of the CloudEvent being published. Specification can
+   *  be found here:
+   *  https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/protobuf-format.md
+   */
+  // const protoMessage = {}
+  /**
+   *  The JSON format of the CloudEvent being published. Specification can be
+   *  found here:
+   *  https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+   */
+  // const jsonMessage = 'abc123'
+  /**
+   *  The Avro format of the CloudEvent being published. Specification can
+   *  be found here:
+   *  https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/avro-format.md
+   */
+  // const avroMessage = Buffer.from('string')
 
-  // Imports the Securitycentermanagement library
-  const {SecurityCenterManagementClient} = require('@google-cloud/securitycentermanagement').v1;
+  // Imports the Publishing library
+  const {PublisherClient} = require('@google-cloud/eventarc-publishing').v1;
 
   // Instantiates a client
-  const securitycentermanagementClient = new SecurityCenterManagementClient();
+  const publishingClient = new PublisherClient();
 
-  async function callGetEffectiveSecurityHealthAnalyticsCustomModule() {
+  async function callPublish() {
     // Construct request
     const request = {
-      name,
+      messageBus,
     };
 
     // Run request
-    const response = await securitycentermanagementClient.getEffectiveSecurityHealthAnalyticsCustomModule(request);
+    const response = await publishingClient.publish(request);
     console.log(response);
   }
 
-  callGetEffectiveSecurityHealthAnalyticsCustomModule();
-  // [END securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveSecurityHealthAnalyticsCustomModule_async]
+  callPublish();
+  // [END eventarcpublishing_v1_generated_Publisher_Publish_async]
 }
 
 process.on('unhandledRejection', err => {
