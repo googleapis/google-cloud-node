@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.14.0](https://github.com/googleapis/nodejs-storage/compare/v7.13.0...v7.14.0) (2024-10-29)
+
+
+### Features
+
+* Add support for restore token ([#2548](https://github.com/googleapis/nodejs-storage/issues/2548)) ([8241e91](https://github.com/googleapis/nodejs-storage/commit/8241e91e78d47b4cdaea2d941f75fd6a4fa29230))
+* Adds integration tests for Universe Domain configuration ([#2538](https://github.com/googleapis/nodejs-storage/issues/2538)) ([53db6ba](https://github.com/googleapis/nodejs-storage/commit/53db6ba7406b99e507cacfa6195cb5a7d308914b))
+* Adds integration tests for Universe Domain configuration with ([53db6ba](https://github.com/googleapis/nodejs-storage/commit/53db6ba7406b99e507cacfa6195cb5a7d308914b))
+* **storage:** Add support for 'skipIfExists' option for downloadMany ([#2526](https://github.com/googleapis/nodejs-storage/issues/2526)) ([729efb2](https://github.com/googleapis/nodejs-storage/commit/729efb213f96b1a406a1caa54870f50e96796639))
+
 ## [7.13.0](https://github.com/googleapis/nodejs-storage/compare/v7.12.1...v7.13.0) (2024-09-17)
 
 
