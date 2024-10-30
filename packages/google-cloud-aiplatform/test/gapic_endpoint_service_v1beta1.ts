@@ -803,6 +803,208 @@ describe('v1beta1.EndpointServiceClient', () => {
     });
   });
 
+  describe('updateEndpointLongRunning', () => {
+    it('invokes updateEndpointLongRunning without error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateEndpointLongRunning =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateEndpointLongRunning(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEndpointLongRunning without error using callback', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateEndpointLongRunning =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateEndpointLongRunning(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+              protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEndpointLongRunning with call error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEndpointLongRunning = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateEndpointLongRunning(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEndpointLongRunning with LRO error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest()
+      );
+      request.endpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest',
+        ['endpoint', 'name']
+      );
+      request.endpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEndpointLongRunning = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateEndpointLongRunning(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEndpointLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateEndpointLongRunningProgress without error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateEndpointLongRunningProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateEndpointLongRunningProgress with error', async () => {
+      const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateEndpointLongRunningProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteEndpoint', () => {
     it('invokes deleteEndpoint without error', async () => {
       const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
