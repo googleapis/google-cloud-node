@@ -25536,6 +25536,34 @@
                             }
                           ]
                         },
+                        "StopNotebookRuntime": {
+                          "requestType": "StopNotebookRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/notebookRuntimes/*}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "StopNotebookRuntimeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "StopNotebookRuntimeOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/notebookRuntimes/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "StopNotebookRuntimeResponse",
+                                "metadata_type": "StopNotebookRuntimeOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "CreateNotebookExecutionJob": {
                           "requestType": "CreateNotebookExecutionJobRequest",
                           "responseType": "google.longrunning.Operation",
@@ -25953,6 +25981,29 @@
                       }
                     },
                     "StartNotebookRuntimeResponse": {
+                      "fields": {}
+                    },
+                    "StopNotebookRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntime"
+                          }
+                        }
+                      }
+                    },
+                    "StopNotebookRuntimeOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StopNotebookRuntimeResponse": {
                       "fields": {}
                     },
                     "CreateNotebookExecutionJobRequest": {
