@@ -7608,6 +7608,9 @@ export namespace google {
 
                         /** ReportDefinition keepEmptyRows */
                         keepEmptyRows?: (boolean|null);
+
+                        /** ReportDefinition samplingLevel */
+                        samplingLevel?: (google.analytics.data.v1alpha.SamplingLevel|keyof typeof google.analytics.data.v1alpha.SamplingLevel|null);
                     }
 
                     /** Represents a ReportDefinition. */
@@ -7654,6 +7657,12 @@ export namespace google {
 
                         /** ReportDefinition keepEmptyRows. */
                         public keepEmptyRows: boolean;
+
+                        /** ReportDefinition samplingLevel. */
+                        public samplingLevel?: (google.analytics.data.v1alpha.SamplingLevel|keyof typeof google.analytics.data.v1alpha.SamplingLevel|null);
+
+                        /** ReportDefinition _samplingLevel. */
+                        public _samplingLevel?: "samplingLevel";
 
                         /**
                          * Creates a new ReportDefinition instance using the specified properties.
@@ -16208,6 +16217,14 @@ export namespace google {
                     RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0,
                     COST_DATA = 1,
                     REVENUE_DATA = 2
+                }
+
+                /** SamplingLevel enum. */
+                enum SamplingLevel {
+                    SAMPLING_LEVEL_UNSPECIFIED = 0,
+                    LOW = 1,
+                    MEDIUM = 2,
+                    UNSAMPLED = 3
                 }
             }
 
