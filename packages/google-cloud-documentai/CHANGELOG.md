@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.11.0...documentai-v8.12.0) (2024-10-30)
+
+
+### Features
+
+* [documentai] Updated the exponential backoff settings for the Document AI ProcessDocument and BatchProcessDocuments methods ([#5762](https://github.com/googleapis/google-cloud-node/issues/5762)) ([267abc2](https://github.com/googleapis/google-cloud-node/commit/267abc23759c33654e12a9cc57d62abab8642480))
+
 ## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.10.0...documentai-v8.11.0) (2024-10-10)
 
 

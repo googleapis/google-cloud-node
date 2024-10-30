@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.3.0...securesourcemanager-v0.4.0) (2024-10-30)
+
+
+### Features
+
+* [securesourcemanager] Add branch rule APIs ([#5758](https://github.com/googleapis/google-cloud-node/issues/5758)) ([eeef236](https://github.com/googleapis/google-cloud-node/commit/eeef23662c220fff4eb0011878edcf9a0986d1af))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.2.0...securesourcemanager-v0.3.0) (2024-07-22)
 
 

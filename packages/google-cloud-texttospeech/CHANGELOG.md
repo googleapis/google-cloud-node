@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.5.0...text-to-speech-v5.6.0) (2024-10-30)
+
+
+### Features
+
+* [texttospeech] add multi-speaker markup, which allows generating dialogue between multiple speakers ([#5760](https://github.com/googleapis/google-cloud-node/issues/5760)) ([f9dea89](https://github.com/googleapis/google-cloud-node/commit/f9dea89f81e706c13b11651936923e5506fbe5b6))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.4.0...text-to-speech-v5.5.0) (2024-10-10)
 
 

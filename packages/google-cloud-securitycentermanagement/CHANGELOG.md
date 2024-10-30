@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.4.0...securitycentermanagement-v0.5.0) (2024-10-30)
+
+
+### Features
+
+* [eventarc-publishing,securitycentermanagement] Add GroundedGenerationService API ([#5778](https://github.com/googleapis/google-cloud-node/issues/5778)) ([fc49da8](https://github.com/googleapis/google-cloud-node/commit/fc49da87f341638232166e80adce38d8108461a9))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.3.0...securitycentermanagement-v0.4.0) (2024-06-21)
 
 
