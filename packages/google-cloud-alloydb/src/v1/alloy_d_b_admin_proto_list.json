@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/alloydb/v1/data_model.proto",
   "../../protos/google/cloud/alloydb/v1/resources.proto",
   "../../protos/google/cloud/alloydb/v1/service.proto"
 ]
