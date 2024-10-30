@@ -3162,7 +3162,9 @@
                             "inlineData",
                             "fileData",
                             "functionCall",
-                            "functionResponse"
+                            "functionResponse",
+                            "executableCode",
+                            "codeExecutionResult"
                           ]
                         },
                         "metadata": {
@@ -3203,6 +3205,20 @@
                         "functionResponse": {
                           "type": "FunctionResponse",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "executableCode": {
+                          "type": "ExecutableCode",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "codeExecutionResult": {
+                          "type": "CodeExecutionResult",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4298,6 +4314,18 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "codeExecution": {
+                          "type": "CodeExecution",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CodeExecution": {
+                          "fields": {}
                         }
                       }
                     },
@@ -4431,6 +4459,60 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExecutableCode": {
+                      "fields": {
+                        "language": {
+                          "type": "Language",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "code": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Language": {
+                          "values": {
+                            "LANGUAGE_UNSPECIFIED": 0,
+                            "PYTHON": 1
+                          }
+                        }
+                      }
+                    },
+                    "CodeExecutionResult": {
+                      "fields": {
+                        "outcome": {
+                          "type": "Outcome",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "output": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Outcome": {
+                          "values": {
+                            "OUTCOME_UNSPECIFIED": 0,
+                            "OUTCOME_OK": 1,
+                            "OUTCOME_FAILED": 2,
+                            "OUTCOME_DEADLINE_EXCEEDED": 3
                           }
                         }
                       }
