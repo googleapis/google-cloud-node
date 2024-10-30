@@ -21455,6 +21455,7 @@
                          * @interface IPrivatePoolV1Config
                          * @property {google.devtools.cloudbuild.v1.PrivatePoolV1Config.IWorkerConfig|null} [workerConfig] PrivatePoolV1Config workerConfig
                          * @property {google.devtools.cloudbuild.v1.PrivatePoolV1Config.INetworkConfig|null} [networkConfig] PrivatePoolV1Config networkConfig
+                         * @property {google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect|null} [privateServiceConnect] PrivatePoolV1Config privateServiceConnect
                          */
     
                         /**
@@ -21489,6 +21490,14 @@
                         PrivatePoolV1Config.prototype.networkConfig = null;
     
                         /**
+                         * PrivatePoolV1Config privateServiceConnect.
+                         * @member {google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect|null|undefined} privateServiceConnect
+                         * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config
+                         * @instance
+                         */
+                        PrivatePoolV1Config.prototype.privateServiceConnect = null;
+    
+                        /**
                          * Creates a new PrivatePoolV1Config instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config
@@ -21516,6 +21525,8 @@
                                 $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig.encode(message.workerConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
                                 $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.privateServiceConnect != null && Object.hasOwnProperty.call(message, "privateServiceConnect"))
+                                $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.encode(message.privateServiceConnect, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -21556,6 +21567,10 @@
                                     }
                                 case 2: {
                                         message.networkConfig = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.privateServiceConnect = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -21603,6 +21618,11 @@
                                 if (error)
                                     return "networkConfig." + error;
                             }
+                            if (message.privateServiceConnect != null && message.hasOwnProperty("privateServiceConnect")) {
+                                var error = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.verify(message.privateServiceConnect);
+                                if (error)
+                                    return "privateServiceConnect." + error;
+                            }
                             return null;
                         };
     
@@ -21628,6 +21648,11 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.PrivatePoolV1Config.networkConfig: object expected");
                                 message.networkConfig = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.fromObject(object.networkConfig);
                             }
+                            if (object.privateServiceConnect != null) {
+                                if (typeof object.privateServiceConnect !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.PrivatePoolV1Config.privateServiceConnect: object expected");
+                                message.privateServiceConnect = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.fromObject(object.privateServiceConnect);
+                            }
                             return message;
                         };
     
@@ -21647,11 +21672,14 @@
                             if (options.defaults) {
                                 object.workerConfig = null;
                                 object.networkConfig = null;
+                                object.privateServiceConnect = null;
                             }
                             if (message.workerConfig != null && message.hasOwnProperty("workerConfig"))
                                 object.workerConfig = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig.toObject(message.workerConfig, options);
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
                                 object.networkConfig = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.toObject(message.networkConfig, options);
+                            if (message.privateServiceConnect != null && message.hasOwnProperty("privateServiceConnect"))
+                                object.privateServiceConnect = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.toObject(message.privateServiceConnect, options);
                             return object;
                         };
     
@@ -22210,6 +22238,256 @@
                             })();
     
                             return NetworkConfig;
+                        })();
+    
+                        PrivatePoolV1Config.PrivateServiceConnect = (function() {
+    
+                            /**
+                             * Properties of a PrivateServiceConnect.
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config
+                             * @interface IPrivateServiceConnect
+                             * @property {string|null} [networkAttachment] PrivateServiceConnect networkAttachment
+                             * @property {boolean|null} [publicIpAddressDisabled] PrivateServiceConnect publicIpAddressDisabled
+                             * @property {boolean|null} [routeAllTraffic] PrivateServiceConnect routeAllTraffic
+                             */
+    
+                            /**
+                             * Constructs a new PrivateServiceConnect.
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config
+                             * @classdesc Represents a PrivateServiceConnect.
+                             * @implements IPrivateServiceConnect
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect=} [properties] Properties to set
+                             */
+                            function PrivateServiceConnect(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PrivateServiceConnect networkAttachment.
+                             * @member {string} networkAttachment
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @instance
+                             */
+                            PrivateServiceConnect.prototype.networkAttachment = "";
+    
+                            /**
+                             * PrivateServiceConnect publicIpAddressDisabled.
+                             * @member {boolean} publicIpAddressDisabled
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @instance
+                             */
+                            PrivateServiceConnect.prototype.publicIpAddressDisabled = false;
+    
+                            /**
+                             * PrivateServiceConnect routeAllTraffic.
+                             * @member {boolean} routeAllTraffic
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @instance
+                             */
+                            PrivateServiceConnect.prototype.routeAllTraffic = false;
+    
+                            /**
+                             * Creates a new PrivateServiceConnect instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect} PrivateServiceConnect instance
+                             */
+                            PrivateServiceConnect.create = function create(properties) {
+                                return new PrivateServiceConnect(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PrivateServiceConnect message. Does not implicitly {@link google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect} message PrivateServiceConnect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrivateServiceConnect.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.networkAttachment != null && Object.hasOwnProperty.call(message, "networkAttachment"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkAttachment);
+                                if (message.publicIpAddressDisabled != null && Object.hasOwnProperty.call(message, "publicIpAddressDisabled"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.publicIpAddressDisabled);
+                                if (message.routeAllTraffic != null && Object.hasOwnProperty.call(message, "routeAllTraffic"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.routeAllTraffic);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PrivateServiceConnect message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect} message PrivateServiceConnect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrivateServiceConnect.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PrivateServiceConnect message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect} PrivateServiceConnect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrivateServiceConnect.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.networkAttachment = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.publicIpAddressDisabled = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.routeAllTraffic = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PrivateServiceConnect message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect} PrivateServiceConnect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrivateServiceConnect.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PrivateServiceConnect message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PrivateServiceConnect.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                    if (!$util.isString(message.networkAttachment))
+                                        return "networkAttachment: string expected";
+                                if (message.publicIpAddressDisabled != null && message.hasOwnProperty("publicIpAddressDisabled"))
+                                    if (typeof message.publicIpAddressDisabled !== "boolean")
+                                        return "publicIpAddressDisabled: boolean expected";
+                                if (message.routeAllTraffic != null && message.hasOwnProperty("routeAllTraffic"))
+                                    if (typeof message.routeAllTraffic !== "boolean")
+                                        return "routeAllTraffic: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PrivateServiceConnect message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect} PrivateServiceConnect
+                             */
+                            PrivateServiceConnect.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect();
+                                if (object.networkAttachment != null)
+                                    message.networkAttachment = String(object.networkAttachment);
+                                if (object.publicIpAddressDisabled != null)
+                                    message.publicIpAddressDisabled = Boolean(object.publicIpAddressDisabled);
+                                if (object.routeAllTraffic != null)
+                                    message.routeAllTraffic = Boolean(object.routeAllTraffic);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PrivateServiceConnect message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect} message PrivateServiceConnect
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PrivateServiceConnect.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.networkAttachment = "";
+                                    object.publicIpAddressDisabled = false;
+                                    object.routeAllTraffic = false;
+                                }
+                                if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                    object.networkAttachment = message.networkAttachment;
+                                if (message.publicIpAddressDisabled != null && message.hasOwnProperty("publicIpAddressDisabled"))
+                                    object.publicIpAddressDisabled = message.publicIpAddressDisabled;
+                                if (message.routeAllTraffic != null && message.hasOwnProperty("routeAllTraffic"))
+                                    object.routeAllTraffic = message.routeAllTraffic;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PrivateServiceConnect to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PrivateServiceConnect.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PrivateServiceConnect
+                             * @function getTypeUrl
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PrivateServiceConnect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect";
+                            };
+    
+                            return PrivateServiceConnect;
                         })();
     
                         return PrivatePoolV1Config;
