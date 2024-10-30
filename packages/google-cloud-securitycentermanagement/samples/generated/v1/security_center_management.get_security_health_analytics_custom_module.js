@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the resource
+   *  Required. Name of the resource, in the format
+   *  `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`.
    */
   // const name = 'abc123'
 

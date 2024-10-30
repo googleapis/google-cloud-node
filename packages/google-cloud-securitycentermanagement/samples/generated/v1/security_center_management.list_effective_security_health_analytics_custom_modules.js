@@ -29,12 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of parent to list effective custom modules. specified in one
-   *  of the following formats:
+   *  Required. Name of parent to list effective custom modules, in one of the
+   *  following formats:
    *  * `organizations/{organization}/locations/{location}`
    *  * `folders/{folder}/locations/{location}`
-   *  or
-   *  `projects/{project}/locations/{location}`
+   *  * `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
@@ -43,7 +42,10 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. The value returned by the last call indicating a continuation.
+   *  Optional. A pagination token returned from a previous request. Provide this
+   *  token to retrieve the next page of results.
+   *  When paginating, the rest of the request must match the request that
+   *  generated the page token.
    */
   // const pageToken = 'abc123'
 

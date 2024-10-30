@@ -29,11 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent to list Security Command Center services.
-   *  Formats:
-   *    * organizations/{organization}/locations/{location}
-   *    * folders/{folder}/locations/{location}
-   *    * projects/{project}/locations/{location}
+   *  Required. The name of the parent to list Security Command Center services,
+   *  in one of the following formats:
+   *  * `organizations/{organization}/locations/{location}`
+   *  * `folders/{folder}/locations/{location}`
+   *  * `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
@@ -42,12 +42,15 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. The value returned by the last call indicating a continuation.
+   *  Optional. A pagination token returned from a previous request. Provide this
+   *  token to retrieve the next page of results.
+   *  When paginating, the rest of the request must match the request that
+   *  generated the page token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Flag that, when set, will be used to filter the ModuleSettings that are
-   *  in scope. The default setting is that all modules will be shown.
+   *  Flag that, when set, is used to filter the module settings that are shown.
+   *  The default setting is that all modules are shown.
    */
   // const showEligibleModulesOnly = true
 
