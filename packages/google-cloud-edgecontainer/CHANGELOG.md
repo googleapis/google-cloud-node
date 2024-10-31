@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.4.0...edgecontainer-v0.5.0) (2024-10-30)
+
+
+### Features
+
+* [edgecontainer] add storage schema to local control plane config ([#5775](https://github.com/googleapis/google-cloud-node/issues/5775)) ([5f913f7](https://github.com/googleapis/google-cloud-node/commit/5f913f729b267fca3d8fbd562d84bb945c74674f))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.3.0...edgecontainer-v0.4.0) (2024-05-21)
 
 

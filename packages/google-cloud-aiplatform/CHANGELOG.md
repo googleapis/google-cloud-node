@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.32.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.31.0...aiplatform-v3.32.0) (2024-10-30)
+
+
+### Features
+
+* Add code execution tool API ([#5761](https://github.com/googleapis/google-cloud-node/issues/5761)) ([f032b83](https://github.com/googleapis/google-cloud-node/commit/f032b8303a412828252e822edb607be47471013b))
+* Introduce DefaultRuntime to PipelineJob ([#5756](https://github.com/googleapis/google-cloud-node/issues/5756)) ([c4badb0](https://github.com/googleapis/google-cloud-node/commit/c4badb0999c66dc075d5630dc8920a2528417c87))
+
 ## [3.31.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.30.1...aiplatform-v3.31.0) (2024-10-10)
 
 

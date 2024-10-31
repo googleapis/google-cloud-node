@@ -5,6 +5,414 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "55c77b9d386e49a6fd3c6767a771b31b116e945a",
+          "message": "[gdchardwaremanagement] add a DeleteSite method",
+          "issues": [
+            "5767"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "bbfdfb0a-5db6-4254-9fd3-464fa3286e40",
+      "createTime": "2024-10-30T23:16:37.825Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fc49da87f341638232166e80adce38d8108461a9",
+          "message": "[eventarc-publishing,securitycentermanagement] Add GroundedGenerationService API",
+          "issues": [
+            "5778"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "710e2467-8cef-4614-b679-75a653af7001",
+      "createTime": "2024-10-30T23:16:37.810Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "eeef23662c220fff4eb0011878edcf9a0986d1af",
+          "message": "[securesourcemanager] Add branch rule APIs",
+          "issues": [
+            "5758"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "54920c36-9bd3-4f8d-8a38-c70da07a70aa",
+      "createTime": "2024-10-30T23:16:37.794Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2fdec25aba6fc7457e77d11ee24f2f79f262a618",
+          "message": "[css] A new field `headline_offer_installment` is added to message `.google.shopping.css.v1.Attributes`",
+          "issues": [
+            "5765"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "0a30eb56-af0b-4bb5-b5c8-5e5c5f7bc3a1",
+      "createTime": "2024-10-30T23:16:37.779Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3f262fc59aa6054bd22f6868e76e7c686a9444a3",
+          "message": "[dlp] discovery of BigQuery snapshots",
+          "issues": [
+            "5757"
+          ]
+        }
+      ],
+      "version": "5.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "96c40693-0ca7-4b43-bddb-dd3f48f9bbd2",
+      "createTime": "2024-10-30T23:16:37.763Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3aade58c11e739c4652f5b1ab8e7f3cf12992ce9",
+          "message": "[cloudbuild] Add PrivateServiceConnect option to WorkerPool",
+          "issues": [
+            "5770"
+          ]
+        }
+      ],
+      "version": "4.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "b53ce78b-d0a3-4ad5-8f73-3a3baf20096c",
+      "createTime": "2024-10-30T23:16:37.745Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5eb3c3ec44e03edae96207f892d5b2d98aca51a",
+          "message": "[artifactregistry] Add Artifact Registry attachment API",
+          "issues": [
+            "5769"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "bd00c329-06f0-420f-ae52-d289b6e3fb24",
+      "createTime": "2024-10-30T23:16:37.729Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f9dea89f81e706c13b11651936923e5506fbe5b6",
+          "message": "[texttospeech] add multi-speaker markup, which allows generating dialogue between multiple speakers",
+          "issues": [
+            "5760"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "b611ffc7-7bde-4784-8c42-ca008d3939a0",
+      "createTime": "2024-10-30T23:16:37.713Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ae63b6a3f18b20f27b43a9f21f26f69af95b2461",
+          "message": "[recaptchaenterprise] support for ListIpOverrides and RemoveIpOverride",
+          "issues": [
+            "5777"
+          ]
+        }
+      ],
+      "version": "5.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "ba56ec52-1ef4-4fd9-9d38-2600d97ebdc2",
+      "createTime": "2024-10-30T23:16:37.696Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "[networkmanagement] add messages and fields related to Redis Instances",
+          "issues": [
+            "5755"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add messages and fields related to Redis Clusters",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add PSC network attachment URI to the InstanceInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add subnet URI and region name to the NetworkInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add firewall policy URI to the FirewallInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add fields related to advertised routes to the RouteInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add region name field to the RouteInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add region name to the ForwardingRuleInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add load balancer name to the ForwardingRuleInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add PSC target fields to the ForwardingRuleInfo proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "312ba7fa3330b19e20f32ff6a7e6703185623a26",
+          "message": "Add more detailed abort and drop causes to corresponding enums",
+          "issues": []
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "458f3247-3a70-4da8-abe2-4ddf1a4337d1",
+      "createTime": "2024-10-30T23:16:37.679Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fc49da87f341638232166e80adce38d8108461a9",
+          "message": "[eventarc-publishing,securitycentermanagement] Add GroundedGenerationService API",
+          "issues": [
+            "5778"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "8bbe3868-3d63-442b-84e3-c08c9debbeba",
+      "createTime": "2024-10-30T23:16:37.660Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "90e80249da2893b120decca6715659e032e6485e",
+          "message": "[eventarc] Publish Eventarc Advanced protos",
+          "issues": [
+            "5773"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "a408fc01-1078-4539-8f96-ae6e9d5c339c",
+      "createTime": "2024-10-30T23:16:37.644Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5f913f729b267fca3d8fbd562d84bb945c74674f",
+          "message": "[edgecontainer] add storage schema to local control plane config",
+          "issues": [
+            "5775"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "fabe7271-09d8-4677-84a5-5a51da7888c8",
+      "createTime": "2024-10-30T23:16:37.628Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "267abc23759c33654e12a9cc57d62abab8642480",
+          "message": "[documentai] Updated the exponential backoff settings for the Document AI ProcessDocument and BatchProcessDocuments methods",
+          "issues": [
+            "5762"
+          ]
+        }
+      ],
+      "version": "8.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "5111ba03-0aa6-44c6-807d-1a59cc9f2a1f",
+      "createTime": "2024-10-30T23:16:37.585Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "099d1b3ff7d6e8e43ab79f5d62c344c269eb806f",
+          "message": "[deploy] added new fields for the Automation Repair rule",
+          "issues": [
+            "5774"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "cb391500-3edf-440c-8667-a9c63ed84b33",
+      "createTime": "2024-10-30T23:16:37.564Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9639bc9a253ccf94a4318210d638b29a42a5ee72",
+          "message": "[dataproc] Add `ProvisioningModelMix` to support mixing of spot and standard instances for secondary workers",
+          "issues": [
+            "5753"
+          ]
+        }
+      ],
+      "version": "5.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "9b10e188-9e97-41c7-9166-88574269fd5c",
+      "createTime": "2024-10-30T23:16:37.525Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c6050069aa75b31a262ff243c9f5407707926856",
+          "message": "[contentwarehouse] Updated the exponential backoff settings for the Document AI ProcessDocument and BatchProcessDocuments methods",
+          "issues": [
+            "5763"
+          ]
+        }
+      ],
+      "version": "1.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "cbcb4ee5-6fa4-46ad-927f-321521b0f92d",
+      "createTime": "2024-10-30T23:16:37.430Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "619e469914af5506e47d26ff01887dbfeef99131",
+          "message": "[alloydb] add new PSC instance configuration setting and output the PSC DNS name",
+          "issues": [
+            "5764"
+          ]
+        }
+      ],
+      "version": "1.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "581c7465-2534-49c4-9b5e-b5681520ff9e",
+      "createTime": "2024-10-30T23:16:37.408Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f032b8303a412828252e822edb607be47471013b",
+          "message": "Add code execution tool API",
+          "issues": [
+            "5761"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "c4badb0999c66dc075d5630dc8920a2528417c87",
+          "message": "Introduce DefaultRuntime to PipelineJob",
+          "issues": [
+            "5756"
+          ]
+        }
+      ],
+      "version": "3.32.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "e37e5aa8-5112-436a-bfcf-7e6975adba22",
+      "createTime": "2024-10-30T23:16:37.390Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "96bb1b51a7d1481cb16d2d9ca6bc984b3258688d",
+          "message": "[analytics-data] add `SamplingLevel` type to Data API v1alpha",
+          "issues": [
+            "5759"
+          ]
+        }
+      ],
+      "version": "4.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "5e33cbb0-6c44-41b2-8925-4a430d56513d",
+      "createTime": "2024-10-30T23:16:37.375Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "cec22abd4f27d8acf3c7c1d87b2bd6873e505841",
           "message": "Add partner_model_tuning_spec to TuningJob",
           "issues": [
@@ -37098,5 +37506,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-10-10T19:23:48.665Z"
+  "updateTime": "2024-10-30T23:16:37.825Z"
 }

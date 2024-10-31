@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.7.0...network-management-v3.8.0) (2024-10-30)
+
+
+### Features
+
+* [networkmanagement] add messages and fields related to Redis Instances ([#5755](https://github.com/googleapis/google-cloud-node/issues/5755)) ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add fields related to advertised routes to the RouteInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add firewall policy URI to the FirewallInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add load balancer name to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add messages and fields related to Redis Clusters ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add more detailed abort and drop causes to corresponding enums ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add PSC network attachment URI to the InstanceInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add PSC target fields to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add region name field to the RouteInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add region name to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add subnet URI and region name to the NetworkInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.6.0...network-management-v3.7.0) (2024-08-19)
 
 

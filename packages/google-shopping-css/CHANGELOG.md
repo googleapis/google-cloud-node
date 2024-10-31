@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.5.0...css-v0.6.0) (2024-10-30)
+
+
+### Features
+
+* [css] A new field `headline_offer_installment` is added to message `.google.shopping.css.v1.Attributes` ([#5765](https://github.com/googleapis/google-cloud-node/issues/5765)) ([2fdec25](https://github.com/googleapis/google-cloud-node/commit/2fdec25aba6fc7457e77d11ee24f2f79f262a618))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.4.0...css-v0.5.0) (2024-05-21)
 
 
