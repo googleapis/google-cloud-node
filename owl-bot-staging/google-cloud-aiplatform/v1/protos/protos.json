@@ -6344,6 +6344,11 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "systemLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 28
                         }
                       }
                     },
