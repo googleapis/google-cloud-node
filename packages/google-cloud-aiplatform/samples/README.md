@@ -545,6 +545,7 @@
   * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
   * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
   * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.stop_notebook_runtime](#notebook_service.stop_notebook_runtime)
   * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
   * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
@@ -9725,6 +9726,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.stop_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js`
 
 
 -----
