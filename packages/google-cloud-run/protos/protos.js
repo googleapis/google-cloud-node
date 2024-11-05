@@ -8970,6 +8970,7 @@
                          * @interface IGCSVolumeSource
                          * @property {string|null} [bucket] GCSVolumeSource bucket
                          * @property {boolean|null} [readOnly] GCSVolumeSource readOnly
+                         * @property {Array.<string>|null} [mountOptions] GCSVolumeSource mountOptions
                          */
     
                         /**
@@ -8981,6 +8982,7 @@
                          * @param {google.cloud.run.v2.IGCSVolumeSource=} [properties] Properties to set
                          */
                         function GCSVolumeSource(properties) {
+                            this.mountOptions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -9002,6 +9004,14 @@
                          * @instance
                          */
                         GCSVolumeSource.prototype.readOnly = false;
+    
+                        /**
+                         * GCSVolumeSource mountOptions.
+                         * @member {Array.<string>} mountOptions
+                         * @memberof google.cloud.run.v2.GCSVolumeSource
+                         * @instance
+                         */
+                        GCSVolumeSource.prototype.mountOptions = $util.emptyArray;
     
                         /**
                          * Creates a new GCSVolumeSource instance using the specified properties.
@@ -9031,6 +9041,9 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
                             if (message.readOnly != null && Object.hasOwnProperty.call(message, "readOnly"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.readOnly);
+                            if (message.mountOptions != null && message.mountOptions.length)
+                                for (var i = 0; i < message.mountOptions.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.mountOptions[i]);
                             return writer;
                         };
     
@@ -9071,6 +9084,12 @@
                                     }
                                 case 2: {
                                         message.readOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.mountOptions && message.mountOptions.length))
+                                            message.mountOptions = [];
+                                        message.mountOptions.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -9114,6 +9133,13 @@
                             if (message.readOnly != null && message.hasOwnProperty("readOnly"))
                                 if (typeof message.readOnly !== "boolean")
                                     return "readOnly: boolean expected";
+                            if (message.mountOptions != null && message.hasOwnProperty("mountOptions")) {
+                                if (!Array.isArray(message.mountOptions))
+                                    return "mountOptions: array expected";
+                                for (var i = 0; i < message.mountOptions.length; ++i)
+                                    if (!$util.isString(message.mountOptions[i]))
+                                        return "mountOptions: string[] expected";
+                            }
                             return null;
                         };
     
@@ -9133,6 +9159,13 @@
                                 message.bucket = String(object.bucket);
                             if (object.readOnly != null)
                                 message.readOnly = Boolean(object.readOnly);
+                            if (object.mountOptions) {
+                                if (!Array.isArray(object.mountOptions))
+                                    throw TypeError(".google.cloud.run.v2.GCSVolumeSource.mountOptions: array expected");
+                                message.mountOptions = [];
+                                for (var i = 0; i < object.mountOptions.length; ++i)
+                                    message.mountOptions[i] = String(object.mountOptions[i]);
+                            }
                             return message;
                         };
     
@@ -9149,6 +9182,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.mountOptions = [];
                             if (options.defaults) {
                                 object.bucket = "";
                                 object.readOnly = false;
@@ -9157,6 +9192,11 @@
                                 object.bucket = message.bucket;
                             if (message.readOnly != null && message.hasOwnProperty("readOnly"))
                                 object.readOnly = message.readOnly;
+                            if (message.mountOptions && message.mountOptions.length) {
+                                object.mountOptions = [];
+                                for (var j = 0; j < message.mountOptions.length; ++j)
+                                    object.mountOptions[j] = message.mountOptions[j];
+                            }
                             return object;
                         };
     
