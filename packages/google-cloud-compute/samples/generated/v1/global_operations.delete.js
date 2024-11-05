@@ -29,7 +29,7 @@ function main(operation, project) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the Operations resource to delete.
+   *  Name of the Operations resource to delete, or its unique numeric identifier.
    */
   // const operation = 'abc123'
   /**

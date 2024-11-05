@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -9788,6 +9791,10 @@
                                 "enableInteractionLogging": {
                                   "type": "bool",
                                   "id": 3
+                                },
+                                "enableConsentBasedRedaction": {
+                                  "type": "bool",
+                                  "id": 4
                                 }
                               }
                             }
@@ -11058,6 +11065,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "locked": {
+                              "type": "bool",
+                              "id": 30
                             }
                           },
                           "nested": {
@@ -11626,7 +11637,8 @@
                             "target": {
                               "oneof": [
                                 "targetPage",
-                                "targetFlow"
+                                "targetFlow",
+                                "targetPlaybook"
                               ]
                             }
                           },
@@ -11661,6 +11673,13 @@
                               "id": 3,
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "targetPlaybook": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
                               }
                             }
                           }
@@ -11972,6 +11991,10 @@
                                 "modelOutput": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             },
@@ -12000,6 +12023,10 @@
                                 "modelOutput": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             },
@@ -16284,6 +16311,7 @@
                                 "NO_MATCH": 4,
                                 "NO_INPUT": 5,
                                 "EVENT": 6,
+                                "KNOWLEDGE_CONNECTOR": 8,
                                 "PLAYBOOK": 9
                               }
                             }
@@ -20947,6 +20975,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "serviceDirectoryConfig": {
+                                  "type": "ServiceDirectoryConfig",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -21133,6 +21168,18 @@
                                         "(google.api.field_behavior)": "REQUIRED"
                                       }
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "ServiceDirectoryConfig": {
+                              "fields": {
+                                "service": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Service"
                                   }
                                 }
                               }
