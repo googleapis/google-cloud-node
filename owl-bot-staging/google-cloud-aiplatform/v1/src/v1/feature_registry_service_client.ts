@@ -392,6 +392,10 @@ export class FeatureRegistryServiceClient {
       '.google.cloud.aiplatform.v1.Feature') as gax.protobuf.Type;
     const createFeatureMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.CreateFeatureOperationMetadata') as gax.protobuf.Type;
+    const batchCreateFeaturesResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.BatchCreateFeaturesResponse') as gax.protobuf.Type;
+    const batchCreateFeaturesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.BatchCreateFeaturesOperationMetadata') as gax.protobuf.Type;
     const updateFeatureResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.Feature') as gax.protobuf.Type;
     const updateFeatureMetadata = protoFilesRoot.lookup(
@@ -418,6 +422,10 @@ export class FeatureRegistryServiceClient {
         this.operationsClient,
         createFeatureResponse.decode.bind(createFeatureResponse),
         createFeatureMetadata.decode.bind(createFeatureMetadata)),
+      batchCreateFeatures: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchCreateFeaturesResponse.decode.bind(batchCreateFeaturesResponse),
+        batchCreateFeaturesMetadata.decode.bind(batchCreateFeaturesMetadata)),
       updateFeature: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateFeatureResponse.decode.bind(updateFeatureResponse),
@@ -471,7 +479,7 @@ export class FeatureRegistryServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const featureRegistryServiceStubMethods =
-        ['createFeatureGroup', 'getFeatureGroup', 'listFeatureGroups', 'updateFeatureGroup', 'deleteFeatureGroup', 'createFeature', 'getFeature', 'listFeatures', 'updateFeature', 'deleteFeature'];
+        ['createFeatureGroup', 'getFeatureGroup', 'listFeatureGroups', 'updateFeatureGroup', 'deleteFeatureGroup', 'createFeature', 'batchCreateFeatures', 'getFeature', 'listFeatures', 'updateFeature', 'deleteFeature'];
     for (const methodName of featureRegistryServiceStubMethods) {
       const callPromise = this.featureRegistryServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -735,7 +743,7 @@ export class FeatureRegistryServiceClient {
  *   Required. The ID to use for this FeatureGroup, which will become the final
  *   component of the FeatureGroup's resource name.
  *
- *   This value may be up to 60 characters, and valid characters are
+ *   This value may be up to 128 characters, and valid characters are
  *   `[a-z0-9_]`. The first character cannot be a number.
  *
  *   The value must be unique within the project and location.
@@ -1124,6 +1132,104 @@ export class FeatureRegistryServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createFeature, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1.Feature, protos.google.cloud.aiplatform.v1.CreateFeatureOperationMetadata>;
+  }
+/**
+ * Creates a batch of Features in a given FeatureGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the EntityType/FeatureGroup to create the
+ *   batch of Features under. Format:
+ *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+ *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
+ * @param {number[]} request.requests
+ *   Required. The request message specifying the Features to create. All
+ *   Features must be created under the same parent EntityType / FeatureGroup.
+ *   The `parent` field in each child request message can be omitted. If
+ *   `parent` is set in a child request, then the value must match the `parent`
+ *   value in this request message.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/feature_registry_service.batch_create_features.js</caption>
+ * region_tag:aiplatform_v1_generated_FeatureRegistryService_BatchCreateFeatures_async
+ */
+  batchCreateFeatures(
+      request?: protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  batchCreateFeatures(
+      request: protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateFeatures(
+      request: protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateFeatures(
+      request?: protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.batchCreateFeatures(request, options, callback);
+  }
+/**
+ * Check the status of the long running operation returned by `batchCreateFeatures()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/feature_registry_service.batch_create_features.js</caption>
+ * region_tag:aiplatform_v1_generated_FeatureRegistryService_BatchCreateFeatures_async
+ */
+  async checkBatchCreateFeaturesProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1.BatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.BatchCreateFeaturesOperationMetadata>>{
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchCreateFeatures, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1.BatchCreateFeaturesResponse, protos.google.cloud.aiplatform.v1.BatchCreateFeaturesOperationMetadata>;
   }
 /**
  * Updates the parameters of a single Feature.
