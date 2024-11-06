@@ -11,13 +11,13 @@
               "nested": {
                 "v2": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Dialogflow.V2",
                     "go_package": "cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebhookProto",
                     "java_package": "com.google.cloud.dialogflow.v2",
                     "objc_class_prefix": "DF",
+                    "cc_enable_arenas": true,
                     "(google.api.resource_definition).type": "dialogflow.googleapis.com/CXSecuritySettings",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/securitySettings/{security_settings}"
                   },
@@ -2191,6 +2191,10 @@
                                     "title": {
                                       "type": "string",
                                       "id": 4
+                                    },
+                                    "metadata": {
+                                      "type": "google.protobuf.Struct",
+                                      "id": 5
                                     }
                                   }
                                 }
@@ -2299,6 +2303,14 @@
                           "type": "bool",
                           "id": 17
                         },
+                        "phraseSets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.resource_reference).type": "speech.googleapis.com/PhraseSet"
+                          }
+                        },
                         "optOutConformerModelMigration": {
                           "type": "bool",
                           "id": 26
@@ -2400,6 +2412,14 @@
                         "model": {
                           "type": "string",
                           "id": 2
+                        },
+                        "phraseSets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "speech.googleapis.com/PhraseSet"
+                          }
                         },
                         "audioEncoding": {
                           "type": "AudioEncoding",
@@ -7161,6 +7181,13 @@
                             "sections": {
                               "type": "Sections",
                               "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "contextSize": {
+                              "type": "int32",
+                              "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
