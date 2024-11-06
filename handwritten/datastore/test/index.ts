@@ -184,6 +184,12 @@ async.each(
 
       before(() => {
         Object.assign(fakeEntity, fakeEntityInit);
+        const buildEntityProtoModule = proxyquire(
+          '../src/utils/entity/buildEntityProto.js',
+          {
+            '../../entity.js': {entity: fakeEntity},
+          }
+        );
         Datastore = proxyquire('../src', {
           './entity.js': {entity: fakeEntity},
           './index-class.js': {Index: FakeIndex},
@@ -194,6 +200,7 @@ async.each(
             GoogleAuth: fakeGoogleAuth,
           },
           'google-gax': fakeGoogleGax,
+          './utils/entity/buildEntityProto': buildEntityProtoModule,
         }).Datastore;
       });
 

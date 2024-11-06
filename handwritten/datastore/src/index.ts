@@ -68,9 +68,10 @@ import {promisifyAll} from '@google-cloud/promisify';
 import {google} from '../protos/protos';
 import {AggregateQuery} from './aggregate';
 import {SaveEntity} from './interfaces/save';
+import {extendExcludeFromIndexes} from './utils/entity/extendExcludeFromIndexes';
+import {buildEntityProto} from './utils/entity/buildEntityProto';
 
 const {grpc} = new GrpcClient();
-const addExcludeFromIndexes = entity.addExcludeFromIndexes;
 
 export type PathType = string | number | entity.Int;
 export interface BooleanObject {
@@ -1098,7 +1099,6 @@ class Datastore extends DatastoreRequest {
       .map(DatastoreRequest.prepareEntityObject_)
       .forEach((entityObject: Entity, index: number) => {
         const mutation: Mutation = {};
-        let entityProto: EntityProto = {};
         let method = 'upsert';
 
         if (entityObject.method) {
@@ -1115,70 +1115,8 @@ class Datastore extends DatastoreRequest {
           insertIndexes[index] = true;
         }
 
-        if (Array.isArray(entityObject.data)) {
-          // This code populates the excludeFromIndexes list with the right values.
-          if (entityObject.excludeLargeProperties) {
-            entityObject.data.forEach(
-              (data: {
-                name: {
-                  toString(): string;
-                };
-                value: Entity;
-                excludeFromIndexes?: boolean;
-              }) => {
-                entityObject.excludeFromIndexes = entity.findLargeProperties_(
-                  data.value,
-                  data.name.toString(),
-                  entityObject.excludeFromIndexes
-                );
-              }
-            );
-          }
-          // This code builds the right entityProto from the entityObject
-          entityProto.properties = entityObject.data.reduce(
-            (
-              acc: EntityProtoReduceAccumulator,
-              data: EntityProtoReduceData
-            ) => {
-              const value = entity.encodeValue(
-                data.value,
-                data.name.toString()
-              );
-
-              if (typeof data.excludeFromIndexes === 'boolean') {
-                const excluded = data.excludeFromIndexes;
-                let values = value.arrayValue && value.arrayValue.values;
-
-                if (values) {
-                  values = values.map((x: ValueProto) => {
-                    x.excludeFromIndexes = excluded;
-                    return x;
-                  });
-                } else {
-                  value.excludeFromIndexes = data.excludeFromIndexes;
-                }
-              }
-
-              acc[data.name] = value;
-
-              return acc;
-            },
-            {}
-          );
-          // This code adds excludeFromIndexes in the right places
-          addExcludeFromIndexes(entityObject.excludeFromIndexes, entityProto);
-        } else {
-          // This code populates the excludeFromIndexes list with the right values.
-          if (entityObject.excludeLargeProperties) {
-            entityObject.excludeFromIndexes = entity.findLargeProperties_(
-              entityObject.data,
-              '',
-              entityObject.excludeFromIndexes
-            );
-          }
-          // This code builds the right entityProto from the entityObject
-          entityProto = entity.entityToEntityProto(entityObject);
-        }
+        extendExcludeFromIndexes(entityObject);
+        const entityProto = buildEntityProto(entityObject);
 
         entityProto.key = entity.keyToKeyProto(entityObject.key);
 
