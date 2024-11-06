@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the agent to export.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const name = 'abc123'
   /**
@@ -52,8 +52,8 @@ function main(name) {
   // const dataFormat = {}
   /**
    *  Optional. Environment name. If not set, draft environment is assumed.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const environment = 'abc123'
   /**

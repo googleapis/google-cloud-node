@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the agent to restore into.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const name = 'abc123'
   /**

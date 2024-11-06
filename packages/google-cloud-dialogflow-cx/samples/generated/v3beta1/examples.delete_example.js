@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the example to delete.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/playbooks/<Playbook ID>/examples/<Example ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/examples/<ExampleID>`.
    */
   // const name = 'abc123'
 

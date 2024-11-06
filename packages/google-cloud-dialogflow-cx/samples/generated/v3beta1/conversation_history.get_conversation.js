@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the conversation.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/conversations/<Conversation ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/conversations/<ConversationID>`.
    */
   // const name = 'abc123'
 

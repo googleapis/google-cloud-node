@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the playbook version.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/playbooks/<Playbook ID>/versions/<Version ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/versions/<VersionID>`.
    */
   // const name = 'abc123'
 

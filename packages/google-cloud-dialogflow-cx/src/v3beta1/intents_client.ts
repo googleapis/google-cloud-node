@@ -573,8 +573,8 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the intent.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/intents/<Intent ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
    * @param {string} request.languageCode
    *   The language to retrieve the intent for. The following fields are language
    *   dependent:
@@ -680,7 +680,7 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create an intent for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Intent} request.intent
    *   Required. The intent to create.
    * @param {string} request.languageCode
@@ -906,8 +906,8 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the intent to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/intents/<Intent ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1014,7 +1014,7 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to import the intents into.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.intentsUri
    *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
    *   to import intents from. The format of this URI must be
@@ -1174,12 +1174,11 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent agent to export intents.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string[]} request.intents
    *   Required. The name of the intents to export.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/intents/<Intent ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
    * @param {string} [request.intentsUri]
    *   Optional. The [Google Cloud
    *   Storage](https://cloud.google.com/storage/docs/) URI to export the
@@ -1332,7 +1331,7 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all intents for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list intents for. The following fields are language
    *   dependent:
@@ -1444,7 +1443,7 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all intents for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list intents for. The following fields are language
    *   dependent:
@@ -1504,7 +1503,7 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all intents for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list intents for. The following fields are language
    *   dependent:

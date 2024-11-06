@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the intent to delete.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/intents/<Intent ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
    */
   // const name = 'abc123'
 

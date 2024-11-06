@@ -577,7 +577,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the agent.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -672,7 +672,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to create a agent for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Agent} request.agent
    *   Required. The agent to create.
    * @param {object} [options]
@@ -862,7 +862,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the agent to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -955,7 +955,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The agent to validate.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   If not specified, the agent's default language is used.
    * @param {object} [options]
@@ -1055,8 +1055,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The agent name.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/validationResult`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/validationResult`.
    * @param {string} request.languageCode
    *   If not specified, the agent's default language is used.
    * @param {object} [options]
@@ -1158,8 +1158,8 @@ export class AgentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/generativeSettings`.
+   *   Required. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generativeSettings`.
    * @param {string} request.languageCode
    *   Required. Language code of the generative settings.
    * @param {object} [options]
@@ -1371,7 +1371,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the agent to export.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} [request.agentUri]
    *   Optional. The [Google Cloud
    *   Storage](https://cloud.google.com/storage/docs/) URI to export the agent
@@ -1388,8 +1388,8 @@ export class AgentsClient {
    *   is assumed.
    * @param {string} [request.environment]
    *   Optional. Environment name. If not set, draft environment is assumed.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination} [request.gitDestination]
    *   Optional. The Git branch to export the agent to.
    * @param {boolean} [request.includeBigqueryExportSettings]
@@ -1546,7 +1546,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the agent to restore into.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.agentUri
    *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
    *   to restore agent from. The format of this URI must be
@@ -1696,7 +1696,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to list all agents for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1795,7 +1795,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to list all agents for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1842,7 +1842,7 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to list all agents for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.

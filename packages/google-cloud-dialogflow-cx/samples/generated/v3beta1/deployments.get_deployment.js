@@ -31,8 +31,7 @@ function main(name) {
   /**
    *  Required. The name of the
    *  Deployment google.cloud.dialogflow.cx.v3beta1.Deployment. Format:
-   *  `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>`.
    */
   // const name = 'abc123'
 

@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the webhook.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/webhooks/<Webhook ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
    */
   // const name = 'abc123'
 

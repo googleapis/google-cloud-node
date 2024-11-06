@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the experiment to start.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/experiments/<ExperimentID>`.
    */
   // const name = 'abc123'
 

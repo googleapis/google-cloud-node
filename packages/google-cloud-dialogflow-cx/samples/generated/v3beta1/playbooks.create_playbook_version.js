@@ -30,8 +30,8 @@ function main(parent, playbookVersion) {
    */
   /**
    *  Required. The playbook to create a version for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/playbooks/<Playbook ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    */
   // const parent = 'abc123'
   /**
