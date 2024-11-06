@@ -30,7 +30,7 @@ function main(agent, type) {
    */
   /**
    *  Required. The agent to calculate coverage for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const agent = 'abc123'
   /**

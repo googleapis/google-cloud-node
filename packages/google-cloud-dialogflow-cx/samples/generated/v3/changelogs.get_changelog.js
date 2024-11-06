@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the changelog to get.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/changelogs/<Changelog ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/changelogs/<ChangelogID>`.
    */
   // const name = 'abc123'
 

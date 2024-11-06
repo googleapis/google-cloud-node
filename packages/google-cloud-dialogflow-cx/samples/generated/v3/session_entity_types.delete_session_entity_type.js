@@ -30,12 +30,12 @@ function main(name) {
    */
   /**
    *  Required. The name of the session entity type to delete.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/sessions/<Session ID>/entityTypes/<Entity Type ID>` or
-   *  `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>/sessions/<Session ID>/entityTypes/<Entity
-   *  Type ID>`. If `Environment ID` is not specified, we assume default 'draft'
-   *  environment.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>/entityTypes/<EntityTypeID>`
+   *  or
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>/entityTypes/<EntityTypeID>`.
+   *  If `Environment ID` is not specified,
+   *  we assume default 'draft' environment.
    */
   // const name = 'abc123'
 

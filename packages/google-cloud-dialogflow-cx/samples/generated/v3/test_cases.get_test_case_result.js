@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the testcase.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/testCases/<TestCase ID>/results/<TestCaseResult ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>/results/<TestCaseResultID>`.
    */
   // const name = 'abc123'
 

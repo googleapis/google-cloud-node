@@ -589,10 +589,10 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to delete test cases from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string[]} request.names
-   *   Required. Format of test case names: `projects/<Project ID>/locations/
-   *   <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+   *   Required. Format of test case names:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -689,8 +689,8 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the testcase.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/testCases/<TestCase ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -781,7 +781,7 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create the test case for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3.TestCase} request.testCase
    *   Required. The test case to create.
    * @param {object} [options]
@@ -969,7 +969,7 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.agent
    *   Required. The agent to calculate coverage for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3.CalculateCoverageRequest.CoverageType} request.type
    *   Required. The type of coverage requested.
    * @param {object} [options]
@@ -1068,8 +1068,8 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the testcase.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/testCases/<TestCase ID>/results/<TestCaseResult ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>/results/<TestCaseResultID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1175,12 +1175,12 @@ export class TestCasesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format of test case name to run: `projects/<Project
-   *   ID>/locations/ <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+   *   Required. Format of test case name to run:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    * @param {string} [request.environment]
    *   Optional. Environment name. If not set, draft environment is assumed.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1325,15 +1325,14 @@ export class TestCasesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Agent name. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/ <AgentID>`.
+   *   Required. Agent name. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} [request.environment]
    *   Optional. If not set, draft environment is assumed. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {string[]} request.testCases
-   *   Required. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/testCases/<TestCase ID>`.
+   *   Required. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1481,7 +1480,7 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to import test cases to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.gcsUri
    *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
    *   to import test cases from. The format of this URI must be
@@ -1640,7 +1639,7 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent where to export test cases from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.gcsUri
    *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
    *   export the test cases to. The format of this URI must be
@@ -1802,7 +1801,7 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all pages for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20.
    *   Note that when TestCaseView = FULL, the maximum page size allowed is 20.
@@ -1904,7 +1903,7 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all pages for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20.
    *   Note that when TestCaseView = FULL, the maximum page size allowed is 20.
@@ -1954,7 +1953,7 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all pages for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20.
    *   Note that when TestCaseView = FULL, the maximum page size allowed is 20.
@@ -2004,9 +2003,10 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The test case to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   testCases/<TestCase ID>`. Specify a `-` as a wildcard for TestCase ID to
-   *   list results across multiple test cases.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
+   *   Specify a `-` as a wildcard for TestCase ID to
+   *    list results across multiple test cases.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -2130,9 +2130,10 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The test case to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   testCases/<TestCase ID>`. Specify a `-` as a wildcard for TestCase ID to
-   *   list results across multiple test cases.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
+   *   Specify a `-` as a wildcard for TestCase ID to
+   *    list results across multiple test cases.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -2204,9 +2205,10 @@ export class TestCasesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The test case to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   testCases/<TestCase ID>`. Specify a `-` as a wildcard for TestCase ID to
-   *   list results across multiple test cases.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
+   *   Specify a `-` as a wildcard for TestCase ID to
+   *    list results across multiple test cases.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.

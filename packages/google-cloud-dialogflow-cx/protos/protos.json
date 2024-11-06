@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -10,7 +13,6 @@
                   "nested": {
                     "v3": {
                       "options": {
-                        "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3",
                         "go_package": "cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb",
                         "java_multiple_files": true,
@@ -19,7 +21,8 @@
                         "objc_class_prefix": "DF",
                         "ruby_package": "Google::Cloud::Dialogflow::CX::V3",
                         "(google.api.resource_definition).type": "dlp.googleapis.com/DeidentifyTemplate",
-                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}"
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}",
+                        "cc_enable_arenas": true
                       },
                       "nested": {
                         "AdvancedSettings": {
@@ -470,6 +473,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "clientCertificateSettings": {
+                              "type": "ClientCertificateSettings",
+                              "id": 43,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -544,6 +554,33 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ClientCertificateSettings": {
+                              "fields": {
+                                "sslCertificate": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "privateKey": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                  }
+                                },
+                                "passphrase": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                                   }
                                 }
                               }
@@ -884,7 +921,8 @@
                             "AUDIO_ENCODING_AMR": 4,
                             "AUDIO_ENCODING_AMR_WB": 5,
                             "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7,
+                            "AUDIO_ENCODING_ALAW": 8
                           }
                         },
                         "SpeechModelVariant": {
@@ -1023,7 +1061,8 @@
                             "OUTPUT_AUDIO_ENCODING_MP3": 2,
                             "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
                             "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
-                            "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                            "OUTPUT_AUDIO_ENCODING_MULAW": 5,
+                            "OUTPUT_AUDIO_ENCODING_ALAW": 6
                           }
                         },
                         "OutputAudioConfig": {
@@ -6496,6 +6535,81 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "boostControlSpec": {
+                                  "type": "BoostControlSpec",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "BoostControlSpec": {
+                                  "fields": {
+                                    "fieldName": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "attributeType": {
+                                      "type": "AttributeType",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "interpolationType": {
+                                      "type": "InterpolationType",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "controlPoints": {
+                                      "rule": "repeated",
+                                      "type": "ControlPoint",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "AttributeType": {
+                                      "values": {
+                                        "ATTRIBUTE_TYPE_UNSPECIFIED": 0,
+                                        "NUMERICAL": 1,
+                                        "FRESHNESS": 2
+                                      }
+                                    },
+                                    "InterpolationType": {
+                                      "values": {
+                                        "INTERPOLATION_TYPE_UNSPECIFIED": 0,
+                                        "LINEAR": 1
+                                      }
+                                    },
+                                    "ControlPoint": {
+                                      "fields": {
+                                        "attributeValue": {
+                                          "type": "string",
+                                          "id": 1,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        },
+                                        "boostAmount": {
+                                          "type": "float",
+                                          "id": 2,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -8852,6 +8966,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "modelParameter": {
+                              "type": "ModelParameter",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -8864,6 +8982,60 @@
                                 "name": {
                                   "type": "string",
                                   "id": 2
+                                }
+                              }
+                            },
+                            "ModelParameter": {
+                              "oneofs": {
+                                "_temperature": {
+                                  "oneof": [
+                                    "temperature"
+                                  ]
+                                },
+                                "_maxDecodeSteps": {
+                                  "oneof": [
+                                    "maxDecodeSteps"
+                                  ]
+                                },
+                                "_topP": {
+                                  "oneof": [
+                                    "topP"
+                                  ]
+                                },
+                                "_topK": {
+                                  "oneof": [
+                                    "topK"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "temperature": {
+                                  "type": "float",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "maxDecodeSteps": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topP": {
+                                  "type": "float",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "topK": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             }
@@ -9788,6 +9960,10 @@
                                 "enableInteractionLogging": {
                                   "type": "bool",
                                   "id": 3
+                                },
+                                "enableConsentBasedRedaction": {
+                                  "type": "bool",
+                                  "id": 4
                                 }
                               }
                             }
@@ -11058,6 +11234,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "locked": {
+                              "type": "bool",
+                              "id": 30
                             }
                           },
                           "nested": {
@@ -11626,7 +11806,8 @@
                             "target": {
                               "oneof": [
                                 "targetPage",
-                                "targetFlow"
+                                "targetFlow",
+                                "targetPlaybook"
                               ]
                             }
                           },
@@ -11661,6 +11842,13 @@
                               "id": 3,
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "targetPlaybook": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
                               }
                             }
                           }
@@ -11972,6 +12160,10 @@
                                 "modelOutput": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             },
@@ -12000,6 +12192,10 @@
                                 "modelOutput": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             },
@@ -16284,6 +16480,7 @@
                                 "NO_MATCH": 4,
                                 "NO_INPUT": 5,
                                 "EVENT": 6,
+                                "KNOWLEDGE_CONNECTOR": 8,
                                 "PLAYBOOK": 9
                               }
                             }
@@ -20947,6 +21144,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "serviceDirectoryConfig": {
+                                  "type": "ServiceDirectoryConfig",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -21133,6 +21337,18 @@
                                         "(google.api.field_behavior)": "REQUIRED"
                                       }
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "ServiceDirectoryConfig": {
+                              "fields": {
+                                "service": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Service"
                                   }
                                 }
                               }

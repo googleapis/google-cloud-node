@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The Agent google.cloud.dialogflow.cx.v3.Agent  to list all
-   *  environments for. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>`.
+   *  environments for. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
