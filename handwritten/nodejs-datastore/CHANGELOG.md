@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [9.2.1](https://github.com/googleapis/nodejs-datastore/compare/v9.2.0...v9.2.1) (2024-11-06)
+
+
+### Bug Fixes
+
+* Address edge cases for excluding large properties when using save ([#1356](https://github.com/googleapis/nodejs-datastore/issues/1356)) ([ceaff7e](https://github.com/googleapis/nodejs-datastore/commit/ceaff7ef468413ff10e03e0b3ed923b4b5a37a08))
+* Create a release ([#1353](https://github.com/googleapis/nodejs-datastore/issues/1353)) ([536873e](https://github.com/googleapis/nodejs-datastore/commit/536873e24bacc9477f1a9c4c5403ed08d5c8cc93))
+
 ## [9.2.0](https://github.com/googleapis/nodejs-datastore/compare/v9.1.0...v9.2.0) (2024-10-30)
 
 
