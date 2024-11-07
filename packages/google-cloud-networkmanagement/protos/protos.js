@@ -19486,6 +19486,7 @@
                          * @property {string|null} [loadBalancerId] Endpoint loadBalancerId
                          * @property {google.cloud.networkmanagement.v1beta1.LoadBalancerType|null} [loadBalancerType] Endpoint loadBalancerType
                          * @property {string|null} [gkeMasterCluster] Endpoint gkeMasterCluster
+                         * @property {string|null} [fqdn] Endpoint fqdn
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {string|null} [redisInstance] Endpoint redisInstance
                          * @property {string|null} [redisCluster] Endpoint redisCluster
@@ -19575,6 +19576,14 @@
                          * @instance
                          */
                         Endpoint.prototype.gkeMasterCluster = "";
+    
+                        /**
+                         * Endpoint fqdn.
+                         * @member {string} fqdn
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.fqdn = "";
     
                         /**
                          * Endpoint cloudSqlInstance.
@@ -19742,6 +19751,8 @@
                                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.redisInstance);
                             if (message.redisCluster != null && Object.hasOwnProperty.call(message, "redisCluster"))
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.redisCluster);
+                            if (message.fqdn != null && Object.hasOwnProperty.call(message, "fqdn"))
+                                writer.uint32(/* id 19, wireType 2 =*/154).string(message.fqdn);
                             return writer;
                         };
     
@@ -19806,6 +19817,10 @@
                                     }
                                 case 7: {
                                         message.gkeMasterCluster = reader.string();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.fqdn = reader.string();
                                         break;
                                     }
                                 case 8: {
@@ -19932,6 +19947,9 @@
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
                                 if (!$util.isString(message.gkeMasterCluster))
                                     return "gkeMasterCluster: string expected";
+                            if (message.fqdn != null && message.hasOwnProperty("fqdn"))
+                                if (!$util.isString(message.fqdn))
+                                    return "fqdn: string expected";
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance"))
                                 if (!$util.isString(message.cloudSqlInstance))
                                     return "cloudSqlInstance: string expected";
@@ -20078,6 +20096,8 @@
                             }
                             if (object.gkeMasterCluster != null)
                                 message.gkeMasterCluster = String(object.gkeMasterCluster);
+                            if (object.fqdn != null)
+                                message.fqdn = String(object.fqdn);
                             if (object.cloudSqlInstance != null)
                                 message.cloudSqlInstance = String(object.cloudSqlInstance);
                             if (object.redisInstance != null)
@@ -20154,6 +20174,7 @@
                                 object.forwardingRule = "";
                                 object.redisInstance = "";
                                 object.redisCluster = "";
+                                object.fqdn = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 object.ipAddress = message.ipAddress;
@@ -20198,6 +20219,8 @@
                                 object.redisInstance = message.redisInstance;
                             if (message.redisCluster != null && message.hasOwnProperty("redisCluster"))
                                 object.redisCluster = message.redisCluster;
+                            if (message.fqdn != null && message.hasOwnProperty("fqdn"))
+                                object.fqdn = message.fqdn;
                             return object;
                         };
     
@@ -30668,6 +30691,7 @@
                                 case 80:
                                 case 81:
                                 case 82:
+                                case 83:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -31036,6 +31060,10 @@
                             case 82:
                                 message.cause = 82;
                                 break;
+                            case "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED":
+                            case 83:
+                                message.cause = 83;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -31194,6 +31222,7 @@
                          * @property {number} NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION=80 NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION value
                          * @property {number} NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION=81 NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION value
                          * @property {number} NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION=82 NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION value
+                         * @property {number} PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED=83 PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -31280,6 +31309,7 @@
                             values[valuesById[80] = "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION"] = 80;
                             values[valuesById[81] = "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION"] = 81;
                             values[valuesById[82] = "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION"] = 82;
+                            values[valuesById[83] = "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED"] = 83;
                             return values;
                         })();
     
@@ -31296,6 +31326,7 @@
                          * @property {string|null} [clusterNetworkUri] GKEMasterInfo clusterNetworkUri
                          * @property {string|null} [internalIp] GKEMasterInfo internalIp
                          * @property {string|null} [externalIp] GKEMasterInfo externalIp
+                         * @property {string|null} [dnsEndpoint] GKEMasterInfo dnsEndpoint
                          */
     
                         /**
@@ -31346,6 +31377,14 @@
                         GKEMasterInfo.prototype.externalIp = "";
     
                         /**
+                         * GKEMasterInfo dnsEndpoint.
+                         * @member {string} dnsEndpoint
+                         * @memberof google.cloud.networkmanagement.v1beta1.GKEMasterInfo
+                         * @instance
+                         */
+                        GKEMasterInfo.prototype.dnsEndpoint = "";
+    
+                        /**
                          * Creates a new GKEMasterInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.GKEMasterInfo
@@ -31377,6 +31416,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.internalIp);
                             if (message.externalIp != null && Object.hasOwnProperty.call(message, "externalIp"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.externalIp);
+                            if (message.dnsEndpoint != null && Object.hasOwnProperty.call(message, "dnsEndpoint"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.dnsEndpoint);
                             return writer;
                         };
     
@@ -31427,6 +31468,10 @@
                                         message.externalIp = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.dnsEndpoint = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31474,6 +31519,9 @@
                             if (message.externalIp != null && message.hasOwnProperty("externalIp"))
                                 if (!$util.isString(message.externalIp))
                                     return "externalIp: string expected";
+                            if (message.dnsEndpoint != null && message.hasOwnProperty("dnsEndpoint"))
+                                if (!$util.isString(message.dnsEndpoint))
+                                    return "dnsEndpoint: string expected";
                             return null;
                         };
     
@@ -31497,6 +31545,8 @@
                                 message.internalIp = String(object.internalIp);
                             if (object.externalIp != null)
                                 message.externalIp = String(object.externalIp);
+                            if (object.dnsEndpoint != null)
+                                message.dnsEndpoint = String(object.dnsEndpoint);
                             return message;
                         };
     
@@ -31518,6 +31568,7 @@
                                 object.clusterNetworkUri = "";
                                 object.internalIp = "";
                                 object.externalIp = "";
+                                object.dnsEndpoint = "";
                             }
                             if (message.clusterUri != null && message.hasOwnProperty("clusterUri"))
                                 object.clusterUri = message.clusterUri;
@@ -31527,6 +31578,8 @@
                                 object.internalIp = message.internalIp;
                             if (message.externalIp != null && message.hasOwnProperty("externalIp"))
                                 object.externalIp = message.externalIp;
+                            if (message.dnsEndpoint != null && message.hasOwnProperty("dnsEndpoint"))
+                                object.dnsEndpoint = message.dnsEndpoint;
                             return object;
                         };
     
