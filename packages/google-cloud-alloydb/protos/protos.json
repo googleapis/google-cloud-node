@@ -3812,6 +3812,115 @@
                     "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
                   "nested": {
+                    "CloudSQLBackupRunSource": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupRunId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SqlResult": {
+                      "fields": {
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "SqlResultColumn",
+                          "id": 1
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "SqlResultRow",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlResultColumn": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlResultRow": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "SqlResultValue",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SqlResultValue": {
+                      "oneofs": {
+                        "_value": {
+                          "oneof": [
+                            "value"
+                          ]
+                        },
+                        "_nullValue": {
+                          "oneof": [
+                            "nullValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nullValue": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "GeminiClusterConfig": {
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GeminiInstanceConfig": {
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "InstanceView": {
                       "values": {
                         "INSTANCE_VIEW_UNSPECIFIED": 0,
@@ -3836,7 +3945,15 @@
                         "DATABASE_VERSION_UNSPECIFIED": 0,
                         "POSTGRES_13": 1,
                         "POSTGRES_14": 2,
-                        "POSTGRES_15": 3
+                        "POSTGRES_15": 3,
+                        "POSTGRES_16": 4
+                      }
+                    },
+                    "SubscriptionType": {
+                      "values": {
+                        "SUBSCRIPTION_TYPE_UNSPECIFIED": 0,
+                        "STANDARD": 1,
+                        "TRIAL": 2
                       }
                     },
                     "UserPassword": {
@@ -4157,17 +4274,54 @@
                         }
                       }
                     },
+                    "MaintenanceUpdatePolicy": {
+                      "fields": {
+                        "maintenanceWindows": {
+                          "rule": "repeated",
+                          "type": "MaintenanceWindow",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "MaintenanceWindow": {
+                          "fields": {
+                            "day": {
+                              "type": "google.type.DayOfWeek",
+                              "id": 1
+                            },
+                            "startTime": {
+                              "type": "google.type.TimeOfDay",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MaintenanceSchedule": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Cluster": {
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/Cluster",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}",
+                        "(google.api.resource).plural": "clusters",
+                        "(google.api.resource).singular": "cluster",
                         "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
                       },
                       "oneofs": {
                         "source": {
                           "oneof": [
                             "backupSource",
-                            "migrationSource"
+                            "migrationSource",
+                            "cloudsqlBackupRunSource"
                           ]
                         }
                       },
@@ -4182,6 +4336,13 @@
                         "migrationSource": {
                           "type": "MigrationSource",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudsqlBackupRunSource": {
+                          "type": "CloudSQLBackupRunSource",
+                          "id": 42,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -4360,6 +4521,49 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "maintenanceUpdatePolicy": {
+                          "type": "MaintenanceUpdatePolicy",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maintenanceSchedule": {
+                          "type": "MaintenanceSchedule",
+                          "id": 37,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "geminiConfig": {
+                          "type": "GeminiClusterConfig",
+                          "id": 36,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "subscriptionType": {
+                          "type": "SubscriptionType",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "trialMetadata": {
+                          "type": "TrialMetadata",
+                          "id": 39,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4410,6 +4614,33 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "serviceOwnedProjectNumber": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "TrialMetadata": {
+                          "fields": {
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            },
+                            "upgradeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
+                            },
+                            "graceEndTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
                             }
                           }
                         },
@@ -4440,6 +4671,8 @@
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/Instance",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}",
+                        "(google.api.resource).plural": "instances",
+                        "(google.api.resource).singular": "instance",
                         "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
                       },
                       "fields": {
@@ -4537,6 +4770,10 @@
                           "type": "QueryInsightsInstanceConfig",
                           "id": 21
                         },
+                        "observabilityConfig": {
+                          "type": "ObservabilityInstanceConfig",
+                          "id": 26
+                        },
                         "readPoolConfig": {
                           "type": "ReadPoolConfig",
                           "id": 14
@@ -4552,6 +4789,7 @@
                           "type": "string",
                           "id": 27,
                           "options": {
+                            "(google.api.field_info).format": "IPV4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -4608,6 +4846,22 @@
                           "id": 29,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "geminiConfig": {
+                          "type": "GeminiInstanceConfig",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outboundPublicIpAddresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -4686,6 +4940,121 @@
                             }
                           }
                         },
+                        "ObservabilityInstanceConfig": {
+                          "oneofs": {
+                            "_enabled": {
+                              "oneof": [
+                                "enabled"
+                              ]
+                            },
+                            "_preserveComments": {
+                              "oneof": [
+                                "preserveComments"
+                              ]
+                            },
+                            "_trackWaitEvents": {
+                              "oneof": [
+                                "trackWaitEvents"
+                              ]
+                            },
+                            "_trackWaitEventTypes": {
+                              "oneof": [
+                                "trackWaitEventTypes"
+                              ]
+                            },
+                            "_maxQueryStringLength": {
+                              "oneof": [
+                                "maxQueryStringLength"
+                              ]
+                            },
+                            "_recordApplicationTags": {
+                              "oneof": [
+                                "recordApplicationTags"
+                              ]
+                            },
+                            "_queryPlansPerMinute": {
+                              "oneof": [
+                                "queryPlansPerMinute"
+                              ]
+                            },
+                            "_trackActiveQueries": {
+                              "oneof": [
+                                "trackActiveQueries"
+                              ]
+                            },
+                            "_trackClientAddress": {
+                              "oneof": [
+                                "trackClientAddress"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "preserveComments": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trackWaitEvents": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trackWaitEventTypes": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxQueryStringLength": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "int32",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trackActiveQueries": {
+                              "type": "bool",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trackClientAddress": {
+                              "type": "bool",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "ReadPoolConfig": {
                           "fields": {
                             "nodeCount": {
@@ -4731,14 +5100,9 @@
                         },
                         "PscInterfaceConfig": {
                           "fields": {
-                            "consumerEndpointIps": {
-                              "rule": "repeated",
+                            "networkAttachmentResource": {
                               "type": "string",
                               "id": 1
-                            },
-                            "networkAttachment": {
-                              "type": "string",
-                              "id": 2
                             }
                           }
                         },
@@ -4759,33 +5123,17 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "allowedConsumerNetworks": {
-                              "rule": "repeated",
+                            "pscDnsName": {
                               "type": "string",
-                              "id": 3,
+                              "id": 7,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
                             "pscInterfaceConfigs": {
                               "rule": "repeated",
                               "type": "PscInterfaceConfig",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "outgoingServiceAttachmentLinks": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "pscEnabled": {
-                              "type": "bool",
-                              "id": 6,
+                              "id": 8,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -4805,6 +5153,13 @@
                             "enablePublicIp": {
                               "type": "bool",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableOutboundPublicIp": {
+                              "type": "bool",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -4857,7 +5212,9 @@
                     "ConnectionInfo": {
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/ConnectionInfo",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}/connectionInfo"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}/connectionInfo",
+                        "(google.api.resource).plural": "connectionInfos",
+                        "(google.api.resource).singular": "connectionInfo"
                       },
                       "fields": {
                         "name": {
@@ -4908,6 +5265,8 @@
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/Backup",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/backups/{backup}",
+                        "(google.api.resource).plural": "backups",
+                        "(google.api.resource).singular": "backup",
                         "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
                       },
                       "fields": {
@@ -5056,6 +5415,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -5099,7 +5466,9 @@
                     "SupportedDatabaseFlag": {
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/SupportedDatabaseFlag",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/flags/{flag}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/flags/{flag}",
+                        "(google.api.resource).plural": "supportedDatabaseFlags",
+                        "(google.api.resource).singular": "supportedDatabaseFlag"
                       },
                       "oneofs": {
                         "restrictions": {
@@ -5181,6 +5550,8 @@
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/User",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/users/{user}",
+                        "(google.api.resource).plural": "users",
+                        "(google.api.resource).singular": "user",
                         "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
                       },
                       "fields": {
@@ -5211,6 +5582,13 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "keepExtraRoles": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         }
                       },
@@ -5354,6 +5732,34 @@
                             }
                           ]
                         },
+                        "UpgradeCluster": {
+                          "requestType": "UpgradeClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{name=projects/*/locations/*/clusters/*}:upgrade",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,version",
+                            "(google.longrunning.operation_info).response_type": "UpgradeClusterResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{name=projects/*/locations/*/clusters/*}:upgrade",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,version"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UpgradeClusterResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteCluster": {
                           "requestType": "DeleteClusterRequest",
                           "responseType": "google.longrunning.Operation",
@@ -5394,6 +5800,34 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1alpha/{name=projects/*/locations/*/clusters/*}:promote",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SwitchoverCluster": {
+                          "requestType": "SwitchoverClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/clusters/*}:switchover",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/clusters/*}:switchover",
                                 "body": "*"
                               }
                             },
@@ -5711,6 +6145,26 @@
                                 "response_type": "Instance",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "ExecuteSql": {
+                          "requestType": "ExecuteSqlRequest",
+                          "responseType": "ExecuteSqlResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{instance=projects/*/locations/*/clusters/*/instances/*}:executeSql",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "instance,database,user,sql_statement,password"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{instance=projects/*/locations/*/clusters/*/instances/*}:executeSql",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance,database,user,sql_statement,password"
                             }
                           ]
                         },
@@ -6195,6 +6649,152 @@
                         }
                       }
                     },
+                    "UpgradeClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "version": {
+                          "type": "DatabaseVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeClusterResponse": {
+                      "fields": {
+                        "status": {
+                          "type": "Status",
+                          "id": 1
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clusterUpgradeDetails": {
+                          "rule": "repeated",
+                          "type": "ClusterUpgradeDetails",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "StageInfo": {
+                          "fields": {
+                            "stage": {
+                              "type": "Stage",
+                              "id": 1
+                            },
+                            "status": {
+                              "type": "Status",
+                              "id": 2
+                            },
+                            "logsUrl": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "InstanceUpgradeDetails": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "upgradeStatus": {
+                              "type": "Status",
+                              "id": 2
+                            },
+                            "instanceType": {
+                              "type": "Instance.InstanceType",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ClusterUpgradeDetails": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "upgradeStatus": {
+                              "type": "Status",
+                              "id": 2
+                            },
+                            "clusterType": {
+                              "type": "Cluster.ClusterType",
+                              "id": 3
+                            },
+                            "databaseVersion": {
+                              "type": "DatabaseVersion",
+                              "id": 4
+                            },
+                            "stageInfo": {
+                              "rule": "repeated",
+                              "type": "StageInfo",
+                              "id": 5
+                            },
+                            "instanceUpgradeDetails": {
+                              "rule": "repeated",
+                              "type": "InstanceUpgradeDetails",
+                              "id": 6
+                            }
+                          }
+                        },
+                        "Status": {
+                          "values": {
+                            "STATUS_UNSPECIFIED": 0,
+                            "NOT_STARTED": 4,
+                            "IN_PROGRESS": 5,
+                            "SUCCESS": 1,
+                            "FAILED": 2,
+                            "PARTIAL_SUCCESS": 3,
+                            "CANCEL_IN_PROGRESS": 6,
+                            "CANCELLED": 7
+                          }
+                        },
+                        "Stage": {
+                          "values": {
+                            "STAGE_UNSPECIFIED": 0,
+                            "ALLOYDB_PRECHECK": 1,
+                            "PG_UPGRADE_CHECK": 2,
+                            "PREPARE_FOR_UPGRADE": 5,
+                            "PRIMARY_INSTANCE_UPGRADE": 3,
+                            "READ_POOL_INSTANCES_UPGRADE": 4,
+                            "ROLLBACK": 6,
+                            "CLEANUP": 7
+                          }
+                        }
+                      }
+                    },
                     "DeleteClusterRequest": {
                       "fields": {
                         "name": {
@@ -6229,6 +6829,32 @@
                         "force": {
                           "type": "bool",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SwitchoverClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -6731,6 +7357,104 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "nodeIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExecuteSqlRequest": {
+                      "oneofs": {
+                        "userCredential": {
+                          "oneof": [
+                            "password"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "password": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Instance"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "user": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sqlStatement": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExecuteSqlResponse": {
+                      "fields": {
+                        "sqlResults": {
+                          "rule": "repeated",
+                          "type": "SqlResult",
+                          "id": 1
+                        },
+                        "metadata": {
+                          "type": "ExecuteSqlMetadata",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExecuteSqlMetadata": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "partialResult": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "sqlStatementExecutionDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "status": {
+                          "type": "Status",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Status": {
+                          "values": {
+                            "STATUS_UNSPECIFIED": 0,
+                            "OK": 1,
+                            "PARTIAL": 2,
+                            "ERROR": 3
+                          }
                         }
                       }
                     },
@@ -7035,7 +7759,9 @@
                       "oneofs": {
                         "requestSpecific": {
                           "oneof": [
-                            "batchCreateInstancesMetadata"
+                            "batchCreateInstancesMetadata",
+                            "promoteClusterStatus",
+                            "upgradeClusterStatus"
                           ]
                         }
                       },
@@ -7043,6 +7769,20 @@
                         "batchCreateInstancesMetadata": {
                           "type": "BatchCreateInstancesMetadata",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "promoteClusterStatus": {
+                          "type": "PromoteClusterStatus",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "upgradeClusterStatus": {
+                          "type": "UpgradeClusterStatus",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -7094,6 +7834,107 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PromoteClusterStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PROMOTE_CLUSTER_AVAILABLE_FOR_READ": 1,
+                            "PROMOTE_CLUSTER_AVAILABLE_FOR_WRITE": 2,
+                            "PROMOTE_CLUSTER_COMPLETED": 3
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeClusterStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "UpgradeClusterResponse.Status",
+                          "id": 1
+                        },
+                        "cancellable": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "sourceVersion": {
+                          "type": "DatabaseVersion",
+                          "id": 3
+                        },
+                        "targetVersion": {
+                          "type": "DatabaseVersion",
+                          "id": 4
+                        },
+                        "stages": {
+                          "rule": "repeated",
+                          "type": "StageStatus",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "StageStatus": {
+                          "oneofs": {
+                            "stageSpecificStatus": {
+                              "oneof": [
+                                "readPoolInstancesUpgrade"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "readPoolInstancesUpgrade": {
+                              "type": "ReadPoolInstancesUpgradeStageStatus",
+                              "id": 11
+                            },
+                            "stage": {
+                              "type": "UpgradeClusterResponse.Stage",
+                              "id": 1
+                            },
+                            "state": {
+                              "type": "UpgradeClusterResponse.Status",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ReadPoolInstancesUpgradeStageStatus": {
+                          "fields": {
+                            "upgradeStats": {
+                              "type": "Stats",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Stats": {
+                              "fields": {
+                                "notStarted": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "ongoing": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "success": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
+                                "failed": {
+                                  "type": "int32",
+                                  "id": 4
+                                }
+                              }
+                            }
                           }
                         }
                       }
