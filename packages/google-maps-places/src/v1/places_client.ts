@@ -629,6 +629,14 @@ export class PlacesClient {
    *   Optional. Additional parameters for routing to results.
    * @param {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} [request.searchAlongRouteParameters]
    *   Optional. Additional parameters proto for searching along a route.
+   * @param {boolean} [request.includePureServiceAreaBusinesses]
+   *   Optional. Include pure service area businesses if the field is set to true.
+   *   Pure service area business is a business that visits or delivers to
+   *   customers directly but does not serve customers at their business address.
+   *   For example, businesses like cleaning services or plumbers. Those
+   *   businesses do not have a physical address or location on Google Maps.
+   *   Places will not return fields including `location`, `plus_code`, and other
+   *   location related fields for these businesses.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1026,6 +1034,14 @@ export class PlacesClient {
    *   * Be sure to pass a unique session token for each new session. Using the
    *     same token for more than one session will result in each request being
    *     billed individually.
+   * @param {boolean} [request.includePureServiceAreaBusinesses]
+   *   Optional. Include pure service area businesses if the field is set to true.
+   *   Pure service area business is a business that visits or delivers to
+   *   customers directly but does not serve customers at their business address.
+   *   For example, businesses like cleaning services or plumbers. Those
+   *   businesses do not have a physical address or location on Google Maps.
+   *   Places will not return fields including `location`, `plus_code`, and other
+   *   location related fields for these businesses.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

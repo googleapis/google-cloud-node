@@ -2561,6 +2561,15 @@ export namespace google {
 
                     /** Place areaSummary */
                     areaSummary?: (google.maps.places.v1.Place.IAreaSummary|null);
+
+                    /** Place containingPlaces */
+                    containingPlaces?: (google.maps.places.v1.Place.IContainingPlace[]|null);
+
+                    /** Place pureServiceAreaBusiness */
+                    pureServiceAreaBusiness?: (boolean|null);
+
+                    /** Place priceRange */
+                    priceRange?: (google.maps.places.v1.IPriceRange|null);
                 }
 
                 /** Represents a Place. */
@@ -2761,6 +2770,15 @@ export namespace google {
                     /** Place areaSummary. */
                     public areaSummary?: (google.maps.places.v1.Place.IAreaSummary|null);
 
+                    /** Place containingPlaces. */
+                    public containingPlaces: google.maps.places.v1.Place.IContainingPlace[];
+
+                    /** Place pureServiceAreaBusiness. */
+                    public pureServiceAreaBusiness?: (boolean|null);
+
+                    /** Place priceRange. */
+                    public priceRange?: (google.maps.places.v1.IPriceRange|null);
+
                     /** Place _utcOffsetMinutes. */
                     public _utcOffsetMinutes?: "utcOffsetMinutes";
 
@@ -2838,6 +2856,9 @@ export namespace google {
 
                     /** Place _accessibilityOptions. */
                     public _accessibilityOptions?: "accessibilityOptions";
+
+                    /** Place _pureServiceAreaBusiness. */
+                    public _pureServiceAreaBusiness?: "pureServiceAreaBusiness";
 
                     /**
                      * Creates a new Place instance using the specified properties.
@@ -3154,6 +3175,12 @@ export namespace google {
 
                         /** OpeningHours specialDays */
                         specialDays?: (google.maps.places.v1.Place.OpeningHours.ISpecialDay[]|null);
+
+                        /** OpeningHours nextOpenTime */
+                        nextOpenTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OpeningHours nextCloseTime */
+                        nextCloseTime?: (google.protobuf.ITimestamp|null);
                     }
 
                     /** Represents an OpeningHours. */
@@ -3179,6 +3206,12 @@ export namespace google {
 
                         /** OpeningHours specialDays. */
                         public specialDays: google.maps.places.v1.Place.OpeningHours.ISpecialDay[];
+
+                        /** OpeningHours nextOpenTime. */
+                        public nextOpenTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OpeningHours nextCloseTime. */
+                        public nextCloseTime?: (google.protobuf.ITimestamp|null);
 
                         /** OpeningHours _openNow. */
                         public _openNow?: "openNow";
@@ -4442,6 +4475,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a ContainingPlace. */
+                    interface IContainingPlace {
+
+                        /** ContainingPlace name */
+                        name?: (string|null);
+
+                        /** ContainingPlace id */
+                        id?: (string|null);
+                    }
+
+                    /** Represents a ContainingPlace. */
+                    class ContainingPlace implements IContainingPlace {
+
+                        /**
+                         * Constructs a new ContainingPlace.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.IContainingPlace);
+
+                        /** ContainingPlace name. */
+                        public name: string;
+
+                        /** ContainingPlace id. */
+                        public id: string;
+
+                        /**
+                         * Creates a new ContainingPlace instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ContainingPlace instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.IContainingPlace): google.maps.places.v1.Place.ContainingPlace;
+
+                        /**
+                         * Encodes the specified ContainingPlace message. Does not implicitly {@link google.maps.places.v1.Place.ContainingPlace.verify|verify} messages.
+                         * @param message ContainingPlace message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.IContainingPlace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ContainingPlace message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ContainingPlace.verify|verify} messages.
+                         * @param message ContainingPlace message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IContainingPlace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ContainingPlace message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ContainingPlace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.ContainingPlace;
+
+                        /**
+                         * Decodes a ContainingPlace message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ContainingPlace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.ContainingPlace;
+
+                        /**
+                         * Verifies a ContainingPlace message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ContainingPlace message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ContainingPlace
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.ContainingPlace;
+
+                        /**
+                         * Creates a plain object from a ContainingPlace message. Also converts values to other types if specified.
+                         * @param message ContainingPlace
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.ContainingPlace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ContainingPlace to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ContainingPlace
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** PriceLevel enum. */
@@ -4452,6 +4588,109 @@ export namespace google {
                     PRICE_LEVEL_MODERATE = 3,
                     PRICE_LEVEL_EXPENSIVE = 4,
                     PRICE_LEVEL_VERY_EXPENSIVE = 5
+                }
+
+                /** Properties of a PriceRange. */
+                interface IPriceRange {
+
+                    /** PriceRange startPrice */
+                    startPrice?: (google.type.IMoney|null);
+
+                    /** PriceRange endPrice */
+                    endPrice?: (google.type.IMoney|null);
+                }
+
+                /** Represents a PriceRange. */
+                class PriceRange implements IPriceRange {
+
+                    /**
+                     * Constructs a new PriceRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IPriceRange);
+
+                    /** PriceRange startPrice. */
+                    public startPrice?: (google.type.IMoney|null);
+
+                    /** PriceRange endPrice. */
+                    public endPrice?: (google.type.IMoney|null);
+
+                    /**
+                     * Creates a new PriceRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PriceRange instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IPriceRange): google.maps.places.v1.PriceRange;
+
+                    /**
+                     * Encodes the specified PriceRange message. Does not implicitly {@link google.maps.places.v1.PriceRange.verify|verify} messages.
+                     * @param message PriceRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IPriceRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PriceRange message, length delimited. Does not implicitly {@link google.maps.places.v1.PriceRange.verify|verify} messages.
+                     * @param message PriceRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IPriceRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PriceRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PriceRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.PriceRange;
+
+                    /**
+                     * Decodes a PriceRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PriceRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.PriceRange;
+
+                    /**
+                     * Verifies a PriceRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PriceRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PriceRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.PriceRange;
+
+                    /**
+                     * Creates a plain object from a PriceRange message. Also converts values to other types if specified.
+                     * @param message PriceRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.PriceRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PriceRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PriceRange
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a Places */
@@ -5109,6 +5348,9 @@ export namespace google {
 
                     /** SearchTextRequest searchAlongRouteParameters */
                     searchAlongRouteParameters?: (google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters|null);
+
+                    /** SearchTextRequest includePureServiceAreaBusinesses */
+                    includePureServiceAreaBusinesses?: (boolean|null);
                 }
 
                 /** Represents a SearchTextRequest. */
@@ -5164,6 +5406,9 @@ export namespace google {
 
                     /** SearchTextRequest searchAlongRouteParameters. */
                     public searchAlongRouteParameters?: (google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters|null);
+
+                    /** SearchTextRequest includePureServiceAreaBusinesses. */
+                    public includePureServiceAreaBusinesses: boolean;
 
                     /**
                      * Creates a new SearchTextRequest instance using the specified properties.
@@ -6136,6 +6381,9 @@ export namespace google {
 
                     /** AutocompletePlacesRequest sessionToken */
                     sessionToken?: (string|null);
+
+                    /** AutocompletePlacesRequest includePureServiceAreaBusinesses */
+                    includePureServiceAreaBusinesses?: (boolean|null);
                 }
 
                 /** Represents an AutocompletePlacesRequest. */
@@ -6179,6 +6427,9 @@ export namespace google {
 
                     /** AutocompletePlacesRequest sessionToken. */
                     public sessionToken: string;
+
+                    /** AutocompletePlacesRequest includePureServiceAreaBusinesses. */
+                    public includePureServiceAreaBusinesses: boolean;
 
                     /**
                      * Creates a new AutocompletePlacesRequest instance using the specified properties.
@@ -7449,6 +7700,9 @@ export namespace google {
 
                     /** RoutingSummary legs */
                     legs?: (google.maps.places.v1.RoutingSummary.ILeg[]|null);
+
+                    /** RoutingSummary directionsUri */
+                    directionsUri?: (string|null);
                 }
 
                 /** Represents a RoutingSummary. */
@@ -7462,6 +7716,9 @@ export namespace google {
 
                     /** RoutingSummary legs. */
                     public legs: google.maps.places.v1.RoutingSummary.ILeg[];
+
+                    /** RoutingSummary directionsUri. */
+                    public directionsUri: string;
 
                     /**
                      * Creates a new RoutingSummary instance using the specified properties.

@@ -98,7 +98,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 137,
+                    "end": 147,
                     "type": "FULL"
                 }
             ],
@@ -166,6 +166,10 @@
                     {
                         "name": "search_along_route_parameters",
                         "type": ".google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters"
+                    },
+                    {
+                        "name": "include_pure_service_area_businesses",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.maps.places.v1.SearchTextResponse",
@@ -298,7 +302,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 143,
+                    "end": 153,
                     "type": "FULL"
                 }
             ],
@@ -350,6 +354,10 @@
                     {
                         "name": "session_token",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_pure_service_area_businesses",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.maps.places.v1.AutocompletePlacesResponse",

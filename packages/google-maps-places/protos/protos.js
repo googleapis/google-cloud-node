@@ -5907,6 +5907,9 @@
                          * @property {google.maps.places.v1.IEVChargeOptions|null} [evChargeOptions] Place evChargeOptions
                          * @property {google.maps.places.v1.Place.IGenerativeSummary|null} [generativeSummary] Place generativeSummary
                          * @property {google.maps.places.v1.Place.IAreaSummary|null} [areaSummary] Place areaSummary
+                         * @property {Array.<google.maps.places.v1.Place.IContainingPlace>|null} [containingPlaces] Place containingPlaces
+                         * @property {boolean|null} [pureServiceAreaBusiness] Place pureServiceAreaBusiness
+                         * @property {google.maps.places.v1.IPriceRange|null} [priceRange] Place priceRange
                          */
     
                         /**
@@ -5926,6 +5929,7 @@
                             this.currentSecondaryOpeningHours = [];
                             this.regularSecondaryOpeningHours = [];
                             this.subDestinations = [];
+                            this.containingPlaces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6436,6 +6440,30 @@
                          */
                         Place.prototype.areaSummary = null;
     
+                        /**
+                         * Place containingPlaces.
+                         * @member {Array.<google.maps.places.v1.Place.IContainingPlace>} containingPlaces
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.containingPlaces = $util.emptyArray;
+    
+                        /**
+                         * Place pureServiceAreaBusiness.
+                         * @member {boolean|null|undefined} pureServiceAreaBusiness
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.pureServiceAreaBusiness = null;
+    
+                        /**
+                         * Place priceRange.
+                         * @member {google.maps.places.v1.IPriceRange|null|undefined} priceRange
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.priceRange = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6726,6 +6754,17 @@
                         });
     
                         /**
+                         * Place _pureServiceAreaBusiness.
+                         * @member {"pureServiceAreaBusiness"|undefined} _pureServiceAreaBusiness
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Object.defineProperty(Place.prototype, "_pureServiceAreaBusiness", {
+                            get: $util.oneOfGetter($oneOfFields = ["pureServiceAreaBusiness"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Place instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.Place
@@ -6883,6 +6922,13 @@
                                 $root.google.maps.places.v1.Place.GenerativeSummary.encode(message.generativeSummary, writer.uint32(/* id 80, wireType 2 =*/642).fork()).ldelim();
                             if (message.areaSummary != null && Object.hasOwnProperty.call(message, "areaSummary"))
                                 $root.google.maps.places.v1.Place.AreaSummary.encode(message.areaSummary, writer.uint32(/* id 81, wireType 2 =*/650).fork()).ldelim();
+                            if (message.containingPlaces != null && message.containingPlaces.length)
+                                for (var i = 0; i < message.containingPlaces.length; ++i)
+                                    $root.google.maps.places.v1.Place.ContainingPlace.encode(message.containingPlaces[i], writer.uint32(/* id 82, wireType 2 =*/658).fork()).ldelim();
+                            if (message.pureServiceAreaBusiness != null && Object.hasOwnProperty.call(message, "pureServiceAreaBusiness"))
+                                writer.uint32(/* id 83, wireType 0 =*/664).bool(message.pureServiceAreaBusiness);
+                            if (message.priceRange != null && Object.hasOwnProperty.call(message, "priceRange"))
+                                $root.google.maps.places.v1.PriceRange.encode(message.priceRange, writer.uint32(/* id 86, wireType 2 =*/690).fork()).ldelim();
                             return writer;
                         };
     
@@ -7183,6 +7229,20 @@
                                     }
                                 case 81: {
                                         message.areaSummary = $root.google.maps.places.v1.Place.AreaSummary.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 82: {
+                                        if (!(message.containingPlaces && message.containingPlaces.length))
+                                            message.containingPlaces = [];
+                                        message.containingPlaces.push($root.google.maps.places.v1.Place.ContainingPlace.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 83: {
+                                        message.pureServiceAreaBusiness = reader.bool();
+                                        break;
+                                    }
+                                case 86: {
+                                        message.priceRange = $root.google.maps.places.v1.PriceRange.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -7555,6 +7615,25 @@
                                 if (error)
                                     return "areaSummary." + error;
                             }
+                            if (message.containingPlaces != null && message.hasOwnProperty("containingPlaces")) {
+                                if (!Array.isArray(message.containingPlaces))
+                                    return "containingPlaces: array expected";
+                                for (var i = 0; i < message.containingPlaces.length; ++i) {
+                                    var error = $root.google.maps.places.v1.Place.ContainingPlace.verify(message.containingPlaces[i]);
+                                    if (error)
+                                        return "containingPlaces." + error;
+                                }
+                            }
+                            if (message.pureServiceAreaBusiness != null && message.hasOwnProperty("pureServiceAreaBusiness")) {
+                                properties._pureServiceAreaBusiness = 1;
+                                if (typeof message.pureServiceAreaBusiness !== "boolean")
+                                    return "pureServiceAreaBusiness: boolean expected";
+                            }
+                            if (message.priceRange != null && message.hasOwnProperty("priceRange")) {
+                                var error = $root.google.maps.places.v1.PriceRange.verify(message.priceRange);
+                                if (error)
+                                    return "priceRange." + error;
+                            }
                             return null;
                         };
     
@@ -7854,6 +7933,23 @@
                                     throw TypeError(".google.maps.places.v1.Place.areaSummary: object expected");
                                 message.areaSummary = $root.google.maps.places.v1.Place.AreaSummary.fromObject(object.areaSummary);
                             }
+                            if (object.containingPlaces) {
+                                if (!Array.isArray(object.containingPlaces))
+                                    throw TypeError(".google.maps.places.v1.Place.containingPlaces: array expected");
+                                message.containingPlaces = [];
+                                for (var i = 0; i < object.containingPlaces.length; ++i) {
+                                    if (typeof object.containingPlaces[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.Place.containingPlaces: object expected");
+                                    message.containingPlaces[i] = $root.google.maps.places.v1.Place.ContainingPlace.fromObject(object.containingPlaces[i]);
+                                }
+                            }
+                            if (object.pureServiceAreaBusiness != null)
+                                message.pureServiceAreaBusiness = Boolean(object.pureServiceAreaBusiness);
+                            if (object.priceRange != null) {
+                                if (typeof object.priceRange !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.priceRange: object expected");
+                                message.priceRange = $root.google.maps.places.v1.PriceRange.fromObject(object.priceRange);
+                            }
                             return message;
                         };
     
@@ -7879,6 +7975,7 @@
                                 object.reviews = [];
                                 object.photos = [];
                                 object.subDestinations = [];
+                                object.containingPlaces = [];
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -7910,6 +8007,7 @@
                                 object.evChargeOptions = null;
                                 object.generativeSummary = null;
                                 object.areaSummary = null;
+                                object.priceRange = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8139,6 +8237,18 @@
                                 object.generativeSummary = $root.google.maps.places.v1.Place.GenerativeSummary.toObject(message.generativeSummary, options);
                             if (message.areaSummary != null && message.hasOwnProperty("areaSummary"))
                                 object.areaSummary = $root.google.maps.places.v1.Place.AreaSummary.toObject(message.areaSummary, options);
+                            if (message.containingPlaces && message.containingPlaces.length) {
+                                object.containingPlaces = [];
+                                for (var j = 0; j < message.containingPlaces.length; ++j)
+                                    object.containingPlaces[j] = $root.google.maps.places.v1.Place.ContainingPlace.toObject(message.containingPlaces[j], options);
+                            }
+                            if (message.pureServiceAreaBusiness != null && message.hasOwnProperty("pureServiceAreaBusiness")) {
+                                object.pureServiceAreaBusiness = message.pureServiceAreaBusiness;
+                                if (options.oneofs)
+                                    object._pureServiceAreaBusiness = "pureServiceAreaBusiness";
+                            }
+                            if (message.priceRange != null && message.hasOwnProperty("priceRange"))
+                                object.priceRange = $root.google.maps.places.v1.PriceRange.toObject(message.priceRange, options);
                             return object;
                         };
     
@@ -8696,6 +8806,8 @@
                              * @property {Array.<string>|null} [weekdayDescriptions] OpeningHours weekdayDescriptions
                              * @property {google.maps.places.v1.Place.OpeningHours.SecondaryHoursType|null} [secondaryHoursType] OpeningHours secondaryHoursType
                              * @property {Array.<google.maps.places.v1.Place.OpeningHours.ISpecialDay>|null} [specialDays] OpeningHours specialDays
+                             * @property {google.protobuf.ITimestamp|null} [nextOpenTime] OpeningHours nextOpenTime
+                             * @property {google.protobuf.ITimestamp|null} [nextCloseTime] OpeningHours nextCloseTime
                              */
     
                             /**
@@ -8756,6 +8868,22 @@
                              */
                             OpeningHours.prototype.specialDays = $util.emptyArray;
     
+                            /**
+                             * OpeningHours nextOpenTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} nextOpenTime
+                             * @memberof google.maps.places.v1.Place.OpeningHours
+                             * @instance
+                             */
+                            OpeningHours.prototype.nextOpenTime = null;
+    
+                            /**
+                             * OpeningHours nextCloseTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} nextCloseTime
+                             * @memberof google.maps.places.v1.Place.OpeningHours
+                             * @instance
+                             */
+                            OpeningHours.prototype.nextCloseTime = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -8807,6 +8935,10 @@
                                 if (message.specialDays != null && message.specialDays.length)
                                     for (var i = 0; i < message.specialDays.length; ++i)
                                         $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.encode(message.specialDays[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.nextOpenTime != null && Object.hasOwnProperty.call(message, "nextOpenTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.nextOpenTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.nextCloseTime != null && Object.hasOwnProperty.call(message, "nextCloseTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.nextCloseTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -8865,6 +8997,14 @@
                                             if (!(message.specialDays && message.specialDays.length))
                                                 message.specialDays = [];
                                             message.specialDays.push($root.google.maps.places.v1.Place.OpeningHours.SpecialDay.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.nextOpenTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.nextCloseTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -8952,6 +9092,16 @@
                                         if (error)
                                             return "specialDays." + error;
                                     }
+                                }
+                                if (message.nextOpenTime != null && message.hasOwnProperty("nextOpenTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.nextOpenTime);
+                                    if (error)
+                                        return "nextOpenTime." + error;
+                                }
+                                if (message.nextCloseTime != null && message.hasOwnProperty("nextCloseTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.nextCloseTime);
+                                    if (error)
+                                        return "nextCloseTime." + error;
                                 }
                                 return null;
                             };
@@ -9061,6 +9211,16 @@
                                         message.specialDays[i] = $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.fromObject(object.specialDays[i]);
                                     }
                                 }
+                                if (object.nextOpenTime != null) {
+                                    if (typeof object.nextOpenTime !== "object")
+                                        throw TypeError(".google.maps.places.v1.Place.OpeningHours.nextOpenTime: object expected");
+                                    message.nextOpenTime = $root.google.protobuf.Timestamp.fromObject(object.nextOpenTime);
+                                }
+                                if (object.nextCloseTime != null) {
+                                    if (typeof object.nextCloseTime !== "object")
+                                        throw TypeError(".google.maps.places.v1.Place.OpeningHours.nextCloseTime: object expected");
+                                    message.nextCloseTime = $root.google.protobuf.Timestamp.fromObject(object.nextCloseTime);
+                                }
                                 return message;
                             };
     
@@ -9082,8 +9242,11 @@
                                     object.weekdayDescriptions = [];
                                     object.specialDays = [];
                                 }
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.secondaryHoursType = options.enums === String ? "SECONDARY_HOURS_TYPE_UNSPECIFIED" : 0;
+                                    object.nextOpenTime = null;
+                                    object.nextCloseTime = null;
+                                }
                                 if (message.openNow != null && message.hasOwnProperty("openNow")) {
                                     object.openNow = message.openNow;
                                     if (options.oneofs)
@@ -9106,6 +9269,10 @@
                                     for (var j = 0; j < message.specialDays.length; ++j)
                                         object.specialDays[j] = $root.google.maps.places.v1.Place.OpeningHours.SpecialDay.toObject(message.specialDays[j], options);
                                 }
+                                if (message.nextOpenTime != null && message.hasOwnProperty("nextOpenTime"))
+                                    object.nextOpenTime = $root.google.protobuf.Timestamp.toObject(message.nextOpenTime, options);
+                                if (message.nextCloseTime != null && message.hasOwnProperty("nextCloseTime"))
+                                    object.nextCloseTime = $root.google.protobuf.Timestamp.toObject(message.nextCloseTime, options);
                                 return object;
                             };
     
@@ -12051,6 +12218,233 @@
                             return AreaSummary;
                         })();
     
+                        Place.ContainingPlace = (function() {
+    
+                            /**
+                             * Properties of a ContainingPlace.
+                             * @memberof google.maps.places.v1.Place
+                             * @interface IContainingPlace
+                             * @property {string|null} [name] ContainingPlace name
+                             * @property {string|null} [id] ContainingPlace id
+                             */
+    
+                            /**
+                             * Constructs a new ContainingPlace.
+                             * @memberof google.maps.places.v1.Place
+                             * @classdesc Represents a ContainingPlace.
+                             * @implements IContainingPlace
+                             * @constructor
+                             * @param {google.maps.places.v1.Place.IContainingPlace=} [properties] Properties to set
+                             */
+                            function ContainingPlace(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ContainingPlace name.
+                             * @member {string} name
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @instance
+                             */
+                            ContainingPlace.prototype.name = "";
+    
+                            /**
+                             * ContainingPlace id.
+                             * @member {string} id
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @instance
+                             */
+                            ContainingPlace.prototype.id = "";
+    
+                            /**
+                             * Creates a new ContainingPlace instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {google.maps.places.v1.Place.IContainingPlace=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.Place.ContainingPlace} ContainingPlace instance
+                             */
+                            ContainingPlace.create = function create(properties) {
+                                return new ContainingPlace(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ContainingPlace message. Does not implicitly {@link google.maps.places.v1.Place.ContainingPlace.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {google.maps.places.v1.Place.IContainingPlace} message ContainingPlace message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContainingPlace.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ContainingPlace message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ContainingPlace.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {google.maps.places.v1.Place.IContainingPlace} message ContainingPlace message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContainingPlace.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ContainingPlace message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.Place.ContainingPlace} ContainingPlace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContainingPlace.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ContainingPlace();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ContainingPlace message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.Place.ContainingPlace} ContainingPlace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContainingPlace.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ContainingPlace message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ContainingPlace.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ContainingPlace message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.Place.ContainingPlace} ContainingPlace
+                             */
+                            ContainingPlace.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.Place.ContainingPlace)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.Place.ContainingPlace();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ContainingPlace message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {google.maps.places.v1.Place.ContainingPlace} message ContainingPlace
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ContainingPlace.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.id = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ContainingPlace to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ContainingPlace.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ContainingPlace
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.Place.ContainingPlace
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ContainingPlace.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.Place.ContainingPlace";
+                            };
+    
+                            return ContainingPlace;
+                        })();
+    
                         return Place;
                     })();
     
@@ -12074,6 +12468,243 @@
                         values[valuesById[4] = "PRICE_LEVEL_EXPENSIVE"] = 4;
                         values[valuesById[5] = "PRICE_LEVEL_VERY_EXPENSIVE"] = 5;
                         return values;
+                    })();
+    
+                    v1.PriceRange = (function() {
+    
+                        /**
+                         * Properties of a PriceRange.
+                         * @memberof google.maps.places.v1
+                         * @interface IPriceRange
+                         * @property {google.type.IMoney|null} [startPrice] PriceRange startPrice
+                         * @property {google.type.IMoney|null} [endPrice] PriceRange endPrice
+                         */
+    
+                        /**
+                         * Constructs a new PriceRange.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a PriceRange.
+                         * @implements IPriceRange
+                         * @constructor
+                         * @param {google.maps.places.v1.IPriceRange=} [properties] Properties to set
+                         */
+                        function PriceRange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PriceRange startPrice.
+                         * @member {google.type.IMoney|null|undefined} startPrice
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @instance
+                         */
+                        PriceRange.prototype.startPrice = null;
+    
+                        /**
+                         * PriceRange endPrice.
+                         * @member {google.type.IMoney|null|undefined} endPrice
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @instance
+                         */
+                        PriceRange.prototype.endPrice = null;
+    
+                        /**
+                         * Creates a new PriceRange instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {google.maps.places.v1.IPriceRange=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.PriceRange} PriceRange instance
+                         */
+                        PriceRange.create = function create(properties) {
+                            return new PriceRange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PriceRange message. Does not implicitly {@link google.maps.places.v1.PriceRange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {google.maps.places.v1.IPriceRange} message PriceRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PriceRange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startPrice != null && Object.hasOwnProperty.call(message, "startPrice"))
+                                $root.google.type.Money.encode(message.startPrice, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endPrice != null && Object.hasOwnProperty.call(message, "endPrice"))
+                                $root.google.type.Money.encode(message.endPrice, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PriceRange message, length delimited. Does not implicitly {@link google.maps.places.v1.PriceRange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {google.maps.places.v1.IPriceRange} message PriceRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PriceRange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PriceRange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.PriceRange} PriceRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PriceRange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.PriceRange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PriceRange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.PriceRange} PriceRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PriceRange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PriceRange message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PriceRange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startPrice != null && message.hasOwnProperty("startPrice")) {
+                                var error = $root.google.type.Money.verify(message.startPrice);
+                                if (error)
+                                    return "startPrice." + error;
+                            }
+                            if (message.endPrice != null && message.hasOwnProperty("endPrice")) {
+                                var error = $root.google.type.Money.verify(message.endPrice);
+                                if (error)
+                                    return "endPrice." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PriceRange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.PriceRange} PriceRange
+                         */
+                        PriceRange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.PriceRange)
+                                return object;
+                            var message = new $root.google.maps.places.v1.PriceRange();
+                            if (object.startPrice != null) {
+                                if (typeof object.startPrice !== "object")
+                                    throw TypeError(".google.maps.places.v1.PriceRange.startPrice: object expected");
+                                message.startPrice = $root.google.type.Money.fromObject(object.startPrice);
+                            }
+                            if (object.endPrice != null) {
+                                if (typeof object.endPrice !== "object")
+                                    throw TypeError(".google.maps.places.v1.PriceRange.endPrice: object expected");
+                                message.endPrice = $root.google.type.Money.fromObject(object.endPrice);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PriceRange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {google.maps.places.v1.PriceRange} message PriceRange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PriceRange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startPrice = null;
+                                object.endPrice = null;
+                            }
+                            if (message.startPrice != null && message.hasOwnProperty("startPrice"))
+                                object.startPrice = $root.google.type.Money.toObject(message.startPrice, options);
+                            if (message.endPrice != null && message.hasOwnProperty("endPrice"))
+                                object.endPrice = $root.google.type.Money.toObject(message.endPrice, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PriceRange to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PriceRange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PriceRange
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.PriceRange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PriceRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.PriceRange";
+                        };
+    
+                        return PriceRange;
                     })();
     
                     v1.Places = (function() {
@@ -13666,6 +14297,7 @@
                          * @property {google.maps.places.v1.SearchTextRequest.IEVOptions|null} [evOptions] SearchTextRequest evOptions
                          * @property {google.maps.places.v1.IRoutingParameters|null} [routingParameters] SearchTextRequest routingParameters
                          * @property {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters|null} [searchAlongRouteParameters] SearchTextRequest searchAlongRouteParameters
+                         * @property {boolean|null} [includePureServiceAreaBusinesses] SearchTextRequest includePureServiceAreaBusinesses
                          */
     
                         /**
@@ -13805,6 +14437,14 @@
                         SearchTextRequest.prototype.searchAlongRouteParameters = null;
     
                         /**
+                         * SearchTextRequest includePureServiceAreaBusinesses.
+                         * @member {boolean} includePureServiceAreaBusinesses
+                         * @memberof google.maps.places.v1.SearchTextRequest
+                         * @instance
+                         */
+                        SearchTextRequest.prototype.includePureServiceAreaBusinesses = false;
+    
+                        /**
                          * Creates a new SearchTextRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.SearchTextRequest
@@ -13862,6 +14502,8 @@
                                 $root.google.maps.places.v1.RoutingParameters.encode(message.routingParameters, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.searchAlongRouteParameters != null && Object.hasOwnProperty.call(message, "searchAlongRouteParameters"))
                                 $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.encode(message.searchAlongRouteParameters, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.includePureServiceAreaBusinesses != null && Object.hasOwnProperty.call(message, "includePureServiceAreaBusinesses"))
+                                writer.uint32(/* id 20, wireType 0 =*/160).bool(message.includePureServiceAreaBusinesses);
                             return writer;
                         };
     
@@ -13961,6 +14603,10 @@
                                     }
                                 case 17: {
                                         message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.includePureServiceAreaBusinesses = reader.bool();
                                         break;
                                     }
                                 default:
@@ -14072,6 +14718,9 @@
                                 if (error)
                                     return "searchAlongRouteParameters." + error;
                             }
+                            if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
+                                if (typeof message.includePureServiceAreaBusinesses !== "boolean")
+                                    return "includePureServiceAreaBusinesses: boolean expected";
                             return null;
                         };
     
@@ -14185,6 +14834,8 @@
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.searchAlongRouteParameters: object expected");
                                 message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.fromObject(object.searchAlongRouteParameters);
                             }
+                            if (object.includePureServiceAreaBusinesses != null)
+                                message.includePureServiceAreaBusinesses = Boolean(object.includePureServiceAreaBusinesses);
                             return message;
                         };
     
@@ -14218,6 +14869,7 @@
                                 object.evOptions = null;
                                 object.routingParameters = null;
                                 object.searchAlongRouteParameters = null;
+                                object.includePureServiceAreaBusinesses = false;
                             }
                             if (message.textQuery != null && message.hasOwnProperty("textQuery"))
                                 object.textQuery = message.textQuery;
@@ -14252,6 +14904,8 @@
                                 object.routingParameters = $root.google.maps.places.v1.RoutingParameters.toObject(message.routingParameters, options);
                             if (message.searchAlongRouteParameters != null && message.hasOwnProperty("searchAlongRouteParameters"))
                                 object.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.toObject(message.searchAlongRouteParameters, options);
+                            if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
+                                object.includePureServiceAreaBusinesses = message.includePureServiceAreaBusinesses;
                             return object;
                         };
     
@@ -16410,6 +17064,7 @@
                          * @property {number|null} [inputOffset] AutocompletePlacesRequest inputOffset
                          * @property {boolean|null} [includeQueryPredictions] AutocompletePlacesRequest includeQueryPredictions
                          * @property {string|null} [sessionToken] AutocompletePlacesRequest sessionToken
+                         * @property {boolean|null} [includePureServiceAreaBusinesses] AutocompletePlacesRequest includePureServiceAreaBusinesses
                          */
     
                         /**
@@ -16518,6 +17173,14 @@
                         AutocompletePlacesRequest.prototype.sessionToken = "";
     
                         /**
+                         * AutocompletePlacesRequest includePureServiceAreaBusinesses.
+                         * @member {boolean} includePureServiceAreaBusinesses
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.includePureServiceAreaBusinesses = false;
+    
+                        /**
                          * Creates a new AutocompletePlacesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.AutocompletePlacesRequest
@@ -16565,6 +17228,8 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.includeQueryPredictions);
                             if (message.sessionToken != null && Object.hasOwnProperty.call(message, "sessionToken"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.sessionToken);
+                            if (message.includePureServiceAreaBusinesses != null && Object.hasOwnProperty.call(message, "includePureServiceAreaBusinesses"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.includePureServiceAreaBusinesses);
                             return writer;
                         };
     
@@ -16645,6 +17310,10 @@
                                     }
                                 case 11: {
                                         message.sessionToken = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.includePureServiceAreaBusinesses = reader.bool();
                                         break;
                                     }
                                 default:
@@ -16729,6 +17398,9 @@
                             if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
                                 if (!$util.isString(message.sessionToken))
                                     return "sessionToken: string expected";
+                            if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
+                                if (typeof message.includePureServiceAreaBusinesses !== "boolean")
+                                    return "includePureServiceAreaBusinesses: boolean expected";
                             return null;
                         };
     
@@ -16785,6 +17457,8 @@
                                 message.includeQueryPredictions = Boolean(object.includeQueryPredictions);
                             if (object.sessionToken != null)
                                 message.sessionToken = String(object.sessionToken);
+                            if (object.includePureServiceAreaBusinesses != null)
+                                message.includePureServiceAreaBusinesses = Boolean(object.includePureServiceAreaBusinesses);
                             return message;
                         };
     
@@ -16815,6 +17489,7 @@
                                 object.inputOffset = 0;
                                 object.includeQueryPredictions = false;
                                 object.sessionToken = "";
+                                object.includePureServiceAreaBusinesses = false;
                             }
                             if (message.input != null && message.hasOwnProperty("input"))
                                 object.input = message.input;
@@ -16844,6 +17519,8 @@
                                 object.includeQueryPredictions = message.includeQueryPredictions;
                             if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
                                 object.sessionToken = message.sessionToken;
+                            if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
+                                object.includePureServiceAreaBusinesses = message.includePureServiceAreaBusinesses;
                             return object;
                         };
     
@@ -19700,6 +20377,7 @@
                          * @memberof google.maps.places.v1
                          * @interface IRoutingSummary
                          * @property {Array.<google.maps.places.v1.RoutingSummary.ILeg>|null} [legs] RoutingSummary legs
+                         * @property {string|null} [directionsUri] RoutingSummary directionsUri
                          */
     
                         /**
@@ -19725,6 +20403,14 @@
                          * @instance
                          */
                         RoutingSummary.prototype.legs = $util.emptyArray;
+    
+                        /**
+                         * RoutingSummary directionsUri.
+                         * @member {string} directionsUri
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @instance
+                         */
+                        RoutingSummary.prototype.directionsUri = "";
     
                         /**
                          * Creates a new RoutingSummary instance using the specified properties.
@@ -19753,6 +20439,8 @@
                             if (message.legs != null && message.legs.length)
                                 for (var i = 0; i < message.legs.length; ++i)
                                     $root.google.maps.places.v1.RoutingSummary.Leg.encode(message.legs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.directionsUri != null && Object.hasOwnProperty.call(message, "directionsUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.directionsUri);
                             return writer;
                         };
     
@@ -19791,6 +20479,10 @@
                                         if (!(message.legs && message.legs.length))
                                             message.legs = [];
                                         message.legs.push($root.google.maps.places.v1.RoutingSummary.Leg.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.directionsUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -19837,6 +20529,9 @@
                                         return "legs." + error;
                                 }
                             }
+                            if (message.directionsUri != null && message.hasOwnProperty("directionsUri"))
+                                if (!$util.isString(message.directionsUri))
+                                    return "directionsUri: string expected";
                             return null;
                         };
     
@@ -19862,6 +20557,8 @@
                                     message.legs[i] = $root.google.maps.places.v1.RoutingSummary.Leg.fromObject(object.legs[i]);
                                 }
                             }
+                            if (object.directionsUri != null)
+                                message.directionsUri = String(object.directionsUri);
                             return message;
                         };
     
@@ -19880,11 +20577,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.legs = [];
+                            if (options.defaults)
+                                object.directionsUri = "";
                             if (message.legs && message.legs.length) {
                                 object.legs = [];
                                 for (var j = 0; j < message.legs.length; ++j)
                                     object.legs[j] = $root.google.maps.places.v1.RoutingSummary.Leg.toObject(message.legs[j], options);
                             }
+                            if (message.directionsUri != null && message.hasOwnProperty("directionsUri"))
+                                object.directionsUri = message.directionsUri;
                             return object;
                         };
     
