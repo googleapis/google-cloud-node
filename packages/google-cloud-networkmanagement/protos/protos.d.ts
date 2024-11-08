@@ -222,6 +222,9 @@ export namespace google {
                     /** Endpoint gkeMasterCluster */
                     gkeMasterCluster?: (string|null);
 
+                    /** Endpoint fqdn */
+                    fqdn?: (string|null);
+
                     /** Endpoint cloudSqlInstance */
                     cloudSqlInstance?: (string|null);
 
@@ -282,6 +285,9 @@ export namespace google {
 
                     /** Endpoint gkeMasterCluster. */
                     public gkeMasterCluster: string;
+
+                    /** Endpoint fqdn. */
+                    public fqdn: string;
 
                     /** Endpoint cloudSqlInstance. */
                     public cloudSqlInstance: string;
@@ -4027,7 +4033,8 @@ export namespace google {
                         REDIS_CLUSTER_UNSUPPORTED_PROTOCOL = 79,
                         NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION = 80,
                         NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION = 81,
-                        NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION = 82
+                        NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION = 82,
+                        PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83
                     }
                 }
 
@@ -4045,6 +4052,9 @@ export namespace google {
 
                     /** GKEMasterInfo externalIp */
                     externalIp?: (string|null);
+
+                    /** GKEMasterInfo dnsEndpoint */
+                    dnsEndpoint?: (string|null);
                 }
 
                 /** Represents a GKEMasterInfo. */
@@ -4067,6 +4077,9 @@ export namespace google {
 
                     /** GKEMasterInfo externalIp. */
                     public externalIp: string;
+
+                    /** GKEMasterInfo dnsEndpoint. */
+                    public dnsEndpoint: string;
 
                     /**
                      * Creates a new GKEMasterInfo instance using the specified properties.

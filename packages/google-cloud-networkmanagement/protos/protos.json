@@ -169,6 +169,10 @@
                           "type": "string",
                           "id": 7
                         },
+                        "fqdn": {
+                          "type": "string",
+                          "id": 19
+                        },
                         "cloudSqlInstance": {
                           "type": "string",
                           "id": 8
@@ -1451,7 +1455,8 @@
                             "REDIS_CLUSTER_UNSUPPORTED_PROTOCOL": 79,
                             "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION": 80,
                             "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION": 81,
-                            "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION": 82
+                            "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION": 82,
+                            "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED": 83
                           }
                         }
                       }
@@ -1473,6 +1478,10 @@
                         "externalIp": {
                           "type": "string",
                           "id": 6
+                        },
+                        "dnsEndpoint": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
