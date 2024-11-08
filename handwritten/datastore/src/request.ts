@@ -692,7 +692,7 @@ class DatastoreRequest {
   /**
    * This function saves results from a successful beginTransaction call.
    *
-   * @param {BeginAsyncResponse} [response] The response from a call to
+   * @param {object} [response] The response from a call to
    * begin a transaction that completed successfully.
    *
    **/
@@ -1078,6 +1078,11 @@ class DatastoreRequest {
     return stream;
   }
 
+  /**
+   * Gets request options from a RunQueryStream options configuration
+   *
+   * @param {RunQueryStreamOptions} [options] The RunQueryStream options configuration
+   */
   private getRequestOptions(
     options: RunQueryStreamOptions
   ): SharedQueryOptions {
@@ -1114,6 +1119,12 @@ class DatastoreRequest {
     return sharedQueryOpts;
   }
 
+  /**
+   * Gets request options from a RunQueryStream options configuration
+   *
+   * @param {Query} [query] A Query object
+   * @param {RunQueryStreamOptions} [options] The RunQueryStream options configuration
+   */
   private getQueryOptions(
     query: Query,
     options: RunQueryStreamOptions = {}
@@ -1200,6 +1211,11 @@ class DatastoreRequest {
   }
 
   /**
+   * Builds a request and sends it to the Gapic Layer.
+   *
+   * @param {object} config Configuration object.
+   * @param {function} callback The callback function.
+   *
    * @private
    */
   prepareGaxRequest_(config: RequestConfig, callback: Function): void {
@@ -1328,10 +1344,23 @@ class DatastoreRequest {
   }
 }
 
+/**
+ * Check to see if a request is a Transaction
+ *
+ * @param {DatastoreRequest} request The Datastore request object
+ *
+ */
 function isTransaction(request: DatastoreRequest): request is Transaction {
   return request instanceof Transaction;
 }
 
+/**
+ * Throw an error if read options are not properly specified.
+ *
+ * @param {DatastoreRequest} request The Datastore request object
+ * @param {SharedQueryOptions} options The Query options
+ *
+ */
 function throwOnTransactionErrors(
   request: DatastoreRequest,
   options: SharedQueryOptions
@@ -1354,8 +1383,8 @@ function throwOnTransactionErrors(
  * This function gets transaction request options used for defining a
  * request to create a new transaction on the server.
  *
- * @param transaction The transaction for which the request will be made.
- * @param options Custom options that will be used to create the request.
+ * @param {Transaction} transaction The transaction for which the request will be made.
+ * @param {RunOptions} options Custom options that will be used to create the request.
  */
 export function getTransactionRequest(
   transaction: Transaction,

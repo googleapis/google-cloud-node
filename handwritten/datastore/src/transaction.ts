@@ -130,8 +130,7 @@ class Transaction extends DatastoreRequest {
    * If the commit request fails, we will automatically rollback the
    * transaction.
    *
-   * @param {object} [gaxOptions] Request configuration options, outlined here:
-   *     https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {CallOptions | https://googleapis.github.io/gax-nodejs/global.html#CallOptions} [gaxOptions] Request configuration options.
    * @param {function} callback The callback function.
    * @param {?error} callback.err An error returned while making this request.
    *   If the commit fails, we automatically try to rollback the transaction
@@ -280,6 +279,7 @@ class Transaction extends DatastoreRequest {
    * Create an aggregation query from the query specified. See {module:datastore/query} for all
    * of the available methods.
    *
+   * @param {Query} query A Query object
    */
   createAggregationQuery(query: Query): AggregateQuery {
     return this.datastore.createAggregationQuery.call(this, query);
