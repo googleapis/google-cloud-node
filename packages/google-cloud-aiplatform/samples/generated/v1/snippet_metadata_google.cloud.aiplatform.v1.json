@@ -2708,6 +2708,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_FeatureRegistryService_BatchCreateFeatures_async",
+            "title": "DatasetService batchCreateFeatures Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a batch of Features in a given FeatureGroup.",
+            "canonical": true,
+            "file": "feature_registry_service.batch_create_features.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchCreateFeatures",
+                "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService.BatchCreateFeatures",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requests",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchCreateFeatures",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService.BatchCreateFeatures",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_GetFeature_async",
             "title": "DatasetService getFeature Sample",
             "origin": "API_DEFINITION",
@@ -3566,7 +3610,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],

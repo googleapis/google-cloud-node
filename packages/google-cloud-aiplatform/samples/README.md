@@ -370,13 +370,21 @@
   * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
   * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
   * [Feature_online_store_service.streaming_fetch_feature_values](#feature_online_store_service.streaming_fetch_feature_values)
+  * [Feature_registry_service.batch_create_features](#feature_registry_service.batch_create_features)
   * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
   * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
+  * [Feature_registry_service.create_feature_monitor](#feature_registry_service.create_feature_monitor)
+  * [Feature_registry_service.create_feature_monitor_job](#feature_registry_service.create_feature_monitor_job)
   * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
   * [Feature_registry_service.delete_feature_group](#feature_registry_service.delete_feature_group)
+  * [Feature_registry_service.delete_feature_monitor](#feature_registry_service.delete_feature_monitor)
   * [Feature_registry_service.get_feature](#feature_registry_service.get_feature)
   * [Feature_registry_service.get_feature_group](#feature_registry_service.get_feature_group)
+  * [Feature_registry_service.get_feature_monitor](#feature_registry_service.get_feature_monitor)
+  * [Feature_registry_service.get_feature_monitor_job](#feature_registry_service.get_feature_monitor_job)
   * [Feature_registry_service.list_feature_groups](#feature_registry_service.list_feature_groups)
+  * [Feature_registry_service.list_feature_monitor_jobs](#feature_registry_service.list_feature_monitor_jobs)
+  * [Feature_registry_service.list_feature_monitors](#feature_registry_service.list_feature_monitors)
   * [Feature_registry_service.list_features](#feature_registry_service.list_features)
   * [Feature_registry_service.update_feature](#feature_registry_service.update_feature)
   * [Feature_registry_service.update_feature_group](#feature_registry_service.update_feature_group)
@@ -675,7 +683,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Dataset_service.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset.js,samples/README.md)
 
@@ -692,7 +700,7 @@ __Usage:__
 
 ### Dataset_service.create_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js,samples/README.md)
 
@@ -709,7 +717,7 @@ __Usage:__
 
 ### Dataset_service.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js,samples/README.md)
 
@@ -726,7 +734,7 @@ __Usage:__
 
 ### Dataset_service.delete_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js,samples/README.md)
 
@@ -743,7 +751,7 @@ __Usage:__
 
 ### Dataset_service.delete_saved_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_saved_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_saved_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_saved_query.js,samples/README.md)
 
@@ -760,7 +768,7 @@ __Usage:__
 
 ### Dataset_service.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.export_data.js,samples/README.md)
 
@@ -777,7 +785,7 @@ __Usage:__
 
 ### Dataset_service.get_annotation_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_annotation_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_annotation_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_annotation_spec.js,samples/README.md)
 
@@ -794,7 +802,7 @@ __Usage:__
 
 ### Dataset_service.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset.js,samples/README.md)
 
@@ -811,7 +819,7 @@ __Usage:__
 
 ### Dataset_service.get_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js,samples/README.md)
 
@@ -828,7 +836,7 @@ __Usage:__
 
 ### Dataset_service.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.import_data.js,samples/README.md)
 
@@ -845,7 +853,7 @@ __Usage:__
 
 ### Dataset_service.list_annotations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_annotations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_annotations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_annotations.js,samples/README.md)
 
@@ -862,7 +870,7 @@ __Usage:__
 
 ### Dataset_service.list_data_items
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_data_items.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_data_items.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_data_items.js,samples/README.md)
 
@@ -879,7 +887,7 @@ __Usage:__
 
 ### Dataset_service.list_dataset_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js,samples/README.md)
 
@@ -896,7 +904,7 @@ __Usage:__
 
 ### Dataset_service.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_datasets.js,samples/README.md)
 
@@ -913,7 +921,7 @@ __Usage:__
 
 ### Dataset_service.list_saved_queries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_saved_queries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_saved_queries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_saved_queries.js,samples/README.md)
 
@@ -930,7 +938,7 @@ __Usage:__
 
 ### Dataset_service.restore_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js,samples/README.md)
 
@@ -947,7 +955,7 @@ __Usage:__
 
 ### Dataset_service.search_data_items
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.search_data_items.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.search_data_items.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.search_data_items.js,samples/README.md)
 
@@ -964,7 +972,7 @@ __Usage:__
 
 ### Dataset_service.update_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset.js,samples/README.md)
 
@@ -981,7 +989,7 @@ __Usage:__
 
 ### Dataset_service.update_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset_version.js,samples/README.md)
 
@@ -998,7 +1006,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.create_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js,samples/README.md)
 
@@ -1015,7 +1023,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.delete_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.delete_deployment_resource_pool.js,samples/README.md)
 
@@ -1032,7 +1040,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.get_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.get_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.get_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.get_deployment_resource_pool.js,samples/README.md)
 
@@ -1049,7 +1057,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.list_deployment_resource_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.list_deployment_resource_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.list_deployment_resource_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.list_deployment_resource_pools.js,samples/README.md)
 
@@ -1066,7 +1074,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.query_deployed_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js,samples/README.md)
 
@@ -1083,7 +1091,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.update_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js,samples/README.md)
 
@@ -1100,7 +1108,7 @@ __Usage:__
 
 ### Endpoint_service.create_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.create_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.create_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.create_endpoint.js,samples/README.md)
 
@@ -1117,7 +1125,7 @@ __Usage:__
 
 ### Endpoint_service.delete_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.delete_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.delete_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.delete_endpoint.js,samples/README.md)
 
@@ -1134,7 +1142,7 @@ __Usage:__
 
 ### Endpoint_service.deploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.deploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.deploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.deploy_model.js,samples/README.md)
 
@@ -1151,7 +1159,7 @@ __Usage:__
 
 ### Endpoint_service.get_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.get_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.get_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.get_endpoint.js,samples/README.md)
 
@@ -1168,7 +1176,7 @@ __Usage:__
 
 ### Endpoint_service.list_endpoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.list_endpoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.list_endpoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.list_endpoints.js,samples/README.md)
 
@@ -1185,7 +1193,7 @@ __Usage:__
 
 ### Endpoint_service.mutate_deployed_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js,samples/README.md)
 
@@ -1202,7 +1210,7 @@ __Usage:__
 
 ### Endpoint_service.undeploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.undeploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.undeploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.undeploy_model.js,samples/README.md)
 
@@ -1219,7 +1227,7 @@ __Usage:__
 
 ### Endpoint_service.update_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint.js,samples/README.md)
 
@@ -1236,7 +1244,7 @@ __Usage:__
 
 ### Evaluation_service.evaluate_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/evaluation_service.evaluate_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/evaluation_service.evaluate_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/evaluation_service.evaluate_instances.js,samples/README.md)
 
@@ -1253,7 +1261,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.create_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.create_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.create_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.create_feature_online_store.js,samples/README.md)
 
@@ -1270,7 +1278,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.create_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.create_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.create_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.create_feature_view.js,samples/README.md)
 
@@ -1287,7 +1295,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.delete_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.delete_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.delete_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.delete_feature_online_store.js,samples/README.md)
 
@@ -1304,7 +1312,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.delete_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.delete_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.delete_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.delete_feature_view.js,samples/README.md)
 
@@ -1321,7 +1329,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.get_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_online_store.js,samples/README.md)
 
@@ -1338,7 +1346,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.get_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_view.js,samples/README.md)
 
@@ -1355,7 +1363,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.get_feature_view_sync
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_view_sync.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_view_sync.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.get_feature_view_sync.js,samples/README.md)
 
@@ -1372,7 +1380,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.list_feature_online_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_online_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_online_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_online_stores.js,samples/README.md)
 
@@ -1389,7 +1397,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.list_feature_view_syncs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_view_syncs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_view_syncs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_view_syncs.js,samples/README.md)
 
@@ -1406,7 +1414,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.list_feature_views
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_views.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_views.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.list_feature_views.js,samples/README.md)
 
@@ -1423,7 +1431,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.sync_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.sync_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.sync_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.sync_feature_view.js,samples/README.md)
 
@@ -1440,7 +1448,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.update_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.update_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.update_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.update_feature_online_store.js,samples/README.md)
 
@@ -1457,7 +1465,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.update_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.update_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.update_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.update_feature_view.js,samples/README.md)
 
@@ -1474,7 +1482,7 @@ __Usage:__
 
 ### Feature_online_store_service.fetch_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.fetch_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.fetch_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.fetch_feature_values.js,samples/README.md)
 
@@ -1491,7 +1499,7 @@ __Usage:__
 
 ### Feature_online_store_service.search_nearest_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js,samples/README.md)
 
@@ -1508,7 +1516,7 @@ __Usage:__
 
 ### Feature_registry_service.batch_create_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js,samples/README.md)
 
@@ -1525,7 +1533,7 @@ __Usage:__
 
 ### Feature_registry_service.create_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.create_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.create_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.create_feature.js,samples/README.md)
 
@@ -1542,7 +1550,7 @@ __Usage:__
 
 ### Feature_registry_service.create_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.create_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.create_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.create_feature_group.js,samples/README.md)
 
@@ -1559,7 +1567,7 @@ __Usage:__
 
 ### Feature_registry_service.delete_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.delete_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.delete_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.delete_feature.js,samples/README.md)
 
@@ -1576,7 +1584,7 @@ __Usage:__
 
 ### Feature_registry_service.delete_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.delete_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.delete_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.delete_feature_group.js,samples/README.md)
 
@@ -1593,7 +1601,7 @@ __Usage:__
 
 ### Feature_registry_service.get_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.get_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.get_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.get_feature.js,samples/README.md)
 
@@ -1610,7 +1618,7 @@ __Usage:__
 
 ### Feature_registry_service.get_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.get_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.get_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.get_feature_group.js,samples/README.md)
 
@@ -1627,7 +1635,7 @@ __Usage:__
 
 ### Feature_registry_service.list_feature_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.list_feature_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.list_feature_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.list_feature_groups.js,samples/README.md)
 
@@ -1644,7 +1652,7 @@ __Usage:__
 
 ### Feature_registry_service.list_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.list_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.list_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.list_features.js,samples/README.md)
 
@@ -1661,7 +1669,7 @@ __Usage:__
 
 ### Feature_registry_service.update_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.update_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.update_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.update_feature.js,samples/README.md)
 
@@ -1678,7 +1686,7 @@ __Usage:__
 
 ### Feature_registry_service.update_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.update_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.update_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.update_feature_group.js,samples/README.md)
 
@@ -1695,7 +1703,7 @@ __Usage:__
 
 ### Featurestore_online_serving_service.read_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.read_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.read_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.read_feature_values.js,samples/README.md)
 
@@ -1712,7 +1720,7 @@ __Usage:__
 
 ### Featurestore_online_serving_service.streaming_read_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.streaming_read_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.streaming_read_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.streaming_read_feature_values.js,samples/README.md)
 
@@ -1729,7 +1737,7 @@ __Usage:__
 
 ### Featurestore_online_serving_service.write_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.write_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.write_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_online_serving_service.write_feature_values.js,samples/README.md)
 
@@ -1746,7 +1754,7 @@ __Usage:__
 
 ### Featurestore_service.batch_create_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.batch_create_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.batch_create_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.batch_create_features.js,samples/README.md)
 
@@ -1763,7 +1771,7 @@ __Usage:__
 
 ### Featurestore_service.batch_read_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.batch_read_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.batch_read_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.batch_read_feature_values.js,samples/README.md)
 
@@ -1780,7 +1788,7 @@ __Usage:__
 
 ### Featurestore_service.create_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_entity_type.js,samples/README.md)
 
@@ -1797,7 +1805,7 @@ __Usage:__
 
 ### Featurestore_service.create_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_feature.js,samples/README.md)
 
@@ -1814,7 +1822,7 @@ __Usage:__
 
 ### Featurestore_service.create_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.create_featurestore.js,samples/README.md)
 
@@ -1831,7 +1839,7 @@ __Usage:__
 
 ### Featurestore_service.delete_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_entity_type.js,samples/README.md)
 
@@ -1848,7 +1856,7 @@ __Usage:__
 
 ### Featurestore_service.delete_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature.js,samples/README.md)
 
@@ -1865,7 +1873,7 @@ __Usage:__
 
 ### Featurestore_service.delete_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature_values.js,samples/README.md)
 
@@ -1882,7 +1890,7 @@ __Usage:__
 
 ### Featurestore_service.delete_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_featurestore.js,samples/README.md)
 
@@ -1899,7 +1907,7 @@ __Usage:__
 
 ### Featurestore_service.export_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.export_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.export_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.export_feature_values.js,samples/README.md)
 
@@ -1916,7 +1924,7 @@ __Usage:__
 
 ### Featurestore_service.get_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_entity_type.js,samples/README.md)
 
@@ -1933,7 +1941,7 @@ __Usage:__
 
 ### Featurestore_service.get_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_feature.js,samples/README.md)
 
@@ -1950,7 +1958,7 @@ __Usage:__
 
 ### Featurestore_service.get_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.get_featurestore.js,samples/README.md)
 
@@ -1967,7 +1975,7 @@ __Usage:__
 
 ### Featurestore_service.import_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.import_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.import_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.import_feature_values.js,samples/README.md)
 
@@ -1984,7 +1992,7 @@ __Usage:__
 
 ### Featurestore_service.list_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_entity_types.js,samples/README.md)
 
@@ -2001,7 +2009,7 @@ __Usage:__
 
 ### Featurestore_service.list_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_features.js,samples/README.md)
 
@@ -2018,7 +2026,7 @@ __Usage:__
 
 ### Featurestore_service.list_featurestores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_featurestores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_featurestores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.list_featurestores.js,samples/README.md)
 
@@ -2035,7 +2043,7 @@ __Usage:__
 
 ### Featurestore_service.search_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.search_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.search_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.search_features.js,samples/README.md)
 
@@ -2052,7 +2060,7 @@ __Usage:__
 
 ### Featurestore_service.update_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_entity_type.js,samples/README.md)
 
@@ -2069,7 +2077,7 @@ __Usage:__
 
 ### Featurestore_service.update_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_feature.js,samples/README.md)
 
@@ -2086,7 +2094,7 @@ __Usage:__
 
 ### Featurestore_service.update_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_featurestore.js,samples/README.md)
 
@@ -2103,7 +2111,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.cancel_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.cancel_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.cancel_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.cancel_tuning_job.js,samples/README.md)
 
@@ -2120,7 +2128,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.create_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.create_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.create_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.create_tuning_job.js,samples/README.md)
 
@@ -2137,7 +2145,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.get_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.get_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.get_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.get_tuning_job.js,samples/README.md)
 
@@ -2154,7 +2162,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.list_tuning_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.list_tuning_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.list_tuning_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.list_tuning_jobs.js,samples/README.md)
 
@@ -2171,7 +2179,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.rebase_tuned_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js,samples/README.md)
 
@@ -2188,7 +2196,7 @@ __Usage:__
 
 ### Index_endpoint_service.create_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.create_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.create_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.create_index_endpoint.js,samples/README.md)
 
@@ -2205,7 +2213,7 @@ __Usage:__
 
 ### Index_endpoint_service.delete_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.delete_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.delete_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.delete_index_endpoint.js,samples/README.md)
 
@@ -2222,7 +2230,7 @@ __Usage:__
 
 ### Index_endpoint_service.deploy_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.deploy_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.deploy_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.deploy_index.js,samples/README.md)
 
@@ -2239,7 +2247,7 @@ __Usage:__
 
 ### Index_endpoint_service.get_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.get_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.get_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.get_index_endpoint.js,samples/README.md)
 
@@ -2256,7 +2264,7 @@ __Usage:__
 
 ### Index_endpoint_service.list_index_endpoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.list_index_endpoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.list_index_endpoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.list_index_endpoints.js,samples/README.md)
 
@@ -2273,7 +2281,7 @@ __Usage:__
 
 ### Index_endpoint_service.mutate_deployed_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.mutate_deployed_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.mutate_deployed_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.mutate_deployed_index.js,samples/README.md)
 
@@ -2290,7 +2298,7 @@ __Usage:__
 
 ### Index_endpoint_service.undeploy_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.undeploy_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.undeploy_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.undeploy_index.js,samples/README.md)
 
@@ -2307,7 +2315,7 @@ __Usage:__
 
 ### Index_endpoint_service.update_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.update_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.update_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_endpoint_service.update_index_endpoint.js,samples/README.md)
 
@@ -2324,7 +2332,7 @@ __Usage:__
 
 ### Index_service.create_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_service.create_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_service.create_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_service.create_index.js,samples/README.md)
 
@@ -2341,7 +2349,7 @@ __Usage:__
 
 ### Index_service.delete_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_service.delete_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_service.delete_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_service.delete_index.js,samples/README.md)
 
@@ -2358,7 +2366,7 @@ __Usage:__
 
 ### Index_service.get_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_service.get_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_service.get_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_service.get_index.js,samples/README.md)
 
@@ -2375,7 +2383,7 @@ __Usage:__
 
 ### Index_service.list_indexes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_service.list_indexes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_service.list_indexes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_service.list_indexes.js,samples/README.md)
 
@@ -2392,7 +2400,7 @@ __Usage:__
 
 ### Index_service.remove_datapoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_service.remove_datapoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_service.remove_datapoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_service.remove_datapoints.js,samples/README.md)
 
@@ -2409,7 +2417,7 @@ __Usage:__
 
 ### Index_service.update_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_service.update_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_service.update_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_service.update_index.js,samples/README.md)
 
@@ -2426,7 +2434,7 @@ __Usage:__
 
 ### Index_service.upsert_datapoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/index_service.upsert_datapoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/index_service.upsert_datapoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/index_service.upsert_datapoints.js,samples/README.md)
 
@@ -2443,7 +2451,7 @@ __Usage:__
 
 ### Job_service.cancel_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_batch_prediction_job.js,samples/README.md)
 
@@ -2460,7 +2468,7 @@ __Usage:__
 
 ### Job_service.cancel_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_custom_job.js,samples/README.md)
 
@@ -2477,7 +2485,7 @@ __Usage:__
 
 ### Job_service.cancel_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_data_labeling_job.js,samples/README.md)
 
@@ -2494,7 +2502,7 @@ __Usage:__
 
 ### Job_service.cancel_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -2511,7 +2519,7 @@ __Usage:__
 
 ### Job_service.cancel_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.cancel_nas_job.js,samples/README.md)
 
@@ -2528,7 +2536,7 @@ __Usage:__
 
 ### Job_service.create_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_batch_prediction_job.js,samples/README.md)
 
@@ -2545,7 +2553,7 @@ __Usage:__
 
 ### Job_service.create_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_custom_job.js,samples/README.md)
 
@@ -2562,7 +2570,7 @@ __Usage:__
 
 ### Job_service.create_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_data_labeling_job.js,samples/README.md)
 
@@ -2579,7 +2587,7 @@ __Usage:__
 
 ### Job_service.create_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -2596,7 +2604,7 @@ __Usage:__
 
 ### Job_service.create_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -2613,7 +2621,7 @@ __Usage:__
 
 ### Job_service.create_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.create_nas_job.js,samples/README.md)
 
@@ -2630,7 +2638,7 @@ __Usage:__
 
 ### Job_service.delete_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_batch_prediction_job.js,samples/README.md)
 
@@ -2647,7 +2655,7 @@ __Usage:__
 
 ### Job_service.delete_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_custom_job.js,samples/README.md)
 
@@ -2664,7 +2672,7 @@ __Usage:__
 
 ### Job_service.delete_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_data_labeling_job.js,samples/README.md)
 
@@ -2681,7 +2689,7 @@ __Usage:__
 
 ### Job_service.delete_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -2698,7 +2706,7 @@ __Usage:__
 
 ### Job_service.delete_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -2715,7 +2723,7 @@ __Usage:__
 
 ### Job_service.delete_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.delete_nas_job.js,samples/README.md)
 
@@ -2732,7 +2740,7 @@ __Usage:__
 
 ### Job_service.get_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_batch_prediction_job.js,samples/README.md)
 
@@ -2749,7 +2757,7 @@ __Usage:__
 
 ### Job_service.get_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_custom_job.js,samples/README.md)
 
@@ -2766,7 +2774,7 @@ __Usage:__
 
 ### Job_service.get_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_data_labeling_job.js,samples/README.md)
 
@@ -2783,7 +2791,7 @@ __Usage:__
 
 ### Job_service.get_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -2800,7 +2808,7 @@ __Usage:__
 
 ### Job_service.get_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -2817,7 +2825,7 @@ __Usage:__
 
 ### Job_service.get_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_nas_job.js,samples/README.md)
 
@@ -2834,7 +2842,7 @@ __Usage:__
 
 ### Job_service.get_nas_trial_detail
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_nas_trial_detail.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_nas_trial_detail.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.get_nas_trial_detail.js,samples/README.md)
 
@@ -2851,7 +2859,7 @@ __Usage:__
 
 ### Job_service.list_batch_prediction_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_batch_prediction_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_batch_prediction_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_batch_prediction_jobs.js,samples/README.md)
 
@@ -2868,7 +2876,7 @@ __Usage:__
 
 ### Job_service.list_custom_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_custom_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_custom_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_custom_jobs.js,samples/README.md)
 
@@ -2885,7 +2893,7 @@ __Usage:__
 
 ### Job_service.list_data_labeling_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_data_labeling_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_data_labeling_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_data_labeling_jobs.js,samples/README.md)
 
@@ -2902,7 +2910,7 @@ __Usage:__
 
 ### Job_service.list_hyperparameter_tuning_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js,samples/README.md)
 
@@ -2919,7 +2927,7 @@ __Usage:__
 
 ### Job_service.list_model_deployment_monitoring_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js,samples/README.md)
 
@@ -2936,7 +2944,7 @@ __Usage:__
 
 ### Job_service.list_nas_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_nas_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_nas_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_nas_jobs.js,samples/README.md)
 
@@ -2953,7 +2961,7 @@ __Usage:__
 
 ### Job_service.list_nas_trial_details
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_nas_trial_details.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_nas_trial_details.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.list_nas_trial_details.js,samples/README.md)
 
@@ -2970,7 +2978,7 @@ __Usage:__
 
 ### Job_service.pause_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.pause_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.pause_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.pause_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -2987,7 +2995,7 @@ __Usage:__
 
 ### Job_service.resume_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.resume_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.resume_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.resume_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -3004,7 +3012,7 @@ __Usage:__
 
 ### Job_service.search_model_deployment_monitoring_stats_anomalies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js,samples/README.md)
 
@@ -3021,7 +3029,7 @@ __Usage:__
 
 ### Job_service.update_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/job_service.update_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/job_service.update_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/job_service.update_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -3038,7 +3046,7 @@ __Usage:__
 
 ### Llm_utility_service.compute_tokens
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/llm_utility_service.compute_tokens.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/llm_utility_service.compute_tokens.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/llm_utility_service.compute_tokens.js,samples/README.md)
 
@@ -3055,7 +3063,7 @@ __Usage:__
 
 ### Llm_utility_service.count_tokens
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/llm_utility_service.count_tokens.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/llm_utility_service.count_tokens.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/llm_utility_service.count_tokens.js,samples/README.md)
 
@@ -3072,7 +3080,7 @@ __Usage:__
 
 ### Match_service.find_neighbors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/match_service.find_neighbors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/match_service.find_neighbors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/match_service.find_neighbors.js,samples/README.md)
 
@@ -3089,7 +3097,7 @@ __Usage:__
 
 ### Match_service.read_index_datapoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/match_service.read_index_datapoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/match_service.read_index_datapoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/match_service.read_index_datapoints.js,samples/README.md)
 
@@ -3106,7 +3114,7 @@ __Usage:__
 
 ### Metadata_service.add_context_artifacts_and_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_context_artifacts_and_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_context_artifacts_and_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_context_artifacts_and_executions.js,samples/README.md)
 
@@ -3123,7 +3131,7 @@ __Usage:__
 
 ### Metadata_service.add_context_children
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_context_children.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_context_children.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_context_children.js,samples/README.md)
 
@@ -3140,7 +3148,7 @@ __Usage:__
 
 ### Metadata_service.add_execution_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_execution_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_execution_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.add_execution_events.js,samples/README.md)
 
@@ -3157,7 +3165,7 @@ __Usage:__
 
 ### Metadata_service.create_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_artifact.js,samples/README.md)
 
@@ -3174,7 +3182,7 @@ __Usage:__
 
 ### Metadata_service.create_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_context.js,samples/README.md)
 
@@ -3191,7 +3199,7 @@ __Usage:__
 
 ### Metadata_service.create_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_execution.js,samples/README.md)
 
@@ -3208,7 +3216,7 @@ __Usage:__
 
 ### Metadata_service.create_metadata_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_metadata_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_metadata_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_metadata_schema.js,samples/README.md)
 
@@ -3225,7 +3233,7 @@ __Usage:__
 
 ### Metadata_service.create_metadata_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_metadata_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_metadata_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.create_metadata_store.js,samples/README.md)
 
@@ -3242,7 +3250,7 @@ __Usage:__
 
 ### Metadata_service.delete_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_artifact.js,samples/README.md)
 
@@ -3259,7 +3267,7 @@ __Usage:__
 
 ### Metadata_service.delete_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_context.js,samples/README.md)
 
@@ -3276,7 +3284,7 @@ __Usage:__
 
 ### Metadata_service.delete_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_execution.js,samples/README.md)
 
@@ -3293,7 +3301,7 @@ __Usage:__
 
 ### Metadata_service.delete_metadata_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_metadata_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_metadata_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.delete_metadata_store.js,samples/README.md)
 
@@ -3310,7 +3318,7 @@ __Usage:__
 
 ### Metadata_service.get_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_artifact.js,samples/README.md)
 
@@ -3327,7 +3335,7 @@ __Usage:__
 
 ### Metadata_service.get_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_context.js,samples/README.md)
 
@@ -3344,7 +3352,7 @@ __Usage:__
 
 ### Metadata_service.get_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_execution.js,samples/README.md)
 
@@ -3361,7 +3369,7 @@ __Usage:__
 
 ### Metadata_service.get_metadata_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_metadata_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_metadata_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_metadata_schema.js,samples/README.md)
 
@@ -3378,7 +3386,7 @@ __Usage:__
 
 ### Metadata_service.get_metadata_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_metadata_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_metadata_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.get_metadata_store.js,samples/README.md)
 
@@ -3395,7 +3403,7 @@ __Usage:__
 
 ### Metadata_service.list_artifacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_artifacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_artifacts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_artifacts.js,samples/README.md)
 
@@ -3412,7 +3420,7 @@ __Usage:__
 
 ### Metadata_service.list_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_contexts.js,samples/README.md)
 
@@ -3429,7 +3437,7 @@ __Usage:__
 
 ### Metadata_service.list_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_executions.js,samples/README.md)
 
@@ -3446,7 +3454,7 @@ __Usage:__
 
 ### Metadata_service.list_metadata_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_metadata_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_metadata_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_metadata_schemas.js,samples/README.md)
 
@@ -3463,7 +3471,7 @@ __Usage:__
 
 ### Metadata_service.list_metadata_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_metadata_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_metadata_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.list_metadata_stores.js,samples/README.md)
 
@@ -3480,7 +3488,7 @@ __Usage:__
 
 ### Metadata_service.purge_artifacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_artifacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_artifacts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_artifacts.js,samples/README.md)
 
@@ -3497,7 +3505,7 @@ __Usage:__
 
 ### Metadata_service.purge_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_contexts.js,samples/README.md)
 
@@ -3514,7 +3522,7 @@ __Usage:__
 
 ### Metadata_service.purge_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.purge_executions.js,samples/README.md)
 
@@ -3531,7 +3539,7 @@ __Usage:__
 
 ### Metadata_service.query_artifact_lineage_subgraph
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_artifact_lineage_subgraph.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_artifact_lineage_subgraph.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_artifact_lineage_subgraph.js,samples/README.md)
 
@@ -3548,7 +3556,7 @@ __Usage:__
 
 ### Metadata_service.query_context_lineage_subgraph
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_context_lineage_subgraph.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_context_lineage_subgraph.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_context_lineage_subgraph.js,samples/README.md)
 
@@ -3565,7 +3573,7 @@ __Usage:__
 
 ### Metadata_service.query_execution_inputs_and_outputs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_execution_inputs_and_outputs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_execution_inputs_and_outputs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.query_execution_inputs_and_outputs.js,samples/README.md)
 
@@ -3582,7 +3590,7 @@ __Usage:__
 
 ### Metadata_service.remove_context_children
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.remove_context_children.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.remove_context_children.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.remove_context_children.js,samples/README.md)
 
@@ -3599,7 +3607,7 @@ __Usage:__
 
 ### Metadata_service.update_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_artifact.js,samples/README.md)
 
@@ -3616,7 +3624,7 @@ __Usage:__
 
 ### Metadata_service.update_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_context.js,samples/README.md)
 
@@ -3633,7 +3641,7 @@ __Usage:__
 
 ### Metadata_service.update_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/metadata_service.update_execution.js,samples/README.md)
 
@@ -3650,7 +3658,7 @@ __Usage:__
 
 ### Migration_service.batch_migrate_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/migration_service.batch_migrate_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/migration_service.batch_migrate_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/migration_service.batch_migrate_resources.js,samples/README.md)
 
@@ -3667,7 +3675,7 @@ __Usage:__
 
 ### Migration_service.search_migratable_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/migration_service.search_migratable_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/migration_service.search_migratable_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/migration_service.search_migratable_resources.js,samples/README.md)
 
@@ -3684,7 +3692,7 @@ __Usage:__
 
 ### Model_garden_service.get_publisher_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_garden_service.get_publisher_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_garden_service.get_publisher_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_garden_service.get_publisher_model.js,samples/README.md)
 
@@ -3701,7 +3709,7 @@ __Usage:__
 
 ### Model_service.batch_import_evaluated_annotations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_evaluated_annotations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_evaluated_annotations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_evaluated_annotations.js,samples/README.md)
 
@@ -3718,7 +3726,7 @@ __Usage:__
 
 ### Model_service.batch_import_model_evaluation_slices
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_model_evaluation_slices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_model_evaluation_slices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_model_evaluation_slices.js,samples/README.md)
 
@@ -3735,7 +3743,7 @@ __Usage:__
 
 ### Model_service.copy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.copy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.copy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.copy_model.js,samples/README.md)
 
@@ -3752,7 +3760,7 @@ __Usage:__
 
 ### Model_service.delete_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.delete_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.delete_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.delete_model.js,samples/README.md)
 
@@ -3769,7 +3777,7 @@ __Usage:__
 
 ### Model_service.delete_model_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.delete_model_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.delete_model_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.delete_model_version.js,samples/README.md)
 
@@ -3786,7 +3794,7 @@ __Usage:__
 
 ### Model_service.export_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.export_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.export_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.export_model.js,samples/README.md)
 
@@ -3803,7 +3811,7 @@ __Usage:__
 
 ### Model_service.get_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model.js,samples/README.md)
 
@@ -3820,7 +3828,7 @@ __Usage:__
 
 ### Model_service.get_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model_evaluation.js,samples/README.md)
 
@@ -3837,7 +3845,7 @@ __Usage:__
 
 ### Model_service.get_model_evaluation_slice
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model_evaluation_slice.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model_evaluation_slice.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.get_model_evaluation_slice.js,samples/README.md)
 
@@ -3854,7 +3862,7 @@ __Usage:__
 
 ### Model_service.import_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.import_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.import_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.import_model_evaluation.js,samples/README.md)
 
@@ -3871,7 +3879,7 @@ __Usage:__
 
 ### Model_service.list_model_evaluation_slices
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_evaluation_slices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_evaluation_slices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_evaluation_slices.js,samples/README.md)
 
@@ -3888,7 +3896,7 @@ __Usage:__
 
 ### Model_service.list_model_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_evaluations.js,samples/README.md)
 
@@ -3905,7 +3913,7 @@ __Usage:__
 
 ### Model_service.list_model_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_versions.js,samples/README.md)
 
@@ -3922,7 +3930,7 @@ __Usage:__
 
 ### Model_service.list_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_models.js,samples/README.md)
 
@@ -3939,7 +3947,7 @@ __Usage:__
 
 ### Model_service.merge_version_aliases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.merge_version_aliases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.merge_version_aliases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.merge_version_aliases.js,samples/README.md)
 
@@ -3956,7 +3964,7 @@ __Usage:__
 
 ### Model_service.update_explanation_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_explanation_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_explanation_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_explanation_dataset.js,samples/README.md)
 
@@ -3973,7 +3981,7 @@ __Usage:__
 
 ### Model_service.update_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_model.js,samples/README.md)
 
@@ -3990,7 +3998,7 @@ __Usage:__
 
 ### Model_service.upload_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.upload_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/model_service.upload_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.upload_model.js,samples/README.md)
 
@@ -4007,7 +4015,7 @@ __Usage:__
 
 ### Notebook_service.assign_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.assign_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.assign_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.assign_notebook_runtime.js,samples/README.md)
 
@@ -4024,7 +4032,7 @@ __Usage:__
 
 ### Notebook_service.create_notebook_execution_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_execution_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_execution_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_execution_job.js,samples/README.md)
 
@@ -4041,7 +4049,7 @@ __Usage:__
 
 ### Notebook_service.create_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_runtime_template.js,samples/README.md)
 
@@ -4058,7 +4066,7 @@ __Usage:__
 
 ### Notebook_service.delete_notebook_execution_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_execution_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_execution_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_execution_job.js,samples/README.md)
 
@@ -4075,7 +4083,7 @@ __Usage:__
 
 ### Notebook_service.delete_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime.js,samples/README.md)
 
@@ -4092,7 +4100,7 @@ __Usage:__
 
 ### Notebook_service.delete_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime_template.js,samples/README.md)
 
@@ -4109,7 +4117,7 @@ __Usage:__
 
 ### Notebook_service.get_notebook_execution_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_execution_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_execution_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_execution_job.js,samples/README.md)
 
@@ -4126,7 +4134,7 @@ __Usage:__
 
 ### Notebook_service.get_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime.js,samples/README.md)
 
@@ -4143,7 +4151,7 @@ __Usage:__
 
 ### Notebook_service.get_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime_template.js,samples/README.md)
 
@@ -4160,7 +4168,7 @@ __Usage:__
 
 ### Notebook_service.list_notebook_execution_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_execution_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_execution_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_execution_jobs.js,samples/README.md)
 
@@ -4177,7 +4185,7 @@ __Usage:__
 
 ### Notebook_service.list_notebook_runtime_templates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtime_templates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtime_templates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtime_templates.js,samples/README.md)
 
@@ -4194,7 +4202,7 @@ __Usage:__
 
 ### Notebook_service.list_notebook_runtimes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtimes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtimes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtimes.js,samples/README.md)
 
@@ -4211,7 +4219,7 @@ __Usage:__
 
 ### Notebook_service.start_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.start_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.start_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.start_notebook_runtime.js,samples/README.md)
 
@@ -4228,7 +4236,7 @@ __Usage:__
 
 ### Notebook_service.stop_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js,samples/README.md)
 
@@ -4245,7 +4253,7 @@ __Usage:__
 
 ### Notebook_service.update_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.update_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.update_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.update_notebook_runtime_template.js,samples/README.md)
 
@@ -4262,7 +4270,7 @@ __Usage:__
 
 ### Notebook_service.upgrade_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.upgrade_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.upgrade_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.upgrade_notebook_runtime.js,samples/README.md)
 
@@ -4279,7 +4287,7 @@ __Usage:__
 
 ### Persistent_resource_service.create_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.create_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.create_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.create_persistent_resource.js,samples/README.md)
 
@@ -4296,7 +4304,7 @@ __Usage:__
 
 ### Persistent_resource_service.delete_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.delete_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.delete_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.delete_persistent_resource.js,samples/README.md)
 
@@ -4313,7 +4321,7 @@ __Usage:__
 
 ### Persistent_resource_service.get_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.get_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.get_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.get_persistent_resource.js,samples/README.md)
 
@@ -4330,7 +4338,7 @@ __Usage:__
 
 ### Persistent_resource_service.list_persistent_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.list_persistent_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.list_persistent_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.list_persistent_resources.js,samples/README.md)
 
@@ -4347,7 +4355,7 @@ __Usage:__
 
 ### Persistent_resource_service.reboot_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.reboot_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.reboot_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.reboot_persistent_resource.js,samples/README.md)
 
@@ -4364,7 +4372,7 @@ __Usage:__
 
 ### Persistent_resource_service.update_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.update_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.update_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/persistent_resource_service.update_persistent_resource.js,samples/README.md)
 
@@ -4381,7 +4389,7 @@ __Usage:__
 
 ### Pipeline_service.batch_cancel_pipeline_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js,samples/README.md)
 
@@ -4398,7 +4406,7 @@ __Usage:__
 
 ### Pipeline_service.batch_delete_pipeline_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js,samples/README.md)
 
@@ -4415,7 +4423,7 @@ __Usage:__
 
 ### Pipeline_service.cancel_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.cancel_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.cancel_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.cancel_pipeline_job.js,samples/README.md)
 
@@ -4432,7 +4440,7 @@ __Usage:__
 
 ### Pipeline_service.cancel_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.cancel_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.cancel_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.cancel_training_pipeline.js,samples/README.md)
 
@@ -4449,7 +4457,7 @@ __Usage:__
 
 ### Pipeline_service.create_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.create_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.create_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.create_pipeline_job.js,samples/README.md)
 
@@ -4466,7 +4474,7 @@ __Usage:__
 
 ### Pipeline_service.create_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.create_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.create_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.create_training_pipeline.js,samples/README.md)
 
@@ -4483,7 +4491,7 @@ __Usage:__
 
 ### Pipeline_service.delete_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.delete_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.delete_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.delete_pipeline_job.js,samples/README.md)
 
@@ -4500,7 +4508,7 @@ __Usage:__
 
 ### Pipeline_service.delete_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.delete_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.delete_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.delete_training_pipeline.js,samples/README.md)
 
@@ -4517,7 +4525,7 @@ __Usage:__
 
 ### Pipeline_service.get_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.get_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.get_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.get_pipeline_job.js,samples/README.md)
 
@@ -4534,7 +4542,7 @@ __Usage:__
 
 ### Pipeline_service.get_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.get_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.get_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.get_training_pipeline.js,samples/README.md)
 
@@ -4551,7 +4559,7 @@ __Usage:__
 
 ### Pipeline_service.list_pipeline_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.list_pipeline_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.list_pipeline_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.list_pipeline_jobs.js,samples/README.md)
 
@@ -4568,7 +4576,7 @@ __Usage:__
 
 ### Pipeline_service.list_training_pipelines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.list_training_pipelines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.list_training_pipelines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.list_training_pipelines.js,samples/README.md)
 
@@ -4585,7 +4593,7 @@ __Usage:__
 
 ### Prediction_service.direct_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.direct_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.direct_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.direct_predict.js,samples/README.md)
 
@@ -4602,7 +4610,7 @@ __Usage:__
 
 ### Prediction_service.direct_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.direct_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.direct_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.direct_raw_predict.js,samples/README.md)
 
@@ -4619,7 +4627,7 @@ __Usage:__
 
 ### Prediction_service.explain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.explain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.explain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.explain.js,samples/README.md)
 
@@ -4636,7 +4644,7 @@ __Usage:__
 
 ### Prediction_service.generate_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.generate_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.generate_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.generate_content.js,samples/README.md)
 
@@ -4653,7 +4661,7 @@ __Usage:__
 
 ### Prediction_service.predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.predict.js,samples/README.md)
 
@@ -4670,7 +4678,7 @@ __Usage:__
 
 ### Prediction_service.raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.raw_predict.js,samples/README.md)
 
@@ -4687,7 +4695,7 @@ __Usage:__
 
 ### Prediction_service.server_streaming_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.server_streaming_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.server_streaming_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.server_streaming_predict.js,samples/README.md)
 
@@ -4704,7 +4712,7 @@ __Usage:__
 
 ### Prediction_service.stream_direct_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_predict.js,samples/README.md)
 
@@ -4721,7 +4729,7 @@ __Usage:__
 
 ### Prediction_service.stream_direct_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_raw_predict.js,samples/README.md)
 
@@ -4738,7 +4746,7 @@ __Usage:__
 
 ### Prediction_service.stream_generate_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js,samples/README.md)
 
@@ -4755,7 +4763,7 @@ __Usage:__
 
 ### Prediction_service.stream_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js,samples/README.md)
 
@@ -4772,7 +4780,7 @@ __Usage:__
 
 ### Prediction_service.streaming_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_predict.js,samples/README.md)
 
@@ -4789,7 +4797,7 @@ __Usage:__
 
 ### Prediction_service.streaming_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_raw_predict.js,samples/README.md)
 
@@ -4806,7 +4814,7 @@ __Usage:__
 
 ### Schedule_service.create_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.create_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.create_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.create_schedule.js,samples/README.md)
 
@@ -4823,7 +4831,7 @@ __Usage:__
 
 ### Schedule_service.delete_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.delete_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.delete_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.delete_schedule.js,samples/README.md)
 
@@ -4840,7 +4848,7 @@ __Usage:__
 
 ### Schedule_service.get_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.get_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.get_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.get_schedule.js,samples/README.md)
 
@@ -4857,7 +4865,7 @@ __Usage:__
 
 ### Schedule_service.list_schedules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.list_schedules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.list_schedules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.list_schedules.js,samples/README.md)
 
@@ -4874,7 +4882,7 @@ __Usage:__
 
 ### Schedule_service.pause_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.pause_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.pause_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.pause_schedule.js,samples/README.md)
 
@@ -4891,7 +4899,7 @@ __Usage:__
 
 ### Schedule_service.resume_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.resume_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.resume_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.resume_schedule.js,samples/README.md)
 
@@ -4908,7 +4916,7 @@ __Usage:__
 
 ### Schedule_service.update_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.update_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.update_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.update_schedule.js,samples/README.md)
 
@@ -4925,7 +4933,7 @@ __Usage:__
 
 ### Specialist_pool_service.create_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.create_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.create_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.create_specialist_pool.js,samples/README.md)
 
@@ -4942,7 +4950,7 @@ __Usage:__
 
 ### Specialist_pool_service.delete_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.delete_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.delete_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.delete_specialist_pool.js,samples/README.md)
 
@@ -4959,7 +4967,7 @@ __Usage:__
 
 ### Specialist_pool_service.get_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.get_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.get_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.get_specialist_pool.js,samples/README.md)
 
@@ -4976,7 +4984,7 @@ __Usage:__
 
 ### Specialist_pool_service.list_specialist_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.list_specialist_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.list_specialist_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.list_specialist_pools.js,samples/README.md)
 
@@ -4993,7 +5001,7 @@ __Usage:__
 
 ### Specialist_pool_service.update_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.update_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.update_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.update_specialist_pool.js,samples/README.md)
 
@@ -5010,7 +5018,7 @@ __Usage:__
 
 ### Tensorboard_service.batch_create_tensorboard_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_create_tensorboard_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_create_tensorboard_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_create_tensorboard_runs.js,samples/README.md)
 
@@ -5027,7 +5035,7 @@ __Usage:__
 
 ### Tensorboard_service.batch_create_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_create_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_create_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_create_tensorboard_time_series.js,samples/README.md)
 
@@ -5044,7 +5052,7 @@ __Usage:__
 
 ### Tensorboard_service.batch_read_tensorboard_time_series_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_read_tensorboard_time_series_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_read_tensorboard_time_series_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.batch_read_tensorboard_time_series_data.js,samples/README.md)
 
@@ -5061,7 +5069,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard.js,samples/README.md)
 
@@ -5078,7 +5086,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_experiment.js,samples/README.md)
 
@@ -5095,7 +5103,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_run.js,samples/README.md)
 
@@ -5112,7 +5120,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.create_tensorboard_time_series.js,samples/README.md)
 
@@ -5129,7 +5137,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard.js,samples/README.md)
 
@@ -5146,7 +5154,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_experiment.js,samples/README.md)
 
@@ -5163,7 +5171,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_run.js,samples/README.md)
 
@@ -5180,7 +5188,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.delete_tensorboard_time_series.js,samples/README.md)
 
@@ -5197,7 +5205,7 @@ __Usage:__
 
 ### Tensorboard_service.export_tensorboard_time_series_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.export_tensorboard_time_series_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.export_tensorboard_time_series_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.export_tensorboard_time_series_data.js,samples/README.md)
 
@@ -5214,7 +5222,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard.js,samples/README.md)
 
@@ -5231,7 +5239,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_experiment.js,samples/README.md)
 
@@ -5248,7 +5256,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_run.js,samples/README.md)
 
@@ -5265,7 +5273,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.get_tensorboard_time_series.js,samples/README.md)
 
@@ -5282,7 +5290,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboard_experiments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_experiments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_experiments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_experiments.js,samples/README.md)
 
@@ -5299,7 +5307,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboard_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_runs.js,samples/README.md)
 
@@ -5316,7 +5324,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboard_time_series.js,samples/README.md)
 
@@ -5333,7 +5341,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboards
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboards.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboards.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.list_tensorboards.js,samples/README.md)
 
@@ -5350,7 +5358,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_blob_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_blob_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_blob_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_blob_data.js,samples/README.md)
 
@@ -5367,7 +5375,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_size
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js,samples/README.md)
 
@@ -5384,7 +5392,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_time_series_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_time_series_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_time_series_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_time_series_data.js,samples/README.md)
 
@@ -5401,7 +5409,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_usage
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_usage.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_usage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_usage.js,samples/README.md)
 
@@ -5418,7 +5426,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard.js,samples/README.md)
 
@@ -5435,7 +5443,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_experiment.js,samples/README.md)
 
@@ -5452,7 +5460,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_run.js,samples/README.md)
 
@@ -5469,7 +5477,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.update_tensorboard_time_series.js,samples/README.md)
 
@@ -5486,7 +5494,7 @@ __Usage:__
 
 ### Tensorboard_service.write_tensorboard_experiment_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_experiment_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_experiment_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_experiment_data.js,samples/README.md)
 
@@ -5503,7 +5511,7 @@ __Usage:__
 
 ### Tensorboard_service.write_tensorboard_run_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_run_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_run_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_run_data.js,samples/README.md)
 
@@ -5520,7 +5528,7 @@ __Usage:__
 
 ### Vizier_service.add_trial_measurement
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.add_trial_measurement.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.add_trial_measurement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.add_trial_measurement.js,samples/README.md)
 
@@ -5537,7 +5545,7 @@ __Usage:__
 
 ### Vizier_service.check_trial_early_stopping_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.check_trial_early_stopping_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.check_trial_early_stopping_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.check_trial_early_stopping_state.js,samples/README.md)
 
@@ -5554,7 +5562,7 @@ __Usage:__
 
 ### Vizier_service.complete_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.complete_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.complete_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.complete_trial.js,samples/README.md)
 
@@ -5571,7 +5579,7 @@ __Usage:__
 
 ### Vizier_service.create_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.create_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.create_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.create_study.js,samples/README.md)
 
@@ -5588,7 +5596,7 @@ __Usage:__
 
 ### Vizier_service.create_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.create_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.create_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.create_trial.js,samples/README.md)
 
@@ -5605,7 +5613,7 @@ __Usage:__
 
 ### Vizier_service.delete_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.delete_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.delete_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.delete_study.js,samples/README.md)
 
@@ -5622,7 +5630,7 @@ __Usage:__
 
 ### Vizier_service.delete_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.delete_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.delete_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.delete_trial.js,samples/README.md)
 
@@ -5639,7 +5647,7 @@ __Usage:__
 
 ### Vizier_service.get_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.get_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.get_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.get_study.js,samples/README.md)
 
@@ -5656,7 +5664,7 @@ __Usage:__
 
 ### Vizier_service.get_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.get_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.get_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.get_trial.js,samples/README.md)
 
@@ -5673,7 +5681,7 @@ __Usage:__
 
 ### Vizier_service.list_optimal_trials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_optimal_trials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_optimal_trials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_optimal_trials.js,samples/README.md)
 
@@ -5690,7 +5698,7 @@ __Usage:__
 
 ### Vizier_service.list_studies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_studies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_studies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_studies.js,samples/README.md)
 
@@ -5707,7 +5715,7 @@ __Usage:__
 
 ### Vizier_service.list_trials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_trials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_trials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.list_trials.js,samples/README.md)
 
@@ -5724,7 +5732,7 @@ __Usage:__
 
 ### Vizier_service.lookup_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.lookup_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.lookup_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.lookup_study.js,samples/README.md)
 
@@ -5741,7 +5749,7 @@ __Usage:__
 
 ### Vizier_service.stop_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.stop_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.stop_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.stop_trial.js,samples/README.md)
 
@@ -5758,7 +5766,7 @@ __Usage:__
 
 ### Vizier_service.suggest_trials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.suggest_trials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.suggest_trials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vizier_service.suggest_trials.js,samples/README.md)
 
@@ -5775,7 +5783,7 @@ __Usage:__
 
 ### Dataset_service.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset.js,samples/README.md)
 
@@ -5792,7 +5800,7 @@ __Usage:__
 
 ### Dataset_service.create_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.create_dataset_version.js,samples/README.md)
 
@@ -5809,7 +5817,7 @@ __Usage:__
 
 ### Dataset_service.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset.js,samples/README.md)
 
@@ -5826,7 +5834,7 @@ __Usage:__
 
 ### Dataset_service.delete_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_dataset_version.js,samples/README.md)
 
@@ -5843,7 +5851,7 @@ __Usage:__
 
 ### Dataset_service.delete_saved_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_saved_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_saved_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_saved_query.js,samples/README.md)
 
@@ -5860,7 +5868,7 @@ __Usage:__
 
 ### Dataset_service.export_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.export_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.export_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.export_data.js,samples/README.md)
 
@@ -5877,7 +5885,7 @@ __Usage:__
 
 ### Dataset_service.get_annotation_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_annotation_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_annotation_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_annotation_spec.js,samples/README.md)
 
@@ -5894,7 +5902,7 @@ __Usage:__
 
 ### Dataset_service.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset.js,samples/README.md)
 
@@ -5911,7 +5919,7 @@ __Usage:__
 
 ### Dataset_service.get_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.get_dataset_version.js,samples/README.md)
 
@@ -5928,7 +5936,7 @@ __Usage:__
 
 ### Dataset_service.import_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.import_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.import_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.import_data.js,samples/README.md)
 
@@ -5945,7 +5953,7 @@ __Usage:__
 
 ### Dataset_service.list_annotations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_annotations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_annotations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_annotations.js,samples/README.md)
 
@@ -5962,7 +5970,7 @@ __Usage:__
 
 ### Dataset_service.list_data_items
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_data_items.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_data_items.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_data_items.js,samples/README.md)
 
@@ -5979,7 +5987,7 @@ __Usage:__
 
 ### Dataset_service.list_dataset_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_dataset_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_dataset_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_dataset_versions.js,samples/README.md)
 
@@ -5996,7 +6004,7 @@ __Usage:__
 
 ### Dataset_service.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_datasets.js,samples/README.md)
 
@@ -6013,7 +6021,7 @@ __Usage:__
 
 ### Dataset_service.list_saved_queries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_saved_queries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_saved_queries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.list_saved_queries.js,samples/README.md)
 
@@ -6030,7 +6038,7 @@ __Usage:__
 
 ### Dataset_service.restore_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.restore_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.restore_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.restore_dataset_version.js,samples/README.md)
 
@@ -6047,7 +6055,7 @@ __Usage:__
 
 ### Dataset_service.search_data_items
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.search_data_items.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.search_data_items.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.search_data_items.js,samples/README.md)
 
@@ -6064,7 +6072,7 @@ __Usage:__
 
 ### Dataset_service.update_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset.js,samples/README.md)
 
@@ -6081,7 +6089,7 @@ __Usage:__
 
 ### Dataset_service.update_dataset_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset_version.js,samples/README.md)
 
@@ -6098,7 +6106,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.create_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.create_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.create_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.create_deployment_resource_pool.js,samples/README.md)
 
@@ -6115,7 +6123,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.delete_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.delete_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.delete_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.delete_deployment_resource_pool.js,samples/README.md)
 
@@ -6132,7 +6140,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.get_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.get_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.get_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.get_deployment_resource_pool.js,samples/README.md)
 
@@ -6149,7 +6157,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.list_deployment_resource_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.list_deployment_resource_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.list_deployment_resource_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.list_deployment_resource_pools.js,samples/README.md)
 
@@ -6166,7 +6174,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.query_deployed_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.query_deployed_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.query_deployed_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.query_deployed_models.js,samples/README.md)
 
@@ -6183,7 +6191,7 @@ __Usage:__
 
 ### Deployment_resource_pool_service.update_deployment_resource_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js,samples/README.md)
 
@@ -6200,7 +6208,7 @@ __Usage:__
 
 ### Endpoint_service.create_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.create_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.create_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.create_endpoint.js,samples/README.md)
 
@@ -6217,7 +6225,7 @@ __Usage:__
 
 ### Endpoint_service.delete_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.delete_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.delete_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.delete_endpoint.js,samples/README.md)
 
@@ -6234,7 +6242,7 @@ __Usage:__
 
 ### Endpoint_service.deploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.deploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.deploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.deploy_model.js,samples/README.md)
 
@@ -6251,7 +6259,7 @@ __Usage:__
 
 ### Endpoint_service.get_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.get_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.get_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.get_endpoint.js,samples/README.md)
 
@@ -6268,7 +6276,7 @@ __Usage:__
 
 ### Endpoint_service.list_endpoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.list_endpoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.list_endpoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.list_endpoints.js,samples/README.md)
 
@@ -6285,7 +6293,7 @@ __Usage:__
 
 ### Endpoint_service.mutate_deployed_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js,samples/README.md)
 
@@ -6302,7 +6310,7 @@ __Usage:__
 
 ### Endpoint_service.undeploy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.undeploy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.undeploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.undeploy_model.js,samples/README.md)
 
@@ -6319,7 +6327,7 @@ __Usage:__
 
 ### Endpoint_service.update_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint.js,samples/README.md)
 
@@ -6336,7 +6344,7 @@ __Usage:__
 
 ### Endpoint_service.update_endpoint_long_running
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js,samples/README.md)
 
@@ -6353,7 +6361,7 @@ __Usage:__
 
 ### Evaluation_service.evaluate_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js,samples/README.md)
 
@@ -6370,7 +6378,7 @@ __Usage:__
 
 ### Extension_execution_service.execute_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.execute_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.execute_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.execute_extension.js,samples/README.md)
 
@@ -6387,7 +6395,7 @@ __Usage:__
 
 ### Extension_execution_service.query_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.query_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.query_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.query_extension.js,samples/README.md)
 
@@ -6404,7 +6412,7 @@ __Usage:__
 
 ### Extension_registry_service.delete_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.delete_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.delete_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.delete_extension.js,samples/README.md)
 
@@ -6421,7 +6429,7 @@ __Usage:__
 
 ### Extension_registry_service.get_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.get_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.get_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.get_extension.js,samples/README.md)
 
@@ -6438,7 +6446,7 @@ __Usage:__
 
 ### Extension_registry_service.import_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.import_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.import_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.import_extension.js,samples/README.md)
 
@@ -6455,7 +6463,7 @@ __Usage:__
 
 ### Extension_registry_service.list_extensions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.list_extensions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.list_extensions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.list_extensions.js,samples/README.md)
 
@@ -6472,7 +6480,7 @@ __Usage:__
 
 ### Extension_registry_service.update_extension
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.update_extension.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.update_extension.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.update_extension.js,samples/README.md)
 
@@ -6489,7 +6497,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.create_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_online_store.js,samples/README.md)
 
@@ -6506,7 +6514,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.create_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_view.js,samples/README.md)
 
@@ -6523,7 +6531,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.delete_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_online_store.js,samples/README.md)
 
@@ -6540,7 +6548,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.delete_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.delete_feature_view.js,samples/README.md)
 
@@ -6557,7 +6565,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.get_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_online_store.js,samples/README.md)
 
@@ -6574,7 +6582,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.get_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view.js,samples/README.md)
 
@@ -6591,7 +6599,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.get_feature_view_sync
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view_sync.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view_sync.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.get_feature_view_sync.js,samples/README.md)
 
@@ -6608,7 +6616,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.list_feature_online_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_online_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_online_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_online_stores.js,samples/README.md)
 
@@ -6625,7 +6633,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.list_feature_view_syncs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_view_syncs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_view_syncs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_view_syncs.js,samples/README.md)
 
@@ -6642,7 +6650,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.list_feature_views
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_views.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_views.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.list_feature_views.js,samples/README.md)
 
@@ -6659,7 +6667,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.sync_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.sync_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.sync_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.sync_feature_view.js,samples/README.md)
 
@@ -6676,7 +6684,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.update_feature_online_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_online_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_online_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_online_store.js,samples/README.md)
 
@@ -6693,7 +6701,7 @@ __Usage:__
 
 ### Feature_online_store_admin_service.update_feature_view
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_view.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_view.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.update_feature_view.js,samples/README.md)
 
@@ -6710,7 +6718,7 @@ __Usage:__
 
 ### Feature_online_store_service.fetch_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.fetch_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.fetch_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.fetch_feature_values.js,samples/README.md)
 
@@ -6727,7 +6735,7 @@ __Usage:__
 
 ### Feature_online_store_service.search_nearest_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.search_nearest_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.search_nearest_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.search_nearest_entities.js,samples/README.md)
 
@@ -6744,7 +6752,7 @@ __Usage:__
 
 ### Feature_online_store_service.streaming_fetch_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.streaming_fetch_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.streaming_fetch_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.streaming_fetch_feature_values.js,samples/README.md)
 
@@ -6759,9 +6767,26 @@ __Usage:__
 
 
 
+### Feature_registry_service.batch_create_features
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.create_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js,samples/README.md)
 
@@ -6778,7 +6803,7 @@ __Usage:__
 
 ### Feature_registry_service.create_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js,samples/README.md)
 
@@ -6793,9 +6818,43 @@ __Usage:__
 
 
 
+### Feature_registry_service.create_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.create_feature_monitor_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.delete_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature.js,samples/README.md)
 
@@ -6812,7 +6871,7 @@ __Usage:__
 
 ### Feature_registry_service.delete_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_group.js,samples/README.md)
 
@@ -6827,9 +6886,26 @@ __Usage:__
 
 
 
+### Feature_registry_service.delete_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.get_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js,samples/README.md)
 
@@ -6846,7 +6922,7 @@ __Usage:__
 
 ### Feature_registry_service.get_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_group.js,samples/README.md)
 
@@ -6861,9 +6937,43 @@ __Usage:__
 
 
 
+### Feature_registry_service.get_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.get_feature_monitor_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.list_feature_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js,samples/README.md)
 
@@ -6878,9 +6988,43 @@ __Usage:__
 
 
 
+### Feature_registry_service.list_feature_monitor_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.list_feature_monitors
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.list_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_features.js,samples/README.md)
 
@@ -6897,7 +7041,7 @@ __Usage:__
 
 ### Feature_registry_service.update_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature.js,samples/README.md)
 
@@ -6914,7 +7058,7 @@ __Usage:__
 
 ### Feature_registry_service.update_feature_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js,samples/README.md)
 
@@ -6931,7 +7075,7 @@ __Usage:__
 
 ### Featurestore_online_serving_service.read_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.read_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.read_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.read_feature_values.js,samples/README.md)
 
@@ -6948,7 +7092,7 @@ __Usage:__
 
 ### Featurestore_online_serving_service.streaming_read_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.streaming_read_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.streaming_read_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.streaming_read_feature_values.js,samples/README.md)
 
@@ -6965,7 +7109,7 @@ __Usage:__
 
 ### Featurestore_online_serving_service.write_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.write_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.write_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_online_serving_service.write_feature_values.js,samples/README.md)
 
@@ -6982,7 +7126,7 @@ __Usage:__
 
 ### Featurestore_service.batch_create_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.batch_create_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.batch_create_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.batch_create_features.js,samples/README.md)
 
@@ -6999,7 +7143,7 @@ __Usage:__
 
 ### Featurestore_service.batch_read_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.batch_read_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.batch_read_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.batch_read_feature_values.js,samples/README.md)
 
@@ -7016,7 +7160,7 @@ __Usage:__
 
 ### Featurestore_service.create_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_entity_type.js,samples/README.md)
 
@@ -7033,7 +7177,7 @@ __Usage:__
 
 ### Featurestore_service.create_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_feature.js,samples/README.md)
 
@@ -7050,7 +7194,7 @@ __Usage:__
 
 ### Featurestore_service.create_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.create_featurestore.js,samples/README.md)
 
@@ -7067,7 +7211,7 @@ __Usage:__
 
 ### Featurestore_service.delete_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_entity_type.js,samples/README.md)
 
@@ -7084,7 +7228,7 @@ __Usage:__
 
 ### Featurestore_service.delete_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_feature.js,samples/README.md)
 
@@ -7101,7 +7245,7 @@ __Usage:__
 
 ### Featurestore_service.delete_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_feature_values.js,samples/README.md)
 
@@ -7118,7 +7262,7 @@ __Usage:__
 
 ### Featurestore_service.delete_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.delete_featurestore.js,samples/README.md)
 
@@ -7135,7 +7279,7 @@ __Usage:__
 
 ### Featurestore_service.export_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.export_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.export_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.export_feature_values.js,samples/README.md)
 
@@ -7152,7 +7296,7 @@ __Usage:__
 
 ### Featurestore_service.get_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_entity_type.js,samples/README.md)
 
@@ -7169,7 +7313,7 @@ __Usage:__
 
 ### Featurestore_service.get_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_feature.js,samples/README.md)
 
@@ -7186,7 +7330,7 @@ __Usage:__
 
 ### Featurestore_service.get_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.get_featurestore.js,samples/README.md)
 
@@ -7203,7 +7347,7 @@ __Usage:__
 
 ### Featurestore_service.import_feature_values
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.import_feature_values.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.import_feature_values.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.import_feature_values.js,samples/README.md)
 
@@ -7220,7 +7364,7 @@ __Usage:__
 
 ### Featurestore_service.list_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_entity_types.js,samples/README.md)
 
@@ -7237,7 +7381,7 @@ __Usage:__
 
 ### Featurestore_service.list_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_features.js,samples/README.md)
 
@@ -7254,7 +7398,7 @@ __Usage:__
 
 ### Featurestore_service.list_featurestores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_featurestores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_featurestores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.list_featurestores.js,samples/README.md)
 
@@ -7271,7 +7415,7 @@ __Usage:__
 
 ### Featurestore_service.search_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.search_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.search_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.search_features.js,samples/README.md)
 
@@ -7288,7 +7432,7 @@ __Usage:__
 
 ### Featurestore_service.update_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_entity_type.js,samples/README.md)
 
@@ -7305,7 +7449,7 @@ __Usage:__
 
 ### Featurestore_service.update_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_feature.js,samples/README.md)
 
@@ -7322,7 +7466,7 @@ __Usage:__
 
 ### Featurestore_service.update_featurestore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_featurestore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_featurestore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_featurestore.js,samples/README.md)
 
@@ -7339,7 +7483,7 @@ __Usage:__
 
 ### Gen_ai_cache_service.create_cached_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.create_cached_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.create_cached_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.create_cached_content.js,samples/README.md)
 
@@ -7356,7 +7500,7 @@ __Usage:__
 
 ### Gen_ai_cache_service.delete_cached_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.delete_cached_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.delete_cached_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.delete_cached_content.js,samples/README.md)
 
@@ -7373,7 +7517,7 @@ __Usage:__
 
 ### Gen_ai_cache_service.get_cached_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.get_cached_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.get_cached_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.get_cached_content.js,samples/README.md)
 
@@ -7390,7 +7534,7 @@ __Usage:__
 
 ### Gen_ai_cache_service.list_cached_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.list_cached_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.list_cached_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.list_cached_contents.js,samples/README.md)
 
@@ -7407,7 +7551,7 @@ __Usage:__
 
 ### Gen_ai_cache_service.update_cached_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.update_cached_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.update_cached_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.update_cached_content.js,samples/README.md)
 
@@ -7424,7 +7568,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.cancel_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.cancel_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.cancel_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.cancel_tuning_job.js,samples/README.md)
 
@@ -7441,7 +7585,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.create_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.create_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.create_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.create_tuning_job.js,samples/README.md)
 
@@ -7458,7 +7602,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.get_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.get_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.get_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.get_tuning_job.js,samples/README.md)
 
@@ -7475,7 +7619,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.list_tuning_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js,samples/README.md)
 
@@ -7492,7 +7636,7 @@ __Usage:__
 
 ### Gen_ai_tuning_service.rebase_tuned_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js,samples/README.md)
 
@@ -7509,7 +7653,7 @@ __Usage:__
 
 ### Index_endpoint_service.create_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.create_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.create_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.create_index_endpoint.js,samples/README.md)
 
@@ -7526,7 +7670,7 @@ __Usage:__
 
 ### Index_endpoint_service.delete_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.delete_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.delete_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.delete_index_endpoint.js,samples/README.md)
 
@@ -7543,7 +7687,7 @@ __Usage:__
 
 ### Index_endpoint_service.deploy_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.deploy_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.deploy_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.deploy_index.js,samples/README.md)
 
@@ -7560,7 +7704,7 @@ __Usage:__
 
 ### Index_endpoint_service.get_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.get_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.get_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.get_index_endpoint.js,samples/README.md)
 
@@ -7577,7 +7721,7 @@ __Usage:__
 
 ### Index_endpoint_service.list_index_endpoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.list_index_endpoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.list_index_endpoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.list_index_endpoints.js,samples/README.md)
 
@@ -7594,7 +7738,7 @@ __Usage:__
 
 ### Index_endpoint_service.mutate_deployed_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.mutate_deployed_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.mutate_deployed_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.mutate_deployed_index.js,samples/README.md)
 
@@ -7611,7 +7755,7 @@ __Usage:__
 
 ### Index_endpoint_service.undeploy_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.undeploy_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.undeploy_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.undeploy_index.js,samples/README.md)
 
@@ -7628,7 +7772,7 @@ __Usage:__
 
 ### Index_endpoint_service.update_index_endpoint
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.update_index_endpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.update_index_endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_endpoint_service.update_index_endpoint.js,samples/README.md)
 
@@ -7645,7 +7789,7 @@ __Usage:__
 
 ### Index_service.create_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.create_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.create_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.create_index.js,samples/README.md)
 
@@ -7662,7 +7806,7 @@ __Usage:__
 
 ### Index_service.delete_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.delete_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.delete_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.delete_index.js,samples/README.md)
 
@@ -7679,7 +7823,7 @@ __Usage:__
 
 ### Index_service.get_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.get_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.get_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.get_index.js,samples/README.md)
 
@@ -7696,7 +7840,7 @@ __Usage:__
 
 ### Index_service.list_indexes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.list_indexes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.list_indexes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.list_indexes.js,samples/README.md)
 
@@ -7713,7 +7857,7 @@ __Usage:__
 
 ### Index_service.remove_datapoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.remove_datapoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.remove_datapoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.remove_datapoints.js,samples/README.md)
 
@@ -7730,7 +7874,7 @@ __Usage:__
 
 ### Index_service.update_index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.update_index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.update_index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.update_index.js,samples/README.md)
 
@@ -7747,7 +7891,7 @@ __Usage:__
 
 ### Index_service.upsert_datapoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.upsert_datapoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.upsert_datapoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/index_service.upsert_datapoints.js,samples/README.md)
 
@@ -7764,7 +7908,7 @@ __Usage:__
 
 ### Job_service.cancel_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_batch_prediction_job.js,samples/README.md)
 
@@ -7781,7 +7925,7 @@ __Usage:__
 
 ### Job_service.cancel_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_custom_job.js,samples/README.md)
 
@@ -7798,7 +7942,7 @@ __Usage:__
 
 ### Job_service.cancel_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_data_labeling_job.js,samples/README.md)
 
@@ -7815,7 +7959,7 @@ __Usage:__
 
 ### Job_service.cancel_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -7832,7 +7976,7 @@ __Usage:__
 
 ### Job_service.cancel_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.cancel_nas_job.js,samples/README.md)
 
@@ -7849,7 +7993,7 @@ __Usage:__
 
 ### Job_service.create_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_batch_prediction_job.js,samples/README.md)
 
@@ -7866,7 +8010,7 @@ __Usage:__
 
 ### Job_service.create_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_custom_job.js,samples/README.md)
 
@@ -7883,7 +8027,7 @@ __Usage:__
 
 ### Job_service.create_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_data_labeling_job.js,samples/README.md)
 
@@ -7900,7 +8044,7 @@ __Usage:__
 
 ### Job_service.create_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -7917,7 +8061,7 @@ __Usage:__
 
 ### Job_service.create_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -7934,7 +8078,7 @@ __Usage:__
 
 ### Job_service.create_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.create_nas_job.js,samples/README.md)
 
@@ -7951,7 +8095,7 @@ __Usage:__
 
 ### Job_service.delete_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_batch_prediction_job.js,samples/README.md)
 
@@ -7968,7 +8112,7 @@ __Usage:__
 
 ### Job_service.delete_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_custom_job.js,samples/README.md)
 
@@ -7985,7 +8129,7 @@ __Usage:__
 
 ### Job_service.delete_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_data_labeling_job.js,samples/README.md)
 
@@ -8002,7 +8146,7 @@ __Usage:__
 
 ### Job_service.delete_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -8019,7 +8163,7 @@ __Usage:__
 
 ### Job_service.delete_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -8036,7 +8180,7 @@ __Usage:__
 
 ### Job_service.delete_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.delete_nas_job.js,samples/README.md)
 
@@ -8053,7 +8197,7 @@ __Usage:__
 
 ### Job_service.get_batch_prediction_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_batch_prediction_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_batch_prediction_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_batch_prediction_job.js,samples/README.md)
 
@@ -8070,7 +8214,7 @@ __Usage:__
 
 ### Job_service.get_custom_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_custom_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_custom_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_custom_job.js,samples/README.md)
 
@@ -8087,7 +8231,7 @@ __Usage:__
 
 ### Job_service.get_data_labeling_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_data_labeling_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_data_labeling_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_data_labeling_job.js,samples/README.md)
 
@@ -8104,7 +8248,7 @@ __Usage:__
 
 ### Job_service.get_hyperparameter_tuning_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_hyperparameter_tuning_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_hyperparameter_tuning_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_hyperparameter_tuning_job.js,samples/README.md)
 
@@ -8121,7 +8265,7 @@ __Usage:__
 
 ### Job_service.get_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -8138,7 +8282,7 @@ __Usage:__
 
 ### Job_service.get_nas_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_nas_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_nas_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_nas_job.js,samples/README.md)
 
@@ -8155,7 +8299,7 @@ __Usage:__
 
 ### Job_service.get_nas_trial_detail
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_nas_trial_detail.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_nas_trial_detail.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.get_nas_trial_detail.js,samples/README.md)
 
@@ -8172,7 +8316,7 @@ __Usage:__
 
 ### Job_service.list_batch_prediction_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_batch_prediction_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_batch_prediction_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_batch_prediction_jobs.js,samples/README.md)
 
@@ -8189,7 +8333,7 @@ __Usage:__
 
 ### Job_service.list_custom_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_custom_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_custom_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_custom_jobs.js,samples/README.md)
 
@@ -8206,7 +8350,7 @@ __Usage:__
 
 ### Job_service.list_data_labeling_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_data_labeling_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_data_labeling_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_data_labeling_jobs.js,samples/README.md)
 
@@ -8223,7 +8367,7 @@ __Usage:__
 
 ### Job_service.list_hyperparameter_tuning_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_hyperparameter_tuning_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_hyperparameter_tuning_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_hyperparameter_tuning_jobs.js,samples/README.md)
 
@@ -8240,7 +8384,7 @@ __Usage:__
 
 ### Job_service.list_model_deployment_monitoring_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_model_deployment_monitoring_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_model_deployment_monitoring_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_model_deployment_monitoring_jobs.js,samples/README.md)
 
@@ -8257,7 +8401,7 @@ __Usage:__
 
 ### Job_service.list_nas_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_nas_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_nas_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_nas_jobs.js,samples/README.md)
 
@@ -8274,7 +8418,7 @@ __Usage:__
 
 ### Job_service.list_nas_trial_details
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_nas_trial_details.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_nas_trial_details.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.list_nas_trial_details.js,samples/README.md)
 
@@ -8291,7 +8435,7 @@ __Usage:__
 
 ### Job_service.pause_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.pause_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.pause_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.pause_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -8308,7 +8452,7 @@ __Usage:__
 
 ### Job_service.resume_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.resume_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.resume_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.resume_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -8325,7 +8469,7 @@ __Usage:__
 
 ### Job_service.search_model_deployment_monitoring_stats_anomalies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.search_model_deployment_monitoring_stats_anomalies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.search_model_deployment_monitoring_stats_anomalies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.search_model_deployment_monitoring_stats_anomalies.js,samples/README.md)
 
@@ -8342,7 +8486,7 @@ __Usage:__
 
 ### Job_service.update_model_deployment_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.update_model_deployment_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.update_model_deployment_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.update_model_deployment_monitoring_job.js,samples/README.md)
 
@@ -8359,7 +8503,7 @@ __Usage:__
 
 ### Llm_utility_service.compute_tokens
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/llm_utility_service.compute_tokens.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/llm_utility_service.compute_tokens.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/llm_utility_service.compute_tokens.js,samples/README.md)
 
@@ -8376,7 +8520,7 @@ __Usage:__
 
 ### Llm_utility_service.count_tokens
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/llm_utility_service.count_tokens.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/llm_utility_service.count_tokens.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/llm_utility_service.count_tokens.js,samples/README.md)
 
@@ -8393,7 +8537,7 @@ __Usage:__
 
 ### Match_service.find_neighbors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.find_neighbors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.find_neighbors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.find_neighbors.js,samples/README.md)
 
@@ -8410,7 +8554,7 @@ __Usage:__
 
 ### Match_service.read_index_datapoints
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.read_index_datapoints.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.read_index_datapoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.read_index_datapoints.js,samples/README.md)
 
@@ -8427,7 +8571,7 @@ __Usage:__
 
 ### Metadata_service.add_context_artifacts_and_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_context_artifacts_and_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_context_artifacts_and_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_context_artifacts_and_executions.js,samples/README.md)
 
@@ -8444,7 +8588,7 @@ __Usage:__
 
 ### Metadata_service.add_context_children
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_context_children.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_context_children.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_context_children.js,samples/README.md)
 
@@ -8461,7 +8605,7 @@ __Usage:__
 
 ### Metadata_service.add_execution_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_execution_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_execution_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.add_execution_events.js,samples/README.md)
 
@@ -8478,7 +8622,7 @@ __Usage:__
 
 ### Metadata_service.create_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_artifact.js,samples/README.md)
 
@@ -8495,7 +8639,7 @@ __Usage:__
 
 ### Metadata_service.create_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_context.js,samples/README.md)
 
@@ -8512,7 +8656,7 @@ __Usage:__
 
 ### Metadata_service.create_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_execution.js,samples/README.md)
 
@@ -8529,7 +8673,7 @@ __Usage:__
 
 ### Metadata_service.create_metadata_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_metadata_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_metadata_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_metadata_schema.js,samples/README.md)
 
@@ -8546,7 +8690,7 @@ __Usage:__
 
 ### Metadata_service.create_metadata_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_metadata_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_metadata_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.create_metadata_store.js,samples/README.md)
 
@@ -8563,7 +8707,7 @@ __Usage:__
 
 ### Metadata_service.delete_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_artifact.js,samples/README.md)
 
@@ -8580,7 +8724,7 @@ __Usage:__
 
 ### Metadata_service.delete_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_context.js,samples/README.md)
 
@@ -8597,7 +8741,7 @@ __Usage:__
 
 ### Metadata_service.delete_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_execution.js,samples/README.md)
 
@@ -8614,7 +8758,7 @@ __Usage:__
 
 ### Metadata_service.delete_metadata_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_metadata_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_metadata_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.delete_metadata_store.js,samples/README.md)
 
@@ -8631,7 +8775,7 @@ __Usage:__
 
 ### Metadata_service.get_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_artifact.js,samples/README.md)
 
@@ -8648,7 +8792,7 @@ __Usage:__
 
 ### Metadata_service.get_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_context.js,samples/README.md)
 
@@ -8665,7 +8809,7 @@ __Usage:__
 
 ### Metadata_service.get_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_execution.js,samples/README.md)
 
@@ -8682,7 +8826,7 @@ __Usage:__
 
 ### Metadata_service.get_metadata_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_metadata_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_metadata_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_metadata_schema.js,samples/README.md)
 
@@ -8699,7 +8843,7 @@ __Usage:__
 
 ### Metadata_service.get_metadata_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_metadata_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_metadata_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.get_metadata_store.js,samples/README.md)
 
@@ -8716,7 +8860,7 @@ __Usage:__
 
 ### Metadata_service.list_artifacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_artifacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_artifacts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_artifacts.js,samples/README.md)
 
@@ -8733,7 +8877,7 @@ __Usage:__
 
 ### Metadata_service.list_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_contexts.js,samples/README.md)
 
@@ -8750,7 +8894,7 @@ __Usage:__
 
 ### Metadata_service.list_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_executions.js,samples/README.md)
 
@@ -8767,7 +8911,7 @@ __Usage:__
 
 ### Metadata_service.list_metadata_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_metadata_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_metadata_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_metadata_schemas.js,samples/README.md)
 
@@ -8784,7 +8928,7 @@ __Usage:__
 
 ### Metadata_service.list_metadata_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_metadata_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_metadata_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.list_metadata_stores.js,samples/README.md)
 
@@ -8801,7 +8945,7 @@ __Usage:__
 
 ### Metadata_service.purge_artifacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_artifacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_artifacts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_artifacts.js,samples/README.md)
 
@@ -8818,7 +8962,7 @@ __Usage:__
 
 ### Metadata_service.purge_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_contexts.js,samples/README.md)
 
@@ -8835,7 +8979,7 @@ __Usage:__
 
 ### Metadata_service.purge_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.purge_executions.js,samples/README.md)
 
@@ -8852,7 +8996,7 @@ __Usage:__
 
 ### Metadata_service.query_artifact_lineage_subgraph
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_artifact_lineage_subgraph.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_artifact_lineage_subgraph.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_artifact_lineage_subgraph.js,samples/README.md)
 
@@ -8869,7 +9013,7 @@ __Usage:__
 
 ### Metadata_service.query_context_lineage_subgraph
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_context_lineage_subgraph.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_context_lineage_subgraph.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_context_lineage_subgraph.js,samples/README.md)
 
@@ -8886,7 +9030,7 @@ __Usage:__
 
 ### Metadata_service.query_execution_inputs_and_outputs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_execution_inputs_and_outputs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_execution_inputs_and_outputs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.query_execution_inputs_and_outputs.js,samples/README.md)
 
@@ -8903,7 +9047,7 @@ __Usage:__
 
 ### Metadata_service.remove_context_children
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.remove_context_children.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.remove_context_children.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.remove_context_children.js,samples/README.md)
 
@@ -8920,7 +9064,7 @@ __Usage:__
 
 ### Metadata_service.update_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_artifact.js,samples/README.md)
 
@@ -8937,7 +9081,7 @@ __Usage:__
 
 ### Metadata_service.update_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_context.js,samples/README.md)
 
@@ -8954,7 +9098,7 @@ __Usage:__
 
 ### Metadata_service.update_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/metadata_service.update_execution.js,samples/README.md)
 
@@ -8971,7 +9115,7 @@ __Usage:__
 
 ### Migration_service.batch_migrate_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.batch_migrate_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.batch_migrate_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.batch_migrate_resources.js,samples/README.md)
 
@@ -8988,7 +9132,7 @@ __Usage:__
 
 ### Migration_service.search_migratable_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.search_migratable_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.search_migratable_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.search_migratable_resources.js,samples/README.md)
 
@@ -9005,7 +9149,7 @@ __Usage:__
 
 ### Model_garden_service.get_publisher_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js,samples/README.md)
 
@@ -9022,7 +9166,7 @@ __Usage:__
 
 ### Model_garden_service.list_publisher_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.list_publisher_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.list_publisher_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.list_publisher_models.js,samples/README.md)
 
@@ -9039,7 +9183,7 @@ __Usage:__
 
 ### Model_monitoring_service.create_model_monitor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitor.js,samples/README.md)
 
@@ -9056,7 +9200,7 @@ __Usage:__
 
 ### Model_monitoring_service.create_model_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitoring_job.js,samples/README.md)
 
@@ -9073,7 +9217,7 @@ __Usage:__
 
 ### Model_monitoring_service.delete_model_monitor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitor.js,samples/README.md)
 
@@ -9090,7 +9234,7 @@ __Usage:__
 
 ### Model_monitoring_service.delete_model_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitoring_job.js,samples/README.md)
 
@@ -9107,7 +9251,7 @@ __Usage:__
 
 ### Model_monitoring_service.get_model_monitor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitor.js,samples/README.md)
 
@@ -9124,7 +9268,7 @@ __Usage:__
 
 ### Model_monitoring_service.get_model_monitoring_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitoring_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitoring_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitoring_job.js,samples/README.md)
 
@@ -9141,7 +9285,7 @@ __Usage:__
 
 ### Model_monitoring_service.list_model_monitoring_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitoring_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitoring_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitoring_jobs.js,samples/README.md)
 
@@ -9158,7 +9302,7 @@ __Usage:__
 
 ### Model_monitoring_service.list_model_monitors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitors.js,samples/README.md)
 
@@ -9175,7 +9319,7 @@ __Usage:__
 
 ### Model_monitoring_service.search_model_monitoring_alerts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_alerts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_alerts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_alerts.js,samples/README.md)
 
@@ -9192,7 +9336,7 @@ __Usage:__
 
 ### Model_monitoring_service.search_model_monitoring_stats
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_stats.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_stats.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_stats.js,samples/README.md)
 
@@ -9209,7 +9353,7 @@ __Usage:__
 
 ### Model_monitoring_service.update_model_monitor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.update_model_monitor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.update_model_monitor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.update_model_monitor.js,samples/README.md)
 
@@ -9226,7 +9370,7 @@ __Usage:__
 
 ### Model_service.batch_import_evaluated_annotations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_evaluated_annotations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_evaluated_annotations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_evaluated_annotations.js,samples/README.md)
 
@@ -9243,7 +9387,7 @@ __Usage:__
 
 ### Model_service.batch_import_model_evaluation_slices
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_model_evaluation_slices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_model_evaluation_slices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_model_evaluation_slices.js,samples/README.md)
 
@@ -9260,7 +9404,7 @@ __Usage:__
 
 ### Model_service.copy_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.copy_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.copy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.copy_model.js,samples/README.md)
 
@@ -9277,7 +9421,7 @@ __Usage:__
 
 ### Model_service.delete_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.delete_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.delete_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.delete_model.js,samples/README.md)
 
@@ -9294,7 +9438,7 @@ __Usage:__
 
 ### Model_service.delete_model_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.delete_model_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.delete_model_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.delete_model_version.js,samples/README.md)
 
@@ -9311,7 +9455,7 @@ __Usage:__
 
 ### Model_service.export_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.export_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.export_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.export_model.js,samples/README.md)
 
@@ -9328,7 +9472,7 @@ __Usage:__
 
 ### Model_service.get_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model.js,samples/README.md)
 
@@ -9345,7 +9489,7 @@ __Usage:__
 
 ### Model_service.get_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model_evaluation.js,samples/README.md)
 
@@ -9362,7 +9506,7 @@ __Usage:__
 
 ### Model_service.get_model_evaluation_slice
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model_evaluation_slice.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model_evaluation_slice.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.get_model_evaluation_slice.js,samples/README.md)
 
@@ -9379,7 +9523,7 @@ __Usage:__
 
 ### Model_service.import_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.import_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.import_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.import_model_evaluation.js,samples/README.md)
 
@@ -9396,7 +9540,7 @@ __Usage:__
 
 ### Model_service.list_model_evaluation_slices
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_evaluation_slices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_evaluation_slices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_evaluation_slices.js,samples/README.md)
 
@@ -9413,7 +9557,7 @@ __Usage:__
 
 ### Model_service.list_model_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_evaluations.js,samples/README.md)
 
@@ -9430,7 +9574,7 @@ __Usage:__
 
 ### Model_service.list_model_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_versions.js,samples/README.md)
 
@@ -9447,7 +9591,7 @@ __Usage:__
 
 ### Model_service.list_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_models.js,samples/README.md)
 
@@ -9464,7 +9608,7 @@ __Usage:__
 
 ### Model_service.merge_version_aliases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.merge_version_aliases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.merge_version_aliases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.merge_version_aliases.js,samples/README.md)
 
@@ -9481,7 +9625,7 @@ __Usage:__
 
 ### Model_service.update_explanation_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.update_explanation_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.update_explanation_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.update_explanation_dataset.js,samples/README.md)
 
@@ -9498,7 +9642,7 @@ __Usage:__
 
 ### Model_service.update_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.update_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.update_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.update_model.js,samples/README.md)
 
@@ -9515,7 +9659,7 @@ __Usage:__
 
 ### Model_service.upload_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.upload_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.upload_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.upload_model.js,samples/README.md)
 
@@ -9532,7 +9676,7 @@ __Usage:__
 
 ### Notebook_service.assign_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.assign_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.assign_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.assign_notebook_runtime.js,samples/README.md)
 
@@ -9549,7 +9693,7 @@ __Usage:__
 
 ### Notebook_service.create_notebook_execution_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js,samples/README.md)
 
@@ -9566,7 +9710,7 @@ __Usage:__
 
 ### Notebook_service.create_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_runtime_template.js,samples/README.md)
 
@@ -9583,7 +9727,7 @@ __Usage:__
 
 ### Notebook_service.delete_notebook_execution_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js,samples/README.md)
 
@@ -9600,7 +9744,7 @@ __Usage:__
 
 ### Notebook_service.delete_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime.js,samples/README.md)
 
@@ -9617,7 +9761,7 @@ __Usage:__
 
 ### Notebook_service.delete_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime_template.js,samples/README.md)
 
@@ -9634,7 +9778,7 @@ __Usage:__
 
 ### Notebook_service.get_notebook_execution_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_execution_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_execution_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_execution_job.js,samples/README.md)
 
@@ -9651,7 +9795,7 @@ __Usage:__
 
 ### Notebook_service.get_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime.js,samples/README.md)
 
@@ -9668,7 +9812,7 @@ __Usage:__
 
 ### Notebook_service.get_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime_template.js,samples/README.md)
 
@@ -9685,7 +9829,7 @@ __Usage:__
 
 ### Notebook_service.list_notebook_execution_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_execution_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_execution_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_execution_jobs.js,samples/README.md)
 
@@ -9702,7 +9846,7 @@ __Usage:__
 
 ### Notebook_service.list_notebook_runtime_templates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtime_templates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtime_templates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtime_templates.js,samples/README.md)
 
@@ -9719,7 +9863,7 @@ __Usage:__
 
 ### Notebook_service.list_notebook_runtimes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtimes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtimes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtimes.js,samples/README.md)
 
@@ -9736,7 +9880,7 @@ __Usage:__
 
 ### Notebook_service.start_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js,samples/README.md)
 
@@ -9753,7 +9897,7 @@ __Usage:__
 
 ### Notebook_service.stop_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js,samples/README.md)
 
@@ -9770,7 +9914,7 @@ __Usage:__
 
 ### Notebook_service.update_notebook_runtime_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js,samples/README.md)
 
@@ -9787,7 +9931,7 @@ __Usage:__
 
 ### Notebook_service.upgrade_notebook_runtime
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js,samples/README.md)
 
@@ -9804,7 +9948,7 @@ __Usage:__
 
 ### Persistent_resource_service.create_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js,samples/README.md)
 
@@ -9821,7 +9965,7 @@ __Usage:__
 
 ### Persistent_resource_service.delete_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js,samples/README.md)
 
@@ -9838,7 +9982,7 @@ __Usage:__
 
 ### Persistent_resource_service.get_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js,samples/README.md)
 
@@ -9855,7 +9999,7 @@ __Usage:__
 
 ### Persistent_resource_service.list_persistent_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.list_persistent_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.list_persistent_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.list_persistent_resources.js,samples/README.md)
 
@@ -9872,7 +10016,7 @@ __Usage:__
 
 ### Persistent_resource_service.reboot_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.reboot_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.reboot_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.reboot_persistent_resource.js,samples/README.md)
 
@@ -9889,7 +10033,7 @@ __Usage:__
 
 ### Persistent_resource_service.update_persistent_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js,samples/README.md)
 
@@ -9906,7 +10050,7 @@ __Usage:__
 
 ### Pipeline_service.batch_cancel_pipeline_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.batch_cancel_pipeline_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.batch_cancel_pipeline_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.batch_cancel_pipeline_jobs.js,samples/README.md)
 
@@ -9923,7 +10067,7 @@ __Usage:__
 
 ### Pipeline_service.batch_delete_pipeline_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.batch_delete_pipeline_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.batch_delete_pipeline_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.batch_delete_pipeline_jobs.js,samples/README.md)
 
@@ -9940,7 +10084,7 @@ __Usage:__
 
 ### Pipeline_service.cancel_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.cancel_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.cancel_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.cancel_pipeline_job.js,samples/README.md)
 
@@ -9957,7 +10101,7 @@ __Usage:__
 
 ### Pipeline_service.cancel_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.cancel_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.cancel_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.cancel_training_pipeline.js,samples/README.md)
 
@@ -9974,7 +10118,7 @@ __Usage:__
 
 ### Pipeline_service.create_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.create_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.create_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.create_pipeline_job.js,samples/README.md)
 
@@ -9991,7 +10135,7 @@ __Usage:__
 
 ### Pipeline_service.create_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.create_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.create_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.create_training_pipeline.js,samples/README.md)
 
@@ -10008,7 +10152,7 @@ __Usage:__
 
 ### Pipeline_service.delete_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js,samples/README.md)
 
@@ -10025,7 +10169,7 @@ __Usage:__
 
 ### Pipeline_service.delete_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js,samples/README.md)
 
@@ -10042,7 +10186,7 @@ __Usage:__
 
 ### Pipeline_service.get_pipeline_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.get_pipeline_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.get_pipeline_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.get_pipeline_job.js,samples/README.md)
 
@@ -10059,7 +10203,7 @@ __Usage:__
 
 ### Pipeline_service.get_training_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.get_training_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.get_training_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.get_training_pipeline.js,samples/README.md)
 
@@ -10076,7 +10220,7 @@ __Usage:__
 
 ### Pipeline_service.list_pipeline_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js,samples/README.md)
 
@@ -10093,7 +10237,7 @@ __Usage:__
 
 ### Pipeline_service.list_training_pipelines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.list_training_pipelines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.list_training_pipelines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.list_training_pipelines.js,samples/README.md)
 
@@ -10110,7 +10254,7 @@ __Usage:__
 
 ### Prediction_service.chat_completions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.chat_completions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.chat_completions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.chat_completions.js,samples/README.md)
 
@@ -10127,7 +10271,7 @@ __Usage:__
 
 ### Prediction_service.count_tokens
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js,samples/README.md)
 
@@ -10144,7 +10288,7 @@ __Usage:__
 
 ### Prediction_service.direct_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.direct_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.direct_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.direct_predict.js,samples/README.md)
 
@@ -10161,7 +10305,7 @@ __Usage:__
 
 ### Prediction_service.direct_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.direct_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.direct_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.direct_raw_predict.js,samples/README.md)
 
@@ -10178,7 +10322,7 @@ __Usage:__
 
 ### Prediction_service.explain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.explain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.explain.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.explain.js,samples/README.md)
 
@@ -10195,7 +10339,7 @@ __Usage:__
 
 ### Prediction_service.generate_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.generate_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.generate_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.generate_content.js,samples/README.md)
 
@@ -10212,7 +10356,7 @@ __Usage:__
 
 ### Prediction_service.predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.predict.js,samples/README.md)
 
@@ -10229,7 +10373,7 @@ __Usage:__
 
 ### Prediction_service.raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.raw_predict.js,samples/README.md)
 
@@ -10246,7 +10390,7 @@ __Usage:__
 
 ### Prediction_service.server_streaming_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js,samples/README.md)
 
@@ -10263,7 +10407,7 @@ __Usage:__
 
 ### Prediction_service.stream_direct_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_predict.js,samples/README.md)
 
@@ -10280,7 +10424,7 @@ __Usage:__
 
 ### Prediction_service.stream_direct_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_raw_predict.js,samples/README.md)
 
@@ -10297,7 +10441,7 @@ __Usage:__
 
 ### Prediction_service.stream_generate_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_generate_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_generate_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_generate_content.js,samples/README.md)
 
@@ -10314,7 +10458,7 @@ __Usage:__
 
 ### Prediction_service.stream_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js,samples/README.md)
 
@@ -10331,7 +10475,7 @@ __Usage:__
 
 ### Prediction_service.streaming_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_predict.js,samples/README.md)
 
@@ -10348,7 +10492,7 @@ __Usage:__
 
 ### Prediction_service.streaming_raw_predict
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_raw_predict.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_raw_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_raw_predict.js,samples/README.md)
 
@@ -10365,7 +10509,7 @@ __Usage:__
 
 ### Reasoning_engine_execution_service.query_reasoning_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js,samples/README.md)
 
@@ -10382,7 +10526,7 @@ __Usage:__
 
 ### Reasoning_engine_service.create_reasoning_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js,samples/README.md)
 
@@ -10399,7 +10543,7 @@ __Usage:__
 
 ### Reasoning_engine_service.delete_reasoning_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.delete_reasoning_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.delete_reasoning_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.delete_reasoning_engine.js,samples/README.md)
 
@@ -10416,7 +10560,7 @@ __Usage:__
 
 ### Reasoning_engine_service.get_reasoning_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.get_reasoning_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.get_reasoning_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.get_reasoning_engine.js,samples/README.md)
 
@@ -10433,7 +10577,7 @@ __Usage:__
 
 ### Reasoning_engine_service.list_reasoning_engines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.list_reasoning_engines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.list_reasoning_engines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.list_reasoning_engines.js,samples/README.md)
 
@@ -10450,7 +10594,7 @@ __Usage:__
 
 ### Reasoning_engine_service.update_reasoning_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js,samples/README.md)
 
@@ -10467,7 +10611,7 @@ __Usage:__
 
 ### Schedule_service.create_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.create_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.create_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.create_schedule.js,samples/README.md)
 
@@ -10484,7 +10628,7 @@ __Usage:__
 
 ### Schedule_service.delete_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.delete_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.delete_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.delete_schedule.js,samples/README.md)
 
@@ -10501,7 +10645,7 @@ __Usage:__
 
 ### Schedule_service.get_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.get_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.get_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.get_schedule.js,samples/README.md)
 
@@ -10518,7 +10662,7 @@ __Usage:__
 
 ### Schedule_service.list_schedules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.list_schedules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.list_schedules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.list_schedules.js,samples/README.md)
 
@@ -10535,7 +10679,7 @@ __Usage:__
 
 ### Schedule_service.pause_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.pause_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.pause_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.pause_schedule.js,samples/README.md)
 
@@ -10552,7 +10696,7 @@ __Usage:__
 
 ### Schedule_service.resume_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.resume_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.resume_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.resume_schedule.js,samples/README.md)
 
@@ -10569,7 +10713,7 @@ __Usage:__
 
 ### Schedule_service.update_schedule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.update_schedule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.update_schedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.update_schedule.js,samples/README.md)
 
@@ -10586,7 +10730,7 @@ __Usage:__
 
 ### Specialist_pool_service.create_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js,samples/README.md)
 
@@ -10603,7 +10747,7 @@ __Usage:__
 
 ### Specialist_pool_service.delete_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js,samples/README.md)
 
@@ -10620,7 +10764,7 @@ __Usage:__
 
 ### Specialist_pool_service.get_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.get_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.get_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.get_specialist_pool.js,samples/README.md)
 
@@ -10637,7 +10781,7 @@ __Usage:__
 
 ### Specialist_pool_service.list_specialist_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.list_specialist_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.list_specialist_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.list_specialist_pools.js,samples/README.md)
 
@@ -10654,7 +10798,7 @@ __Usage:__
 
 ### Specialist_pool_service.update_specialist_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.update_specialist_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.update_specialist_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/specialist_pool_service.update_specialist_pool.js,samples/README.md)
 
@@ -10671,7 +10815,7 @@ __Usage:__
 
 ### Tensorboard_service.batch_create_tensorboard_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_runs.js,samples/README.md)
 
@@ -10688,7 +10832,7 @@ __Usage:__
 
 ### Tensorboard_service.batch_create_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_time_series.js,samples/README.md)
 
@@ -10705,7 +10849,7 @@ __Usage:__
 
 ### Tensorboard_service.batch_read_tensorboard_time_series_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_read_tensorboard_time_series_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_read_tensorboard_time_series_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.batch_read_tensorboard_time_series_data.js,samples/README.md)
 
@@ -10722,7 +10866,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard.js,samples/README.md)
 
@@ -10739,7 +10883,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_experiment.js,samples/README.md)
 
@@ -10756,7 +10900,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_run.js,samples/README.md)
 
@@ -10773,7 +10917,7 @@ __Usage:__
 
 ### Tensorboard_service.create_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.create_tensorboard_time_series.js,samples/README.md)
 
@@ -10790,7 +10934,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard.js,samples/README.md)
 
@@ -10807,7 +10951,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_experiment.js,samples/README.md)
 
@@ -10824,7 +10968,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_run.js,samples/README.md)
 
@@ -10841,7 +10985,7 @@ __Usage:__
 
 ### Tensorboard_service.delete_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.delete_tensorboard_time_series.js,samples/README.md)
 
@@ -10858,7 +11002,7 @@ __Usage:__
 
 ### Tensorboard_service.export_tensorboard_time_series_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.export_tensorboard_time_series_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.export_tensorboard_time_series_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.export_tensorboard_time_series_data.js,samples/README.md)
 
@@ -10875,7 +11019,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard.js,samples/README.md)
 
@@ -10892,7 +11036,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_experiment.js,samples/README.md)
 
@@ -10909,7 +11053,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_run.js,samples/README.md)
 
@@ -10926,7 +11070,7 @@ __Usage:__
 
 ### Tensorboard_service.get_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.get_tensorboard_time_series.js,samples/README.md)
 
@@ -10943,7 +11087,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboard_experiments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_experiments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_experiments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_experiments.js,samples/README.md)
 
@@ -10960,7 +11104,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboard_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_runs.js,samples/README.md)
 
@@ -10977,7 +11121,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboard_time_series.js,samples/README.md)
 
@@ -10994,7 +11138,7 @@ __Usage:__
 
 ### Tensorboard_service.list_tensorboards
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboards.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboards.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.list_tensorboards.js,samples/README.md)
 
@@ -11011,7 +11155,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_blob_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_blob_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_blob_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_blob_data.js,samples/README.md)
 
@@ -11028,7 +11172,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_size
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_size.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_size.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_size.js,samples/README.md)
 
@@ -11045,7 +11189,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_time_series_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_time_series_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_time_series_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_time_series_data.js,samples/README.md)
 
@@ -11062,7 +11206,7 @@ __Usage:__
 
 ### Tensorboard_service.read_tensorboard_usage
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_usage.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_usage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_usage.js,samples/README.md)
 
@@ -11079,7 +11223,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard.js,samples/README.md)
 
@@ -11096,7 +11240,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard_experiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_experiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_experiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_experiment.js,samples/README.md)
 
@@ -11113,7 +11257,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_run.js,samples/README.md)
 
@@ -11130,7 +11274,7 @@ __Usage:__
 
 ### Tensorboard_service.update_tensorboard_time_series
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_time_series.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_time_series.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_time_series.js,samples/README.md)
 
@@ -11147,7 +11291,7 @@ __Usage:__
 
 ### Tensorboard_service.write_tensorboard_experiment_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_experiment_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_experiment_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_experiment_data.js,samples/README.md)
 
@@ -11164,7 +11308,7 @@ __Usage:__
 
 ### Tensorboard_service.write_tensorboard_run_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_run_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_run_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_run_data.js,samples/README.md)
 
@@ -11181,7 +11325,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.create_rag_corpus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js,samples/README.md)
 
@@ -11198,7 +11342,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.delete_rag_corpus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js,samples/README.md)
 
@@ -11215,7 +11359,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.delete_rag_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js,samples/README.md)
 
@@ -11232,7 +11376,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.get_rag_corpus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_corpus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_corpus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_corpus.js,samples/README.md)
 
@@ -11249,7 +11393,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.get_rag_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_file.js,samples/README.md)
 
@@ -11266,7 +11410,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.import_rag_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js,samples/README.md)
 
@@ -11283,7 +11427,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.list_rag_corpora
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_corpora.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_corpora.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_corpora.js,samples/README.md)
 
@@ -11300,7 +11444,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.list_rag_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_files.js,samples/README.md)
 
@@ -11317,7 +11461,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.update_rag_corpus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js,samples/README.md)
 
@@ -11334,7 +11478,7 @@ __Usage:__
 
 ### Vertex_rag_data_service.upload_rag_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js,samples/README.md)
 
@@ -11351,7 +11495,7 @@ __Usage:__
 
 ### Vertex_rag_service.retrieve_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.retrieve_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.retrieve_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.retrieve_contexts.js,samples/README.md)
 
@@ -11368,7 +11512,7 @@ __Usage:__
 
 ### Vizier_service.add_trial_measurement
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.add_trial_measurement.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.add_trial_measurement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.add_trial_measurement.js,samples/README.md)
 
@@ -11385,7 +11529,7 @@ __Usage:__
 
 ### Vizier_service.check_trial_early_stopping_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.check_trial_early_stopping_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.check_trial_early_stopping_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.check_trial_early_stopping_state.js,samples/README.md)
 
@@ -11402,7 +11546,7 @@ __Usage:__
 
 ### Vizier_service.complete_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.complete_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.complete_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.complete_trial.js,samples/README.md)
 
@@ -11419,7 +11563,7 @@ __Usage:__
 
 ### Vizier_service.create_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.create_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.create_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.create_study.js,samples/README.md)
 
@@ -11436,7 +11580,7 @@ __Usage:__
 
 ### Vizier_service.create_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.create_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.create_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.create_trial.js,samples/README.md)
 
@@ -11453,7 +11597,7 @@ __Usage:__
 
 ### Vizier_service.delete_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.delete_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.delete_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.delete_study.js,samples/README.md)
 
@@ -11470,7 +11614,7 @@ __Usage:__
 
 ### Vizier_service.delete_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.delete_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.delete_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.delete_trial.js,samples/README.md)
 
@@ -11487,7 +11631,7 @@ __Usage:__
 
 ### Vizier_service.get_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.get_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.get_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.get_study.js,samples/README.md)
 
@@ -11504,7 +11648,7 @@ __Usage:__
 
 ### Vizier_service.get_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.get_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.get_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.get_trial.js,samples/README.md)
 
@@ -11521,7 +11665,7 @@ __Usage:__
 
 ### Vizier_service.list_optimal_trials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_optimal_trials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_optimal_trials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_optimal_trials.js,samples/README.md)
 
@@ -11538,7 +11682,7 @@ __Usage:__
 
 ### Vizier_service.list_studies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_studies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_studies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_studies.js,samples/README.md)
 
@@ -11555,7 +11699,7 @@ __Usage:__
 
 ### Vizier_service.list_trials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_trials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_trials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.list_trials.js,samples/README.md)
 
@@ -11572,7 +11716,7 @@ __Usage:__
 
 ### Vizier_service.lookup_study
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.lookup_study.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.lookup_study.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.lookup_study.js,samples/README.md)
 
@@ -11589,7 +11733,7 @@ __Usage:__
 
 ### Vizier_service.stop_trial
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.stop_trial.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.stop_trial.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.stop_trial.js,samples/README.md)
 
@@ -11606,7 +11750,7 @@ __Usage:__
 
 ### Vizier_service.suggest_trials
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.suggest_trials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.suggest_trials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vizier_service.suggest_trials.js,samples/README.md)
 
@@ -11623,7 +11767,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-aiplatform/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/quickstart.js,samples/README.md)
 

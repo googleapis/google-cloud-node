@@ -3385,6 +3385,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "response": {
+                          "type": "Schema",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -12559,6 +12566,34 @@
                             }
                           ]
                         },
+                        "BatchCreateFeatures": {
+                          "requestType": "BatchCreateFeaturesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/featureGroups/*}/features:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests",
+                            "(google.longrunning.operation_info).response_type": "BatchCreateFeaturesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchCreateFeaturesOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/featureGroups/*}/features:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchCreateFeaturesResponse",
+                                "metadata_type": "BatchCreateFeaturesOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetFeature": {
                           "requestType": "GetFeatureRequest",
                           "responseType": "Feature",
@@ -13891,7 +13926,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/Feature"
                           }
                         },
                         "requests": {
@@ -39879,6 +39914,11 @@
                         "fasterDeploymentConfig": {
                           "type": "FasterDeploymentConfig",
                           "id": 23
+                        },
+                        "systemLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 28
                         }
                       }
                     },
@@ -44426,6 +44466,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "featureStatsAndAnomaly": {
+                          "rule": "repeated",
+                          "type": "FeatureStatsAndAnomaly",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "versionColumnName": {
                           "type": "string",
                           "id": 106
@@ -44476,6 +44524,175 @@
                             "STRING_ARRAY": 12,
                             "BYTES": 13,
                             "STRUCT": 14
+                          }
+                        }
+                      }
+                    },
+                    "FeatureMonitor": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/FeatureMonitor",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}",
+                        "(google.api.resource).plural": "featureMonitors",
+                        "(google.api.resource).singular": "featureMonitor"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scheduleConfig": {
+                          "type": "ScheduleConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureSelectionConfig": {
+                          "type": "FeatureSelectionConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ScheduleConfig": {
+                      "fields": {
+                        "cron": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FeatureSelectionConfig": {
+                      "fields": {
+                        "featureConfigs": {
+                          "rule": "repeated",
+                          "type": "FeatureConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FeatureConfig": {
+                          "fields": {
+                            "featureId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "driftThreshold": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FeatureStatsAndAnomaly": {
+                      "fields": {
+                        "featureId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "featureStats": {
+                          "type": "google.protobuf.Value",
+                          "id": 2
+                        },
+                        "distributionDeviation": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "driftDetectionThreshold": {
+                          "type": "double",
+                          "id": 4
+                        },
+                        "driftDetected": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "statsTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "featureMonitorJobId": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "featureMonitorId": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "FeatureStatsAndAnomalySpec": {
+                      "oneofs": {
+                        "_latestStatsCount": {
+                          "oneof": [
+                            "latestStatsCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "latestStatsCount": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "statsTimeRange": {
+                          "type": "google.type.Interval",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -44595,6 +44812,115 @@
                                 }
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "FeatureMonitorJob": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/FeatureMonitorJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}/featureMonitorJobs/{feature_monitor_job}",
+                        "(google.api.resource).plural": "featureMonitorJobs",
+                        "(google.api.resource).singular": "featureMonitorJob"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finalStatus": {
+                          "type": "google.rpc.Status",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "jobSummary": {
+                          "type": "JobSummary",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "driftBaseFeatureMonitorJobId": {
+                          "type": "int64",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "driftBaseSnapshotTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "featureSelectionConfig": {
+                          "type": "FeatureSelectionConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "triggerType": {
+                          "type": "FeatureMonitorJobTrigger",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "JobSummary": {
+                          "fields": {
+                            "totalSlotMs": {
+                              "type": "int64",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "featureStatsAndAnomalies": {
+                              "rule": "repeated",
+                              "type": "FeatureStatsAndAnomaly",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "FeatureMonitorJobTrigger": {
+                          "values": {
+                            "FEATURE_MONITOR_JOB_TRIGGER_UNSPECIFIED": 0,
+                            "FEATURE_MONITOR_JOB_TRIGGER_PERIODIC": 1,
+                            "FEATURE_MONITOR_JOB_TRIGGER_ON_DEMAND": 2
                           }
                         }
                       }
@@ -45510,6 +45836,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "optimizedConfig": {
+                          "type": "OptimizedConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "serviceAgentType": {
                           "type": "ServiceAgentType",
                           "id": 14,
@@ -45830,6 +46163,17 @@
                             "ragCorpusId": {
                               "type": "int64",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "OptimizedConfig": {
+                          "fields": {
+                            "automaticResources": {
+                              "type": "AutomaticResources",
+                              "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -47068,6 +47412,34 @@
                             }
                           ]
                         },
+                        "BatchCreateFeatures": {
+                          "requestType": "BatchCreateFeaturesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*}/features:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests",
+                            "(google.longrunning.operation_info).response_type": "BatchCreateFeaturesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchCreateFeaturesOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*}/features:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchCreateFeaturesResponse",
+                                "metadata_type": "BatchCreateFeaturesOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetFeature": {
                           "requestType": "GetFeatureRequest",
                           "responseType": "Feature",
@@ -47155,6 +47527,152 @@
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "DeleteOperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "CreateFeatureMonitor": {
+                          "requestType": "CreateFeatureMonitorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*}/featureMonitors",
+                            "(google.api.http).body": "feature_monitor",
+                            "(google.api.method_signature)": "parent,feature_monitor,feature_monitor_id",
+                            "(google.longrunning.operation_info).response_type": "FeatureMonitor",
+                            "(google.longrunning.operation_info).metadata_type": "CreateFeatureMonitorOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*}/featureMonitors",
+                                "body": "feature_monitor"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,feature_monitor,feature_monitor_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "FeatureMonitor",
+                                "metadata_type": "CreateFeatureMonitorOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetFeatureMonitor": {
+                          "requestType": "GetFeatureMonitorRequest",
+                          "responseType": "FeatureMonitor",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListFeatureMonitors": {
+                          "requestType": "ListFeatureMonitorsRequest",
+                          "responseType": "ListFeatureMonitorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*}/featureMonitors",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*}/featureMonitors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteFeatureMonitor": {
+                          "requestType": "DeleteFeatureMonitorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateFeatureMonitorJob": {
+                          "requestType": "CreateFeatureMonitorJobRequest",
+                          "responseType": "FeatureMonitorJob",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*/featureMonitors/*}/featureMonitorJobs",
+                            "(google.api.http).body": "feature_monitor_job",
+                            "(google.api.method_signature)": "parent,feature_monitor_job,feature_monitor_job_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*/featureMonitors/*}/featureMonitorJobs",
+                                "body": "feature_monitor_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,feature_monitor_job,feature_monitor_job_id"
+                            }
+                          ]
+                        },
+                        "GetFeatureMonitorJob": {
+                          "requestType": "GetFeatureMonitorJobRequest",
+                          "responseType": "FeatureMonitorJob",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/featureMonitorJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/featureMonitorJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListFeatureMonitorJobs": {
+                          "requestType": "ListFeatureMonitorJobsRequest",
+                          "responseType": "ListFeatureMonitorJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*/featureMonitors/*}/featureMonitorJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/featureGroups/*/featureMonitors/*}/featureMonitorJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         }
@@ -47270,6 +47788,109 @@
                         }
                       }
                     },
+                    "CreateFeatureMonitorRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/FeatureMonitor"
+                          }
+                        },
+                        "featureMonitor": {
+                          "type": "FeatureMonitor",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureMonitorId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetFeatureMonitorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureMonitor"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeatureMonitorsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/FeatureMonitor"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFeatureMonitorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureMonitor"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeatureMonitorsResponse": {
+                      "fields": {
+                        "featureMonitors": {
+                          "rule": "repeated",
+                          "type": "FeatureMonitor",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "CreateFeatureGroupOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
@@ -47299,6 +47920,105 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        }
+                      }
+                    },
+                    "CreateFeatureMonitorOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateFeatureMonitorJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/FeatureMonitorJob"
+                          }
+                        },
+                        "featureMonitorJob": {
+                          "type": "FeatureMonitorJob",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureMonitorJobId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GetFeatureMonitorJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureMonitorJob"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeatureMonitorJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/FeatureMonitorJob"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeatureMonitorJobsResponse": {
+                      "fields": {
+                        "featureMonitorJobs": {
+                          "rule": "repeated",
+                          "type": "FeatureMonitorJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -48400,7 +49120,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/Feature"
                           }
                         },
                         "requests": {
@@ -48430,6 +49150,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Feature"
+                          }
+                        },
+                        "featureStatsAndAnomalySpec": {
+                          "type": "FeatureStatsAndAnomalySpec",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -60702,6 +61429,34 @@
                             }
                           ]
                         },
+                        "StopNotebookRuntime": {
+                          "requestType": "StopNotebookRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "StopNotebookRuntimeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "StopNotebookRuntimeOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "StopNotebookRuntimeResponse",
+                                "metadata_type": "StopNotebookRuntimeOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "CreateNotebookExecutionJob": {
                           "requestType": "CreateNotebookExecutionJobRequest",
                           "responseType": "google.longrunning.Operation",
@@ -61119,6 +61874,29 @@
                       }
                     },
                     "StartNotebookRuntimeResponse": {
+                      "fields": {}
+                    },
+                    "StopNotebookRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntime"
+                          }
+                        }
+                      }
+                    },
+                    "StopNotebookRuntimeOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StopNotebookRuntimeResponse": {
                       "fields": {}
                     },
                     "CreateNotebookExecutionJobRequest": {
