@@ -17868,6 +17868,10 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 16
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 22
                         }
                       }
                     },
