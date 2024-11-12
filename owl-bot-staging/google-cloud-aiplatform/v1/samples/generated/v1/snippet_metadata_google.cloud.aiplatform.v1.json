@@ -899,7 +899,7 @@
       "regionTag": "aiplatform_v1_generated_DatasetService_ListAnnotations_async",
       "title": "DatasetService listAnnotations Sample",
       "origin": "API_DEFINITION",
-      "description": " Lists Annotations belongs to a dataitem",
+      "description": " Lists Annotations belongs to a dataitem This RPC is only available in InternalDatasetService. It is only used for exporting conversation data to CCAI Insights.",
       "canonical": true,
       "file": "dataset_service.list_annotations.js",
       "language": "JAVASCRIPT",
@@ -1610,7 +1610,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 152,
+          "end": 156,
           "type": "FULL"
         }
       ],
@@ -1710,6 +1710,10 @@
           {
             "name": "tool_parameter_kv_match_input",
             "type": ".google.cloud.aiplatform.v1.ToolParameterKVMatchInput"
+          },
+          {
+            "name": "metricx_input",
+            "type": ".google.cloud.aiplatform.v1.MetricxInput"
           },
           {
             "name": "location",
@@ -2122,7 +2126,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 76,
+          "end": 77,
           "type": "FULL"
         }
       ],
@@ -4315,7 +4319,7 @@
       "regionTag": "aiplatform_v1_generated_GenAiTuningService_RebaseTunedModel_async",
       "title": "DatasetService rebaseTunedModel Sample",
       "origin": "API_DEFINITION",
-      "description": " Rebase a TunedModel. Creates a LongRunningOperation that takes a legacy Tuned GenAI model Reference and creates a TuningJob based on newly available model.",
+      "description": " Rebase a TunedModel.",
       "canonical": true,
       "file": "gen_ai_tuning_service.rebase_tuned_model.js",
       "language": "JAVASCRIPT",

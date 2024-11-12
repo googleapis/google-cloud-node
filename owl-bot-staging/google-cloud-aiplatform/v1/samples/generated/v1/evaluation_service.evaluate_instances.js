@@ -127,6 +127,10 @@ function main(location) {
    */
   // const toolParameterKvMatchInput = {}
   /**
+   *  Input for Metricx metric.
+   */
+  // const metricxInput = {}
+  /**
    *  Required. The resource name of the Location to evaluate the instances.
    *  Format: `projects/{project}/locations/{location}`
    */
