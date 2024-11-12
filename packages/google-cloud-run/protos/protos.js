@@ -8970,6 +8970,7 @@
                          * @interface IGCSVolumeSource
                          * @property {string|null} [bucket] GCSVolumeSource bucket
                          * @property {boolean|null} [readOnly] GCSVolumeSource readOnly
+                         * @property {Array.<string>|null} [mountOptions] GCSVolumeSource mountOptions
                          */
     
                         /**
@@ -8981,6 +8982,7 @@
                          * @param {google.cloud.run.v2.IGCSVolumeSource=} [properties] Properties to set
                          */
                         function GCSVolumeSource(properties) {
+                            this.mountOptions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -9002,6 +9004,14 @@
                          * @instance
                          */
                         GCSVolumeSource.prototype.readOnly = false;
+    
+                        /**
+                         * GCSVolumeSource mountOptions.
+                         * @member {Array.<string>} mountOptions
+                         * @memberof google.cloud.run.v2.GCSVolumeSource
+                         * @instance
+                         */
+                        GCSVolumeSource.prototype.mountOptions = $util.emptyArray;
     
                         /**
                          * Creates a new GCSVolumeSource instance using the specified properties.
@@ -9031,6 +9041,9 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
                             if (message.readOnly != null && Object.hasOwnProperty.call(message, "readOnly"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.readOnly);
+                            if (message.mountOptions != null && message.mountOptions.length)
+                                for (var i = 0; i < message.mountOptions.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.mountOptions[i]);
                             return writer;
                         };
     
@@ -9071,6 +9084,12 @@
                                     }
                                 case 2: {
                                         message.readOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.mountOptions && message.mountOptions.length))
+                                            message.mountOptions = [];
+                                        message.mountOptions.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -9114,6 +9133,13 @@
                             if (message.readOnly != null && message.hasOwnProperty("readOnly"))
                                 if (typeof message.readOnly !== "boolean")
                                     return "readOnly: boolean expected";
+                            if (message.mountOptions != null && message.hasOwnProperty("mountOptions")) {
+                                if (!Array.isArray(message.mountOptions))
+                                    return "mountOptions: array expected";
+                                for (var i = 0; i < message.mountOptions.length; ++i)
+                                    if (!$util.isString(message.mountOptions[i]))
+                                        return "mountOptions: string[] expected";
+                            }
                             return null;
                         };
     
@@ -9133,6 +9159,13 @@
                                 message.bucket = String(object.bucket);
                             if (object.readOnly != null)
                                 message.readOnly = Boolean(object.readOnly);
+                            if (object.mountOptions) {
+                                if (!Array.isArray(object.mountOptions))
+                                    throw TypeError(".google.cloud.run.v2.GCSVolumeSource.mountOptions: array expected");
+                                message.mountOptions = [];
+                                for (var i = 0; i < object.mountOptions.length; ++i)
+                                    message.mountOptions[i] = String(object.mountOptions[i]);
+                            }
                             return message;
                         };
     
@@ -9149,6 +9182,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.mountOptions = [];
                             if (options.defaults) {
                                 object.bucket = "";
                                 object.readOnly = false;
@@ -9157,6 +9192,11 @@
                                 object.bucket = message.bucket;
                             if (message.readOnly != null && message.hasOwnProperty("readOnly"))
                                 object.readOnly = message.readOnly;
+                            if (message.mountOptions && message.mountOptions.length) {
+                                object.mountOptions = [];
+                                for (var j = 0; j < message.mountOptions.length; ++j)
+                                    object.mountOptions[j] = message.mountOptions[j];
+                            }
                             return object;
                         };
     
@@ -19341,6 +19381,8 @@
                          * @property {string|null} [encryptionKey] RevisionTemplate encryptionKey
                          * @property {number|null} [maxInstanceRequestConcurrency] RevisionTemplate maxInstanceRequestConcurrency
                          * @property {google.cloud.run.v2.IServiceMesh|null} [serviceMesh] RevisionTemplate serviceMesh
+                         * @property {google.cloud.run.v2.EncryptionKeyRevocationAction|null} [encryptionKeyRevocationAction] RevisionTemplate encryptionKeyRevocationAction
+                         * @property {google.protobuf.IDuration|null} [encryptionKeyShutdownDuration] RevisionTemplate encryptionKeyShutdownDuration
                          * @property {boolean|null} [sessionAffinity] RevisionTemplate sessionAffinity
                          * @property {boolean|null} [healthCheckDisabled] RevisionTemplate healthCheckDisabled
                          * @property {google.cloud.run.v2.INodeSelector|null} [nodeSelector] RevisionTemplate nodeSelector
@@ -19470,6 +19512,22 @@
                         RevisionTemplate.prototype.serviceMesh = null;
     
                         /**
+                         * RevisionTemplate encryptionKeyRevocationAction.
+                         * @member {google.cloud.run.v2.EncryptionKeyRevocationAction} encryptionKeyRevocationAction
+                         * @memberof google.cloud.run.v2.RevisionTemplate
+                         * @instance
+                         */
+                        RevisionTemplate.prototype.encryptionKeyRevocationAction = 0;
+    
+                        /**
+                         * RevisionTemplate encryptionKeyShutdownDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} encryptionKeyShutdownDuration
+                         * @memberof google.cloud.run.v2.RevisionTemplate
+                         * @instance
+                         */
+                        RevisionTemplate.prototype.encryptionKeyShutdownDuration = null;
+    
+                        /**
                          * RevisionTemplate sessionAffinity.
                          * @member {boolean} sessionAffinity
                          * @memberof google.cloud.run.v2.RevisionTemplate
@@ -19547,6 +19605,10 @@
                                 writer.uint32(/* id 15, wireType 0 =*/120).int32(message.maxInstanceRequestConcurrency);
                             if (message.serviceMesh != null && Object.hasOwnProperty.call(message, "serviceMesh"))
                                 $root.google.cloud.run.v2.ServiceMesh.encode(message.serviceMesh, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.encryptionKeyRevocationAction != null && Object.hasOwnProperty.call(message, "encryptionKeyRevocationAction"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.encryptionKeyRevocationAction);
+                            if (message.encryptionKeyShutdownDuration != null && Object.hasOwnProperty.call(message, "encryptionKeyShutdownDuration"))
+                                $root.google.protobuf.Duration.encode(message.encryptionKeyShutdownDuration, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.sessionAffinity != null && Object.hasOwnProperty.call(message, "sessionAffinity"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.sessionAffinity);
                             if (message.healthCheckDisabled != null && Object.hasOwnProperty.call(message, "healthCheckDisabled"))
@@ -19681,6 +19743,14 @@
                                         message.serviceMesh = $root.google.cloud.run.v2.ServiceMesh.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 17: {
+                                        message.encryptionKeyRevocationAction = reader.int32();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.encryptionKeyShutdownDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 19: {
                                         message.sessionAffinity = reader.bool();
                                         break;
@@ -19803,6 +19873,20 @@
                                 if (error)
                                     return "serviceMesh." + error;
                             }
+                            if (message.encryptionKeyRevocationAction != null && message.hasOwnProperty("encryptionKeyRevocationAction"))
+                                switch (message.encryptionKeyRevocationAction) {
+                                default:
+                                    return "encryptionKeyRevocationAction: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.encryptionKeyShutdownDuration != null && message.hasOwnProperty("encryptionKeyShutdownDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.encryptionKeyShutdownDuration);
+                                if (error)
+                                    return "encryptionKeyShutdownDuration." + error;
+                            }
                             if (message.sessionAffinity != null && message.hasOwnProperty("sessionAffinity"))
                                 if (typeof message.sessionAffinity !== "boolean")
                                     return "sessionAffinity: boolean expected";
@@ -19911,6 +19995,31 @@
                                     throw TypeError(".google.cloud.run.v2.RevisionTemplate.serviceMesh: object expected");
                                 message.serviceMesh = $root.google.cloud.run.v2.ServiceMesh.fromObject(object.serviceMesh);
                             }
+                            switch (object.encryptionKeyRevocationAction) {
+                            default:
+                                if (typeof object.encryptionKeyRevocationAction === "number") {
+                                    message.encryptionKeyRevocationAction = object.encryptionKeyRevocationAction;
+                                    break;
+                                }
+                                break;
+                            case "ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED":
+                            case 0:
+                                message.encryptionKeyRevocationAction = 0;
+                                break;
+                            case "PREVENT_NEW":
+                            case 1:
+                                message.encryptionKeyRevocationAction = 1;
+                                break;
+                            case "SHUTDOWN":
+                            case 2:
+                                message.encryptionKeyRevocationAction = 2;
+                                break;
+                            }
+                            if (object.encryptionKeyShutdownDuration != null) {
+                                if (typeof object.encryptionKeyShutdownDuration !== "object")
+                                    throw TypeError(".google.cloud.run.v2.RevisionTemplate.encryptionKeyShutdownDuration: object expected");
+                                message.encryptionKeyShutdownDuration = $root.google.protobuf.Duration.fromObject(object.encryptionKeyShutdownDuration);
+                            }
                             if (object.sessionAffinity != null)
                                 message.sessionAffinity = Boolean(object.sessionAffinity);
                             if (object.healthCheckDisabled != null)
@@ -19954,6 +20063,8 @@
                                 object.encryptionKey = "";
                                 object.maxInstanceRequestConcurrency = 0;
                                 object.serviceMesh = null;
+                                object.encryptionKeyRevocationAction = options.enums === String ? "ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED" : 0;
+                                object.encryptionKeyShutdownDuration = null;
                                 object.sessionAffinity = false;
                                 object.healthCheckDisabled = false;
                                 object.nodeSelector = null;
@@ -19997,6 +20108,10 @@
                                 object.maxInstanceRequestConcurrency = message.maxInstanceRequestConcurrency;
                             if (message.serviceMesh != null && message.hasOwnProperty("serviceMesh"))
                                 object.serviceMesh = $root.google.cloud.run.v2.ServiceMesh.toObject(message.serviceMesh, options);
+                            if (message.encryptionKeyRevocationAction != null && message.hasOwnProperty("encryptionKeyRevocationAction"))
+                                object.encryptionKeyRevocationAction = options.enums === String ? $root.google.cloud.run.v2.EncryptionKeyRevocationAction[message.encryptionKeyRevocationAction] === undefined ? message.encryptionKeyRevocationAction : $root.google.cloud.run.v2.EncryptionKeyRevocationAction[message.encryptionKeyRevocationAction] : message.encryptionKeyRevocationAction;
+                            if (message.encryptionKeyShutdownDuration != null && message.hasOwnProperty("encryptionKeyShutdownDuration"))
+                                object.encryptionKeyShutdownDuration = $root.google.protobuf.Duration.toObject(message.encryptionKeyShutdownDuration, options);
                             if (message.sessionAffinity != null && message.hasOwnProperty("sessionAffinity"))
                                 object.sessionAffinity = message.sessionAffinity;
                             if (message.healthCheckDisabled != null && message.hasOwnProperty("healthCheckDisabled"))
