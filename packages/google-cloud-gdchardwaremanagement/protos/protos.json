@@ -529,6 +529,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "ipv4Address": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_info).format": "IPV4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -918,6 +926,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "provisioningState": {
+                          "type": "ProvisioningState",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -931,6 +946,14 @@
                             "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED": 7,
                             "ACTIVE": 3,
                             "CANCELLED": 4
+                          }
+                        },
+                        "ProvisioningState": {
+                          "values": {
+                            "PROVISIONING_STATE_UNSPECIFIED": 0,
+                            "PROVISIONING_REQUIRED": 1,
+                            "PROVISIONING_IN_PROGRESS": 2,
+                            "PROVISIONING_COMPLETE": 3
                           }
                         }
                       }
@@ -1237,6 +1260,22 @@
                         "kubernetesIpv4Subnet": {
                           "type": "Subnet",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dnsIpv4Addresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kubernetesPrimaryVlanId": {
+                          "type": "int32",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3274,7 +3313,14 @@
                           "type": "StateSignal",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "provisioningStateSignal": {
+                          "type": "ProvisioningStateSignal",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -3293,6 +3339,13 @@
                             "FACTORY_TURNUP_CHECKS_PASSED": 1,
                             "READY_FOR_SITE_TURNUP": 1,
                             "FACTORY_TURNUP_CHECKS_FAILED": 2
+                          }
+                        },
+                        "ProvisioningStateSignal": {
+                          "values": {
+                            "PROVISIONING_STATE_SIGNAL_UNSPECIFIED": 0,
+                            "PROVISIONING_IN_PROGRESS": 1,
+                            "PROVISIONING_COMPLETE": 2
                           }
                         }
                       }

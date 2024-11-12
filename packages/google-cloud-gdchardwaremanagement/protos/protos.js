@@ -2690,6 +2690,7 @@
                              * @interface IMacAddress
                              * @property {string|null} [address] MacAddress address
                              * @property {google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|null} [type] MacAddress type
+                             * @property {string|null} [ipv4Address] MacAddress ipv4Address
                              */
     
                             /**
@@ -2724,6 +2725,14 @@
                             MacAddress.prototype.type = 0;
     
                             /**
+                             * MacAddress ipv4Address.
+                             * @member {string} ipv4Address
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
+                             * @instance
+                             */
+                            MacAddress.prototype.ipv4Address = "";
+    
+                            /**
                              * Creates a new MacAddress instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress
@@ -2751,6 +2760,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
                                 if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                                if (message.ipv4Address != null && Object.hasOwnProperty.call(message, "ipv4Address"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.ipv4Address);
                                 return writer;
                             };
     
@@ -2791,6 +2802,10 @@
                                         }
                                     case 2: {
                                             message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ipv4Address = reader.string();
                                             break;
                                         }
                                     default:
@@ -2841,6 +2856,9 @@
                                     case 3:
                                         break;
                                     }
+                                if (message.ipv4Address != null && message.hasOwnProperty("ipv4Address"))
+                                    if (!$util.isString(message.ipv4Address))
+                                        return "ipv4Address: string expected";
                                 return null;
                             };
     
@@ -2882,6 +2900,8 @@
                                     message.type = 3;
                                     break;
                                 }
+                                if (object.ipv4Address != null)
+                                    message.ipv4Address = String(object.ipv4Address);
                                 return message;
                             };
     
@@ -2901,11 +2921,14 @@
                                 if (options.defaults) {
                                     object.address = "";
                                     object.type = options.enums === String ? "ADDRESS_TYPE_UNSPECIFIED" : 0;
+                                    object.ipv4Address = "";
                                 }
                                 if (message.address != null && message.hasOwnProperty("address"))
                                     object.address = message.address;
                                 if (message.type != null && message.hasOwnProperty("type"))
                                     object.type = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType[message.type] === undefined ? message.type : $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType[message.type] : message.type;
+                                if (message.ipv4Address != null && message.hasOwnProperty("ipv4Address"))
+                                    object.ipv4Address = message.ipv4Address;
                                 return object;
                             };
     
@@ -4878,6 +4901,7 @@
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.IZoneNetworkConfig|null} [networkConfig] Zone networkConfig
                          * @property {string|null} [globallyUniqueId] Zone globallyUniqueId
                          * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig>|null} [subscriptionConfigs] Zone subscriptionConfigs
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|null} [provisioningState] Zone provisioningState
                          */
     
                         /**
@@ -4987,6 +5011,14 @@
                         Zone.prototype.subscriptionConfigs = $util.emptyArray;
     
                         /**
+                         * Zone provisioningState.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState} provisioningState
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
+                         * @instance
+                         */
+                        Zone.prototype.provisioningState = 0;
+    
+                        /**
                          * Creates a new Zone instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
@@ -5035,6 +5067,8 @@
                             if (message.subscriptionConfigs != null && message.subscriptionConfigs.length)
                                 for (var i = 0; i < message.subscriptionConfigs.length; ++i)
                                     $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.encode(message.subscriptionConfigs[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.provisioningState != null && Object.hasOwnProperty.call(message, "provisioningState"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.provisioningState);
                             return writer;
                         };
     
@@ -5134,6 +5168,10 @@
                                         if (!(message.subscriptionConfigs && message.subscriptionConfigs.length))
                                             message.subscriptionConfigs = [];
                                         message.subscriptionConfigs.push($root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 14: {
+                                        message.provisioningState = reader.int32();
                                         break;
                                     }
                                 default:
@@ -5238,6 +5276,16 @@
                                         return "subscriptionConfigs." + error;
                                 }
                             }
+                            if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
+                                switch (message.provisioningState) {
+                                default:
+                                    return "provisioningState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -5343,6 +5391,30 @@
                                     message.subscriptionConfigs[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.fromObject(object.subscriptionConfigs[i]);
                                 }
                             }
+                            switch (object.provisioningState) {
+                            default:
+                                if (typeof object.provisioningState === "number") {
+                                    message.provisioningState = object.provisioningState;
+                                    break;
+                                }
+                                break;
+                            case "PROVISIONING_STATE_UNSPECIFIED":
+                            case 0:
+                                message.provisioningState = 0;
+                                break;
+                            case "PROVISIONING_REQUIRED":
+                            case 1:
+                                message.provisioningState = 1;
+                                break;
+                            case "PROVISIONING_IN_PROGRESS":
+                            case 2:
+                                message.provisioningState = 2;
+                                break;
+                            case "PROVISIONING_COMPLETE":
+                            case 3:
+                                message.provisioningState = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -5374,6 +5446,7 @@
                                 object.ciqUri = "";
                                 object.networkConfig = null;
                                 object.globallyUniqueId = "";
+                                object.provisioningState = options.enums === String ? "PROVISIONING_STATE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5407,6 +5480,8 @@
                                 for (var j = 0; j < message.subscriptionConfigs.length; ++j)
                                     object.subscriptionConfigs[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.toObject(message.subscriptionConfigs[j], options);
                             }
+                            if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
+                                object.provisioningState = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState[message.provisioningState] === undefined ? message.provisioningState : $root.google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState[message.provisioningState] : message.provisioningState;
                             return object;
                         };
     
@@ -5459,6 +5534,24 @@
                             values[valuesById[7] = "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED"] = 7;
                             values[valuesById[3] = "ACTIVE"] = 3;
                             values[valuesById[4] = "CANCELLED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * ProvisioningState enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState
+                         * @enum {number}
+                         * @property {number} PROVISIONING_STATE_UNSPECIFIED=0 PROVISIONING_STATE_UNSPECIFIED value
+                         * @property {number} PROVISIONING_REQUIRED=1 PROVISIONING_REQUIRED value
+                         * @property {number} PROVISIONING_IN_PROGRESS=2 PROVISIONING_IN_PROGRESS value
+                         * @property {number} PROVISIONING_COMPLETE=3 PROVISIONING_COMPLETE value
+                         */
+                        Zone.ProvisioningState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVISIONING_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PROVISIONING_REQUIRED"] = 1;
+                            values[valuesById[2] = "PROVISIONING_IN_PROGRESS"] = 2;
+                            values[valuesById[3] = "PROVISIONING_COMPLETE"] = 3;
                             return values;
                         })();
     
@@ -7784,6 +7877,8 @@
                          * @property {string|null} [kubernetesControlPlaneIpv4Range] ZoneNetworkConfig kubernetesControlPlaneIpv4Range
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.ISubnet|null} [managementIpv4Subnet] ZoneNetworkConfig managementIpv4Subnet
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.ISubnet|null} [kubernetesIpv4Subnet] ZoneNetworkConfig kubernetesIpv4Subnet
+                         * @property {Array.<string>|null} [dnsIpv4Addresses] ZoneNetworkConfig dnsIpv4Addresses
+                         * @property {number|null} [kubernetesPrimaryVlanId] ZoneNetworkConfig kubernetesPrimaryVlanId
                          */
     
                         /**
@@ -7795,6 +7890,7 @@
                          * @param {google.cloud.gdchardwaremanagement.v1alpha.IZoneNetworkConfig=} [properties] Properties to set
                          */
                         function ZoneNetworkConfig(properties) {
+                            this.dnsIpv4Addresses = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7842,6 +7938,22 @@
                         ZoneNetworkConfig.prototype.kubernetesIpv4Subnet = null;
     
                         /**
+                         * ZoneNetworkConfig dnsIpv4Addresses.
+                         * @member {Array.<string>} dnsIpv4Addresses
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig
+                         * @instance
+                         */
+                        ZoneNetworkConfig.prototype.dnsIpv4Addresses = $util.emptyArray;
+    
+                        /**
+                         * ZoneNetworkConfig kubernetesPrimaryVlanId.
+                         * @member {number} kubernetesPrimaryVlanId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig
+                         * @instance
+                         */
+                        ZoneNetworkConfig.prototype.kubernetesPrimaryVlanId = 0;
+    
+                        /**
                          * Creates a new ZoneNetworkConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig
@@ -7875,6 +7987,11 @@
                                 $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.encode(message.managementIpv4Subnet, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.kubernetesIpv4Subnet != null && Object.hasOwnProperty.call(message, "kubernetesIpv4Subnet"))
                                 $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.encode(message.kubernetesIpv4Subnet, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.dnsIpv4Addresses != null && message.dnsIpv4Addresses.length)
+                                for (var i = 0; i < message.dnsIpv4Addresses.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.dnsIpv4Addresses[i]);
+                            if (message.kubernetesPrimaryVlanId != null && Object.hasOwnProperty.call(message, "kubernetesPrimaryVlanId"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.kubernetesPrimaryVlanId);
                             return writer;
                         };
     
@@ -7927,6 +8044,16 @@
                                     }
                                 case 5: {
                                         message.kubernetesIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.dnsIpv4Addresses && message.dnsIpv4Addresses.length))
+                                            message.dnsIpv4Addresses = [];
+                                        message.dnsIpv4Addresses.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.kubernetesPrimaryVlanId = reader.int32();
                                         break;
                                     }
                                 default:
@@ -7983,6 +8110,16 @@
                                 if (error)
                                     return "kubernetesIpv4Subnet." + error;
                             }
+                            if (message.dnsIpv4Addresses != null && message.hasOwnProperty("dnsIpv4Addresses")) {
+                                if (!Array.isArray(message.dnsIpv4Addresses))
+                                    return "dnsIpv4Addresses: array expected";
+                                for (var i = 0; i < message.dnsIpv4Addresses.length; ++i)
+                                    if (!$util.isString(message.dnsIpv4Addresses[i]))
+                                        return "dnsIpv4Addresses: string[] expected";
+                            }
+                            if (message.kubernetesPrimaryVlanId != null && message.hasOwnProperty("kubernetesPrimaryVlanId"))
+                                if (!$util.isInteger(message.kubernetesPrimaryVlanId))
+                                    return "kubernetesPrimaryVlanId: integer expected";
                             return null;
                         };
     
@@ -8014,6 +8151,15 @@
                                     throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.kubernetesIpv4Subnet: object expected");
                                 message.kubernetesIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.fromObject(object.kubernetesIpv4Subnet);
                             }
+                            if (object.dnsIpv4Addresses) {
+                                if (!Array.isArray(object.dnsIpv4Addresses))
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.dnsIpv4Addresses: array expected");
+                                message.dnsIpv4Addresses = [];
+                                for (var i = 0; i < object.dnsIpv4Addresses.length; ++i)
+                                    message.dnsIpv4Addresses[i] = String(object.dnsIpv4Addresses[i]);
+                            }
+                            if (object.kubernetesPrimaryVlanId != null)
+                                message.kubernetesPrimaryVlanId = object.kubernetesPrimaryVlanId | 0;
                             return message;
                         };
     
@@ -8030,12 +8176,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dnsIpv4Addresses = [];
                             if (options.defaults) {
                                 object.machineMgmtIpv4Range = "";
                                 object.kubernetesNodeIpv4Range = "";
                                 object.kubernetesControlPlaneIpv4Range = "";
                                 object.managementIpv4Subnet = null;
                                 object.kubernetesIpv4Subnet = null;
+                                object.kubernetesPrimaryVlanId = 0;
                             }
                             if (message.machineMgmtIpv4Range != null && message.hasOwnProperty("machineMgmtIpv4Range"))
                                 object.machineMgmtIpv4Range = message.machineMgmtIpv4Range;
@@ -8047,6 +8196,13 @@
                                 object.managementIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.toObject(message.managementIpv4Subnet, options);
                             if (message.kubernetesIpv4Subnet != null && message.hasOwnProperty("kubernetesIpv4Subnet"))
                                 object.kubernetesIpv4Subnet = $root.google.cloud.gdchardwaremanagement.v1alpha.Subnet.toObject(message.kubernetesIpv4Subnet, options);
+                            if (message.dnsIpv4Addresses && message.dnsIpv4Addresses.length) {
+                                object.dnsIpv4Addresses = [];
+                                for (var j = 0; j < message.dnsIpv4Addresses.length; ++j)
+                                    object.dnsIpv4Addresses[j] = message.dnsIpv4Addresses[j];
+                            }
+                            if (message.kubernetesPrimaryVlanId != null && message.hasOwnProperty("kubernetesPrimaryVlanId"))
+                                object.kubernetesPrimaryVlanId = message.kubernetesPrimaryVlanId;
                             return object;
                         };
     
@@ -21855,6 +22011,7 @@
                          * @property {string|null} [name] SignalZoneStateRequest name
                          * @property {string|null} [requestId] SignalZoneStateRequest requestId
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal|null} [stateSignal] SignalZoneStateRequest stateSignal
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|null} [provisioningStateSignal] SignalZoneStateRequest provisioningStateSignal
                          */
     
                         /**
@@ -21897,6 +22054,14 @@
                         SignalZoneStateRequest.prototype.stateSignal = 0;
     
                         /**
+                         * SignalZoneStateRequest provisioningStateSignal.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal} provisioningStateSignal
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest
+                         * @instance
+                         */
+                        SignalZoneStateRequest.prototype.provisioningStateSignal = 0;
+    
+                        /**
                          * Creates a new SignalZoneStateRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest
@@ -21926,6 +22091,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
                             if (message.stateSignal != null && Object.hasOwnProperty.call(message, "stateSignal"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.stateSignal);
+                            if (message.provisioningStateSignal != null && Object.hasOwnProperty.call(message, "provisioningStateSignal"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.provisioningStateSignal);
                             return writer;
                         };
     
@@ -21970,6 +22137,10 @@
                                     }
                                 case 3: {
                                         message.stateSignal = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.provisioningStateSignal = reader.int32();
                                         break;
                                     }
                                 default:
@@ -22023,6 +22194,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.provisioningStateSignal != null && message.hasOwnProperty("provisioningStateSignal"))
+                                switch (message.provisioningStateSignal) {
+                                default:
+                                    return "provisioningStateSignal: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -22066,6 +22246,26 @@
                                 message.stateSignal = 2;
                                 break;
                             }
+                            switch (object.provisioningStateSignal) {
+                            default:
+                                if (typeof object.provisioningStateSignal === "number") {
+                                    message.provisioningStateSignal = object.provisioningStateSignal;
+                                    break;
+                                }
+                                break;
+                            case "PROVISIONING_STATE_SIGNAL_UNSPECIFIED":
+                            case 0:
+                                message.provisioningStateSignal = 0;
+                                break;
+                            case "PROVISIONING_IN_PROGRESS":
+                            case 1:
+                                message.provisioningStateSignal = 1;
+                                break;
+                            case "PROVISIONING_COMPLETE":
+                            case 2:
+                                message.provisioningStateSignal = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -22086,6 +22286,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.stateSignal = options.enums === String ? "STATE_SIGNAL_UNSPECIFIED" : 0;
+                                object.provisioningStateSignal = options.enums === String ? "PROVISIONING_STATE_SIGNAL_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -22093,6 +22294,8 @@
                                 object.requestId = message.requestId;
                             if (message.stateSignal != null && message.hasOwnProperty("stateSignal"))
                                 object.stateSignal = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal[message.stateSignal] === undefined ? message.stateSignal : $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal[message.stateSignal] : message.stateSignal;
+                            if (message.provisioningStateSignal != null && message.hasOwnProperty("provisioningStateSignal"))
+                                object.provisioningStateSignal = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal[message.provisioningStateSignal] === undefined ? message.provisioningStateSignal : $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal[message.provisioningStateSignal] : message.provisioningStateSignal;
                             return object;
                         };
     
@@ -22137,6 +22340,22 @@
                             values[valuesById[1] = "FACTORY_TURNUP_CHECKS_PASSED"] = 1;
                             values["READY_FOR_SITE_TURNUP"] = 1;
                             values[valuesById[2] = "FACTORY_TURNUP_CHECKS_FAILED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ProvisioningStateSignal enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal
+                         * @enum {number}
+                         * @property {number} PROVISIONING_STATE_SIGNAL_UNSPECIFIED=0 PROVISIONING_STATE_SIGNAL_UNSPECIFIED value
+                         * @property {number} PROVISIONING_IN_PROGRESS=1 PROVISIONING_IN_PROGRESS value
+                         * @property {number} PROVISIONING_COMPLETE=2 PROVISIONING_COMPLETE value
+                         */
+                        SignalZoneStateRequest.ProvisioningStateSignal = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVISIONING_STATE_SIGNAL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PROVISIONING_IN_PROGRESS"] = 1;
+                            values[valuesById[2] = "PROVISIONING_COMPLETE"] = 2;
                             return values;
                         })();
     

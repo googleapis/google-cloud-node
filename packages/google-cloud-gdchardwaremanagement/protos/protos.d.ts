@@ -787,6 +787,9 @@ export namespace google {
 
                         /** MacAddress type */
                         type?: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|null);
+
+                        /** MacAddress ipv4Address */
+                        ipv4Address?: (string|null);
                     }
 
                     /** Represents a MacAddress. */
@@ -803,6 +806,9 @@ export namespace google {
 
                         /** MacAddress type. */
                         public type: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType);
+
+                        /** MacAddress ipv4Address. */
+                        public ipv4Address: string;
 
                         /**
                          * Creates a new MacAddress instance using the specified properties.
@@ -1597,6 +1603,9 @@ export namespace google {
 
                     /** Zone subscriptionConfigs */
                     subscriptionConfigs?: (google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig[]|null);
+
+                    /** Zone provisioningState */
+                    provisioningState?: (google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|null);
                 }
 
                 /** Represents a Zone. */
@@ -1640,6 +1649,9 @@ export namespace google {
 
                     /** Zone subscriptionConfigs. */
                     public subscriptionConfigs: google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig[];
+
+                    /** Zone provisioningState. */
+                    public provisioningState: (google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState);
 
                     /**
                      * Creates a new Zone instance using the specified properties.
@@ -1731,6 +1743,14 @@ export namespace google {
                         CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED = 7,
                         ACTIVE = 3,
                         CANCELLED = 4
+                    }
+
+                    /** ProvisioningState enum. */
+                    enum ProvisioningState {
+                        PROVISIONING_STATE_UNSPECIFIED = 0,
+                        PROVISIONING_REQUIRED = 1,
+                        PROVISIONING_IN_PROGRESS = 2,
+                        PROVISIONING_COMPLETE = 3
                     }
                 }
 
@@ -2620,6 +2640,12 @@ export namespace google {
 
                     /** ZoneNetworkConfig kubernetesIpv4Subnet */
                     kubernetesIpv4Subnet?: (google.cloud.gdchardwaremanagement.v1alpha.ISubnet|null);
+
+                    /** ZoneNetworkConfig dnsIpv4Addresses */
+                    dnsIpv4Addresses?: (string[]|null);
+
+                    /** ZoneNetworkConfig kubernetesPrimaryVlanId */
+                    kubernetesPrimaryVlanId?: (number|null);
                 }
 
                 /** Represents a ZoneNetworkConfig. */
@@ -2645,6 +2671,12 @@ export namespace google {
 
                     /** ZoneNetworkConfig kubernetesIpv4Subnet. */
                     public kubernetesIpv4Subnet?: (google.cloud.gdchardwaremanagement.v1alpha.ISubnet|null);
+
+                    /** ZoneNetworkConfig dnsIpv4Addresses. */
+                    public dnsIpv4Addresses: string[];
+
+                    /** ZoneNetworkConfig kubernetesPrimaryVlanId. */
+                    public kubernetesPrimaryVlanId: number;
 
                     /**
                      * Creates a new ZoneNetworkConfig instance using the specified properties.
@@ -8747,6 +8779,9 @@ export namespace google {
 
                     /** SignalZoneStateRequest stateSignal */
                     stateSignal?: (google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal|null);
+
+                    /** SignalZoneStateRequest provisioningStateSignal */
+                    provisioningStateSignal?: (google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|null);
                 }
 
                 /** Represents a SignalZoneStateRequest. */
@@ -8766,6 +8801,9 @@ export namespace google {
 
                     /** SignalZoneStateRequest stateSignal. */
                     public stateSignal: (google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal);
+
+                    /** SignalZoneStateRequest provisioningStateSignal. */
+                    public provisioningStateSignal: (google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal);
 
                     /**
                      * Creates a new SignalZoneStateRequest instance using the specified properties.
@@ -8853,6 +8891,13 @@ export namespace google {
                         FACTORY_TURNUP_CHECKS_PASSED = 1,
                         READY_FOR_SITE_TURNUP = 1,
                         FACTORY_TURNUP_CHECKS_FAILED = 2
+                    }
+
+                    /** ProvisioningStateSignal enum. */
+                    enum ProvisioningStateSignal {
+                        PROVISIONING_STATE_SIGNAL_UNSPECIFIED = 0,
+                        PROVISIONING_IN_PROGRESS = 1,
+                        PROVISIONING_COMPLETE = 2
                     }
                 }
 
