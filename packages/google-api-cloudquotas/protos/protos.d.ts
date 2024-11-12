@@ -1362,6 +1362,8 @@ export namespace google {
                     enum IneligibilityReason {
                         INELIGIBILITY_REASON_UNSPECIFIED = 0,
                         NO_VALID_BILLING_ACCOUNT = 1,
+                        NOT_SUPPORTED = 3,
+                        NOT_ENOUGH_USAGE_HISTORY = 4,
                         OTHER = 2
                     }
                 }
