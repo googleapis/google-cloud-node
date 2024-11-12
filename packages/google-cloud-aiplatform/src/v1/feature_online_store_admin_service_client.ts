@@ -3204,6 +3204,7 @@ export class FeatureOnlineStoreAdminServiceClient {
    *     * `feature_registry_source.feature_groups`
    *     * `sync_config`
    *     * `sync_config.cron`
+   *     * `optimized_config.automatic_resources`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

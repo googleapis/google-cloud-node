@@ -2386,8 +2386,6 @@ export class GenAiTuningServiceClient {
 
   /**
    * Rebase a TunedModel.
-   * Creates a LongRunningOperation that takes a legacy Tuned GenAI model
-   * Reference and creates a TuningJob based on newly available model.
    *
    * @param {Object} request
    *   The request object that will be sent.
