@@ -1041,7 +1041,7 @@ export class StoragePoolsClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   /**
-   * Updates the specified storagePool with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: size_tb and provisioned_iops.
+   * Updates the specified storagePool with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: pool_provisioned_capacity_gb, pool_provisioned_iops and pool_provisioned_throughput.
    *
    * @param {Object} request
    *   The request object that will be sent.
