@@ -739,7 +739,8 @@ export class ServiceHealthClient {
    *   response. The expression takes the following forms: <br>
    *   *   field=value for `category` and `state`<br>
    *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-   *   Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+   *   `event_impacts.product.product_name:"Eventarc"`
    *   <br>
    *
    *   Multiple filter queries are separated by spaces. Example:
@@ -749,7 +750,7 @@ export class ServiceHealthClient {
    *   AND and OR expressions explicitly.
    *
    *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`
+   *   `update_time`, `event_impacts.product.product_name`
    * @param {google.cloud.servicehealth.v1.EventView} [request.view]
    *   Optional. Event fields to include in response.
    * @param {object} [options]
@@ -868,7 +869,8 @@ export class ServiceHealthClient {
    *   response. The expression takes the following forms: <br>
    *   *   field=value for `category` and `state`<br>
    *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-   *   Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+   *   `event_impacts.product.product_name:"Eventarc"`
    *   <br>
    *
    *   Multiple filter queries are separated by spaces. Example:
@@ -878,7 +880,7 @@ export class ServiceHealthClient {
    *   AND and OR expressions explicitly.
    *
    *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`
+   *   `update_time`, `event_impacts.product.product_name`
    * @param {google.cloud.servicehealth.v1.EventView} [request.view]
    *   Optional. Event fields to include in response.
    * @param {object} [options]
@@ -945,7 +947,8 @@ export class ServiceHealthClient {
    *   response. The expression takes the following forms: <br>
    *   *   field=value for `category` and `state`<br>
    *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-   *   Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+   *   `event_impacts.product.product_name:"Eventarc"`
    *   <br>
    *
    *   Multiple filter queries are separated by spaces. Example:
@@ -955,7 +958,7 @@ export class ServiceHealthClient {
    *   AND and OR expressions explicitly.
    *
    *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`
+   *   `update_time`, `event_impacts.product.product_name`
    * @param {google.cloud.servicehealth.v1.EventView} [request.view]
    *   Optional. Event fields to include in response.
    * @param {object} [options]
@@ -1028,7 +1031,7 @@ export class ServiceHealthClient {
    *   *   field=value for `category` and `state`
    *   *   field &lt;, >, &lt;=, or >= value for `update_time`
    *
-   *   Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
    *
    *   Multiple filter queries are space-separated. Example:
    *   `category=INCIDENT state=ACTIVE`.
@@ -1167,7 +1170,7 @@ export class ServiceHealthClient {
    *   *   field=value for `category` and `state`
    *   *   field &lt;, >, &lt;=, or >= value for `update_time`
    *
-   *   Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
    *
    *   Multiple filter queries are space-separated. Example:
    *   `category=INCIDENT state=ACTIVE`.
@@ -1250,7 +1253,7 @@ export class ServiceHealthClient {
    *   *   field=value for `category` and `state`
    *   *   field &lt;, >, &lt;=, or >= value for `update_time`
    *
-   *   Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
    *
    *   Multiple filter queries are space-separated. Example:
    *   `category=INCIDENT state=ACTIVE`.
