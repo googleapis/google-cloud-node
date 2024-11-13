@@ -2907,8 +2907,10 @@ export class IndexEndpointServiceClient {
    *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
    * @param {google.cloud.aiplatform.v1.DeployedIndex} request.deployedIndex
    *   Required. The DeployedIndex to be updated within the IndexEndpoint.
-   *   Currently, the updatable fields are {@link protos.automatic_resources|DeployedIndex}
-   *   and {@link protos.dedicated_resources|DeployedIndex}
+   *   Currently, the updatable fields are
+   *   {@link protos.google.cloud.aiplatform.v1.DeployedIndex.automatic_resources|DeployedIndex.automatic_resources}
+   *   and
+   *   {@link protos.google.cloud.aiplatform.v1.DeployedIndex.dedicated_resources|DeployedIndex.dedicated_resources}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

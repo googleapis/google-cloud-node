@@ -662,6 +662,11 @@
                 "createFeature"
               ]
             },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
+              ]
+            },
             "UpdateFeature": {
               "methods": [
                 "updateFeature"
@@ -719,6 +724,11 @@
             "CreateFeature": {
               "methods": [
                 "createFeature"
+              ]
+            },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
               ]
             },
             "UpdateFeature": {

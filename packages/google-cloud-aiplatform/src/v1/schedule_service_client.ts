@@ -2386,8 +2386,9 @@ export class ScheduleServiceClient {
    *
    * When the Schedule is resumed, new runs will be scheduled starting from the
    * next execution time after the current time based on the time_specification
-   * in the Schedule. If {@link protos.|Schedule.catchUp} is set up true, all
-   * missed runs will be scheduled for backfill first.
+   * in the Schedule. If
+   * {@link protos.google.cloud.aiplatform.v1.Schedule.catch_up|Schedule.catch_up} is set up
+   * true, all missed runs will be scheduled for backfill first.
    *
    * @param {Object} request
    *   The request object that will be sent.

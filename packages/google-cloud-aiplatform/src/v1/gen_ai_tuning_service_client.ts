@@ -2386,8 +2386,6 @@ export class GenAiTuningServiceClient {
 
   /**
    * Rebase a TunedModel.
-   * Creates a LongRunningOperation that takes a legacy Tuned GenAI model
-   * Reference and creates a TuningJob based on newly available model.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2548,8 +2546,9 @@ export class GenAiTuningServiceClient {
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
-   *   Typically obtained via {@link protos.|ListTuningJob.next_page_token} of the
-   *   previous GenAiTuningService.ListTuningJob][] call.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListTuningJobsResponse.next_page_token|ListTuningJobsResponse.next_page_token}
+   *   of the previous GenAiTuningService.ListTuningJob][] call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2650,8 +2649,9 @@ export class GenAiTuningServiceClient {
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
-   *   Typically obtained via {@link protos.|ListTuningJob.next_page_token} of the
-   *   previous GenAiTuningService.ListTuningJob][] call.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListTuningJobsResponse.next_page_token|ListTuningJobsResponse.next_page_token}
+   *   of the previous GenAiTuningService.ListTuningJob][] call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2700,8 +2700,9 @@ export class GenAiTuningServiceClient {
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
-   *   Typically obtained via {@link protos.|ListTuningJob.next_page_token} of the
-   *   previous GenAiTuningService.ListTuningJob][] call.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListTuningJobsResponse.next_page_token|ListTuningJobsResponse.next_page_token}
+   *   of the previous GenAiTuningService.ListTuningJob][] call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

@@ -2846,8 +2846,8 @@ export class PersistentResourceServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListPersistentResourceResponse.next_page_token} of the previous
-   *   {@link protos.|PersistentResourceService.ListPersistentResource} call.
+   *   {@link protos.google.cloud.aiplatform.v1.ListPersistentResourcesResponse.next_page_token|ListPersistentResourcesResponse.next_page_token}
+   *   of the previous {@link protos.|PersistentResourceService.ListPersistentResource} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2951,8 +2951,8 @@ export class PersistentResourceServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListPersistentResourceResponse.next_page_token} of the previous
-   *   {@link protos.|PersistentResourceService.ListPersistentResource} call.
+   *   {@link protos.google.cloud.aiplatform.v1.ListPersistentResourcesResponse.next_page_token|ListPersistentResourcesResponse.next_page_token}
+   *   of the previous {@link protos.|PersistentResourceService.ListPersistentResource} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3000,8 +3000,8 @@ export class PersistentResourceServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListPersistentResourceResponse.next_page_token} of the previous
-   *   {@link protos.|PersistentResourceService.ListPersistentResource} call.
+   *   {@link protos.google.cloud.aiplatform.v1.ListPersistentResourcesResponse.next_page_token|ListPersistentResourcesResponse.next_page_token}
+   *   of the previous {@link protos.|PersistentResourceService.ListPersistentResource} call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

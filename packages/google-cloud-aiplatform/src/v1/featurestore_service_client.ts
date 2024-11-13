@@ -3644,15 +3644,16 @@ export class FeaturestoreServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the EntityType to create the batch of
-   *   Features under. Format:
+   *   Required. The resource name of the EntityType/FeatureGroup to create the
+   *   batch of Features under. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    * @param {number[]} request.requests
    *   Required. The request message specifying the Features to create. All
-   *   Features must be created under the same parent EntityType. The `parent`
-   *   field in each child request message can be omitted. If `parent` is set in a
-   *   child request, then the value must match the `parent` value in this request
-   *   message.
+   *   Features must be created under the same parent EntityType / FeatureGroup.
+   *   The `parent` field in each child request message can be omitted. If
+   *   `parent` is set in a child request, then the value must match the `parent`
+   *   value in this request message.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

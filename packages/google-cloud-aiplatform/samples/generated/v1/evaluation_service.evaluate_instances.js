@@ -127,6 +127,15 @@ function main(location) {
    */
   // const toolParameterKvMatchInput = {}
   /**
+   *  Translation metrics.
+   *  Input for Comet metric.
+   */
+  // const cometInput = {}
+  /**
+   *  Input for Metricx metric.
+   */
+  // const metricxInput = {}
+  /**
    *  Required. The resource name of the Location to evaluate the instances.
    *  Format: `projects/{project}/locations/{location}`
    */

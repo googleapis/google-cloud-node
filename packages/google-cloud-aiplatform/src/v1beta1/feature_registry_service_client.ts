@@ -264,6 +264,12 @@ export class FeatureRegistryServiceClient {
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
+      featureMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}'
+      ),
+      featureMonitorJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}/featureMonitorJobs/{feature_monitor_job}'
+      ),
       featureOnlineStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}'
       ),
@@ -412,6 +418,16 @@ export class FeatureRegistryServiceClient {
         'pageToken',
         'nextPageToken',
         'features'
+      ),
+      listFeatureMonitors: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'featureMonitors'
+      ),
+      listFeatureMonitorJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'featureMonitorJobs'
       ),
     };
 
@@ -2186,6 +2202,12 @@ export class FeatureRegistryServiceClient {
     const createFeatureMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateFeatureOperationMetadata'
     ) as gax.protobuf.Type;
+    const batchCreateFeaturesResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesResponse'
+    ) as gax.protobuf.Type;
+    const batchCreateFeaturesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesOperationMetadata'
+    ) as gax.protobuf.Type;
     const updateFeatureResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.Feature'
     ) as gax.protobuf.Type;
@@ -2196,6 +2218,18 @@ export class FeatureRegistryServiceClient {
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteFeatureMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
+    const createFeatureMonitorResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.FeatureMonitor'
+    ) as gax.protobuf.Type;
+    const createFeatureMonitorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.CreateFeatureMonitorOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteFeatureMonitorResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteFeatureMonitorMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
 
@@ -2220,6 +2254,11 @@ export class FeatureRegistryServiceClient {
         createFeatureResponse.decode.bind(createFeatureResponse),
         createFeatureMetadata.decode.bind(createFeatureMetadata)
       ),
+      batchCreateFeatures: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchCreateFeaturesResponse.decode.bind(batchCreateFeaturesResponse),
+        batchCreateFeaturesMetadata.decode.bind(batchCreateFeaturesMetadata)
+      ),
       updateFeature: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateFeatureResponse.decode.bind(updateFeatureResponse),
@@ -2229,6 +2268,16 @@ export class FeatureRegistryServiceClient {
         this.operationsClient,
         deleteFeatureResponse.decode.bind(deleteFeatureResponse),
         deleteFeatureMetadata.decode.bind(deleteFeatureMetadata)
+      ),
+      createFeatureMonitor: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createFeatureMonitorResponse.decode.bind(createFeatureMonitorResponse),
+        createFeatureMonitorMetadata.decode.bind(createFeatureMonitorMetadata)
+      ),
+      deleteFeatureMonitor: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteFeatureMonitorResponse.decode.bind(deleteFeatureMonitorResponse),
+        deleteFeatureMonitorMetadata.decode.bind(deleteFeatureMonitorMetadata)
       ),
     };
 
@@ -2289,10 +2338,18 @@ export class FeatureRegistryServiceClient {
       'updateFeatureGroup',
       'deleteFeatureGroup',
       'createFeature',
+      'batchCreateFeatures',
       'getFeature',
       'listFeatures',
       'updateFeature',
       'deleteFeature',
+      'createFeatureMonitor',
+      'getFeatureMonitor',
+      'listFeatureMonitors',
+      'deleteFeatureMonitor',
+      'createFeatureMonitorJob',
+      'getFeatureMonitorJob',
+      'listFeatureMonitorJobs',
     ];
     for (const methodName of featureRegistryServiceStubMethods) {
       const callPromise = this.featureRegistryServiceStub.then(
@@ -2517,6 +2574,10 @@ export class FeatureRegistryServiceClient {
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
    *   Format for feature_group as parent:
    *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
+   * @param {google.cloud.aiplatform.v1beta1.FeatureStatsAndAnomalySpec} [request.featureStatsAndAnomalySpec]
+   *   Optional. Only applicable for Vertex AI Feature Store.
+   *   If set, retrieves FeatureStatsAndAnomaly generated by FeatureMonitors based
+   *   on this spec.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2600,6 +2661,306 @@ export class FeatureRegistryServiceClient {
     this.initialize();
     return this.innerApiCalls.getFeature(request, options, callback);
   }
+  /**
+   * Gets details of a single FeatureMonitor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the FeatureMonitor resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitor|FeatureMonitor}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_GetFeatureMonitor_async
+   */
+  getFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+      | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+      | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+          | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+      | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getFeatureMonitor(request, options, callback);
+  }
+  /**
+   * Creates a new feature monitor job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of FeatureMonitor to create FeatureMonitorJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}`
+   * @param {google.cloud.aiplatform.v1beta1.FeatureMonitorJob} request.featureMonitorJob
+   *   Required. The Monitor to create.
+   * @param {number} [request.featureMonitorJobId]
+   *   Optional. Output only. System-generated ID for feature monitor job.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob|FeatureMonitorJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_CreateFeatureMonitorJob_async
+   */
+  createFeatureMonitorJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createFeatureMonitorJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFeatureMonitorJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFeatureMonitorJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+          | protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createFeatureMonitorJob(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Get a feature monitor job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the FeatureMonitorJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}/featureMonitorJobs/{feature_monitor_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob|FeatureMonitorJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_GetFeatureMonitorJob_async
+   */
+  getFeatureMonitorJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getFeatureMonitorJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFeatureMonitorJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFeatureMonitorJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+          | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetFeatureMonitorJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getFeatureMonitorJob(request, options, callback);
+  }
 
   /**
    * Creates a new FeatureGroup in a given project and location.
@@ -2616,7 +2977,7 @@ export class FeatureRegistryServiceClient {
    *   Required. The ID to use for this FeatureGroup, which will become the final
    *   component of the FeatureGroup's resource name.
    *
-   *   This value may be up to 60 characters, and valid characters are
+   *   This value may be up to 128 characters, and valid characters are
    *   `[a-z0-9_]`. The first character cannot be a number.
    *
    *   The value must be unique within the project and location.
@@ -3195,6 +3556,151 @@ export class FeatureRegistryServiceClient {
     >;
   }
   /**
+   * Creates a batch of Features in a given FeatureGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the EntityType/FeatureGroup to create the
+   *   batch of Features under. Format:
+   *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}`
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the Features to create. All
+   *   Features must be created under the same parent EntityType / FeatureGroup.
+   *   The `parent` field in each child request message can be omitted. If
+   *   `parent` is set in a child request, then the value must match the `parent`
+   *   value in this request message.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.batch_create_features.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_BatchCreateFeatures_async
+   */
+  batchCreateFeatures(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchCreateFeatures(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateFeatures(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateFeatures(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesResponse,
+            protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCreateFeaturesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchCreateFeatures(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `batchCreateFeatures()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.batch_create_features.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_BatchCreateFeatures_async
+   */
+  async checkBatchCreateFeaturesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesResponse,
+      protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchCreateFeatures,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesResponse,
+      protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesOperationMetadata
+    >;
+  }
+  /**
    * Updates the parameters of a single Feature.
    *
    * @param {Object} request
@@ -3481,6 +3987,292 @@ export class FeatureRegistryServiceClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteFeature,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Creates a new FeatureMonitor in a given project, location and FeatureGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of FeatureGroup to create FeatureMonitor.
+   *   Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{featuregroup}`
+   * @param {google.cloud.aiplatform.v1beta1.FeatureMonitor} request.featureMonitor
+   *   Required. The Monitor to create.
+   * @param {string} request.featureMonitorId
+   *   Required. The ID to use for this FeatureMonitor, which will become the
+   *   final component of the FeatureGroup's resource name.
+   *
+   *   This value may be up to 60 characters, and valid characters are
+   *   `[a-z0-9_]`. The first character cannot be a number.
+   *
+   *   The value must be unique within the FeatureGroup.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_CreateFeatureMonitor_async
+   */
+  createFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+            protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.ICreateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createFeatureMonitor(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createFeatureMonitor()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_CreateFeatureMonitor_async
+   */
+  async checkCreateFeatureMonitorProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.FeatureMonitor,
+      protos.google.cloud.aiplatform.v1beta1.CreateFeatureMonitorOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createFeatureMonitor,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.FeatureMonitor,
+      protos.google.cloud.aiplatform.v1beta1.CreateFeatureMonitorOperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single FeatureMonitor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the FeatureMonitor to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_DeleteFeatureMonitor_async
+   */
+  deleteFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteFeatureMonitorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteFeatureMonitorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteFeatureMonitorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteFeatureMonitorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteFeatureMonitor(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteFeatureMonitor()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_DeleteFeatureMonitor_async
+   */
+  async checkDeleteFeatureMonitorProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFeatureMonitor,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -4138,6 +4930,568 @@ export class FeatureRegistryServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeature>;
+  }
+  /**
+   * Lists FeatureGroups in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the FeatureGroup to list FeatureMonitors.
+   *   Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{featureGroup}`
+   * @param {string} [request.filter]
+   *   Optional. Lists the FeatureMonitors that match the filter expression. The
+   *   following fields are supported:
+   *
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *     in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *     in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
+   *
+   *   Examples:
+   *
+   *   * `create_time > "2020-01-01" OR update_time > "2020-01-01"`
+   *      FeatureMonitors created or updated after 2020-01-01.
+   *   * `labels.env = "prod"`
+   *      FeatureGroups with label "env" set to "prod".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of FeatureGroups to return. The service may
+   *   return fewer than this value. If unspecified, at most 100 FeatureMonitors
+   *   will be returned. The maximum value is 100; any value greater than 100 will
+   *   be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitors|FeatureRegistryService.ListFeatureMonitors}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitors|FeatureRegistryService.ListFeatureMonitors}
+   *   must match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported Fields:
+   *
+   *     * `create_time`
+   *     * `update_time`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitor|FeatureMonitor}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFeatureMonitorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFeatureMonitors(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor[],
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsResponse,
+    ]
+  >;
+  listFeatureMonitors(
+    request: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor
+    >
+  ): void;
+  listFeatureMonitors(
+    request: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor
+    >
+  ): void;
+  listFeatureMonitors(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor[],
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listFeatureMonitors(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the FeatureGroup to list FeatureMonitors.
+   *   Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{featureGroup}`
+   * @param {string} [request.filter]
+   *   Optional. Lists the FeatureMonitors that match the filter expression. The
+   *   following fields are supported:
+   *
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *     in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *     in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
+   *
+   *   Examples:
+   *
+   *   * `create_time > "2020-01-01" OR update_time > "2020-01-01"`
+   *      FeatureMonitors created or updated after 2020-01-01.
+   *   * `labels.env = "prod"`
+   *      FeatureGroups with label "env" set to "prod".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of FeatureGroups to return. The service may
+   *   return fewer than this value. If unspecified, at most 100 FeatureMonitors
+   *   will be returned. The maximum value is 100; any value greater than 100 will
+   *   be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitors|FeatureRegistryService.ListFeatureMonitors}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitors|FeatureRegistryService.ListFeatureMonitors}
+   *   must match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported Fields:
+   *
+   *     * `create_time`
+   *     * `update_time`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitor|FeatureMonitor} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFeatureMonitorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFeatureMonitorsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFeatureMonitors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFeatureMonitors.createStream(
+      this.innerApiCalls.listFeatureMonitors as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listFeatureMonitors`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the FeatureGroup to list FeatureMonitors.
+   *   Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{featureGroup}`
+   * @param {string} [request.filter]
+   *   Optional. Lists the FeatureMonitors that match the filter expression. The
+   *   following fields are supported:
+   *
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *     in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *     in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
+   *
+   *   Examples:
+   *
+   *   * `create_time > "2020-01-01" OR update_time > "2020-01-01"`
+   *      FeatureMonitors created or updated after 2020-01-01.
+   *   * `labels.env = "prod"`
+   *      FeatureGroups with label "env" set to "prod".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of FeatureGroups to return. The service may
+   *   return fewer than this value. If unspecified, at most 100 FeatureMonitors
+   *   will be returned. The maximum value is 100; any value greater than 100 will
+   *   be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitors|FeatureRegistryService.ListFeatureMonitors}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitors|FeatureRegistryService.ListFeatureMonitors}
+   *   must match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported Fields:
+   *
+   *     * `create_time`
+   *     * `update_time`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitor|FeatureMonitor}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_ListFeatureMonitors_async
+   */
+  listFeatureMonitorsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFeatureMonitors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFeatureMonitors.asyncIterate(
+      this.innerApiCalls['listFeatureMonitors'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor>;
+  }
+  /**
+   * List feature monitor jobs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the FeatureMonitor to list
+   *   FeatureMonitorJobs. Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}`
+   * @param {string} [request.filter]
+   *   Optional. Lists the FeatureMonitorJobs that match the filter expression.
+   *   The following fields are supported:
+   *
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *
+   *   Examples:
+   *
+   *   * `create_time > "2020-01-01"`
+   *      FeatureMonitorJobs created after 2020-01-01.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of FeatureMonitorJobs to return. The service
+   *   may return fewer than this value. If unspecified, at most 100
+   *   FeatureMonitorJobs will be returned. The maximum value is 100; any value
+   *   greater than 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitorJobs|FeatureRegistryService.ListFeatureMonitorJobs}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitorJobs|FeatureRegistryService.ListFeatureMonitorJobs}
+   *   must match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported Fields:
+   *
+   *     * `create_time`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob|FeatureMonitorJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFeatureMonitorJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFeatureMonitorJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsResponse,
+    ]
+  >;
+  listFeatureMonitorJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob
+    >
+  ): void;
+  listFeatureMonitorJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob
+    >
+  ): void;
+  listFeatureMonitorJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listFeatureMonitorJobs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the FeatureMonitor to list
+   *   FeatureMonitorJobs. Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}`
+   * @param {string} [request.filter]
+   *   Optional. Lists the FeatureMonitorJobs that match the filter expression.
+   *   The following fields are supported:
+   *
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *
+   *   Examples:
+   *
+   *   * `create_time > "2020-01-01"`
+   *      FeatureMonitorJobs created after 2020-01-01.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of FeatureMonitorJobs to return. The service
+   *   may return fewer than this value. If unspecified, at most 100
+   *   FeatureMonitorJobs will be returned. The maximum value is 100; any value
+   *   greater than 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitorJobs|FeatureRegistryService.ListFeatureMonitorJobs}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitorJobs|FeatureRegistryService.ListFeatureMonitorJobs}
+   *   must match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported Fields:
+   *
+   *     * `create_time`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob|FeatureMonitorJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFeatureMonitorJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFeatureMonitorJobsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFeatureMonitorJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFeatureMonitorJobs.createStream(
+      this.innerApiCalls.listFeatureMonitorJobs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listFeatureMonitorJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the FeatureMonitor to list
+   *   FeatureMonitorJobs. Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}`
+   * @param {string} [request.filter]
+   *   Optional. Lists the FeatureMonitorJobs that match the filter expression.
+   *   The following fields are supported:
+   *
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
+   *
+   *   Examples:
+   *
+   *   * `create_time > "2020-01-01"`
+   *      FeatureMonitorJobs created after 2020-01-01.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of FeatureMonitorJobs to return. The service
+   *   may return fewer than this value. If unspecified, at most 100
+   *   FeatureMonitorJobs will be returned. The maximum value is 100; any value
+   *   greater than 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitorJobs|FeatureRegistryService.ListFeatureMonitorJobs}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureMonitorJobs|FeatureRegistryService.ListFeatureMonitorJobs}
+   *   must match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported Fields:
+   *
+   *     * `create_time`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob|FeatureMonitorJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_ListFeatureMonitorJobs_async
+   */
+  listFeatureMonitorJobsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListFeatureMonitorJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFeatureMonitorJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFeatureMonitorJobs.asyncIterate(
+      this.innerApiCalls['listFeatureMonitorJobs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitorJob>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -5556,6 +6910,174 @@ export class FeatureRegistryServiceClient {
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
     return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
       .feature_group;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @returns {string} Resource name string.
+   */
+  featureMonitorPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string
+  ) {
+    return this.pathTemplates.featureMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_monitor;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitorJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @param {string} feature_monitor_job
+   * @returns {string} Resource name string.
+   */
+  featureMonitorJobPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string,
+    featureMonitorJob: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+      feature_monitor_job: featureMonitorJob,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor;
+  }
+
+  /**
+   * Parse the feature_monitor_job from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor_job.
+   */
+  matchFeatureMonitorJobFromFeatureMonitorJobName(
+    featureMonitorJobName: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor_job;
   }
 
   /**
