@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The location to list all security settings for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>`.
    */
   // const parent = 'abc123'
   /**

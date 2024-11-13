@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the page.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>/pages/<Page ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
    */
   // const name = 'abc123'
   /**

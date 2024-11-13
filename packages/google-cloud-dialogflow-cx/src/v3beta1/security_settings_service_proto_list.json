@@ -2,6 +2,7 @@
   "../../protos/google/cloud/dialogflow/cx/v3beta1/advanced_settings.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/agent.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/audio_config.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3beta1/bigquery_export.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/changelog.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/conversation_history.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/data_store_connection.proto",

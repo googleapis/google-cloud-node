@@ -29,14 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format of test case name to run: `projects/<Project
-   *  ID>/locations/ <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+   *  Required. Format of test case name to run:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    */
   // const name = 'abc123'
   /**
    *  Optional. Environment name. If not set, draft environment is assumed.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const environment = 'abc123'
 

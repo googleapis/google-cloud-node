@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the environment to look up the history for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const name = 'abc123'
   /**

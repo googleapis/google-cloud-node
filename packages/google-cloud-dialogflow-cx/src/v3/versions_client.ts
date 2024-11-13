@@ -556,8 +556,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the {@link protos.google.cloud.dialogflow.cx.v3.Version|Version}.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -741,8 +741,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the {@link protos.google.cloud.dialogflow.cx.v3.Version|Version}
-   *   to delete. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   to delete. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -835,13 +835,13 @@ export class VersionsClient {
    *   Required. Name of the base flow version to compare with the target version.
    *   Use version ID `0` to indicate the draft version of the specified flow.
    *
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/
-   *   <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {string} request.targetVersion
    *   Required. Name of the target flow version to compare with the
    *   base version. Use version ID `0` to indicate the draft version of the
-   *   specified flow. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   specified flow. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {string} request.languageCode
    *   The language to compare the flow versions for.
    *
@@ -951,8 +951,7 @@ export class VersionsClient {
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow} to create an
    *   {@link protos.google.cloud.dialogflow.cx.v3.Version|Version} for. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {google.cloud.dialogflow.cx.v3.Version} request.version
    *   Required. The version to create.
    * @param {object} [options]
@@ -1100,8 +1099,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Version|Version} to be loaded
-   *   to draft flow. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   to draft flow. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {boolean} request.allowOverrideAgentResources
    *   This field is used to prevent accidental overwrite of other agent
    *   resources, which can potentially impact other flow's behavior. If
@@ -1241,8 +1240,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow} to list all
-   *   versions for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
+   *   versions for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1341,8 +1340,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow} to list all
-   *   versions for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
+   *   versions for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1389,8 +1388,8 @@ export class VersionsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow} to list all
-   *   versions for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
+   *   versions for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.

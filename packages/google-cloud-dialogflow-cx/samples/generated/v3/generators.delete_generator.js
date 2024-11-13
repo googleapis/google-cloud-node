@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the generator to delete.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/generators/<Generator ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
    */
   // const name = 'abc123'
   /**

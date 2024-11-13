@@ -593,8 +593,7 @@ export class EnvironmentsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -687,8 +686,7 @@ export class EnvironmentsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} to delete. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -796,7 +794,7 @@ export class EnvironmentsClient {
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to create an
    *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} for. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3.Environment} request.environment
    *   Required. The environment to create.
    * @param {object} [options]
@@ -1091,8 +1089,8 @@ export class EnvironmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.environment
-   *   Required. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>`.
+   *   Required. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1239,12 +1237,12 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.environment
    *   Required. The environment to deploy the flow to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {string} request.flowVersion
    *   Required. The flow version to deploy.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   flows/<Flow ID>/versions/<Version ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1382,8 +1380,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
-   *   environments for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>`.
+   *   environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1482,8 +1480,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
-   *   environments for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>`.
+   *   environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1530,8 +1528,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
-   *   environments for. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>`.
+   *   environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1578,8 +1576,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the environment to look up the history for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1682,8 +1680,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the environment to look up the history for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1730,8 +1728,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the environment to look up the history for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1777,8 +1775,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The environment to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1881,8 +1879,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The environment to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1929,8 +1927,8 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The environment to list results for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *   environments/<Environment ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.

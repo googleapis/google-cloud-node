@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The flow to list all pages for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    */
   // const parent = 'abc123'
   /**

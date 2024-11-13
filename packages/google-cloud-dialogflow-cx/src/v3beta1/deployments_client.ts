@@ -489,8 +489,7 @@ export class DeploymentsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -589,9 +588,8 @@ export class DeploymentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
-   *   to list all environments for. Format: `projects/<Project
-   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *   ID>`.
+   *   to list all environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -690,9 +688,8 @@ export class DeploymentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
-   *   to list all environments for. Format: `projects/<Project
-   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *   ID>`.
+   *   to list all environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -739,9 +736,8 @@ export class DeploymentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
-   *   to list all environments for. Format: `projects/<Project
-   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *   ID>`.
+   *   to list all environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.

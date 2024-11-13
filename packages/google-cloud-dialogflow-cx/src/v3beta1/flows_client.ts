@@ -591,7 +591,7 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a flow for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Flow} request.flow
    *   Required. The flow to create.
    * @param {string} request.languageCode
@@ -697,8 +697,8 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the flow to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {boolean} request.force
    *   This field has no effect for flows with no incoming transitions.
    *   For flows with incoming transitions:
@@ -800,8 +800,8 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the flow to get.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {string} request.languageCode
    *   The language to retrieve the flow for. The following fields are language
    *   dependent:
@@ -1018,8 +1018,8 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The flow to validate.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {string} request.languageCode
    *   If not specified, the agent's default language is used.
    * @param {object} [options]
@@ -1119,8 +1119,8 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The flow name.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/validationResult`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/validationResult`.
    * @param {string} request.languageCode
    *   If not specified, the agent's default language is used.
    * @param {object} [options]
@@ -1238,8 +1238,8 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The flow to train.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1386,7 +1386,7 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to import the flow into.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.flowUri
    *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
    *   to import flow from. The format of this URI must be
@@ -1552,8 +1552,8 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the flow to export.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {string} [request.flowUri]
    *   Optional. The [Google Cloud
    *   Storage](https://cloud.google.com/storage/docs/) URI to export the flow to.
@@ -1703,7 +1703,7 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent containing the flows.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1816,7 +1816,7 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent containing the flows.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1877,7 +1877,7 @@ export class FlowsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent containing the flows.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.

@@ -30,7 +30,7 @@ function main(parent, generator) {
    */
   /**
    *  Required. The agent to create a generator for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**

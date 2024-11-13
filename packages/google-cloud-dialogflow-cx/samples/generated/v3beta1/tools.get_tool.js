@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the Tool.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/tools/<Tool ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/tools/<ToolID>`.
    */
   // const name = 'abc123'
 

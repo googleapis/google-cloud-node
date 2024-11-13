@@ -31,9 +31,9 @@ function main(parent, transitionRouteGroup) {
   /**
    *  Required. The flow to create an
    *  TransitionRouteGroup google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup 
-   *  for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>`
-   *  or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`
+   *  for. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`
+   *  or `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`
    *  for agent-level groups.
    */
   // const parent = 'abc123'

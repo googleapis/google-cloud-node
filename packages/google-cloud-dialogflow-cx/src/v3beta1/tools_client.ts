@@ -562,7 +562,7 @@ export class ToolsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a Tool for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Tool} request.tool
    *   Required. The Tool to be created.
    * @param {object} [options]
@@ -655,8 +655,8 @@ export class ToolsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the Tool.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/tools/<Tool ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/tools/<ToolID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -840,8 +840,8 @@ export class ToolsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the Tool to be deleted.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/tools/<Tool ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/tools/<ToolID>`.
    * @param {boolean} request.force
    *   This field has no effect for Tools not being used.
    *   For Tools that are used:
@@ -941,12 +941,11 @@ export class ToolsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to export tools from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string[]} request.tools
    *   Required. The name of the tools to export.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/tools/<Tool ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/tools/<ToolID>`.
    * @param {string} [request.toolsUri]
    *   Optional. The [Google Cloud
    *   Storage](https://cloud.google.com/storage/docs/) URI to export the tools
@@ -1099,7 +1098,7 @@ export class ToolsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list the Tools from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1198,7 +1197,7 @@ export class ToolsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list the Tools from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1245,7 +1244,7 @@ export class ToolsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list the Tools from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.

@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The environment to list results for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *  environments/<Environment ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const parent = 'abc123'
   /**

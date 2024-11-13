@@ -29,8 +29,8 @@ function main(environment) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/environments/<Environment ID>`.
+   *  Required. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const environment = 'abc123'
 

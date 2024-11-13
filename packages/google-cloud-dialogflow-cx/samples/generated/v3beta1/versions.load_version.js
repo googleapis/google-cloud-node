@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The Version google.cloud.dialogflow.cx.v3beta1.Version  to be
-   *  loaded to draft flow. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *  loaded to draft flow. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    */
   // const name = 'abc123'
   /**

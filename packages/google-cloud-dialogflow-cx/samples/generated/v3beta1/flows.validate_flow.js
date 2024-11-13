@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The flow to validate.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    */
   // const name = 'abc123'
   /**

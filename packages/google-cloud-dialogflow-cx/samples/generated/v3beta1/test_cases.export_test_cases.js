@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The agent where to export test cases from.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**

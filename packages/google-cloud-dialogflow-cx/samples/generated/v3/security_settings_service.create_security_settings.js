@@ -31,7 +31,7 @@ function main(parent, securitySettings) {
   /**
    *  Required. The location to create an
    *  SecuritySettings google.cloud.dialogflow.cx.v3.SecuritySettings  for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>`.
    */
   // const parent = 'abc123'
   /**

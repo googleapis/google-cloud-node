@@ -30,9 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The Environment google.cloud.dialogflow.cx.v3beta1.Environment 
-   *  to list all environments for. Format: `projects/<Project
-   *  ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *  ID>`.
+   *  to list all environments for. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const parent = 'abc123'
   /**

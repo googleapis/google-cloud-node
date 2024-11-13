@@ -29,8 +29,8 @@ function main(name, languageCode) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/generativeSettings`.
+   *  Required. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generativeSettings`.
    */
   // const name = 'abc123'
   /**

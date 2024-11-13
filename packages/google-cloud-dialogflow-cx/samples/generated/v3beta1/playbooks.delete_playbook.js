@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the playbook to delete.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/playbooks/<Playbook ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
    */
   // const name = 'abc123'
 

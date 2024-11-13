@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The Flow google.cloud.dialogflow.cx.v3.Flow  to list all
-   *  versions for. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/flows/<Flow ID>`.
+   *  versions for. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    */
   // const parent = 'abc123'
   /**

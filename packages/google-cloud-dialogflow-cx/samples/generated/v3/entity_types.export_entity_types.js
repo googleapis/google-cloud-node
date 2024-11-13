@@ -30,14 +30,13 @@ function main(parent, entityTypes) {
    */
   /**
    *  Required. The name of the parent agent to export entity types.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
    *  Required. The name of the entity types to export.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/entityTypes/<EntityType ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
    */
   // const entityTypes = ['abc','def']
   /**

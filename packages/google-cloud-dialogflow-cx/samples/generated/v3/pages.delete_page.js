@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the page to delete.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/Flows/<flow ID>/pages/<Page ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/Flows/<flowID>/pages/<PageID>`.
    */
   // const name = 'abc123'
   /**

@@ -30,7 +30,7 @@ function main(parent, agent) {
    */
   /**
    *  Required. The location to create a agent for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>`.
    */
   // const parent = 'abc123'
   /**

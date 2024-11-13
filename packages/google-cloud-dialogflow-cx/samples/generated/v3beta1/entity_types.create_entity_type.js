@@ -30,7 +30,7 @@ function main(parent, entityType) {
    */
   /**
    *  Required. The agent to create a entity type for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
