@@ -4130,5 +4130,70 @@ describe('v2beta1.EncryptionSpecServiceClient', () => {
         );
       });
     });
+
+    describe('sipTrunk', () => {
+      const fakePath = '/rendered/path/sipTrunk';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        siptrunk: 'siptrunkValue',
+      };
+      const client =
+        new encryptionspecserviceModule.v2beta1.EncryptionSpecServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.sipTrunkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sipTrunkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sipTrunkPath', () => {
+        const result = client.sipTrunkPath(
+          'projectValue',
+          'locationValue',
+          'siptrunkValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSipTrunkName', () => {
+        const result = client.matchProjectFromSipTrunkName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSipTrunkName', () => {
+        const result = client.matchLocationFromSipTrunkName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSiptrunkFromSipTrunkName', () => {
+        const result = client.matchSiptrunkFromSipTrunkName(fakePath);
+        assert.strictEqual(result, 'siptrunkValue');
+        assert(
+          (client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });

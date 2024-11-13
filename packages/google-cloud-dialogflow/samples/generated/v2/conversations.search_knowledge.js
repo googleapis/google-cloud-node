@@ -67,6 +67,35 @@ function main(parent, query, conversationProfile, sessionId) {
    *  ID>/conversations/<Conversation ID>/messages/<Message ID>`.
    */
   // const latestMessage = 'abc123'
+  /**
+   *  Optional. The source of the query in the request.
+   */
+  // const querySource = {}
+  /**
+   *  Optional. Information about the end-user to improve the relevance and
+   *  accuracy of generative answers.
+   *  This will be interpreted and used by a language model, so, for good
+   *  results, the data should be self-descriptive, and in a simple structure.
+   *  Example:
+   *  ```json
+   *  {
+   *    "subscription plan": "Business Premium Plus",
+   *    "devices owned": 
+   *      {"model": "Google Pixel 7"},
+   *      {"model": "Google Pixel Tablet"}
+   *     
+   *  }
+   *  ```
+   */
+  // const endUserMetadata = {}
+  /**
+   *  Optional. Configuration specific to search queries with data stores.
+   */
+  // const searchConfig = {}
+  /**
+   *  Optional. Whether to search the query exactly without query rewrite.
+   */
+  // const exactSearch = true
 
   // Imports the Dialogflow library
   const {ConversationsClient} = require('@google-cloud/dialogflow').v2;
