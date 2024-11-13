@@ -3363,6 +3363,9 @@ export namespace google {
 
                     /** GCSVolumeSource readOnly */
                     readOnly?: (boolean|null);
+
+                    /** GCSVolumeSource mountOptions */
+                    mountOptions?: (string[]|null);
                 }
 
                 /** Represents a GCSVolumeSource. */
@@ -3379,6 +3382,9 @@ export namespace google {
 
                     /** GCSVolumeSource readOnly. */
                     public readOnly: boolean;
+
+                    /** GCSVolumeSource mountOptions. */
+                    public mountOptions: string[];
 
                     /**
                      * Creates a new GCSVolumeSource instance using the specified properties.

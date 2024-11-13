@@ -1070,6 +1070,11 @@
                         "readOnly": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "mountOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },

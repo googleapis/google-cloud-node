@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "maps": {
       "nested": {
@@ -12,7 +15,7 @@
                     "go_package": "cloud.google.com/go/maps/fleetengine/delivery/apiv1/deliverypb;deliverypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "Tasks",
-                    "java_package": "google.maps.fleetengine.delivery.v1",
+                    "java_package": "com.google.maps.fleetengine.delivery.v1",
                     "objc_class_prefix": "CFED",
                     "php_namespace": "Google\\Maps\\FleetEngine\\Delivery\\V1",
                     "ruby_package": "Google::Maps::FleetEngine::Delivery::V1",

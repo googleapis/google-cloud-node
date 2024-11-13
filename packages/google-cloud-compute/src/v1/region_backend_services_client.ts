@@ -1735,7 +1735,7 @@ export class RegionBackendServicesClient {
     ) as AsyncIterable<protos.google.cloud.compute.v1.IBackendService>;
   }
   /**
-   * Retrieves an aggregated list of all usable backend services in the specified project in the given region.
+   * Retrieves a list of all usable backend services in the specified project in the given region.
    *
    * @param {Object} request
    *   The request object that will be sent.
