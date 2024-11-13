@@ -1013,6 +1013,11 @@
                       "oneof": [
                         "secondaryBootDiskUpdateStrategy"
                       ]
+                    },
+                    "_localSsdEncryptionMode": {
+                      "oneof": [
+                        "localSsdEncryptionMode"
+                      ]
                     }
                   },
                   "fields": {
@@ -1194,6 +1199,13 @@
                         "proto3_optional": true
                       }
                     },
+                    "localSsdEncryptionMode": {
+                      "type": "LocalSsdEncryptionMode",
+                      "id": 54,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
                     "effectiveCgroupMode": {
                       "type": "EffectiveCgroupMode",
                       "id": 55,
@@ -1203,6 +1215,13 @@
                     }
                   },
                   "nested": {
+                    "LocalSsdEncryptionMode": {
+                      "values": {
+                        "LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED": 0,
+                        "STANDARD_ENCRYPTION": 1,
+                        "EPHEMERAL_KEY_ENCRYPTION": 2
+                      }
+                    },
                     "EffectiveCgroupMode": {
                       "values": {
                         "EFFECTIVE_CGROUP_MODE_UNSPECIFIED": 0,
@@ -2783,6 +2802,13 @@
                     "nodeKubeletConfig": {
                       "type": "NodeKubeletConfig",
                       "id": 3
+                    },
+                    "linuxNodeConfig": {
+                      "type": "LinuxNodeConfig",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -3145,6 +3171,14 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "desiredEnterpriseConfig": {
+                      "type": "DesiredEnterpriseConfig",
+                      "id": 147
+                    },
+                    "desiredNodePoolAutoConfigLinuxNodeConfig": {
+                      "type": "LinuxNodeConfig",
+                      "id": 150
                     }
                   }
                 },
@@ -3180,6 +3214,14 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    }
+                  }
+                },
+                "DesiredEnterpriseConfig": {
+                  "fields": {
+                    "desiredTier": {
+                      "type": "EnterpriseConfig.ClusterTier",
+                      "id": 1
                     }
                   }
                 },
@@ -6203,6 +6245,60 @@
                     }
                   }
                 },
+                "UpgradeInfoEvent": {
+                  "fields": {
+                    "resourceType": {
+                      "type": "UpgradeResourceType",
+                      "id": 1
+                    },
+                    "operation": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "startTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    },
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4
+                    },
+                    "currentVersion": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "targetVersion": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "resource": {
+                      "type": "string",
+                      "id": 7
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 11
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "STARTED": 3,
+                        "SUCCEEDED": 4,
+                        "FAILED": 5,
+                        "CANCELED": 6
+                      }
+                    }
+                  }
+                },
                 "UpgradeAvailableEvent": {
                   "fields": {
                     "version": {
@@ -6647,6 +6743,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "desiredTier": {
+                      "type": "ClusterTier",
+                      "id": 2
                     }
                   },
                   "nested": {
