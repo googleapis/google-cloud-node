@@ -106,7 +106,6 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Maps.Places.V1",
                     "go_package": "cloud.google.com/go/maps/places/apiv1/placespb;placespb",
                     "java_multiple_files": true,
@@ -615,6 +614,11 @@
                           "oneof": [
                             "accessibilityOptions"
                           ]
+                        },
+                        "_pureServiceAreaBusiness": {
+                          "oneof": [
+                            "pureServiceAreaBusiness"
+                          ]
                         }
                       },
                       "fields": {
@@ -955,6 +959,22 @@
                         "areaSummary": {
                           "type": "AreaSummary",
                           "id": 81
+                        },
+                        "containingPlaces": {
+                          "rule": "repeated",
+                          "type": "ContainingPlace",
+                          "id": 82
+                        },
+                        "pureServiceAreaBusiness": {
+                          "type": "bool",
+                          "id": 83,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "priceRange": {
+                          "type": "PriceRange",
+                          "id": 86
                         }
                       },
                       "nested": {
@@ -1025,6 +1045,14 @@
                               "rule": "repeated",
                               "type": "SpecialDay",
                               "id": 5
+                            },
+                            "nextOpenTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 6
+                            },
+                            "nextCloseTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7
                             }
                           },
                           "nested": {
@@ -1377,6 +1405,21 @@
                               "id": 4
                             }
                           }
+                        },
+                        "ContainingPlace": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -1388,6 +1431,18 @@
                         "PRICE_LEVEL_MODERATE": 3,
                         "PRICE_LEVEL_EXPENSIVE": 4,
                         "PRICE_LEVEL_VERY_EXPENSIVE": 5
+                      }
+                    },
+                    "PriceRange": {
+                      "fields": {
+                        "startPrice": {
+                          "type": "google.type.Money",
+                          "id": 1
+                        },
+                        "endPrice": {
+                          "type": "google.type.Money",
+                          "id": 2
+                        }
                       }
                     },
                     "Places": {
@@ -1679,6 +1734,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "includePureServiceAreaBusinesses": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1939,6 +2001,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "includePureServiceAreaBusinesses": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2159,6 +2228,10 @@
                           "rule": "repeated",
                           "type": "Leg",
                           "id": 1
+                        },
+                        "directionsUri": {
+                          "type": "string",
+                          "id": 2
                         }
                       },
                       "nested": {
