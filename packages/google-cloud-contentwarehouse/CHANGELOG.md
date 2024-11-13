@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.10.0...contentwarehouse-v1.11.0) (2024-10-30)
+
+
+### Features
+
+* [contentwarehouse] Updated the exponential backoff settings for the Document AI ProcessDocument and BatchProcessDocuments methods ([#5763](https://github.com/googleapis/google-cloud-node/issues/5763)) ([c605006](https://github.com/googleapis/google-cloud-node/commit/c6050069aa75b31a262ff243c9f5407707926856))
+
 ## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.9.0...contentwarehouse-v1.10.0) (2024-08-19)
 
 

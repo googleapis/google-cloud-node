@@ -34,8 +34,8 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The annotation that is assigned to the Event. This field can
-   *  be left empty to provide reasons that apply to an event without concluding
+   *  Optional. The annotation that is assigned to the Event. This field can be
+   *  left empty to provide reasons that apply to an event without concluding
    *  whether the event is legitimate or fraudulent.
    */
   // const annotation = {}

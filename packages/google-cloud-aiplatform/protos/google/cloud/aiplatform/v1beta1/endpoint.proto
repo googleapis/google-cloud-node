@@ -23,6 +23,7 @@ import "google/cloud/aiplatform/v1beta1/explanation.proto";
 import "google/cloud/aiplatform/v1beta1/io.proto";
 import "google/cloud/aiplatform/v1beta1/machine_resources.proto";
 import "google/cloud/aiplatform/v1beta1/service_networking.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1Beta1";
@@ -167,6 +168,9 @@ message Endpoint {
   string dedicated_endpoint_dns = 25
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
+  // Configurations that are applied to the endpoint for online prediction.
+  ClientConnectionConfig client_connection_config = 23;
+
   // Output only. Reserved for future use.
   bool satisfies_pzs = 27 [(google.api.field_behavior) = OUTPUT_ONLY];
 
@@ -290,6 +294,9 @@ message DeployedModel {
   // [network][google.cloud.aiplatform.v1beta1.Endpoint.network] is configured.
   PrivateEndpoints private_endpoints = 14
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Configuration for faster model deployment.
+  FasterDeploymentConfig faster_deployment_config = 23;
 }
 
 // PrivateEndpoints proto is used to provide paths for users to send
@@ -328,4 +335,16 @@ message PredictRequestResponseLoggingConfig {
   // most special characters will become underscores). If no table name is
   // given, a new table will be created with name `request_response_logging`
   BigQueryDestination bigquery_destination = 3;
+}
+
+// Configuration for faster model deployment.
+message FasterDeploymentConfig {
+  // If true, enable fast tryout feature for this deployed model.
+  bool fast_tryout_enabled = 2;
+}
+
+// Configurations (e.g. inference timeout) that are applied on your endpoints.
+message ClientConnectionConfig {
+  // Customizable online prediction request timeout.
+  google.protobuf.Duration inference_timeout = 1;
 }

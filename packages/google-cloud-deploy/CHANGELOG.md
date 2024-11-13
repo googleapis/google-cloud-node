@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.1.0...deploy-v4.2.0) (2024-10-30)
+
+
+### Features
+
+* [deploy] added new fields for the Automation Repair rule ([#5774](https://github.com/googleapis/google-cloud-node/issues/5774)) ([099d1b3](https://github.com/googleapis/google-cloud-node/commit/099d1b3ff7d6e8e43ab79f5d62c344c269eb806f))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.0.0...deploy-v4.1.0) (2024-10-10)
 
 

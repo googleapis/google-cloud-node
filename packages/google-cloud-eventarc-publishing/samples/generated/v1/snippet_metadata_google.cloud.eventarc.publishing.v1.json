@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-publishing",
-        "version": "3.3.0",
+        "version": "3.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -100,6 +100,58 @@
                 "method": {
                     "shortName": "PublishEvents",
                     "fullName": "google.cloud.eventarc.publishing.v1.Publisher.PublishEvents",
+                    "service": {
+                        "shortName": "Publisher",
+                        "fullName": "google.cloud.eventarc.publishing.v1.Publisher"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "eventarcpublishing_v1_generated_Publisher_Publish_async",
+            "title": "Publisher publish Sample",
+            "origin": "API_DEFINITION",
+            "description": " Publish events to a message bus.",
+            "canonical": true,
+            "file": "publisher.publish.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Publish",
+                "fullName": "google.cloud.eventarc.publishing.v1.Publisher.Publish",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "message_bus",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "proto_message",
+                        "type": ".google.cloud.eventarc.publishing.v1.CloudEvent"
+                    },
+                    {
+                        "name": "json_message",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "avro_message",
+                        "type": "TYPE_BYTES"
+                    }
+                ],
+                "resultType": ".google.cloud.eventarc.publishing.v1.PublishResponse",
+                "client": {
+                    "shortName": "PublisherClient",
+                    "fullName": "google.cloud.eventarc.publishing.v1.PublisherClient"
+                },
+                "method": {
+                    "shortName": "Publish",
+                    "fullName": "google.cloud.eventarc.publishing.v1.Publisher.Publish",
                     "service": {
                         "shortName": "Publisher",
                         "fullName": "google.cloud.eventarc.publishing.v1.Publisher"

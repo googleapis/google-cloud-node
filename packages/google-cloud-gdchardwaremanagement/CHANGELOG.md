@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.2.0...gdchardwaremanagement-v0.3.0) (2024-10-30)
+
+
+### Features
+
+* [gdchardwaremanagement] add a DeleteSite method ([#5767](https://github.com/googleapis/google-cloud-node/issues/5767)) ([55c77b9](https://github.com/googleapis/google-cloud-node/commit/55c77b9d386e49a6fd3c6767a771b31b116e945a))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.1.0...gdchardwaremanagement-v0.2.0) (2024-09-24)
 
 

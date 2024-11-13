@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(validateOnly) {
+function main() {
   // [START eventarc_v1_generated_Eventarc_UpdateChannel_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -39,7 +39,7 @@ function main(validateOnly) {
    */
   // const updateMask = {}
   /**
-   *  Required. If set, validate the request and preview the review, but do not
+   *  Optional. If set, validate the request and preview the review, but do not
    *  post it.
    */
   // const validateOnly = true
@@ -53,7 +53,6 @@ function main(validateOnly) {
   async function callUpdateChannel() {
     // Construct request
     const request = {
-      validateOnly,
     };
 
     // Run request

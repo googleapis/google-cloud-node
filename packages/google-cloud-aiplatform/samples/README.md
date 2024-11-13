@@ -220,6 +220,7 @@
   * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
   * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
   * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.stop_notebook_runtime](#notebook_service.stop_notebook_runtime)
   * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
   * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
@@ -343,6 +344,7 @@
   * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
+  * [Endpoint_service.update_endpoint_long_running](#endpoint_service.update_endpoint_long_running)
   * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
   * [Extension_execution_service.execute_extension](#extension_execution_service.execute_extension)
   * [Extension_execution_service.query_extension](#extension_execution_service.query_extension)
@@ -4205,6 +4207,23 @@ __Usage:__
 
 
 
+### Notebook_service.stop_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.stop_notebook_runtime.js`
+
+
+-----
+
+
+
+
 ### Notebook_service.update_notebook_runtime_template
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.update_notebook_runtime_template.js).
@@ -6289,6 +6308,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint.js`
+
+
+-----
+
+
+
+
+### Endpoint_service.update_endpoint_long_running
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js`
 
 
 -----

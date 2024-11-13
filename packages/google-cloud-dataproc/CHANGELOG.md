@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.11.0...dataproc-v5.12.0) (2024-10-30)
+
+
+### Features
+
+* [dataproc] Add `ProvisioningModelMix` to support mixing of spot and standard instances for secondary workers ([#5753](https://github.com/googleapis/google-cloud-node/issues/5753)) ([9639bc9](https://github.com/googleapis/google-cloud-node/commit/9639bc9a253ccf94a4318210d638b29a42a5ee72))
+
 ## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.10.0...dataproc-v5.11.0) (2024-10-10)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.31.0",
+        "version": "3.32.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -9760,6 +9760,46 @@
                 "method": {
                     "shortName": "StartNotebookRuntime",
                     "fullName": "google.cloud.aiplatform.v1.NotebookService.StartNotebookRuntime",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_NotebookService_StopNotebookRuntime_async",
+            "title": "DatasetService stopNotebookRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Stops a NotebookRuntime.",
+            "canonical": true,
+            "file": "notebook_service.stop_notebook_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StopNotebookRuntime",
+                "fullName": "google.cloud.aiplatform.v1.NotebookService.StopNotebookRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "StopNotebookRuntime",
+                    "fullName": "google.cloud.aiplatform.v1.NotebookService.StopNotebookRuntime",
                     "service": {
                         "shortName": "NotebookService",
                         "fullName": "google.cloud.aiplatform.v1.NotebookService"

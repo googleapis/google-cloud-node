@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-v3.3.0...eventarc-v3.4.0) (2024-10-30)
+
+
+### Features
+
+* [eventarc] Publish Eventarc Advanced protos ([#5773](https://github.com/googleapis/google-cloud-node/issues/5773)) ([90e8024](https://github.com/googleapis/google-cloud-node/commit/90e80249da2893b120decca6715659e032e6485e))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-v3.2.0...eventarc-v3.3.0) (2024-05-21)
 
 

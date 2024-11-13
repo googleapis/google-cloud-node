@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.11.0...dlp-v5.12.0) (2024-10-30)
+
+
+### Features
+
+* [dlp] discovery of BigQuery snapshots ([#5757](https://github.com/googleapis/google-cloud-node/issues/5757)) ([3f262fc](https://github.com/googleapis/google-cloud-node/commit/3f262fc59aa6054bd22f6868e76e7c686a9444a3))
+
 ## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.10.0...dlp-v5.11.0) (2024-09-24)
 
 

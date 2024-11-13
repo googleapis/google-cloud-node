@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.6.0...cloudbuild-v4.7.0) (2024-10-30)
+
+
+### Features
+
+* [cloudbuild] Add PrivateServiceConnect option to WorkerPool ([#5770](https://github.com/googleapis/google-cloud-node/issues/5770)) ([3aade58](https://github.com/googleapis/google-cloud-node/commit/3aade58c11e739c4652f5b1ab8e7f3cf12992ce9))
+
 ## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.5.0...cloudbuild-v4.6.0) (2024-10-10)
 
 
