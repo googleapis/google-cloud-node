@@ -6352,6 +6352,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "fasterDeploymentConfig": {
+                          "type": "FasterDeploymentConfig",
+                          "id": 23
+                        },
                         "systemLabels": {
                           "keyType": "string",
                           "type": "string",
@@ -6404,6 +6408,14 @@
                         "bigqueryDestination": {
                           "type": "BigQueryDestination",
                           "id": 3
+                        }
+                      }
+                    },
+                    "FasterDeploymentConfig": {
+                      "fields": {
+                        "fastTryoutEnabled": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
