@@ -3430,12 +3430,12 @@ export class FeatureRegistryServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link protos.|FeatureGroupAdminService.ListFeatureGroups} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups|FeatureRegistryService.ListFeatureGroups}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.|FeatureGroupAdminService.ListFeatureGroups} must
-   *   match the call that provided the page token.
+   *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups|FeatureRegistryService.ListFeatureGroups}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -3563,12 +3563,12 @@ export class FeatureRegistryServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link protos.|FeatureGroupAdminService.ListFeatureGroups} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups|FeatureRegistryService.ListFeatureGroups}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.|FeatureGroupAdminService.ListFeatureGroups} must
-   *   match the call that provided the page token.
+   *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups|FeatureRegistryService.ListFeatureGroups}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -3644,12 +3644,12 @@ export class FeatureRegistryServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link protos.|FeatureGroupAdminService.ListFeatureGroups} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups|FeatureRegistryService.ListFeatureGroups}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.|FeatureGroupAdminService.ListFeatureGroups} must
-   *   match the call that provided the page token.
+   *   {@link protos.google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups|FeatureRegistryService.ListFeatureGroups}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.

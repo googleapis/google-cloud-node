@@ -4604,7 +4604,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -4735,7 +4736,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -4810,7 +4812,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]

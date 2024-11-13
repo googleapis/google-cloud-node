@@ -43,8 +43,9 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  Optional. The standard list page token.
-   *  Typically obtained via ListTuningJob.next_page_token   of the
-   *  previous GenAiTuningService.ListTuningJob   call.
+   *  Typically obtained via
+   *  ListTuningJobsResponse.next_page_token google.cloud.aiplatform.v1.ListTuningJobsResponse.next_page_token 
+   *  of the previous GenAiTuningService.ListTuningJob   call.
    */
   // const pageToken = 'abc123'
 

@@ -1610,7 +1610,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 156,
+                    "end": 161,
                     "type": "FULL"
                 }
             ],
@@ -1710,6 +1710,10 @@
                     {
                         "name": "tool_parameter_kv_match_input",
                         "type": ".google.cloud.aiplatform.v1.ToolParameterKVMatchInput"
+                    },
+                    {
+                        "name": "comet_input",
+                        "type": ".google.cloud.aiplatform.v1.CometInput"
                     },
                     {
                         "name": "metricx_input",
@@ -4234,7 +4238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -4694,7 +4698,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -9958,7 +9962,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 95,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -11731,7 +11735,7 @@
             "regionTag": "aiplatform_v1_generated_ScheduleService_ResumeSchedule_async",
             "title": "DatasetService resumeSchedule Sample",
             "origin": "API_DEFINITION",
-            "description": " Resumes a paused Schedule to start scheduling new runs. Will mark [Schedule.state][google.cloud.aiplatform.v1.Schedule.state] to 'ACTIVE'. Only paused Schedule can be resumed. When the Schedule is resumed, new runs will be scheduled starting from the next execution time after the current time based on the time_specification in the Schedule. If [Schedule.catchUp][] is set up true, all missed runs will be scheduled for backfill first.",
+            "description": " Resumes a paused Schedule to start scheduling new runs. Will mark [Schedule.state][google.cloud.aiplatform.v1.Schedule.state] to 'ACTIVE'. Only paused Schedule can be resumed. When the Schedule is resumed, new runs will be scheduled starting from the next execution time after the current time based on the time_specification in the Schedule. If [Schedule.catch_up][google.cloud.aiplatform.v1.Schedule.catch_up] is set up true, all missed runs will be scheduled for backfill first.",
             "canonical": true,
             "file": "schedule_service.resume_schedule.js",
             "language": "JAVASCRIPT",

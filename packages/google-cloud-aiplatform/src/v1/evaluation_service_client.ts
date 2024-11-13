@@ -588,6 +588,9 @@ export class EvaluationServiceClient {
    *   Input for tool parameter key match metric.
    * @param {google.cloud.aiplatform.v1.ToolParameterKVMatchInput} request.toolParameterKvMatchInput
    *   Input for tool parameter key value match metric.
+   * @param {google.cloud.aiplatform.v1.CometInput} request.cometInput
+   *   Translation metrics.
+   *   Input for Comet metric.
    * @param {google.cloud.aiplatform.v1.MetricxInput} request.metricxInput
    *   Input for Metricx metric.
    * @param {string} request.location

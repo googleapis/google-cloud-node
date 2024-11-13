@@ -7259,6 +7259,7 @@
                             "toolNameMatchInput",
                             "toolParameterKeyMatchInput",
                             "toolParameterKvMatchInput",
+                            "cometInput",
                             "metricxInput"
                           ]
                         }
@@ -7356,6 +7357,10 @@
                           "type": "ToolParameterKVMatchInput",
                           "id": 22
                         },
+                        "cometInput": {
+                          "type": "CometInput",
+                          "id": 31
+                        },
                         "metricxInput": {
                           "type": "MetricxInput",
                           "id": 32
@@ -7397,6 +7402,7 @@
                             "toolNameMatchResults",
                             "toolParameterKeyMatchResults",
                             "toolParameterKvMatchResults",
+                            "cometResult",
                             "metricxResult"
                           ]
                         }
@@ -7493,6 +7499,10 @@
                         "toolParameterKvMatchResults": {
                           "type": "ToolParameterKVMatchResults",
                           "id": 21
+                        },
+                        "cometResult": {
+                          "type": "CometResult",
+                          "id": 29
                         },
                         "metricxResult": {
                           "type": "MetricxResult",
@@ -9935,6 +9945,129 @@
                       }
                     },
                     "ToolParameterKVMatchMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CometInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "CometSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "CometInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CometSpec": {
+                      "oneofs": {
+                        "_version": {
+                          "oneof": [
+                            "version"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "version": {
+                          "type": "CometVersion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceLanguage": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "targetLanguage": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CometVersion": {
+                          "values": {
+                            "COMET_VERSION_UNSPECIFIED": 0,
+                            "COMET_22_SRC_REF": 2
+                          }
+                        }
+                      }
+                    },
+                    "CometInstance": {
+                      "oneofs": {
+                        "_prediction": {
+                          "oneof": [
+                            "prediction"
+                          ]
+                        },
+                        "_reference": {
+                          "oneof": [
+                            "reference"
+                          ]
+                        },
+                        "_source": {
+                          "oneof": [
+                            "source"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "prediction": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reference": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CometResult": {
                       "oneofs": {
                         "_score": {
                           "oneof": [
