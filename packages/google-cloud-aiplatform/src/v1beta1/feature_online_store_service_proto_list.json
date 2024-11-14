@@ -35,6 +35,8 @@
   "../../protos/google/cloud/aiplatform/v1beta1/extension_registry_service.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/feature.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/feature_group.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/feature_monitor.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/feature_monitor_job.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/feature_monitoring_stats.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/feature_online_store.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/feature_online_store_admin_service.proto",

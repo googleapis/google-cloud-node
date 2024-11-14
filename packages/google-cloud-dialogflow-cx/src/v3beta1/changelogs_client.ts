@@ -487,8 +487,8 @@ export class ChangelogsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the changelog to get.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/changelogs/<Changelog ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/changelogs/<ChangelogID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -586,7 +586,7 @@ export class ChangelogsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent containing the changelogs.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.filter
    *   The filter string. Supports filter by user_email, resource, type and
    *   create_time. Some examples:
@@ -706,7 +706,7 @@ export class ChangelogsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent containing the changelogs.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.filter
    *   The filter string. Supports filter by user_email, resource, type and
    *   create_time. Some examples:
@@ -774,7 +774,7 @@ export class ChangelogsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent containing the changelogs.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.filter
    *   The filter string. Supports filter by user_email, resource, type and
    *   create_time. Some examples:

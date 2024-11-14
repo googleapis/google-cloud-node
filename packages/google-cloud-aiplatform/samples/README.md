@@ -61,6 +61,7 @@
   * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
   * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
   * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
+  * [Feature_registry_service.batch_create_features](#feature_registry_service.batch_create_features)
   * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
   * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
   * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
@@ -369,13 +370,21 @@
   * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
   * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
   * [Feature_online_store_service.streaming_fetch_feature_values](#feature_online_store_service.streaming_fetch_feature_values)
+  * [Feature_registry_service.batch_create_features](#feature_registry_service.batch_create_features)
   * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
   * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
+  * [Feature_registry_service.create_feature_monitor](#feature_registry_service.create_feature_monitor)
+  * [Feature_registry_service.create_feature_monitor_job](#feature_registry_service.create_feature_monitor_job)
   * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
   * [Feature_registry_service.delete_feature_group](#feature_registry_service.delete_feature_group)
+  * [Feature_registry_service.delete_feature_monitor](#feature_registry_service.delete_feature_monitor)
   * [Feature_registry_service.get_feature](#feature_registry_service.get_feature)
   * [Feature_registry_service.get_feature_group](#feature_registry_service.get_feature_group)
+  * [Feature_registry_service.get_feature_monitor](#feature_registry_service.get_feature_monitor)
+  * [Feature_registry_service.get_feature_monitor_job](#feature_registry_service.get_feature_monitor_job)
   * [Feature_registry_service.list_feature_groups](#feature_registry_service.list_feature_groups)
+  * [Feature_registry_service.list_feature_monitor_jobs](#feature_registry_service.list_feature_monitor_jobs)
+  * [Feature_registry_service.list_feature_monitors](#feature_registry_service.list_feature_monitors)
   * [Feature_registry_service.list_features](#feature_registry_service.list_features)
   * [Feature_registry_service.update_feature](#feature_registry_service.update_feature)
   * [Feature_registry_service.update_feature_group](#feature_registry_service.update_feature_group)
@@ -545,6 +554,7 @@
   * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
   * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
   * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.stop_notebook_runtime](#notebook_service.stop_notebook_runtime)
   * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
   * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
@@ -1497,6 +1507,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.batch_create_features
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/feature_registry_service.batch_create_features.js`
 
 
 -----
@@ -6740,6 +6767,23 @@ __Usage:__
 
 
 
+### Feature_registry_service.batch_create_features
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.batch_create_features.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.create_feature
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature.js).
@@ -6767,6 +6811,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_group.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.create_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.create_feature_monitor_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.create_feature_monitor_job.js`
 
 
 -----
@@ -6808,6 +6886,23 @@ __Usage:__
 
 
 
+### Feature_registry_service.delete_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.delete_feature_monitor.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.get_feature
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature.js).
@@ -6842,6 +6937,40 @@ __Usage:__
 
 
 
+### Feature_registry_service.get_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.get_feature_monitor_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.get_feature_monitor_job.js`
+
+
+-----
+
+
+
+
 ### Feature_registry_service.list_feature_groups
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js).
@@ -6852,6 +6981,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_groups.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.list_feature_monitor_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitor_jobs.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.list_feature_monitors
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.list_feature_monitors.js`
 
 
 -----
@@ -9725,6 +9888,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.stop_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js`
 
 
 -----

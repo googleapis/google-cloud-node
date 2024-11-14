@@ -30,14 +30,13 @@ function main(parent, intents) {
    */
   /**
    *  Required. The name of the parent agent to export intents.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
    *  Required. The name of the intents to export.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/intents/<Intent ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
    */
   // const intents = ['abc','def']
   /**

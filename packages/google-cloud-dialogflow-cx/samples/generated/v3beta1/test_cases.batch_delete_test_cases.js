@@ -30,12 +30,12 @@ function main(parent, names) {
    */
   /**
    *  Required. The agent to delete test cases from.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Format of test case names: `projects/<Project ID>/locations/
-   *  <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+   *  Required. Format of test case names:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    */
   // const names = ['abc','def']
 

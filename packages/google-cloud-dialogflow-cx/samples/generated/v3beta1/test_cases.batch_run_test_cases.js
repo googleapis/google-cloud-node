@@ -29,19 +29,18 @@ function main(parent, testCases) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Agent name. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/ <AgentID>`.
+   *  Required. Agent name. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
    *  Optional. If not set, draft environment is assumed. Format:
-   *  `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>`.
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
    */
   // const environment = 'abc123'
   /**
-   *  Required. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/testCases/<TestCase ID>`.
+   *  Required. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
    */
   // const testCases = ['abc','def']
 

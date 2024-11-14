@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The agent to validate.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const name = 'abc123'
   /**

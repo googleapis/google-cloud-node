@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/gkehub/policycontroller/v1beta/policycontroller.proto",
   "../../protos/google/cloud/gkehub/servicemesh/v1beta/servicemesh.proto",
   "../../protos/google/cloud/gkehub/v1beta/configmanagement/configmanagement.proto",
   "../../protos/google/cloud/gkehub/v1beta/feature.proto",

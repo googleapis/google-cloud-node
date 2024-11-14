@@ -759,6 +759,21 @@
                 "getFeature"
               ]
             },
+            "GetFeatureMonitor": {
+              "methods": [
+                "getFeatureMonitor"
+              ]
+            },
+            "CreateFeatureMonitorJob": {
+              "methods": [
+                "createFeatureMonitorJob"
+              ]
+            },
+            "GetFeatureMonitorJob": {
+              "methods": [
+                "getFeatureMonitorJob"
+              ]
+            },
             "CreateFeatureGroup": {
               "methods": [
                 "createFeatureGroup"
@@ -779,6 +794,11 @@
                 "createFeature"
               ]
             },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
+              ]
+            },
             "UpdateFeature": {
               "methods": [
                 "updateFeature"
@@ -787,6 +807,16 @@
             "DeleteFeature": {
               "methods": [
                 "deleteFeature"
+              ]
+            },
+            "CreateFeatureMonitor": {
+              "methods": [
+                "createFeatureMonitor"
+              ]
+            },
+            "DeleteFeatureMonitor": {
+              "methods": [
+                "deleteFeatureMonitor"
               ]
             },
             "ListFeatureGroups": {
@@ -801,6 +831,20 @@
                 "listFeatures",
                 "listFeaturesStream",
                 "listFeaturesAsync"
+              ]
+            },
+            "ListFeatureMonitors": {
+              "methods": [
+                "listFeatureMonitors",
+                "listFeatureMonitorsStream",
+                "listFeatureMonitorsAsync"
+              ]
+            },
+            "ListFeatureMonitorJobs": {
+              "methods": [
+                "listFeatureMonitorJobs",
+                "listFeatureMonitorJobsStream",
+                "listFeatureMonitorJobsAsync"
               ]
             }
           }
@@ -818,6 +862,21 @@
                 "getFeature"
               ]
             },
+            "GetFeatureMonitor": {
+              "methods": [
+                "getFeatureMonitor"
+              ]
+            },
+            "CreateFeatureMonitorJob": {
+              "methods": [
+                "createFeatureMonitorJob"
+              ]
+            },
+            "GetFeatureMonitorJob": {
+              "methods": [
+                "getFeatureMonitorJob"
+              ]
+            },
             "CreateFeatureGroup": {
               "methods": [
                 "createFeatureGroup"
@@ -838,6 +897,11 @@
                 "createFeature"
               ]
             },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
+              ]
+            },
             "UpdateFeature": {
               "methods": [
                 "updateFeature"
@@ -846,6 +910,16 @@
             "DeleteFeature": {
               "methods": [
                 "deleteFeature"
+              ]
+            },
+            "CreateFeatureMonitor": {
+              "methods": [
+                "createFeatureMonitor"
+              ]
+            },
+            "DeleteFeatureMonitor": {
+              "methods": [
+                "deleteFeatureMonitor"
               ]
             },
             "ListFeatureGroups": {
@@ -860,6 +934,20 @@
                 "listFeatures",
                 "listFeaturesStream",
                 "listFeaturesAsync"
+              ]
+            },
+            "ListFeatureMonitors": {
+              "methods": [
+                "listFeatureMonitors",
+                "listFeatureMonitorsStream",
+                "listFeatureMonitorsAsync"
+              ]
+            },
+            "ListFeatureMonitorJobs": {
+              "methods": [
+                "listFeatureMonitorJobs",
+                "listFeatureMonitorJobsStream",
+                "listFeatureMonitorJobsAsync"
               ]
             }
           }
@@ -2756,6 +2844,11 @@
                 "startNotebookRuntime"
               ]
             },
+            "StopNotebookRuntime": {
+              "methods": [
+                "stopNotebookRuntime"
+              ]
+            },
             "CreateNotebookExecutionJob": {
               "methods": [
                 "createNotebookExecutionJob"
@@ -2840,6 +2933,11 @@
             "StartNotebookRuntime": {
               "methods": [
                 "startNotebookRuntime"
+              ]
+            },
+            "StopNotebookRuntime": {
+              "methods": [
+                "stopNotebookRuntime"
               ]
             },
             "CreateNotebookExecutionJob": {

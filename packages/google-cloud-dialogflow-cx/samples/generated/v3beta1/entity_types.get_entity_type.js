@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the entity type.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/entityTypes/<Entity Type ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
    */
   // const name = 'abc123'
   /**

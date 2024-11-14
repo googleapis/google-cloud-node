@@ -34,9 +34,9 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  Optional. The maximum number of databases to return. The service may return
-   *  fewer than this value. If unspecified, an appropriate number of databases
-   *  will be returned. The max value will be 2000, values above max will be
-   *  coerced to max.
+   *  fewer than this value. If unspecified, 2000 is the default page_size. The
+   *  max value of page_size will be 4000, values above max will be coerced to
+   *  max.
    */
   // const pageSize = 1234
   /**

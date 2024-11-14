@@ -64,6 +64,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "StopNotebookRuntime": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateNotebookExecutionJob": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

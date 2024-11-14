@@ -5404,7 +5404,8 @@
                           "oneof": [
                             "promoteReleaseRule",
                             "advanceRolloutRule",
-                            "repairRolloutRule"
+                            "repairRolloutRule",
+                            "timedPromoteReleaseRule"
                           ]
                         }
                       },
@@ -5426,6 +5427,59 @@
                         "repairRolloutRule": {
                           "type": "RepairRolloutRule",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "timedPromoteReleaseRule": {
+                          "type": "TimedPromoteReleaseRule",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TimedPromoteReleaseRule": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destinationTargetId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "schedule": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "condition": {
+                          "type": "AutomationRuleCondition",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destinationPhase": {
+                          "type": "string",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5616,12 +5670,65 @@
                       }
                     },
                     "AutomationRuleCondition": {
+                      "oneofs": {
+                        "ruleTypeCondition": {
+                          "oneof": [
+                            "timedPromoteReleaseCondition"
+                          ]
+                        }
+                      },
                       "fields": {
                         "targetsPresentCondition": {
                           "type": "TargetsPresentCondition",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "timedPromoteReleaseCondition": {
+                          "type": "TimedPromoteReleaseCondition",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TimedPromoteReleaseCondition": {
+                      "fields": {
+                        "nextPromotionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetsList": {
+                          "rule": "repeated",
+                          "type": "Targets",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Targets": {
+                          "fields": {
+                            "sourceTargetId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "destinationTargetId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -5813,7 +5920,8 @@
                           "oneof": [
                             "promoteReleaseOperation",
                             "advanceRolloutOperation",
-                            "repairRolloutOperation"
+                            "repairRolloutOperation",
+                            "timedPromoteReleaseOperation"
                           ]
                         }
                       },
@@ -5926,6 +6034,13 @@
                         "repairRolloutOperation": {
                           "type": "RepairRolloutOperation",
                           "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "timedPromoteReleaseOperation": {
+                          "type": "TimedPromoteReleaseOperation",
+                          "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -6050,6 +6165,31 @@
                         "jobId": {
                           "type": "string",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TimedPromoteReleaseOperation": {
+                      "fields": {
+                        "targetId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "release": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "phase": {
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

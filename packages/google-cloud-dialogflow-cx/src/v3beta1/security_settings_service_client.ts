@@ -511,7 +511,7 @@ export class SecuritySettingsServiceClient {
    * @param {string} request.parent
    *   Required. The location to create an
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}
-   *   for. Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   for. Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.SecuritySettings} request.securitySettings
    *   Required. The security settings to create.
    * @param {object} [options]
@@ -616,8 +616,8 @@ export class SecuritySettingsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the settings.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/securitySettings/<security settings ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/securitySettings/<securitysettingsID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -821,8 +821,8 @@ export class SecuritySettingsServiceClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} to
-   *   delete. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/securitySettings/<Security Settings ID>`.
+   *   delete. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/securitySettings/<SecuritySettingsID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -924,7 +924,7 @@ export class SecuritySettingsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to list all security settings for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1023,7 +1023,7 @@ export class SecuritySettingsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to list all security settings for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1070,7 +1070,7 @@ export class SecuritySettingsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to list all security settings for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.

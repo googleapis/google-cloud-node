@@ -30,9 +30,10 @@ function main(parent) {
    */
   /**
    *  Required. The test case to list results for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-   *  testCases/<TestCase ID>`. Specify a `-` as a wildcard for TestCase ID to
-   *  list results across multiple test cases.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`.
+   *  Specify a `-` as a wildcard for TestCase ID to
+   *   list results across multiple test cases.
    */
   // const parent = 'abc123'
   /**

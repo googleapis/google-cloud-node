@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1249,7 +1252,8 @@
                             "datasetSpec",
                             "filesetSpec",
                             "serviceSpec",
-                            "modelSpec"
+                            "modelSpec",
+                            "featureOnlineStoreSpec"
                           ]
                         }
                       },
@@ -1258,7 +1262,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.field_behavior)": "IDENTIFIER",
                             "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
                           }
                         },
@@ -1346,6 +1350,10 @@
                         "modelSpec": {
                           "type": "ModelSpec",
                           "id": 43
+                        },
+                        "featureOnlineStoreSpec": {
+                          "type": "FeatureOnlineStoreSpec",
+                          "id": 45
                         },
                         "displayName": {
                           "type": "string",
@@ -1671,7 +1679,10 @@
                             "AUTOML": 1,
                             "CUSTOM": 2,
                             "BQML": 3,
-                            "MODEL_GARDEN": 4
+                            "MODEL_GARDEN": 4,
+                            "GENIE": 5,
+                            "CUSTOM_TEXT_EMBEDDING": 6,
+                            "MARKETPLACE": 7
                           }
                         }
                       }
@@ -1747,6 +1758,26 @@
                         }
                       }
                     },
+                    "FeatureOnlineStoreSpec": {
+                      "fields": {
+                        "storageType": {
+                          "type": "StorageType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StorageType": {
+                          "values": {
+                            "STORAGE_TYPE_UNSPECIFIED": 0,
+                            "BIGTABLE": 1,
+                            "OPTIMIZED": 2
+                          }
+                        }
+                      }
+                    },
                     "BusinessContext": {
                       "fields": {
                         "entryOverview": {
@@ -1798,7 +1829,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -2351,7 +2385,10 @@
                         "DATABASE_SCHEMA": 15,
                         "DASHBOARD": 16,
                         "EXPLORE": 17,
-                        "LOOK": 18
+                        "LOOK": 18,
+                        "FEATURE_ONLINE_STORE": 19,
+                        "FEATURE_VIEW": 20,
+                        "FEATURE_GROUP": 21
                       }
                     },
                     "DataplexSpec": {
@@ -2864,7 +2901,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "template": {
                           "type": "string",
@@ -2966,7 +3006,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -2983,6 +3026,26 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "dataplexTransferStatus": {
+                          "type": "DataplexTransferStatus",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DataplexTransferStatus": {
+                          "valuesOptions": {
+                            "MIGRATED": {
+                              "deprecated": true
+                            }
+                          },
+                          "values": {
+                            "DATAPLEX_TRANSFER_STATUS_UNSPECIFIED": 0,
+                            "MIGRATED": 1
+                          }
                         }
                       }
                     },
@@ -2996,7 +3059,7 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "displayName": {
@@ -3977,13 +4040,13 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.DataCatalog.V1Beta1",
                     "go_package": "cloud.google.com/go/datacatalog/apiv1beta1/datacatalogpb;datacatalogpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datacatalog.v1beta1",
                     "php_namespace": "Google\\Cloud\\DataCatalog\\V1beta1",
                     "ruby_package": "Google::Cloud::DataCatalog::V1beta1",
+                    "cc_enable_arenas": true,
                     "(google.api.resource_definition).type": "datacatalog.googleapis.com/TagTemplateFieldEnumValue",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}",
                     "java_outer_classname": "PolicyTagManagerSerializationProto"

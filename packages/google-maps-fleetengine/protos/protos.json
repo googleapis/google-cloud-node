@@ -13,7 +13,7 @@
                 "go_package": "cloud.google.com/go/maps/fleetengine/apiv1/fleetenginepb;fleetenginepb",
                 "java_multiple_files": true,
                 "java_outer_classname": "Vehicles",
-                "java_package": "google.maps.fleetengine.v1",
+                "java_package": "com.google.maps.fleetengine.v1",
                 "objc_class_prefix": "CFE",
                 "php_namespace": "Google\\Maps\\FleetEngine\\V1",
                 "ruby_package": "Google::Maps::FleetEngine::V1"

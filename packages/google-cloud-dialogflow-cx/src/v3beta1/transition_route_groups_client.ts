@@ -497,10 +497,10 @@ export class TransitionRouteGroupsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`
-   *   or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/transitionRouteGroups/<Transition Route Group ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/transitionRouteGroups/<TransitionRouteGroupID>`
+   *   or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/transitionRouteGroups/<TransitionRouteGroupID>`.
    * @param {string} request.languageCode
    *   The language to retrieve the transition route group for. The following
    *   fields are language dependent:
@@ -621,9 +621,9 @@ export class TransitionRouteGroupsClient {
    * @param {string} request.parent
    *   Required. The flow to create an
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}
-   *   for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`
-   *   or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`
+   *   for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`
+   *   or `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`
    *   for agent-level groups.
    * @param {google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup} request.transitionRouteGroup
    *   Required. The transition route group to create.
@@ -864,10 +864,10 @@ export class TransitionRouteGroupsClient {
    * @param {string} request.name
    *   Required. The name of the
    *   {@link protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}
-   *   to delete. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
-   *   Route Group ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/transitionRouteGroups/<Transition Route Group ID>`.
+   *   to delete. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/transitionRouteGroups/<TransitionRouteGroupID>`
+   *   or
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/transitionRouteGroups/<TransitionRouteGroupID>`.
    * @param {boolean} request.force
    *   This field has no effect for transition route group that no page is using.
    *   If the transition route group is referenced by any page:
@@ -977,9 +977,9 @@ export class TransitionRouteGroupsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to list all transition route groups for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`
-   *   or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`
+   *    or `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1095,9 +1095,9 @@ export class TransitionRouteGroupsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to list all transition route groups for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`
-   *   or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`
+   *    or `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -1157,9 +1157,9 @@ export class TransitionRouteGroupsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to list all transition route groups for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`
-   *   or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`
+   *    or `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.

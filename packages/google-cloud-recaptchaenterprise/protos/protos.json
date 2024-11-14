@@ -1286,6 +1286,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "challenge": {
+                          "type": "Challenge",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1299,6 +1306,14 @@
                             "LOW_CONFIDENCE_SCORE": 5,
                             "SUSPECTED_CARDING": 6,
                             "SUSPECTED_CHARGEBACK": 7
+                          }
+                        },
+                        "Challenge": {
+                          "values": {
+                            "CHALLENGE_UNSPECIFIED": 0,
+                            "NOCAPTCHA": 1,
+                            "PASSED": 2,
+                            "FAILED": 3
                           }
                         }
                       }

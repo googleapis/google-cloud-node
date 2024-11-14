@@ -603,6 +603,136 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
   });
 
+  describe('executeSql', () => {
+    it('invokes executeSql without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ExecuteSqlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ExecuteSqlRequest',
+        ['instance']
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ExecuteSqlResponse()
+      );
+      client.innerApiCalls.executeSql = stubSimpleCall(expectedResponse);
+      const [response] = await client.executeSql(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.executeSql as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeSql as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes executeSql without error using callback', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ExecuteSqlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ExecuteSqlRequest',
+        ['instance']
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ExecuteSqlResponse()
+      );
+      client.innerApiCalls.executeSql =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.executeSql(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.executeSql as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeSql as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes executeSql with error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ExecuteSqlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ExecuteSqlRequest',
+        ['instance']
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.executeSql = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.executeSql(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.executeSql as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeSql as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes executeSql with closed client', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ExecuteSqlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ExecuteSqlRequest',
+        ['instance']
+      );
+      request.instance = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.executeSql(request), expectedError);
+    });
+  });
+
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
@@ -1910,6 +2040,200 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
   });
 
+  describe('upgradeCluster', () => {
+    it('invokes upgradeCluster without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.UpgradeClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.UpgradeClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.upgradeCluster =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.upgradeCluster(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes upgradeCluster without error using callback', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.UpgradeClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.UpgradeClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.upgradeCluster =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.upgradeCluster(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+              protos.google.cloud.alloydb.v1beta.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes upgradeCluster with call error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.UpgradeClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.UpgradeClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.upgradeCluster = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.upgradeCluster(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes upgradeCluster with LRO error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.UpgradeClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.UpgradeClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.upgradeCluster = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.upgradeCluster(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpgradeClusterProgress without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpgradeClusterProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpgradeClusterProgress with error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpgradeClusterProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
@@ -2292,6 +2616,200 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       await assert.rejects(
         client.checkPromoteClusterProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('switchoverCluster', () => {
+    it('invokes switchoverCluster without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.SwitchoverClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.SwitchoverClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.switchoverCluster =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.switchoverCluster(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchoverCluster without error using callback', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.SwitchoverClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.SwitchoverClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.switchoverCluster =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.switchoverCluster(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.alloydb.v1beta.ICluster,
+              protos.google.cloud.alloydb.v1beta.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.alloydb.v1beta.ICluster,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchoverCluster with call error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.SwitchoverClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.SwitchoverClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.switchoverCluster = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.switchoverCluster(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchoverCluster with LRO error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.SwitchoverClusterRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.SwitchoverClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.switchoverCluster = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.switchoverCluster(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchoverCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkSwitchoverClusterProgress without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkSwitchoverClusterProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkSwitchoverClusterProgress with error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkSwitchoverClusterProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));

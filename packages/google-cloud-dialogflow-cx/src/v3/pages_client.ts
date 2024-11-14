@@ -527,8 +527,8 @@ export class PagesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the page.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/pages/<Page ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
    * @param {string} request.languageCode
    *   The language to retrieve the page for. The following fields are language
    *   dependent:
@@ -639,8 +639,8 @@ export class PagesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to create a page for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {google.cloud.dialogflow.cx.v3.Page} request.page
    *   Required. The page to create.
    * @param {string} request.languageCode
@@ -876,8 +876,8 @@ export class PagesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the page to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/Flows/<flow ID>/pages/<Page ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/Flows/<flowID>/pages/<PageID>`.
    * @param {boolean} request.force
    *   This field has no effect for pages with no incoming transitions.
    *   For pages with incoming transitions:
@@ -980,8 +980,8 @@ export class PagesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to list all pages for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {string} request.languageCode
    *   The language to list pages for. The following fields are language
    *   dependent:
@@ -1102,8 +1102,8 @@ export class PagesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to list all pages for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {string} request.languageCode
    *   The language to list pages for. The following fields are language
    *   dependent:
@@ -1172,8 +1172,8 @@ export class PagesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to list all pages for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    * @param {string} request.languageCode
    *   The language to list pages for. The following fields are language
    *   dependent:

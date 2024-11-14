@@ -31,8 +31,8 @@ function main(name) {
   /**
    *  Required. The name of the
    *  SecuritySettings google.cloud.dialogflow.cx.v3beta1.SecuritySettings  to
-   *  delete. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/securitySettings/<Security Settings ID>`.
+   *  delete. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/securitySettings/<SecuritySettingsID>`.
    */
   // const name = 'abc123'
 

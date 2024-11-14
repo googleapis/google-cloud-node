@@ -31,7 +31,7 @@ function main(parent, environment) {
   /**
    *  Required. The Agent google.cloud.dialogflow.cx.v3beta1.Agent  to create
    *  an Environment google.cloud.dialogflow.cx.v3beta1.Environment  for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**

@@ -555,10 +555,10 @@ export class GeneratorsClient {
    *   Optional. The ID to use for the generator, which will become the final
    *   component of the generator's resource name.
    *
-   *   The generator ID must be compliant with the regression fomula
+   *   The generator ID must be compliant with the regression formula
    *   `{@link protos.a-zA-Z0-9_-|a-zA-Z}*` with the characters length in range of [3,64].
    *   If the field is not provided, an Id will be auto-generated.
-   *   If the field is provided, the caller is resposible for
+   *   If the field is provided, the caller is responsible for
    *   1. the uniqueness of the ID, otherwise the request will be rejected.
    *   2. the consistency for whether to use custom ID or not under a project to
    *   better ensure uniqueness.
@@ -652,7 +652,7 @@ export class GeneratorsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The generator resource name to retrieve. Format:
-   *   `projects/<Project ID>/locations/<Location ID>`/generators/<Generator ID>`
+   *   `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

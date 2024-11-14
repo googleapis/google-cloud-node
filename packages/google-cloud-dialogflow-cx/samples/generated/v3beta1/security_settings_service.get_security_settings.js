@@ -30,8 +30,8 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the settings.
-   *  Format: `projects/<Project ID>/locations/<Location
-   *  ID>/securitySettings/<security settings ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/securitySettings/<securitysettingsID>`.
    */
   // const name = 'abc123'
 

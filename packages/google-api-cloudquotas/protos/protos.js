@@ -3280,6 +3280,8 @@
                                     return "ineligibilityReason: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
+                                case 4:
                                 case 2:
                                     break;
                                 }
@@ -3314,6 +3316,14 @@
                             case "NO_VALID_BILLING_ACCOUNT":
                             case 1:
                                 message.ineligibilityReason = 1;
+                                break;
+                            case "NOT_SUPPORTED":
+                            case 3:
+                                message.ineligibilityReason = 3;
+                                break;
+                            case "NOT_ENOUGH_USAGE_HISTORY":
+                            case 4:
+                                message.ineligibilityReason = 4;
                                 break;
                             case "OTHER":
                             case 2:
@@ -3379,12 +3389,16 @@
                          * @enum {number}
                          * @property {number} INELIGIBILITY_REASON_UNSPECIFIED=0 INELIGIBILITY_REASON_UNSPECIFIED value
                          * @property {number} NO_VALID_BILLING_ACCOUNT=1 NO_VALID_BILLING_ACCOUNT value
+                         * @property {number} NOT_SUPPORTED=3 NOT_SUPPORTED value
+                         * @property {number} NOT_ENOUGH_USAGE_HISTORY=4 NOT_ENOUGH_USAGE_HISTORY value
                          * @property {number} OTHER=2 OTHER value
                          */
                         QuotaIncreaseEligibility.IneligibilityReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "INELIGIBILITY_REASON_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "NO_VALID_BILLING_ACCOUNT"] = 1;
+                            values[valuesById[3] = "NOT_SUPPORTED"] = 3;
+                            values[valuesById[4] = "NOT_ENOUGH_USAGE_HISTORY"] = 4;
                             values[valuesById[2] = "OTHER"] = 2;
                             return values;
                         })();

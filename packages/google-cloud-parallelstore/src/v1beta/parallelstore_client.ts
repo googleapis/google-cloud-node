@@ -276,7 +276,6 @@ export class ParallelstoreClient {
         {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',

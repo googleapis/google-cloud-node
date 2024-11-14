@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The generator resource name to retrieve. Format:
-   *  `projects/<Project ID>/locations/<Location ID>`/generators/<Generator ID>`
+   *  `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
    */
   // const name = 'abc123'
 

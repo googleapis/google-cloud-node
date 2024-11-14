@@ -1070,6 +1070,11 @@
                         "readOnly": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "mountOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -2558,6 +2563,20 @@
                         "serviceMesh": {
                           "type": "ServiceMesh",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionKeyRevocationAction": {
+                          "type": "EncryptionKeyRevocationAction",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionKeyShutdownDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 18,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The agent to import the flow into.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**

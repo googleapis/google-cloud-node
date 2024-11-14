@@ -899,7 +899,7 @@
             "regionTag": "aiplatform_v1_generated_DatasetService_ListAnnotations_async",
             "title": "DatasetService listAnnotations Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists Annotations belongs to a dataitem",
+            "description": " Lists Annotations belongs to a dataitem This RPC is only available in InternalDatasetService. It is only used for exporting conversation data to CCAI Insights.",
             "canonical": true,
             "file": "dataset_service.list_annotations.js",
             "language": "JAVASCRIPT",
@@ -1610,7 +1610,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 152,
+                    "end": 161,
                     "type": "FULL"
                 }
             ],
@@ -1710,6 +1710,14 @@
                     {
                         "name": "tool_parameter_kv_match_input",
                         "type": ".google.cloud.aiplatform.v1.ToolParameterKVMatchInput"
+                    },
+                    {
+                        "name": "comet_input",
+                        "type": ".google.cloud.aiplatform.v1.CometInput"
+                    },
+                    {
+                        "name": "metricx_input",
+                        "type": ".google.cloud.aiplatform.v1.MetricxInput"
                     },
                     {
                         "name": "location",
@@ -2122,7 +2130,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -2700,6 +2708,50 @@
                 "method": {
                     "shortName": "CreateFeature",
                     "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService.CreateFeature",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_FeatureRegistryService_BatchCreateFeatures_async",
+            "title": "DatasetService batchCreateFeatures Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a batch of Features in a given FeatureGroup.",
+            "canonical": true,
+            "file": "feature_registry_service.batch_create_features.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchCreateFeatures",
+                "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService.BatchCreateFeatures",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requests",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchCreateFeatures",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService.BatchCreateFeatures",
                     "service": {
                         "shortName": "FeatureRegistryService",
                         "fullName": "google.cloud.aiplatform.v1.FeatureRegistryService"
@@ -3566,7 +3618,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -4186,7 +4238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -4271,7 +4323,7 @@
             "regionTag": "aiplatform_v1_generated_GenAiTuningService_RebaseTunedModel_async",
             "title": "DatasetService rebaseTunedModel Sample",
             "origin": "API_DEFINITION",
-            "description": " Rebase a TunedModel. Creates a LongRunningOperation that takes a legacy Tuned GenAI model Reference and creates a TuningJob based on newly available model.",
+            "description": " Rebase a TunedModel.",
             "canonical": true,
             "file": "gen_ai_tuning_service.rebase_tuned_model.js",
             "language": "JAVASCRIPT",
@@ -4646,7 +4698,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -9910,7 +9962,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 95,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -11683,7 +11735,7 @@
             "regionTag": "aiplatform_v1_generated_ScheduleService_ResumeSchedule_async",
             "title": "DatasetService resumeSchedule Sample",
             "origin": "API_DEFINITION",
-            "description": " Resumes a paused Schedule to start scheduling new runs. Will mark [Schedule.state][google.cloud.aiplatform.v1.Schedule.state] to 'ACTIVE'. Only paused Schedule can be resumed. When the Schedule is resumed, new runs will be scheduled starting from the next execution time after the current time based on the time_specification in the Schedule. If [Schedule.catchUp][] is set up true, all missed runs will be scheduled for backfill first.",
+            "description": " Resumes a paused Schedule to start scheduling new runs. Will mark [Schedule.state][google.cloud.aiplatform.v1.Schedule.state] to 'ACTIVE'. Only paused Schedule can be resumed. When the Schedule is resumed, new runs will be scheduled starting from the next execution time after the current time based on the time_specification in the Schedule. If [Schedule.catch_up][google.cloud.aiplatform.v1.Schedule.catch_up] is set up true, all missed runs will be scheduled for backfill first.",
             "canonical": true,
             "file": "schedule_service.resume_schedule.js",
             "language": "JAVASCRIPT",

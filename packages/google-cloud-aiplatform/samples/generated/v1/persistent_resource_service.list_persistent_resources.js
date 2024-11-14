@@ -40,8 +40,8 @@ function main(parent) {
   /**
    *  Optional. The standard list page token.
    *  Typically obtained via
-   *  ListPersistentResourceResponse.next_page_token   of the previous
-   *  PersistentResourceService.ListPersistentResource   call.
+   *  ListPersistentResourcesResponse.next_page_token google.cloud.aiplatform.v1.ListPersistentResourcesResponse.next_page_token 
+   *  of the previous PersistentResourceService.ListPersistentResource   call.
    */
   // const pageToken = 'abc123'
 

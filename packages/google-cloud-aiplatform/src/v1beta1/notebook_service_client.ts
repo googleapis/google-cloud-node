@@ -262,6 +262,12 @@ export class NotebookServiceClient {
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
+      featureMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}'
+      ),
+      featureMonitorJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}/featureMonitorJobs/{feature_monitor_job}'
+      ),
       featureOnlineStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}'
       ),
@@ -2198,6 +2204,12 @@ export class NotebookServiceClient {
     const startNotebookRuntimeMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeOperationMetadata'
     ) as gax.protobuf.Type;
+    const stopNotebookRuntimeResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.StopNotebookRuntimeResponse'
+    ) as gax.protobuf.Type;
+    const stopNotebookRuntimeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.StopNotebookRuntimeOperationMetadata'
+    ) as gax.protobuf.Type;
     const createNotebookExecutionJobResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.NotebookExecutionJob'
     ) as gax.protobuf.Type;
@@ -2257,6 +2269,11 @@ export class NotebookServiceClient {
         this.operationsClient,
         startNotebookRuntimeResponse.decode.bind(startNotebookRuntimeResponse),
         startNotebookRuntimeMetadata.decode.bind(startNotebookRuntimeMetadata)
+      ),
+      stopNotebookRuntime: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        stopNotebookRuntimeResponse.decode.bind(stopNotebookRuntimeResponse),
+        stopNotebookRuntimeMetadata.decode.bind(stopNotebookRuntimeMetadata)
       ),
       createNotebookExecutionJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2339,6 +2356,7 @@ export class NotebookServiceClient {
       'deleteNotebookRuntime',
       'upgradeNotebookRuntime',
       'startNotebookRuntime',
+      'stopNotebookRuntime',
       'createNotebookExecutionJob',
       'getNotebookExecutionJob',
       'listNotebookExecutionJobs',
@@ -3724,6 +3742,145 @@ export class NotebookServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeResponse,
       protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeOperationMetadata
+    >;
+  }
+  /**
+   * Stops a NotebookRuntime.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntime resource to be stopped.
+   *   Instead of checking whether the name is in valid NotebookRuntime resource
+   *   name format, directly throw NotFound exception if there is no such
+   *   NotebookRuntime in spanner.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_StopNotebookRuntime_async
+   */
+  stopNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  stopNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1beta1.IStopNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.stopNotebookRuntime(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `stopNotebookRuntime()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_StopNotebookRuntime_async
+   */
+  async checkStopNotebookRuntimeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.StopNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1beta1.StopNotebookRuntimeOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.stopNotebookRuntime,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.StopNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1beta1.StopNotebookRuntimeOperationMetadata
     >;
   }
   /**
@@ -6366,6 +6523,174 @@ export class NotebookServiceClient {
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
     return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
       .feature_group;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @returns {string} Resource name string.
+   */
+  featureMonitorPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string
+  ) {
+    return this.pathTemplates.featureMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitor resource.
+   *
+   * @param {string} featureMonitorName
+   *   A fully-qualified path representing FeatureMonitor resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_monitor;
+  }
+
+  /**
+   * Return a fully-qualified featureMonitorJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} feature_group
+   * @param {string} feature_monitor
+   * @param {string} feature_monitor_job
+   * @returns {string} Resource name string.
+   */
+  featureMonitorJobPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string,
+    featureMonitorJob: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature_monitor: featureMonitor,
+      feature_monitor_job: featureMonitorJob,
+    });
+  }
+
+  /**
+   * Parse the project from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).location;
+  }
+
+  /**
+   * Parse the feature_group from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_group.
+   */
+  matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_group;
+  }
+
+  /**
+   * Parse the feature_monitor from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor.
+   */
+  matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor;
+  }
+
+  /**
+   * Parse the feature_monitor_job from FeatureMonitorJob resource.
+   *
+   * @param {string} featureMonitorJobName
+   *   A fully-qualified path representing FeatureMonitorJob resource.
+   * @returns {string} A string representing the feature_monitor_job.
+   */
+  matchFeatureMonitorJobFromFeatureMonitorJobName(
+    featureMonitorJobName: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor_job;
   }
 
   /**
