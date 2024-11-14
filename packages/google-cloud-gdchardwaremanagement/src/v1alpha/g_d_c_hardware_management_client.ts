@@ -4100,8 +4100,12 @@ export class GDCHardwareManagementClient {
    * @param {string} [request.requestId]
    *   Optional. An optional unique identifier for this request. See
    *   [AIP-155](https://google.aip.dev/155).
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal} request.stateSignal
-   *   Required. The state signal to send for this zone.
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal} [request.stateSignal]
+   *   Optional. The state signal to send for this zone. Either state_signal or
+   *   provisioning_state_signal must be set, but not both.
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal} [request.provisioningStateSignal]
+   *   Optional. The provisioning state signal to send for this zone. Either
+   *   state_signal or provisioning_state_signal must be set, but not both.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

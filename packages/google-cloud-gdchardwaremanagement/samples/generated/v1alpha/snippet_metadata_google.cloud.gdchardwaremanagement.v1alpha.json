@@ -1654,7 +1654,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -1674,6 +1674,10 @@
                     {
                         "name": "state_signal",
                         "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal"
+                    },
+                    {
+                        "name": "provisioning_state_signal",
+                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
