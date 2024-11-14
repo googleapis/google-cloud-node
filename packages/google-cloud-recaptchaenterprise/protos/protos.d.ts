@@ -2615,6 +2615,9 @@ export namespace google {
 
                     /** RiskAnalysis extendedVerdictReasons */
                     extendedVerdictReasons?: (string[]|null);
+
+                    /** RiskAnalysis challenge */
+                    challenge?: (google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge|keyof typeof google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge|null);
                 }
 
                 /** Represents a RiskAnalysis. */
@@ -2634,6 +2637,9 @@ export namespace google {
 
                     /** RiskAnalysis extendedVerdictReasons. */
                     public extendedVerdictReasons: string[];
+
+                    /** RiskAnalysis challenge. */
+                    public challenge: (google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge|keyof typeof google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge);
 
                     /**
                      * Creates a new RiskAnalysis instance using the specified properties.
@@ -2725,6 +2731,14 @@ export namespace google {
                         LOW_CONFIDENCE_SCORE = 5,
                         SUSPECTED_CARDING = 6,
                         SUSPECTED_CHARGEBACK = 7
+                    }
+
+                    /** Challenge enum. */
+                    enum Challenge {
+                        CHALLENGE_UNSPECIFIED = 0,
+                        NOCAPTCHA = 1,
+                        PASSED = 2,
+                        FAILED = 3
                     }
                 }
 

@@ -6678,6 +6678,7 @@
                          * @property {number|null} [score] RiskAnalysis score
                          * @property {Array.<google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason>|null} [reasons] RiskAnalysis reasons
                          * @property {Array.<string>|null} [extendedVerdictReasons] RiskAnalysis extendedVerdictReasons
+                         * @property {google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge|null} [challenge] RiskAnalysis challenge
                          */
     
                         /**
@@ -6722,6 +6723,14 @@
                         RiskAnalysis.prototype.extendedVerdictReasons = $util.emptyArray;
     
                         /**
+                         * RiskAnalysis challenge.
+                         * @member {google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge} challenge
+                         * @memberof google.cloud.recaptchaenterprise.v1.RiskAnalysis
+                         * @instance
+                         */
+                        RiskAnalysis.prototype.challenge = 0;
+    
+                        /**
                          * Creates a new RiskAnalysis instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.RiskAnalysis
@@ -6756,6 +6765,8 @@
                             if (message.extendedVerdictReasons != null && message.extendedVerdictReasons.length)
                                 for (var i = 0; i < message.extendedVerdictReasons.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.extendedVerdictReasons[i]);
+                            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.challenge);
                             return writer;
                         };
     
@@ -6809,6 +6820,10 @@
                                         if (!(message.extendedVerdictReasons && message.extendedVerdictReasons.length))
                                             message.extendedVerdictReasons = [];
                                         message.extendedVerdictReasons.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.challenge = reader.int32();
                                         break;
                                     }
                                 default:
@@ -6874,6 +6889,16 @@
                                     if (!$util.isString(message.extendedVerdictReasons[i]))
                                         return "extendedVerdictReasons: string[] expected";
                             }
+                            if (message.challenge != null && message.hasOwnProperty("challenge"))
+                                switch (message.challenge) {
+                                default:
+                                    return "challenge: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -6943,6 +6968,30 @@
                                 for (var i = 0; i < object.extendedVerdictReasons.length; ++i)
                                     message.extendedVerdictReasons[i] = String(object.extendedVerdictReasons[i]);
                             }
+                            switch (object.challenge) {
+                            default:
+                                if (typeof object.challenge === "number") {
+                                    message.challenge = object.challenge;
+                                    break;
+                                }
+                                break;
+                            case "CHALLENGE_UNSPECIFIED":
+                            case 0:
+                                message.challenge = 0;
+                                break;
+                            case "NOCAPTCHA":
+                            case 1:
+                                message.challenge = 1;
+                                break;
+                            case "PASSED":
+                            case 2:
+                                message.challenge = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.challenge = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -6963,8 +7012,10 @@
                                 object.reasons = [];
                                 object.extendedVerdictReasons = [];
                             }
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.score = 0;
+                                object.challenge = options.enums === String ? "CHALLENGE_UNSPECIFIED" : 0;
+                            }
                             if (message.score != null && message.hasOwnProperty("score"))
                                 object.score = options.json && !isFinite(message.score) ? String(message.score) : message.score;
                             if (message.reasons && message.reasons.length) {
@@ -6977,6 +7028,8 @@
                                 for (var j = 0; j < message.extendedVerdictReasons.length; ++j)
                                     object.extendedVerdictReasons[j] = message.extendedVerdictReasons[j];
                             }
+                            if (message.challenge != null && message.hasOwnProperty("challenge"))
+                                object.challenge = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge[message.challenge] === undefined ? message.challenge : $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge[message.challenge] : message.challenge;
                             return object;
                         };
     
@@ -7029,6 +7082,24 @@
                             values[valuesById[5] = "LOW_CONFIDENCE_SCORE"] = 5;
                             values[valuesById[6] = "SUSPECTED_CARDING"] = 6;
                             values[valuesById[7] = "SUSPECTED_CHARGEBACK"] = 7;
+                            return values;
+                        })();
+    
+                        /**
+                         * Challenge enum.
+                         * @name google.cloud.recaptchaenterprise.v1.RiskAnalysis.Challenge
+                         * @enum {number}
+                         * @property {number} CHALLENGE_UNSPECIFIED=0 CHALLENGE_UNSPECIFIED value
+                         * @property {number} NOCAPTCHA=1 NOCAPTCHA value
+                         * @property {number} PASSED=2 PASSED value
+                         * @property {number} FAILED=3 FAILED value
+                         */
+                        RiskAnalysis.Challenge = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CHALLENGE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NOCAPTCHA"] = 1;
+                            values[valuesById[2] = "PASSED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
                             return values;
                         })();
     
