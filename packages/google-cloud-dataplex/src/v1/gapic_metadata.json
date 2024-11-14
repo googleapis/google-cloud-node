@@ -50,6 +50,16 @@
                 "lookupEntry"
               ]
             },
+            "GetMetadataJob": {
+              "methods": [
+                "getMetadataJob"
+              ]
+            },
+            "CancelMetadataJob": {
+              "methods": [
+                "cancelMetadataJob"
+              ]
+            },
             "CreateEntryType": {
               "methods": [
                 "createEntryType"
@@ -95,6 +105,11 @@
                 "deleteEntryGroup"
               ]
             },
+            "CreateMetadataJob": {
+              "methods": [
+                "createMetadataJob"
+              ]
+            },
             "ListEntryTypes": {
               "methods": [
                 "listEntryTypes",
@@ -128,6 +143,13 @@
                 "searchEntries",
                 "searchEntriesStream",
                 "searchEntriesAsync"
+              ]
+            },
+            "ListMetadataJobs": {
+              "methods": [
+                "listMetadataJobs",
+                "listMetadataJobsStream",
+                "listMetadataJobsAsync"
               ]
             }
           }
@@ -175,6 +197,16 @@
                 "lookupEntry"
               ]
             },
+            "GetMetadataJob": {
+              "methods": [
+                "getMetadataJob"
+              ]
+            },
+            "CancelMetadataJob": {
+              "methods": [
+                "cancelMetadataJob"
+              ]
+            },
             "CreateEntryType": {
               "methods": [
                 "createEntryType"
@@ -220,6 +252,11 @@
                 "deleteEntryGroup"
               ]
             },
+            "CreateMetadataJob": {
+              "methods": [
+                "createMetadataJob"
+              ]
+            },
             "ListEntryTypes": {
               "methods": [
                 "listEntryTypes",
@@ -253,6 +290,13 @@
                 "searchEntries",
                 "searchEntriesStream",
                 "searchEntriesAsync"
+              ]
+            },
+            "ListMetadataJobs": {
+              "methods": [
+                "listMetadataJobs",
+                "listMetadataJobsStream",
+                "listMetadataJobsAsync"
               ]
             }
           }

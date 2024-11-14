@@ -31,21 +31,21 @@ function main(parent) {
   /**
    *  Required. The resource name of the entryGroup location, of the form:
    *  `projects/{project_number}/locations/{location_id}`
-   *  where `location_id` refers to a GCP region.
+   *  where `location_id` refers to a Google Cloud region.
    */
   // const parent = 'abc123'
   /**
    *  Optional. Maximum number of EntryGroups to return. The service may return
-   *  fewer than this value. If unspecified, at most 10 EntryGroups will be
-   *  returned. The maximum value is 1000; values above 1000 will be coerced to
-   *  1000.
+   *  fewer than this value. If unspecified, the service returns at most 10
+   *  EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+   *  to 1000.
    */
   // const pageSize = 1234
   /**
    *  Optional. Page token received from a previous `ListEntryGroups` call.
    *  Provide this to retrieve the subsequent page. When paginating, all other
-   *  parameters provided to `ListEntryGroups` must match the call that provided
-   *  the page token.
+   *  parameters you provide to `ListEntryGroups` must match the call that
+   *  provided the page token.
    */
   // const pageToken = 'abc123'
   /**

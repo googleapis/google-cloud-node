@@ -29,7 +29,7 @@ function main(entryGroup, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. EntryGroup Resource
+   *  Required. EntryGroup Resource.
    */
   // const entryGroup = {}
   /**
@@ -37,8 +37,8 @@ function main(entryGroup, updateMask) {
    */
   // const updateMask = {}
   /**
-   *  Optional. Only validate the request, but do not perform mutations.
-   *  The default is false.
+   *  Optional. The service validates the request, without performing any
+   *  mutations. The default is false.
    */
   // const validateOnly = true
 

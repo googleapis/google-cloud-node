@@ -29,7 +29,7 @@ function main(entryType, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. EntryType Resource
+   *  Required. EntryType Resource.
    */
   // const entryType = {}
   /**
@@ -37,8 +37,8 @@ function main(entryType, updateMask) {
    */
   // const updateMask = {}
   /**
-   *  Optional. Only validate the request, but do not perform mutations.
-   *  The default is false.
+   *  Optional. The service validates the request without performing any
+   *  mutations. The default is false.
    */
   // const validateOnly = true
 
