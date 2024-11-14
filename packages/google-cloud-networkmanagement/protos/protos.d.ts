@@ -65,6 +65,12 @@ export namespace google {
                     /** ConnectivityTest probingDetails */
                     probingDetails?: (google.cloud.networkmanagement.v1.IProbingDetails|null);
 
+                    /** ConnectivityTest roundTrip */
+                    roundTrip?: (boolean|null);
+
+                    /** ConnectivityTest returnReachabilityDetails */
+                    returnReachabilityDetails?: (google.cloud.networkmanagement.v1.IReachabilityDetails|null);
+
                     /** ConnectivityTest bypassFirewallChecks */
                     bypassFirewallChecks?: (boolean|null);
                 }
@@ -113,6 +119,12 @@ export namespace google {
 
                     /** ConnectivityTest probingDetails. */
                     public probingDetails?: (google.cloud.networkmanagement.v1.IProbingDetails|null);
+
+                    /** ConnectivityTest roundTrip. */
+                    public roundTrip: boolean;
+
+                    /** ConnectivityTest returnReachabilityDetails. */
+                    public returnReachabilityDetails?: (google.cloud.networkmanagement.v1.IReachabilityDetails|null);
 
                     /** ConnectivityTest bypassFirewallChecks. */
                     public bypassFirewallChecks: boolean;
