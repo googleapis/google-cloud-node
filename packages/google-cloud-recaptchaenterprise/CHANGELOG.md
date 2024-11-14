@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.12.0...recaptcha-enterprise-v5.13.0) (2024-11-14)
+
+
+### Features
+
+* [recaptchaenterprise] A new enum `Challenge` is added ([#5807](https://github.com/googleapis/google-cloud-node/issues/5807)) ([9cfcf1f](https://github.com/googleapis/google-cloud-node/commit/9cfcf1fead76fdaa16f22737f33859c52945481e))
+
 ## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.11.0...recaptcha-enterprise-v5.12.0) (2024-10-30)
 
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.5.0...datacatalog-v4.6.0) (2024-11-14)
+
+
+### Features
+
+* [datacatalog] A new field `feature_online_store_spec` is added to message `.google.cloud.datacatalog.v1.Entry` ([#5802](https://github.com/googleapis/google-cloud-node/issues/5802)) ([1467ed6](https://github.com/googleapis/google-cloud-node/commit/1467ed612daa48726f864dd6cf0e5976d798699d))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.4.0...datacatalog-v4.5.0) (2024-08-09)
 
 

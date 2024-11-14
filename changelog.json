@@ -5,6 +5,256 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b288d9f4448e1305151a8f734afd8f1233d8c5bb",
+          "message": "[gdchardwaremanagement] add DNS address, Kubernetes primary VLAN ID, and provisioning state to the Zone resource",
+          "issues": [
+            "5805"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "9e5f6e62-c7d5-4afc-975d-cd8e2bbed49c",
+      "createTime": "2024-11-14T01:17:45.705Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "864ebd10f82a0406a8432fe839b78255fde6d2f9",
+          "message": "[privilegedaccessmanager] republish docs",
+          "issues": [
+            "5810"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "61117d72-3036-4f9d-8bd7-6a36a31863e7",
+      "createTime": "2024-11-14T01:17:45.598Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8764de199b0bbe7188e6c2a225bd5692734412a3",
+          "message": "[cloudquotas] A new value `NOT_SUPPORTED` is added to enum `IneligibilityReason`",
+          "issues": [
+            "5801"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "1e15a661-2fb0-4068-a4f9-096c05b3970e",
+      "createTime": "2024-11-14T01:17:45.542Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "10a04fc297bcf2bdeb8019fb69e638b18eb2e159",
+          "message": "[places] update attributes in Places API",
+          "issues": [
+            "5795"
+          ]
+        }
+      ],
+      "version": "1.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "3762d4ae-c7fb-4ef0-bd0b-3119b57a9967",
+      "createTime": "2024-11-14T01:17:45.525Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "35f689a7c3e74135e3f5c1bae77e3e4fa07c17fc",
+          "message": "[container] add LocalSsdEncryptionMode in NodeConfig",
+          "issues": [
+            "5796"
+          ]
+        }
+      ],
+      "version": "5.19.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "a44ff628-b558-45e9-9aa9-d1c0c0375257",
+      "createTime": "2024-11-14T01:17:45.510Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9cfcf1fead76fdaa16f22737f33859c52945481e",
+          "message": "[recaptchaenterprise] A new enum `Challenge` is added",
+          "issues": [
+            "5807"
+          ]
+        }
+      ],
+      "version": "5.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "ea8d4705-0aad-45bb-b37d-580b13d33382",
+      "createTime": "2024-11-14T01:17:45.494Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f0be12aad7540be57ed9f1a87ad62fa309e7a25b",
+          "message": "[networkmanagement] add DNS endpoint of Google Kubernetes Engine cluster control plane",
+          "issues": [
+            "5790"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "f0be12aad7540be57ed9f1a87ad62fa309e7a25b",
+          "message": "Add more detailed drop causes to corresponding enum",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "f0be12aad7540be57ed9f1a87ad62fa309e7a25b",
+          "message": "Add more detailed drop causes to corresponding enum",
+          "issues": []
+        }
+      ],
+      "version": "3.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "b2776c83-bd89-488f-8e52-5a768bdbf063",
+      "createTime": "2024-11-14T01:17:45.467Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "49e8cd12925813a6f45d75f3a3e422dad061ef6d",
+          "message": "[dialogflow-cx] add options of client_certificate_settings, bigquery_export_settings, bearer_token_config and boost_control_spec; add support of ALAW encoding",
+          "issues": [
+            "5787"
+          ]
+        }
+      ],
+      "version": "4.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "95f7132d-f164-43d9-9564-4af02ac77e7e",
+      "createTime": "2024-11-14T01:17:45.451Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "25a2241eac52e8e501d81021f227387a08197ad1",
+          "message": "[dialogflow] add options of query_source, search_config, end_user_metadata and exact_search",
+          "issues": [
+            "5789"
+          ]
+        }
+      ],
+      "version": "6.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "ff97e019-dca3-4f0a-bf2e-037d27d50b27",
+      "createTime": "2024-11-14T01:17:45.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0e61aecf4629e76bc05609c35b9911681f012d24",
+          "message": "[deploy] A new field `timed_promote_release_rule` is added to message `.google.cloud.deploy.v1.AutomationRule`",
+          "issues": [
+            "5806"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "da2425e8-1f6b-4bda-800b-6cb2ef26a021",
+      "createTime": "2024-11-14T01:17:45.420Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1467ed612daa48726f864dd6cf0e5976d798699d",
+          "message": "[datacatalog] A new field `feature_online_store_spec` is added to message `.google.cloud.datacatalog.v1.Entry`",
+          "issues": [
+            "5802"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "a68b44c3-d781-485f-9fcd-b784e7df02da",
+      "createTime": "2024-11-14T01:17:45.404Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "058967a909f5a98f1872e52d7397ed4e6bbeb6b4",
+          "message": "[compute] Update Compute Engine API to revision 20241105 (#954)",
+          "issues": [
+            "5808"
+          ]
+        }
+      ],
+      "version": "4.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "8079c612-c4d7-4580-9332-2e1fc98c4785",
+      "createTime": "2024-11-14T01:17:45.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e8845566dcf841c5fb2946b5903b63d6298fd901",
+          "message": "[alloydb] deprecated various PSC instance configuration fields",
+          "issues": [
+            "5793"
+          ]
+        }
+      ],
+      "version": "1.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "49d18e8d-2415-430f-a403-03f1a25d22cf",
+      "createTime": "2024-11-14T01:17:45.322Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3cc221d8c6018eab6e7a5ba14c38be2218dcee36",
+          "message": "Add fast_tryout_enabled to FasterDeploymentConfig v1 proto",
+          "issues": [
+            "5781"
+          ]
+        }
+      ],
+      "version": "3.33.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "701904cf-52f2-4b61-a748-c6f0db31b3c2",
+      "createTime": "2024-11-14T01:17:45.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "55c77b9d386e49a6fd3c6767a771b31b116e945a",
           "message": "[gdchardwaremanagement] add a DeleteSite method",
           "issues": [
@@ -37506,5 +37756,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-10-30T23:16:37.825Z"
+  "updateTime": "2024-11-14T01:17:45.705Z"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.4.0...cloudquotas-v0.5.0) (2024-11-14)
+
+
+### Features
+
+* [cloudquotas] A new value `NOT_SUPPORTED` is added to enum `IneligibilityReason` ([#5801](https://github.com/googleapis/google-cloud-node/issues/5801)) ([8764de1](https://github.com/googleapis/google-cloud-node/commit/8764de199b0bbe7188e6c2a225bd5692734412a3))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.3.0...cloudquotas-v0.4.0) (2024-05-21)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.8.0...dialogflow-cx-v4.9.0) (2024-11-14)
+
+
+### Features
+
+* [dialogflow-cx] add options of client_certificate_settings, bigquery_export_settings, bearer_token_config and boost_control_spec; add support of ALAW encoding ([#5787](https://github.com/googleapis/google-cloud-node/issues/5787)) ([49e8cd1](https://github.com/googleapis/google-cloud-node/commit/49e8cd12925813a6f45d75f3a3e422dad061ef6d))
+
 ## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.7.0...dialogflow-cx-v4.8.0) (2024-08-09)
 
 
