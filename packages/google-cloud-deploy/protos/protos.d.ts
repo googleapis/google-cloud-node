@@ -17513,6 +17513,9 @@ export namespace google {
 
                     /** AutomationRule repairRolloutRule */
                     repairRolloutRule?: (google.cloud.deploy.v1.IRepairRolloutRule|null);
+
+                    /** AutomationRule timedPromoteReleaseRule */
+                    timedPromoteReleaseRule?: (google.cloud.deploy.v1.ITimedPromoteReleaseRule|null);
                 }
 
                 /** Represents an AutomationRule. */
@@ -17533,8 +17536,11 @@ export namespace google {
                     /** AutomationRule repairRolloutRule. */
                     public repairRolloutRule?: (google.cloud.deploy.v1.IRepairRolloutRule|null);
 
+                    /** AutomationRule timedPromoteReleaseRule. */
+                    public timedPromoteReleaseRule?: (google.cloud.deploy.v1.ITimedPromoteReleaseRule|null);
+
                     /** AutomationRule rule. */
-                    public rule?: ("promoteReleaseRule"|"advanceRolloutRule"|"repairRolloutRule");
+                    public rule?: ("promoteReleaseRule"|"advanceRolloutRule"|"repairRolloutRule"|"timedPromoteReleaseRule");
 
                     /**
                      * Creates a new AutomationRule instance using the specified properties.
@@ -17608,6 +17614,133 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AutomationRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TimedPromoteReleaseRule. */
+                interface ITimedPromoteReleaseRule {
+
+                    /** TimedPromoteReleaseRule id */
+                    id?: (string|null);
+
+                    /** TimedPromoteReleaseRule destinationTargetId */
+                    destinationTargetId?: (string|null);
+
+                    /** TimedPromoteReleaseRule schedule */
+                    schedule?: (string|null);
+
+                    /** TimedPromoteReleaseRule timeZone */
+                    timeZone?: (string|null);
+
+                    /** TimedPromoteReleaseRule condition */
+                    condition?: (google.cloud.deploy.v1.IAutomationRuleCondition|null);
+
+                    /** TimedPromoteReleaseRule destinationPhase */
+                    destinationPhase?: (string|null);
+                }
+
+                /** Represents a TimedPromoteReleaseRule. */
+                class TimedPromoteReleaseRule implements ITimedPromoteReleaseRule {
+
+                    /**
+                     * Constructs a new TimedPromoteReleaseRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ITimedPromoteReleaseRule);
+
+                    /** TimedPromoteReleaseRule id. */
+                    public id: string;
+
+                    /** TimedPromoteReleaseRule destinationTargetId. */
+                    public destinationTargetId: string;
+
+                    /** TimedPromoteReleaseRule schedule. */
+                    public schedule: string;
+
+                    /** TimedPromoteReleaseRule timeZone. */
+                    public timeZone: string;
+
+                    /** TimedPromoteReleaseRule condition. */
+                    public condition?: (google.cloud.deploy.v1.IAutomationRuleCondition|null);
+
+                    /** TimedPromoteReleaseRule destinationPhase. */
+                    public destinationPhase: string;
+
+                    /**
+                     * Creates a new TimedPromoteReleaseRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimedPromoteReleaseRule instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ITimedPromoteReleaseRule): google.cloud.deploy.v1.TimedPromoteReleaseRule;
+
+                    /**
+                     * Encodes the specified TimedPromoteReleaseRule message. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseRule.verify|verify} messages.
+                     * @param message TimedPromoteReleaseRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ITimedPromoteReleaseRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimedPromoteReleaseRule message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseRule.verify|verify} messages.
+                     * @param message TimedPromoteReleaseRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ITimedPromoteReleaseRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimedPromoteReleaseRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimedPromoteReleaseRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.TimedPromoteReleaseRule;
+
+                    /**
+                     * Decodes a TimedPromoteReleaseRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimedPromoteReleaseRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.TimedPromoteReleaseRule;
+
+                    /**
+                     * Verifies a TimedPromoteReleaseRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimedPromoteReleaseRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimedPromoteReleaseRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.TimedPromoteReleaseRule;
+
+                    /**
+                     * Creates a plain object from a TimedPromoteReleaseRule message. Also converts values to other types if specified.
+                     * @param message TimedPromoteReleaseRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.TimedPromoteReleaseRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimedPromoteReleaseRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimedPromoteReleaseRule
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -18294,6 +18427,9 @@ export namespace google {
 
                     /** AutomationRuleCondition targetsPresentCondition */
                     targetsPresentCondition?: (google.cloud.deploy.v1.ITargetsPresentCondition|null);
+
+                    /** AutomationRuleCondition timedPromoteReleaseCondition */
+                    timedPromoteReleaseCondition?: (google.cloud.deploy.v1.ITimedPromoteReleaseCondition|null);
                 }
 
                 /** Represents an AutomationRuleCondition. */
@@ -18307,6 +18443,12 @@ export namespace google {
 
                     /** AutomationRuleCondition targetsPresentCondition. */
                     public targetsPresentCondition?: (google.cloud.deploy.v1.ITargetsPresentCondition|null);
+
+                    /** AutomationRuleCondition timedPromoteReleaseCondition. */
+                    public timedPromoteReleaseCondition?: (google.cloud.deploy.v1.ITimedPromoteReleaseCondition|null);
+
+                    /** AutomationRuleCondition ruleTypeCondition. */
+                    public ruleTypeCondition?: "timedPromoteReleaseCondition";
 
                     /**
                      * Creates a new AutomationRuleCondition instance using the specified properties.
@@ -18384,6 +18526,215 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TimedPromoteReleaseCondition. */
+                interface ITimedPromoteReleaseCondition {
+
+                    /** TimedPromoteReleaseCondition nextPromotionTime */
+                    nextPromotionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimedPromoteReleaseCondition targetsList */
+                    targetsList?: (google.cloud.deploy.v1.TimedPromoteReleaseCondition.ITargets[]|null);
+                }
+
+                /** Represents a TimedPromoteReleaseCondition. */
+                class TimedPromoteReleaseCondition implements ITimedPromoteReleaseCondition {
+
+                    /**
+                     * Constructs a new TimedPromoteReleaseCondition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ITimedPromoteReleaseCondition);
+
+                    /** TimedPromoteReleaseCondition nextPromotionTime. */
+                    public nextPromotionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimedPromoteReleaseCondition targetsList. */
+                    public targetsList: google.cloud.deploy.v1.TimedPromoteReleaseCondition.ITargets[];
+
+                    /**
+                     * Creates a new TimedPromoteReleaseCondition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimedPromoteReleaseCondition instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ITimedPromoteReleaseCondition): google.cloud.deploy.v1.TimedPromoteReleaseCondition;
+
+                    /**
+                     * Encodes the specified TimedPromoteReleaseCondition message. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseCondition.verify|verify} messages.
+                     * @param message TimedPromoteReleaseCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ITimedPromoteReleaseCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimedPromoteReleaseCondition message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseCondition.verify|verify} messages.
+                     * @param message TimedPromoteReleaseCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ITimedPromoteReleaseCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimedPromoteReleaseCondition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimedPromoteReleaseCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.TimedPromoteReleaseCondition;
+
+                    /**
+                     * Decodes a TimedPromoteReleaseCondition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimedPromoteReleaseCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.TimedPromoteReleaseCondition;
+
+                    /**
+                     * Verifies a TimedPromoteReleaseCondition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimedPromoteReleaseCondition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimedPromoteReleaseCondition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.TimedPromoteReleaseCondition;
+
+                    /**
+                     * Creates a plain object from a TimedPromoteReleaseCondition message. Also converts values to other types if specified.
+                     * @param message TimedPromoteReleaseCondition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.TimedPromoteReleaseCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimedPromoteReleaseCondition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimedPromoteReleaseCondition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TimedPromoteReleaseCondition {
+
+                    /** Properties of a Targets. */
+                    interface ITargets {
+
+                        /** Targets sourceTargetId */
+                        sourceTargetId?: (string|null);
+
+                        /** Targets destinationTargetId */
+                        destinationTargetId?: (string|null);
+                    }
+
+                    /** Represents a Targets. */
+                    class Targets implements ITargets {
+
+                        /**
+                         * Constructs a new Targets.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.deploy.v1.TimedPromoteReleaseCondition.ITargets);
+
+                        /** Targets sourceTargetId. */
+                        public sourceTargetId: string;
+
+                        /** Targets destinationTargetId. */
+                        public destinationTargetId: string;
+
+                        /**
+                         * Creates a new Targets instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Targets instance
+                         */
+                        public static create(properties?: google.cloud.deploy.v1.TimedPromoteReleaseCondition.ITargets): google.cloud.deploy.v1.TimedPromoteReleaseCondition.Targets;
+
+                        /**
+                         * Encodes the specified Targets message. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseCondition.Targets.verify|verify} messages.
+                         * @param message Targets message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.deploy.v1.TimedPromoteReleaseCondition.ITargets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Targets message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseCondition.Targets.verify|verify} messages.
+                         * @param message Targets message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.deploy.v1.TimedPromoteReleaseCondition.ITargets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Targets message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Targets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.TimedPromoteReleaseCondition.Targets;
+
+                        /**
+                         * Decodes a Targets message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Targets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.TimedPromoteReleaseCondition.Targets;
+
+                        /**
+                         * Verifies a Targets message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Targets message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Targets
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.TimedPromoteReleaseCondition.Targets;
+
+                        /**
+                         * Creates a plain object from a Targets message. Also converts values to other types if specified.
+                         * @param message Targets
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.deploy.v1.TimedPromoteReleaseCondition.Targets, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Targets to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Targets
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a CreateAutomationRequest. */
@@ -19127,6 +19478,9 @@ export namespace google {
                     /** AutomationRun repairRolloutOperation */
                     repairRolloutOperation?: (google.cloud.deploy.v1.IRepairRolloutOperation|null);
 
+                    /** AutomationRun timedPromoteReleaseOperation */
+                    timedPromoteReleaseOperation?: (google.cloud.deploy.v1.ITimedPromoteReleaseOperation|null);
+
                     /** AutomationRun waitUntilTime */
                     waitUntilTime?: (google.protobuf.ITimestamp|null);
                 }
@@ -19188,11 +19542,14 @@ export namespace google {
                     /** AutomationRun repairRolloutOperation. */
                     public repairRolloutOperation?: (google.cloud.deploy.v1.IRepairRolloutOperation|null);
 
+                    /** AutomationRun timedPromoteReleaseOperation. */
+                    public timedPromoteReleaseOperation?: (google.cloud.deploy.v1.ITimedPromoteReleaseOperation|null);
+
                     /** AutomationRun waitUntilTime. */
                     public waitUntilTime?: (google.protobuf.ITimestamp|null);
 
                     /** AutomationRun operation. */
-                    public operation?: ("promoteReleaseOperation"|"advanceRolloutOperation"|"repairRolloutOperation");
+                    public operation?: ("promoteReleaseOperation"|"advanceRolloutOperation"|"repairRolloutOperation"|"timedPromoteReleaseOperation");
 
                     /**
                      * Creates a new AutomationRun instance using the specified properties.
@@ -19631,6 +19988,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RepairRolloutOperation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TimedPromoteReleaseOperation. */
+                interface ITimedPromoteReleaseOperation {
+
+                    /** TimedPromoteReleaseOperation targetId */
+                    targetId?: (string|null);
+
+                    /** TimedPromoteReleaseOperation release */
+                    release?: (string|null);
+
+                    /** TimedPromoteReleaseOperation phase */
+                    phase?: (string|null);
+                }
+
+                /** Represents a TimedPromoteReleaseOperation. */
+                class TimedPromoteReleaseOperation implements ITimedPromoteReleaseOperation {
+
+                    /**
+                     * Constructs a new TimedPromoteReleaseOperation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ITimedPromoteReleaseOperation);
+
+                    /** TimedPromoteReleaseOperation targetId. */
+                    public targetId: string;
+
+                    /** TimedPromoteReleaseOperation release. */
+                    public release: string;
+
+                    /** TimedPromoteReleaseOperation phase. */
+                    public phase: string;
+
+                    /**
+                     * Creates a new TimedPromoteReleaseOperation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimedPromoteReleaseOperation instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ITimedPromoteReleaseOperation): google.cloud.deploy.v1.TimedPromoteReleaseOperation;
+
+                    /**
+                     * Encodes the specified TimedPromoteReleaseOperation message. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseOperation.verify|verify} messages.
+                     * @param message TimedPromoteReleaseOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ITimedPromoteReleaseOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimedPromoteReleaseOperation message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.TimedPromoteReleaseOperation.verify|verify} messages.
+                     * @param message TimedPromoteReleaseOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ITimedPromoteReleaseOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimedPromoteReleaseOperation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimedPromoteReleaseOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.TimedPromoteReleaseOperation;
+
+                    /**
+                     * Decodes a TimedPromoteReleaseOperation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimedPromoteReleaseOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.TimedPromoteReleaseOperation;
+
+                    /**
+                     * Verifies a TimedPromoteReleaseOperation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimedPromoteReleaseOperation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimedPromoteReleaseOperation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.TimedPromoteReleaseOperation;
+
+                    /**
+                     * Creates a plain object from a TimedPromoteReleaseOperation message. Also converts values to other types if specified.
+                     * @param message TimedPromoteReleaseOperation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.TimedPromoteReleaseOperation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimedPromoteReleaseOperation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimedPromoteReleaseOperation
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
