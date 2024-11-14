@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.0...alloydb-v1.10.1) (2024-11-14)
+
+
+### Bug Fixes
+
+* [alloydb] deprecated various PSC instance configuration fields ([#5793](https://github.com/googleapis/google-cloud-node/issues/5793)) ([e884556](https://github.com/googleapis/google-cloud-node/commit/e8845566dcf841c5fb2946b5903b63d6298fd901))
+
 ## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.9.0...alloydb-v1.10.0) (2024-10-30)
 
 

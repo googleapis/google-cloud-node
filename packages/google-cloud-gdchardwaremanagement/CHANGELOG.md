@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.3.0...gdchardwaremanagement-v0.4.0) (2024-11-14)
+
+
+### Features
+
+* [gdchardwaremanagement] add DNS address, Kubernetes primary VLAN ID, and provisioning state to the Zone resource ([#5805](https://github.com/googleapis/google-cloud-node/issues/5805)) ([b288d9f](https://github.com/googleapis/google-cloud-node/commit/b288d9f4448e1305151a8f734afd8f1233d8c5bb))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.2.0...gdchardwaremanagement-v0.3.0) (2024-10-30)
 
 

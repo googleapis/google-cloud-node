@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.10.0...dialogflow-v6.11.0) (2024-11-14)
+
+
+### Features
+
+* [dialogflow] add options of query_source, search_config, end_user_metadata and exact_search ([#5789](https://github.com/googleapis/google-cloud-node/issues/5789)) ([25a2241](https://github.com/googleapis/google-cloud-node/commit/25a2241eac52e8e501d81021f227387a08197ad1))
+
 ## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.9.0...dialogflow-v6.10.0) (2024-10-10)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.7.0...places-v1.8.0) (2024-11-14)
+
+
+### Features
+
+* [places] update attributes in Places API ([#5795](https://github.com/googleapis/google-cloud-node/issues/5795)) ([10a04fc](https://github.com/googleapis/google-cloud-node/commit/10a04fc297bcf2bdeb8019fb69e638b18eb2e159))
+
 ## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.6.0...places-v1.7.0) (2024-09-24)
 
 

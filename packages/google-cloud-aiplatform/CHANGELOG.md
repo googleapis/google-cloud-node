@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.33.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.32.0...aiplatform-v3.33.0) (2024-11-14)
+
+
+### Features
+
+* Add fast_tryout_enabled to FasterDeploymentConfig v1 proto ([#5781](https://github.com/googleapis/google-cloud-node/issues/5781)) ([3cc221d](https://github.com/googleapis/google-cloud-node/commit/3cc221d8c6018eab6e7a5ba14c38be2218dcee36))
+
 ## [3.32.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.31.0...aiplatform-v3.32.0) (2024-10-30)
 
 

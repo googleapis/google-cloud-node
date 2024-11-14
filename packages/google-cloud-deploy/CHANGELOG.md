@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.2.0...deploy-v4.3.0) (2024-11-14)
+
+
+### Features
+
+* [deploy] A new field `timed_promote_release_rule` is added to message `.google.cloud.deploy.v1.AutomationRule` ([#5806](https://github.com/googleapis/google-cloud-node/issues/5806)) ([0e61aec](https://github.com/googleapis/google-cloud-node/commit/0e61aecf4629e76bc05609c35b9911681f012d24))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.1.0...deploy-v4.2.0) (2024-10-30)
 
 

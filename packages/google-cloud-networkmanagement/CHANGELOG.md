@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.8.0...network-management-v3.9.0) (2024-11-14)
+
+
+### Features
+
+* [networkmanagement] add DNS endpoint of Google Kubernetes Engine cluster control plane ([#5790](https://github.com/googleapis/google-cloud-node/issues/5790)) ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+* Add more detailed drop causes to corresponding enum ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+* Add more detailed drop causes to corresponding enum ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+
 ## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.7.0...network-management-v3.8.0) (2024-10-30)
 
 
