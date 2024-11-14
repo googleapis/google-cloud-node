@@ -572,7 +572,7 @@ export class PrivilegedAccessManagerClient {
   // -- Service calls --
   // -------------------
   /**
-   * CheckOnboardingStatus reports the onboarding status for a
+   * `CheckOnboardingStatus` reports the onboarding status for a
    * project/folder/organization. Any findings reported by this API need to be
    * fixed before PAM can be used on the resource.
    *
@@ -867,7 +867,8 @@ export class PrivilegedAccessManagerClient {
     return this.innerApiCalls.getGrant(request, options, callback);
   }
   /**
-   * Creates a new grant in a given project and location.
+   * Creates a new grant in a given project/folder/organization and
+   * location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -886,7 +887,7 @@ export class PrivilegedAccessManagerClient {
    *   request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
+   *   clients from accidentally creating duplicate grants.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
@@ -1219,7 +1220,7 @@ export class PrivilegedAccessManagerClient {
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, ignores the second request and returns the
    *   previous operation's response. This prevents clients from accidentally
-   *   creating duplicate commitments.
+   *   creating duplicate entitlements.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
@@ -1354,7 +1355,7 @@ export class PrivilegedAccessManagerClient {
   }
   /**
    * Deletes a single entitlement. This method can only be called when there
-   * are no in-progress (ACTIVE/ACTIVATING/REVOKING) grants under the
+   * are no in-progress (`ACTIVE`/`ACTIVATING`/`REVOKING`) grants under the
    * entitlement.
    *
    * @param {Object} request
@@ -1370,8 +1371,7 @@ export class PrivilegedAccessManagerClient {
    *   For example, consider a situation where you make an initial request and the
    *   request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
+   *   was received, and if so, ignores the second request.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
