@@ -2567,6 +2567,20 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "encryptionKeyRevocationAction": {
+                          "type": "EncryptionKeyRevocationAction",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionKeyShutdownDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "sessionAffinity": {
                           "type": "bool",
                           "id": 19,

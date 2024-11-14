@@ -7429,6 +7429,12 @@ export namespace google {
                     /** RevisionTemplate serviceMesh */
                     serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
 
+                    /** RevisionTemplate encryptionKeyRevocationAction */
+                    encryptionKeyRevocationAction?: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction|null);
+
+                    /** RevisionTemplate encryptionKeyShutdownDuration */
+                    encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
+
                     /** RevisionTemplate sessionAffinity */
                     sessionAffinity?: (boolean|null);
 
@@ -7486,6 +7492,12 @@ export namespace google {
 
                     /** RevisionTemplate serviceMesh. */
                     public serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
+
+                    /** RevisionTemplate encryptionKeyRevocationAction. */
+                    public encryptionKeyRevocationAction: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction);
+
+                    /** RevisionTemplate encryptionKeyShutdownDuration. */
+                    public encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
 
                     /** RevisionTemplate sessionAffinity. */
                     public sessionAffinity: boolean;
