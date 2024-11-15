@@ -1,6 +1,6 @@
 {
   "name": "managedkafka",
-  "name_pretty": "Apache Kafka for BigQuery API",
+  "name_pretty": "Managed Service for Apache Kafka API",
   "product_documentation": "https://cloud.google.com/managed-kafka",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/managedkafka/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
