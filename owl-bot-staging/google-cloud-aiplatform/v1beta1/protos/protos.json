@@ -28350,7 +28350,8 @@
                         },
                         "environmentSpec": {
                           "oneof": [
-                            "notebookRuntimeTemplateResourceName"
+                            "notebookRuntimeTemplateResourceName",
+                            "customEnvironmentSpec"
                           ]
                         },
                         "executionSink": {
@@ -28384,6 +28385,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate"
                           }
+                        },
+                        "customEnvironmentSpec": {
+                          "type": "CustomEnvironmentSpec",
+                          "id": 16
                         },
                         "gcsOutputUri": {
                           "type": "string",
@@ -28488,6 +28493,22 @@
                             "content": {
                               "type": "bytes",
                               "id": 1
+                            }
+                          }
+                        },
+                        "CustomEnvironmentSpec": {
+                          "fields": {
+                            "machineSpec": {
+                              "type": "MachineSpec",
+                              "id": 1
+                            },
+                            "persistentDiskSpec": {
+                              "type": "PersistentDiskSpec",
+                              "id": 2
+                            },
+                            "networkSpec": {
+                              "type": "NetworkSpec",
+                              "id": 3
                             }
                           }
                         }
