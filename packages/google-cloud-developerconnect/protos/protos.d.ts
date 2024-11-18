@@ -350,6 +350,15 @@ export namespace google {
                     /** Connection githubConfig */
                     githubConfig?: (google.cloud.developerconnect.v1.IGitHubConfig|null);
 
+                    /** Connection githubEnterpriseConfig */
+                    githubEnterpriseConfig?: (google.cloud.developerconnect.v1.IGitHubEnterpriseConfig|null);
+
+                    /** Connection gitlabConfig */
+                    gitlabConfig?: (google.cloud.developerconnect.v1.IGitLabConfig|null);
+
+                    /** Connection gitlabEnterpriseConfig */
+                    gitlabEnterpriseConfig?: (google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null);
+
                     /** Connection name */
                     name?: (string|null);
 
@@ -382,6 +391,9 @@ export namespace google {
 
                     /** Connection uid */
                     uid?: (string|null);
+
+                    /** Connection cryptoKeyConfig */
+                    cryptoKeyConfig?: (google.cloud.developerconnect.v1.ICryptoKeyConfig|null);
                 }
 
                 /** Represents a Connection. */
@@ -395,6 +407,15 @@ export namespace google {
 
                     /** Connection githubConfig. */
                     public githubConfig?: (google.cloud.developerconnect.v1.IGitHubConfig|null);
+
+                    /** Connection githubEnterpriseConfig. */
+                    public githubEnterpriseConfig?: (google.cloud.developerconnect.v1.IGitHubEnterpriseConfig|null);
+
+                    /** Connection gitlabConfig. */
+                    public gitlabConfig?: (google.cloud.developerconnect.v1.IGitLabConfig|null);
+
+                    /** Connection gitlabEnterpriseConfig. */
+                    public gitlabEnterpriseConfig?: (google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null);
 
                     /** Connection name. */
                     public name: string;
@@ -429,8 +450,11 @@ export namespace google {
                     /** Connection uid. */
                     public uid: string;
 
+                    /** Connection cryptoKeyConfig. */
+                    public cryptoKeyConfig?: (google.cloud.developerconnect.v1.ICryptoKeyConfig|null);
+
                     /** Connection connectionConfig. */
-                    public connectionConfig?: "githubConfig";
+                    public connectionConfig?: ("githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig");
 
                     /**
                      * Creates a new Connection instance using the specified properties.
@@ -504,6 +528,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Connection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CryptoKeyConfig. */
+                interface ICryptoKeyConfig {
+
+                    /** CryptoKeyConfig keyReference */
+                    keyReference?: (string|null);
+                }
+
+                /** Represents a CryptoKeyConfig. */
+                class CryptoKeyConfig implements ICryptoKeyConfig {
+
+                    /**
+                     * Constructs a new CryptoKeyConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.ICryptoKeyConfig);
+
+                    /** CryptoKeyConfig keyReference. */
+                    public keyReference: string;
+
+                    /**
+                     * Creates a new CryptoKeyConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CryptoKeyConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.ICryptoKeyConfig): google.cloud.developerconnect.v1.CryptoKeyConfig;
+
+                    /**
+                     * Encodes the specified CryptoKeyConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.CryptoKeyConfig.verify|verify} messages.
+                     * @param message CryptoKeyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.ICryptoKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CryptoKeyConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.CryptoKeyConfig.verify|verify} messages.
+                     * @param message CryptoKeyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.ICryptoKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CryptoKeyConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CryptoKeyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.CryptoKeyConfig;
+
+                    /**
+                     * Decodes a CryptoKeyConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CryptoKeyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.CryptoKeyConfig;
+
+                    /**
+                     * Verifies a CryptoKeyConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CryptoKeyConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CryptoKeyConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.CryptoKeyConfig;
+
+                    /**
+                     * Creates a plain object from a CryptoKeyConfig message. Also converts values to other types if specified.
+                     * @param message CryptoKeyConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.CryptoKeyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CryptoKeyConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CryptoKeyConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -756,6 +877,254 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a GitHubEnterpriseConfig. */
+                interface IGitHubEnterpriseConfig {
+
+                    /** GitHubEnterpriseConfig hostUri */
+                    hostUri?: (string|null);
+
+                    /** GitHubEnterpriseConfig appId */
+                    appId?: (number|Long|string|null);
+
+                    /** GitHubEnterpriseConfig appSlug */
+                    appSlug?: (string|null);
+
+                    /** GitHubEnterpriseConfig privateKeySecretVersion */
+                    privateKeySecretVersion?: (string|null);
+
+                    /** GitHubEnterpriseConfig webhookSecretSecretVersion */
+                    webhookSecretSecretVersion?: (string|null);
+
+                    /** GitHubEnterpriseConfig appInstallationId */
+                    appInstallationId?: (number|Long|string|null);
+
+                    /** GitHubEnterpriseConfig installationUri */
+                    installationUri?: (string|null);
+
+                    /** GitHubEnterpriseConfig serviceDirectoryConfig */
+                    serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** GitHubEnterpriseConfig serverVersion */
+                    serverVersion?: (string|null);
+
+                    /** GitHubEnterpriseConfig sslCaCertificate */
+                    sslCaCertificate?: (string|null);
+                }
+
+                /** Represents a GitHubEnterpriseConfig. */
+                class GitHubEnterpriseConfig implements IGitHubEnterpriseConfig {
+
+                    /**
+                     * Constructs a new GitHubEnterpriseConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGitHubEnterpriseConfig);
+
+                    /** GitHubEnterpriseConfig hostUri. */
+                    public hostUri: string;
+
+                    /** GitHubEnterpriseConfig appId. */
+                    public appId: (number|Long|string);
+
+                    /** GitHubEnterpriseConfig appSlug. */
+                    public appSlug: string;
+
+                    /** GitHubEnterpriseConfig privateKeySecretVersion. */
+                    public privateKeySecretVersion: string;
+
+                    /** GitHubEnterpriseConfig webhookSecretSecretVersion. */
+                    public webhookSecretSecretVersion: string;
+
+                    /** GitHubEnterpriseConfig appInstallationId. */
+                    public appInstallationId: (number|Long|string);
+
+                    /** GitHubEnterpriseConfig installationUri. */
+                    public installationUri: string;
+
+                    /** GitHubEnterpriseConfig serviceDirectoryConfig. */
+                    public serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** GitHubEnterpriseConfig serverVersion. */
+                    public serverVersion: string;
+
+                    /** GitHubEnterpriseConfig sslCaCertificate. */
+                    public sslCaCertificate: string;
+
+                    /**
+                     * Creates a new GitHubEnterpriseConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitHubEnterpriseConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGitHubEnterpriseConfig): google.cloud.developerconnect.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Encodes the specified GitHubEnterpriseConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitHubEnterpriseConfig.verify|verify} messages.
+                     * @param message GitHubEnterpriseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGitHubEnterpriseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitHubEnterpriseConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitHubEnterpriseConfig.verify|verify} messages.
+                     * @param message GitHubEnterpriseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGitHubEnterpriseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitHubEnterpriseConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitHubEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Decodes a GitHubEnterpriseConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitHubEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Verifies a GitHubEnterpriseConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitHubEnterpriseConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitHubEnterpriseConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Creates a plain object from a GitHubEnterpriseConfig message. Also converts values to other types if specified.
+                     * @param message GitHubEnterpriseConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GitHubEnterpriseConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitHubEnterpriseConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitHubEnterpriseConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceDirectoryConfig. */
+                interface IServiceDirectoryConfig {
+
+                    /** ServiceDirectoryConfig service */
+                    service?: (string|null);
+                }
+
+                /** Represents a ServiceDirectoryConfig. */
+                class ServiceDirectoryConfig implements IServiceDirectoryConfig {
+
+                    /**
+                     * Constructs a new ServiceDirectoryConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IServiceDirectoryConfig);
+
+                    /** ServiceDirectoryConfig service. */
+                    public service: string;
+
+                    /**
+                     * Creates a new ServiceDirectoryConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceDirectoryConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IServiceDirectoryConfig): google.cloud.developerconnect.v1.ServiceDirectoryConfig;
+
+                    /**
+                     * Encodes the specified ServiceDirectoryConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify|verify} messages.
+                     * @param message ServiceDirectoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify|verify} messages.
+                     * @param message ServiceDirectoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceDirectoryConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceDirectoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ServiceDirectoryConfig;
+
+                    /**
+                     * Decodes a ServiceDirectoryConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceDirectoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ServiceDirectoryConfig;
+
+                    /**
+                     * Verifies a ServiceDirectoryConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceDirectoryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceDirectoryConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ServiceDirectoryConfig;
+
+                    /**
+                     * Creates a plain object from a ServiceDirectoryConfig message. Also converts values to other types if specified.
+                     * @param message ServiceDirectoryConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ServiceDirectoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceDirectoryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceDirectoryConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a OAuthCredential. */
                 interface IOAuthCredential {
 
@@ -853,6 +1222,351 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OAuthCredential
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GitLabConfig. */
+                interface IGitLabConfig {
+
+                    /** GitLabConfig webhookSecretSecretVersion */
+                    webhookSecretSecretVersion?: (string|null);
+
+                    /** GitLabConfig readAuthorizerCredential */
+                    readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** GitLabConfig authorizerCredential */
+                    authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+                }
+
+                /** Represents a GitLabConfig. */
+                class GitLabConfig implements IGitLabConfig {
+
+                    /**
+                     * Constructs a new GitLabConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGitLabConfig);
+
+                    /** GitLabConfig webhookSecretSecretVersion. */
+                    public webhookSecretSecretVersion: string;
+
+                    /** GitLabConfig readAuthorizerCredential. */
+                    public readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** GitLabConfig authorizerCredential. */
+                    public authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /**
+                     * Creates a new GitLabConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitLabConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGitLabConfig): google.cloud.developerconnect.v1.GitLabConfig;
+
+                    /**
+                     * Encodes the specified GitLabConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabConfig.verify|verify} messages.
+                     * @param message GitLabConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGitLabConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitLabConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabConfig.verify|verify} messages.
+                     * @param message GitLabConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGitLabConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitLabConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitLabConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GitLabConfig;
+
+                    /**
+                     * Decodes a GitLabConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitLabConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GitLabConfig;
+
+                    /**
+                     * Verifies a GitLabConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitLabConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitLabConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GitLabConfig;
+
+                    /**
+                     * Creates a plain object from a GitLabConfig message. Also converts values to other types if specified.
+                     * @param message GitLabConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GitLabConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitLabConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitLabConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UserCredential. */
+                interface IUserCredential {
+
+                    /** UserCredential userTokenSecretVersion */
+                    userTokenSecretVersion?: (string|null);
+
+                    /** UserCredential username */
+                    username?: (string|null);
+                }
+
+                /** Represents a UserCredential. */
+                class UserCredential implements IUserCredential {
+
+                    /**
+                     * Constructs a new UserCredential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IUserCredential);
+
+                    /** UserCredential userTokenSecretVersion. */
+                    public userTokenSecretVersion: string;
+
+                    /** UserCredential username. */
+                    public username: string;
+
+                    /**
+                     * Creates a new UserCredential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserCredential instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IUserCredential): google.cloud.developerconnect.v1.UserCredential;
+
+                    /**
+                     * Encodes the specified UserCredential message. Does not implicitly {@link google.cloud.developerconnect.v1.UserCredential.verify|verify} messages.
+                     * @param message UserCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IUserCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserCredential message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.UserCredential.verify|verify} messages.
+                     * @param message UserCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IUserCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserCredential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.UserCredential;
+
+                    /**
+                     * Decodes a UserCredential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.UserCredential;
+
+                    /**
+                     * Verifies a UserCredential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserCredential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserCredential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.UserCredential;
+
+                    /**
+                     * Creates a plain object from a UserCredential message. Also converts values to other types if specified.
+                     * @param message UserCredential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.UserCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserCredential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserCredential
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GitLabEnterpriseConfig. */
+                interface IGitLabEnterpriseConfig {
+
+                    /** GitLabEnterpriseConfig hostUri */
+                    hostUri?: (string|null);
+
+                    /** GitLabEnterpriseConfig webhookSecretSecretVersion */
+                    webhookSecretSecretVersion?: (string|null);
+
+                    /** GitLabEnterpriseConfig readAuthorizerCredential */
+                    readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** GitLabEnterpriseConfig authorizerCredential */
+                    authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** GitLabEnterpriseConfig serviceDirectoryConfig */
+                    serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** GitLabEnterpriseConfig sslCaCertificate */
+                    sslCaCertificate?: (string|null);
+
+                    /** GitLabEnterpriseConfig serverVersion */
+                    serverVersion?: (string|null);
+                }
+
+                /** Represents a GitLabEnterpriseConfig. */
+                class GitLabEnterpriseConfig implements IGitLabEnterpriseConfig {
+
+                    /**
+                     * Constructs a new GitLabEnterpriseConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGitLabEnterpriseConfig);
+
+                    /** GitLabEnterpriseConfig hostUri. */
+                    public hostUri: string;
+
+                    /** GitLabEnterpriseConfig webhookSecretSecretVersion. */
+                    public webhookSecretSecretVersion: string;
+
+                    /** GitLabEnterpriseConfig readAuthorizerCredential. */
+                    public readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** GitLabEnterpriseConfig authorizerCredential. */
+                    public authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** GitLabEnterpriseConfig serviceDirectoryConfig. */
+                    public serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** GitLabEnterpriseConfig sslCaCertificate. */
+                    public sslCaCertificate: string;
+
+                    /** GitLabEnterpriseConfig serverVersion. */
+                    public serverVersion: string;
+
+                    /**
+                     * Creates a new GitLabEnterpriseConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitLabEnterpriseConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGitLabEnterpriseConfig): google.cloud.developerconnect.v1.GitLabEnterpriseConfig;
+
+                    /**
+                     * Encodes the specified GitLabEnterpriseConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabEnterpriseConfig.verify|verify} messages.
+                     * @param message GitLabEnterpriseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGitLabEnterpriseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitLabEnterpriseConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitLabEnterpriseConfig.verify|verify} messages.
+                     * @param message GitLabEnterpriseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGitLabEnterpriseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitLabEnterpriseConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitLabEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GitLabEnterpriseConfig;
+
+                    /**
+                     * Decodes a GitLabEnterpriseConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitLabEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GitLabEnterpriseConfig;
+
+                    /**
+                     * Verifies a GitLabEnterpriseConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitLabEnterpriseConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitLabEnterpriseConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GitLabEnterpriseConfig;
+
+                    /**
+                     * Creates a plain object from a GitLabEnterpriseConfig message. Also converts values to other types if specified.
+                     * @param message GitLabEnterpriseConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GitLabEnterpriseConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitLabEnterpriseConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitLabEnterpriseConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1708,6 +2422,9 @@ export namespace google {
 
                     /** GitRepositoryLink uid */
                     uid?: (string|null);
+
+                    /** GitRepositoryLink webhookId */
+                    webhookId?: (string|null);
                 }
 
                 /** Represents a GitRepositoryLink. */
@@ -1748,6 +2465,9 @@ export namespace google {
 
                     /** GitRepositoryLink uid. */
                     public uid: string;
+
+                    /** GitRepositoryLink webhookId. */
+                    public webhookId: string;
 
                     /**
                      * Creates a new GitRepositoryLink instance using the specified properties.
