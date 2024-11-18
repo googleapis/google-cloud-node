@@ -8467,7 +8467,13 @@
                             "toolCallValidInput",
                             "toolNameMatchInput",
                             "toolParameterKeyMatchInput",
-                            "toolParameterKvMatchInput"
+                            "toolParameterKvMatchInput",
+                            "trajectoryExactMatchInput",
+                            "trajectoryInOrderMatchInput",
+                            "trajectoryAnyOrderMatchInput",
+                            "trajectoryPrecisionInput",
+                            "trajectoryRecallInput",
+                            "trajectorySingleToolUseInput"
                           ]
                         }
                       },
@@ -8564,6 +8570,30 @@
                           "type": "ToolParameterKVMatchInput",
                           "id": 22
                         },
+                        "trajectoryExactMatchInput": {
+                          "type": "TrajectoryExactMatchInput",
+                          "id": 33
+                        },
+                        "trajectoryInOrderMatchInput": {
+                          "type": "TrajectoryInOrderMatchInput",
+                          "id": 34
+                        },
+                        "trajectoryAnyOrderMatchInput": {
+                          "type": "TrajectoryAnyOrderMatchInput",
+                          "id": 35
+                        },
+                        "trajectoryPrecisionInput": {
+                          "type": "TrajectoryPrecisionInput",
+                          "id": 37
+                        },
+                        "trajectoryRecallInput": {
+                          "type": "TrajectoryRecallInput",
+                          "id": 38
+                        },
+                        "trajectorySingleToolUseInput": {
+                          "type": "TrajectorySingleToolUseInput",
+                          "id": 39
+                        },
                         "location": {
                           "type": "string",
                           "id": 1,
@@ -8600,7 +8630,13 @@
                             "toolCallValidResults",
                             "toolNameMatchResults",
                             "toolParameterKeyMatchResults",
-                            "toolParameterKvMatchResults"
+                            "toolParameterKvMatchResults",
+                            "trajectoryExactMatchResults",
+                            "trajectoryInOrderMatchResults",
+                            "trajectoryAnyOrderMatchResults",
+                            "trajectoryPrecisionResults",
+                            "trajectoryRecallResults",
+                            "trajectorySingleToolUseResults"
                           ]
                         }
                       },
@@ -8696,6 +8732,30 @@
                         "toolParameterKvMatchResults": {
                           "type": "ToolParameterKVMatchResults",
                           "id": 21
+                        },
+                        "trajectoryExactMatchResults": {
+                          "type": "TrajectoryExactMatchResults",
+                          "id": 31
+                        },
+                        "trajectoryInOrderMatchResults": {
+                          "type": "TrajectoryInOrderMatchResults",
+                          "id": 32
+                        },
+                        "trajectoryAnyOrderMatchResults": {
+                          "type": "TrajectoryAnyOrderMatchResults",
+                          "id": 33
+                        },
+                        "trajectoryPrecisionResults": {
+                          "type": "TrajectoryPrecisionResults",
+                          "id": 35
+                        },
+                        "trajectoryRecallResults": {
+                          "type": "TrajectoryRecallResults",
+                          "id": 36
+                        },
+                        "trajectorySingleToolUseResults": {
+                          "type": "TrajectorySingleToolUseResults",
+                          "id": 37
                         }
                       }
                     },
@@ -11147,6 +11207,563 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryExactMatchInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "TrajectoryExactMatchSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "TrajectoryExactMatchInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryExactMatchSpec": {
+                      "fields": {}
+                    },
+                    "TrajectoryExactMatchInstance": {
+                      "oneofs": {
+                        "_predictedTrajectory": {
+                          "oneof": [
+                            "predictedTrajectory"
+                          ]
+                        },
+                        "_referenceTrajectory": {
+                          "oneof": [
+                            "referenceTrajectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "predictedTrajectory": {
+                          "type": "Trajectory",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "referenceTrajectory": {
+                          "type": "Trajectory",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryExactMatchResults": {
+                      "fields": {
+                        "trajectoryExactMatchMetricValues": {
+                          "rule": "repeated",
+                          "type": "TrajectoryExactMatchMetricValue",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryExactMatchMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryInOrderMatchInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "TrajectoryInOrderMatchSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "TrajectoryInOrderMatchInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryInOrderMatchSpec": {
+                      "fields": {}
+                    },
+                    "TrajectoryInOrderMatchInstance": {
+                      "oneofs": {
+                        "_predictedTrajectory": {
+                          "oneof": [
+                            "predictedTrajectory"
+                          ]
+                        },
+                        "_referenceTrajectory": {
+                          "oneof": [
+                            "referenceTrajectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "predictedTrajectory": {
+                          "type": "Trajectory",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "referenceTrajectory": {
+                          "type": "Trajectory",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryInOrderMatchResults": {
+                      "fields": {
+                        "trajectoryInOrderMatchMetricValues": {
+                          "rule": "repeated",
+                          "type": "TrajectoryInOrderMatchMetricValue",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryInOrderMatchMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryAnyOrderMatchInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "TrajectoryAnyOrderMatchSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "TrajectoryAnyOrderMatchInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryAnyOrderMatchSpec": {
+                      "fields": {}
+                    },
+                    "TrajectoryAnyOrderMatchInstance": {
+                      "oneofs": {
+                        "_predictedTrajectory": {
+                          "oneof": [
+                            "predictedTrajectory"
+                          ]
+                        },
+                        "_referenceTrajectory": {
+                          "oneof": [
+                            "referenceTrajectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "predictedTrajectory": {
+                          "type": "Trajectory",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "referenceTrajectory": {
+                          "type": "Trajectory",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryAnyOrderMatchResults": {
+                      "fields": {
+                        "trajectoryAnyOrderMatchMetricValues": {
+                          "rule": "repeated",
+                          "type": "TrajectoryAnyOrderMatchMetricValue",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryAnyOrderMatchMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryPrecisionInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "TrajectoryPrecisionSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "TrajectoryPrecisionInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryPrecisionSpec": {
+                      "fields": {}
+                    },
+                    "TrajectoryPrecisionInstance": {
+                      "oneofs": {
+                        "_predictedTrajectory": {
+                          "oneof": [
+                            "predictedTrajectory"
+                          ]
+                        },
+                        "_referenceTrajectory": {
+                          "oneof": [
+                            "referenceTrajectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "predictedTrajectory": {
+                          "type": "Trajectory",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "referenceTrajectory": {
+                          "type": "Trajectory",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryPrecisionResults": {
+                      "fields": {
+                        "trajectoryPrecisionMetricValues": {
+                          "rule": "repeated",
+                          "type": "TrajectoryPrecisionMetricValue",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryPrecisionMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryRecallInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "TrajectoryRecallSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "TrajectoryRecallInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryRecallSpec": {
+                      "fields": {}
+                    },
+                    "TrajectoryRecallInstance": {
+                      "oneofs": {
+                        "_predictedTrajectory": {
+                          "oneof": [
+                            "predictedTrajectory"
+                          ]
+                        },
+                        "_referenceTrajectory": {
+                          "oneof": [
+                            "referenceTrajectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "predictedTrajectory": {
+                          "type": "Trajectory",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "referenceTrajectory": {
+                          "type": "Trajectory",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryRecallResults": {
+                      "fields": {
+                        "trajectoryRecallMetricValues": {
+                          "rule": "repeated",
+                          "type": "TrajectoryRecallMetricValue",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectoryRecallMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectorySingleToolUseInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "TrajectorySingleToolUseSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "TrajectorySingleToolUseInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectorySingleToolUseSpec": {
+                      "oneofs": {
+                        "_toolName": {
+                          "oneof": [
+                            "toolName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "toolName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectorySingleToolUseInstance": {
+                      "oneofs": {
+                        "_predictedTrajectory": {
+                          "oneof": [
+                            "predictedTrajectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "predictedTrajectory": {
+                          "type": "Trajectory",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TrajectorySingleToolUseResults": {
+                      "fields": {
+                        "trajectorySingleToolUseMetricValues": {
+                          "rule": "repeated",
+                          "type": "TrajectorySingleToolUseMetricValue",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TrajectorySingleToolUseMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "Trajectory": {
+                      "fields": {
+                        "toolCalls": {
+                          "rule": "repeated",
+                          "type": "ToolCall",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ToolCall": {
+                      "oneofs": {
+                        "_toolName": {
+                          "oneof": [
+                            "toolName"
+                          ]
+                        },
+                        "_toolInput": {
+                          "oneof": [
+                            "toolInput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "toolName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "toolInput": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }

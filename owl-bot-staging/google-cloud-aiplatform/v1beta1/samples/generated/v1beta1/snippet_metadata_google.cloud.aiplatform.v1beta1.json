@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 152,
+          "end": 176,
           "type": "FULL"
         }
       ],
@@ -1746,6 +1746,30 @@
           {
             "name": "tool_parameter_kv_match_input",
             "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKVMatchInput"
+          },
+          {
+            "name": "trajectory_exact_match_input",
+            "type": ".google.cloud.aiplatform.v1beta1.TrajectoryExactMatchInput"
+          },
+          {
+            "name": "trajectory_in_order_match_input",
+            "type": ".google.cloud.aiplatform.v1beta1.TrajectoryInOrderMatchInput"
+          },
+          {
+            "name": "trajectory_any_order_match_input",
+            "type": ".google.cloud.aiplatform.v1beta1.TrajectoryAnyOrderMatchInput"
+          },
+          {
+            "name": "trajectory_precision_input",
+            "type": ".google.cloud.aiplatform.v1beta1.TrajectoryPrecisionInput"
+          },
+          {
+            "name": "trajectory_recall_input",
+            "type": ".google.cloud.aiplatform.v1beta1.TrajectoryRecallInput"
+          },
+          {
+            "name": "trajectory_single_tool_use_input",
+            "type": ".google.cloud.aiplatform.v1beta1.TrajectorySingleToolUseInput"
           },
           {
             "name": "location",

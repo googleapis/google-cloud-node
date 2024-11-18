@@ -567,6 +567,18 @@ export class EvaluationServiceClient {
  *   Input for tool parameter key match metric.
  * @param {google.cloud.aiplatform.v1beta1.ToolParameterKVMatchInput} request.toolParameterKvMatchInput
  *   Input for tool parameter key value match metric.
+ * @param {google.cloud.aiplatform.v1beta1.TrajectoryExactMatchInput} request.trajectoryExactMatchInput
+ *   Input for trajectory exact match metric.
+ * @param {google.cloud.aiplatform.v1beta1.TrajectoryInOrderMatchInput} request.trajectoryInOrderMatchInput
+ *   Input for trajectory in order match metric.
+ * @param {google.cloud.aiplatform.v1beta1.TrajectoryAnyOrderMatchInput} request.trajectoryAnyOrderMatchInput
+ *   Input for trajectory match any order metric.
+ * @param {google.cloud.aiplatform.v1beta1.TrajectoryPrecisionInput} request.trajectoryPrecisionInput
+ *   Input for trajectory precision metric.
+ * @param {google.cloud.aiplatform.v1beta1.TrajectoryRecallInput} request.trajectoryRecallInput
+ *   Input for trajectory recall metric.
+ * @param {google.cloud.aiplatform.v1beta1.TrajectorySingleToolUseInput} request.trajectorySingleToolUseInput
+ *   Input for trajectory single tool use metric.
  * @param {string} request.location
  *   Required. The resource name of the Location to evaluate the instances.
  *   Format: `projects/{project}/locations/{location}`
