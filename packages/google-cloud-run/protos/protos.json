@@ -1338,6 +1338,13 @@
                       }
                     },
                     "ServiceScaling": {
+                      "oneofs": {
+                        "_manualInstanceCount": {
+                          "oneof": [
+                            "manualInstanceCount"
+                          ]
+                        }
+                      },
                       "fields": {
                         "minInstanceCount": {
                           "type": "int32",
@@ -1351,6 +1358,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "manualInstanceCount": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },

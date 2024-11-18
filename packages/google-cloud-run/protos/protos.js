@@ -11840,6 +11840,7 @@
                          * @interface IServiceScaling
                          * @property {number|null} [minInstanceCount] ServiceScaling minInstanceCount
                          * @property {google.cloud.run.v2.ServiceScaling.ScalingMode|null} [scalingMode] ServiceScaling scalingMode
+                         * @property {number|null} [manualInstanceCount] ServiceScaling manualInstanceCount
                          */
     
                         /**
@@ -11874,6 +11875,28 @@
                         ServiceScaling.prototype.scalingMode = 0;
     
                         /**
+                         * ServiceScaling manualInstanceCount.
+                         * @member {number|null|undefined} manualInstanceCount
+                         * @memberof google.cloud.run.v2.ServiceScaling
+                         * @instance
+                         */
+                        ServiceScaling.prototype.manualInstanceCount = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ServiceScaling _manualInstanceCount.
+                         * @member {"manualInstanceCount"|undefined} _manualInstanceCount
+                         * @memberof google.cloud.run.v2.ServiceScaling
+                         * @instance
+                         */
+                        Object.defineProperty(ServiceScaling.prototype, "_manualInstanceCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["manualInstanceCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new ServiceScaling instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.ServiceScaling
@@ -11901,6 +11924,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.minInstanceCount);
                             if (message.scalingMode != null && Object.hasOwnProperty.call(message, "scalingMode"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.scalingMode);
+                            if (message.manualInstanceCount != null && Object.hasOwnProperty.call(message, "manualInstanceCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.manualInstanceCount);
                             return writer;
                         };
     
@@ -11943,6 +11968,10 @@
                                         message.scalingMode = reader.int32();
                                         break;
                                     }
+                                case 6: {
+                                        message.manualInstanceCount = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11978,6 +12007,7 @@
                         ServiceScaling.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.minInstanceCount != null && message.hasOwnProperty("minInstanceCount"))
                                 if (!$util.isInteger(message.minInstanceCount))
                                     return "minInstanceCount: integer expected";
@@ -11990,6 +12020,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.manualInstanceCount != null && message.hasOwnProperty("manualInstanceCount")) {
+                                properties._manualInstanceCount = 1;
+                                if (!$util.isInteger(message.manualInstanceCount))
+                                    return "manualInstanceCount: integer expected";
+                            }
                             return null;
                         };
     
@@ -12027,6 +12062,8 @@
                                 message.scalingMode = 2;
                                 break;
                             }
+                            if (object.manualInstanceCount != null)
+                                message.manualInstanceCount = object.manualInstanceCount | 0;
                             return message;
                         };
     
@@ -12051,6 +12088,11 @@
                                 object.minInstanceCount = message.minInstanceCount;
                             if (message.scalingMode != null && message.hasOwnProperty("scalingMode"))
                                 object.scalingMode = options.enums === String ? $root.google.cloud.run.v2.ServiceScaling.ScalingMode[message.scalingMode] === undefined ? message.scalingMode : $root.google.cloud.run.v2.ServiceScaling.ScalingMode[message.scalingMode] : message.scalingMode;
+                            if (message.manualInstanceCount != null && message.hasOwnProperty("manualInstanceCount")) {
+                                object.manualInstanceCount = message.manualInstanceCount;
+                                if (options.oneofs)
+                                    object._manualInstanceCount = "manualInstanceCount";
+                            }
                             return object;
                         };
     
