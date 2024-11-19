@@ -251,7 +251,21 @@ export class ModelServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=tunedModels/*/operations/*}',
+          additional_bindings: [
+            {get: '/v1beta/{name=generatedFiles/*/operations/*}'},
+            {get: '/v1beta/{name=models/*/operations/*}'},
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=tunedModels/*}/operations',
+          additional_bindings: [{get: '/v1beta/{name=models/*}/operations'}],
+        },
+      ];
     }
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
@@ -650,8 +664,8 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
    *   Required. The tuned model to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

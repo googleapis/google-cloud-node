@@ -9485,6 +9485,9 @@ export namespace google {
 
                     /** GenerateContentResponse usageMetadata */
                     usageMetadata?: (google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata|null);
+
+                    /** GenerateContentResponse modelVersion */
+                    modelVersion?: (string|null);
                 }
 
                 /** Represents a GenerateContentResponse. */
@@ -9504,6 +9507,9 @@ export namespace google {
 
                     /** GenerateContentResponse usageMetadata. */
                     public usageMetadata?: (google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata|null);
+
+                    /** GenerateContentResponse modelVersion. */
+                    public modelVersion: string;
 
                     /**
                      * Creates a new GenerateContentResponse instance using the specified properties.
@@ -10838,6 +10844,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata */
                     retrievalMetadata?: (google.ai.generativelanguage.v1beta.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata webSearchQueries */
+                    webSearchQueries?: (string[]|null);
                 }
 
                 /** Represents a GroundingMetadata. */
@@ -10860,6 +10869,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata. */
                     public retrievalMetadata?: (google.ai.generativelanguage.v1beta.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata webSearchQueries. */
+                    public webSearchQueries: string[];
 
                     /** GroundingMetadata _searchEntryPoint. */
                     public _searchEntryPoint?: "searchEntryPoint";

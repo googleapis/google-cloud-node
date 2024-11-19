@@ -2590,13 +2590,19 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{model=models/*}:streamGenerateContent",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{model=tunedModels/*}:streamGenerateContent",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "model,contents"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta/{model=models/*}:streamGenerateContent",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{model=tunedModels/*}:streamGenerateContent",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -2979,6 +2985,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "modelVersion": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3318,6 +3331,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "webSearchQueries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -4408,7 +4426,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4699,10 +4717,7 @@
                         "examples": {
                           "rule": "repeated",
                           "type": "TuningExample",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 1
                         }
                       }
                     },
