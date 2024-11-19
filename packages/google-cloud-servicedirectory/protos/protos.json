@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -921,7 +924,6 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.ServiceDirectory.V1Beta1",
                     "go_package": "cloud.google.com/go/servicedirectory/apiv1beta1/servicedirectorypb;servicedirectorypb",
                     "java_multiple_files": true,
