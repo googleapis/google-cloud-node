@@ -1116,6 +1116,48 @@ describe('entity', () => {
         expectedEntityProto
       );
     });
+
+    it('should not throw when `null` value is supplied for a field with an entity/array index exclusion', () => {
+      const entityObject = {
+        excludeFromIndexes: [
+          'entityCompletelyExcluded.*',
+          'entityPropertyExcluded.name',
+          'entityArrayCompletelyExcluded[].*',
+          'entityArrayPropertyExcluded[].name',
+        ],
+
+        data: {
+          entityCompletelyExcluded: null,
+          entityPropertyExcluded: null,
+          entityArrayCompletelyExcluded: null,
+          entityArrayPropertyExcluded: null,
+        },
+      };
+
+      const expectedEntityProto = {
+        key: null,
+        properties: {
+          entityCompletelyExcluded: {
+            nullValue: 0,
+            excludeFromIndexes: true,
+          },
+          entityPropertyExcluded: {
+            nullValue: 0,
+          },
+          entityArrayCompletelyExcluded: {
+            nullValue: 0,
+          },
+          entityArrayPropertyExcluded: {
+            nullValue: 0,
+          },
+        },
+      };
+
+      assert.deepStrictEqual(
+        testEntity.entityToEntityProto(entityObject),
+        expectedEntityProto
+      );
+    });
   });
 
   describe('formatArray', () => {

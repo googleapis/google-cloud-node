@@ -819,6 +819,8 @@ export namespace entity {
     return entityProto;
 
     function excludePathFromEntity(entity: EntityProto, path: string) {
+      if (!entity) return;
+
       const arrayIndex = path.indexOf('[]');
       const entityIndex = path.indexOf('.');
       const wildcardIndex = path.indexOf('.*');
@@ -905,6 +907,7 @@ export namespace entity {
         isFirstPathPartDefined
       ) {
         const array = entity.properties![firstPathPart].arrayValue;
+        if (!array) return;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         array.values.forEach((value: any) => {
           if (value.entityValue) {
