@@ -194,6 +194,21 @@
           "timeout_millis": 60000,
           "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
+        },
+        "SetConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "RetrieveConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "RetrieveEffectiveConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
+          "retry_params_name": "default"
         }
       }
     }

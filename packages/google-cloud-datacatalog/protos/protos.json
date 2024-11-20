@@ -11,7 +11,6 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.DataCatalog.V1",
                     "go_package": "cloud.google.com/go/datacatalog/apiv1/datacatalogpb;datacatalogpb",
                     "java_multiple_files": true,
@@ -891,6 +890,60 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ImportEntriesResponse",
                                 "metadata_type": "ImportEntriesMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SetConfig": {
+                          "requestType": "SetConfigRequest",
+                          "responseType": "MigrationConfig",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=organizations/*/locations/*}:setConfig",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*}:setConfig",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=organizations/*/locations/*}:setConfig",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*}:setConfig",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "RetrieveConfig": {
+                          "requestType": "RetrieveConfigRequest",
+                          "responseType": "OrganizationConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*}:retrieveConfig"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*}:retrieveConfig"
+                              }
+                            }
+                          ]
+                        },
+                        "RetrieveEffectiveConfig": {
+                          "requestType": "RetrieveEffectiveConfigRequest",
+                          "responseType": "MigrationConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*}:retrieveEffectiveConfig",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*}:retrieveEffectiveConfig"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*}:retrieveEffectiveConfig",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*}:retrieveEffectiveConfig"
+                                }
                               }
                             }
                           ]
@@ -1848,6 +1901,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "transferredToDataplex": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2391,6 +2451,90 @@
                         "FEATURE_GROUP": 21
                       }
                     },
+                    "SetConfigRequest": {
+                      "oneofs": {
+                        "configuration": {
+                          "oneof": [
+                            "tagTemplateMigration",
+                            "catalogUiExperience"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tagTemplateMigration": {
+                          "type": "TagTemplateMigration",
+                          "id": 2
+                        },
+                        "catalogUiExperience": {
+                          "type": "CatalogUIExperience",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RetrieveConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveEffectiveConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TagTemplateMigration": {
+                      "values": {
+                        "TAG_TEMPLATE_MIGRATION_UNSPECIFIED": 0,
+                        "TAG_TEMPLATE_MIGRATION_ENABLED": 1,
+                        "TAG_TEMPLATE_MIGRATION_DISABLED": 2
+                      }
+                    },
+                    "CatalogUIExperience": {
+                      "values": {
+                        "CATALOG_UI_EXPERIENCE_UNSPECIFIED": 0,
+                        "CATALOG_UI_EXPERIENCE_ENABLED": 1,
+                        "CATALOG_UI_EXPERIENCE_DISABLED": 2
+                      }
+                    },
+                    "OrganizationConfig": {
+                      "fields": {
+                        "config": {
+                          "keyType": "string",
+                          "type": "MigrationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MigrationConfig": {
+                      "fields": {
+                        "tagTemplateMigration": {
+                          "type": "TagTemplateMigration",
+                          "id": 1
+                        },
+                        "catalogUiExperience": {
+                          "type": "CatalogUIExperience",
+                          "id": 2
+                        }
+                      }
+                    },
                     "DataplexSpec": {
                       "fields": {
                         "asset": {
@@ -2931,6 +3075,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "dataplexTransferStatus": {
+                          "type": "TagTemplate.DataplexTransferStatus",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3044,7 +3195,8 @@
                           },
                           "values": {
                             "DATAPLEX_TRANSFER_STATUS_UNSPECIFIED": 0,
-                            "MIGRATED": 1
+                            "MIGRATED": 1,
+                            "TRANSFERRED": 2
                           }
                         }
                       }
