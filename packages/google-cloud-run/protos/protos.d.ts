@@ -4560,6 +4560,9 @@ export namespace google {
 
                     /** ServiceScaling scalingMode */
                     scalingMode?: (google.cloud.run.v2.ServiceScaling.ScalingMode|keyof typeof google.cloud.run.v2.ServiceScaling.ScalingMode|null);
+
+                    /** ServiceScaling manualInstanceCount */
+                    manualInstanceCount?: (number|null);
                 }
 
                 /** Represents a ServiceScaling. */
@@ -4576,6 +4579,12 @@ export namespace google {
 
                     /** ServiceScaling scalingMode. */
                     public scalingMode: (google.cloud.run.v2.ServiceScaling.ScalingMode|keyof typeof google.cloud.run.v2.ServiceScaling.ScalingMode);
+
+                    /** ServiceScaling manualInstanceCount. */
+                    public manualInstanceCount?: (number|null);
+
+                    /** ServiceScaling _manualInstanceCount. */
+                    public _manualInstanceCount?: "manualInstanceCount";
 
                     /**
                      * Creates a new ServiceScaling instance using the specified properties.
