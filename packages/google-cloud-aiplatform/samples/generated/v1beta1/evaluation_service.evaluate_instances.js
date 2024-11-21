@@ -127,6 +127,30 @@ function main(location) {
    */
   // const toolParameterKvMatchInput = {}
   /**
+   *  Input for trajectory exact match metric.
+   */
+  // const trajectoryExactMatchInput = {}
+  /**
+   *  Input for trajectory in order match metric.
+   */
+  // const trajectoryInOrderMatchInput = {}
+  /**
+   *  Input for trajectory match any order metric.
+   */
+  // const trajectoryAnyOrderMatchInput = {}
+  /**
+   *  Input for trajectory precision metric.
+   */
+  // const trajectoryPrecisionInput = {}
+  /**
+   *  Input for trajectory recall metric.
+   */
+  // const trajectoryRecallInput = {}
+  /**
+   *  Input for trajectory single tool use metric.
+   */
+  // const trajectorySingleToolUseInput = {}
+  /**
    *  Required. The resource name of the Location to evaluate the instances.
    *  Format: `projects/{project}/locations/{location}`
    */

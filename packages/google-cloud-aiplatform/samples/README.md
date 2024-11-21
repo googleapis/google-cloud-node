@@ -45,6 +45,7 @@
   * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
+  * [Endpoint_service.update_endpoint_long_running](#endpoint_service.update_endpoint_long_running)
   * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
   * [Feature_online_store_admin_service.create_feature_online_store](#feature_online_store_admin_service.create_feature_online_store)
   * [Feature_online_store_admin_service.create_feature_view](#feature_online_store_admin_service.create_feature_view)
@@ -1235,6 +1236,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint.js`
+
+
+-----
+
+
+
+
+### Endpoint_service.update_endpoint_long_running
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint_long_running.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint_long_running.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.update_endpoint_long_running.js`
 
 
 -----
