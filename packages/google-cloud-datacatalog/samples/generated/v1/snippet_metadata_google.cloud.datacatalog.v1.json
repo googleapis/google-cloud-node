@@ -1564,6 +1564,134 @@
             }
         },
         {
+            "regionTag": "datacatalog_v1_generated_DataCatalog_SetConfig_async",
+            "title": "DataCatalog setConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the configuration related to the migration to Dataplex for an organization or project.",
+            "canonical": true,
+            "file": "data_catalog.set_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetConfig",
+                "fullName": "google.cloud.datacatalog.v1.DataCatalog.SetConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tag_template_migration",
+                        "type": ".google.cloud.datacatalog.v1.TagTemplateMigration"
+                    },
+                    {
+                        "name": "catalog_ui_experience",
+                        "type": ".google.cloud.datacatalog.v1.CatalogUIExperience"
+                    }
+                ],
+                "resultType": ".google.cloud.datacatalog.v1.MigrationConfig",
+                "client": {
+                    "shortName": "DataCatalogClient",
+                    "fullName": "google.cloud.datacatalog.v1.DataCatalogClient"
+                },
+                "method": {
+                    "shortName": "SetConfig",
+                    "fullName": "google.cloud.datacatalog.v1.DataCatalog.SetConfig",
+                    "service": {
+                        "shortName": "DataCatalog",
+                        "fullName": "google.cloud.datacatalog.v1.DataCatalog"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datacatalog_v1_generated_DataCatalog_RetrieveConfig_async",
+            "title": "DataCatalog retrieveConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the configuration related to the migration from Data Catalog to Dataplex for a specific organization, including all the projects under it which have a separate configuration set.",
+            "canonical": true,
+            "file": "data_catalog.retrieve_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RetrieveConfig",
+                "fullName": "google.cloud.datacatalog.v1.DataCatalog.RetrieveConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.datacatalog.v1.OrganizationConfig",
+                "client": {
+                    "shortName": "DataCatalogClient",
+                    "fullName": "google.cloud.datacatalog.v1.DataCatalogClient"
+                },
+                "method": {
+                    "shortName": "RetrieveConfig",
+                    "fullName": "google.cloud.datacatalog.v1.DataCatalog.RetrieveConfig",
+                    "service": {
+                        "shortName": "DataCatalog",
+                        "fullName": "google.cloud.datacatalog.v1.DataCatalog"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datacatalog_v1_generated_DataCatalog_RetrieveEffectiveConfig_async",
+            "title": "DataCatalog retrieveEffectiveConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the effective configuration related to the migration from Data Catalog to Dataplex for a specific organization or project. If there is no specific configuration set for the resource, the setting is checked hierarchicahlly through the ancestors of the resource, starting from the resource itself.",
+            "canonical": true,
+            "file": "data_catalog.retrieve_effective_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RetrieveEffectiveConfig",
+                "fullName": "google.cloud.datacatalog.v1.DataCatalog.RetrieveEffectiveConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.datacatalog.v1.MigrationConfig",
+                "client": {
+                    "shortName": "DataCatalogClient",
+                    "fullName": "google.cloud.datacatalog.v1.DataCatalogClient"
+                },
+                "method": {
+                    "shortName": "RetrieveEffectiveConfig",
+                    "fullName": "google.cloud.datacatalog.v1.DataCatalog.RetrieveEffectiveConfig",
+                    "service": {
+                        "shortName": "DataCatalog",
+                        "fullName": "google.cloud.datacatalog.v1.DataCatalog"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "datacatalog_v1_generated_PolicyTagManager_CreateTaxonomy_async",
             "title": "DataCatalog createTaxonomy Sample",
             "origin": "API_DEFINITION",

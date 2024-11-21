@@ -1213,6 +1213,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public importEntries(request: google.cloud.datacatalog.v1.IImportEntriesRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls SetConfig.
+                     * @param request SetConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MigrationConfig
+                     */
+                    public setConfig(request: google.cloud.datacatalog.v1.ISetConfigRequest, callback: google.cloud.datacatalog.v1.DataCatalog.SetConfigCallback): void;
+
+                    /**
+                     * Calls SetConfig.
+                     * @param request SetConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setConfig(request: google.cloud.datacatalog.v1.ISetConfigRequest): Promise<google.cloud.datacatalog.v1.MigrationConfig>;
+
+                    /**
+                     * Calls RetrieveConfig.
+                     * @param request RetrieveConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and OrganizationConfig
+                     */
+                    public retrieveConfig(request: google.cloud.datacatalog.v1.IRetrieveConfigRequest, callback: google.cloud.datacatalog.v1.DataCatalog.RetrieveConfigCallback): void;
+
+                    /**
+                     * Calls RetrieveConfig.
+                     * @param request RetrieveConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveConfig(request: google.cloud.datacatalog.v1.IRetrieveConfigRequest): Promise<google.cloud.datacatalog.v1.OrganizationConfig>;
+
+                    /**
+                     * Calls RetrieveEffectiveConfig.
+                     * @param request RetrieveEffectiveConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MigrationConfig
+                     */
+                    public retrieveEffectiveConfig(request: google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest, callback: google.cloud.datacatalog.v1.DataCatalog.RetrieveEffectiveConfigCallback): void;
+
+                    /**
+                     * Calls RetrieveEffectiveConfig.
+                     * @param request RetrieveEffectiveConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveEffectiveConfig(request: google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest): Promise<google.cloud.datacatalog.v1.MigrationConfig>;
                 }
 
                 namespace DataCatalog {
@@ -1454,6 +1496,27 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ImportEntriesCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1.DataCatalog|setConfig}.
+                     * @param error Error, if any
+                     * @param [response] MigrationConfig
+                     */
+                    type SetConfigCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1.MigrationConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1.DataCatalog|retrieveConfig}.
+                     * @param error Error, if any
+                     * @param [response] OrganizationConfig
+                     */
+                    type RetrieveConfigCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1.OrganizationConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1.DataCatalog|retrieveEffectiveConfig}.
+                     * @param error Error, if any
+                     * @param [response] MigrationConfig
+                     */
+                    type RetrieveEffectiveConfigCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1.MigrationConfig) => void;
                 }
 
                 /** Properties of a SearchCatalogRequest. */
@@ -5703,6 +5766,9 @@ export namespace google {
 
                     /** EntryGroup dataCatalogTimestamps */
                     dataCatalogTimestamps?: (google.cloud.datacatalog.v1.ISystemTimestamps|null);
+
+                    /** EntryGroup transferredToDataplex */
+                    transferredToDataplex?: (boolean|null);
                 }
 
                 /** Represents an EntryGroup. */
@@ -5725,6 +5791,9 @@ export namespace google {
 
                     /** EntryGroup dataCatalogTimestamps. */
                     public dataCatalogTimestamps?: (google.cloud.datacatalog.v1.ISystemTimestamps|null);
+
+                    /** EntryGroup transferredToDataplex. */
+                    public transferredToDataplex: boolean;
 
                     /**
                      * Creates a new EntryGroup instance using the specified properties.
@@ -8755,6 +8824,526 @@ export namespace google {
                     FEATURE_GROUP = 21
                 }
 
+                /** Properties of a SetConfigRequest. */
+                interface ISetConfigRequest {
+
+                    /** SetConfigRequest name */
+                    name?: (string|null);
+
+                    /** SetConfigRequest tagTemplateMigration */
+                    tagTemplateMigration?: (google.cloud.datacatalog.v1.TagTemplateMigration|keyof typeof google.cloud.datacatalog.v1.TagTemplateMigration|null);
+
+                    /** SetConfigRequest catalogUiExperience */
+                    catalogUiExperience?: (google.cloud.datacatalog.v1.CatalogUIExperience|keyof typeof google.cloud.datacatalog.v1.CatalogUIExperience|null);
+                }
+
+                /** Represents a SetConfigRequest. */
+                class SetConfigRequest implements ISetConfigRequest {
+
+                    /**
+                     * Constructs a new SetConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ISetConfigRequest);
+
+                    /** SetConfigRequest name. */
+                    public name: string;
+
+                    /** SetConfigRequest tagTemplateMigration. */
+                    public tagTemplateMigration?: (google.cloud.datacatalog.v1.TagTemplateMigration|keyof typeof google.cloud.datacatalog.v1.TagTemplateMigration|null);
+
+                    /** SetConfigRequest catalogUiExperience. */
+                    public catalogUiExperience?: (google.cloud.datacatalog.v1.CatalogUIExperience|keyof typeof google.cloud.datacatalog.v1.CatalogUIExperience|null);
+
+                    /** SetConfigRequest configuration. */
+                    public configuration?: ("tagTemplateMigration"|"catalogUiExperience");
+
+                    /**
+                     * Creates a new SetConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ISetConfigRequest): google.cloud.datacatalog.v1.SetConfigRequest;
+
+                    /**
+                     * Encodes the specified SetConfigRequest message. Does not implicitly {@link google.cloud.datacatalog.v1.SetConfigRequest.verify|verify} messages.
+                     * @param message SetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ISetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.SetConfigRequest.verify|verify} messages.
+                     * @param message SetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ISetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.SetConfigRequest;
+
+                    /**
+                     * Decodes a SetConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.SetConfigRequest;
+
+                    /**
+                     * Verifies a SetConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.SetConfigRequest;
+
+                    /**
+                     * Creates a plain object from a SetConfigRequest message. Also converts values to other types if specified.
+                     * @param message SetConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.SetConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveConfigRequest. */
+                interface IRetrieveConfigRequest {
+
+                    /** RetrieveConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a RetrieveConfigRequest. */
+                class RetrieveConfigRequest implements IRetrieveConfigRequest {
+
+                    /**
+                     * Constructs a new RetrieveConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IRetrieveConfigRequest);
+
+                    /** RetrieveConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new RetrieveConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IRetrieveConfigRequest): google.cloud.datacatalog.v1.RetrieveConfigRequest;
+
+                    /**
+                     * Encodes the specified RetrieveConfigRequest message. Does not implicitly {@link google.cloud.datacatalog.v1.RetrieveConfigRequest.verify|verify} messages.
+                     * @param message RetrieveConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IRetrieveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.RetrieveConfigRequest.verify|verify} messages.
+                     * @param message RetrieveConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IRetrieveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.RetrieveConfigRequest;
+
+                    /**
+                     * Decodes a RetrieveConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.RetrieveConfigRequest;
+
+                    /**
+                     * Verifies a RetrieveConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.RetrieveConfigRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveConfigRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.RetrieveConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveEffectiveConfigRequest. */
+                interface IRetrieveEffectiveConfigRequest {
+
+                    /** RetrieveEffectiveConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a RetrieveEffectiveConfigRequest. */
+                class RetrieveEffectiveConfigRequest implements IRetrieveEffectiveConfigRequest {
+
+                    /**
+                     * Constructs a new RetrieveEffectiveConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest);
+
+                    /** RetrieveEffectiveConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new RetrieveEffectiveConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveEffectiveConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest): google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest;
+
+                    /**
+                     * Encodes the specified RetrieveEffectiveConfigRequest message. Does not implicitly {@link google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest.verify|verify} messages.
+                     * @param message RetrieveEffectiveConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveEffectiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest.verify|verify} messages.
+                     * @param message RetrieveEffectiveConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveEffectiveConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveEffectiveConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest;
+
+                    /**
+                     * Decodes a RetrieveEffectiveConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveEffectiveConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest;
+
+                    /**
+                     * Verifies a RetrieveEffectiveConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveEffectiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveEffectiveConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveEffectiveConfigRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveEffectiveConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveEffectiveConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveEffectiveConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** TagTemplateMigration enum. */
+                enum TagTemplateMigration {
+                    TAG_TEMPLATE_MIGRATION_UNSPECIFIED = 0,
+                    TAG_TEMPLATE_MIGRATION_ENABLED = 1,
+                    TAG_TEMPLATE_MIGRATION_DISABLED = 2
+                }
+
+                /** CatalogUIExperience enum. */
+                enum CatalogUIExperience {
+                    CATALOG_UI_EXPERIENCE_UNSPECIFIED = 0,
+                    CATALOG_UI_EXPERIENCE_ENABLED = 1,
+                    CATALOG_UI_EXPERIENCE_DISABLED = 2
+                }
+
+                /** Properties of an OrganizationConfig. */
+                interface IOrganizationConfig {
+
+                    /** OrganizationConfig config */
+                    config?: ({ [k: string]: google.cloud.datacatalog.v1.IMigrationConfig }|null);
+                }
+
+                /** Represents an OrganizationConfig. */
+                class OrganizationConfig implements IOrganizationConfig {
+
+                    /**
+                     * Constructs a new OrganizationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IOrganizationConfig);
+
+                    /** OrganizationConfig config. */
+                    public config: { [k: string]: google.cloud.datacatalog.v1.IMigrationConfig };
+
+                    /**
+                     * Creates a new OrganizationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OrganizationConfig instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IOrganizationConfig): google.cloud.datacatalog.v1.OrganizationConfig;
+
+                    /**
+                     * Encodes the specified OrganizationConfig message. Does not implicitly {@link google.cloud.datacatalog.v1.OrganizationConfig.verify|verify} messages.
+                     * @param message OrganizationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IOrganizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OrganizationConfig message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.OrganizationConfig.verify|verify} messages.
+                     * @param message OrganizationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IOrganizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OrganizationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OrganizationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.OrganizationConfig;
+
+                    /**
+                     * Decodes an OrganizationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OrganizationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.OrganizationConfig;
+
+                    /**
+                     * Verifies an OrganizationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OrganizationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OrganizationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.OrganizationConfig;
+
+                    /**
+                     * Creates a plain object from an OrganizationConfig message. Also converts values to other types if specified.
+                     * @param message OrganizationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.OrganizationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OrganizationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OrganizationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MigrationConfig. */
+                interface IMigrationConfig {
+
+                    /** MigrationConfig tagTemplateMigration */
+                    tagTemplateMigration?: (google.cloud.datacatalog.v1.TagTemplateMigration|keyof typeof google.cloud.datacatalog.v1.TagTemplateMigration|null);
+
+                    /** MigrationConfig catalogUiExperience */
+                    catalogUiExperience?: (google.cloud.datacatalog.v1.CatalogUIExperience|keyof typeof google.cloud.datacatalog.v1.CatalogUIExperience|null);
+                }
+
+                /** Represents a MigrationConfig. */
+                class MigrationConfig implements IMigrationConfig {
+
+                    /**
+                     * Constructs a new MigrationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IMigrationConfig);
+
+                    /** MigrationConfig tagTemplateMigration. */
+                    public tagTemplateMigration: (google.cloud.datacatalog.v1.TagTemplateMigration|keyof typeof google.cloud.datacatalog.v1.TagTemplateMigration);
+
+                    /** MigrationConfig catalogUiExperience. */
+                    public catalogUiExperience: (google.cloud.datacatalog.v1.CatalogUIExperience|keyof typeof google.cloud.datacatalog.v1.CatalogUIExperience);
+
+                    /**
+                     * Creates a new MigrationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MigrationConfig instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IMigrationConfig): google.cloud.datacatalog.v1.MigrationConfig;
+
+                    /**
+                     * Encodes the specified MigrationConfig message. Does not implicitly {@link google.cloud.datacatalog.v1.MigrationConfig.verify|verify} messages.
+                     * @param message MigrationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IMigrationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MigrationConfig message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.MigrationConfig.verify|verify} messages.
+                     * @param message MigrationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IMigrationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MigrationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MigrationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.MigrationConfig;
+
+                    /**
+                     * Decodes a MigrationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MigrationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.MigrationConfig;
+
+                    /**
+                     * Verifies a MigrationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MigrationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MigrationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.MigrationConfig;
+
+                    /**
+                     * Creates a plain object from a MigrationConfig message. Also converts values to other types if specified.
+                     * @param message MigrationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.MigrationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MigrationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MigrationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DataplexSpec. */
                 interface IDataplexSpec {
 
@@ -11293,6 +11882,9 @@ export namespace google {
 
                     /** Tag fields */
                     fields?: ({ [k: string]: google.cloud.datacatalog.v1.ITagField }|null);
+
+                    /** Tag dataplexTransferStatus */
+                    dataplexTransferStatus?: (google.cloud.datacatalog.v1.TagTemplate.DataplexTransferStatus|keyof typeof google.cloud.datacatalog.v1.TagTemplate.DataplexTransferStatus|null);
                 }
 
                 /** Represents a Tag. */
@@ -11318,6 +11910,9 @@ export namespace google {
 
                     /** Tag fields. */
                     public fields: { [k: string]: google.cloud.datacatalog.v1.ITagField };
+
+                    /** Tag dataplexTransferStatus. */
+                    public dataplexTransferStatus: (google.cloud.datacatalog.v1.TagTemplate.DataplexTransferStatus|keyof typeof google.cloud.datacatalog.v1.TagTemplate.DataplexTransferStatus);
 
                     /** Tag scope. */
                     public scope?: "column";
@@ -11768,7 +12363,8 @@ export namespace google {
                     /** DataplexTransferStatus enum. */
                     enum DataplexTransferStatus {
                         DATAPLEX_TRANSFER_STATUS_UNSPECIFIED = 0,
-                        MIGRATED = 1
+                        MIGRATED = 1,
+                        TRANSFERRED = 2
                     }
                 }
 
