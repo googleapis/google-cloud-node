@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(tunedModel, updateMask) {
+function main(tunedModel) {
   // [START generativelanguage_v1beta_generated_ModelService_UpdateTunedModel_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -33,7 +33,7 @@ function main(tunedModel, updateMask) {
    */
   // const tunedModel = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -47,7 +47,6 @@ function main(tunedModel, updateMask) {
     // Construct request
     const request = {
       tunedModel,
-      updateMask,
     };
 
     // Run request
