@@ -18854,6 +18854,199 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "dialogflow.googleapis.com/Message"
                           }
+                        },
+                        "querySource": {
+                          "type": "QuerySource",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endUserMetadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "searchConfig": {
+                          "type": "SearchConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exactSearch": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "QuerySource": {
+                          "values": {
+                            "QUERY_SOURCE_UNSPECIFIED": 0,
+                            "AGENT_QUERY": 1,
+                            "SUGGESTED_QUERY": 2
+                          }
+                        },
+                        "SearchConfig": {
+                          "fields": {
+                            "boostSpecs": {
+                              "rule": "repeated",
+                              "type": "BoostSpecs",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filterSpecs": {
+                              "rule": "repeated",
+                              "type": "FilterSpecs",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "BoostSpecs": {
+                              "fields": {
+                                "dataStores": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                                  }
+                                },
+                                "spec": {
+                                  "rule": "repeated",
+                                  "type": "BoostSpec",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "BoostSpec": {
+                                  "fields": {
+                                    "conditionBoostSpecs": {
+                                      "rule": "repeated",
+                                      "type": "ConditionBoostSpec",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "ConditionBoostSpec": {
+                                      "fields": {
+                                        "condition": {
+                                          "type": "string",
+                                          "id": 1,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        },
+                                        "boost": {
+                                          "type": "float",
+                                          "id": 2,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        },
+                                        "boostControlSpec": {
+                                          "type": "BoostControlSpec",
+                                          "id": 4,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        }
+                                      },
+                                      "nested": {
+                                        "BoostControlSpec": {
+                                          "fields": {
+                                            "fieldName": {
+                                              "type": "string",
+                                              "id": 1,
+                                              "options": {
+                                                "(google.api.field_behavior)": "OPTIONAL"
+                                              }
+                                            },
+                                            "attributeType": {
+                                              "type": "AttributeType",
+                                              "id": 2,
+                                              "options": {
+                                                "(google.api.field_behavior)": "OPTIONAL"
+                                              }
+                                            },
+                                            "interpolationType": {
+                                              "type": "InterpolationType",
+                                              "id": 3,
+                                              "options": {
+                                                "(google.api.field_behavior)": "OPTIONAL"
+                                              }
+                                            },
+                                            "controlPoints": {
+                                              "rule": "repeated",
+                                              "type": "ControlPoint",
+                                              "id": 4,
+                                              "options": {
+                                                "(google.api.field_behavior)": "OPTIONAL"
+                                              }
+                                            }
+                                          },
+                                          "nested": {
+                                            "AttributeType": {
+                                              "values": {
+                                                "ATTRIBUTE_TYPE_UNSPECIFIED": 0,
+                                                "NUMERICAL": 1,
+                                                "FRESHNESS": 2
+                                              }
+                                            },
+                                            "InterpolationType": {
+                                              "values": {
+                                                "INTERPOLATION_TYPE_UNSPECIFIED": 0,
+                                                "LINEAR": 1
+                                              }
+                                            },
+                                            "ControlPoint": {
+                                              "fields": {}
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "FilterSpecs": {
+                              "fields": {
+                                "dataStores": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "filter": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -18912,6 +19105,10 @@
                             "snippet": {
                               "type": "string",
                               "id": 3
+                            },
+                            "metadata": {
+                              "type": "google.protobuf.Struct",
+                              "id": 5
                             }
                           }
                         }

@@ -1558,7 +1558,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 91,
+                    "end": 120,
                     "type": "FULL"
                 }
             ],
@@ -1590,6 +1590,22 @@
                     {
                         "name": "latest_message",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query_source",
+                        "type": ".google.cloud.dialogflow.v2beta1.SearchKnowledgeRequest.QuerySource"
+                    },
+                    {
+                        "name": "end_user_metadata",
+                        "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "search_config",
+                        "type": ".google.cloud.dialogflow.v2beta1.SearchKnowledgeRequest.SearchConfig"
+                    },
+                    {
+                        "name": "exact_search",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.dialogflow.v2beta1.SearchKnowledgeResponse",
