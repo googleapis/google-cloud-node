@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START datastream_v1_generated_Datastream_DiscoverConnectionProfile_async]
+function main(name) {
+  // [START datastream_v1_generated_Datastream_RunStream_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,43 +29,19 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the connection profile type. Must be in
-   *  the format `projects/* /locations/*`.
+   *  Required. Name of the stream resource to start, in the format:
+   *  projects/{project_id}/locations/{location}/streams/{stream_name}
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  An ad-hoc connection profile configuration.
+   *  Optional. The CDC strategy of the stream. If not set, the system's default
+   *  value will be used.
    */
-  // const connectionProfile = {}
+  // const cdcStrategy = {}
   /**
-   *  A reference to an existing connection profile.
+   *  Optional. Update the stream without validating it.
    */
-  // const connectionProfileName = 'abc123'
-  /**
-   *  Whether to retrieve the full hierarchy of data objects (TRUE) or only the
-   *  current level (FALSE).
-   */
-  // const fullHierarchy = true
-  /**
-   *  The number of hierarchy levels below the current level to be retrieved.
-   */
-  // const hierarchyDepth = 1234
-  /**
-   *  Oracle RDBMS to enrich with child data objects and metadata.
-   */
-  // const oracleRdbms = {}
-  /**
-   *  MySQL RDBMS to enrich with child data objects and metadata.
-   */
-  // const mysqlRdbms = {}
-  /**
-   *  PostgreSQL RDBMS to enrich with child data objects and metadata.
-   */
-  // const postgresqlRdbms = {}
-  /**
-   *  SQLServer RDBMS to enrich with child data objects and metadata.
-   */
-  // const sqlServerRdbms = {}
+  // const force = true
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;
@@ -73,19 +49,20 @@ function main(parent) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function callDiscoverConnectionProfile() {
+  async function callRunStream() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const response = await datastreamClient.discoverConnectionProfile(request);
+    const [operation] = await datastreamClient.runStream(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDiscoverConnectionProfile();
-  // [END datastream_v1_generated_Datastream_DiscoverConnectionProfile_async]
+  callRunStream();
+  // [END datastream_v1_generated_Datastream_RunStream_async]
 }
 
 process.on('unhandledRejection', err => {

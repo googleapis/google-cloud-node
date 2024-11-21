@@ -33,6 +33,7 @@
   * [Datastream.list_stream_objects](#datastream.list_stream_objects)
   * [Datastream.list_streams](#datastream.list_streams)
   * [Datastream.lookup_stream_object](#datastream.lookup_stream_object)
+  * [Datastream.run_stream](#datastream.run_stream)
   * [Datastream.start_backfill_job](#datastream.start_backfill_job)
   * [Datastream.stop_backfill_job](#datastream.stop_backfill_job)
   * [Datastream.update_connection_profile](#datastream.update_connection_profile)
@@ -425,6 +426,23 @@ __Usage:__
 
 
 `node packages/google-cloud-datastream/samples/generated/v1/datastream.lookup_stream_object.js`
+
+
+-----
+
+
+
+
+### Datastream.run_stream
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.run_stream.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.run_stream.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-datastream/samples/generated/v1/datastream.run_stream.js`
 
 
 -----

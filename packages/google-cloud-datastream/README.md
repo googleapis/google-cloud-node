@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
 1.  [Enable the Datastream API][enable_api].
-1.  [Set up authentication with a service account][auth] so you can access the
+1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
@@ -139,6 +139,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Datastream.list_stream_objects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.list_stream_objects.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.list_stream_objects.js,packages/google-cloud-datastream/samples/README.md) |
 | Datastream.list_streams | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.list_streams.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.list_streams.js,packages/google-cloud-datastream/samples/README.md) |
 | Datastream.lookup_stream_object | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.lookup_stream_object.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.lookup_stream_object.js,packages/google-cloud-datastream/samples/README.md) |
+| Datastream.run_stream | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.run_stream.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.run_stream.js,packages/google-cloud-datastream/samples/README.md) |
 | Datastream.start_backfill_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.start_backfill_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.start_backfill_job.js,packages/google-cloud-datastream/samples/README.md) |
 | Datastream.stop_backfill_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.stop_backfill_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.stop_backfill_job.js,packages/google-cloud-datastream/samples/README.md) |
 | Datastream.update_connection_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.update_connection_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.update_connection_profile.js,packages/google-cloud-datastream/samples/README.md) |
@@ -234,4 +235,4 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=datastream.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+[auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
