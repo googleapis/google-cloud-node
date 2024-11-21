@@ -20569,6 +20569,9 @@ export namespace google {
 
                     /** Filter betweenFilter */
                     betweenFilter?: (google.analytics.data.v1beta.Filter.IBetweenFilter|null);
+
+                    /** Filter emptyFilter */
+                    emptyFilter?: (google.analytics.data.v1beta.Filter.IEmptyFilter|null);
                 }
 
                 /** Represents a Filter. */
@@ -20595,8 +20598,11 @@ export namespace google {
                     /** Filter betweenFilter. */
                     public betweenFilter?: (google.analytics.data.v1beta.Filter.IBetweenFilter|null);
 
+                    /** Filter emptyFilter. */
+                    public emptyFilter?: (google.analytics.data.v1beta.Filter.IEmptyFilter|null);
+
                     /** Filter oneFilter. */
-                    public oneFilter?: ("stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter");
+                    public oneFilter?: ("stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter"|"emptyFilter");
 
                     /**
                      * Creates a new Filter instance using the specified properties.
@@ -21117,6 +21123,97 @@ export namespace google {
 
                         /**
                          * Gets the default type url for BetweenFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EmptyFilter. */
+                    interface IEmptyFilter {
+                    }
+
+                    /** Represents an EmptyFilter. */
+                    class EmptyFilter implements IEmptyFilter {
+
+                        /**
+                         * Constructs a new EmptyFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.Filter.IEmptyFilter);
+
+                        /**
+                         * Creates a new EmptyFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EmptyFilter instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.Filter.IEmptyFilter): google.analytics.data.v1beta.Filter.EmptyFilter;
+
+                        /**
+                         * Encodes the specified EmptyFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.EmptyFilter.verify|verify} messages.
+                         * @param message EmptyFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.Filter.IEmptyFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EmptyFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.EmptyFilter.verify|verify} messages.
+                         * @param message EmptyFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.Filter.IEmptyFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EmptyFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EmptyFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Filter.EmptyFilter;
+
+                        /**
+                         * Decodes an EmptyFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EmptyFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Filter.EmptyFilter;
+
+                        /**
+                         * Verifies an EmptyFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EmptyFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EmptyFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Filter.EmptyFilter;
+
+                        /**
+                         * Creates a plain object from an EmptyFilter message. Also converts values to other types if specified.
+                         * @param message EmptyFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.Filter.EmptyFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EmptyFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EmptyFilter
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
