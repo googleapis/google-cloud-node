@@ -85,6 +85,11 @@
                 "deleteStream"
               ]
             },
+            "RunStream": {
+              "methods": [
+                "runStream"
+              ]
+            },
             "CreatePrivateConnection": {
               "methods": [
                 "createPrivateConnection"
@@ -225,6 +230,11 @@
             "DeleteStream": {
               "methods": [
                 "deleteStream"
+              ]
+            },
+            "RunStream": {
+              "methods": [
+                "runStream"
               ]
             },
             "CreatePrivateConnection": {

@@ -62,6 +62,10 @@ function main(parent) {
    *  PostgreSQL RDBMS to enrich with child data objects and metadata.
    */
   // const postgresqlRdbms = {}
+  /**
+   *  SQLServer RDBMS to enrich with child data objects and metadata.
+   */
+  // const sqlServerRdbms = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;
