@@ -212,6 +212,9 @@ export class DeveloperConnectClient {
       connectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}'
       ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+      ),
       gitRepositoryLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}'
       ),
@@ -223,6 +226,9 @@ export class DeveloperConnectClient {
       ),
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+      servicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}'
       ),
     };
 
@@ -2937,6 +2943,77 @@ export class DeveloperConnectClient {
   }
 
   /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
+  }
+
+  /**
    * Return a fully-qualified gitRepositoryLink resource name string.
    *
    * @param {string} project
@@ -3122,6 +3199,73 @@ export class DeveloperConnectClient {
   matchSecretVersionFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret_version;
+  }
+
+  /**
+   * Return a fully-qualified service resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} namespace
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  servicePath(
+    project: string,
+    location: string,
+    namespace: string,
+    service: string
+  ) {
+    return this.pathTemplates.servicePathTemplate.render({
+      project: project,
+      location: location,
+      namespace: namespace,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the project from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).project;
+  }
+
+  /**
+   * Parse the location from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).location;
+  }
+
+  /**
+   * Parse the namespace from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the namespace.
+   */
+  matchNamespaceFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).namespace;
+  }
+
+  /**
+   * Parse the service from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**
