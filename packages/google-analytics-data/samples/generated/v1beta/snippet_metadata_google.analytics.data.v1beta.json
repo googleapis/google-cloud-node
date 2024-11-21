@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 150,
+                    "end": 154,
                     "type": "FULL"
                 }
             ],
@@ -195,7 +195,7 @@
             "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunReports_async",
             "title": "BetaAnalyticsData batchRunReports Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns multiple reports in a batch. All reports must be for the same GA4 Property.",
+            "description": " Returns multiple reports in a batch. All reports must be for the same Google Analytics property.",
             "canonical": true,
             "file": "beta_analytics_data.batch_run_reports.js",
             "language": "JAVASCRIPT",
@@ -239,7 +239,7 @@
             "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunPivotReports_async",
             "title": "BetaAnalyticsData batchRunPivotReports Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns multiple pivot reports in a batch. All reports must be for the same GA4 Property.",
+            "description": " Returns multiple pivot reports in a batch. All reports must be for the same Google Analytics property.",
             "canonical": true,
             "file": "beta_analytics_data.batch_run_pivot_reports.js",
             "language": "JAVASCRIPT",
@@ -283,7 +283,7 @@
             "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_GetMetadata_async",
             "title": "BetaAnalyticsData getMetadata Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics GA4 Property Identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.",
+            "description": " Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics property identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.",
             "canonical": true,
             "file": "beta_analytics_data.get_metadata.js",
             "language": "JAVASCRIPT",
@@ -330,7 +330,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 106,
+                    "end": 107,
                     "type": "FULL"
                 }
             ],

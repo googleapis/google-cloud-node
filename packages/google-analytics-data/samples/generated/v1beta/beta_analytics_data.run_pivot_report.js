@@ -29,7 +29,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  A Google Analytics GA4 property identifier whose events are tracked.
+   *  A Google Analytics property identifier whose events are tracked.
    *  Specified in the URL path and not the body. To learn more, see where to
    *  find your Property
    *  ID (https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -90,15 +90,15 @@ function main() {
    *  returned. If true, these rows will be returned if they are not separately
    *  removed by a filter.
    *  Regardless of this `keep_empty_rows` setting, only data recorded by the
-   *  Google Analytics (GA4) property can be displayed in a report.
+   *  Google Analytics property can be displayed in a report.
    *  For example if a property never logs a `purchase` event, then a query for
    *  the `eventName` dimension and  `eventCount` metric will not have a row
    *  eventName: "purchase" and eventCount: 0.
    */
   // const keepEmptyRows = true
   /**
-   *  Toggles whether to return the current state of this Analytics Property's
-   *  quota. Quota is returned in PropertyQuota (#PropertyQuota).
+   *  Toggles whether to return the current state of this Google Analytics
+   *  property's quota. Quota is returned in PropertyQuota (#PropertyQuota).
    */
   // const returnPropertyQuota = true
   /**

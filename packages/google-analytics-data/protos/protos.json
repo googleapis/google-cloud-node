@@ -5354,7 +5354,8 @@
                             "stringFilter",
                             "inListFilter",
                             "numericFilter",
-                            "betweenFilter"
+                            "betweenFilter",
+                            "emptyFilter"
                           ]
                         }
                       },
@@ -5378,6 +5379,10 @@
                         "betweenFilter": {
                           "type": "BetweenFilter",
                           "id": 6
+                        },
+                        "emptyFilter": {
+                          "type": "EmptyFilter",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -5458,6 +5463,9 @@
                               "id": 2
                             }
                           }
+                        },
+                        "EmptyFilter": {
+                          "fields": {}
                         }
                       }
                     },
