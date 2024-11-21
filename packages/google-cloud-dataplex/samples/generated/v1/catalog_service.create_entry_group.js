@@ -39,12 +39,12 @@ function main(parent, entryGroupId, entryGroup) {
    */
   // const entryGroupId = 'abc123'
   /**
-   *  Required. EntryGroup Resource
+   *  Required. EntryGroup Resource.
    */
   // const entryGroup = {}
   /**
-   *  Optional. Only validate the request, but do not perform mutations.
-   *  The default is false.
+   *  Optional. The service validates the request without performing any
+   *  mutations. The default is false.
    */
   // const validateOnly = true
 

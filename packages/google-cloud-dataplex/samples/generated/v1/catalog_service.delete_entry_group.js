@@ -35,7 +35,8 @@ function main(name) {
   // const name = 'abc123'
   /**
    *  Optional. If the client provided etag value does not match the current etag
-   *  value, the DeleteEntryGroupRequest method returns an ABORTED error response
+   *  value, the DeleteEntryGroupRequest method returns an ABORTED error
+   *  response.
    */
   // const etag = 'abc123'
 

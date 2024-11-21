@@ -38,21 +38,25 @@ function main(name, query) {
    */
   // const query = 'abc123'
   /**
-   *  Optional. Pagination.
+   *  Optional. Number of results in the search page. If <=0, then defaults
+   *  to 10. Max limit for page_size is 1000. Throws an invalid argument for
+   *  page_size > 1000.
    */
   // const pageSize = 1234
   /**
+   *  Optional. Page token received from a previous `SearchEntries` call. Provide
+   *  this to retrieve the subsequent page.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Ordering of the results. Supported options to be added later.
+   *  Optional. Specifies the ordering of results.
    */
   // const orderBy = 'abc123'
   /**
-   *  Optional. The scope under which the search should be operating. Should
-   *  either be organizations/<org_id> or projects/<project_ref>. If left
-   *  unspecified, it will default to the organization where the project provided
-   *  in `name` is located.
+   *  Optional. The scope under which the search should be operating. It must
+   *  either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+   *  unspecified, it defaults to the organization where the project provided in
+   *  `name` is located.
    */
   // const scope = 'abc123'
 

@@ -3139,6 +3139,70 @@ describe('v1.ContentServiceClient', () => {
       });
     });
 
+    describe('metadataJob', () => {
+      const fakePath = '/rendered/path/metadataJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadataJob: 'metadataJobValue',
+      };
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.metadataJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataJobPath', () => {
+        const result = client.metadataJobPath(
+          'projectValue',
+          'locationValue',
+          'metadataJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataJobName', () => {
+        const result = client.matchProjectFromMetadataJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataJobName', () => {
+        const result = client.matchLocationFromMetadataJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataJobFromMetadataJobName', () => {
+        const result = client.matchMetadataJobFromMetadataJobName(fakePath);
+        assert.strictEqual(result, 'metadataJobValue');
+        assert(
+          (client.pathTemplates.metadataJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('partition', () => {
       const fakePath = '/rendered/path/partition';
       const expectedParameters = {
