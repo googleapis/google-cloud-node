@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.7.0...generativelanguage-v2.8.0) (2024-11-21)
+
+
+### Features
+
+* [generativelanguage] Adds search grounding ([#5828](https://github.com/googleapis/google-cloud-node/issues/5828)) ([0b27dc2](https://github.com/googleapis/google-cloud-node/commit/0b27dc2c46300e144e82f6bd90a0fbf7072b22db))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.6.0...generativelanguage-v2.7.0) (2024-10-10)
 
 

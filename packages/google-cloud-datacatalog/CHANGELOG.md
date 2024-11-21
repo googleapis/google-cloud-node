@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.6.0...datacatalog-v4.7.0) (2024-11-21)
+
+
+### Features
+
+* [datacatalog] A new method `SetConfig` is added to service `DataCatalog` ([#5830](https://github.com/googleapis/google-cloud-node/issues/5830)) ([65a557c](https://github.com/googleapis/google-cloud-node/commit/65a557c7722e603c0ffea2d42d8bc176b3467ddb))
+
 ## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.5.0...datacatalog-v4.6.0) (2024-11-14)
 
 

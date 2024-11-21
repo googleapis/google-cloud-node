@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.11.0...dataplex-v3.12.0) (2024-11-21)
+
+
+### Features
+
+* [dataplex] update Go Datastore import path ([#5818](https://github.com/googleapis/google-cloud-node/issues/5818)) ([020c59a](https://github.com/googleapis/google-cloud-node/commit/020c59a19460baff4ea7bbabef5d00d9becead94))
+
 ## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.10.0...dataplex-v3.11.0) (2024-06-27)
 
 

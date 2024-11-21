@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.11.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.10.0...data-v4.11.0) (2024-11-21)
+
+
+### Features
+
+* [analytics-data] add `EmptyFilter` type to the Data API v1beta ([#5831](https://github.com/googleapis/google-cloud-node/issues/5831)) ([ced8054](https://github.com/googleapis/google-cloud-node/commit/ced80544ee74321deb881ee42dc5c2db05fbd0a4))
+
 ## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.9.0...data-v4.10.0) (2024-10-30)
 
 

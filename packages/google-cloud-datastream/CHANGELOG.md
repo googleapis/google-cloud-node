@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v3.2.0...datastream-v3.3.0) (2024-11-21)
+
+
+### Features
+
+* [datastream] A new method `RunStream` is added to service `Datastream` ([#5834](https://github.com/googleapis/google-cloud-node/issues/5834)) ([ca4db62](https://github.com/googleapis/google-cloud-node/commit/ca4db6283b23e8f99bdffb0ed4ea76005ee62f9e))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v3.1.0...datastream-v3.2.0) (2024-05-21)
 
 

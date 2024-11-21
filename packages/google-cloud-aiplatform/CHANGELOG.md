@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.34.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.33.0...aiplatform-v3.34.0) (2024-11-21)
+
+
+### Features
+
+* Add a v1 UpdateEndpointLongRunning API ([#5812](https://github.com/googleapis/google-cloud-node/issues/5812)) ([39dc74e](https://github.com/googleapis/google-cloud-node/commit/39dc74ec30a573169d282a6e1b172c48e23b00d4))
+
 ## [3.33.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.32.0...aiplatform-v3.33.0) (2024-11-14)
 
 
