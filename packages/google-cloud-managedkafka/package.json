@@ -26,7 +26,7 @@
     "cloud",
     "google managedkafka",
     "managedkafka",
-    "Apache Kafka for BigQuery API"
+    "Managed Service for Apache Kafka API"
   ],
   "scripts": {
     "clean": "gts clean",

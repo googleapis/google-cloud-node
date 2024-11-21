@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Apache Kafka for BigQuery API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka)
+# [Managed Service for Apache Kafka API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/managedkafka.svg)](https://www.npmjs.org/package/@google-cloud/managedkafka)
@@ -10,14 +10,14 @@
 
 
 
-Apache Kafka for BigQuery API client for Node.js
+Managed Service for Apache Kafka API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka/CHANGELOG.md).
 
-* [Apache Kafka for BigQuery API Node.js Client API Reference][client-docs]
-* [Apache Kafka for BigQuery API Documentation][product-docs]
+* [Managed Service for Apache Kafka API Node.js Client API Reference][client-docs]
+* [Managed Service for Apache Kafka API Documentation][product-docs]
 * [github.com/googleapis/google-cloud-node/packages/google-cloud-managedkafka](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -43,7 +43,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Apache Kafka for BigQuery API API][enable_api].
+1.  [Enable the Managed Service for Apache Kafka API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -139,7 +139,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 
 
-The [Apache Kafka for BigQuery API Node.js Client API Reference][client-docs] documentation
+The [Managed Service for Apache Kafka API Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
