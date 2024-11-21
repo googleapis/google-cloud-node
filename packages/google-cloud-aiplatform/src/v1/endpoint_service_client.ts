@@ -1921,6 +1921,12 @@ export class EndpointServiceClient {
     const createEndpointMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.CreateEndpointOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateEndpointLongRunningResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.Endpoint'
+    ) as gax.protobuf.Type;
+    const updateEndpointLongRunningMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpdateEndpointOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteEndpointResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -1951,6 +1957,15 @@ export class EndpointServiceClient {
         this.operationsClient,
         createEndpointResponse.decode.bind(createEndpointResponse),
         createEndpointMetadata.decode.bind(createEndpointMetadata)
+      ),
+      updateEndpointLongRunning: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateEndpointLongRunningResponse.decode.bind(
+          updateEndpointLongRunningResponse
+        ),
+        updateEndpointLongRunningMetadata.decode.bind(
+          updateEndpointLongRunningMetadata
+        )
       ),
       deleteEndpoint: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2028,6 +2043,7 @@ export class EndpointServiceClient {
       'getEndpoint',
       'listEndpoints',
       'updateEndpoint',
+      'updateEndpointLongRunning',
       'deleteEndpoint',
       'deployModel',
       'undeployModel',
@@ -2481,6 +2497,148 @@ export class EndpointServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.Endpoint,
       protos.google.cloud.aiplatform.v1.CreateEndpointOperationMetadata
+    >;
+  }
+  /**
+   * Updates an Endpoint with a long running operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.Endpoint} request.endpoint
+   *   Required. The Endpoint which replaces the resource on the server. Currently
+   *   we only support updating the `client_connection_config` field, all the
+   *   other fields' update will be blocked.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/endpoint_service.update_endpoint_long_running.js</caption>
+   * region_tag:aiplatform_v1_generated_EndpointService_UpdateEndpointLongRunning_async
+   */
+  updateEndpointLongRunning(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateEndpointLongRunningRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IEndpoint,
+        protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateEndpointLongRunning(
+    request: protos.google.cloud.aiplatform.v1.IUpdateEndpointLongRunningRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IEndpoint,
+        protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEndpointLongRunning(
+    request: protos.google.cloud.aiplatform.v1.IUpdateEndpointLongRunningRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IEndpoint,
+        protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEndpointLongRunning(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateEndpointLongRunningRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IEndpoint,
+            protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IEndpoint,
+        protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IEndpoint,
+        protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'endpoint.name': request.endpoint!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEndpointLongRunning(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateEndpointLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/endpoint_service.update_endpoint_long_running.js</caption>
+   * region_tag:aiplatform_v1_generated_EndpointService_UpdateEndpointLongRunning_async
+   */
+  async checkUpdateEndpointLongRunningProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.Endpoint,
+      protos.google.cloud.aiplatform.v1.UpdateEndpointOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateEndpointLongRunning,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.Endpoint,
+      protos.google.cloud.aiplatform.v1.UpdateEndpointOperationMetadata
     >;
   }
   /**
