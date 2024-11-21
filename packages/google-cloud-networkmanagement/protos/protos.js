@@ -84,6 +84,8 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ConnectivityTest updateTime
                          * @property {google.cloud.networkmanagement.v1.IReachabilityDetails|null} [reachabilityDetails] ConnectivityTest reachabilityDetails
                          * @property {google.cloud.networkmanagement.v1.IProbingDetails|null} [probingDetails] ConnectivityTest probingDetails
+                         * @property {boolean|null} [roundTrip] ConnectivityTest roundTrip
+                         * @property {google.cloud.networkmanagement.v1.IReachabilityDetails|null} [returnReachabilityDetails] ConnectivityTest returnReachabilityDetails
                          * @property {boolean|null} [bypassFirewallChecks] ConnectivityTest bypassFirewallChecks
                          */
     
@@ -201,6 +203,22 @@
                         ConnectivityTest.prototype.probingDetails = null;
     
                         /**
+                         * ConnectivityTest roundTrip.
+                         * @member {boolean} roundTrip
+                         * @memberof google.cloud.networkmanagement.v1.ConnectivityTest
+                         * @instance
+                         */
+                        ConnectivityTest.prototype.roundTrip = false;
+    
+                        /**
+                         * ConnectivityTest returnReachabilityDetails.
+                         * @member {google.cloud.networkmanagement.v1.IReachabilityDetails|null|undefined} returnReachabilityDetails
+                         * @memberof google.cloud.networkmanagement.v1.ConnectivityTest
+                         * @instance
+                         */
+                        ConnectivityTest.prototype.returnReachabilityDetails = null;
+    
+                        /**
                          * ConnectivityTest bypassFirewallChecks.
                          * @member {boolean} bypassFirewallChecks
                          * @memberof google.cloud.networkmanagement.v1.ConnectivityTest
@@ -258,6 +276,10 @@
                                 $root.google.cloud.networkmanagement.v1.ReachabilityDetails.encode(message.reachabilityDetails, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.probingDetails != null && Object.hasOwnProperty.call(message, "probingDetails"))
                                 $root.google.cloud.networkmanagement.v1.ProbingDetails.encode(message.probingDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.roundTrip != null && Object.hasOwnProperty.call(message, "roundTrip"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.roundTrip);
+                            if (message.returnReachabilityDetails != null && Object.hasOwnProperty.call(message, "returnReachabilityDetails"))
+                                $root.google.cloud.networkmanagement.v1.ReachabilityDetails.encode(message.returnReachabilityDetails, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.bypassFirewallChecks != null && Object.hasOwnProperty.call(message, "bypassFirewallChecks"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.bypassFirewallChecks);
                             return writer;
@@ -363,6 +385,14 @@
                                         message.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 15: {
+                                        message.roundTrip = reader.bool();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.returnReachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 17: {
                                         message.bypassFirewallChecks = reader.bool();
                                         break;
@@ -459,6 +489,14 @@
                                 if (error)
                                     return "probingDetails." + error;
                             }
+                            if (message.roundTrip != null && message.hasOwnProperty("roundTrip"))
+                                if (typeof message.roundTrip !== "boolean")
+                                    return "roundTrip: boolean expected";
+                            if (message.returnReachabilityDetails != null && message.hasOwnProperty("returnReachabilityDetails")) {
+                                var error = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.verify(message.returnReachabilityDetails);
+                                if (error)
+                                    return "returnReachabilityDetails." + error;
+                            }
                             if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
                                 if (typeof message.bypassFirewallChecks !== "boolean")
                                     return "bypassFirewallChecks: boolean expected";
@@ -529,6 +567,13 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.ConnectivityTest.probingDetails: object expected");
                                 message.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.fromObject(object.probingDetails);
                             }
+                            if (object.roundTrip != null)
+                                message.roundTrip = Boolean(object.roundTrip);
+                            if (object.returnReachabilityDetails != null) {
+                                if (typeof object.returnReachabilityDetails !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ConnectivityTest.returnReachabilityDetails: object expected");
+                                message.returnReachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.fromObject(object.returnReachabilityDetails);
+                            }
                             if (object.bypassFirewallChecks != null)
                                 message.bypassFirewallChecks = Boolean(object.bypassFirewallChecks);
                             return message;
@@ -562,6 +607,8 @@
                                 object.updateTime = null;
                                 object.reachabilityDetails = null;
                                 object.probingDetails = null;
+                                object.roundTrip = false;
+                                object.returnReachabilityDetails = null;
                                 object.bypassFirewallChecks = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -595,6 +642,10 @@
                                 object.reachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.toObject(message.reachabilityDetails, options);
                             if (message.probingDetails != null && message.hasOwnProperty("probingDetails"))
                                 object.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.toObject(message.probingDetails, options);
+                            if (message.roundTrip != null && message.hasOwnProperty("roundTrip"))
+                                object.roundTrip = message.roundTrip;
+                            if (message.returnReachabilityDetails != null && message.hasOwnProperty("returnReachabilityDetails"))
+                                object.returnReachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.toObject(message.returnReachabilityDetails, options);
                             if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
                                 object.bypassFirewallChecks = message.bypassFirewallChecks;
                             return object;
@@ -18980,6 +19031,8 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ConnectivityTest updateTime
                          * @property {google.cloud.networkmanagement.v1beta1.IReachabilityDetails|null} [reachabilityDetails] ConnectivityTest reachabilityDetails
                          * @property {google.cloud.networkmanagement.v1beta1.IProbingDetails|null} [probingDetails] ConnectivityTest probingDetails
+                         * @property {boolean|null} [roundTrip] ConnectivityTest roundTrip
+                         * @property {google.cloud.networkmanagement.v1beta1.IReachabilityDetails|null} [returnReachabilityDetails] ConnectivityTest returnReachabilityDetails
                          * @property {boolean|null} [bypassFirewallChecks] ConnectivityTest bypassFirewallChecks
                          */
     
@@ -19097,6 +19150,22 @@
                         ConnectivityTest.prototype.probingDetails = null;
     
                         /**
+                         * ConnectivityTest roundTrip.
+                         * @member {boolean} roundTrip
+                         * @memberof google.cloud.networkmanagement.v1beta1.ConnectivityTest
+                         * @instance
+                         */
+                        ConnectivityTest.prototype.roundTrip = false;
+    
+                        /**
+                         * ConnectivityTest returnReachabilityDetails.
+                         * @member {google.cloud.networkmanagement.v1beta1.IReachabilityDetails|null|undefined} returnReachabilityDetails
+                         * @memberof google.cloud.networkmanagement.v1beta1.ConnectivityTest
+                         * @instance
+                         */
+                        ConnectivityTest.prototype.returnReachabilityDetails = null;
+    
+                        /**
                          * ConnectivityTest bypassFirewallChecks.
                          * @member {boolean} bypassFirewallChecks
                          * @memberof google.cloud.networkmanagement.v1beta1.ConnectivityTest
@@ -19154,6 +19223,10 @@
                                 $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.encode(message.reachabilityDetails, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.probingDetails != null && Object.hasOwnProperty.call(message, "probingDetails"))
                                 $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.encode(message.probingDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.roundTrip != null && Object.hasOwnProperty.call(message, "roundTrip"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.roundTrip);
+                            if (message.returnReachabilityDetails != null && Object.hasOwnProperty.call(message, "returnReachabilityDetails"))
+                                $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.encode(message.returnReachabilityDetails, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.bypassFirewallChecks != null && Object.hasOwnProperty.call(message, "bypassFirewallChecks"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.bypassFirewallChecks);
                             return writer;
@@ -19259,6 +19332,14 @@
                                         message.probingDetails = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 15: {
+                                        message.roundTrip = reader.bool();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.returnReachabilityDetails = $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 17: {
                                         message.bypassFirewallChecks = reader.bool();
                                         break;
@@ -19355,6 +19436,14 @@
                                 if (error)
                                     return "probingDetails." + error;
                             }
+                            if (message.roundTrip != null && message.hasOwnProperty("roundTrip"))
+                                if (typeof message.roundTrip !== "boolean")
+                                    return "roundTrip: boolean expected";
+                            if (message.returnReachabilityDetails != null && message.hasOwnProperty("returnReachabilityDetails")) {
+                                var error = $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.verify(message.returnReachabilityDetails);
+                                if (error)
+                                    return "returnReachabilityDetails." + error;
+                            }
                             if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
                                 if (typeof message.bypassFirewallChecks !== "boolean")
                                     return "bypassFirewallChecks: boolean expected";
@@ -19425,6 +19514,13 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.ConnectivityTest.probingDetails: object expected");
                                 message.probingDetails = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.fromObject(object.probingDetails);
                             }
+                            if (object.roundTrip != null)
+                                message.roundTrip = Boolean(object.roundTrip);
+                            if (object.returnReachabilityDetails != null) {
+                                if (typeof object.returnReachabilityDetails !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.ConnectivityTest.returnReachabilityDetails: object expected");
+                                message.returnReachabilityDetails = $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.fromObject(object.returnReachabilityDetails);
+                            }
                             if (object.bypassFirewallChecks != null)
                                 message.bypassFirewallChecks = Boolean(object.bypassFirewallChecks);
                             return message;
@@ -19458,6 +19554,8 @@
                                 object.updateTime = null;
                                 object.reachabilityDetails = null;
                                 object.probingDetails = null;
+                                object.roundTrip = false;
+                                object.returnReachabilityDetails = null;
                                 object.bypassFirewallChecks = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -19491,6 +19589,10 @@
                                 object.reachabilityDetails = $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.toObject(message.reachabilityDetails, options);
                             if (message.probingDetails != null && message.hasOwnProperty("probingDetails"))
                                 object.probingDetails = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.toObject(message.probingDetails, options);
+                            if (message.roundTrip != null && message.hasOwnProperty("roundTrip"))
+                                object.roundTrip = message.roundTrip;
+                            if (message.returnReachabilityDetails != null && message.hasOwnProperty("returnReachabilityDetails"))
+                                object.returnReachabilityDetails = $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.toObject(message.returnReachabilityDetails, options);
                             if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
                                 object.bypassFirewallChecks = message.bypassFirewallChecks;
                             return object;
