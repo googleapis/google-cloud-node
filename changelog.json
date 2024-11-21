@@ -5,6 +5,193 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b80a7b7e6f97d9a07110adb27dcad28f0b5de341",
+          "message": "[developerconnect] A new resource_definition `servicedirectory.googleapis.com/Service` is added",
+          "issues": [
+            "5820"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "97b83922-2f83-47b2-bc63-380baada924b",
+      "createTime": "2024-11-21T17:29:23.584Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a1ab492a1116d08b008f9fc88751972703725b02",
+          "message": "[run]support manual instance count in Cloud Run for manual scaling feature",
+          "issues": [
+            "5821"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "419a300c-5b3b-4ed8-9ab3-03ed54a11b0c",
+      "createTime": "2024-11-21T17:29:23.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "994627330c440344fc3b2bbbcb6ee466e1cbc45c",
+          "message": "[networkmanagement] add round-trip mode",
+          "issues": [
+            "5814"
+          ]
+        }
+      ],
+      "version": "3.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "6d77ebd5-6075-46ad-9dea-aa9419d47530",
+      "createTime": "2024-11-21T17:29:23.554Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b0358c61fa5a644681d922a4de1de405d0fddc28",
+          "message": "[dialogflow] add options of query_source, search_config, end_user_metadata and exact_search",
+          "issues": [
+            "5813"
+          ]
+        }
+      ],
+      "version": "6.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "c00616ac-41ee-4643-9b73-a85d58962628",
+      "createTime": "2024-11-21T17:29:23.539Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ca4db6283b23e8f99bdffb0ed4ea76005ee62f9e",
+          "message": "[datastream] A new method `RunStream` is added to service `Datastream`",
+          "issues": [
+            "5834"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "e7195d19-82e8-4705-85b4-87f5cb6f970c",
+      "createTime": "2024-11-21T17:29:23.526Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "020c59a19460baff4ea7bbabef5d00d9becead94",
+          "message": "[dataplex] update Go Datastore import path",
+          "issues": [
+            "5818"
+          ]
+        }
+      ],
+      "version": "3.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "03cee8fb-a30c-4cac-bdb1-de4215d7ea6b",
+      "createTime": "2024-11-21T17:29:23.510Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65a557c7722e603c0ffea2d42d8bc176b3467ddb",
+          "message": "[datacatalog] A new method `SetConfig` is added to service `DataCatalog`",
+          "issues": [
+            "5830"
+          ]
+        }
+      ],
+      "version": "4.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "11f26779-7eba-40d3-b8e8-e9e5f053d4a1",
+      "createTime": "2024-11-21T17:29:23.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d5acb00e881256ec5866d14556b9a013157288a6",
+          "message": "[contactcenterinsights] Add FeedbackLabel resource and APIs",
+          "issues": [
+            "5817"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "16015865-ee7a-4367-bfc5-81f1f5113ebf",
+      "createTime": "2024-11-21T17:29:23.479Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "39dc74ec30a573169d282a6e1b172c48e23b00d4",
+          "message": "Add a v1 UpdateEndpointLongRunning API",
+          "issues": [
+            "5812"
+          ]
+        }
+      ],
+      "version": "3.34.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "59e510d9-1c02-4804-be03-a78cb1798e69",
+      "createTime": "2024-11-21T17:29:23.464Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ced80544ee74321deb881ee42dc5c2db05fbd0a4",
+          "message": "[analytics-data] add `EmptyFilter` type to the Data API v1beta",
+          "issues": [
+            "5831"
+          ]
+        }
+      ],
+      "version": "4.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "49356ef9-9e6f-499a-84d7-271f9fc3c07d",
+      "createTime": "2024-11-21T17:29:23.446Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b27dc2c46300e144e82f6bd90a0fbf7072b22db",
+          "message": "[generativelanguage] Adds search grounding",
+          "issues": [
+            "5828"
+          ]
+        }
+      ],
+      "version": "2.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "46bbdca6-a471-4d41-8aa2-adb3a752615d",
+      "createTime": "2024-11-21T17:29:23.432Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b288d9f4448e1305151a8f734afd8f1233d8c5bb",
           "message": "[gdchardwaremanagement] add DNS address, Kubernetes primary VLAN ID, and provisioning state to the Zone resource",
           "issues": [
@@ -37756,5 +37943,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-11-14T01:17:45.705Z"
+  "updateTime": "2024-11-21T17:29:23.584Z"
 }

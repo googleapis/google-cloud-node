@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.6.0...contact-center-insights-v3.7.0) (2024-11-21)
+
+
+### Features
+
+* [contactcenterinsights] Add FeedbackLabel resource and APIs ([#5817](https://github.com/googleapis/google-cloud-node/issues/5817)) ([d5acb00](https://github.com/googleapis/google-cloud-node/commit/d5acb00e881256ec5866d14556b9a013157288a6))
+
 ## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.5.0...contact-center-insights-v3.6.0) (2024-10-10)
 
 

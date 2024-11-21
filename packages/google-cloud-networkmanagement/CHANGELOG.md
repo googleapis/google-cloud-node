@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.9.0...network-management-v3.10.0) (2024-11-21)
+
+
+### Features
+
+* [networkmanagement] add round-trip mode ([#5814](https://github.com/googleapis/google-cloud-node/issues/5814)) ([9946273](https://github.com/googleapis/google-cloud-node/commit/994627330c440344fc3b2bbbcb6ee466e1cbc45c))
+
 ## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.8.0...network-management-v3.9.0) (2024-11-14)
 
 
