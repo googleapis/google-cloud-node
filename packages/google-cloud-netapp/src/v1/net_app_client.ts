@@ -474,6 +474,18 @@ export class NetAppClient {
     const reverseReplicationDirectionMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const establishPeeringResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.Replication'
+    ) as gax.protobuf.Type;
+    const establishPeeringMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const syncReplicationResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.Replication'
+    ) as gax.protobuf.Type;
+    const syncReplicationMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createBackupVaultResponse = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.BackupVault'
     ) as gax.protobuf.Type;
@@ -664,6 +676,16 @@ export class NetAppClient {
           reverseReplicationDirectionMetadata
         )
       ),
+      establishPeering: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        establishPeeringResponse.decode.bind(establishPeeringResponse),
+        establishPeeringMetadata.decode.bind(establishPeeringMetadata)
+      ),
+      syncReplication: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        syncReplicationResponse.decode.bind(syncReplicationResponse),
+        syncReplicationMetadata.decode.bind(syncReplicationMetadata)
+      ),
       createBackupVault: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createBackupVaultResponse.decode.bind(createBackupVaultResponse),
@@ -798,6 +820,8 @@ export class NetAppClient {
       'stopReplication',
       'resumeReplication',
       'reverseReplicationDirection',
+      'establishPeering',
+      'syncReplication',
       'createBackupVault',
       'getBackupVault',
       'listBackupVaults',
@@ -1783,9 +1807,9 @@ export class NetAppClient {
    *   Required. Value for parent.
    * @param {string} request.storagePoolId
    *   Required. Id of the requesting storage pool. Must be unique within the
-   *   parent resource. Must contain only letters, numbers, underscore and hyphen,
-   *   with the first character a letter or underscore, the last a letter or
-   *   underscore or a number, and a 63 character maximum.
+   *   parent resource. Must contain only letters, numbers and hyphen, with the
+   *   first character a letter, the last a letter or a number, and a 63 character
+   *   maximum.
    * @param {google.cloud.netapp.v1.StoragePool} request.storagePool
    *   Required. The required parameters to create a new storage pool.
    * @param {object} [options]
@@ -2345,9 +2369,9 @@ export class NetAppClient {
    *   Required. Value for parent.
    * @param {string} request.volumeId
    *   Required. Id of the requesting volume. Must be unique within the parent
-   *   resource. Must contain only letters, numbers, underscore and hyphen, with
-   *   the first character a letter or underscore, the last a letter or underscore
-   *   or a number, and a 63 character maximum.
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a number,
+   *   and a 63 character maximum.
    * @param {google.cloud.netapp.v1.Volume} request.volume
    *   Required. The volume being created.
    * @param {object} [options]
@@ -2916,9 +2940,9 @@ export class NetAppClient {
    *   Required. A snapshot resource
    * @param {string} request.snapshotId
    *   Required. ID of the snapshot to create. Must be unique within the parent
-   *   resource. Must contain only letters, numbers, underscore and hyphen, with
-   *   the first character a letter or underscore, the last a letter or underscore
-   *   or a number, and a 63 character maximum.
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3336,9 +3360,9 @@ export class NetAppClient {
    *   Required. Fields of the to be created active directory.
    * @param {string} request.activeDirectoryId
    *   Required. ID of the active directory to create. Must be unique within the
-   *   parent resource. Must contain only letters, numbers, underscore and hyphen,
-   *   with the first character a letter or underscore, the last a letter or
-   *   underscore or a number, and a 63 character maximum.
+   *   parent resource. Must contain only letters, numbers and hyphen, with the
+   *   first character a letter , the last a letter or a number, and a 63
+   *   character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3755,9 +3779,9 @@ export class NetAppClient {
    *   Required. Value for parent.
    * @param {string} request.kmsConfigId
    *   Required. Id of the requesting KmsConfig. Must be unique within the parent
-   *   resource. Must contain only letters, numbers, underscore and hyphen, with
-   *   the first character a letter or underscore, the last a letter or underscore
-   *   or a number, and a 63 character maximum.
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.KmsConfig} request.kmsConfig
    *   Required. The required parameters to create a new KmsConfig.
    * @param {object} [options]
@@ -4316,9 +4340,9 @@ export class NetAppClient {
    *   Required. A replication resource
    * @param {string} request.replicationId
    *   Required. ID of the replication to create. Must be unique within the parent
-   *   resource. Must contain only letters, numbers, underscore and hyphen, with
-   *   the first character a letter or underscore, the last a letter or underscore
-   *   or a number, and a 63 character maximum.
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5148,6 +5172,292 @@ export class NetAppClient {
     >;
   }
   /**
+   * Establish replication peering.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the replication, in the format of
+   *   projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}.
+   * @param {string} request.peerClusterName
+   *   Required. Name of the user's local source cluster to be peered with the
+   *   destination cluster.
+   * @param {string} request.peerSvmName
+   *   Required. Name of the user's local source vserver svm to be peered with the
+   *   destination vserver svm.
+   * @param {string[]} [request.peerIpAddresses]
+   *   Optional. List of IPv4 ip addresses to be used for peering.
+   * @param {string} request.peerVolumeName
+   *   Required. Name of the user's local source volume to be peered with the
+   *   destination volume.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.establish_peering.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_EstablishPeering_async
+   */
+  establishPeering(
+    request?: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  establishPeering(
+    request: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  establishPeering(
+    request: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  establishPeering(
+    request?: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.establishPeering(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `establishPeering()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.establish_peering.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_EstablishPeering_async
+   */
+  async checkEstablishPeeringProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.establishPeering,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Syncs the replication. This will invoke one time volume data transfer from
+   * source to destination.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the replication, in the format of
+   *   projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.sync_replication.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SyncReplication_async
+   */
+  syncReplication(
+    request?: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  syncReplication(
+    request: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  syncReplication(
+    request: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  syncReplication(
+    request?: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.syncReplication(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `syncReplication()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.sync_replication.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SyncReplication_async
+   */
+  async checkSyncReplicationProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.syncReplication,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
    * Creates new backup vault
    *
    * @param {Object} request
@@ -5158,8 +5468,8 @@ export class NetAppClient {
    * @param {string} request.backupVaultId
    *   Required. The ID to use for the backupVault.
    *   The ID must be unique within the specified location.
-   *   Must contain only letters, numbers, underscore and hyphen, with the first
-   *   character a letter or underscore, the last a letter or underscore or a
+   *   Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
    *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.BackupVault} request.backupVault
    *   Required. A backupVault resource
@@ -5585,8 +5895,8 @@ export class NetAppClient {
    * @param {string} request.backupId
    *   Required. The ID to use for the backup.
    *   The ID must be unique within the specified backupVault.
-   *   Must contain only letters, numbers, underscore and hyphen, with the first
-   *   character a letter or underscore, the last a letter or underscore or a
+   *   Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
    *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.Backup} request.backup
    *   Required. A backup resource
@@ -6011,8 +6321,8 @@ export class NetAppClient {
    * @param {string} request.backupPolicyId
    *   Required. The ID to use for the backup policy.
    *   The ID must be unique within the specified location.
-   *   Must contain only letters, numbers, underscore and hyphen, with the first
-   *   character a letter or underscore, the last a letter or underscore or a
+   *   Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
    *   number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
