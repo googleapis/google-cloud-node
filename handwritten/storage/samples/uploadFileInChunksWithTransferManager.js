@@ -33,7 +33,7 @@ function main(
   // const bucketName = 'your-unique-bucket-name';
 
   // The path of file to upload
-  // const fileName = 'path/to/your/file';
+  // const filePath = 'path/to/your/file';
 
   // The size of each chunk to be uploaded
   // const chunkSize = 32 * 1024 * 1024;
