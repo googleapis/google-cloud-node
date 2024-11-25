@@ -105,7 +105,8 @@ export namespace google {
                     TOKEN_TYPE_UNSPECIFIED = 0,
                     TOKEN_TYPE_OIDC = 1,
                     TOKEN_TYPE_PKI = 2,
-                    TOKEN_TYPE_LIMITED_AWS = 3
+                    TOKEN_TYPE_LIMITED_AWS = 3,
+                    TOKEN_TYPE_AWS_PRINCIPALTAGS = 4
                 }
 
                 /** Properties of a Challenge. */
@@ -889,6 +890,9 @@ export namespace google {
                 /** Properties of a TokenOptions. */
                 interface ITokenOptions {
 
+                    /** TokenOptions awsPrincipalTagsOptions */
+                    awsPrincipalTagsOptions?: (google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions|null);
+
                     /** TokenOptions audience */
                     audience?: (string|null);
 
@@ -908,6 +912,9 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.confidentialcomputing.v1.ITokenOptions);
 
+                    /** TokenOptions awsPrincipalTagsOptions. */
+                    public awsPrincipalTagsOptions?: (google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions|null);
+
                     /** TokenOptions audience. */
                     public audience: string;
 
@@ -916,6 +923,9 @@ export namespace google {
 
                     /** TokenOptions tokenType. */
                     public tokenType: (google.cloud.confidentialcomputing.v1.TokenType|keyof typeof google.cloud.confidentialcomputing.v1.TokenType);
+
+                    /** TokenOptions tokenTypeOptions. */
+                    public tokenTypeOptions?: "awsPrincipalTagsOptions";
 
                     /**
                      * Creates a new TokenOptions instance using the specified properties.
@@ -993,6 +1003,306 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TokenOptions {
+
+                    /** Properties of an AwsPrincipalTagsOptions. */
+                    interface IAwsPrincipalTagsOptions {
+
+                        /** AwsPrincipalTagsOptions allowedPrincipalTags */
+                        allowedPrincipalTags?: (google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags|null);
+                    }
+
+                    /** Represents an AwsPrincipalTagsOptions. */
+                    class AwsPrincipalTagsOptions implements IAwsPrincipalTagsOptions {
+
+                        /**
+                         * Constructs a new AwsPrincipalTagsOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions);
+
+                        /** AwsPrincipalTagsOptions allowedPrincipalTags. */
+                        public allowedPrincipalTags?: (google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags|null);
+
+                        /**
+                         * Creates a new AwsPrincipalTagsOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AwsPrincipalTagsOptions instance
+                         */
+                        public static create(properties?: google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions;
+
+                        /**
+                         * Encodes the specified AwsPrincipalTagsOptions message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.verify|verify} messages.
+                         * @param message AwsPrincipalTagsOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AwsPrincipalTagsOptions message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.verify|verify} messages.
+                         * @param message AwsPrincipalTagsOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AwsPrincipalTagsOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AwsPrincipalTagsOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions;
+
+                        /**
+                         * Decodes an AwsPrincipalTagsOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AwsPrincipalTagsOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions;
+
+                        /**
+                         * Verifies an AwsPrincipalTagsOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AwsPrincipalTagsOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AwsPrincipalTagsOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions;
+
+                        /**
+                         * Creates a plain object from an AwsPrincipalTagsOptions message. Also converts values to other types if specified.
+                         * @param message AwsPrincipalTagsOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AwsPrincipalTagsOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AwsPrincipalTagsOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AwsPrincipalTagsOptions {
+
+                        /** Properties of an AllowedPrincipalTags. */
+                        interface IAllowedPrincipalTags {
+
+                            /** AllowedPrincipalTags containerImageSignatures */
+                            containerImageSignatures?: (google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures|null);
+                        }
+
+                        /** Represents an AllowedPrincipalTags. */
+                        class AllowedPrincipalTags implements IAllowedPrincipalTags {
+
+                            /**
+                             * Constructs a new AllowedPrincipalTags.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags);
+
+                            /** AllowedPrincipalTags containerImageSignatures. */
+                            public containerImageSignatures?: (google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures|null);
+
+                            /**
+                             * Creates a new AllowedPrincipalTags instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AllowedPrincipalTags instance
+                             */
+                            public static create(properties?: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags;
+
+                            /**
+                             * Encodes the specified AllowedPrincipalTags message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.verify|verify} messages.
+                             * @param message AllowedPrincipalTags message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AllowedPrincipalTags message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.verify|verify} messages.
+                             * @param message AllowedPrincipalTags message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AllowedPrincipalTags message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AllowedPrincipalTags
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags;
+
+                            /**
+                             * Decodes an AllowedPrincipalTags message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AllowedPrincipalTags
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags;
+
+                            /**
+                             * Verifies an AllowedPrincipalTags message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AllowedPrincipalTags message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AllowedPrincipalTags
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags;
+
+                            /**
+                             * Creates a plain object from an AllowedPrincipalTags message. Also converts values to other types if specified.
+                             * @param message AllowedPrincipalTags
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AllowedPrincipalTags to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AllowedPrincipalTags
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace AllowedPrincipalTags {
+
+                            /** Properties of a ContainerImageSignatures. */
+                            interface IContainerImageSignatures {
+
+                                /** ContainerImageSignatures keyIds */
+                                keyIds?: (string[]|null);
+                            }
+
+                            /** Represents a ContainerImageSignatures. */
+                            class ContainerImageSignatures implements IContainerImageSignatures {
+
+                                /**
+                                 * Constructs a new ContainerImageSignatures.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures);
+
+                                /** ContainerImageSignatures keyIds. */
+                                public keyIds: string[];
+
+                                /**
+                                 * Creates a new ContainerImageSignatures instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ContainerImageSignatures instance
+                                 */
+                                public static create(properties?: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures;
+
+                                /**
+                                 * Encodes the specified ContainerImageSignatures message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.verify|verify} messages.
+                                 * @param message ContainerImageSignatures message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ContainerImageSignatures message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.verify|verify} messages.
+                                 * @param message ContainerImageSignatures message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ContainerImageSignatures message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ContainerImageSignatures
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures;
+
+                                /**
+                                 * Decodes a ContainerImageSignatures message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ContainerImageSignatures
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures;
+
+                                /**
+                                 * Verifies a ContainerImageSignatures message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ContainerImageSignatures message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ContainerImageSignatures
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures;
+
+                                /**
+                                 * Creates a plain object from a ContainerImageSignatures message. Also converts values to other types if specified.
+                                 * @param message ContainerImageSignatures
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ContainerImageSignatures to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ContainerImageSignatures
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
                 }
 
                 /** Properties of a TpmAttestation. */
