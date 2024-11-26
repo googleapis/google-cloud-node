@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1535,7 +1538,6 @@
               "nested": {
                 "v2": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Maps.Routing.V2",
                     "go_package": "cloud.google.com/go/maps/routing/apiv2/routingpb;routingpb",
                     "java_multiple_files": true,
@@ -1543,7 +1545,8 @@
                     "java_package": "com.google.maps.routing.v2",
                     "objc_class_prefix": "GMRV2",
                     "php_namespace": "Google\\Maps\\Routing\\V2",
-                    "ruby_package": "Google::Maps::Routing::V2"
+                    "ruby_package": "Google::Maps::Routing::V2",
+                    "cc_enable_arenas": true
                   },
                   "nested": {
                     "FallbackInfo": {
@@ -2089,7 +2092,8 @@
                         "ROUTE_LABEL_UNSPECIFIED": 0,
                         "DEFAULT_ROUTE": 1,
                         "DEFAULT_ROUTE_ALTERNATE": 2,
-                        "FUEL_EFFICIENT": 3
+                        "FUEL_EFFICIENT": 3,
+                        "SHORTER_DISTANCE": 4
                       }
                     },
                     "RouteTravelMode": {
@@ -2607,7 +2611,8 @@
                         "ReferenceRoute": {
                           "values": {
                             "REFERENCE_ROUTE_UNSPECIFIED": 0,
-                            "FUEL_EFFICIENT": 1
+                            "FUEL_EFFICIENT": 1,
+                            "SHORTER_DISTANCE": 2
                           }
                         },
                         "ExtraComputation": {

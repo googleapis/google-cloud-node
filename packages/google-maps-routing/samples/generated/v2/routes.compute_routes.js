@@ -134,7 +134,10 @@ function main(origin, destination) {
    *  request in addition to the default route. A reference route is a route with
    *  a different route calculation objective than the default route. For example
    *  a `FUEL_EFFICIENT` reference route calculation takes into account various
-   *  parameters that would generate an optimal fuel efficient route.
+   *  parameters that would generate an optimal fuel efficient route. When using
+   *  this feature, look for
+   *  `route_labels` google.maps.routing.v2.Route.route_labels  on the
+   *  resulting routes.
    */
   // const requestedReferenceRoutes = [1,2,3,4]
   /**

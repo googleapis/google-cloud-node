@@ -18841,6 +18841,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                             }
@@ -18947,6 +18948,10 @@
                                     case "FUEL_EFFICIENT":
                                     case 3:
                                         message.routeLabels[i] = 3;
+                                        break;
+                                    case "SHORTER_DISTANCE":
+                                    case 4:
+                                        message.routeLabels[i] = 4;
                                         break;
                                     }
                             }
@@ -23165,6 +23170,7 @@
                      * @property {number} DEFAULT_ROUTE=1 DEFAULT_ROUTE value
                      * @property {number} DEFAULT_ROUTE_ALTERNATE=2 DEFAULT_ROUTE_ALTERNATE value
                      * @property {number} FUEL_EFFICIENT=3 FUEL_EFFICIENT value
+                     * @property {number} SHORTER_DISTANCE=4 SHORTER_DISTANCE value
                      */
                     v2.RouteLabel = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -23172,6 +23178,7 @@
                         values[valuesById[1] = "DEFAULT_ROUTE"] = 1;
                         values[valuesById[2] = "DEFAULT_ROUTE_ALTERNATE"] = 2;
                         values[valuesById[3] = "FUEL_EFFICIENT"] = 3;
+                        values[valuesById[4] = "SHORTER_DISTANCE"] = 4;
                         return values;
                     })();
     
@@ -27021,6 +27028,7 @@
                                         return "requestedReferenceRoutes: enum value[] expected";
                                     case 0:
                                     case 1:
+                                    case 2:
                                         break;
                                     }
                             }
@@ -27247,6 +27255,10 @@
                                     case 1:
                                         message.requestedReferenceRoutes[i] = 1;
                                         break;
+                                    case "SHORTER_DISTANCE":
+                                    case 2:
+                                        message.requestedReferenceRoutes[i] = 2;
+                                        break;
                                     }
                             }
                             if (object.extraComputations) {
@@ -27432,11 +27444,13 @@
                          * @enum {number}
                          * @property {number} REFERENCE_ROUTE_UNSPECIFIED=0 REFERENCE_ROUTE_UNSPECIFIED value
                          * @property {number} FUEL_EFFICIENT=1 FUEL_EFFICIENT value
+                         * @property {number} SHORTER_DISTANCE=2 SHORTER_DISTANCE value
                          */
                         ComputeRoutesRequest.ReferenceRoute = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "REFERENCE_ROUTE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "FUEL_EFFICIENT"] = 1;
+                            values[valuesById[2] = "SHORTER_DISTANCE"] = 2;
                             return values;
                         })();
     
