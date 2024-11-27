@@ -683,6 +683,9 @@ export namespace google {
 
                     /** Product productName */
                     productName?: (string|null);
+
+                    /** Product id */
+                    id?: (string|null);
                 }
 
                 /** Represents a Product. */
@@ -696,6 +699,9 @@ export namespace google {
 
                     /** Product productName. */
                     public productName: string;
+
+                    /** Product id. */
+                    public id: string;
 
                     /**
                      * Creates a new Product instance using the specified properties.

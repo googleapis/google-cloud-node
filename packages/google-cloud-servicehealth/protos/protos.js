@@ -2157,6 +2157,7 @@
                          * @memberof google.cloud.servicehealth.v1
                          * @interface IProduct
                          * @property {string|null} [productName] Product productName
+                         * @property {string|null} [id] Product id
                          */
     
                         /**
@@ -2181,6 +2182,14 @@
                          * @instance
                          */
                         Product.prototype.productName = "";
+    
+                        /**
+                         * Product id.
+                         * @member {string} id
+                         * @memberof google.cloud.servicehealth.v1.Product
+                         * @instance
+                         */
+                        Product.prototype.id = "";
     
                         /**
                          * Creates a new Product instance using the specified properties.
@@ -2208,6 +2217,8 @@
                                 writer = $Writer.create();
                             if (message.productName != null && Object.hasOwnProperty.call(message, "productName"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.productName);
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
                             return writer;
                         };
     
@@ -2244,6 +2255,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.productName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.id = reader.string();
                                         break;
                                     }
                                 default:
@@ -2284,6 +2299,9 @@
                             if (message.productName != null && message.hasOwnProperty("productName"))
                                 if (!$util.isString(message.productName))
                                     return "productName: string expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
                             return null;
                         };
     
@@ -2301,6 +2319,8 @@
                             var message = new $root.google.cloud.servicehealth.v1.Product();
                             if (object.productName != null)
                                 message.productName = String(object.productName);
+                            if (object.id != null)
+                                message.id = String(object.id);
                             return message;
                         };
     
@@ -2317,10 +2337,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.productName = "";
+                                object.id = "";
+                            }
                             if (message.productName != null && message.hasOwnProperty("productName"))
                                 object.productName = message.productName;
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
                             return object;
                         };
     

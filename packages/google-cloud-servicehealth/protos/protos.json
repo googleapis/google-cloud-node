@@ -374,6 +374,10 @@
                         "productName": {
                           "type": "string",
                           "id": 1
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
