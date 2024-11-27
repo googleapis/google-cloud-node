@@ -1384,7 +1384,7 @@
                             "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/jobs/*}:cancel",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "CancelJobResponse",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.batch.v1alpha.CancelJobResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.batch.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
@@ -1399,7 +1399,7 @@
                             },
                             {
                               "(google.longrunning.operation_info)": {
-                                "response_type": "CancelJobResponse",
+                                "response_type": "google.cloud.batch.v1alpha.CancelJobResponse",
                                 "metadata_type": "google.cloud.batch.v1alpha.OperationMetadata"
                               }
                             }
