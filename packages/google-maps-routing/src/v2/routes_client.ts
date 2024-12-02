@@ -492,7 +492,10 @@ export class RoutesClient {
    *   request in addition to the default route. A reference route is a route with
    *   a different route calculation objective than the default route. For example
    *   a `FUEL_EFFICIENT` reference route calculation takes into account various
-   *   parameters that would generate an optimal fuel efficient route.
+   *   parameters that would generate an optimal fuel efficient route. When using
+   *   this feature, look for
+   *   {@link protos.google.maps.routing.v2.Route.route_labels|`route_labels`} on the
+   *   resulting routes.
    * @param {number[]} [request.extraComputations]
    *   Optional. A list of extra computations which may be used to complete the
    *   request. Note: These extra computations may return extra fields on the

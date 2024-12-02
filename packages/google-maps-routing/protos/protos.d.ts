@@ -8576,7 +8576,8 @@ export namespace google {
                     ROUTE_LABEL_UNSPECIFIED = 0,
                     DEFAULT_ROUTE = 1,
                     DEFAULT_ROUTE_ALTERNATE = 2,
-                    FUEL_EFFICIENT = 3
+                    FUEL_EFFICIENT = 3,
+                    SHORTER_DISTANCE = 4
                 }
 
                 /** RouteTravelMode enum. */
@@ -9919,7 +9920,8 @@ export namespace google {
                     /** ReferenceRoute enum. */
                     enum ReferenceRoute {
                         REFERENCE_ROUTE_UNSPECIFIED = 0,
-                        FUEL_EFFICIENT = 1
+                        FUEL_EFFICIENT = 1,
+                        SHORTER_DISTANCE = 2
                     }
 
                     /** ExtraComputation enum. */
