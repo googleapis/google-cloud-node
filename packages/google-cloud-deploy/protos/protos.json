@@ -2205,6 +2205,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "dnsEndpoint": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3281,7 +3288,10 @@
                         },
                         "skaffoldVersion": {
                           "type": "string",
-                          "id": 19
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "targetArtifacts": {
                           "keyType": "string",
