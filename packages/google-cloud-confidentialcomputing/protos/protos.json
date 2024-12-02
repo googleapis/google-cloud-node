@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -74,7 +77,8 @@
                         "TOKEN_TYPE_UNSPECIFIED": 0,
                         "TOKEN_TYPE_OIDC": 1,
                         "TOKEN_TYPE_PKI": 2,
-                        "TOKEN_TYPE_LIMITED_AWS": 3
+                        "TOKEN_TYPE_LIMITED_AWS": 3,
+                        "TOKEN_TYPE_AWS_PRINCIPALTAGS": 4
                       }
                     },
                     "Challenge": {
@@ -280,7 +284,21 @@
                       }
                     },
                     "TokenOptions": {
+                      "oneofs": {
+                        "tokenTypeOptions": {
+                          "oneof": [
+                            "awsPrincipalTagsOptions"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "awsPrincipalTagsOptions": {
+                          "type": "AwsPrincipalTagsOptions",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "audience": {
                           "type": "string",
                           "id": 1,
@@ -301,6 +319,46 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AwsPrincipalTagsOptions": {
+                          "fields": {
+                            "allowedPrincipalTags": {
+                              "type": "AllowedPrincipalTags",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "AllowedPrincipalTags": {
+                              "fields": {
+                                "containerImageSignatures": {
+                                  "type": "ContainerImageSignatures",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ContainerImageSignatures": {
+                                  "fields": {
+                                    "keyIds": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }

@@ -193,6 +193,7 @@
                      * @property {number} TOKEN_TYPE_OIDC=1 TOKEN_TYPE_OIDC value
                      * @property {number} TOKEN_TYPE_PKI=2 TOKEN_TYPE_PKI value
                      * @property {number} TOKEN_TYPE_LIMITED_AWS=3 TOKEN_TYPE_LIMITED_AWS value
+                     * @property {number} TOKEN_TYPE_AWS_PRINCIPALTAGS=4 TOKEN_TYPE_AWS_PRINCIPALTAGS value
                      */
                     v1.TokenType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -200,6 +201,7 @@
                         values[valuesById[1] = "TOKEN_TYPE_OIDC"] = 1;
                         values[valuesById[2] = "TOKEN_TYPE_PKI"] = 2;
                         values[valuesById[3] = "TOKEN_TYPE_LIMITED_AWS"] = 3;
+                        values[valuesById[4] = "TOKEN_TYPE_AWS_PRINCIPALTAGS"] = 4;
                         return values;
                     })();
     
@@ -2167,6 +2169,7 @@
                          * Properties of a TokenOptions.
                          * @memberof google.cloud.confidentialcomputing.v1
                          * @interface ITokenOptions
+                         * @property {google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions|null} [awsPrincipalTagsOptions] TokenOptions awsPrincipalTagsOptions
                          * @property {string|null} [audience] TokenOptions audience
                          * @property {Array.<string>|null} [nonce] TokenOptions nonce
                          * @property {google.cloud.confidentialcomputing.v1.TokenType|null} [tokenType] TokenOptions tokenType
@@ -2187,6 +2190,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * TokenOptions awsPrincipalTagsOptions.
+                         * @member {google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions|null|undefined} awsPrincipalTagsOptions
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @instance
+                         */
+                        TokenOptions.prototype.awsPrincipalTagsOptions = null;
     
                         /**
                          * TokenOptions audience.
@@ -2211,6 +2222,20 @@
                          * @instance
                          */
                         TokenOptions.prototype.tokenType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TokenOptions tokenTypeOptions.
+                         * @member {"awsPrincipalTagsOptions"|undefined} tokenTypeOptions
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @instance
+                         */
+                        Object.defineProperty(TokenOptions.prototype, "tokenTypeOptions", {
+                            get: $util.oneOfGetter($oneOfFields = ["awsPrincipalTagsOptions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new TokenOptions instance using the specified properties.
@@ -2243,6 +2268,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.nonce[i]);
                             if (message.tokenType != null && Object.hasOwnProperty.call(message, "tokenType"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.tokenType);
+                            if (message.awsPrincipalTagsOptions != null && Object.hasOwnProperty.call(message, "awsPrincipalTagsOptions"))
+                                $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.encode(message.awsPrincipalTagsOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -2277,6 +2304,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 4: {
+                                        message.awsPrincipalTagsOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.audience = reader.string();
                                         break;
@@ -2326,6 +2357,15 @@
                         TokenOptions.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.awsPrincipalTagsOptions != null && message.hasOwnProperty("awsPrincipalTagsOptions")) {
+                                properties.tokenTypeOptions = 1;
+                                {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.verify(message.awsPrincipalTagsOptions);
+                                    if (error)
+                                        return "awsPrincipalTagsOptions." + error;
+                                }
+                            }
                             if (message.audience != null && message.hasOwnProperty("audience"))
                                 if (!$util.isString(message.audience))
                                     return "audience: string expected";
@@ -2344,6 +2384,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -2361,6 +2402,11 @@
                             if (object instanceof $root.google.cloud.confidentialcomputing.v1.TokenOptions)
                                 return object;
                             var message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions();
+                            if (object.awsPrincipalTagsOptions != null) {
+                                if (typeof object.awsPrincipalTagsOptions !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.TokenOptions.awsPrincipalTagsOptions: object expected");
+                                message.awsPrincipalTagsOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.fromObject(object.awsPrincipalTagsOptions);
+                            }
                             if (object.audience != null)
                                 message.audience = String(object.audience);
                             if (object.nonce) {
@@ -2392,6 +2438,10 @@
                             case "TOKEN_TYPE_LIMITED_AWS":
                             case 3:
                                 message.tokenType = 3;
+                                break;
+                            case "TOKEN_TYPE_AWS_PRINCIPALTAGS":
+                            case 4:
+                                message.tokenType = 4;
                                 break;
                             }
                             return message;
@@ -2425,6 +2475,11 @@
                             }
                             if (message.tokenType != null && message.hasOwnProperty("tokenType"))
                                 object.tokenType = options.enums === String ? $root.google.cloud.confidentialcomputing.v1.TokenType[message.tokenType] === undefined ? message.tokenType : $root.google.cloud.confidentialcomputing.v1.TokenType[message.tokenType] : message.tokenType;
+                            if (message.awsPrincipalTagsOptions != null && message.hasOwnProperty("awsPrincipalTagsOptions")) {
+                                object.awsPrincipalTagsOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.toObject(message.awsPrincipalTagsOptions, options);
+                                if (options.oneofs)
+                                    object.tokenTypeOptions = "awsPrincipalTagsOptions";
+                            }
                             return object;
                         };
     
@@ -2453,6 +2508,641 @@
                             }
                             return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.TokenOptions";
                         };
+    
+                        TokenOptions.AwsPrincipalTagsOptions = (function() {
+    
+                            /**
+                             * Properties of an AwsPrincipalTagsOptions.
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                             * @interface IAwsPrincipalTagsOptions
+                             * @property {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags|null} [allowedPrincipalTags] AwsPrincipalTagsOptions allowedPrincipalTags
+                             */
+    
+                            /**
+                             * Constructs a new AwsPrincipalTagsOptions.
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                             * @classdesc Represents an AwsPrincipalTagsOptions.
+                             * @implements IAwsPrincipalTagsOptions
+                             * @constructor
+                             * @param {google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions=} [properties] Properties to set
+                             */
+                            function AwsPrincipalTagsOptions(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AwsPrincipalTagsOptions allowedPrincipalTags.
+                             * @member {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags|null|undefined} allowedPrincipalTags
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @instance
+                             */
+                            AwsPrincipalTagsOptions.prototype.allowedPrincipalTags = null;
+    
+                            /**
+                             * Creates a new AwsPrincipalTagsOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions=} [properties] Properties to set
+                             * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions} AwsPrincipalTagsOptions instance
+                             */
+                            AwsPrincipalTagsOptions.create = function create(properties) {
+                                return new AwsPrincipalTagsOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AwsPrincipalTagsOptions message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions} message AwsPrincipalTagsOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsPrincipalTagsOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowedPrincipalTags != null && Object.hasOwnProperty.call(message, "allowedPrincipalTags"))
+                                    $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.encode(message.allowedPrincipalTags, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AwsPrincipalTagsOptions message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.TokenOptions.IAwsPrincipalTagsOptions} message AwsPrincipalTagsOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsPrincipalTagsOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AwsPrincipalTagsOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions} AwsPrincipalTagsOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsPrincipalTagsOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.allowedPrincipalTags = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AwsPrincipalTagsOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions} AwsPrincipalTagsOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsPrincipalTagsOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AwsPrincipalTagsOptions message.
+                             * @function verify
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AwsPrincipalTagsOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allowedPrincipalTags != null && message.hasOwnProperty("allowedPrincipalTags")) {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.verify(message.allowedPrincipalTags);
+                                    if (error)
+                                        return "allowedPrincipalTags." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AwsPrincipalTagsOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions} AwsPrincipalTagsOptions
+                             */
+                            AwsPrincipalTagsOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions)
+                                    return object;
+                                var message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions();
+                                if (object.allowedPrincipalTags != null) {
+                                    if (typeof object.allowedPrincipalTags !== "object")
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.allowedPrincipalTags: object expected");
+                                    message.allowedPrincipalTags = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.fromObject(object.allowedPrincipalTags);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AwsPrincipalTagsOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions} message AwsPrincipalTagsOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AwsPrincipalTagsOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.allowedPrincipalTags = null;
+                                if (message.allowedPrincipalTags != null && message.hasOwnProperty("allowedPrincipalTags"))
+                                    object.allowedPrincipalTags = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.toObject(message.allowedPrincipalTags, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AwsPrincipalTagsOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AwsPrincipalTagsOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AwsPrincipalTagsOptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AwsPrincipalTagsOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions";
+                            };
+    
+                            AwsPrincipalTagsOptions.AllowedPrincipalTags = (function() {
+    
+                                /**
+                                 * Properties of an AllowedPrincipalTags.
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                                 * @interface IAllowedPrincipalTags
+                                 * @property {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures|null} [containerImageSignatures] AllowedPrincipalTags containerImageSignatures
+                                 */
+    
+                                /**
+                                 * Constructs a new AllowedPrincipalTags.
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions
+                                 * @classdesc Represents an AllowedPrincipalTags.
+                                 * @implements IAllowedPrincipalTags
+                                 * @constructor
+                                 * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags=} [properties] Properties to set
+                                 */
+                                function AllowedPrincipalTags(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AllowedPrincipalTags containerImageSignatures.
+                                 * @member {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures|null|undefined} containerImageSignatures
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @instance
+                                 */
+                                AllowedPrincipalTags.prototype.containerImageSignatures = null;
+    
+                                /**
+                                 * Creates a new AllowedPrincipalTags instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags=} [properties] Properties to set
+                                 * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags} AllowedPrincipalTags instance
+                                 */
+                                AllowedPrincipalTags.create = function create(properties) {
+                                    return new AllowedPrincipalTags(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AllowedPrincipalTags message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags} message AllowedPrincipalTags message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AllowedPrincipalTags.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.containerImageSignatures != null && Object.hasOwnProperty.call(message, "containerImageSignatures"))
+                                        $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.encode(message.containerImageSignatures, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AllowedPrincipalTags message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.IAllowedPrincipalTags} message AllowedPrincipalTags message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AllowedPrincipalTags.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AllowedPrincipalTags message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags} AllowedPrincipalTags
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AllowedPrincipalTags.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.containerImageSignatures = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AllowedPrincipalTags message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags} AllowedPrincipalTags
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AllowedPrincipalTags.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AllowedPrincipalTags message.
+                                 * @function verify
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AllowedPrincipalTags.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.containerImageSignatures != null && message.hasOwnProperty("containerImageSignatures")) {
+                                        var error = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.verify(message.containerImageSignatures);
+                                        if (error)
+                                            return "containerImageSignatures." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AllowedPrincipalTags message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags} AllowedPrincipalTags
+                                 */
+                                AllowedPrincipalTags.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags)
+                                        return object;
+                                    var message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags();
+                                    if (object.containerImageSignatures != null) {
+                                        if (typeof object.containerImageSignatures !== "object")
+                                            throw TypeError(".google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.containerImageSignatures: object expected");
+                                        message.containerImageSignatures = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.fromObject(object.containerImageSignatures);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AllowedPrincipalTags message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags} message AllowedPrincipalTags
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AllowedPrincipalTags.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.containerImageSignatures = null;
+                                    if (message.containerImageSignatures != null && message.hasOwnProperty("containerImageSignatures"))
+                                        object.containerImageSignatures = $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.toObject(message.containerImageSignatures, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AllowedPrincipalTags to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AllowedPrincipalTags.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AllowedPrincipalTags
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AllowedPrincipalTags.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags";
+                                };
+    
+                                AllowedPrincipalTags.ContainerImageSignatures = (function() {
+    
+                                    /**
+                                     * Properties of a ContainerImageSignatures.
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                     * @interface IContainerImageSignatures
+                                     * @property {Array.<string>|null} [keyIds] ContainerImageSignatures keyIds
+                                     */
+    
+                                    /**
+                                     * Constructs a new ContainerImageSignatures.
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags
+                                     * @classdesc Represents a ContainerImageSignatures.
+                                     * @implements IContainerImageSignatures
+                                     * @constructor
+                                     * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures=} [properties] Properties to set
+                                     */
+                                    function ContainerImageSignatures(properties) {
+                                        this.keyIds = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ContainerImageSignatures keyIds.
+                                     * @member {Array.<string>} keyIds
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @instance
+                                     */
+                                    ContainerImageSignatures.prototype.keyIds = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new ContainerImageSignatures instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures=} [properties] Properties to set
+                                     * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures} ContainerImageSignatures instance
+                                     */
+                                    ContainerImageSignatures.create = function create(properties) {
+                                        return new ContainerImageSignatures(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ContainerImageSignatures message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures} message ContainerImageSignatures message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ContainerImageSignatures.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.keyIds != null && message.keyIds.length)
+                                            for (var i = 0; i < message.keyIds.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyIds[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ContainerImageSignatures message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.IContainerImageSignatures} message ContainerImageSignatures message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ContainerImageSignatures.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ContainerImageSignatures message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures} ContainerImageSignatures
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ContainerImageSignatures.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.keyIds && message.keyIds.length))
+                                                        message.keyIds = [];
+                                                    message.keyIds.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ContainerImageSignatures message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures} ContainerImageSignatures
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ContainerImageSignatures.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ContainerImageSignatures message.
+                                     * @function verify
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ContainerImageSignatures.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.keyIds != null && message.hasOwnProperty("keyIds")) {
+                                            if (!Array.isArray(message.keyIds))
+                                                return "keyIds: array expected";
+                                            for (var i = 0; i < message.keyIds.length; ++i)
+                                                if (!$util.isString(message.keyIds[i]))
+                                                    return "keyIds: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ContainerImageSignatures message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures} ContainerImageSignatures
+                                     */
+                                    ContainerImageSignatures.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures)
+                                            return object;
+                                        var message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures();
+                                        if (object.keyIds) {
+                                            if (!Array.isArray(object.keyIds))
+                                                throw TypeError(".google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures.keyIds: array expected");
+                                            message.keyIds = [];
+                                            for (var i = 0; i < object.keyIds.length; ++i)
+                                                message.keyIds[i] = String(object.keyIds[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ContainerImageSignatures message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures} message ContainerImageSignatures
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ContainerImageSignatures.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.keyIds = [];
+                                        if (message.keyIds && message.keyIds.length) {
+                                            object.keyIds = [];
+                                            for (var j = 0; j < message.keyIds.length; ++j)
+                                                object.keyIds[j] = message.keyIds[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ContainerImageSignatures to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ContainerImageSignatures.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ContainerImageSignatures
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ContainerImageSignatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.TokenOptions.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures";
+                                    };
+    
+                                    return ContainerImageSignatures;
+                                })();
+    
+                                return AllowedPrincipalTags;
+                            })();
+    
+                            return AwsPrincipalTagsOptions;
+                        })();
     
                         return TokenOptions;
                     })();
