@@ -3281,10 +3281,7 @@
                         },
                         "skaffoldVersion": {
                           "type": "string",
-                          "id": 19,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 19
                         },
                         "targetArtifacts": {
                           "keyType": "string",
