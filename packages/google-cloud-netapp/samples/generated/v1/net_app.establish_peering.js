@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, snapshot, snapshotId) {
-  // [START netapp_v1_generated_NetApp_CreateSnapshot_async]
+function main(name, peerClusterName, peerSvmName, peerVolumeName) {
+  // [START netapp_v1_generated_NetApp_EstablishPeering_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,21 +29,29 @@ function main(parent, snapshot, snapshotId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The NetApp volume to create the snapshots of, in the format
-   *  `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+   *  Required. The resource name of the replication, in the format of
+   *  projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. A snapshot resource
+   *  Required. Name of the user's local source cluster to be peered with the
+   *  destination cluster.
    */
-  // const snapshot = {}
+  // const peerClusterName = 'abc123'
   /**
-   *  Required. ID of the snapshot to create. Must be unique within the parent
-   *  resource. Must contain only letters, numbers and hyphen, with the first
-   *  character a letter, the last a letter or a
-   *  number, and a 63 character maximum.
+   *  Required. Name of the user's local source vserver svm to be peered with the
+   *  destination vserver svm.
    */
-  // const snapshotId = 'abc123'
+  // const peerSvmName = 'abc123'
+  /**
+   *  Optional. List of IPv4 ip addresses to be used for peering.
+   */
+  // const peerIpAddresses = ['abc','def']
+  /**
+   *  Required. Name of the user's local source volume to be peered with the
+   *  destination volume.
+   */
+  // const peerVolumeName = 'abc123'
 
   // Imports the Netapp library
   const {NetAppClient} = require('@google-cloud/netapp').v1;
@@ -51,22 +59,23 @@ function main(parent, snapshot, snapshotId) {
   // Instantiates a client
   const netappClient = new NetAppClient();
 
-  async function callCreateSnapshot() {
+  async function callEstablishPeering() {
     // Construct request
     const request = {
-      parent,
-      snapshot,
-      snapshotId,
+      name,
+      peerClusterName,
+      peerSvmName,
+      peerVolumeName,
     };
 
     // Run request
-    const [operation] = await netappClient.createSnapshot(request);
+    const [operation] = await netappClient.establishPeering(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateSnapshot();
-  // [END netapp_v1_generated_NetApp_CreateSnapshot_async]
+  callEstablishPeering();
+  // [END netapp_v1_generated_NetApp_EstablishPeering_async]
 }
 
 process.on('unhandledRejection', err => {

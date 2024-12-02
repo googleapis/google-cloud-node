@@ -1672,6 +1672,102 @@
             }
         },
         {
+            "regionTag": "netapp_v1_generated_NetApp_EstablishPeering_async",
+            "title": "NetApp establishPeering Sample",
+            "origin": "API_DEFINITION",
+            "description": " Establish replication peering.",
+            "canonical": true,
+            "file": "net_app.establish_peering.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 77,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "EstablishPeering",
+                "fullName": "google.cloud.netapp.v1.NetApp.EstablishPeering",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "peer_cluster_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "peer_svm_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "peer_ip_addresses",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "peer_volume_name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NetAppClient",
+                    "fullName": "google.cloud.netapp.v1.NetAppClient"
+                },
+                "method": {
+                    "shortName": "EstablishPeering",
+                    "fullName": "google.cloud.netapp.v1.NetApp.EstablishPeering",
+                    "service": {
+                        "shortName": "NetApp",
+                        "fullName": "google.cloud.netapp.v1.NetApp"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "netapp_v1_generated_NetApp_SyncReplication_async",
+            "title": "NetApp syncReplication Sample",
+            "origin": "API_DEFINITION",
+            "description": " Syncs the replication. This will invoke one time volume data transfer from source to destination.",
+            "canonical": true,
+            "file": "net_app.sync_replication.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SyncReplication",
+                "fullName": "google.cloud.netapp.v1.NetApp.SyncReplication",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NetAppClient",
+                    "fullName": "google.cloud.netapp.v1.NetAppClient"
+                },
+                "method": {
+                    "shortName": "SyncReplication",
+                    "fullName": "google.cloud.netapp.v1.NetApp.SyncReplication",
+                    "service": {
+                        "shortName": "NetApp",
+                        "fullName": "google.cloud.netapp.v1.NetApp"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "netapp_v1_generated_NetApp_CreateBackupVault_async",
             "title": "NetApp createBackupVault Sample",
             "origin": "API_DEFINITION",

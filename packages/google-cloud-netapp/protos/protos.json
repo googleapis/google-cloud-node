@@ -14,7 +14,7 @@
                     "csharp_namespace": "Google.Cloud.NetApp.V1",
                     "go_package": "cloud.google.com/go/netapp/apiv1/netapppb;netapppb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "VolumeProto",
+                    "java_outer_classname": "StoragePoolProto",
                     "java_package": "com.google.cloud.netapp.v1",
                     "php_namespace": "Google\\Cloud\\NetApp\\V1",
                     "ruby_package": "Google::Cloud::NetApp::V1",
@@ -282,7 +282,8 @@
                             "UPDATING": 3,
                             "IN_USE": 4,
                             "DELETING": 5,
-                            "ERROR": 6
+                            "ERROR": 6,
+                            "DIAGNOSING": 7
                           }
                         }
                       }
@@ -1781,6 +1782,54 @@
                             }
                           ]
                         },
+                        "EstablishPeering": {
+                          "requestType": "EstablishPeeringRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/volumes/*/replications/*}:establishPeering",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Replication",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/volumes/*/replications/*}:establishPeering",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Replication",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SyncReplication": {
+                          "requestType": "SyncReplicationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/volumes/*/replications/*}:sync",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Replication",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/volumes/*/replications/*}:sync",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Replication",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "CreateBackupVault": {
                           "requestType": "CreateBackupVaultRequest",
                           "responseType": "google.longrunning.Operation",
@@ -2659,6 +2708,27 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "netapp.googleapis.com/Volume"
                           }
+                        },
+                        "hybridPeeringDetails": {
+                          "type": "HybridPeeringDetails",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clusterLocation": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hybridReplicationType": {
+                          "type": "HybridReplicationType",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2669,7 +2739,9 @@
                             "READY": 2,
                             "UPDATING": 3,
                             "DELETING": 5,
-                            "ERROR": 6
+                            "ERROR": 6,
+                            "PENDING_CLUSTER_PEERING": 8,
+                            "PENDING_SVM_PEERING": 9
                           }
                         },
                         "ReplicationRole": {
@@ -2693,7 +2765,48 @@
                             "PREPARING": 1,
                             "MIRRORED": 2,
                             "STOPPED": 3,
-                            "TRANSFERRING": 4
+                            "TRANSFERRING": 4,
+                            "BASELINE_TRANSFERRING": 5,
+                            "ABORTED": 6
+                          }
+                        },
+                        "HybridReplicationType": {
+                          "values": {
+                            "HYBRID_REPLICATION_TYPE_UNSPECIFIED": 0,
+                            "MIGRATION": 1,
+                            "CONTINUOUS_REPLICATION": 2
+                          }
+                        }
+                      }
+                    },
+                    "HybridPeeringDetails": {
+                      "fields": {
+                        "subnetIp": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "command": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "commandExpiryTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "passphrase": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2762,6 +2875,11 @@
                           "oneof": [
                             "description"
                           ]
+                        },
+                        "_tieringPolicy": {
+                          "oneof": [
+                            "tieringPolicy"
+                          ]
                         }
                       },
                       "fields": {
@@ -2785,6 +2903,14 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "tieringPolicy": {
+                          "type": "TieringPolicy",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -2886,525 +3012,55 @@
                         }
                       }
                     },
-                    "ListSnapshotsRequest": {
+                    "EstablishPeeringRequest": {
                       "fields": {
-                        "parent": {
+                        "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/Snapshot"
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Replication"
                           }
                         },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
+                        "peerClusterName": {
                           "type": "string",
-                          "id": 3
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
-                        "orderBy": {
+                        "peerSvmName": {
                           "type": "string",
-                          "id": 4
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
-                        "filter": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ListSnapshotsResponse": {
-                      "fields": {
-                        "snapshots": {
+                        "peerIpAddresses": {
                           "rule": "repeated",
-                          "type": "Snapshot",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetSnapshotRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "netapp.googleapis.com/Snapshot"
-                          }
-                        }
-                      }
-                    },
-                    "CreateSnapshotRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/Snapshot"
-                          }
-                        },
-                        "snapshot": {
-                          "type": "Snapshot",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "snapshotId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteSnapshotRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "netapp.googleapis.com/Snapshot"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateSnapshotRequest": {
-                      "fields": {
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "snapshot": {
-                          "type": "Snapshot",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "Snapshot": {
-                      "options": {
-                        "(google.api.resource).type": "netapp.googleapis.com/Snapshot",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}/snapshots/{snapshot}",
-                        "(google.api.resource).plural": "snapshots",
-                        "(google.api.resource).singular": "snapshot"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "stateDetails": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "usedBytes": {
-                          "type": "double",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 7
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "READY": 1,
-                            "CREATING": 2,
-                            "DELETING": 3,
-                            "UPDATING": 4,
-                            "DISABLED": 5,
-                            "ERROR": 6
-                          }
-                        }
-                      }
-                    },
-                    "GetStoragePoolRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
-                          }
-                        }
-                      }
-                    },
-                    "ListStoragePoolsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/StoragePool"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "orderBy": {
                           "type": "string",
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "filter": {
+                        "peerVolumeName": {
                           "type": "string",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListStoragePoolsResponse": {
-                      "fields": {
-                        "storagePools": {
-                          "rule": "repeated",
-                          "type": "StoragePool",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "CreateStoragePoolRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/StoragePool"
-                          }
-                        },
-                        "storagePoolId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "storagePool": {
-                          "type": "StoragePool",
-                          "id": 3,
-                          "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
                     },
-                    "UpdateStoragePoolRequest": {
-                      "fields": {
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "storagePool": {
-                          "type": "StoragePool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteStoragePoolRequest": {
+                    "SyncReplicationRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
-                          }
-                        }
-                      }
-                    },
-                    "SwitchActiveReplicaZoneRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
-                          }
-                        }
-                      }
-                    },
-                    "StoragePool": {
-                      "options": {
-                        "(google.api.resource).type": "netapp.googleapis.com/StoragePool",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/storagePools/{storage_pool}",
-                        "(google.api.resource).plural": "storagePools",
-                        "(google.api.resource).singular": "storagePool"
-                      },
-                      "oneofs": {
-                        "_globalAccessAllowed": {
-                          "oneof": [
-                            "globalAccessAllowed"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
-                        },
-                        "serviceLevel": {
-                          "type": "ServiceLevel",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "capacityGib": {
-                          "type": "int64",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "volumeCapacityGib": {
-                          "type": "int64",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "volumeCount": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "stateDetails": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
-                        },
-                        "activeDirectory": {
-                          "type": "string",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "netapp.googleapis.com/ActiveDirectory"
-                          }
-                        },
-                        "kmsConfig": {
-                          "type": "string",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "netapp.googleapis.com/KmsConfig"
-                          }
-                        },
-                        "ldapEnabled": {
-                          "type": "bool",
-                          "id": 14,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "psaRange": {
-                          "type": "string",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "encryptionType": {
-                          "type": "EncryptionType",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "globalAccessAllowed": {
-                          "type": "bool",
-                          "id": 17,
-                          "options": {
-                            "deprecated": true,
-                            "proto3_optional": true
-                          }
-                        },
-                        "allowAutoTiering": {
-                          "type": "bool",
-                          "id": 18,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "replicaZone": {
-                          "type": "string",
-                          "id": 20,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "zone": {
-                          "type": "string",
-                          "id": 21,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "READY": 1,
-                            "CREATING": 2,
-                            "DELETING": 3,
-                            "UPDATING": 4,
-                            "RESTORING": 5,
-                            "DISABLED": 6,
-                            "ERROR": 7
-                          }
-                        }
-                      }
-                    },
-                    "ServiceLevel": {
-                      "values": {
-                        "SERVICE_LEVEL_UNSPECIFIED": 0,
-                        "PREMIUM": 1,
-                        "EXTREME": 2,
-                        "STANDARD": 3,
-                        "FLEX": 4
-                      }
-                    },
-                    "EncryptionType": {
-                      "values": {
-                        "ENCRYPTION_TYPE_UNSPECIFIED": 0,
-                        "SERVICE_MANAGED": 1,
-                        "CLOUD_KMS": 2
-                      }
-                    },
-                    "LocationMetadata": {
-                      "fields": {
-                        "supportedServiceLevels": {
-                          "rule": "repeated",
-                          "type": "ServiceLevel",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Replication"
                           }
                         }
                       }
@@ -3876,6 +3532,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "hybridReplicationParameters": {
+                          "type": "HybridReplicationParameters",
+                          "id": 40,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3888,7 +3551,9 @@
                             "UPDATING": 4,
                             "RESTORING": 5,
                             "DISABLED": 6,
-                            "ERROR": 7
+                            "ERROR": 7,
+                            "PREPARING": 8,
+                            "READ_ONLY": 9
                           }
                         }
                       }
@@ -4418,6 +4083,592 @@
                           }
                         }
                       }
+                    },
+                    "HybridReplicationParameters": {
+                      "fields": {
+                        "replication": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Replication"
+                          }
+                        },
+                        "peerVolumeName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "peerClusterName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "peerSvmName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "peerIpAddresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clusterLocation": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ServiceLevel": {
+                      "values": {
+                        "SERVICE_LEVEL_UNSPECIFIED": 0,
+                        "PREMIUM": 1,
+                        "EXTREME": 2,
+                        "STANDARD": 3,
+                        "FLEX": 4
+                      }
+                    },
+                    "EncryptionType": {
+                      "values": {
+                        "ENCRYPTION_TYPE_UNSPECIFIED": 0,
+                        "SERVICE_MANAGED": 1,
+                        "CLOUD_KMS": 2
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "supportedServiceLevels": {
+                          "rule": "repeated",
+                          "type": "ServiceLevel",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListSnapshotsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/Snapshot"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListSnapshotsResponse": {
+                      "fields": {
+                        "snapshots": {
+                          "rule": "repeated",
+                          "type": "Snapshot",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Snapshot"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSnapshotRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/Snapshot"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "Snapshot",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshotId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Snapshot"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateSnapshotRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "Snapshot",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Snapshot": {
+                      "options": {
+                        "(google.api.resource).type": "netapp.googleapis.com/Snapshot",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}/snapshots/{snapshot}",
+                        "(google.api.resource).plural": "snapshots",
+                        "(google.api.resource).singular": "snapshot"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateDetails": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "usedBytes": {
+                          "type": "double",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "READY": 1,
+                            "CREATING": 2,
+                            "DELETING": 3,
+                            "UPDATING": 4,
+                            "DISABLED": 5,
+                            "ERROR": 6
+                          }
+                        }
+                      }
+                    },
+                    "GetStoragePoolRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        }
+                      }
+                    },
+                    "ListStoragePoolsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/StoragePool"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListStoragePoolsResponse": {
+                      "fields": {
+                        "storagePools": {
+                          "rule": "repeated",
+                          "type": "StoragePool",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateStoragePoolRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "netapp.googleapis.com/StoragePool"
+                          }
+                        },
+                        "storagePoolId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "storagePool": {
+                          "type": "StoragePool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateStoragePoolRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "storagePool": {
+                          "type": "StoragePool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteStoragePoolRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        }
+                      }
+                    },
+                    "SwitchActiveReplicaZoneRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        }
+                      }
+                    },
+                    "StoragePool": {
+                      "options": {
+                        "(google.api.resource).type": "netapp.googleapis.com/StoragePool",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/storagePools/{storage_pool}",
+                        "(google.api.resource).plural": "storagePools",
+                        "(google.api.resource).singular": "storagePool"
+                      },
+                      "oneofs": {
+                        "_globalAccessAllowed": {
+                          "oneof": [
+                            "globalAccessAllowed"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "serviceLevel": {
+                          "type": "ServiceLevel",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "capacityGib": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "volumeCapacityGib": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "volumeCount": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateDetails": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "activeDirectory": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/ActiveDirectory"
+                          }
+                        },
+                        "kmsConfig": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/KmsConfig"
+                          }
+                        },
+                        "ldapEnabled": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "psaRange": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionType": {
+                          "type": "EncryptionType",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "globalAccessAllowed": {
+                          "type": "bool",
+                          "id": 17,
+                          "options": {
+                            "deprecated": true,
+                            "proto3_optional": true
+                          }
+                        },
+                        "allowAutoTiering": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "replicaZone": {
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "READY": 1,
+                            "CREATING": 2,
+                            "DELETING": 3,
+                            "UPDATING": 4,
+                            "RESTORING": 5,
+                            "DISABLED": 6,
+                            "ERROR": 7
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -4427,9 +4678,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -4911,6 +5162,30 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             }
           }

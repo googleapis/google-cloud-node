@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, snapshot, snapshotId) {
-  // [START netapp_v1_generated_NetApp_CreateSnapshot_async]
+function main(name) {
+  // [START netapp_v1_generated_NetApp_SyncReplication_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,21 +29,10 @@ function main(parent, snapshot, snapshotId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The NetApp volume to create the snapshots of, in the format
-   *  `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+   *  Required. The resource name of the replication, in the format of
+   *  projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. A snapshot resource
-   */
-  // const snapshot = {}
-  /**
-   *  Required. ID of the snapshot to create. Must be unique within the parent
-   *  resource. Must contain only letters, numbers and hyphen, with the first
-   *  character a letter, the last a letter or a
-   *  number, and a 63 character maximum.
-   */
-  // const snapshotId = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Netapp library
   const {NetAppClient} = require('@google-cloud/netapp').v1;
@@ -51,22 +40,20 @@ function main(parent, snapshot, snapshotId) {
   // Instantiates a client
   const netappClient = new NetAppClient();
 
-  async function callCreateSnapshot() {
+  async function callSyncReplication() {
     // Construct request
     const request = {
-      parent,
-      snapshot,
-      snapshotId,
+      name,
     };
 
     // Run request
-    const [operation] = await netappClient.createSnapshot(request);
+    const [operation] = await netappClient.syncReplication(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateSnapshot();
-  // [END netapp_v1_generated_NetApp_CreateSnapshot_async]
+  callSyncReplication();
+  // [END netapp_v1_generated_NetApp_SyncReplication_async]
 }
 
 process.on('unhandledRejection', err => {
