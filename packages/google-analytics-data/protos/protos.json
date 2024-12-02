@@ -2878,7 +2878,8 @@
                             "stringFilter",
                             "inListFilter",
                             "numericFilter",
-                            "betweenFilter"
+                            "betweenFilter",
+                            "emptyFilter"
                           ]
                         }
                       },
@@ -2902,6 +2903,10 @@
                         "betweenFilter": {
                           "type": "BetweenFilter",
                           "id": 5
+                        },
+                        "emptyFilter": {
+                          "type": "EmptyFilter",
+                          "id": 6
                         }
                       }
                     },
@@ -3038,6 +3043,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "EmptyFilter": {
+                      "fields": {}
                     },
                     "NumericValue": {
                       "oneofs": {
@@ -3193,6 +3201,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "samplingMetadatas": {
+                          "rule": "repeated",
+                          "type": "SamplingMetadata",
+                          "id": 9
                         }
                       },
                       "nested": {
