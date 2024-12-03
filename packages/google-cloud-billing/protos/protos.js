@@ -475,6 +475,7 @@
                          * @property {string|null} [displayName] BillingAccount displayName
                          * @property {string|null} [masterBillingAccount] BillingAccount masterBillingAccount
                          * @property {string|null} [parent] BillingAccount parent
+                         * @property {string|null} [currencyCode] BillingAccount currencyCode
                          */
     
                         /**
@@ -533,6 +534,14 @@
                         BillingAccount.prototype.parent = "";
     
                         /**
+                         * BillingAccount currencyCode.
+                         * @member {string} currencyCode
+                         * @memberof google.cloud.billing.v1.BillingAccount
+                         * @instance
+                         */
+                        BillingAccount.prototype.currencyCode = "";
+    
+                        /**
                          * Creates a new BillingAccount instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.billing.v1.BillingAccount
@@ -566,6 +575,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.masterBillingAccount);
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.parent);
+                            if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.currencyCode);
                             return writer;
                         };
     
@@ -620,6 +631,10 @@
                                         message.parent = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.currencyCode = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -670,6 +685,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                if (!$util.isString(message.currencyCode))
+                                    return "currencyCode: string expected";
                             return null;
                         };
     
@@ -695,6 +713,8 @@
                                 message.masterBillingAccount = String(object.masterBillingAccount);
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.currencyCode != null)
+                                message.currencyCode = String(object.currencyCode);
                             return message;
                         };
     
@@ -717,6 +737,7 @@
                                 object.displayName = "";
                                 object.masterBillingAccount = "";
                                 object.parent = "";
+                                object.currencyCode = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -728,6 +749,8 @@
                                 object.masterBillingAccount = message.masterBillingAccount;
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                object.currencyCode = message.currencyCode;
                             return object;
                         };
     

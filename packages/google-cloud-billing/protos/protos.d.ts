@@ -298,6 +298,9 @@ export namespace google {
 
                     /** BillingAccount parent */
                     parent?: (string|null);
+
+                    /** BillingAccount currencyCode */
+                    currencyCode?: (string|null);
                 }
 
                 /** Represents a BillingAccount. */
@@ -323,6 +326,9 @@ export namespace google {
 
                     /** BillingAccount parent. */
                     public parent: string;
+
+                    /** BillingAccount currencyCode. */
+                    public currencyCode: string;
 
                     /**
                      * Creates a new BillingAccount instance using the specified properties.
