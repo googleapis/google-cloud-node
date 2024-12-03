@@ -316,6 +316,66 @@
             }
         },
         {
+            "regionTag": "networkconnectivity_v1_generated_HubService_QueryHubStatus_async",
+            "title": "HubService queryHubStatus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Query the Private Service Connect propagation status of a Network Connectivity Center hub.",
+            "canonical": true,
+            "file": "hub_service.query_hub_status.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 99,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryHubStatus",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.QueryHubStatus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "group_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.networkconnectivity.v1.QueryHubStatusResponse",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryHubStatus",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.QueryHubStatus",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "networkconnectivity_v1_generated_HubService_ListSpokes_async",
             "title": "HubService listSpokes Sample",
             "origin": "API_DEFINITION",
@@ -739,7 +799,7 @@
             "regionTag": "networkconnectivity_v1_generated_HubService_ListRoutes_async",
             "title": "HubService listRoutes Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists routes in a given project.",
+            "description": " Lists routes in a given route table.",
             "canonical": true,
             "file": "hub_service.list_routes.js",
             "language": "JAVASCRIPT",
@@ -795,7 +855,7 @@
             "regionTag": "networkconnectivity_v1_generated_HubService_ListRouteTables_async",
             "title": "HubService listRouteTables Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists route tables in a given project.",
+            "description": " Lists route tables in a given hub.",
             "canonical": true,
             "file": "hub_service.list_route_tables.js",
             "language": "JAVASCRIPT",
@@ -936,6 +996,54 @@
                 "method": {
                     "shortName": "ListGroups",
                     "fullName": "google.cloud.networkconnectivity.v1.HubService.ListGroups",
+                    "service": {
+                        "shortName": "HubService",
+                        "fullName": "google.cloud.networkconnectivity.v1.HubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "networkconnectivity_v1_generated_HubService_UpdateGroup_async",
+            "title": "HubService updateGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the parameters of a Network Connectivity Center group.",
+            "canonical": true,
+            "file": "hub_service.update_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 77,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateGroup",
+                "fullName": "google.cloud.networkconnectivity.v1.HubService.UpdateGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "group",
+                        "type": ".google.cloud.networkconnectivity.v1.Group"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "HubServiceClient",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateGroup",
+                    "fullName": "google.cloud.networkconnectivity.v1.HubService.UpdateGroup",
                     "service": {
                         "shortName": "HubService",
                         "fullName": "google.cloud.networkconnectivity.v1.HubService"

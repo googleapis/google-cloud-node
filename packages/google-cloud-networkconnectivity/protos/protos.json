@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -207,6 +210,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/global/hubs/*}:listSpokes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "QueryHubStatus": {
+                          "requestType": "QueryHubStatusRequest",
+                          "responseType": "QueryHubStatusResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/global/hubs/*}:queryStatus",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/global/hubs/*}:queryStatus"
                               }
                             },
                             {
@@ -495,6 +516,34 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "UpdateGroup": {
+                          "requestType": "UpdateGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{group.name=projects/*/locations/global/hubs/*/groups/*}",
+                            "(google.api.http).body": "group",
+                            "(google.api.method_signature)": "group,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Group",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{group.name=projects/*/locations/global/hubs/*/groups/*}",
+                                "body": "group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "group,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Group",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -509,7 +558,8 @@
                       "values": {
                         "ROUTE_TYPE_UNSPECIFIED": 0,
                         "VPC_PRIMARY_SUBNET": 1,
-                        "VPC_SECONDARY_SUBNET": 2
+                        "VPC_SECONDARY_SUBNET": 2,
+                        "DYNAMIC_ROUTE": 3
                       }
                     },
                     "State": {
@@ -531,13 +581,34 @@
                         "VPN_TUNNEL": 1,
                         "INTERCONNECT_ATTACHMENT": 2,
                         "ROUTER_APPLIANCE": 3,
-                        "VPC_NETWORK": 4
+                        "VPC_NETWORK": 4,
+                        "PRODUCER_VPC_NETWORK": 7
+                      }
+                    },
+                    "PolicyMode": {
+                      "values": {
+                        "POLICY_MODE_UNSPECIFIED": 0,
+                        "PRESET": 1
+                      }
+                    },
+                    "PresetTopology": {
+                      "values": {
+                        "PRESET_TOPOLOGY_UNSPECIFIED": 0,
+                        "MESH": 2,
+                        "STAR": 3
                       }
                     },
                     "Hub": {
                       "options": {
                         "(google.api.resource).type": "networkconnectivity.googleapis.com/Hub",
                         "(google.api.resource).pattern": "projects/{project}/locations/global/hubs/{hub}"
+                      },
+                      "oneofs": {
+                        "_exportPsc": {
+                          "oneof": [
+                            "exportPsc"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
@@ -602,6 +673,28 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "policyMode": {
+                          "type": "PolicyMode",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "presetTopology": {
+                          "type": "PresetTopology",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exportPsc": {
+                          "type": "bool",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -691,6 +784,13 @@
                         "linkedVpcNetwork": {
                           "type": "LinkedVpcNetwork",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "linkedProducerVpcNetwork": {
+                          "type": "LinkedProducerVpcNetwork",
+                          "id": 26,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -889,6 +989,34 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "priority": {
+                          "type": "int64",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextHopVpnTunnel": {
+                          "type": "NextHopVPNTunnel",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "nextHopRouterApplianceInstance": {
+                          "type": "NextHopRouterApplianceInstance",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "nextHopInterconnectAttachment": {
+                          "type": "NextHopInterconnectAttachment",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
@@ -947,6 +1075,29 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "autoAccept": {
+                          "type": "AutoAccept",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "routeTable": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AutoAccept": {
+                      "fields": {
+                        "autoAcceptProjects": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1146,6 +1297,127 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "QueryHubStatusRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "groupBy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryHubStatusResponse": {
+                      "fields": {
+                        "hubStatusEntries": {
+                          "rule": "repeated",
+                          "type": "HubStatusEntry",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "HubStatusEntry": {
+                      "fields": {
+                        "count": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "groupBy": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pscPropagationStatus": {
+                          "type": "PscPropagationStatus",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PscPropagationStatus": {
+                      "fields": {
+                        "sourceSpoke": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceGroup": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sourceForwardingRule": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "targetSpoke": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "targetGroup": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "code": {
+                          "type": "Code",
+                          "id": 6
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "Code": {
+                          "values": {
+                            "CODE_UNSPECIFIED": 0,
+                            "READY": 1,
+                            "PROPAGATING": 2,
+                            "ERROR_PRODUCER_PROPAGATED_CONNECTION_LIMIT_EXCEEDED": 3,
+                            "ERROR_PRODUCER_NAT_IP_SPACE_EXHAUSTED": 4,
+                            "ERROR_PRODUCER_QUOTA_EXCEEDED": 5,
+                            "ERROR_CONSUMER_QUOTA_EXCEEDED": 6
+                          }
                         }
                       }
                     },
@@ -1544,6 +1816,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        },
+                        "includeImportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1568,6 +1848,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        },
+                        "includeImportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1589,6 +1877,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        },
+                        "includeImportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1606,6 +1902,74 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "producerVpcSpokes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
+                          }
+                        }
+                      }
+                    },
+                    "LinkedProducerVpcNetwork": {
+                      "fields": {
+                        "network": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "serviceConsumerVpcSpoke": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
+                          }
+                        },
+                        "peering": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "producerNetwork": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "excludeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1644,6 +2008,72 @@
                           "options": {
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        }
+                      }
+                    },
+                    "NextHopVPNTunnel": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/VpnTunnel"
+                          }
+                        },
+                        "vpcNetwork": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "siteToSiteDataTransfer": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "NextHopRouterApplianceInstance": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Instance"
+                          }
+                        },
+                        "vpcNetwork": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "siteToSiteDataTransfer": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "NextHopInterconnectAttachment": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/InterconnectAttachment"
+                          }
+                        },
+                        "vpcNetwork": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "siteToSiteDataTransfer": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -1739,6 +2169,31 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Group"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateGroupRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "group": {
+                          "type": "Group",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2933,9 +3388,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -3417,6 +3872,30 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             }
           }
