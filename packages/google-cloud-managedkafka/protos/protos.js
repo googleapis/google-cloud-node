@@ -4666,6 +4666,8 @@
                          * @property {google.cloud.managedkafka.v1.ICapacityConfig|null} [capacityConfig] Cluster capacityConfig
                          * @property {google.cloud.managedkafka.v1.IRebalanceConfig|null} [rebalanceConfig] Cluster rebalanceConfig
                          * @property {google.cloud.managedkafka.v1.Cluster.State|null} [state] Cluster state
+                         * @property {boolean|null} [satisfiesPzi] Cluster satisfiesPzi
+                         * @property {boolean|null} [satisfiesPzs] Cluster satisfiesPzs
                          */
     
                         /**
@@ -4748,6 +4750,22 @@
                          */
                         Cluster.prototype.state = 0;
     
+                        /**
+                         * Cluster satisfiesPzi.
+                         * @member {boolean|null|undefined} satisfiesPzi
+                         * @memberof google.cloud.managedkafka.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.satisfiesPzi = null;
+    
+                        /**
+                         * Cluster satisfiesPzs.
+                         * @member {boolean|null|undefined} satisfiesPzs
+                         * @memberof google.cloud.managedkafka.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.satisfiesPzs = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -4759,6 +4777,28 @@
                          */
                         Object.defineProperty(Cluster.prototype, "platformConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["gcpConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Cluster _satisfiesPzi.
+                         * @member {"satisfiesPzi"|undefined} _satisfiesPzi
+                         * @memberof google.cloud.managedkafka.v1.Cluster
+                         * @instance
+                         */
+                        Object.defineProperty(Cluster.prototype, "_satisfiesPzi", {
+                            get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Cluster _satisfiesPzs.
+                         * @member {"satisfiesPzs"|undefined} _satisfiesPzs
+                         * @memberof google.cloud.managedkafka.v1.Cluster
+                         * @instance
+                         */
+                        Object.defineProperty(Cluster.prototype, "_satisfiesPzs", {
+                            get: $util.oneOfGetter($oneOfFields = ["satisfiesPzs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4803,6 +4843,10 @@
                                 $root.google.cloud.managedkafka.v1.GcpConfig.encode(message.gcpConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.satisfiesPzi);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.satisfiesPzs);
                             return writer;
                         };
     
@@ -4886,6 +4930,14 @@
                                     }
                                 case 10: {
                                         message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.satisfiesPzs = reader.bool();
                                         break;
                                     }
                                 default:
@@ -4973,6 +5025,16 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                                properties._satisfiesPzi = 1;
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
+                            }
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs")) {
+                                properties._satisfiesPzs = 1;
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            }
                             return null;
                         };
     
@@ -5046,6 +5108,10 @@
                                 message.state = 3;
                                 break;
                             }
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             return message;
                         };
     
@@ -5095,6 +5161,16 @@
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.managedkafka.v1.Cluster.State[message.state] === undefined ? message.state : $root.google.cloud.managedkafka.v1.Cluster.State[message.state] : message.state;
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                                object.satisfiesPzi = message.satisfiesPzi;
+                                if (options.oneofs)
+                                    object._satisfiesPzi = "satisfiesPzi";
+                            }
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs")) {
+                                object.satisfiesPzs = message.satisfiesPzs;
+                                if (options.oneofs)
+                                    object._satisfiesPzs = "satisfiesPzs";
+                            }
                             return object;
                         };
     
