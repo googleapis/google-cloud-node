@@ -120,6 +120,20 @@ export namespace google {
                         public updateReservation(request: google.cloud.bigquery.reservation.v1.IUpdateReservationRequest): Promise<google.cloud.bigquery.reservation.v1.Reservation>;
 
                         /**
+                         * Calls FailoverReservation.
+                         * @param request FailoverReservationRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Reservation
+                         */
+                        public failoverReservation(request: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.FailoverReservationCallback): void;
+
+                        /**
+                         * Calls FailoverReservation.
+                         * @param request FailoverReservationRequest message or plain object
+                         * @returns Promise
+                         */
+                        public failoverReservation(request: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest): Promise<google.cloud.bigquery.reservation.v1.Reservation>;
+
+                        /**
                          * Calls CreateCapacityCommitment.
                          * @param request CreateCapacityCommitmentRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and CapacityCommitment
@@ -382,6 +396,13 @@ export namespace google {
                         type UpdateReservationCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.Reservation) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|failoverReservation}.
+                         * @param error Error, if any
+                         * @param [response] Reservation
+                         */
+                        type FailoverReservationCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.Reservation) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|createCapacityCommitment}.
                          * @param error Error, if any
                          * @param [response] CapacityCommitment
@@ -523,6 +544,15 @@ export namespace google {
 
                         /** Reservation edition */
                         edition?: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition|null);
+
+                        /** Reservation primaryLocation */
+                        primaryLocation?: (string|null);
+
+                        /** Reservation secondaryLocation */
+                        secondaryLocation?: (string|null);
+
+                        /** Reservation originalPrimaryLocation */
+                        originalPrimaryLocation?: (string|null);
                     }
 
                     /** Represents a Reservation. */
@@ -560,6 +590,15 @@ export namespace google {
 
                         /** Reservation edition. */
                         public edition: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition);
+
+                        /** Reservation primaryLocation. */
+                        public primaryLocation: string;
+
+                        /** Reservation secondaryLocation. */
+                        public secondaryLocation: string;
+
+                        /** Reservation originalPrimaryLocation. */
+                        public originalPrimaryLocation: string;
 
                         /**
                          * Creates a new Reservation instance using the specified properties.
@@ -777,6 +816,9 @@ export namespace google {
 
                         /** CapacityCommitment edition */
                         edition?: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition|null);
+
+                        /** CapacityCommitment isFlatRate */
+                        isFlatRate?: (boolean|null);
                     }
 
                     /** Represents a CapacityCommitment. */
@@ -817,6 +859,9 @@ export namespace google {
 
                         /** CapacityCommitment edition. */
                         public edition: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition);
+
+                        /** CapacityCommitment isFlatRate. */
+                        public isFlatRate: boolean;
 
                         /**
                          * Creates a new CapacityCommitment instance using the specified properties.
@@ -1533,6 +1578,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for UpdateReservationRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FailoverReservationRequest. */
+                    interface IFailoverReservationRequest {
+
+                        /** FailoverReservationRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a FailoverReservationRequest. */
+                    class FailoverReservationRequest implements IFailoverReservationRequest {
+
+                        /**
+                         * Constructs a new FailoverReservationRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest);
+
+                        /** FailoverReservationRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new FailoverReservationRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FailoverReservationRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Encodes the specified FailoverReservationRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.FailoverReservationRequest.verify|verify} messages.
+                         * @param message FailoverReservationRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FailoverReservationRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.FailoverReservationRequest.verify|verify} messages.
+                         * @param message FailoverReservationRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IFailoverReservationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FailoverReservationRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FailoverReservationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Decodes a FailoverReservationRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FailoverReservationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Verifies a FailoverReservationRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FailoverReservationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FailoverReservationRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.FailoverReservationRequest;
+
+                        /**
+                         * Creates a plain object from a FailoverReservationRequest message. Also converts values to other types if specified.
+                         * @param message FailoverReservationRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.FailoverReservationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FailoverReservationRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FailoverReservationRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
