@@ -155,6 +155,7 @@ export class AdaptationClient {
     }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
+    // @ts-ignore
     this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
