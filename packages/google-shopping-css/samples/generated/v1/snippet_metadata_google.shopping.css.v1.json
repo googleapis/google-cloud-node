@@ -15,7 +15,7 @@
             "regionTag": "css_v1_generated_AccountLabelsService_ListAccountLabels_async",
             "title": "AccountLabelsService listAccountLabels Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists the labels assigned to an account.",
+            "description": " Lists the labels owned by an account.",
             "canonical": true,
             "file": "account_labels_service.list_account_labels.js",
             "language": "JAVASCRIPT",

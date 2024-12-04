@@ -668,7 +668,7 @@ export class AccountLabelsServiceClient {
   }
 
   /**
-   * Lists the labels assigned to an account.
+   * Lists the labels owned by an account.
    *
    * @param {Object} request
    *   The request object that will be sent.
