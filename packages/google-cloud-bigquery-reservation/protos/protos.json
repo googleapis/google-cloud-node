@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -115,6 +118,22 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "reservation,update_mask"
+                                }
+                              ]
+                            },
+                            "FailoverReservation": {
+                              "requestType": "FailoverReservationRequest",
+                              "responseType": "Reservation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{name=projects/*/locations/*/reservations/*}:failoverReservation",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/locations/*/reservations/*}:failoverReservation",
+                                    "body": "*"
+                                  }
                                 }
                               ]
                             },
@@ -475,6 +494,30 @@
                             "edition": {
                               "type": "Edition",
                               "id": 17
+                            },
+                            "primaryLocation": {
+                              "type": "string",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "secondaryLocation": {
+                              "type": "string",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "originalPrimaryLocation": {
+                              "type": "string",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
                             }
                           },
                           "nested": {
@@ -555,12 +598,22 @@
                             "edition": {
                               "type": "Edition",
                               "id": 12
+                            },
+                            "isFlatRate": {
+                              "type": "bool",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
                             "CommitmentPlan": {
                               "valuesOptions": {
                                 "FLEX_FLAT_RATE": {
+                                  "deprecated": true
+                                },
+                                "TRIAL": {
                                   "deprecated": true
                                 },
                                 "MONTHLY_FLAT_RATE": {
@@ -679,6 +732,18 @@
                             "updateMask": {
                               "type": "google.protobuf.FieldMask",
                               "id": 2
+                            }
+                          }
+                        },
+                        "FailoverReservationRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigqueryreservation.googleapis.com/Reservation"
+                              }
                             }
                           }
                         },
@@ -826,7 +891,9 @@
                         "Assignment": {
                           "options": {
                             "(google.api.resource).type": "bigqueryreservation.googleapis.com/Assignment",
-                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/reservations/{reservation}/assignments/{assignment}"
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/reservations/{reservation}/assignments/{assignment}",
+                            "(google.api.resource).plural": "assignments",
+                            "(google.api.resource).singular": "assignment"
                           },
                           "fields": {
                             "name": {

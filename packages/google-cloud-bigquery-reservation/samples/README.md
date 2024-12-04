@@ -18,6 +18,7 @@
   * [Reservation_service.delete_assignment](#reservation_service.delete_assignment)
   * [Reservation_service.delete_capacity_commitment](#reservation_service.delete_capacity_commitment)
   * [Reservation_service.delete_reservation](#reservation_service.delete_reservation)
+  * [Reservation_service.failover_reservation](#reservation_service.failover_reservation)
   * [Reservation_service.get_bi_reservation](#reservation_service.get_bi_reservation)
   * [Reservation_service.get_capacity_commitment](#reservation_service.get_capacity_commitment)
   * [Reservation_service.get_reservation](#reservation_service.get_reservation)
@@ -145,6 +146,23 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_reservation.js`
+
+
+-----
+
+
+
+
+### Reservation_service.failover_reservation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.failover_reservation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.failover_reservation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.failover_reservation.js`
 
 
 -----

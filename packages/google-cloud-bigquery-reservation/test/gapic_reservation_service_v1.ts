@@ -834,6 +834,137 @@ describe('v1.ReservationServiceClient', () => {
     });
   });
 
+  describe('failoverReservation', () => {
+    it('invokes failoverReservation without error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.Reservation()
+      );
+      client.innerApiCalls.failoverReservation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.failoverReservation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes failoverReservation without error using callback', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.Reservation()
+      );
+      client.innerApiCalls.failoverReservation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.failoverReservation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.reservation.v1.IReservation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes failoverReservation with error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.failoverReservation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.failoverReservation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.failoverReservation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes failoverReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.FailoverReservationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.failoverReservation(request), expectedError);
+    });
+  });
+
   describe('createCapacityCommitment', () => {
     it('invokes createCapacityCommitment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
