@@ -45729,6 +45729,7 @@
                      * @property {string|null} [spaceUri] Space spaceUri
                      * @property {google.chat.v1.Space.PredefinedPermissionSettings|null} [predefinedPermissionSettings] Space predefinedPermissionSettings
                      * @property {google.chat.v1.Space.IPermissionSettings|null} [permissionSettings] Space permissionSettings
+                     * @property {google.protobuf.ITimestamp|null} [importModeExpireTime] Space importModeExpireTime
                      */
     
                     /**
@@ -45898,6 +45899,14 @@
                      */
                     Space.prototype.permissionSettings = null;
     
+                    /**
+                     * Space importModeExpireTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} importModeExpireTime
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.importModeExpireTime = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -45974,6 +45983,8 @@
                             writer.uint32(/* id 26, wireType 0 =*/208).int32(message.predefinedPermissionSettings);
                         if (message.permissionSettings != null && Object.hasOwnProperty.call(message, "permissionSettings"))
                             $root.google.chat.v1.Space.PermissionSettings.encode(message.permissionSettings, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                        if (message.importModeExpireTime != null && Object.hasOwnProperty.call(message, "importModeExpireTime"))
+                            $root.google.protobuf.Timestamp.encode(message.importModeExpireTime, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                         return writer;
                     };
     
@@ -46082,6 +46093,10 @@
                                 }
                             case 27: {
                                     message.permissionSettings = $root.google.chat.v1.Space.PermissionSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 28: {
+                                    message.importModeExpireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -46227,6 +46242,11 @@
                                 if (error)
                                     return "permissionSettings." + error;
                             }
+                        }
+                        if (message.importModeExpireTime != null && message.hasOwnProperty("importModeExpireTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.importModeExpireTime);
+                            if (error)
+                                return "importModeExpireTime." + error;
                         }
                         return null;
                     };
@@ -46397,6 +46417,11 @@
                                 throw TypeError(".google.chat.v1.Space.permissionSettings: object expected");
                             message.permissionSettings = $root.google.chat.v1.Space.PermissionSettings.fromObject(object.permissionSettings);
                         }
+                        if (object.importModeExpireTime != null) {
+                            if (typeof object.importModeExpireTime !== "object")
+                                throw TypeError(".google.chat.v1.Space.importModeExpireTime: object expected");
+                            message.importModeExpireTime = $root.google.protobuf.Timestamp.fromObject(object.importModeExpireTime);
+                        }
                         return message;
                     };
     
@@ -46431,6 +46456,7 @@
                             object.membershipCount = null;
                             object.accessSettings = null;
                             object.spaceUri = "";
+                            object.importModeExpireTime = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -46476,6 +46502,8 @@
                             if (options.oneofs)
                                 object.spacePermissionSettings = "permissionSettings";
                         }
+                        if (message.importModeExpireTime != null && message.hasOwnProperty("importModeExpireTime"))
+                            object.importModeExpireTime = $root.google.protobuf.Timestamp.toObject(message.importModeExpireTime, options);
                         return object;
                     };
     

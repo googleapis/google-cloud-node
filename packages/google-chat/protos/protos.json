@@ -4733,6 +4733,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "importModeExpireTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 28,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
