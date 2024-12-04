@@ -265,6 +265,11 @@ export class HubServiceClient {
         'nextPageToken',
         'spokes'
       ),
+      queryHubStatus: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'hubStatusEntries'
+      ),
       listSpokes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -429,6 +434,12 @@ export class HubServiceClient {
     const deleteSpokeMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkconnectivity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const updateGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkconnectivity.v1.Group'
+    ) as gax.protobuf.Type;
+    const updateGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkconnectivity.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createHub: new this._gaxModule.LongrunningDescriptor(
@@ -470,6 +481,11 @@ export class HubServiceClient {
         this.operationsClient,
         deleteSpokeResponse.decode.bind(deleteSpokeResponse),
         deleteSpokeMetadata.decode.bind(deleteSpokeMetadata)
+      ),
+      updateGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateGroupResponse.decode.bind(updateGroupResponse),
+        updateGroupMetadata.decode.bind(updateGroupMetadata)
       ),
     };
 
@@ -529,6 +545,7 @@ export class HubServiceClient {
       'updateHub',
       'deleteHub',
       'listHubSpokes',
+      'queryHubStatus',
       'listSpokes',
       'getSpoke',
       'createSpoke',
@@ -542,6 +559,7 @@ export class HubServiceClient {
       'listRouteTables',
       'getGroup',
       'listGroups',
+      'updateGroup',
     ];
     for (const methodName of hubServiceStubMethods) {
       const callPromise = this.hubServiceStub.then(
@@ -2356,6 +2374,163 @@ export class HubServiceClient {
     >;
   }
   /**
+   * Updates the parameters of a Network Connectivity Center group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. In the case of an update to an existing group, field mask is used
+   *   to specify the fields to be overwritten. The fields specified in the
+   *   update_mask are relative to the resource, not the full request. A field is
+   *   overwritten if it is in the mask. If the user does not provide a mask, then
+   *   all fields are overwritten.
+   * @param {google.cloud.networkconnectivity.v1.Group} request.group
+   *   Required. The state that the group should be in after the update.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server knows to ignore the request
+   *   if it has already been completed. The server guarantees that a request
+   *   doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check to see whether the original operation
+   *   was received. If it was, the server ignores the second request. This
+   *   behavior prevents clients from mistakenly creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID, with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/hub_service.update_group.js</caption>
+   * region_tag:networkconnectivity_v1_generated_HubService_UpdateGroup_async
+   */
+  updateGroup(
+    request?: protos.google.cloud.networkconnectivity.v1.IUpdateGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IGroup,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateGroup(
+    request: protos.google.cloud.networkconnectivity.v1.IUpdateGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IGroup,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGroup(
+    request: protos.google.cloud.networkconnectivity.v1.IUpdateGroupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IGroup,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGroup(
+    request?: protos.google.cloud.networkconnectivity.v1.IUpdateGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkconnectivity.v1.IGroup,
+            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IGroup,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IGroup,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'group.name': request.group!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateGroup(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateGroup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/hub_service.update_group.js</caption>
+   * region_tag:networkconnectivity_v1_generated_HubService_UpdateGroup_async
+   */
+  async checkUpdateGroupProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkconnectivity.v1.Group,
+      protos.google.cloud.networkconnectivity.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateGroup,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkconnectivity.v1.Group,
+      protos.google.cloud.networkconnectivity.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists the Network Connectivity Center hubs associated with a given project.
    *
    * @param {Object} request
@@ -2793,6 +2968,283 @@ export class HubServiceClient {
     ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1.ISpoke>;
   }
   /**
+   * Query the Private Service Connect propagation status of a Network
+   * Connectivity Center hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the hub.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return per page.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   *   The filter can be used to filter the results by the following fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   *     * `psc_propagation_status.message`
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results in ascending order by the specified fields.
+   *   A comma-separated list of any of these fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   *   If `group_by` is set, the value of the `order_by` field must be the
+   *   same as or a subset of the `group_by` field.
+   * @param {string} [request.groupBy]
+   *   Optional. Aggregate the results by the specified fields.
+   *   A comma-separated list of any of these fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkconnectivity.v1.HubStatusEntry|HubStatusEntry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `queryHubStatusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  queryHubStatus(
+    request?: protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.networkconnectivity.v1.IHubStatusEntry[],
+      protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest | null,
+      protos.google.cloud.networkconnectivity.v1.IQueryHubStatusResponse,
+    ]
+  >;
+  queryHubStatus(
+    request: protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+      | protos.google.cloud.networkconnectivity.v1.IQueryHubStatusResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkconnectivity.v1.IHubStatusEntry
+    >
+  ): void;
+  queryHubStatus(
+    request: protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+      | protos.google.cloud.networkconnectivity.v1.IQueryHubStatusResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkconnectivity.v1.IHubStatusEntry
+    >
+  ): void;
+  queryHubStatus(
+    request?: protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+          | protos.google.cloud.networkconnectivity.v1.IQueryHubStatusResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkconnectivity.v1.IHubStatusEntry
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+      | protos.google.cloud.networkconnectivity.v1.IQueryHubStatusResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkconnectivity.v1.IHubStatusEntry
+    >
+  ): Promise<
+    [
+      protos.google.cloud.networkconnectivity.v1.IHubStatusEntry[],
+      protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest | null,
+      protos.google.cloud.networkconnectivity.v1.IQueryHubStatusResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.queryHubStatus(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the hub.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return per page.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   *   The filter can be used to filter the results by the following fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   *     * `psc_propagation_status.message`
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results in ascending order by the specified fields.
+   *   A comma-separated list of any of these fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   *   If `group_by` is set, the value of the `order_by` field must be the
+   *   same as or a subset of the `group_by` field.
+   * @param {string} [request.groupBy]
+   *   Optional. Aggregate the results by the specified fields.
+   *   A comma-separated list of any of these fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkconnectivity.v1.HubStatusEntry|HubStatusEntry} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `queryHubStatusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  queryHubStatusStream(
+    request?: protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['queryHubStatus'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.queryHubStatus.createStream(
+      this.innerApiCalls.queryHubStatus as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `queryHubStatus`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the hub.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return per page.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   *   The filter can be used to filter the results by the following fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   *     * `psc_propagation_status.message`
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results in ascending order by the specified fields.
+   *   A comma-separated list of any of these fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   *   If `group_by` is set, the value of the `order_by` field must be the
+   *   same as or a subset of the `group_by` field.
+   * @param {string} [request.groupBy]
+   *   Optional. Aggregate the results by the specified fields.
+   *   A comma-separated list of any of these fields:
+   *     * `psc_propagation_status.source_spoke`
+   *     * `psc_propagation_status.source_group`
+   *     * `psc_propagation_status.source_forwarding_rule`
+   *     * `psc_propagation_status.target_spoke`
+   *     * `psc_propagation_status.target_group`
+   *     * `psc_propagation_status.code`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networkconnectivity.v1.HubStatusEntry|HubStatusEntry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/hub_service.query_hub_status.js</caption>
+   * region_tag:networkconnectivity_v1_generated_HubService_QueryHubStatus_async
+   */
+  queryHubStatusAsync(
+    request?: protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.networkconnectivity.v1.IHubStatusEntry> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['queryHubStatus'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.queryHubStatus.asyncIterate(
+      this.innerApiCalls['queryHubStatus'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1.IHubStatusEntry>;
+  }
+  /**
    * Lists the Network Connectivity Center spokes in a specified project and
    * location.
    *
@@ -2992,7 +3444,7 @@ export class HubServiceClient {
     ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1.ISpoke>;
   }
   /**
-   * Lists routes in a given project.
+   * Lists routes in a given route table.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3190,7 +3642,7 @@ export class HubServiceClient {
     ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1.IRoute>;
   }
   /**
-   * Lists route tables in a given project.
+   * Lists route tables in a given hub.
    *
    * @param {Object} request
    *   The request object that will be sent.
