@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -3535,15 +3538,24 @@
                                 },
                                 "softwareConfig": {
                                   "type": "SoftwareConfig",
-                                  "id": 4
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "nodeConfig": {
                                   "type": "NodeConfig",
-                                  "id": 5
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "privateEnvironmentConfig": {
                                   "type": "PrivateEnvironmentConfig",
-                                  "id": 7
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "webServerNetworkAccessControl": {
                                   "type": "WebServerNetworkAccessControl",
@@ -3684,7 +3696,10 @@
                               "fields": {
                                 "imageVersion": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "airflowConfigOverrides": {
                                   "keyType": "string",
@@ -4443,11 +4458,17 @@
                               "fields": {
                                 "name": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
                                 },
                                 "config": {
                                   "type": "EnvironmentConfig",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "uuid": {
                                   "type": "string",
