@@ -2151,6 +2151,12 @@ export namespace google {
 
                     /** Cluster state */
                     state?: (google.cloud.managedkafka.v1.Cluster.State|keyof typeof google.cloud.managedkafka.v1.Cluster.State|null);
+
+                    /** Cluster satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
+                    /** Cluster satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
                 }
 
                 /** Represents a Cluster. */
@@ -2186,8 +2192,20 @@ export namespace google {
                     /** Cluster state. */
                     public state: (google.cloud.managedkafka.v1.Cluster.State|keyof typeof google.cloud.managedkafka.v1.Cluster.State);
 
+                    /** Cluster satisfiesPzi. */
+                    public satisfiesPzi?: (boolean|null);
+
+                    /** Cluster satisfiesPzs. */
+                    public satisfiesPzs?: (boolean|null);
+
                     /** Cluster platformConfig. */
                     public platformConfig?: "gcpConfig";
+
+                    /** Cluster _satisfiesPzi. */
+                    public _satisfiesPzi?: "satisfiesPzi";
+
+                    /** Cluster _satisfiesPzs. */
+                    public _satisfiesPzs?: "satisfiesPzs";
 
                     /**
                      * Creates a new Cluster instance using the specified properties.
