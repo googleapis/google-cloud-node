@@ -5317,6 +5317,9 @@ export namespace google {
 
                     /** GkeCluster proxyUrl */
                     proxyUrl?: (string|null);
+
+                    /** GkeCluster dnsEndpoint */
+                    dnsEndpoint?: (boolean|null);
                 }
 
                 /** Represents a GkeCluster. */
@@ -5336,6 +5339,9 @@ export namespace google {
 
                     /** GkeCluster proxyUrl. */
                     public proxyUrl: string;
+
+                    /** GkeCluster dnsEndpoint. */
+                    public dnsEndpoint: boolean;
 
                     /**
                      * Creates a new GkeCluster instance using the specified properties.
