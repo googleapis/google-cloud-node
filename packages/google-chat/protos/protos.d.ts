@@ -17790,6 +17790,9 @@ export namespace google {
 
                 /** Space permissionSettings */
                 permissionSettings?: (google.chat.v1.Space.IPermissionSettings|null);
+
+                /** Space importModeExpireTime */
+                importModeExpireTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a Space. */
@@ -17857,6 +17860,9 @@ export namespace google {
 
                 /** Space permissionSettings. */
                 public permissionSettings?: (google.chat.v1.Space.IPermissionSettings|null);
+
+                /** Space importModeExpireTime. */
+                public importModeExpireTime?: (google.protobuf.ITimestamp|null);
 
                 /** Space spacePermissionSettings. */
                 public spacePermissionSettings?: ("predefinedPermissionSettings"|"permissionSettings");
