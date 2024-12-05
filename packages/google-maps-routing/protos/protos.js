@@ -3021,488 +3021,6 @@
                 return ListValue;
             })();
     
-            protobuf.Duration = (function() {
-    
-                /**
-                 * Properties of a Duration.
-                 * @memberof google.protobuf
-                 * @interface IDuration
-                 * @property {number|Long|null} [seconds] Duration seconds
-                 * @property {number|null} [nanos] Duration nanos
-                 */
-    
-                /**
-                 * Constructs a new Duration.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Duration.
-                 * @implements IDuration
-                 * @constructor
-                 * @param {google.protobuf.IDuration=} [properties] Properties to set
-                 */
-                function Duration(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Duration seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Duration
-                 * @instance
-                 */
-                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Duration nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Duration
-                 * @instance
-                 */
-                Duration.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Duration instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.IDuration=} [properties] Properties to set
-                 * @returns {google.protobuf.Duration} Duration instance
-                 */
-                Duration.create = function create(properties) {
-                    return new Duration(properties);
-                };
-    
-                /**
-                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Duration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Duration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Duration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Duration} Duration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Duration.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Duration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Duration} Duration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Duration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Duration message.
-                 * @function verify
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Duration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Duration} Duration
-                 */
-                Duration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Duration)
-                        return object;
-                    var message = new $root.google.protobuf.Duration();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {google.protobuf.Duration} message Duration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Duration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Duration to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Duration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Duration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Duration
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Duration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Duration";
-                };
-    
-                return Duration;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
-            })();
-    
             protobuf.FileDescriptorSet = (function() {
     
                 /**
@@ -15390,6 +14908,488 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Duration = (function() {
+    
+                /**
+                 * Properties of a Duration.
+                 * @memberof google.protobuf
+                 * @interface IDuration
+                 * @property {number|Long|null} [seconds] Duration seconds
+                 * @property {number|null} [nanos] Duration nanos
+                 */
+    
+                /**
+                 * Constructs a new Duration.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Duration.
+                 * @implements IDuration
+                 * @constructor
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 */
+                function Duration(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Duration seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Duration nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Duration instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 * @returns {google.protobuf.Duration} Duration instance
+                 */
+                Duration.create = function create(properties) {
+                    return new Duration(properties);
+                };
+    
+                /**
+                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Duration message.
+                 * @function verify
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Duration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Duration} Duration
+                 */
+                Duration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Duration)
+                        return object;
+                    var message = new $root.google.protobuf.Duration();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.Duration} message Duration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Duration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Duration to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Duration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Duration
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Duration";
+                };
+    
+                return Duration;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
+            })();
+    
             return protobuf;
         })();
     
@@ -18487,6 +18487,1062 @@
                         return values;
                     })();
     
+                    v2.PolylineDetails = (function() {
+    
+                        /**
+                         * Properties of a PolylineDetails.
+                         * @memberof google.maps.routing.v2
+                         * @interface IPolylineDetails
+                         * @property {Array.<google.maps.routing.v2.PolylineDetails.IFlyoverInfo>|null} [flyoverInfo] PolylineDetails flyoverInfo
+                         * @property {Array.<google.maps.routing.v2.PolylineDetails.INarrowRoadInfo>|null} [narrowRoadInfo] PolylineDetails narrowRoadInfo
+                         */
+    
+                        /**
+                         * Constructs a new PolylineDetails.
+                         * @memberof google.maps.routing.v2
+                         * @classdesc Represents a PolylineDetails.
+                         * @implements IPolylineDetails
+                         * @constructor
+                         * @param {google.maps.routing.v2.IPolylineDetails=} [properties] Properties to set
+                         */
+                        function PolylineDetails(properties) {
+                            this.flyoverInfo = [];
+                            this.narrowRoadInfo = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PolylineDetails flyoverInfo.
+                         * @member {Array.<google.maps.routing.v2.PolylineDetails.IFlyoverInfo>} flyoverInfo
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @instance
+                         */
+                        PolylineDetails.prototype.flyoverInfo = $util.emptyArray;
+    
+                        /**
+                         * PolylineDetails narrowRoadInfo.
+                         * @member {Array.<google.maps.routing.v2.PolylineDetails.INarrowRoadInfo>} narrowRoadInfo
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @instance
+                         */
+                        PolylineDetails.prototype.narrowRoadInfo = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PolylineDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {google.maps.routing.v2.IPolylineDetails=} [properties] Properties to set
+                         * @returns {google.maps.routing.v2.PolylineDetails} PolylineDetails instance
+                         */
+                        PolylineDetails.create = function create(properties) {
+                            return new PolylineDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PolylineDetails message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {google.maps.routing.v2.IPolylineDetails} message PolylineDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PolylineDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.flyoverInfo != null && message.flyoverInfo.length)
+                                for (var i = 0; i < message.flyoverInfo.length; ++i)
+                                    $root.google.maps.routing.v2.PolylineDetails.FlyoverInfo.encode(message.flyoverInfo[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.narrowRoadInfo != null && message.narrowRoadInfo.length)
+                                for (var i = 0; i < message.narrowRoadInfo.length; ++i)
+                                    $root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.encode(message.narrowRoadInfo[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PolylineDetails message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {google.maps.routing.v2.IPolylineDetails} message PolylineDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PolylineDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PolylineDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routing.v2.PolylineDetails} PolylineDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PolylineDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routing.v2.PolylineDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 12: {
+                                        if (!(message.flyoverInfo && message.flyoverInfo.length))
+                                            message.flyoverInfo = [];
+                                        message.flyoverInfo.push($root.google.maps.routing.v2.PolylineDetails.FlyoverInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.narrowRoadInfo && message.narrowRoadInfo.length))
+                                            message.narrowRoadInfo = [];
+                                        message.narrowRoadInfo.push($root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PolylineDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routing.v2.PolylineDetails} PolylineDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PolylineDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PolylineDetails message.
+                         * @function verify
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PolylineDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.flyoverInfo != null && message.hasOwnProperty("flyoverInfo")) {
+                                if (!Array.isArray(message.flyoverInfo))
+                                    return "flyoverInfo: array expected";
+                                for (var i = 0; i < message.flyoverInfo.length; ++i) {
+                                    var error = $root.google.maps.routing.v2.PolylineDetails.FlyoverInfo.verify(message.flyoverInfo[i]);
+                                    if (error)
+                                        return "flyoverInfo." + error;
+                                }
+                            }
+                            if (message.narrowRoadInfo != null && message.hasOwnProperty("narrowRoadInfo")) {
+                                if (!Array.isArray(message.narrowRoadInfo))
+                                    return "narrowRoadInfo: array expected";
+                                for (var i = 0; i < message.narrowRoadInfo.length; ++i) {
+                                    var error = $root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.verify(message.narrowRoadInfo[i]);
+                                    if (error)
+                                        return "narrowRoadInfo." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PolylineDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routing.v2.PolylineDetails} PolylineDetails
+                         */
+                        PolylineDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routing.v2.PolylineDetails)
+                                return object;
+                            var message = new $root.google.maps.routing.v2.PolylineDetails();
+                            if (object.flyoverInfo) {
+                                if (!Array.isArray(object.flyoverInfo))
+                                    throw TypeError(".google.maps.routing.v2.PolylineDetails.flyoverInfo: array expected");
+                                message.flyoverInfo = [];
+                                for (var i = 0; i < object.flyoverInfo.length; ++i) {
+                                    if (typeof object.flyoverInfo[i] !== "object")
+                                        throw TypeError(".google.maps.routing.v2.PolylineDetails.flyoverInfo: object expected");
+                                    message.flyoverInfo[i] = $root.google.maps.routing.v2.PolylineDetails.FlyoverInfo.fromObject(object.flyoverInfo[i]);
+                                }
+                            }
+                            if (object.narrowRoadInfo) {
+                                if (!Array.isArray(object.narrowRoadInfo))
+                                    throw TypeError(".google.maps.routing.v2.PolylineDetails.narrowRoadInfo: array expected");
+                                message.narrowRoadInfo = [];
+                                for (var i = 0; i < object.narrowRoadInfo.length; ++i) {
+                                    if (typeof object.narrowRoadInfo[i] !== "object")
+                                        throw TypeError(".google.maps.routing.v2.PolylineDetails.narrowRoadInfo: object expected");
+                                    message.narrowRoadInfo[i] = $root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.fromObject(object.narrowRoadInfo[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PolylineDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {google.maps.routing.v2.PolylineDetails} message PolylineDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PolylineDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.flyoverInfo = [];
+                                object.narrowRoadInfo = [];
+                            }
+                            if (message.flyoverInfo && message.flyoverInfo.length) {
+                                object.flyoverInfo = [];
+                                for (var j = 0; j < message.flyoverInfo.length; ++j)
+                                    object.flyoverInfo[j] = $root.google.maps.routing.v2.PolylineDetails.FlyoverInfo.toObject(message.flyoverInfo[j], options);
+                            }
+                            if (message.narrowRoadInfo && message.narrowRoadInfo.length) {
+                                object.narrowRoadInfo = [];
+                                for (var j = 0; j < message.narrowRoadInfo.length; ++j)
+                                    object.narrowRoadInfo[j] = $root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.toObject(message.narrowRoadInfo[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PolylineDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PolylineDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PolylineDetails
+                         * @function getTypeUrl
+                         * @memberof google.maps.routing.v2.PolylineDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PolylineDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routing.v2.PolylineDetails";
+                        };
+    
+                        PolylineDetails.PolylinePointIndex = (function() {
+    
+                            /**
+                             * Properties of a PolylinePointIndex.
+                             * @memberof google.maps.routing.v2.PolylineDetails
+                             * @interface IPolylinePointIndex
+                             * @property {number|null} [startIndex] PolylinePointIndex startIndex
+                             * @property {number|null} [endIndex] PolylinePointIndex endIndex
+                             */
+    
+                            /**
+                             * Constructs a new PolylinePointIndex.
+                             * @memberof google.maps.routing.v2.PolylineDetails
+                             * @classdesc Represents a PolylinePointIndex.
+                             * @implements IPolylinePointIndex
+                             * @constructor
+                             * @param {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex=} [properties] Properties to set
+                             */
+                            function PolylinePointIndex(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PolylinePointIndex startIndex.
+                             * @member {number|null|undefined} startIndex
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @instance
+                             */
+                            PolylinePointIndex.prototype.startIndex = null;
+    
+                            /**
+                             * PolylinePointIndex endIndex.
+                             * @member {number|null|undefined} endIndex
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @instance
+                             */
+                            PolylinePointIndex.prototype.endIndex = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * PolylinePointIndex _startIndex.
+                             * @member {"startIndex"|undefined} _startIndex
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @instance
+                             */
+                            Object.defineProperty(PolylinePointIndex.prototype, "_startIndex", {
+                                get: $util.oneOfGetter($oneOfFields = ["startIndex"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * PolylinePointIndex _endIndex.
+                             * @member {"endIndex"|undefined} _endIndex
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @instance
+                             */
+                            Object.defineProperty(PolylinePointIndex.prototype, "_endIndex", {
+                                get: $util.oneOfGetter($oneOfFields = ["endIndex"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new PolylinePointIndex instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex=} [properties] Properties to set
+                             * @returns {google.maps.routing.v2.PolylineDetails.PolylinePointIndex} PolylinePointIndex instance
+                             */
+                            PolylinePointIndex.create = function create(properties) {
+                                return new PolylinePointIndex(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PolylinePointIndex message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.PolylinePointIndex.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex} message PolylinePointIndex message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PolylinePointIndex.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.startIndex != null && Object.hasOwnProperty.call(message, "startIndex"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.startIndex);
+                                if (message.endIndex != null && Object.hasOwnProperty.call(message, "endIndex"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.endIndex);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PolylinePointIndex message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.PolylinePointIndex.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex} message PolylinePointIndex message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PolylinePointIndex.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PolylinePointIndex message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.routing.v2.PolylineDetails.PolylinePointIndex} PolylinePointIndex
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PolylinePointIndex.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.startIndex = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.endIndex = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PolylinePointIndex message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.routing.v2.PolylineDetails.PolylinePointIndex} PolylinePointIndex
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PolylinePointIndex.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PolylinePointIndex message.
+                             * @function verify
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PolylinePointIndex.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.startIndex != null && message.hasOwnProperty("startIndex")) {
+                                    properties._startIndex = 1;
+                                    if (!$util.isInteger(message.startIndex))
+                                        return "startIndex: integer expected";
+                                }
+                                if (message.endIndex != null && message.hasOwnProperty("endIndex")) {
+                                    properties._endIndex = 1;
+                                    if (!$util.isInteger(message.endIndex))
+                                        return "endIndex: integer expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PolylinePointIndex message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.routing.v2.PolylineDetails.PolylinePointIndex} PolylinePointIndex
+                             */
+                            PolylinePointIndex.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex)
+                                    return object;
+                                var message = new $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex();
+                                if (object.startIndex != null)
+                                    message.startIndex = object.startIndex | 0;
+                                if (object.endIndex != null)
+                                    message.endIndex = object.endIndex | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PolylinePointIndex message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.PolylinePointIndex} message PolylinePointIndex
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PolylinePointIndex.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.startIndex != null && message.hasOwnProperty("startIndex")) {
+                                    object.startIndex = message.startIndex;
+                                    if (options.oneofs)
+                                        object._startIndex = "startIndex";
+                                }
+                                if (message.endIndex != null && message.hasOwnProperty("endIndex")) {
+                                    object.endIndex = message.endIndex;
+                                    if (options.oneofs)
+                                        object._endIndex = "endIndex";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PolylinePointIndex to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PolylinePointIndex.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PolylinePointIndex
+                             * @function getTypeUrl
+                             * @memberof google.maps.routing.v2.PolylineDetails.PolylinePointIndex
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PolylinePointIndex.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.routing.v2.PolylineDetails.PolylinePointIndex";
+                            };
+    
+                            return PolylinePointIndex;
+                        })();
+    
+                        /**
+                         * RoadFeatureState enum.
+                         * @name google.maps.routing.v2.PolylineDetails.RoadFeatureState
+                         * @enum {number}
+                         * @property {number} ROAD_FEATURE_STATE_UNSPECIFIED=0 ROAD_FEATURE_STATE_UNSPECIFIED value
+                         * @property {number} EXISTS=1 EXISTS value
+                         * @property {number} DOES_NOT_EXIST=2 DOES_NOT_EXIST value
+                         */
+                        PolylineDetails.RoadFeatureState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROAD_FEATURE_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EXISTS"] = 1;
+                            values[valuesById[2] = "DOES_NOT_EXIST"] = 2;
+                            return values;
+                        })();
+    
+                        PolylineDetails.FlyoverInfo = (function() {
+    
+                            /**
+                             * Properties of a FlyoverInfo.
+                             * @memberof google.maps.routing.v2.PolylineDetails
+                             * @interface IFlyoverInfo
+                             * @property {google.maps.routing.v2.PolylineDetails.RoadFeatureState|null} [flyoverPresence] FlyoverInfo flyoverPresence
+                             * @property {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null} [polylinePointIndex] FlyoverInfo polylinePointIndex
+                             */
+    
+                            /**
+                             * Constructs a new FlyoverInfo.
+                             * @memberof google.maps.routing.v2.PolylineDetails
+                             * @classdesc Represents a FlyoverInfo.
+                             * @implements IFlyoverInfo
+                             * @constructor
+                             * @param {google.maps.routing.v2.PolylineDetails.IFlyoverInfo=} [properties] Properties to set
+                             */
+                            function FlyoverInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FlyoverInfo flyoverPresence.
+                             * @member {google.maps.routing.v2.PolylineDetails.RoadFeatureState} flyoverPresence
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @instance
+                             */
+                            FlyoverInfo.prototype.flyoverPresence = 0;
+    
+                            /**
+                             * FlyoverInfo polylinePointIndex.
+                             * @member {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null|undefined} polylinePointIndex
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @instance
+                             */
+                            FlyoverInfo.prototype.polylinePointIndex = null;
+    
+                            /**
+                             * Creates a new FlyoverInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.IFlyoverInfo=} [properties] Properties to set
+                             * @returns {google.maps.routing.v2.PolylineDetails.FlyoverInfo} FlyoverInfo instance
+                             */
+                            FlyoverInfo.create = function create(properties) {
+                                return new FlyoverInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FlyoverInfo message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.FlyoverInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.IFlyoverInfo} message FlyoverInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlyoverInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.flyoverPresence != null && Object.hasOwnProperty.call(message, "flyoverPresence"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.flyoverPresence);
+                                if (message.polylinePointIndex != null && Object.hasOwnProperty.call(message, "polylinePointIndex"))
+                                    $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.encode(message.polylinePointIndex, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FlyoverInfo message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.FlyoverInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.IFlyoverInfo} message FlyoverInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FlyoverInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FlyoverInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.routing.v2.PolylineDetails.FlyoverInfo} FlyoverInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlyoverInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routing.v2.PolylineDetails.FlyoverInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.flyoverPresence = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.polylinePointIndex = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FlyoverInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.routing.v2.PolylineDetails.FlyoverInfo} FlyoverInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FlyoverInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FlyoverInfo message.
+                             * @function verify
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FlyoverInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.flyoverPresence != null && message.hasOwnProperty("flyoverPresence"))
+                                    switch (message.flyoverPresence) {
+                                    default:
+                                        return "flyoverPresence: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.polylinePointIndex != null && message.hasOwnProperty("polylinePointIndex")) {
+                                    var error = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.verify(message.polylinePointIndex);
+                                    if (error)
+                                        return "polylinePointIndex." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FlyoverInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.routing.v2.PolylineDetails.FlyoverInfo} FlyoverInfo
+                             */
+                            FlyoverInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.routing.v2.PolylineDetails.FlyoverInfo)
+                                    return object;
+                                var message = new $root.google.maps.routing.v2.PolylineDetails.FlyoverInfo();
+                                switch (object.flyoverPresence) {
+                                default:
+                                    if (typeof object.flyoverPresence === "number") {
+                                        message.flyoverPresence = object.flyoverPresence;
+                                        break;
+                                    }
+                                    break;
+                                case "ROAD_FEATURE_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.flyoverPresence = 0;
+                                    break;
+                                case "EXISTS":
+                                case 1:
+                                    message.flyoverPresence = 1;
+                                    break;
+                                case "DOES_NOT_EXIST":
+                                case 2:
+                                    message.flyoverPresence = 2;
+                                    break;
+                                }
+                                if (object.polylinePointIndex != null) {
+                                    if (typeof object.polylinePointIndex !== "object")
+                                        throw TypeError(".google.maps.routing.v2.PolylineDetails.FlyoverInfo.polylinePointIndex: object expected");
+                                    message.polylinePointIndex = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.fromObject(object.polylinePointIndex);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FlyoverInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.FlyoverInfo} message FlyoverInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FlyoverInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.flyoverPresence = options.enums === String ? "ROAD_FEATURE_STATE_UNSPECIFIED" : 0;
+                                    object.polylinePointIndex = null;
+                                }
+                                if (message.flyoverPresence != null && message.hasOwnProperty("flyoverPresence"))
+                                    object.flyoverPresence = options.enums === String ? $root.google.maps.routing.v2.PolylineDetails.RoadFeatureState[message.flyoverPresence] === undefined ? message.flyoverPresence : $root.google.maps.routing.v2.PolylineDetails.RoadFeatureState[message.flyoverPresence] : message.flyoverPresence;
+                                if (message.polylinePointIndex != null && message.hasOwnProperty("polylinePointIndex"))
+                                    object.polylinePointIndex = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.toObject(message.polylinePointIndex, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FlyoverInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FlyoverInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FlyoverInfo
+                             * @function getTypeUrl
+                             * @memberof google.maps.routing.v2.PolylineDetails.FlyoverInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FlyoverInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.routing.v2.PolylineDetails.FlyoverInfo";
+                            };
+    
+                            return FlyoverInfo;
+                        })();
+    
+                        PolylineDetails.NarrowRoadInfo = (function() {
+    
+                            /**
+                             * Properties of a NarrowRoadInfo.
+                             * @memberof google.maps.routing.v2.PolylineDetails
+                             * @interface INarrowRoadInfo
+                             * @property {google.maps.routing.v2.PolylineDetails.RoadFeatureState|null} [narrowRoadPresence] NarrowRoadInfo narrowRoadPresence
+                             * @property {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null} [polylinePointIndex] NarrowRoadInfo polylinePointIndex
+                             */
+    
+                            /**
+                             * Constructs a new NarrowRoadInfo.
+                             * @memberof google.maps.routing.v2.PolylineDetails
+                             * @classdesc Represents a NarrowRoadInfo.
+                             * @implements INarrowRoadInfo
+                             * @constructor
+                             * @param {google.maps.routing.v2.PolylineDetails.INarrowRoadInfo=} [properties] Properties to set
+                             */
+                            function NarrowRoadInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NarrowRoadInfo narrowRoadPresence.
+                             * @member {google.maps.routing.v2.PolylineDetails.RoadFeatureState} narrowRoadPresence
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @instance
+                             */
+                            NarrowRoadInfo.prototype.narrowRoadPresence = 0;
+    
+                            /**
+                             * NarrowRoadInfo polylinePointIndex.
+                             * @member {google.maps.routing.v2.PolylineDetails.IPolylinePointIndex|null|undefined} polylinePointIndex
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @instance
+                             */
+                            NarrowRoadInfo.prototype.polylinePointIndex = null;
+    
+                            /**
+                             * Creates a new NarrowRoadInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.INarrowRoadInfo=} [properties] Properties to set
+                             * @returns {google.maps.routing.v2.PolylineDetails.NarrowRoadInfo} NarrowRoadInfo instance
+                             */
+                            NarrowRoadInfo.create = function create(properties) {
+                                return new NarrowRoadInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NarrowRoadInfo message. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.INarrowRoadInfo} message NarrowRoadInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NarrowRoadInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.narrowRoadPresence != null && Object.hasOwnProperty.call(message, "narrowRoadPresence"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.narrowRoadPresence);
+                                if (message.polylinePointIndex != null && Object.hasOwnProperty.call(message, "polylinePointIndex"))
+                                    $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.encode(message.polylinePointIndex, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NarrowRoadInfo message, length delimited. Does not implicitly {@link google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.INarrowRoadInfo} message NarrowRoadInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NarrowRoadInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NarrowRoadInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.routing.v2.PolylineDetails.NarrowRoadInfo} NarrowRoadInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NarrowRoadInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.narrowRoadPresence = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.polylinePointIndex = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NarrowRoadInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.routing.v2.PolylineDetails.NarrowRoadInfo} NarrowRoadInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NarrowRoadInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NarrowRoadInfo message.
+                             * @function verify
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NarrowRoadInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.narrowRoadPresence != null && message.hasOwnProperty("narrowRoadPresence"))
+                                    switch (message.narrowRoadPresence) {
+                                    default:
+                                        return "narrowRoadPresence: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.polylinePointIndex != null && message.hasOwnProperty("polylinePointIndex")) {
+                                    var error = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.verify(message.polylinePointIndex);
+                                    if (error)
+                                        return "polylinePointIndex." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NarrowRoadInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.routing.v2.PolylineDetails.NarrowRoadInfo} NarrowRoadInfo
+                             */
+                            NarrowRoadInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo)
+                                    return object;
+                                var message = new $root.google.maps.routing.v2.PolylineDetails.NarrowRoadInfo();
+                                switch (object.narrowRoadPresence) {
+                                default:
+                                    if (typeof object.narrowRoadPresence === "number") {
+                                        message.narrowRoadPresence = object.narrowRoadPresence;
+                                        break;
+                                    }
+                                    break;
+                                case "ROAD_FEATURE_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.narrowRoadPresence = 0;
+                                    break;
+                                case "EXISTS":
+                                case 1:
+                                    message.narrowRoadPresence = 1;
+                                    break;
+                                case "DOES_NOT_EXIST":
+                                case 2:
+                                    message.narrowRoadPresence = 2;
+                                    break;
+                                }
+                                if (object.polylinePointIndex != null) {
+                                    if (typeof object.polylinePointIndex !== "object")
+                                        throw TypeError(".google.maps.routing.v2.PolylineDetails.NarrowRoadInfo.polylinePointIndex: object expected");
+                                    message.polylinePointIndex = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.fromObject(object.polylinePointIndex);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NarrowRoadInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {google.maps.routing.v2.PolylineDetails.NarrowRoadInfo} message NarrowRoadInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NarrowRoadInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.narrowRoadPresence = options.enums === String ? "ROAD_FEATURE_STATE_UNSPECIFIED" : 0;
+                                    object.polylinePointIndex = null;
+                                }
+                                if (message.narrowRoadPresence != null && message.hasOwnProperty("narrowRoadPresence"))
+                                    object.narrowRoadPresence = options.enums === String ? $root.google.maps.routing.v2.PolylineDetails.RoadFeatureState[message.narrowRoadPresence] === undefined ? message.narrowRoadPresence : $root.google.maps.routing.v2.PolylineDetails.RoadFeatureState[message.narrowRoadPresence] : message.narrowRoadPresence;
+                                if (message.polylinePointIndex != null && message.hasOwnProperty("polylinePointIndex"))
+                                    object.polylinePointIndex = $root.google.maps.routing.v2.PolylineDetails.PolylinePointIndex.toObject(message.polylinePointIndex, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NarrowRoadInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NarrowRoadInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NarrowRoadInfo
+                             * @function getTypeUrl
+                             * @memberof google.maps.routing.v2.PolylineDetails.NarrowRoadInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NarrowRoadInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.routing.v2.PolylineDetails.NarrowRoadInfo";
+                            };
+    
+                            return NarrowRoadInfo;
+                        })();
+    
+                        return PolylineDetails;
+                    })();
+    
                     v2.Route = (function() {
     
                         /**
@@ -18506,6 +19562,7 @@
                          * @property {Array.<number>|null} [optimizedIntermediateWaypointIndex] Route optimizedIntermediateWaypointIndex
                          * @property {google.maps.routing.v2.Route.IRouteLocalizedValues|null} [localizedValues] Route localizedValues
                          * @property {string|null} [routeToken] Route routeToken
+                         * @property {google.maps.routing.v2.IPolylineDetails|null} [polylineDetails] Route polylineDetails
                          */
     
                         /**
@@ -18632,6 +19689,14 @@
                         Route.prototype.routeToken = "";
     
                         /**
+                         * Route polylineDetails.
+                         * @member {google.maps.routing.v2.IPolylineDetails|null|undefined} polylineDetails
+                         * @memberof google.maps.routing.v2.Route
+                         * @instance
+                         */
+                        Route.prototype.polylineDetails = null;
+    
+                        /**
                          * Creates a new Route instance using the specified properties.
                          * @function create
                          * @memberof google.maps.routing.v2.Route
@@ -18691,6 +19756,8 @@
                                     writer.int32(message.routeLabels[i]);
                                 writer.ldelim();
                             }
+                            if (message.polylineDetails != null && Object.hasOwnProperty.call(message, "polylineDetails"))
+                                $root.google.maps.routing.v2.PolylineDetails.encode(message.polylineDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -18793,6 +19860,10 @@
                                     }
                                 case 12: {
                                         message.routeToken = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.polylineDetails = $root.google.maps.routing.v2.PolylineDetails.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -18907,6 +19978,11 @@
                             if (message.routeToken != null && message.hasOwnProperty("routeToken"))
                                 if (!$util.isString(message.routeToken))
                                     return "routeToken: string expected";
+                            if (message.polylineDetails != null && message.hasOwnProperty("polylineDetails")) {
+                                var error = $root.google.maps.routing.v2.PolylineDetails.verify(message.polylineDetails);
+                                if (error)
+                                    return "polylineDetails." + error;
+                            }
                             return null;
                         };
     
@@ -19015,6 +20091,11 @@
                             }
                             if (object.routeToken != null)
                                 message.routeToken = String(object.routeToken);
+                            if (object.polylineDetails != null) {
+                                if (typeof object.polylineDetails !== "object")
+                                    throw TypeError(".google.maps.routing.v2.Route.polylineDetails: object expected");
+                                message.polylineDetails = $root.google.maps.routing.v2.PolylineDetails.fromObject(object.polylineDetails);
+                            }
                             return message;
                         };
     
@@ -19047,6 +20128,7 @@
                                 object.travelAdvisory = null;
                                 object.localizedValues = null;
                                 object.routeToken = "";
+                                object.polylineDetails = null;
                             }
                             if (message.legs && message.legs.length) {
                                 object.legs = [];
@@ -19086,6 +20168,8 @@
                                 for (var j = 0; j < message.routeLabels.length; ++j)
                                     object.routeLabels[j] = options.enums === String ? $root.google.maps.routing.v2.RouteLabel[message.routeLabels[j]] === undefined ? message.routeLabels[j] : $root.google.maps.routing.v2.RouteLabel[message.routeLabels[j]] : message.routeLabels[j];
                             }
+                            if (message.polylineDetails != null && message.hasOwnProperty("polylineDetails"))
+                                object.polylineDetails = $root.google.maps.routing.v2.PolylineDetails.toObject(message.polylineDetails, options);
                             return object;
                         };
     
@@ -27044,6 +28128,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
                                         break;
                                     }
                             }
@@ -27292,6 +28378,14 @@
                                     case 4:
                                         message.extraComputations[i] = 4;
                                         break;
+                                    case "FLYOVER_INFO_ON_POLYLINE":
+                                    case 7:
+                                        message.extraComputations[i] = 7;
+                                        break;
+                                    case "NARROW_ROAD_INFO_ON_POLYLINE":
+                                    case 8:
+                                        message.extraComputations[i] = 8;
+                                        break;
                                     }
                             }
                             switch (object.trafficModel) {
@@ -27463,6 +28557,8 @@
                          * @property {number} FUEL_CONSUMPTION=2 FUEL_CONSUMPTION value
                          * @property {number} TRAFFIC_ON_POLYLINE=3 TRAFFIC_ON_POLYLINE value
                          * @property {number} HTML_FORMATTED_NAVIGATION_INSTRUCTIONS=4 HTML_FORMATTED_NAVIGATION_INSTRUCTIONS value
+                         * @property {number} FLYOVER_INFO_ON_POLYLINE=7 FLYOVER_INFO_ON_POLYLINE value
+                         * @property {number} NARROW_ROAD_INFO_ON_POLYLINE=8 NARROW_ROAD_INFO_ON_POLYLINE value
                          */
                         ComputeRoutesRequest.ExtraComputation = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -27471,6 +28567,8 @@
                             values[valuesById[2] = "FUEL_CONSUMPTION"] = 2;
                             values[valuesById[3] = "TRAFFIC_ON_POLYLINE"] = 3;
                             values[valuesById[4] = "HTML_FORMATTED_NAVIGATION_INSTRUCTIONS"] = 4;
+                            values[valuesById[7] = "FLYOVER_INFO_ON_POLYLINE"] = 7;
+                            values[valuesById[8] = "NARROW_ROAD_INFO_ON_POLYLINE"] = 8;
                             return values;
                         })();
     
@@ -30767,6 +31865,34 @@
              * @namespace
              */
             var api = {};
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
+                return values;
+            })();
     
             api.Http = (function() {
     
@@ -35657,34 +36783,6 @@
                 values[valuesById[3] = "BETA"] = 3;
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
-                return values;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             * @property {number} IDENTIFIER=8 IDENTIFIER value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
             })();
     
