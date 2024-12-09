@@ -733,7 +733,9 @@ export class ConversationProfilesClient {
   /**
    * Creates a conversation profile in the specified project.
    *
-   * {@link protos.|ConversationProfile.CreateTime} and {@link protos.|ConversationProfile.UpdateTime}
+   * {@link protos.google.cloud.dialogflow.v2.ConversationProfile.create_time|ConversationProfile.create_time}
+   * and
+   * {@link protos.google.cloud.dialogflow.v2.ConversationProfile.update_time|ConversationProfile.update_time}
    * aren't populated in the response. You can retrieve them via
    * {@link protos.google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile}
    * API.
@@ -841,7 +843,9 @@ export class ConversationProfilesClient {
   /**
    * Updates the specified conversation profile.
    *
-   * {@link protos.|ConversationProfile.CreateTime} and {@link protos.|ConversationProfile.UpdateTime}
+   * {@link protos.google.cloud.dialogflow.v2.ConversationProfile.create_time|ConversationProfile.create_time}
+   * and
+   * {@link protos.google.cloud.dialogflow.v2.ConversationProfile.update_time|ConversationProfile.update_time}
    * aren't populated in the response. You can retrieve them via
    * {@link protos.google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile}
    * API.
