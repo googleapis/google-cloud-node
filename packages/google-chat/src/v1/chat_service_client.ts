@@ -486,8 +486,11 @@ export class ChatServiceClient {
    * Creates a message in a Google Chat space. For an example, see [Send a
    * message](https://developers.google.com/workspace/chat/create-messages).
    *
-   * The `create()` method requires either user or app authentication. Chat
-   * attributes the message sender differently depending on the type of
+   * The `create()` method requires either [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * or [app
+   * authentication](https://developers.google.com/workspace/chat/authorize-import).
+   * Chat attributes the message sender differently depending on the type of
    * authentication that you use in your request.
    *
    * The following image shows how Chat attributes a message when you use app
@@ -507,6 +510,12 @@ export class ChatServiceClient {
    * authentication](https://developers.google.com/workspace/chat/images/message-user-auth.svg)
    *
    * The maximum message size, including the message contents, is 32,000 bytes.
+   *
+   * For
+   * [webhook](https://developers.google.com/workspace/chat/quickstart/webhooks)
+   * requests, the response doesn't contain the full message. The response only
+   * populates the `name` and `thread.name` fields in addition to the
+   * information that was in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -531,6 +540,12 @@ export class ChatServiceClient {
    * @param {google.chat.v1.CreateMessageRequest.MessageReplyOption} [request.messageReplyOption]
    *   Optional. Specifies whether a message starts a thread or replies to one.
    *   Only supported in named spaces.
+   *
+   *   When [responding to user
+   *   interactions](https://developers.google.com/workspace/chat/receive-respond-interactions),
+   *   this field is ignored. For interactions within a thread, the reply is
+   *   created in the same thread. Otherwise, the reply is created as a new
+   *   thread.
    * @param {string} [request.messageId]
    *   Optional. A custom ID for a message. Lets Chat apps get, update, or delete
    *   a message without needing to store the system-assigned ID in the message's
@@ -627,13 +642,16 @@ export class ChatServiceClient {
    * [Get details about a user's or Google Chat app's
    * membership](https://developers.google.com/workspace/chat/get-members).
    *
-   * Requires
-   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
-   * Supports
-   * [app
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
-   * and [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -646,13 +664,11 @@ export class ChatServiceClient {
    *
    *   Format: `spaces/{space}/members/{member}` or `spaces/{space}/members/app`
    *
-   *   When [authenticated as a
-   *   user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
-   *   you can use the user's email as an alias for `{member}`. For example,
+   *   You can use the user's email as an alias for `{member}`. For example,
    *   `spaces/{space}/members/example@gmail.com` where `example@gmail.com` is the
    *   email of the Google Chat user.
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -744,13 +760,14 @@ export class ChatServiceClient {
    * For an example, see [Get details about a
    * message](https://developers.google.com/workspace/chat/get-messages).
    *
-   * Requires
-   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
-   * Supports
-   * [app
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
-   * and [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
    *
    * Note: Might return a message from a blocked member or space.
    *
@@ -848,13 +865,15 @@ export class ChatServiceClient {
    * [Update a
    * message](https://developers.google.com/workspace/chat/update-messages).
    *
-   * Requires
-   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
-   * Supports
-   * [app
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
-   * and [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   *
    * When using app authentication, requests can only update messages
    * created by the calling Chat app.
    *
@@ -965,13 +984,15 @@ export class ChatServiceClient {
    * For an example, see [Delete a
    * message](https://developers.google.com/workspace/chat/delete-messages).
    *
-   * Requires
-   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
-   * Supports
-   * [app
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
-   * and [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   *
    * When using app authentication, requests can only delete messages
    * created by the calling Chat app.
    *
@@ -986,9 +1007,9 @@ export class ChatServiceClient {
    *   `clientAssignedMessageId` field for `{message}`. For details, see [Name a
    *   message]
    *   (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
-   * @param {boolean} request.force
-   *   When `true`, deleting a message also deletes its threaded replies. When
-   *   `false`, if a message has threaded replies, deletion fails.
+   * @param {boolean} [request.force]
+   *   Optional. When `true`, deleting a message also deletes its threaded
+   *   replies. When `false`, if a message has threaded replies, deletion fails.
    *
    *   Only applies when [authenticating as a
    *   user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
@@ -1163,6 +1184,7 @@ export class ChatServiceClient {
    * Uploads an attachment. For an example, see
    * [Upload media as a file
    * attachment](https://developers.google.com/workspace/chat/upload-media-attachments).
+   *
    * Requires user
    * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
@@ -1257,13 +1279,16 @@ export class ChatServiceClient {
    * [Get details about a
    * space](https://developers.google.com/workspace/chat/get-spaces).
    *
-   * Requires
-   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
-   * Supports
-   * [app
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
-   * and [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1271,8 +1296,8 @@ export class ChatServiceClient {
    *   Required. Resource name of the space, in the form `spaces/{space}`.
    *
    *   Format: `spaces/{space}`
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -1357,35 +1382,39 @@ export class ChatServiceClient {
     return this.innerApiCalls.getSpace(request, options, callback);
   }
   /**
-   * Creates a space with no members. Can be used to create a named space.
-   * Spaces grouped by topics aren't supported. For an example, see
-   * [Create a
+   * Creates a space with no members. Can be used to create a named space, or a
+   * group chat in `Import mode`. For an example, see [Create a
    * space](https://developers.google.com/workspace/chat/create-spaces).
    *
    *  If you receive the error message `ALREADY_EXISTS` when creating
    *  a space, try a different `displayName`. An existing space within
    *  the Google Workspace organization might already use this display name.
    *
-   * If you're a member of the [Developer Preview
-   * program](https://developers.google.com/workspace/preview), you can create a
-   * group chat in import mode using `spaceType.GROUP_CHAT`.
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
    *
-   * Requires [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+   * in [Developer Preview](https://developers.google.com/workspace/preview)
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   *
+   * When authenticating as an app, the `space.customer` field must be set in
+   * the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.chat.v1.Space} request.space
    *   Required. The `displayName` and `spaceType` fields must be populated.  Only
-   *   `SpaceType.SPACE` is supported.
+   *   `SpaceType.SPACE`  and `SpaceType.GROUP_CHAT` are supported.
+   *   `SpaceType.GROUP_CHAT` can only be used if `importMode` is set to true.
    *
    *   If you receive the error message `ALREADY_EXISTS`,
    *   try a different `displayName`. An existing space within the Google
    *   Workspace organization might already use this display name.
    *
-   *   If you're a member of the [Developer Preview
-   *   program](https://developers.google.com/workspace/preview),
-   *   `SpaceType.GROUP_CHAT` can be used if `importMode` is set to true.
    *
    *   The space `name` is assigned on the server so anything specified in this
    *   field will be ignored.
@@ -1664,8 +1693,18 @@ export class ChatServiceClient {
    * `ALREADY_EXISTS`, try a different display name.. An existing space within
    * the Google Workspace organization might already use this display name.
    *
-   * Requires [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+   * in [Developer Preview](https://developers.google.com/workspace/preview)
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1735,8 +1774,8 @@ export class ChatServiceClient {
    *   - `permission_settings.manageApps`
    *   - `permission_settings.manageWebhooks`
    *   - `permission_settings.replyMessages`
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -1829,9 +1868,19 @@ export class ChatServiceClient {
    * memberships in the space—are also deleted. For an example, see
    * [Delete a
    * space](https://developers.google.com/workspace/chat/delete-spaces).
-   * Requires [user
+   *
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+   * in [Developer Preview](https://developers.google.com/workspace/preview)
+   *
+   * - [User
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
-   * from a user who has permission to delete the space.
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1839,8 +1888,8 @@ export class ChatServiceClient {
    *   Required. Resource name of the space to delete.
    *
    *   Format: `spaces/{space}`
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -1928,8 +1977,11 @@ export class ChatServiceClient {
    * Completes the
    * [import process](https://developers.google.com/workspace/chat/import-data)
    * for the specified space and makes it visible to users.
-   * Requires app authentication and domain-wide delegation. For more
-   * information, see [Authorize Google Chat apps to import
+   *
+   * Requires [app
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * and domain-wide delegation. For more information, see [Authorize Google
+   * Chat apps to import
    * data](https://developers.google.com/workspace/chat/authorize-import).
    *
    * @param {Object} request
@@ -2019,20 +2071,24 @@ export class ChatServiceClient {
    * see
    * [Find a direct message](/chat/api/guides/v1/spaces/find-direct-message).
    *
-   * With [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
-   * returns the direct message space between the specified user and the
-   * authenticated user.
-   *
    * With [app
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app),
    * returns the direct message space between the specified user and the calling
    * Chat app.
    *
-   * Requires [user
+   * With [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+   * returns the direct message space between the specified user and the
+   * authenticated user.
+   *
+   * // Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   *
+   * - [User
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
-   * or [app
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2128,8 +2184,19 @@ export class ChatServiceClient {
    * policy turned off, then they're invited, and must accept the space
    * invitation before joining. Otherwise, creating a membership adds the member
    * directly to the specified space.
-   * Requires [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+   * in [Developer Preview](https://developers.google.com/workspace/preview)
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * For example usage, see:
    *
@@ -2151,23 +2218,44 @@ export class ChatServiceClient {
    *   Format: spaces/{space}
    * @param {google.chat.v1.Membership} request.membership
    *   Required. The membership relation to create.
+   *
    *   The `memberType` field must contain a user with the `user.name` and
    *   `user.type` fields populated. The server will assign a resource name
    *   and overwrite anything specified.
+   *
    *   When a Chat app creates a membership relation for a human user, it must use
-   *   the `chat.memberships` scope, set `user.type` to `HUMAN`, and set
-   *   `user.name` with format `users/{user}`, where `{user}` can be the email
-   *   address for the user. For users in the same Workspace organization `{user}`
-   *   can also be the `id` of the
-   *   [person](https://developers.google.com/people/api/rest/v1/people) from the
-   *   People API, or the `id` for the user in the Directory API. For example, if
-   *   the People API Person profile ID for `user@example.com` is `123456789`, you
-   *   can add the user to the space by setting the `membership.member.name` to
-   *   `users/user@example.com` or `users/123456789`. When a Chat app creates a
-   *   membership relation for itself, it must use the `chat.memberships.app`
-   *   scope, set `user.type` to `BOT`, and set `user.name` to `users/app`.
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   *   certain authorization scopes and set specific values for certain fields:
+   *
+   *   - When [authenticating as a
+   *   user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+   *   the `chat.memberships` authorization scope is required.
+   *
+   *   - When [authenticating as an
+   *   app](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app),
+   *   the `chat.app.memberships` authorization scope is required.
+   *   Authenticating as an app is available in [Developer
+   *   Preview](https://developers.google.com/workspace/preview).
+   *
+   *   - Set `user.type` to `HUMAN`, and set `user.name` with format
+   *   `users/{user}`, where `{user}` can be the email address for the user. For
+   *   users in the same Workspace organization `{user}` can also be the `id` of
+   *   the [person](https://developers.google.com/people/api/rest/v1/people) from
+   *   the People API, or the `id` for the user in the Directory API. For example,
+   *   if the People API Person profile ID for `user@example.com` is `123456789`,
+   *   you can add the user to the space by setting the `membership.member.name`
+   *   to `users/user@example.com` or `users/123456789`.
+   *
+   *   Inviting users external to the Workspace organization that owns the space
+   *   requires [user
+   *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   *   When a Chat app creates a membership relation for itself, it must
+   *   [authenticate as a
+   *   user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   *   and use the `chat.memberships.app` scope, set `user.type` to `BOT`, and set
+   *   `user.name` to `users/app`.
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -2259,8 +2347,18 @@ export class ChatServiceClient {
    * Updates a membership. For an example, see [Update a user's membership in
    * a space](https://developers.google.com/workspace/chat/update-members).
    *
-   * Requires [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+   * in [Developer Preview](https://developers.google.com/workspace/preview)
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2274,8 +2372,8 @@ export class ChatServiceClient {
    *   Currently supported field paths:
    *
    *   - `role`
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -2364,8 +2462,18 @@ export class ChatServiceClient {
    * [Remove a user or a Google Chat app from a
    * space](https://developers.google.com/workspace/chat/delete-members).
    *
-   * Requires [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+   * in [Developer Preview](https://developers.google.com/workspace/preview)
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2384,8 +2492,8 @@ export class ChatServiceClient {
    *   and `spaces/{space}/members/app` format.
    *
    *   Format: `spaces/{space}/members/{member}` or `spaces/{space}/members/app`.
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -2476,6 +2584,7 @@ export class ChatServiceClient {
    * supported. For an example, see
    * [Add a reaction to a
    * message](https://developers.google.com/workspace/chat/create-reactions).
+   *
    * Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
@@ -2567,6 +2676,7 @@ export class ChatServiceClient {
    * For an example, see
    * [Delete a
    * reaction](https://developers.google.com/workspace/chat/delete-reactions).
+   *
    * Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
@@ -3080,6 +3190,7 @@ export class ChatServiceClient {
    * For an example, see
    * [List
    * messages](https://developers.google.com/workspace/chat/api/guides/v1/messages/list).
+   *
    * Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
@@ -3089,9 +3200,9 @@ export class ChatServiceClient {
    *   Required. The resource name of the space to list messages from.
    *
    *   Format: `spaces/{space}`
-   * @param {number} request.pageSize
-   *   The maximum number of messages returned. The service might return fewer
-   *   messages than this value.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of messages returned. The service might return
+   *   fewer messages than this value.
    *
    *   If unspecified, at most 25 are returned.
    *
@@ -3099,17 +3210,15 @@ export class ChatServiceClient {
    *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
-   * @param {string} request.pageToken
-   *   Optional, if resuming from a previous query.
-   *
-   *   A page token received from a previous list messages call. Provide this
-   *   parameter to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous list messages call. Provide
+   *   this parameter to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided should match the call that
    *   provided the page token. Passing different values to the other parameters
    *   might lead to unexpected results.
-   * @param {string} request.filter
-   *   A query filter.
+   * @param {string} [request.filter]
+   *   Optional. A query filter.
    *
    *   You can filter messages by date (`create_time`) and thread (`thread.name`).
    *
@@ -3146,20 +3255,19 @@ export class ChatServiceClient {
    *
    *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
    *   error.
-   * @param {string} request.orderBy
-   *   Optional, if resuming from a previous query.
-   *
-   *   How the list of messages is ordered. Specify a value to order by an
-   *   ordering operation. Valid ordering operation values are as follows:
+   * @param {string} [request.orderBy]
+   *   Optional. How the list of messages is ordered. Specify a value to order by
+   *   an ordering operation. Valid ordering operation values are as follows:
    *
    *   - `ASC` for ascending.
    *
    *   - `DESC` for descending.
    *
    *   The default ordering is `create_time ASC`.
-   * @param {boolean} request.showDeleted
-   *   Whether to include deleted messages. Deleted messages include deleted time
-   *   and metadata about their deletion, but message content is unavailable.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. Whether to include deleted messages. Deleted messages include
+   *   deleted time and metadata about their deletion, but message content is
+   *   unavailable.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3247,9 +3355,9 @@ export class ChatServiceClient {
    *   Required. The resource name of the space to list messages from.
    *
    *   Format: `spaces/{space}`
-   * @param {number} request.pageSize
-   *   The maximum number of messages returned. The service might return fewer
-   *   messages than this value.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of messages returned. The service might return
+   *   fewer messages than this value.
    *
    *   If unspecified, at most 25 are returned.
    *
@@ -3257,17 +3365,15 @@ export class ChatServiceClient {
    *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
-   * @param {string} request.pageToken
-   *   Optional, if resuming from a previous query.
-   *
-   *   A page token received from a previous list messages call. Provide this
-   *   parameter to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous list messages call. Provide
+   *   this parameter to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided should match the call that
    *   provided the page token. Passing different values to the other parameters
    *   might lead to unexpected results.
-   * @param {string} request.filter
-   *   A query filter.
+   * @param {string} [request.filter]
+   *   Optional. A query filter.
    *
    *   You can filter messages by date (`create_time`) and thread (`thread.name`).
    *
@@ -3304,20 +3410,19 @@ export class ChatServiceClient {
    *
    *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
    *   error.
-   * @param {string} request.orderBy
-   *   Optional, if resuming from a previous query.
-   *
-   *   How the list of messages is ordered. Specify a value to order by an
-   *   ordering operation. Valid ordering operation values are as follows:
+   * @param {string} [request.orderBy]
+   *   Optional. How the list of messages is ordered. Specify a value to order by
+   *   an ordering operation. Valid ordering operation values are as follows:
    *
    *   - `ASC` for ascending.
    *
    *   - `DESC` for descending.
    *
    *   The default ordering is `create_time ASC`.
-   * @param {boolean} request.showDeleted
-   *   Whether to include deleted messages. Deleted messages include deleted time
-   *   and metadata about their deletion, but message content is unavailable.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. Whether to include deleted messages. Deleted messages include
+   *   deleted time and metadata about their deletion, but message content is
+   *   unavailable.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3361,9 +3466,9 @@ export class ChatServiceClient {
    *   Required. The resource name of the space to list messages from.
    *
    *   Format: `spaces/{space}`
-   * @param {number} request.pageSize
-   *   The maximum number of messages returned. The service might return fewer
-   *   messages than this value.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of messages returned. The service might return
+   *   fewer messages than this value.
    *
    *   If unspecified, at most 25 are returned.
    *
@@ -3371,17 +3476,15 @@ export class ChatServiceClient {
    *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
-   * @param {string} request.pageToken
-   *   Optional, if resuming from a previous query.
-   *
-   *   A page token received from a previous list messages call. Provide this
-   *   parameter to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous list messages call. Provide
+   *   this parameter to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided should match the call that
    *   provided the page token. Passing different values to the other parameters
    *   might lead to unexpected results.
-   * @param {string} request.filter
-   *   A query filter.
+   * @param {string} [request.filter]
+   *   Optional. A query filter.
    *
    *   You can filter messages by date (`create_time`) and thread (`thread.name`).
    *
@@ -3418,20 +3521,19 @@ export class ChatServiceClient {
    *
    *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
    *   error.
-   * @param {string} request.orderBy
-   *   Optional, if resuming from a previous query.
-   *
-   *   How the list of messages is ordered. Specify a value to order by an
-   *   ordering operation. Valid ordering operation values are as follows:
+   * @param {string} [request.orderBy]
+   *   Optional. How the list of messages is ordered. Specify a value to order by
+   *   an ordering operation. Valid ordering operation values are as follows:
    *
    *   - `ASC` for ascending.
    *
    *   - `DESC` for descending.
    *
    *   The default ordering is `create_time ASC`.
-   * @param {boolean} request.showDeleted
-   *   Whether to include deleted messages. Deleted messages include deleted time
-   *   and metadata about their deletion, but message content is unavailable.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. Whether to include deleted messages. Deleted messages include
+   *   deleted time and metadata about their deletion, but message content is
+   *   unavailable.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3478,13 +3580,16 @@ export class ChatServiceClient {
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
    * lists memberships in spaces that the authenticated user has access to.
    *
-   * Requires
-   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
-   * Supports
-   * [app
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [App
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
-   * and [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * You can authenticate and authorize this method with administrator
+   * privileges by setting the `use_admin_access` field in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3565,8 +3670,8 @@ export class ChatServiceClient {
    *
    *   Currently requires [user
    *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -3738,8 +3843,8 @@ export class ChatServiceClient {
    *
    *   Currently requires [user
    *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -3867,8 +3972,8 @@ export class ChatServiceClient {
    *
    *   Currently requires [user
    *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
-   * @param {boolean} request.useAdminAccess
-   *   When `true`, the method runs using the user's Google Workspace
+   * @param {boolean} [request.useAdminAccess]
+   *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
    *
    *   The calling user must be a Google Workspace administrator with the
@@ -3919,16 +4024,14 @@ export class ChatServiceClient {
    * [List
    * spaces](https://developers.google.com/workspace/chat/list-spaces).
    *
-   * Requires
-   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
-   * Supports
-   * [app
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
-   * and [user
-   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
    *
-   * Lists spaces visible to the caller or authenticated user. Group chats
-   * and DMs aren't listed until the first message is sent.
+   * - [App
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
    *
    * To list all named spaces by Google Workspace organization, use the
    * [`spaces.search()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/search)
@@ -4189,7 +4292,9 @@ export class ChatServiceClient {
   }
   /**
    * Returns a list of spaces in a Google Workspace organization based on an
-   * administrator's search. Requires [user
+   * administrator's search.
+   *
+   * Requires [user
    * authentication with administrator
    * privileges](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user#admin-privileges).
    * In the request, set `use_admin_access` to `true`.
@@ -4712,6 +4817,7 @@ export class ChatServiceClient {
    * Lists reactions to a message. For an example, see
    * [List reactions for a
    * message](https://developers.google.com/workspace/chat/list-reactions).
+   *
    * Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
@@ -5079,14 +5185,14 @@ export class ChatServiceClient {
    *   where the events occurred.
    *
    *   Format: `spaces/{space}`.
-   * @param {number} request.pageSize
+   * @param {number} [request.pageSize]
    *   Optional. The maximum number of space events returned. The service might
    *   return fewer than this value.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous list space events call. Provide this
-   *   to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous list space events call.
+   *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to list space events must
    *   match the call that provided the page token. Passing different values to
@@ -5233,14 +5339,14 @@ export class ChatServiceClient {
    *   where the events occurred.
    *
    *   Format: `spaces/{space}`.
-   * @param {number} request.pageSize
+   * @param {number} [request.pageSize]
    *   Optional. The maximum number of space events returned. The service might
    *   return fewer than this value.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous list space events call. Provide this
-   *   to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous list space events call.
+   *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to list space events must
    *   match the call that provided the page token. Passing different values to
@@ -5343,14 +5449,14 @@ export class ChatServiceClient {
    *   where the events occurred.
    *
    *   Format: `spaces/{space}`.
-   * @param {number} request.pageSize
+   * @param {number} [request.pageSize]
    *   Optional. The maximum number of space events returned. The service might
    *   return fewer than this value.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous list space events call. Provide this
-   *   to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous list space events call.
+   *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to list space events must
    *   match the call that provided the page token. Passing different values to
