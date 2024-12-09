@@ -42,8 +42,8 @@ function main(parent, filter) {
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous list space events call. Provide this
-   *  to retrieve the subsequent page.
+   *  Optional. A page token, received from a previous list space events call.
+   *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to list space events must
    *  match the call that provided the page token. Passing different values to
    *  the other parameters might lead to unexpected results.
