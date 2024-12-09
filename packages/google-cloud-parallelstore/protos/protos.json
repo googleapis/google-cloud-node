@@ -1104,6 +1104,13 @@
                         "DIRECTORY_STRIPE_LEVEL_MAX": 3
                       }
                     },
+                    "DeploymentType": {
+                      "values": {
+                        "DEPLOYMENT_TYPE_UNSPECIFIED": 0,
+                        "SCRATCH": 1,
+                        "PERSISTENT": 2
+                      }
+                    },
                     "Instance": {
                       "options": {
                         "(google.api.resource).type": "parallelstore.googleapis.com/Instance",
@@ -1211,6 +1218,13 @@
                         "directoryStripeLevel": {
                           "type": "DirectoryStripeLevel",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deploymentType": {
+                          "type": "DeploymentType",
+                          "id": 17,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

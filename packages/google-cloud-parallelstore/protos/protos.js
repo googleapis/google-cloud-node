@@ -6744,6 +6744,22 @@
                         return values;
                     })();
     
+                    /**
+                     * DeploymentType enum.
+                     * @name google.cloud.parallelstore.v1beta.DeploymentType
+                     * @enum {number}
+                     * @property {number} DEPLOYMENT_TYPE_UNSPECIFIED=0 DEPLOYMENT_TYPE_UNSPECIFIED value
+                     * @property {number} SCRATCH=1 SCRATCH value
+                     * @property {number} PERSISTENT=2 PERSISTENT value
+                     */
+                    v1beta.DeploymentType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEPLOYMENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SCRATCH"] = 1;
+                        values[valuesById[2] = "PERSISTENT"] = 2;
+                        return values;
+                    })();
+    
                     v1beta.Instance = (function() {
     
                         /**
@@ -6764,6 +6780,7 @@
                          * @property {string|null} [effectiveReservedIpRange] Instance effectiveReservedIpRange
                          * @property {google.cloud.parallelstore.v1beta.FileStripeLevel|null} [fileStripeLevel] Instance fileStripeLevel
                          * @property {google.cloud.parallelstore.v1beta.DirectoryStripeLevel|null} [directoryStripeLevel] Instance directoryStripeLevel
+                         * @property {google.cloud.parallelstore.v1beta.DeploymentType|null} [deploymentType] Instance deploymentType
                          */
     
                         /**
@@ -6896,6 +6913,14 @@
                         Instance.prototype.directoryStripeLevel = 0;
     
                         /**
+                         * Instance deploymentType.
+                         * @member {google.cloud.parallelstore.v1beta.DeploymentType} deploymentType
+                         * @memberof google.cloud.parallelstore.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.deploymentType = 0;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.parallelstore.v1beta.Instance
@@ -6949,6 +6974,8 @@
                                 writer.uint32(/* id 15, wireType 0 =*/120).int32(message.fileStripeLevel);
                             if (message.directoryStripeLevel != null && Object.hasOwnProperty.call(message, "directoryStripeLevel"))
                                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.directoryStripeLevel);
+                            if (message.deploymentType != null && Object.hasOwnProperty.call(message, "deploymentType"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.deploymentType);
                             return writer;
                         };
     
@@ -7058,6 +7085,10 @@
                                     }
                                 case 16: {
                                         message.directoryStripeLevel = reader.int32();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.deploymentType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -7171,6 +7202,15 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                    break;
+                                }
+                            if (message.deploymentType != null && message.hasOwnProperty("deploymentType"))
+                                switch (message.deploymentType) {
+                                default:
+                                    return "deploymentType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             return null;
@@ -7313,6 +7353,26 @@
                                 message.directoryStripeLevel = 3;
                                 break;
                             }
+                            switch (object.deploymentType) {
+                            default:
+                                if (typeof object.deploymentType === "number") {
+                                    message.deploymentType = object.deploymentType;
+                                    break;
+                                }
+                                break;
+                            case "DEPLOYMENT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.deploymentType = 0;
+                                break;
+                            case "SCRATCH":
+                            case 1:
+                                message.deploymentType = 1;
+                                break;
+                            case "PERSISTENT":
+                            case 2:
+                                message.deploymentType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -7350,6 +7410,7 @@
                                 object.effectiveReservedIpRange = "";
                                 object.fileStripeLevel = options.enums === String ? "FILE_STRIPE_LEVEL_UNSPECIFIED" : 0;
                                 object.directoryStripeLevel = options.enums === String ? "DIRECTORY_STRIPE_LEVEL_UNSPECIFIED" : 0;
+                                object.deploymentType = options.enums === String ? "DEPLOYMENT_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7389,6 +7450,8 @@
                                 object.fileStripeLevel = options.enums === String ? $root.google.cloud.parallelstore.v1beta.FileStripeLevel[message.fileStripeLevel] === undefined ? message.fileStripeLevel : $root.google.cloud.parallelstore.v1beta.FileStripeLevel[message.fileStripeLevel] : message.fileStripeLevel;
                             if (message.directoryStripeLevel != null && message.hasOwnProperty("directoryStripeLevel"))
                                 object.directoryStripeLevel = options.enums === String ? $root.google.cloud.parallelstore.v1beta.DirectoryStripeLevel[message.directoryStripeLevel] === undefined ? message.directoryStripeLevel : $root.google.cloud.parallelstore.v1beta.DirectoryStripeLevel[message.directoryStripeLevel] : message.directoryStripeLevel;
+                            if (message.deploymentType != null && message.hasOwnProperty("deploymentType"))
+                                object.deploymentType = options.enums === String ? $root.google.cloud.parallelstore.v1beta.DeploymentType[message.deploymentType] === undefined ? message.deploymentType : $root.google.cloud.parallelstore.v1beta.DeploymentType[message.deploymentType] : message.deploymentType;
                             return object;
                         };
     
