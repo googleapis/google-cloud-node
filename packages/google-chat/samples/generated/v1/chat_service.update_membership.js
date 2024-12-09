@@ -41,7 +41,7 @@ function main(membership, updateMask) {
    */
   // const updateMask = {}
   /**
-   *  When `true`, the method runs using the user's Google Workspace
+   *  Optional. When `true`, the method runs using the user's Google Workspace
    *  administrator privileges.
    *  The calling user must be a Google Workspace administrator with the
    *  manage chat and spaces conversations

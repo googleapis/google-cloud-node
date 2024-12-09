@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(message) {
+function main(message, updateMask) {
   // [START chat_v1_generated_ChatService_UpdateMessage_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -64,6 +64,7 @@ function main(message) {
     // Construct request
     const request = {
       message,
+      updateMask,
     };
 
     // Run request
