@@ -2755,6 +2755,13 @@ export namespace google {
                     DIRECTORY_STRIPE_LEVEL_MAX = 3
                 }
 
+                /** DeploymentType enum. */
+                enum DeploymentType {
+                    DEPLOYMENT_TYPE_UNSPECIFIED = 0,
+                    SCRATCH = 1,
+                    PERSISTENT = 2
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -2799,6 +2806,9 @@ export namespace google {
 
                     /** Instance directoryStripeLevel */
                     directoryStripeLevel?: (google.cloud.parallelstore.v1beta.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1beta.DirectoryStripeLevel|null);
+
+                    /** Instance deploymentType */
+                    deploymentType?: (google.cloud.parallelstore.v1beta.DeploymentType|keyof typeof google.cloud.parallelstore.v1beta.DeploymentType|null);
                 }
 
                 /** Represents an Instance. */
@@ -2851,6 +2861,9 @@ export namespace google {
 
                     /** Instance directoryStripeLevel. */
                     public directoryStripeLevel: (google.cloud.parallelstore.v1beta.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1beta.DirectoryStripeLevel);
+
+                    /** Instance deploymentType. */
+                    public deploymentType: (google.cloud.parallelstore.v1beta.DeploymentType|keyof typeof google.cloud.parallelstore.v1beta.DeploymentType);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
