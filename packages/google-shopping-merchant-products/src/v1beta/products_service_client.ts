@@ -397,6 +397,10 @@ export class ProductsServiceClient {
    * @param {string} request.name
    *   Required. The name of the product to retrieve.
    *   Format: `accounts/{account}/products/{product}`
+   *   where the last section `product` consists of 4 parts:
+   *   channel~content_language~feed_label~offer_id
+   *   example for product name is
+   *   "accounts/123/products/online~en~US~sku123"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -503,7 +507,7 @@ export class ProductsServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of products to return. The service may return fewer than
    *   this value.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   The maximum value is 250; values above 250 will be coerced to 250.
    *   If unspecified, the maximum number of products will be returned.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListProducts` call.
@@ -608,7 +612,7 @@ export class ProductsServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of products to return. The service may return fewer than
    *   this value.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   The maximum value is 250; values above 250 will be coerced to 250.
    *   If unspecified, the maximum number of products will be returned.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListProducts` call.
@@ -661,7 +665,7 @@ export class ProductsServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of products to return. The service may return fewer than
    *   this value.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   The maximum value is 250; values above 250 will be coerced to 250.
    *   If unspecified, the maximum number of products will be returned.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListProducts` call.
