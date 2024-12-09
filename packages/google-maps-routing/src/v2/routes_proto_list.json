@@ -7,6 +7,7 @@
   "../../protos/google/maps/routing/v2/maneuver.proto",
   "../../protos/google/maps/routing/v2/navigation_instruction.proto",
   "../../protos/google/maps/routing/v2/polyline.proto",
+  "../../protos/google/maps/routing/v2/polyline_details.proto",
   "../../protos/google/maps/routing/v2/route.proto",
   "../../protos/google/maps/routing/v2/route_label.proto",
   "../../protos/google/maps/routing/v2/route_modifiers.proto",
