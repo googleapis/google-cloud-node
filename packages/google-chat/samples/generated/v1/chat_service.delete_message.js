@@ -38,8 +38,8 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  When `true`, deleting a message also deletes its threaded replies. When
-   *  `false`, if a message has threaded replies, deletion fails.
+   *  Optional. When `true`, deleting a message also deletes its threaded
+   *  replies. When `false`, if a message has threaded replies, deletion fails.
    *  Only applies when authenticating as a
    *  user (https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *  Has no effect when authenticating as a Chat app 
