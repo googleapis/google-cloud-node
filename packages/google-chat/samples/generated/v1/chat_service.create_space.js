@@ -30,13 +30,11 @@ function main(space) {
    */
   /**
    *  Required. The `displayName` and `spaceType` fields must be populated.  Only
-   *  `SpaceType.SPACE` is supported.
+   *  `SpaceType.SPACE`  and `SpaceType.GROUP_CHAT` are supported.
+   *  `SpaceType.GROUP_CHAT` can only be used if `importMode` is set to true.
    *  If you receive the error message `ALREADY_EXISTS`,
    *  try a different `displayName`. An existing space within the Google
    *  Workspace organization might already use this display name.
-   *  If you're a member of the Developer Preview
-   *  program (https://developers.google.com/workspace/preview),
-   *  `SpaceType.GROUP_CHAT` can be used if `importMode` is set to true.
    *  The space `name` is assigned on the server so anything specified in this
    *  field will be ignored.
    */
