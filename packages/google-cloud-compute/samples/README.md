@@ -190,8 +190,12 @@
   * [Instance_group_managers.patch_per_instance_configs](#instance_group_managers.patch_per_instance_configs)
   * [Instance_group_managers.recreate_instances](#instance_group_managers.recreate_instances)
   * [Instance_group_managers.resize](#instance_group_managers.resize)
+  * [Instance_group_managers.resume_instances](#instance_group_managers.resume_instances)
   * [Instance_group_managers.set_instance_template](#instance_group_managers.set_instance_template)
   * [Instance_group_managers.set_target_pools](#instance_group_managers.set_target_pools)
+  * [Instance_group_managers.start_instances](#instance_group_managers.start_instances)
+  * [Instance_group_managers.stop_instances](#instance_group_managers.stop_instances)
+  * [Instance_group_managers.suspend_instances](#instance_group_managers.suspend_instances)
   * [Instance_group_managers.update_per_instance_configs](#instance_group_managers.update_per_instance_configs)
   * [Instance_groups.add_instances](#instance_groups.add_instances)
   * [Instance_groups.aggregated_list](#instance_groups.aggregated_list)
@@ -346,6 +350,8 @@
   * [Network_firewall_policies.remove_rule](#network_firewall_policies.remove_rule)
   * [Network_firewall_policies.set_iam_policy](#network_firewall_policies.set_iam_policy)
   * [Network_firewall_policies.test_iam_permissions](#network_firewall_policies.test_iam_permissions)
+  * [Network_profiles.get](#network_profiles.get)
+  * [Network_profiles.list](#network_profiles.list)
   * [Networks.add_peering](#networks.add_peering)
   * [Networks.delete](#networks.delete)
   * [Networks.get](#networks.get)
@@ -488,8 +494,12 @@
   * [Region_instance_group_managers.patch_per_instance_configs](#region_instance_group_managers.patch_per_instance_configs)
   * [Region_instance_group_managers.recreate_instances](#region_instance_group_managers.recreate_instances)
   * [Region_instance_group_managers.resize](#region_instance_group_managers.resize)
+  * [Region_instance_group_managers.resume_instances](#region_instance_group_managers.resume_instances)
   * [Region_instance_group_managers.set_instance_template](#region_instance_group_managers.set_instance_template)
   * [Region_instance_group_managers.set_target_pools](#region_instance_group_managers.set_target_pools)
+  * [Region_instance_group_managers.start_instances](#region_instance_group_managers.start_instances)
+  * [Region_instance_group_managers.stop_instances](#region_instance_group_managers.stop_instances)
+  * [Region_instance_group_managers.suspend_instances](#region_instance_group_managers.suspend_instances)
   * [Region_instance_group_managers.update_per_instance_configs](#region_instance_group_managers.update_per_instance_configs)
   * [Region_instance_groups.get](#region_instance_groups.get)
   * [Region_instance_groups.list](#region_instance_groups.list)
@@ -549,6 +559,7 @@
   * [Region_security_policies.patch](#region_security_policies.patch)
   * [Region_security_policies.patch_rule](#region_security_policies.patch_rule)
   * [Region_security_policies.remove_rule](#region_security_policies.remove_rule)
+  * [Region_security_policies.set_labels](#region_security_policies.set_labels)
   * [Region_ssl_certificates.delete](#region_ssl_certificates.delete)
   * [Region_ssl_certificates.get](#region_ssl_certificates.get)
   * [Region_ssl_certificates.insert](#region_ssl_certificates.insert)
@@ -3828,6 +3839,23 @@ __Usage:__
 
 
 
+### Instance_group_managers.resume_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_managers.resume_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_managers.resume_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_managers.resume_instances.js`
+
+
+-----
+
+
+
+
 ### Instance_group_managers.set_instance_template
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_managers.set_instance_template.js).
@@ -3855,6 +3883,57 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/instance_group_managers.set_target_pools.js`
+
+
+-----
+
+
+
+
+### Instance_group_managers.start_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_managers.start_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_managers.start_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_managers.start_instances.js`
+
+
+-----
+
+
+
+
+### Instance_group_managers.stop_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_managers.stop_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_managers.stop_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_managers.stop_instances.js`
+
+
+-----
+
+
+
+
+### Instance_group_managers.suspend_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_managers.suspend_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_managers.suspend_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_managers.suspend_instances.js`
 
 
 -----
@@ -6480,6 +6559,40 @@ __Usage:__
 
 
 
+### Network_profiles.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_profiles.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_profiles.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_profiles.get.js`
+
+
+-----
+
+
+
+
+### Network_profiles.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_profiles.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_profiles.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_profiles.list.js`
+
+
+-----
+
+
+
+
 ### Networks.add_peering
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/networks.add_peering.js).
@@ -8894,6 +9007,23 @@ __Usage:__
 
 
 
+### Region_instance_group_managers.resume_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.resume_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.resume_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.resume_instances.js`
+
+
+-----
+
+
+
+
 ### Region_instance_group_managers.set_instance_template
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.set_instance_template.js).
@@ -8921,6 +9051,57 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.set_target_pools.js`
+
+
+-----
+
+
+
+
+### Region_instance_group_managers.start_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.start_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.start_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.start_instances.js`
+
+
+-----
+
+
+
+
+### Region_instance_group_managers.stop_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.stop_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.stop_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.stop_instances.js`
+
+
+-----
+
+
+
+
+### Region_instance_group_managers.suspend_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.suspend_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.suspend_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.suspend_instances.js`
 
 
 -----
@@ -9924,6 +10105,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_security_policies.remove_rule.js`
+
+
+-----
+
+
+
+
+### Region_security_policies.set_labels
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_security_policies.set_labels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_security_policies.set_labels.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_security_policies.set_labels.js`
 
 
 -----

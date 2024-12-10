@@ -2400,6 +2400,180 @@ describe('v1.InstanceGroupManagersClient', () => {
     });
   });
 
+  describe('resumeInstances', () => {
+    it('invokes resumeInstances without error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.resumeInstances = stubSimpleCall(expectedResponse);
+      const [response] = await client.resumeInstances(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resumeInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeInstances without error using callback', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.resumeInstances =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resumeInstances(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resumeInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeInstances with error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resumeInstances = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.resumeInstances(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.resumeInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resumeInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resumeInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resumeInstances(request), expectedError);
+    });
+  });
+
   describe('setInstanceTemplate', () => {
     it('invokes setInstanceTemplate without error', async () => {
       const client =
@@ -2746,6 +2920,528 @@ describe('v1.InstanceGroupManagersClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTargetPools(request), expectedError);
+    });
+  });
+
+  describe('startInstances', () => {
+    it('invokes startInstances without error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.startInstances = stubSimpleCall(expectedResponse);
+      const [response] = await client.startInstances(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startInstances without error using callback', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.startInstances =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.startInstances(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startInstances with error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.startInstances = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.startInstances(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.startInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.startInstances(request), expectedError);
+    });
+  });
+
+  describe('stopInstances', () => {
+    it('invokes stopInstances without error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.stopInstances = stubSimpleCall(expectedResponse);
+      const [response] = await client.stopInstances(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.stopInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopInstances without error using callback', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.stopInstances =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.stopInstances(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.stopInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopInstances with error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.stopInstances = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.stopInstances(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.stopInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.stopInstances(request), expectedError);
+    });
+  });
+
+  describe('suspendInstances', () => {
+    it('invokes suspendInstances without error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.suspendInstances = stubSimpleCall(expectedResponse);
+      const [response] = await client.suspendInstances(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.suspendInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspendInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes suspendInstances without error using callback', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.suspendInstances =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.suspendInstances(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.suspendInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspendInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes suspendInstances with error', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance_group_manager=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.suspendInstances = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.suspendInstances(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.suspendInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspendInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes suspendInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstancesInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.suspendInstances(request), expectedError);
     });
   });
 
