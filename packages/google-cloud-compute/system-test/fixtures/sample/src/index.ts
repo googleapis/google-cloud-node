@@ -56,6 +56,7 @@ import {
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
+  NetworkProfilesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,
@@ -261,6 +262,9 @@ function doStuffWithNetworkEndpointGroupsClient(
 function doStuffWithNetworkFirewallPoliciesClient(
   client: NetworkFirewallPoliciesClient
 ) {
+  client.close();
+}
+function doStuffWithNetworkProfilesClient(client: NetworkProfilesClient) {
   client.close();
 }
 function doStuffWithNetworksClient(client: NetworksClient) {
@@ -611,6 +615,9 @@ function main() {
   // check that the client instance can be created
   const networkFirewallPoliciesClient = new NetworkFirewallPoliciesClient();
   doStuffWithNetworkFirewallPoliciesClient(networkFirewallPoliciesClient);
+  // check that the client instance can be created
+  const networkProfilesClient = new NetworkProfilesClient();
+  doStuffWithNetworkProfilesClient(networkProfilesClient);
   // check that the client instance can be created
   const networksClient = new NetworksClient();
   doStuffWithNetworksClient(networksClient);
