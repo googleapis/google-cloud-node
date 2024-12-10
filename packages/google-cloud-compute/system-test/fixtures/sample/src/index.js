@@ -68,6 +68,7 @@ function main() {
   const networkEndpointGroupsClient = new compute.NetworkEndpointGroupsClient();
   const networkFirewallPoliciesClient =
     new compute.NetworkFirewallPoliciesClient();
+  const networkProfilesClient = new compute.NetworkProfilesClient();
   const networksClient = new compute.NetworksClient();
   const nodeGroupsClient = new compute.NodeGroupsClient();
   const nodeTemplatesClient = new compute.NodeTemplatesClient();
