@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -653,7 +656,7 @@
                           "type": "string",
                           "id": 16,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount",
                             "proto3_optional": true
                           }
@@ -761,17 +764,11 @@
                       "fields": {
                         "gcsSource": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 1
                         },
                         "gitSource": {
                           "type": "GitSource",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 2
                         },
                         "inputValues": {
                           "keyType": "string",
@@ -1787,7 +1784,7 @@
                           "type": "string",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
                           }
                         },
@@ -1871,6 +1868,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },

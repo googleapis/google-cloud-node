@@ -4674,6 +4674,9 @@ export namespace google {
 
                     /** Preview tfVersionConstraint */
                     tfVersionConstraint?: (string|null);
+
+                    /** Preview annotations */
+                    annotations?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Preview. */
@@ -4741,6 +4744,9 @@ export namespace google {
 
                     /** Preview tfVersionConstraint. */
                     public tfVersionConstraint?: (string|null);
+
+                    /** Preview annotations. */
+                    public annotations: { [k: string]: string };
 
                     /** Preview blueprint. */
                     public blueprint?: "terraformBlueprint";
