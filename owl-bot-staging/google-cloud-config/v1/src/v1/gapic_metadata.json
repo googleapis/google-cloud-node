@@ -1,0 +1,273 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.config.v1",
+  "libraryPackage": "@google-cloud/config",
+  "services": {
+    "Config": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConfigClient",
+          "rpcs": {
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "GetRevision": {
+              "methods": [
+                "getRevision"
+              ]
+            },
+            "GetResource": {
+              "methods": [
+                "getResource"
+              ]
+            },
+            "ExportDeploymentStatefile": {
+              "methods": [
+                "exportDeploymentStatefile"
+              ]
+            },
+            "ExportRevisionStatefile": {
+              "methods": [
+                "exportRevisionStatefile"
+              ]
+            },
+            "ImportStatefile": {
+              "methods": [
+                "importStatefile"
+              ]
+            },
+            "DeleteStatefile": {
+              "methods": [
+                "deleteStatefile"
+              ]
+            },
+            "ExportLockInfo": {
+              "methods": [
+                "exportLockInfo"
+              ]
+            },
+            "GetPreview": {
+              "methods": [
+                "getPreview"
+              ]
+            },
+            "ExportPreviewResult": {
+              "methods": [
+                "exportPreviewResult"
+              ]
+            },
+            "GetTerraformVersion": {
+              "methods": [
+                "getTerraformVersion"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "createDeployment"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "updateDeployment"
+              ]
+            },
+            "DeleteDeployment": {
+              "methods": [
+                "deleteDeployment"
+              ]
+            },
+            "LockDeployment": {
+              "methods": [
+                "lockDeployment"
+              ]
+            },
+            "UnlockDeployment": {
+              "methods": [
+                "unlockDeployment"
+              ]
+            },
+            "CreatePreview": {
+              "methods": [
+                "createPreview"
+              ]
+            },
+            "DeletePreview": {
+              "methods": [
+                "deletePreview"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            },
+            "ListRevisions": {
+              "methods": [
+                "listRevisions",
+                "listRevisionsStream",
+                "listRevisionsAsync"
+              ]
+            },
+            "ListResources": {
+              "methods": [
+                "listResources",
+                "listResourcesStream",
+                "listResourcesAsync"
+              ]
+            },
+            "ListPreviews": {
+              "methods": [
+                "listPreviews",
+                "listPreviewsStream",
+                "listPreviewsAsync"
+              ]
+            },
+            "ListTerraformVersions": {
+              "methods": [
+                "listTerraformVersions",
+                "listTerraformVersionsStream",
+                "listTerraformVersionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConfigClient",
+          "rpcs": {
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "GetRevision": {
+              "methods": [
+                "getRevision"
+              ]
+            },
+            "GetResource": {
+              "methods": [
+                "getResource"
+              ]
+            },
+            "ExportDeploymentStatefile": {
+              "methods": [
+                "exportDeploymentStatefile"
+              ]
+            },
+            "ExportRevisionStatefile": {
+              "methods": [
+                "exportRevisionStatefile"
+              ]
+            },
+            "ImportStatefile": {
+              "methods": [
+                "importStatefile"
+              ]
+            },
+            "DeleteStatefile": {
+              "methods": [
+                "deleteStatefile"
+              ]
+            },
+            "ExportLockInfo": {
+              "methods": [
+                "exportLockInfo"
+              ]
+            },
+            "GetPreview": {
+              "methods": [
+                "getPreview"
+              ]
+            },
+            "ExportPreviewResult": {
+              "methods": [
+                "exportPreviewResult"
+              ]
+            },
+            "GetTerraformVersion": {
+              "methods": [
+                "getTerraformVersion"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "createDeployment"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "updateDeployment"
+              ]
+            },
+            "DeleteDeployment": {
+              "methods": [
+                "deleteDeployment"
+              ]
+            },
+            "LockDeployment": {
+              "methods": [
+                "lockDeployment"
+              ]
+            },
+            "UnlockDeployment": {
+              "methods": [
+                "unlockDeployment"
+              ]
+            },
+            "CreatePreview": {
+              "methods": [
+                "createPreview"
+              ]
+            },
+            "DeletePreview": {
+              "methods": [
+                "deletePreview"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            },
+            "ListRevisions": {
+              "methods": [
+                "listRevisions",
+                "listRevisionsStream",
+                "listRevisionsAsync"
+              ]
+            },
+            "ListResources": {
+              "methods": [
+                "listResources",
+                "listResourcesStream",
+                "listResourcesAsync"
+              ]
+            },
+            "ListPreviews": {
+              "methods": [
+                "listPreviews",
+                "listPreviewsStream",
+                "listPreviewsAsync"
+              ]
+            },
+            "ListTerraformVersions": {
+              "methods": [
+                "listTerraformVersions",
+                "listTerraformVersionsStream",
+                "listTerraformVersionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
