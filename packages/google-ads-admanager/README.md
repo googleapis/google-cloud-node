@@ -114,7 +114,7 @@ async function callListAdUnitSizes() {
   // Run request
   const iterable = admanagerClient.listAdUnitSizesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
