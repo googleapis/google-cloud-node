@@ -6130,6 +6130,7 @@
                      * @property {number} OGG_OPUS=3 OGG_OPUS value
                      * @property {number} MULAW=5 MULAW value
                      * @property {number} ALAW=6 ALAW value
+                     * @property {number} PCM=7 PCM value
                      */
                     v1beta1.AudioEncoding = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -6140,6 +6141,7 @@
                         values[valuesById[3] = "OGG_OPUS"] = 3;
                         values[valuesById[5] = "MULAW"] = 5;
                         values[valuesById[6] = "ALAW"] = 6;
+                        values[valuesById[7] = "PCM"] = 7;
                         return values;
                     })();
     
@@ -9386,6 +9388,7 @@
                                 case 3:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
@@ -9456,6 +9459,10 @@
                             case "ALAW":
                             case 6:
                                 message.audioEncoding = 6;
+                                break;
+                            case "PCM":
+                            case 7:
+                                message.audioEncoding = 7;
                                 break;
                             }
                             if (object.speakingRate != null)
@@ -10528,6 +10535,282 @@
                         return Timepoint;
                     })();
     
+                    v1beta1.StreamingAudioConfig = (function() {
+    
+                        /**
+                         * Properties of a StreamingAudioConfig.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface IStreamingAudioConfig
+                         * @property {google.cloud.texttospeech.v1beta1.AudioEncoding|null} [audioEncoding] StreamingAudioConfig audioEncoding
+                         * @property {number|null} [sampleRateHertz] StreamingAudioConfig sampleRateHertz
+                         */
+    
+                        /**
+                         * Constructs a new StreamingAudioConfig.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents a StreamingAudioConfig.
+                         * @implements IStreamingAudioConfig
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig=} [properties] Properties to set
+                         */
+                        function StreamingAudioConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StreamingAudioConfig audioEncoding.
+                         * @member {google.cloud.texttospeech.v1beta1.AudioEncoding} audioEncoding
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @instance
+                         */
+                        StreamingAudioConfig.prototype.audioEncoding = 0;
+    
+                        /**
+                         * StreamingAudioConfig sampleRateHertz.
+                         * @member {number} sampleRateHertz
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @instance
+                         */
+                        StreamingAudioConfig.prototype.sampleRateHertz = 0;
+    
+                        /**
+                         * Creates a new StreamingAudioConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.StreamingAudioConfig} StreamingAudioConfig instance
+                         */
+                        StreamingAudioConfig.create = function create(properties) {
+                            return new StreamingAudioConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StreamingAudioConfig message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.StreamingAudioConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig} message StreamingAudioConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StreamingAudioConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.audioEncoding != null && Object.hasOwnProperty.call(message, "audioEncoding"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.audioEncoding);
+                            if (message.sampleRateHertz != null && Object.hasOwnProperty.call(message, "sampleRateHertz"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sampleRateHertz);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StreamingAudioConfig message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.StreamingAudioConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig} message StreamingAudioConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StreamingAudioConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StreamingAudioConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.StreamingAudioConfig} StreamingAudioConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StreamingAudioConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.audioEncoding = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sampleRateHertz = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StreamingAudioConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.StreamingAudioConfig} StreamingAudioConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StreamingAudioConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StreamingAudioConfig message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StreamingAudioConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.audioEncoding != null && message.hasOwnProperty("audioEncoding"))
+                                switch (message.audioEncoding) {
+                                default:
+                                    return "audioEncoding: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                case 3:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
+                                if (!$util.isInteger(message.sampleRateHertz))
+                                    return "sampleRateHertz: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StreamingAudioConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.StreamingAudioConfig} StreamingAudioConfig
+                         */
+                        StreamingAudioConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig();
+                            switch (object.audioEncoding) {
+                            default:
+                                if (typeof object.audioEncoding === "number") {
+                                    message.audioEncoding = object.audioEncoding;
+                                    break;
+                                }
+                                break;
+                            case "AUDIO_ENCODING_UNSPECIFIED":
+                            case 0:
+                                message.audioEncoding = 0;
+                                break;
+                            case "LINEAR16":
+                            case 1:
+                                message.audioEncoding = 1;
+                                break;
+                            case "MP3":
+                            case 2:
+                                message.audioEncoding = 2;
+                                break;
+                            case "MP3_64_KBPS":
+                            case 4:
+                                message.audioEncoding = 4;
+                                break;
+                            case "OGG_OPUS":
+                            case 3:
+                                message.audioEncoding = 3;
+                                break;
+                            case "MULAW":
+                            case 5:
+                                message.audioEncoding = 5;
+                                break;
+                            case "ALAW":
+                            case 6:
+                                message.audioEncoding = 6;
+                                break;
+                            case "PCM":
+                            case 7:
+                                message.audioEncoding = 7;
+                                break;
+                            }
+                            if (object.sampleRateHertz != null)
+                                message.sampleRateHertz = object.sampleRateHertz | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StreamingAudioConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.StreamingAudioConfig} message StreamingAudioConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StreamingAudioConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.audioEncoding = options.enums === String ? "AUDIO_ENCODING_UNSPECIFIED" : 0;
+                                object.sampleRateHertz = 0;
+                            }
+                            if (message.audioEncoding != null && message.hasOwnProperty("audioEncoding"))
+                                object.audioEncoding = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.AudioEncoding[message.audioEncoding] === undefined ? message.audioEncoding : $root.google.cloud.texttospeech.v1beta1.AudioEncoding[message.audioEncoding] : message.audioEncoding;
+                            if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
+                                object.sampleRateHertz = message.sampleRateHertz;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StreamingAudioConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StreamingAudioConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StreamingAudioConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StreamingAudioConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.StreamingAudioConfig";
+                        };
+    
+                        return StreamingAudioConfig;
+                    })();
+    
                     v1beta1.StreamingSynthesizeConfig = (function() {
     
                         /**
@@ -10535,6 +10818,7 @@
                          * @memberof google.cloud.texttospeech.v1beta1
                          * @interface IStreamingSynthesizeConfig
                          * @property {google.cloud.texttospeech.v1beta1.IVoiceSelectionParams|null} [voice] StreamingSynthesizeConfig voice
+                         * @property {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig|null} [streamingAudioConfig] StreamingSynthesizeConfig streamingAudioConfig
                          */
     
                         /**
@@ -10559,6 +10843,14 @@
                          * @instance
                          */
                         StreamingSynthesizeConfig.prototype.voice = null;
+    
+                        /**
+                         * StreamingSynthesizeConfig streamingAudioConfig.
+                         * @member {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig|null|undefined} streamingAudioConfig
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig
+                         * @instance
+                         */
+                        StreamingSynthesizeConfig.prototype.streamingAudioConfig = null;
     
                         /**
                          * Creates a new StreamingSynthesizeConfig instance using the specified properties.
@@ -10586,6 +10878,8 @@
                                 writer = $Writer.create();
                             if (message.voice != null && Object.hasOwnProperty.call(message, "voice"))
                                 $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.encode(message.voice, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.streamingAudioConfig != null && Object.hasOwnProperty.call(message, "streamingAudioConfig"))
+                                $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.encode(message.streamingAudioConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -10622,6 +10916,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.voice = $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.streamingAudioConfig = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -10664,6 +10962,11 @@
                                 if (error)
                                     return "voice." + error;
                             }
+                            if (message.streamingAudioConfig != null && message.hasOwnProperty("streamingAudioConfig")) {
+                                var error = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.verify(message.streamingAudioConfig);
+                                if (error)
+                                    return "streamingAudioConfig." + error;
+                            }
                             return null;
                         };
     
@@ -10684,6 +10987,11 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig.voice: object expected");
                                 message.voice = $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.fromObject(object.voice);
                             }
+                            if (object.streamingAudioConfig != null) {
+                                if (typeof object.streamingAudioConfig !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig.streamingAudioConfig: object expected");
+                                message.streamingAudioConfig = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.fromObject(object.streamingAudioConfig);
+                            }
                             return message;
                         };
     
@@ -10700,10 +11008,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.voice = null;
+                                object.streamingAudioConfig = null;
+                            }
                             if (message.voice != null && message.hasOwnProperty("voice"))
                                 object.voice = $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.toObject(message.voice, options);
+                            if (message.streamingAudioConfig != null && message.hasOwnProperty("streamingAudioConfig"))
+                                object.streamingAudioConfig = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.toObject(message.streamingAudioConfig, options);
                             return object;
                         };
     
