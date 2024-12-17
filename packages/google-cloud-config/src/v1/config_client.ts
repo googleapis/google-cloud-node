@@ -3179,7 +3179,7 @@ export class ConfigClient {
     ) as AsyncIterable<protos.google.cloud.config.v1.IRevision>;
   }
   /**
-   * Lists {@link protos.google.cloud.config.v1.Resource|Resource}s in a given revision.
+   * Lists {@link protos.google.cloud.config.v1.Resource|Resources} in a given revision.
    *
    * @param {Object} request
    *   The request object that will be sent.
