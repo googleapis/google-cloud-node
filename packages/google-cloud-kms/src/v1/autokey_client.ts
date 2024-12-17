@@ -643,9 +643,9 @@ export class AutokeyClient {
    * Creates a new {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}, triggering the
    * provisioning of a new {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} for CMEK
    * use with the given resource type in the configured key project and the same
-   * location. {@link protos.Operations.GetOperation|GetOperation} should be used to resolve
-   * the resulting long-running operation and get the resulting
-   * {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} and
+   * location. {@link protos.google.longrunning.Operations.GetOperation|GetOperation} should
+   * be used to resolve the resulting long-running operation and get the
+   * resulting {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} and
    * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * @param {Object} request

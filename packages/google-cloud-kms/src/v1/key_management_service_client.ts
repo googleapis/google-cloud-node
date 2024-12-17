@@ -1229,7 +1229,9 @@ export class KeyManagementServiceClient {
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
    *   {@link protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent|ImportCryptoKeyVersionRequest.parent},
-   *   have been previously created via {@link protos.|ImportCryptoKeyVersion}, and be in
+   *   have been previously created via
+   *   {@link protos.google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion|ImportCryptoKeyVersion},
+   *   and be in
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}
    *   or
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}
@@ -3010,7 +3012,8 @@ export class KeyManagementServiceClient {
    *   checksum. {@link protos.google.cloud.kms.v1.KeyManagementService|KeyManagementService}
    *   will report an error if the checksum verification fails. If you receive a
    *   checksum error, your client should verify that
-   *   CRC32C({@link protos.|MacVerifyRequest.tag}) is equal to
+   *   CRC32C({@link protos.google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac}) is
+   *   equal to
    *   {@link protos.google.cloud.kms.v1.MacVerifyRequest.mac_crc32c|MacVerifyRequest.mac_crc32c},
    *   and if so, perform a limited number of retries. A persistent mismatch may
    *   indicate an issue in your computation of the CRC32C checksum. Note: This

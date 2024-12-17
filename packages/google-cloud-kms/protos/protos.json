@@ -15,8 +15,7 @@
                     "csharp_namespace": "Google.Cloud.Kms.V1",
                     "php_namespace": "Google\\Cloud\\Kms\\V1",
                     "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}",
-                    "cc_enable_arenas": true
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
                   },
                   "nested": {
                     "Autokey": {
