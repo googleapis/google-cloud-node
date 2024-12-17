@@ -7088,6 +7088,13 @@
                           "type": "NotificationConfig",
                           "id": 8
                         },
+                        "newRecognitionResultNotificationConfig": {
+                          "type": "NotificationConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "sttConfig": {
                           "type": "SpeechToTextConfig",
                           "id": 9
@@ -8739,7 +8746,8 @@
                       "oneofs": {
                         "payload": {
                           "oneof": [
-                            "newMessagePayload"
+                            "newMessagePayload",
+                            "newRecognitionResultPayload"
                           ]
                         }
                       },
@@ -8759,6 +8767,10 @@
                         "newMessagePayload": {
                           "type": "Message",
                           "id": 4
+                        },
+                        "newRecognitionResultPayload": {
+                          "type": "StreamingRecognitionResult",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -8769,6 +8781,7 @@
                             "CONVERSATION_FINISHED": 2,
                             "HUMAN_INTERVENTION_NEEDED": 3,
                             "NEW_MESSAGE": 5,
+                            "NEW_RECOGNITION_RESULT": 7,
                             "UNRECOVERABLE_ERROR": 4
                           }
                         }
@@ -19375,6 +19388,13 @@
                           "type": "NotificationConfig",
                           "id": 8
                         },
+                        "newRecognitionResultNotificationConfig": {
+                          "type": "NotificationConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "sttConfig": {
                           "type": "SpeechToTextConfig",
                           "id": 9
@@ -20587,7 +20607,8 @@
                       "oneofs": {
                         "payload": {
                           "oneof": [
-                            "newMessagePayload"
+                            "newMessagePayload",
+                            "newRecognitionResultPayload"
                           ]
                         }
                       },
@@ -20607,6 +20628,10 @@
                         "newMessagePayload": {
                           "type": "Message",
                           "id": 4
+                        },
+                        "newRecognitionResultPayload": {
+                          "type": "StreamingRecognitionResult",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -20617,6 +20642,7 @@
                             "CONVERSATION_FINISHED": 2,
                             "HUMAN_INTERVENTION_NEEDED": 3,
                             "NEW_MESSAGE": 5,
+                            "NEW_RECOGNITION_RESULT": 7,
                             "UNRECOVERABLE_ERROR": 4
                           }
                         }
