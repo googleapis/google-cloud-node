@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -6,7 +9,6 @@
           "nested": {
             "v1": {
               "options": {
-                "cc_enable_arenas": true,
                 "csharp_namespace": "Google.Cloud.StorageTransfer.V1",
                 "go_package": "cloud.google.com/go/storagetransfer/apiv1/storagetransferpb;storagetransferpb",
                 "java_outer_classname": "TransferTypes",
@@ -979,6 +981,38 @@
                     }
                   }
                 },
+                "ReplicationSpec": {
+                  "oneofs": {
+                    "dataSource": {
+                      "oneof": [
+                        "gcsDataSource"
+                      ]
+                    },
+                    "dataSink": {
+                      "oneof": [
+                        "gcsDataSink"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "gcsDataSource": {
+                      "type": "GcsData",
+                      "id": 1
+                    },
+                    "gcsDataSink": {
+                      "type": "GcsData",
+                      "id": 2
+                    },
+                    "objectConditions": {
+                      "type": "ObjectConditions",
+                      "id": 3
+                    },
+                    "transferOptions": {
+                      "type": "TransferOptions",
+                      "id": 4
+                    }
+                  }
+                },
                 "MetadataOptions": {
                   "fields": {
                     "symlink": {
@@ -1159,6 +1193,10 @@
                     "transferSpec": {
                       "type": "TransferSpec",
                       "id": 4
+                    },
+                    "replicationSpec": {
+                      "type": "ReplicationSpec",
+                      "id": 17
                     },
                     "notificationConfig": {
                       "type": "NotificationConfig",
