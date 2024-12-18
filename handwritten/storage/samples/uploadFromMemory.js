@@ -15,7 +15,7 @@
 function main(
   bucketName = 'my-bucket',
   contents = 'these are my file contents',
-  destFileName = 'file.txt'
+  destFileName = 'file.txt',
 ) {
   // [START storage_file_upload_from_memory]
   /**
@@ -40,7 +40,7 @@ function main(
     await storage.bucket(bucketName).file(destFileName).save(contents);
 
     console.log(
-      `${destFileName} with contents ${contents} uploaded to ${bucketName}.`
+      `${destFileName} with contents ${contents} uploaded to ${bucketName}.`,
     );
   }
 

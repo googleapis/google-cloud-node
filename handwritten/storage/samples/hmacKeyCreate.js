@@ -21,7 +21,7 @@
 
 function main(
   serviceAccountEmail = 'service-account@example.com',
-  projectId = 'serviceAccountProjectId'
+  projectId = 'serviceAccountProjectId',
 ) {
   // [START storage_create_hmac_key]
   /**

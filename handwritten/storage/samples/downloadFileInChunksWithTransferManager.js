@@ -27,7 +27,7 @@ function main(
   bucketName = 'my-bucket',
   fileName = 'file1.txt',
   destFileName = path.join(cwd, fileName),
-  chunkSize = 1024
+  chunkSize = 1024,
 ) {
   // [START storage_transfer_manager_download_chunks_concurrently]
   /**
@@ -62,7 +62,7 @@ function main(
     });
 
     console.log(
-      `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`
+      `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`,
     );
   }
 

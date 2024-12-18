@@ -25,7 +25,7 @@ function main(
   bucketName = 'my-bucket',
   location = 'US',
   region1 = 'US-EAST1',
-  region2 = 'US-WEST1'
+  region2 = 'US-WEST1',
 ) {
   // [START storage_create_bucket_dual_region]
   /**
@@ -63,8 +63,8 @@ function main(
     console.log(`- locationType: '${bucket.metadata.locationType}'`);
     console.log(
       `- customPlacementConfig: '${JSON.stringify(
-        bucket.metadata.customPlacementConfig
-      )}'`
+        bucket.metadata.customPlacementConfig,
+      )}'`,
     );
   }
 

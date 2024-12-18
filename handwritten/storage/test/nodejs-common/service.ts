@@ -45,12 +45,12 @@ const makeAuthRequestFactoryCache = util.makeAuthenticatedRequestFactory;
 let makeAuthenticatedRequestFactoryOverride:
   | null
   | ((
-      config: MakeAuthenticatedRequestFactoryConfig
+      config: MakeAuthenticatedRequestFactoryConfig,
     ) => MakeAuthenticatedRequest);
 
 util.makeAuthenticatedRequestFactory = function (
   this: Util,
-  config: MakeAuthenticatedRequestFactoryConfig
+  config: MakeAuthenticatedRequestFactoryConfig,
 ) {
   if (makeAuthenticatedRequestFactoryOverride) {
     return makeAuthenticatedRequestFactoryOverride.call(this, config);
@@ -101,7 +101,7 @@ describe('Service', () => {
       const authenticatedRequest = {} as MakeAuthenticatedRequest;
 
       makeAuthenticatedRequestFactoryOverride = (
-        config: MakeAuthenticatedRequestFactoryConfig
+        config: MakeAuthenticatedRequestFactoryConfig,
       ) => {
         const expectedConfig = {
           ...CONFIG,
@@ -296,7 +296,7 @@ describe('Service', () => {
       service.interceptors = [{request}];
 
       const originalGlobalInterceptors = [].slice.call(
-        service.globalInterceptors
+        service.globalInterceptors,
       );
       const originalLocalInterceptors = [].slice.call(service.interceptors);
 
@@ -304,7 +304,7 @@ describe('Service', () => {
 
       assert.deepStrictEqual(
         service.globalInterceptors,
-        originalGlobalInterceptors
+        originalGlobalInterceptors,
       );
       assert.deepStrictEqual(service.interceptors, originalLocalInterceptors);
     });
@@ -390,7 +390,7 @@ describe('Service', () => {
       const expectedUri = [service.baseUrl, reqOpts.uri].join('/');
       service.makeAuthenticatedRequest = (
         reqOpts_: DecorateRequestOptions,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) => {
         assert.notStrictEqual(reqOpts_, reqOpts);
         assert.strictEqual(reqOpts_.uri, expectedUri);
@@ -464,7 +464,7 @@ describe('Service', () => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.headers!['User-Agent'],
-          getUserAgentString()
+          getUserAgentString(),
         );
         done();
       };
@@ -478,7 +478,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`,
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
@@ -494,7 +494,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`,
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
@@ -502,7 +502,7 @@ describe('Service', () => {
 
       service.request_(
         {...reqOpts, [GCCL_GCS_CMD_KEY]: expected},
-        assert.ifError
+        assert.ifError,
       );
     });
 
@@ -515,7 +515,7 @@ describe('Service', () => {
           const expectedUri = [service.baseUrl, reqOpts.uri].join('/');
 
           service.makeAuthenticatedRequest = (
-            reqOpts_: DecorateRequestOptions
+            reqOpts_: DecorateRequestOptions,
           ) => {
             assert.strictEqual(reqOpts_.uri, expectedUri);
 
@@ -539,7 +539,7 @@ describe('Service', () => {
           ].join('/');
 
           service.makeAuthenticatedRequest = (
-            reqOpts_: DecorateRequestOptions
+            reqOpts_: DecorateRequestOptions,
           ) => {
             assert.strictEqual(reqOpts_.uri, expectedUri);
 
@@ -564,7 +564,7 @@ describe('Service', () => {
           ].join('/');
 
           service.makeAuthenticatedRequest = (
-            reqOpts_: DecorateRequestOptions
+            reqOpts_: DecorateRequestOptions,
           ) => {
             assert.strictEqual(reqOpts_.uri, expectedUri);
 
@@ -676,7 +676,7 @@ describe('Service', () => {
       const response = {body: {abc: '123'}, statusCode: 200};
       Service.prototype.request_ = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(reqOpts, fakeOpts);
         callback(null, response.body, response);

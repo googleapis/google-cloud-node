@@ -25,7 +25,7 @@ function main(
   destBucketName = 'my-bucket',
   destFileName = 'test3.txt',
   generation = 1,
-  destinationGenerationMatchPrecondition = 0
+  destinationGenerationMatchPrecondition = 0,
 ) {
   // [START storage_copy_file_archived_generation]
   /**
@@ -76,7 +76,7 @@ function main(
       .copy(storage.bucket(destBucketName).file(destFileName), copyOptions);
 
     console.log(
-      `Generation ${generation} of file ${srcFilename} in bucket ${srcBucketName} was copied to ${destFileName} in bucket ${destBucketName}`
+      `Generation ${generation} of file ${srcFilename} in bucket ${srcBucketName} was copied to ${destFileName} in bucket ${destBucketName}`,
     );
   }
 

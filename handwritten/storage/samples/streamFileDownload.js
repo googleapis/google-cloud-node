@@ -26,7 +26,7 @@ const fs = require('fs');
 function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
-  destFileName = path.join(cwd, 'downloaded.txt')
+  destFileName = path.join(cwd, 'downloaded.txt'),
 ) {
   // [START storage_stream_file_download]
   /**
@@ -61,7 +61,7 @@ function main(
       });
 
     console.log(
-      `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`
+      `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`,
     );
   }
 

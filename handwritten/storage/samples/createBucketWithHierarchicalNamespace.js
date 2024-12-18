@@ -50,7 +50,7 @@ function main(bucketName = 'my-bucket') {
     });
 
     console.log(
-      `Created '${bucket.name}' with hierarchical namespace enabled.`
+      `Created '${bucket.name}' with hierarchical namespace enabled.`,
     );
   }
 

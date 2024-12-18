@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket') {
     });
 
     console.log(
-      `Lifecycle management is enabled for bucket ${bucketName} and the rules are:`
+      `Lifecycle management is enabled for bucket ${bucketName} and the rules are:`,
     );
 
     console.log(metadata.lifecycle.rule);

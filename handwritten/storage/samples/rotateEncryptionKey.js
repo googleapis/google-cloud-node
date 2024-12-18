@@ -25,7 +25,7 @@ function main(
   fileName = 'test.txt',
   oldKey = process.env.GOOGLE_CLOUD_KMS_KEY_US,
   newKey = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA,
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_rotate_encryption_key]
   /**

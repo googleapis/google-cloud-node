@@ -106,7 +106,7 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
       },
       (err, apiResponse) => {
         callback!(err, apiResponse);
-      }
+      },
     );
   }
 }

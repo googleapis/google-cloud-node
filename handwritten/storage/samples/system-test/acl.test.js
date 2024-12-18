@@ -70,7 +70,7 @@ it('should print acl for a file', () => {
 it('should print a users acl for a bucket', async () => {
   await bucket.acl.readers.addUser(userEmail);
   const out = execSync(
-    `node printBucketAclForUser.js ${bucketName} ${userEmail}`
+    `node printBucketAclForUser.js ${bucketName} ${userEmail}`,
   );
   assert.match(out, new RegExp(`READER: user-${userEmail}`));
   await bucket.acl.readers.deleteUser(userEmail);
@@ -80,44 +80,44 @@ it('should add a user as an owner on a bucket', () => {
   const out = execSync(`node addBucketOwnerAcl.js ${bucketName} ${userEmail}`);
   assert.match(
     out,
-    new RegExp(`Added user ${userEmail} as an owner on bucket ${bucketName}.`)
+    new RegExp(`Added user ${userEmail} as an owner on bucket ${bucketName}.`),
   );
 });
 
 it('should remove a user from a bucket', () => {
   const out = execSync(
-    `node removeBucketOwnerAcl.js ${bucketName} ${userEmail}`
+    `node removeBucketOwnerAcl.js ${bucketName} ${userEmail}`,
   );
   assert.match(
     out,
-    new RegExp(`Removed user ${userEmail} from bucket ${bucketName}.`)
+    new RegExp(`Removed user ${userEmail} from bucket ${bucketName}.`),
   );
 });
 
 it('should add a user as a default owner on a bucket', () => {
   const out = execSync(
-    `node addBucketDefaultOwnerAcl.js ${bucketName} ${userEmail}`
+    `node addBucketDefaultOwnerAcl.js ${bucketName} ${userEmail}`,
   );
   assert.match(
     out,
-    new RegExp(`Added user ${userEmail} as an owner on bucket ${bucketName}.`)
+    new RegExp(`Added user ${userEmail} as an owner on bucket ${bucketName}.`),
   );
 });
 
 it('should remove a default user from a bucket', () => {
   const out = execSync(
-    `node removeBucketDefaultOwner.js ${bucketName} ${userEmail}`
+    `node removeBucketDefaultOwner.js ${bucketName} ${userEmail}`,
   );
   assert.match(
     out,
-    new RegExp(`Removed user ${userEmail} from bucket ${bucketName}.`)
+    new RegExp(`Removed user ${userEmail} from bucket ${bucketName}.`),
   );
 });
 
 it('should print a users acl for a file', async () => {
   await bucket.file(fileName).acl.readers.addUser(userEmail);
   const out = execSync(
-    `node printFileAclForUser.js ${bucketName} ${fileName} ${userEmail}`
+    `node printFileAclForUser.js ${bucketName} ${fileName} ${userEmail}`,
   );
   assert.match(out, new RegExp(`READER: user-${userEmail}`));
   await bucket.file(fileName).acl.readers.deleteUser(userEmail);
@@ -125,20 +125,20 @@ it('should print a users acl for a file', async () => {
 
 it('should add a user as an owner on a bucket', () => {
   const out = execSync(
-    `node addFileOwnerAcl.js ${bucketName} ${fileName} ${userEmail}`
+    `node addFileOwnerAcl.js ${bucketName} ${fileName} ${userEmail}`,
   );
   assert.match(
     out,
-    new RegExp(`Added user ${userEmail} as an owner on file ${fileName}.`)
+    new RegExp(`Added user ${userEmail} as an owner on file ${fileName}.`),
   );
 });
 
 it('should remove a user from a bucket', () => {
   const out = execSync(
-    `node removeFileOwnerAcl.js ${bucketName} ${fileName} ${userEmail}`
+    `node removeFileOwnerAcl.js ${bucketName} ${fileName} ${userEmail}`,
   );
   assert.match(
     out,
-    new RegExp(`Removed user ${userEmail} from file ${fileName}.`)
+    new RegExp(`Removed user ${userEmail} from file ${fileName}.`),
   );
 });

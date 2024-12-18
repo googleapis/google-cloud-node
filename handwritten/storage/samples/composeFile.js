@@ -24,7 +24,7 @@ function main(
   firstFileName = 'file-one.txt',
   secondFileName = 'file-two.txt',
   destinationFileName = 'file-one-two.txt',
-  destinationGenerationMatchPrecondition = 0
+  destinationGenerationMatchPrecondition = 0,
 ) {
   // [START storage_compose_file]
   /**
@@ -65,7 +65,7 @@ function main(
     await bucket.combine(sources, destinationFileName, combineOptions);
 
     console.log(
-      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}`
+      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}`,
     );
   }
 

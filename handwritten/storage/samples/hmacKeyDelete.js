@@ -21,7 +21,7 @@
 
 function main(
   hmacKeyAccessId = 'GOOG0234230X00',
-  projectId = 'serviceAccountProjectId'
+  projectId = 'serviceAccountProjectId',
 ) {
   // [START storage_delete_hmac_key]
   /**
@@ -45,7 +45,7 @@ function main(
     await hmacKey.delete();
 
     console.log(
-      'The key is deleted, though it may still appear in getHmacKeys() results.'
+      'The key is deleted, though it may still appear in getHmacKeys() results.',
     );
   }
   // [END storage_delete_hmac_key]

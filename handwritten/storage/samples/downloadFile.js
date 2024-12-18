@@ -25,7 +25,7 @@ const cwd = path.join(__dirname, '..');
 function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
-  destFileName = path.join(cwd, 'downloaded.txt')
+  destFileName = path.join(cwd, 'downloaded.txt'),
 ) {
   // [START storage_download_file]
   /**
@@ -55,7 +55,7 @@ function main(
     await storage.bucket(bucketName).file(fileName).download(options);
 
     console.log(
-      `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`
+      `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`,
     );
   }
 

@@ -22,7 +22,7 @@
 function main(
   bucketName = 'my-bucket',
   mainPageSuffix = 'http://example.com',
-  notFoundPage = 'http://example.com/404.html'
+  notFoundPage = 'http://example.com/404.html',
 ) {
   // [START storage_define_bucket_website_configuration]
   /**
@@ -52,7 +52,7 @@ function main(
     });
 
     console.log(
-      `Static website bucket ${bucketName} is set up to use ${mainPageSuffix} as the index page and ${notFoundPage} as the 404 page`
+      `Static website bucket ${bucketName} is set up to use ${mainPageSuffix} as the index page and ${notFoundPage} as the 404 page`,
     );
   }
 

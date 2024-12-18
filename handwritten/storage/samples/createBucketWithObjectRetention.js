@@ -41,7 +41,7 @@ function main(bucketName = 'my-bucket') {
     });
 
     console.log(
-      `Created '${bucket.name}' with object retention enabled setting: ${bucket.metadata.objectRetention.mode}`
+      `Created '${bucket.name}' with object retention enabled setting: ${bucket.metadata.objectRetention.mode}`,
     );
   }
 

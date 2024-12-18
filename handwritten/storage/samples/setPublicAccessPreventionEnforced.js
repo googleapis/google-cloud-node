@@ -43,7 +43,7 @@ function main(bucketName = 'my-bucket') {
     });
 
     console.log(
-      `Public access prevention is set to enforced for ${bucketName}.`
+      `Public access prevention is set to enforced for ${bucketName}.`,
     );
   }
 

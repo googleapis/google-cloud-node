@@ -83,7 +83,7 @@ const fakeUtil = Object.assign({}, util, {
   makeRequest(
     reqOpts: DecorateRequestOptions,
     config: object,
-    callback: BodyResponseCallback
+    callback: BodyResponseCallback,
   ) {
     callback(null);
   },
@@ -195,7 +195,7 @@ describe('File', () => {
   // crc32c hash of `zlib.gzipSync(Buffer.from(DATA), {level: 9})`
   const GZIPPED_DATA = Buffer.from(
     'H4sIAAAAAAACEytJLS5RSEksSQQAsq4I0wkAAAA=',
-    'base64'
+    'base64',
   );
   //crc32c hash of `GZIPPED_DATA`
   const CRC32C_HASH_GZIP = '64jygg==';
@@ -285,7 +285,7 @@ describe('File', () => {
     it('should set instanceRetryValue to the storage insance retryOptions.autoRetry value', () => {
       assert.strictEqual(
         file.instanceRetryValue,
-        STORAGE.retryOptions.autoRetry
+        STORAGE.retryOptions.autoRetry,
       );
     });
 
@@ -369,7 +369,7 @@ describe('File', () => {
       });
       assert.deepStrictEqual(
         file.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -388,7 +388,7 @@ describe('File', () => {
       });
       assert.deepStrictEqual(
         file.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -407,7 +407,7 @@ describe('File', () => {
       });
       assert.deepStrictEqual(
         file.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -426,7 +426,7 @@ describe('File', () => {
       });
       assert.deepStrictEqual(
         file.instancePreconditionOpts,
-        options.preconditionOpts
+        options.preconditionOpts,
       );
     });
 
@@ -618,7 +618,7 @@ describe('File', () => {
       file.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationKmsKeyName,
-          newFile.kmsKeyName
+          newFile.kmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, newFile.kmsKeyName);
         done();
@@ -634,7 +634,7 @@ describe('File', () => {
       file.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationKmsKeyName,
-          destinationKmsKeyName
+          destinationKmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
         done();
@@ -651,7 +651,7 @@ describe('File', () => {
       file.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationPredefinedAcl,
-          options.predefinedAcl
+          options.predefinedAcl,
         );
         assert.strictEqual(reqOpts.json.destinationPredefinedAcl, undefined);
         done();
@@ -668,7 +668,7 @@ describe('File', () => {
       file.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.qs.destinationKmsKeyName,
-          destinationKmsKeyName
+          destinationKmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
         done();
@@ -698,7 +698,7 @@ describe('File', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         file: any,
         expectedPath: string,
-        callback: Function
+        callback: Function,
       ) {
         file.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.uri, expectedPath);
@@ -760,7 +760,7 @@ describe('File', () => {
       beforeEach(() => {
         file.request = (
           reqOpts: DecorateRequestOptions,
-          callback: Function
+          callback: Function,
         ) => {
           callback(null, apiResponse);
         };
@@ -771,7 +771,7 @@ describe('File', () => {
 
         file.request = (
           reqOpts: DecorateRequestOptions,
-          callback: Function
+          callback: Function,
         ) => {
           file.copy = (newFile_: {}, options: {}, callback: Function) => {
             assert.strictEqual(newFile_, newFile);
@@ -793,7 +793,7 @@ describe('File', () => {
 
         file.request = (
           reqOpts: DecorateRequestOptions,
-          callback: Function
+          callback: Function,
         ) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           file.copy = (newFile_: {}, options: any) => {
@@ -816,13 +816,13 @@ describe('File', () => {
 
         file.request = (
           reqOpts: DecorateRequestOptions,
-          callback: Function
+          callback: Function,
         ) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           file.copy = (newFile_: {}, options: any) => {
             assert.strictEqual(
               options.destinationKmsKeyName,
-              fakeOptions.destinationKmsKeyName
+              fakeOptions.destinationKmsKeyName,
             );
             done();
           };
@@ -850,7 +850,7 @@ describe('File', () => {
         const resp = {success: true};
         file.request = (
           reqOpts: DecorateRequestOptions,
-          callback: Function
+          callback: Function,
         ) => {
           callback(null, resp);
         };
@@ -974,7 +974,7 @@ describe('File', () => {
         err: Error,
         res: {},
         body: {},
-        callback: Function
+        callback: Function,
       ) => {
         const rawResponseStream = new PassThrough();
         Object.assign(rawResponseStream, {
@@ -1184,7 +1184,7 @@ describe('File', () => {
             err: Error,
             res: {},
             body: {},
-            callback: Function
+            callback: Function,
           ) => {
             callback(ERROR, null, res);
             setImmediate(() => {
@@ -1222,7 +1222,7 @@ describe('File', () => {
             err: Error,
             res: {},
             body: {},
-            callback: Function
+            callback: Function,
           ) => {
             callback(null, null, rawResponseStream);
             setImmediate(() => {
@@ -1259,7 +1259,7 @@ describe('File', () => {
             err: Error,
             res: {},
             body: {},
-            callback: Function
+            callback: Function,
           ) => {
             callback(null, null, rawResponseStream);
             setImmediate(() => {
@@ -1295,7 +1295,7 @@ describe('File', () => {
           err: Error,
           res: {},
           body: {},
-          callback: Function
+          callback: Function,
         ) => {
           const rawResponseStream = new PassThrough();
           Object.assign(rawResponseStream, {
@@ -1334,7 +1334,7 @@ describe('File', () => {
 
         assert.equal(
           Buffer.compare(Buffer.concat(collection), GZIPPED_DATA),
-          0
+          0,
         );
       });
 
@@ -1393,7 +1393,7 @@ describe('File', () => {
           err: Error,
           res: {},
           body: {},
-          callback: Function
+          callback: Function,
         ) => {
           const rawResponseStream = new PassThrough();
           Object.assign(rawResponseStream, {
@@ -1436,7 +1436,7 @@ describe('File', () => {
             err: Error,
             res: {},
             body: {},
-            callback: Function
+            callback: Function,
           ) => {
             const rawResponseStream = new PassThrough();
             Object.assign(rawResponseStream, {
@@ -1469,7 +1469,7 @@ describe('File', () => {
           err: Error,
           res: {},
           body: {},
-          callback: Function
+          callback: Function,
         ) => {
           const rawResponseStream = new PassThrough();
           Object.assign(rawResponseStream, {
@@ -1614,7 +1614,7 @@ describe('File', () => {
           err: Error,
           res: {},
           body: {},
-          callback: Function
+          callback: Function,
         ) => {
           const rawResponseStream = new PassThrough();
           Object.assign(rawResponseStream, {
@@ -1657,7 +1657,7 @@ describe('File', () => {
             err: Error,
             res: {},
             body: {},
-            callback: Function
+            callback: Function,
           ) => {
             const rawResponseStream = new PassThrough();
             Object.assign(rawResponseStream, {
@@ -1694,7 +1694,7 @@ describe('File', () => {
           setImmediate(() => {
             assert.strictEqual(
               opts.headers!.Range,
-              'bytes=' + startOffset + '-'
+              'bytes=' + startOffset + '-',
             );
             done();
           });
@@ -1849,23 +1849,23 @@ describe('File', () => {
           assert.strictEqual(opts.userProject, options.userProject);
           assert.strictEqual(
             opts.retryOptions.autoRetry,
-            options.retryOptions.autoRetry
+            options.retryOptions.autoRetry,
           );
           assert.strictEqual(
             opts.retryOptions.maxRetries,
-            options.retryOptions.maxRetries
+            options.retryOptions.maxRetries,
           );
           assert.strictEqual(
             opts.retryOptions.maxRetryDelay,
-            options.retryOptions.maxRetryDelay
+            options.retryOptions.maxRetryDelay,
           );
           assert.strictEqual(
             opts.retryOptions.retryDelayMultipier,
-            options.retryOptions.retryDelayMultipier
+            options.retryOptions.retryDelayMultipier,
           );
           assert.strictEqual(
             opts.retryOptions.totalTimeout,
-            options.retryOptions.totalTimeout
+            options.retryOptions.totalTimeout,
           );
           assert.strictEqual(opts.params, options.preconditionOpts);
 
@@ -1928,23 +1928,23 @@ describe('File', () => {
           assert.strictEqual(opts.userProject, options.userProject);
           assert.strictEqual(
             opts.retryOptions.autoRetry,
-            options.retryOptions.autoRetry
+            options.retryOptions.autoRetry,
           );
           assert.strictEqual(
             opts.retryOptions.maxRetries,
-            options.retryOptions.maxRetries
+            options.retryOptions.maxRetries,
           );
           assert.strictEqual(
             opts.retryOptions.maxRetryDelay,
-            options.retryOptions.maxRetryDelay
+            options.retryOptions.maxRetryDelay,
           );
           assert.strictEqual(
             opts.retryOptions.retryDelayMultipier,
-            options.retryOptions.retryDelayMultipier
+            options.retryOptions.retryDelayMultipier,
           );
           assert.strictEqual(
             opts.retryOptions.totalTimeout,
-            options.retryOptions.totalTimeout
+            options.retryOptions.totalTimeout,
           );
           assert.strictEqual(opts.params, file.instancePreconditionOpts);
 
@@ -1993,7 +1993,7 @@ describe('File', () => {
 
     it('should emit RangeError', done => {
       const error = new RangeError(
-        'Cannot provide an `offset` without providing a `uri`'
+        'Cannot provide an `offset` without providing a `uri`',
       );
 
       const opitons = {
@@ -2203,7 +2203,7 @@ describe('File', () => {
       file.startResumableUpload_ = (stream: {}, options: any) => {
         assert.strictEqual(
           options.preconditionOpts.ifMetagenerationNotMatch,
-          100
+          100,
         );
         done();
       };
@@ -2645,7 +2645,7 @@ describe('File', () => {
               assert.ifError(err);
               assert.strictEqual(
                 fileContents + fileContents,
-                tmpFileContents.toString()
+                tmpFileContents.toString(),
               );
               done();
             });
@@ -2769,7 +2769,7 @@ describe('File', () => {
           assert.strictEqual(expirationDate, null);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
-        }
+        },
       );
     });
 
@@ -2784,12 +2784,12 @@ describe('File', () => {
         (err: Error, expirationDate: {}, apiResponse_: {}) => {
           assert.strictEqual(
             err.message,
-            FileExceptionMessages.EXPIRATION_TIME_NA
+            FileExceptionMessages.EXPIRATION_TIME_NA,
           );
           assert.strictEqual(expirationDate, null);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
-        }
+        },
       );
     });
 
@@ -2810,7 +2810,7 @@ describe('File', () => {
           assert.deepStrictEqual(expirationDate, expirationTime);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
-        }
+        },
       );
     });
   });
@@ -2846,7 +2846,7 @@ describe('File', () => {
           assert.strictEqual(typeof signedPolicy.base64, 'string');
           assert.strictEqual(typeof signedPolicy.signature, 'string');
           done();
-        }
+        },
       );
     });
 
@@ -2882,7 +2882,7 @@ describe('File', () => {
           assert.ifError(err);
           assert(signedPolicy.string.indexOf(conditionString) > -1);
           done();
-        }
+        },
       );
     });
 
@@ -2897,7 +2897,7 @@ describe('File', () => {
           assert.ifError(err);
           assert(signedPolicy.string.indexOf(conditionString) > -1);
           done();
-        }
+        },
       );
     });
 
@@ -2918,11 +2918,11 @@ describe('File', () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             policy.conditions.some((condition: any) => {
               return condition.success_action_redirect === redirectUrl;
-            })
+            }),
           );
 
           done();
-        }
+        },
       );
     });
 
@@ -2943,11 +2943,11 @@ describe('File', () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             policy.conditions.some((condition: any) => {
               return condition.success_action_status === successStatus;
-            })
+            }),
           );
 
           done();
-        }
+        },
       );
     });
 
@@ -2964,7 +2964,7 @@ describe('File', () => {
             const expires_ = JSON.parse(policy.string).expiration;
             assert.strictEqual(expires_, expires.toISOString());
             done();
-          }
+          },
         );
       });
 
@@ -2980,7 +2980,7 @@ describe('File', () => {
             const expires_ = JSON.parse(policy.string).expiration;
             assert.strictEqual(expires_, new Date(expires).toISOString());
             done();
-          }
+          },
         );
       });
 
@@ -2996,7 +2996,7 @@ describe('File', () => {
             const expires_ = JSON.parse(policy.string).expiration;
             assert.strictEqual(expires_, new Date(expires).toISOString());
             done();
-          }
+          },
         );
       });
 
@@ -3008,7 +3008,7 @@ describe('File', () => {
             {
               expires,
             },
-            () => {}
+            () => {},
           ),
             ExceptionMessages.EXPIRATION_DATE_INVALID;
         });
@@ -3022,7 +3022,7 @@ describe('File', () => {
             {
               expires,
             },
-            () => {}
+            () => {},
           ),
             ExceptionMessages.EXPIRATION_DATE_PAST;
         });
@@ -3041,7 +3041,7 @@ describe('File', () => {
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
@@ -3056,7 +3056,7 @@ describe('File', () => {
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
@@ -3067,7 +3067,7 @@ describe('File', () => {
               expires: Date.now() + 2000,
               equals: [{}],
             },
-            () => {}
+            () => {},
           ),
             FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
         });
@@ -3080,7 +3080,7 @@ describe('File', () => {
               expires: Date.now() + 2000,
               equals: [['1', '2', '3']],
             },
-            () => {}
+            () => {},
           ),
             FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
         });
@@ -3099,7 +3099,7 @@ describe('File', () => {
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
@@ -3114,7 +3114,7 @@ describe('File', () => {
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
@@ -3125,7 +3125,7 @@ describe('File', () => {
               expires: Date.now() + 2000,
               startsWith: [{}],
             },
-            () => {}
+            () => {},
           ),
             FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
         });
@@ -3138,7 +3138,7 @@ describe('File', () => {
               expires: Date.now() + 2000,
               startsWith: [['1', '2', '3']],
             },
-            () => {}
+            () => {},
           ),
             FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
         });
@@ -3157,7 +3157,7 @@ describe('File', () => {
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
@@ -3168,7 +3168,7 @@ describe('File', () => {
               expires: Date.now() + 2000,
               contentLengthRange: [{max: 1}],
             },
-            () => {}
+            () => {},
           ),
             FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
         });
@@ -3181,7 +3181,7 @@ describe('File', () => {
               expires: Date.now() + 2000,
               contentLengthRange: [{min: 0}],
             },
-            () => {}
+            () => {},
           ),
             FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
         });
@@ -3244,7 +3244,7 @@ describe('File', () => {
       const policyString = JSON.stringify(policy);
       const EXPECTED_POLICY = Buffer.from(policyString).toString('base64');
       const EXPECTED_SIGNATURE = Buffer.from(SIGNATURE, 'base64').toString(
-        'hex'
+        'hex',
       );
       const EXPECTED_FIELDS = {
         ...CONFIG.fields,
@@ -3265,11 +3265,11 @@ describe('File', () => {
           const signStub = BUCKET.storage.authClient.sign;
           assert.deepStrictEqual(
             Buffer.from(signStub.getCall(0).args[0], 'base64').toString(),
-            policyString
+            policyString,
           );
 
           done();
-        }
+        },
       );
     });
 
@@ -3306,10 +3306,10 @@ describe('File', () => {
           assert(
             Buffer.from(res.fields.policy, 'base64')
               .toString('utf-8')
-              .includes(EXPECTED_POLICY_ELEMENT)
+              .includes(EXPECTED_POLICY_ELEMENT),
           );
           done();
-        }
+        },
       );
     });
 
@@ -3330,11 +3330,11 @@ describe('File', () => {
           assert.strictEqual(res.fields['x-goog-meta-foo'], 'bar');
           const decodedPolicy = Buffer.from(
             res.fields.policy,
-            'base64'
+            'base64',
           ).toString('utf-8');
           assert(decodedPolicy.includes(expectedConditionString));
           done();
-        }
+        },
       );
     });
 
@@ -3354,11 +3354,11 @@ describe('File', () => {
           assert.strictEqual(res.fields['x-goog-meta-foo'], 'bår');
           const decodedPolicy = Buffer.from(
             res.fields.policy,
-            'base64'
+            'base64',
           ).toString('utf-8');
           assert(decodedPolicy.includes('"x-goog-meta-foo":"b\\u00e5r"'));
           done();
-        }
+        },
       );
     });
 
@@ -3379,14 +3379,14 @@ describe('File', () => {
           assert.strictEqual(res.fields['x-ignore-foo'], 'bar');
           const decodedPolicy = Buffer.from(
             res.fields.policy,
-            'base64'
+            'base64',
           ).toString('utf-8');
           assert(!decodedPolicy.includes(expectedConditionString));
 
           const signStub = BUCKET.storage.authClient.sign;
           assert(!signStub.getCall(0).args[0].includes('x-ignore-foo'));
           done();
-        }
+        },
       );
     });
 
@@ -3404,16 +3404,16 @@ describe('File', () => {
           const expectedConditionString = JSON.stringify(CONFIG.conditions);
           const decodedPolicy = Buffer.from(
             res.fields.policy,
-            'base64'
+            'base64',
           ).toString('utf-8');
           assert(decodedPolicy.includes(expectedConditionString));
 
           const signStub = BUCKET.storage.authClient.sign;
           assert(
-            !signStub.getCall(0).args[0].includes(expectedConditionString)
+            !signStub.getCall(0).args[0].includes(expectedConditionString),
           );
           done();
-        }
+        },
       );
     });
 
@@ -3426,7 +3426,7 @@ describe('File', () => {
           assert.ifError(err);
           assert(res.url, CONFIG.bucketBoundHostname);
           done();
-        }
+        },
       );
     });
 
@@ -3439,7 +3439,7 @@ describe('File', () => {
           assert.ifError(err);
           assert(res.url, `https://${BUCKET.name}.storage.googleapis.com/`);
           done();
-        }
+        },
       );
     });
 
@@ -3458,7 +3458,7 @@ describe('File', () => {
           assert.ifError(err);
           assert(res.url, `https://${BUCKET.name}.storage.googleapis.com/`);
           done();
-        }
+        },
       );
     });
 
@@ -3473,14 +3473,14 @@ describe('File', () => {
           (err: Error, response: SignedPostPolicyV4Output) => {
             assert.ifError(err);
             const policy = JSON.parse(
-              Buffer.from(response.fields.policy, 'base64').toString()
+              Buffer.from(response.fields.policy, 'base64').toString(),
             );
             assert.strictEqual(
               policy.expiration,
-              formatAsUTCISO(expires, true, '-', ':')
+              formatAsUTCISO(expires, true, '-', ':'),
             );
             done();
-          }
+          },
         );
       });
 
@@ -3494,14 +3494,14 @@ describe('File', () => {
           (err: Error, response: SignedPostPolicyV4Output) => {
             assert.ifError(err);
             const policy = JSON.parse(
-              Buffer.from(response.fields.policy, 'base64').toString()
+              Buffer.from(response.fields.policy, 'base64').toString(),
             );
             assert.strictEqual(
               policy.expiration,
-              formatAsUTCISO(new Date(expires), true, '-', ':')
+              formatAsUTCISO(new Date(expires), true, '-', ':'),
             );
             done();
-          }
+          },
         );
       });
 
@@ -3509,7 +3509,7 @@ describe('File', () => {
         const expires = formatAsUTCISO(
           new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
           false,
-          '-'
+          '-',
         );
 
         file.generateSignedPostPolicyV4(
@@ -3519,14 +3519,14 @@ describe('File', () => {
           (err: Error, response: SignedPostPolicyV4Output) => {
             assert.ifError(err);
             const policy = JSON.parse(
-              Buffer.from(response.fields.policy, 'base64').toString()
+              Buffer.from(response.fields.policy, 'base64').toString(),
             );
             assert.strictEqual(
               policy.expiration,
-              formatAsUTCISO(new Date(expires), true, '-', ':')
+              formatAsUTCISO(new Date(expires), true, '-', ':'),
             );
             done();
-          }
+          },
         );
       });
 
@@ -3538,7 +3538,7 @@ describe('File', () => {
             {
               expires,
             },
-            () => {}
+            () => {},
           ),
             ExceptionMessages.EXPIRATION_DATE_INVALID;
         });
@@ -3552,7 +3552,7 @@ describe('File', () => {
             {
               expires,
             },
-            () => {}
+            () => {},
           ),
             ExceptionMessages.EXPIRATION_DATE_PAST;
         });
@@ -3566,7 +3566,7 @@ describe('File', () => {
             {
               expires,
             },
-            () => {}
+            () => {},
           ),
             {message: 'Max allowed expiration is seven days (604800 seconds).'};
         });
@@ -3595,7 +3595,7 @@ describe('File', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       urlSignerStub = (sandbox.stub as any)(fakeSigner, 'URLSigner').returns(
-        signer
+        signer,
       );
 
       SIGNED_URL_CONFIG = {
@@ -3741,9 +3741,11 @@ describe('File', () => {
       file.setMetadata = (
         metadata: FileMetadata,
         optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
-        cb: MetadataCallback<FileMetadata>
+        cb: MetadataCallback<FileMetadata>,
       ) => {
-        Promise.resolve([apiResponse]).then(resp => cb(null, ...resp));
+        Promise.resolve([apiResponse])
+          .then(resp => cb(null, ...resp))
+          .catch(() => {});
       };
 
       file.makePrivate((err: Error, apiResponse_: {}) => {
@@ -3828,7 +3830,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -3838,7 +3840,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -3848,7 +3850,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -3858,7 +3860,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -3868,7 +3870,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -3891,7 +3893,7 @@ describe('File', () => {
       fakeUtil.makeRequest = function (
         reqOpts: DecorateRequestOptions,
         config: object,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) {
         const error = new ApiError('Permission Denied.');
         error.code = 403;
@@ -3910,7 +3912,7 @@ describe('File', () => {
       fakeUtil.makeRequest = function (
         reqOpts: DecorateRequestOptions,
         config: object,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) {
         callback(error);
       };
@@ -3924,7 +3926,7 @@ describe('File', () => {
       fakeUtil.makeRequest = function (
         reqOpts: DecorateRequestOptions,
         config: object,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) {
         assert.strictEqual(reqOpts.method, 'GET');
         callback(null);
@@ -3944,7 +3946,7 @@ describe('File', () => {
       fakeUtil.makeRequest = function (
         reqOpts: DecorateRequestOptions,
         config: object,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) {
         assert.strictEqual(reqOpts.uri, expectedURL);
         callback(null);
@@ -3959,7 +3961,7 @@ describe('File', () => {
       fakeUtil.makeRequest = function (
         reqOpts: DecorateRequestOptions,
         config: object,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) {
         assert.deepStrictEqual(reqOpts.headers, {});
         callback(null);
@@ -3984,7 +3986,7 @@ describe('File', () => {
       fakeUtil.makeRequest = function (
         reqOpts: DecorateRequestOptions,
         config: object,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) {
         assert.deepStrictEqual(reqOpts.headers, expectedHeader);
         callback(null);
@@ -4002,7 +4004,7 @@ describe('File', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         file: any,
         expectedDestination: string,
-        callback: Function
+        callback: Function,
       ) {
         file.copy = (destination: string) => {
           assert.strictEqual(destination, expectedDestination);
@@ -4049,7 +4051,7 @@ describe('File', () => {
           assert.strictEqual(err, error);
           assert.strictEqual(
             err.message,
-            `file#copy failed with an error - ${originalErrorMessage}`
+            `file#copy failed with an error - ${originalErrorMessage}`,
           );
           done();
         });
@@ -4074,7 +4076,7 @@ describe('File', () => {
             assert.strictEqual(destinationFile, newFile);
             assert.strictEqual(apiResponse, copyApiResponse);
             done();
-          }
+          },
         );
       });
 
@@ -4158,7 +4160,7 @@ describe('File', () => {
           assert.strictEqual(err, error);
           assert.strictEqual(
             err.message,
-            `file#delete failed with an error - ${originalErrorMessage}`
+            `file#delete failed with an error - ${originalErrorMessage}`,
           );
           done();
         });
@@ -4204,7 +4206,7 @@ describe('File', () => {
     it('should pass options to underlying request call', async () => {
       file.parent.request = function (
         reqOpts: DecorateRequestOptions,
-        callback_: Function
+        callback_: Function,
       ) {
         assert.strictEqual(this, file);
         assert.deepStrictEqual(reqOpts, {
@@ -4228,7 +4230,7 @@ describe('File', () => {
 
       file.parent.request = function (
         reqOpts: DecorateRequestOptions,
-        callback_: Function
+        callback_: Function,
       ) {
         assert.strictEqual(this, file);
         assert.strictEqual(reqOpts, options);
@@ -4286,7 +4288,7 @@ describe('File', () => {
       file.copy = (
         destination: string,
         options: object,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(destination, newFile);
         assert.deepStrictEqual(options, {});
@@ -4301,7 +4303,7 @@ describe('File', () => {
     const DATA = 'Data!';
     const BUFFER_DATA = Buffer.from(DATA, 'utf8');
     const UINT8_ARRAY_DATA = Uint8Array.from(
-      Array.from(DATA).map(l => l.charCodeAt(0))
+      Array.from(DATA).map(l => l.charCodeAt(0)),
     );
 
     class DelayedStreamNoError extends Transform {
@@ -4378,7 +4380,7 @@ describe('File', () => {
             _transform(
               chunk: string | Buffer,
               _encoding: string,
-              done: Function
+              done: Function,
             ) {
               this.push(chunk);
               setTimeout(() => {
@@ -4508,7 +4510,7 @@ describe('File', () => {
             transform(
               chunk: string | Buffer,
               _encoding: string,
-              done: Function
+              done: Function,
             ) {
               this.push(chunk);
               setTimeout(() => {
@@ -4728,7 +4730,7 @@ describe('File', () => {
       newFile.setMetadata(
         {retention: null},
         {overrideUnlockedRetention: true},
-        assert.ifError
+        assert.ifError,
       );
     });
   });
@@ -4882,11 +4884,11 @@ describe('File', () => {
 
       assert.deepStrictEqual(
         file.interceptors[0].request({}),
-        expectedInterceptor
+        expectedInterceptor,
       );
       assert.deepStrictEqual(
         file.encryptionKeyInterceptor.request({}),
-        expectedInterceptor
+        expectedInterceptor,
       );
 
       done();
@@ -5184,7 +5186,7 @@ describe('File', () => {
       makeWritableStreamOverride = (stream: {}, options_: any) => {
         assert.strictEqual(
           options_.request.qs.userProject,
-          options.userProject
+          options.userProject,
         );
         done();
       };
@@ -5199,7 +5201,7 @@ describe('File', () => {
         beforeEach(() => {
           file.request = (
             reqOpts: DecorateRequestOptions,
-            callback: Function
+            callback: Function,
           ) => {
             callback(error);
           };
@@ -5226,7 +5228,7 @@ describe('File', () => {
         beforeEach(() => {
           file.request = (
             reqOpts: DecorateRequestOptions,
-            callback: Function
+            callback: Function,
           ) => {
             callback(null, body, resp);
           };

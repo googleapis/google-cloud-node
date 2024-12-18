@@ -41,11 +41,11 @@ describe('Bucket lifecycle management', () => {
 
   it('should add a lifecycle delete rule', async () => {
     const output = execSync(
-      `node enableBucketLifecycleManagement.js ${bucketName}`
+      `node enableBucketLifecycleManagement.js ${bucketName}`,
     );
     assert.include(
       output,
-      `Lifecycle management is enabled for bucket ${bucketName} and the rules are:`
+      `Lifecycle management is enabled for bucket ${bucketName} and the rules are:`,
     );
     const [metadata] = await bucket.getMetadata();
     assert.deepStrictEqual(metadata.lifecycle.rule[0], {
@@ -68,11 +68,11 @@ describe('Bucket lifecycle management', () => {
     });
 
     const output = execSync(
-      `node disableBucketLifecycleManagement.js ${bucketName}`
+      `node disableBucketLifecycleManagement.js ${bucketName}`,
     );
     assert.include(
       output,
-      `Lifecycle management is disabled for bucket ${bucketName}`
+      `Lifecycle management is disabled for bucket ${bucketName}`,
     );
     const [newMetadata] = await bucket.getMetadata();
     assert.isUndefined(newMetadata.lifecycle);

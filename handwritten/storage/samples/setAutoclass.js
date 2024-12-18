@@ -17,7 +17,7 @@
 function main(
   bucketName = 'my-bucket',
   toggle = true,
-  terminalStorageClass = 'ARCHIVE'
+  terminalStorageClass = 'ARCHIVE',
 ) {
   // [START storage_set_autoclass]
   /**
@@ -47,7 +47,7 @@ function main(
     });
 
     console.log(
-      `Autoclass terminal storage class is ${metadata.autoclass.terminalStorageClass}.`
+      `Autoclass terminal storage class is ${metadata.autoclass.terminalStorageClass}.`,
     );
   }
 

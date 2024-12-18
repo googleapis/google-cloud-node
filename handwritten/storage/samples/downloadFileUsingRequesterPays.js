@@ -27,7 +27,7 @@ function main(
   projectId = 'cloud-devrel-public-resources',
   bucketName = `nodejs-storage-samples-${uuid.v4()}`,
   srcFileName = 'test.txt',
-  destFileName = path.join(__dirname, `test_${uuid.v4()}.txt`)
+  destFileName = path.join(__dirname, `test_${uuid.v4()}.txt`),
 ) {
   // [START storage_download_file_requester_pays]
 
@@ -62,7 +62,7 @@ function main(
     await storage.bucket(bucketName).file(srcFileName).download(options);
 
     console.log(
-      `gs://${bucketName}/${srcFileName} downloaded to ${destFileName} using requester-pays requests`
+      `gs://${bucketName}/${srcFileName} downloaded to ${destFileName} using requester-pays requests`,
     );
   }
 

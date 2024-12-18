@@ -22,7 +22,7 @@
 function main(
   bucketName = 'my-bucket',
   labelKey = 'labelone',
-  labelValue = 'labelonevalue'
+  labelValue = 'labelonevalue',
 ) {
   // [START storage_add_bucket_label]
   /**

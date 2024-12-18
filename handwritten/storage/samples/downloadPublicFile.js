@@ -25,7 +25,7 @@ const cwd = path.join(__dirname, '..');
 function main(
   bucketName = 'my-bucket',
   srcFileName = 'test.txt',
-  destFileName = path.join(cwd, 'downloaded.txt')
+  destFileName = path.join(cwd, 'downloaded.txt'),
 ) {
   // [START storage_download_public_file]
   /**
@@ -55,7 +55,7 @@ function main(
     await storage.bucket(bucketName).file(srcFileName).download(options);
 
     console.log(
-      `Downloaded public file ${srcFileName} from bucket name ${bucketName} to ${destFileName}`
+      `Downloaded public file ${srcFileName} from bucket name ${bucketName} to ${destFileName}`,
     );
   }
 

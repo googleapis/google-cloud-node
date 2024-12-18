@@ -16,7 +16,7 @@ function main(
   bucketName = 'my-bucket',
   filePath = './local/path/to/file.txt',
   destFileName = 'file.txt',
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_upload_file]
   /**

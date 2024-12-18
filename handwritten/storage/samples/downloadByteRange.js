@@ -29,7 +29,7 @@ function main(
   fileName = 'test.txt',
   startByte = 0,
   endByte = 20,
-  destFileName = path.join(cwd, 'downloaded.txt')
+  destFileName = path.join(cwd, 'downloaded.txt'),
 ) {
   // [START storage_download_byte_range]
   /**
@@ -67,7 +67,7 @@ function main(
     await storage.bucket(bucketName).file(fileName).download(options);
 
     console.log(
-      `gs://${bucketName}/${fileName} downloaded to ${destFileName} from byte ${startByte} to byte ${endByte}.`
+      `gs://${bucketName}/${fileName} downloaded to ${destFileName} from byte ${startByte} to byte ${endByte}.`,
     );
   }
 

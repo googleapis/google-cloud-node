@@ -41,7 +41,7 @@ describe('HMAC SA Key samples', () => {
 
   it('should create an HMAC Key', async () => {
     const output = execSync(
-      `node hmacKeyCreate.js ${SERVICE_ACCOUNT_EMAIL} ${SERVICE_ACCOUNT_PROJECT}`
+      `node hmacKeyCreate.js ${SERVICE_ACCOUNT_EMAIL} ${SERVICE_ACCOUNT_PROJECT}`,
     );
     assert.include(output, 'The base64 encoded secret is:');
   });
@@ -53,21 +53,21 @@ describe('HMAC SA Key samples', () => {
 
   it('should get HMAC Key', async () => {
     const output = execSync(
-      `node hmacKeyGet.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`
+      `node hmacKeyGet.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`,
     );
     assert.include(output, 'The HMAC key metadata is:');
   });
 
   it('should deactivate HMAC Key', async () => {
     const output = execSync(
-      `node hmacKeyDeactivate.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`
+      `node hmacKeyDeactivate.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`,
     );
     assert.include(output, 'The HMAC key is now inactive.');
   });
 
   it('should activate HMAC Key', async () => {
     const output = execSync(
-      `node hmacKeyActivate.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`
+      `node hmacKeyActivate.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`,
     );
     assert.include(output, 'The HMAC key is now active.');
   });
@@ -75,14 +75,14 @@ describe('HMAC SA Key samples', () => {
   it('should delete HMAC key', async () => {
     // Deactivate then delete
     execSync(
-      `node hmacKeyDeactivate.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`
+      `node hmacKeyDeactivate.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`,
     );
     const output = execSync(
-      `node hmacKeyDelete.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`
+      `node hmacKeyDelete.js ${hmacKey.metadata.accessId} ${SERVICE_ACCOUNT_PROJECT}`,
     );
     assert.include(
       output,
-      'The key is deleted, though it may still appear in getHmacKeys() results.'
+      'The key is deleted, though it may still appear in getHmacKeys() results.',
     );
   });
 });
@@ -110,7 +110,7 @@ async function deleteStaleHmacKeys(serviceAccountEmail, projectId) {
         limit(async () => {
           await hmacKey.setMetadata({state: 'INACTIVE'});
           await hmacKey.delete();
-        })
-      )
+        }),
+      ),
   );
 }

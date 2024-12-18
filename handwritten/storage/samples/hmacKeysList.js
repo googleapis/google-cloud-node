@@ -40,7 +40,7 @@ function main(projectId = 'serviceAccountProjectId') {
     // hmacKeys is an array of HmacKey objects.
     for (const hmacKey of hmacKeys) {
       console.log(
-        `Service Account Email: ${hmacKey.metadata.serviceAccountEmail}`
+        `Service Account Email: ${hmacKey.metadata.serviceAccountEmail}`,
       );
       console.log(`Access Id: ${hmacKey.metadata.accessId}`);
     }

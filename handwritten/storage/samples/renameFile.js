@@ -23,7 +23,7 @@
 function main(
   srcBucketName = 'my-bucket',
   srcFileName = 'test2.txt',
-  destFileName = 'test4.txt'
+  destFileName = 'test4.txt',
 ) {
   // [START storage_rename_file]
   /**
@@ -49,7 +49,7 @@ function main(
     await storage.bucket(srcBucketName).file(srcFileName).rename(destFileName);
 
     console.log(
-      `gs://${srcBucketName}/${srcFileName} renamed to gs://${srcBucketName}/${destFileName}.`
+      `gs://${srcBucketName}/${srcFileName} renamed to gs://${srcBucketName}/${destFileName}.`,
     );
   }
 

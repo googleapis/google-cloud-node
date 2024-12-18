@@ -22,7 +22,7 @@
 
 function main(
   bucketName = 'my-bucket',
-  defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA
+  defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA,
 ) {
   // [START storage_set_bucket_default_kms_key]
   /**
@@ -48,7 +48,7 @@ function main(
     });
 
     console.log(
-      `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
+      `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`,
     );
   }
 

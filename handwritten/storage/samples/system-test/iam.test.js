@@ -52,22 +52,22 @@ after(async () => {
 
 it('should add multiple members to a role on a bucket', async () => {
   const output = execSync(
-    `node addBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`
+    `node addBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`,
   );
   assert.include(
     output,
-    `Added the following member(s) with role ${roleName} to ${bucketName}:`
+    `Added the following member(s) with role ${roleName} to ${bucketName}:`,
   );
   assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
 it('should add conditional binding to a bucket', async () => {
   const output = execSync(
-    `node addBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}' "user:${userEmail}"`
+    `node addBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}' "user:${userEmail}"`,
   );
   assert.include(
     output,
-    `Added the following member(s) with role ${roleName} to ${bucketName}:`
+    `Added the following member(s) with role ${roleName} to ${bucketName}:`,
   );
   assert.include(output, 'with condition:');
   assert.include(output, `Title: ${title}`);
@@ -85,19 +85,19 @@ it('should list members of a role on a bucket', async () => {
 
 it('should remove multiple members from a role on a bucket', async () => {
   const output = execSync(
-    `node removeBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`
+    `node removeBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`,
   );
   assert.ok(
     output.includes(
-      `Removed the following member(s) with role ${roleName} from ${bucketName}:`
-    )
+      `Removed the following member(s) with role ${roleName} from ${bucketName}:`,
+    ),
   );
   assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
 it('should remove conditional binding to a bucket', async () => {
   const output = execSync(
-    `node removeBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}'`
+    `node removeBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}'`,
   );
   assert.include(output, 'Conditional Binding was removed');
 });

@@ -21,7 +21,7 @@
 
 function main(
   bucketName = 'your-unique-bucket-name',
-  directoryPath = './local/path/to/directory'
+  directoryPath = './local/path/to/directory',
 ) {
   // [START upload_directory]
   /**
@@ -80,7 +80,7 @@ function main(
     }
 
     console.log(
-      `${successfulUploads} files uploaded to ${bucketName} successfully.`
+      `${successfulUploads} files uploaded to ${bucketName} successfully.`,
     );
   }
 

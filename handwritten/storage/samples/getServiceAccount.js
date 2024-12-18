@@ -38,7 +38,7 @@ function main(projectId = 'serviceAccountProjectId') {
   async function getServiceAccount() {
     const [serviceAccount] = await storage.getServiceAccount();
     console.log(
-      `The GCS service account for project ${projectId} is: ${serviceAccount.emailAddress}`
+      `The GCS service account for project ${projectId} is: ${serviceAccount.emailAddress}`,
     );
   }
 

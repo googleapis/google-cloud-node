@@ -43,11 +43,11 @@ function main(bucketName = 'my-bucket') {
         metadata.iamConfiguration.uniformBucketLevelAccess;
       console.log(`Uniform bucket-level access is enabled for ${bucketName}.`);
       console.log(
-        `Bucket will be locked on ${uniformBucketLevelAccess.lockedTime}.`
+        `Bucket will be locked on ${uniformBucketLevelAccess.lockedTime}.`,
       );
     } else {
       console.log(
-        `Uniform bucket-level access is not enabled for ${bucketName}.`
+        `Uniform bucket-level access is not enabled for ${bucketName}.`,
       );
     }
   }

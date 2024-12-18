@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
-  userEmail = 'jdobry@google.com'
+  userEmail = 'jdobry@google.com',
 ) {
   // [START storage_add_file_owner]
   /**

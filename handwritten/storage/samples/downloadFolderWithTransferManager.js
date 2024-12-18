@@ -45,7 +45,7 @@ function main(bucketName = 'my-bucket', folderName = 'my-folder') {
     await transferManager.downloadManyFiles(folderName);
 
     console.log(
-      `gs://${bucketName}/${folderName} downloaded to ${folderName}.`
+      `gs://${bucketName}/${folderName} downloaded to ${folderName}.`,
     );
   }
 

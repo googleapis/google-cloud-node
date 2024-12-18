@@ -55,7 +55,7 @@ function main(bucketName = 'my-bucket', location = 'NAM4') {
     });
 
     console.log(
-      `${bucket.name} created with the recovery point objective (RPO) set to ${rpo} in ${location}.`
+      `${bucket.name} created with the recovery point objective (RPO) set to ${rpo} in ${location}.`,
     );
   }
 

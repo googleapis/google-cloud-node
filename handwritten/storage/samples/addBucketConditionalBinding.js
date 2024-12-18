@@ -26,7 +26,7 @@ function main(
   title = 'match-prefix',
   description = 'Applies to objects matching a prefix',
   expression = 'resource.name.startsWith("projects/_/buckets/bucket-name/objects/prefix-a-")',
-  members = 'user:test@example.com'
+  members = 'user:test@example.com',
 ) {
   members = members.split(',');
   // [START storage_add_bucket_conditional_iam_binding]
@@ -81,7 +81,7 @@ function main(
     await bucket.iam.setPolicy(policy);
 
     console.log(
-      `Added the following member(s) with role ${roleName} to ${bucketName}:`
+      `Added the following member(s) with role ${roleName} to ${bucketName}:`,
     );
 
     members.forEach(member => {

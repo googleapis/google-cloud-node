@@ -45,7 +45,7 @@ function main(bucketName = 'my-bucket') {
       status = 'disabled';
     }
     console.log(
-      `Requester-pays requests are ${status} for bucket ${bucketName}.`
+      `Requester-pays requests are ${status} for bucket ${bucketName}.`,
     );
   }
 

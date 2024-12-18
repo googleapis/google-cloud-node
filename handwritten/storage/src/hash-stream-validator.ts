@@ -108,7 +108,7 @@ class HashStreamValidator extends Transform {
 
     if (failed) {
       const mismatchError = new RequestError(
-        FileExceptionMessages.DOWNLOAD_MISMATCH
+        FileExceptionMessages.DOWNLOAD_MISMATCH,
       );
       mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';
 
@@ -121,7 +121,7 @@ class HashStreamValidator extends Transform {
   _transform(
     chunk: Buffer,
     encoding: BufferEncoding,
-    callback: (e?: Error) => void
+    callback: (e?: Error) => void,
   ) {
     this.push(chunk, encoding);
 

@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
-  metagenerationMatchPrecondition = 0
+  metagenerationMatchPrecondition = 0,
 ) {
   // [START storage_set_event_based_hold]
   /**
@@ -54,7 +54,7 @@ function main(
       {
         eventBasedHold: true,
       },
-      options
+      options,
     );
     console.log(`Event-based hold was set for ${fileName}.`);
   }

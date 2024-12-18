@@ -38,7 +38,7 @@ function main(bucketName = 'my-bucket') {
     const [metadata] = await storage.bucket(bucketName).getMetadata();
     if (metadata.retentionPolicy && metadata.retentionPolicy.isLocked) {
       console.log(
-        'Unable to remove retention period as retention policy is locked.'
+        'Unable to remove retention period as retention policy is locked.',
       );
       return null;
     } else {

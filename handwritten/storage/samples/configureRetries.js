@@ -62,17 +62,17 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     },
   });
   console.log(
-    'Functions are customized to be retried according to the following parameters:'
+    'Functions are customized to be retried according to the following parameters:',
   );
   console.log(`Auto Retry: ${storage.retryOptions.autoRetry}`);
   console.log(
-    `Retry delay multiplier: ${storage.retryOptions.retryDelayMultiplier}`
+    `Retry delay multiplier: ${storage.retryOptions.retryDelayMultiplier}`,
   );
   console.log(`Total timeout: ${storage.retryOptions.totalTimeout}`);
   console.log(`Maximum retry delay: ${storage.retryOptions.maxRetryDelay}`);
   console.log(`Maximum retries: ${storage.retryOptions.maxRetries}`);
   console.log(
-    `Idempotency strategy: ${storage.retryOptions.idempotencyStrategy}`
+    `Idempotency strategy: ${storage.retryOptions.idempotencyStrategy}`,
   );
 
   async function deleteFileWithCustomizedRetrySetting() {

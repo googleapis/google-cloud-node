@@ -25,7 +25,7 @@ function main(
   srcFilename = 'test2.txt',
   destBucketName = 'my-bucket',
   destFileName = 'test3.txt',
-  destinationGenerationMatchPrecondition = 0
+  destinationGenerationMatchPrecondition = 0,
 ) {
   // [START storage_copy_file]
   /**
@@ -72,7 +72,7 @@ function main(
       .copy(copyDestination, copyOptions);
 
     console.log(
-      `gs://${srcBucketName}/${srcFilename} copied to gs://${destBucketName}/${destFileName}`
+      `gs://${srcBucketName}/${srcFilename} copied to gs://${destBucketName}/${destFileName}`,
     );
   }
 

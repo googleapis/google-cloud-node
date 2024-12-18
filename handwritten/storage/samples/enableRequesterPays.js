@@ -38,7 +38,7 @@ function main(bucketName = 'my-bucket') {
     await storage.bucket(bucketName).enableRequesterPays();
 
     console.log(
-      `Requester-pays requests have been enabled for bucket ${bucketName}`
+      `Requester-pays requests have been enabled for bucket ${bucketName}`,
     );
   }
 

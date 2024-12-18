@@ -43,7 +43,7 @@ export interface GetServiceAccountCallback {
   (
     err: Error | null,
     serviceAccount?: ServiceAccount,
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 
@@ -174,7 +174,7 @@ export interface GetBucketsCallback {
     err: Error | null,
     buckets: Bucket[],
     nextQuery?: {},
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 export interface GetBucketsRequest {
@@ -204,7 +204,7 @@ export interface CreateHmacKeyCallback {
     err: Error | null,
     hmacKey?: HmacKey | null,
     secret?: string | null,
-    apiResponse?: HmacKeyResourceResponse
+    apiResponse?: HmacKeyResourceResponse,
   ): void;
 }
 
@@ -224,7 +224,7 @@ export interface GetHmacKeysCallback {
     err: Error | null,
     hmacKeys: HmacKey[] | null,
     nextQuery?: {},
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 
@@ -853,18 +853,18 @@ export class Storage extends Service {
 
   createBucket(
     name: string,
-    metadata?: CreateBucketRequest
+    metadata?: CreateBucketRequest,
   ): Promise<CreateBucketResponse>;
   createBucket(name: string, callback: BucketCallback): void;
   createBucket(
     name: string,
     metadata: CreateBucketRequest,
-    callback: BucketCallback
+    callback: BucketCallback,
   ): void;
   createBucket(
     name: string,
     metadata: CreateBucketRequest,
-    callback: BucketCallback
+    callback: BucketCallback,
   ): void;
   /**
    * @typedef {array} CreateBucketResponse
@@ -994,7 +994,7 @@ export class Storage extends Service {
   createBucket(
     name: string,
     metadataOrCallback?: BucketCallback | CreateBucketRequest,
-    callback?: BucketCallback
+    callback?: BucketCallback,
   ): Promise<CreateBucketResponse> | void {
     if (!name) {
       throw new Error(StorageExceptionMessages.BUCKET_NAME_REQUIRED_CREATE);
@@ -1023,14 +1023,14 @@ export class Storage extends Service {
       standard: 'STANDARD',
     } as const;
     const storageClassKeys = Object.keys(
-      storageClasses
+      storageClasses,
     ) as (keyof typeof storageClasses)[];
 
     for (const storageClass of storageClassKeys) {
       if (body[storageClass]) {
         if (metadata.storageClass && metadata.storageClass !== storageClass) {
           throw new Error(
-            `Both \`${storageClass}\` and \`storageClass\` were provided.`
+            `Both \`${storageClass}\` and \`storageClass\` were provided.`,
           );
         }
         body.storageClass = storageClasses[storageClass];
@@ -1091,22 +1091,22 @@ export class Storage extends Service {
         bucket.metadata = resp;
 
         callback!(null, bucket, resp);
-      }
+      },
     );
   }
 
   createHmacKey(
     serviceAccountEmail: string,
-    options?: CreateHmacKeyOptions
+    options?: CreateHmacKeyOptions,
   ): Promise<CreateHmacKeyResponse>;
   createHmacKey(
     serviceAccountEmail: string,
-    callback: CreateHmacKeyCallback
+    callback: CreateHmacKeyCallback,
   ): void;
   createHmacKey(
     serviceAccountEmail: string,
     options: CreateHmacKeyOptions,
-    callback: CreateHmacKeyCallback
+    callback: CreateHmacKeyCallback,
   ): void;
   /**
    * @typedef {object} CreateHmacKeyOptions
@@ -1184,7 +1184,7 @@ export class Storage extends Service {
   createHmacKey(
     serviceAccountEmail: string,
     optionsOrCb?: CreateHmacKeyOptions | CreateHmacKeyCallback,
-    cb?: CreateHmacKeyCallback
+    cb?: CreateHmacKeyCallback,
   ): Promise<CreateHmacKeyResponse> | void {
     if (typeof serviceAccountEmail !== 'string') {
       throw new Error(StorageExceptionMessages.HMAC_SERVICE_ACCOUNT);
@@ -1218,7 +1218,7 @@ export class Storage extends Service {
         hmacKey.metadata = resp.metadata;
 
         callback!(null, hmacKey, resp.secret, resp);
-      }
+      },
     );
   }
 
@@ -1312,11 +1312,11 @@ export class Storage extends Service {
    */
   getBuckets(
     optionsOrCallback?: GetBucketsRequest | GetBucketsCallback,
-    cb?: GetBucketsCallback
+    cb?: GetBucketsCallback,
   ): void | Promise<GetBucketsResponse> {
     const {options, callback} = normalize<GetBucketsRequest>(
       optionsOrCallback,
-      cb
+      cb,
     );
     options.project = options.project || this.projectId;
 
@@ -1343,7 +1343,7 @@ export class Storage extends Service {
           : null;
 
         callback(null, buckets, nextQuery, resp);
-      }
+      },
     );
   }
 
@@ -1435,7 +1435,7 @@ export class Storage extends Service {
   getHmacKeys(options: GetHmacKeysOptions, callback: GetHmacKeysCallback): void;
   getHmacKeys(
     optionsOrCb?: GetHmacKeysOptions | GetHmacKeysCallback,
-    cb?: GetHmacKeysCallback
+    cb?: GetHmacKeysCallback,
   ): Promise<GetHmacKeysResponse> | void {
     const {options, callback} = normalize<GetHmacKeysOptions>(optionsOrCb, cb);
     const query = Object.assign({}, options);
@@ -1467,19 +1467,19 @@ export class Storage extends Service {
           : null;
 
         callback(null, hmacKeys, nextQuery, resp);
-      }
+      },
     );
   }
 
   getServiceAccount(
-    options?: GetServiceAccountOptions
+    options?: GetServiceAccountOptions,
   ): Promise<GetServiceAccountResponse>;
   getServiceAccount(
-    options?: GetServiceAccountOptions
+    options?: GetServiceAccountOptions,
   ): Promise<GetServiceAccountResponse>;
   getServiceAccount(
     options: GetServiceAccountOptions,
-    callback: GetServiceAccountCallback
+    callback: GetServiceAccountCallback,
   ): void;
   getServiceAccount(callback: GetServiceAccountCallback): void;
   /**
@@ -1532,11 +1532,11 @@ export class Storage extends Service {
    */
   getServiceAccount(
     optionsOrCallback?: GetServiceAccountOptions | GetServiceAccountCallback,
-    cb?: GetServiceAccountCallback
+    cb?: GetServiceAccountCallback,
   ): void | Promise<GetServiceAccountResponse> {
     const {options, callback} = normalize<GetServiceAccountOptions>(
       optionsOrCallback,
-      cb
+      cb,
     );
     this.request(
       {
@@ -1555,14 +1555,14 @@ export class Storage extends Service {
           // eslint-disable-next-line no-prototype-builtins
           if (resp.hasOwnProperty(prop)) {
             const camelCaseProp = prop.replace(/_(\w)/g, (_, match) =>
-              match.toUpperCase()
+              match.toUpperCase(),
             );
             camelCaseResponse[camelCaseProp] = resp[prop];
           }
         }
 
         callback(null, camelCaseResponse, resp);
-      }
+      },
     );
   }
 

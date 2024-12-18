@@ -24,7 +24,7 @@ function main(
   fileName = 'test.txt',
   encryptionKey = 'my-encription-key',
   kmsKeyName = 'my-kms-key',
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_object_csek_to_cmek]
   /**
@@ -72,7 +72,7 @@ function main(
       });
 
     console.log(
-      `file ${fileName} in bucket ${bucketName} is now managed by KMS key ${kmsKeyName} instead of customer-supplied encryption key`
+      `file ${fileName} in bucket ${bucketName} is now managed by KMS key ${kmsKeyName} instead of customer-supplied encryption key`,
     );
   }
 

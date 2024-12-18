@@ -60,7 +60,7 @@ function mockAuthorizeRequest(
   code = 200,
   data: {} | string = {
     access_token: 'abc123',
-  }
+  },
 ) {
   return nock('https://www.googleapis.com')
     .post('/oauth2/v4/token')
@@ -176,7 +176,7 @@ describe('resumable-upload', () => {
       });
       assert.strictEqual(
         upWithZeroGeneration.cacheKey,
-        [BUCKET, FILE, 0].join('/')
+        [BUCKET, FILE, 0].join('/'),
       );
     });
 
@@ -525,7 +525,7 @@ describe('resumable-upload', () => {
 
       assert.equal(
         Buffer.compare(Buffer.concat(up.writeBuffers), Buffer.from('abcdef')),
-        0
+        0,
       );
     });
 
@@ -576,7 +576,7 @@ describe('resumable-upload', () => {
     it('should keep the desired last few bytes', () => {
       up.localWriteCache = [Buffer.from('123'), Buffer.from('456')];
       up.localWriteCacheByteLength = up.localWriteCache.reduce(
-        (a: Buffer, b: number) => a.byteLength + b
+        (a: Buffer, b: number) => a.byteLength + b,
       );
       up.writeBuffers = [Buffer.from('789')];
 
@@ -1071,7 +1071,7 @@ describe('resumable-upload', () => {
           assert.equal(data.contentLength, 24);
 
           done();
-        }
+        },
       );
 
       up.makeRequestStream = async (reqOpts: GaxiosOptions) => {
@@ -1160,10 +1160,10 @@ describe('resumable-upload', () => {
           assert(reqOpts.headers);
           assert.equal(
             reqOpts.headers['Content-Range'],
-            `bytes ${OFFSET}-*/${CONTENT_LENGTH}`
+            `bytes ${OFFSET}-*/${CONTENT_LENGTH}`,
           );
           assert.ok(
-            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client']),
           );
           assert.ok(USER_AGENT_REGEX.test(reqOpts.headers['User-Agent']));
 
@@ -1180,7 +1180,7 @@ describe('resumable-upload', () => {
           assert(reqOpts.headers);
           assert.equal(reqOpts.headers['Content-Range'], 'bytes 0-*/*');
           assert.ok(
-            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client']),
           );
           assert.ok(USER_AGENT_REGEX.test(reqOpts.headers['User-Agent']));
 
@@ -1211,10 +1211,10 @@ describe('resumable-upload', () => {
           assert.equal(reqOpts.headers['Content-Length'], CHUNK_SIZE);
           assert.equal(
             reqOpts.headers['Content-Range'],
-            `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`
+            `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`,
           );
           assert.ok(
-            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client']),
           );
           assert.ok(USER_AGENT_REGEX.test(reqOpts.headers['User-Agent']));
 
@@ -1227,7 +1227,7 @@ describe('resumable-upload', () => {
           const OFFSET = 100;
           const EXPECTED_STREAM_AMOUNT = Math.min(
             UPSTREAM_BUFFER_SIZE - OFFSET,
-            CHUNK_SIZE
+            CHUNK_SIZE,
           );
           const ENDING_BYTE = EXPECTED_STREAM_AMOUNT + OFFSET - 1;
 
@@ -1239,14 +1239,14 @@ describe('resumable-upload', () => {
           assert(reqOpts.headers);
           assert.equal(
             reqOpts.headers['Content-Length'],
-            EXPECTED_STREAM_AMOUNT
+            EXPECTED_STREAM_AMOUNT,
           );
           assert.equal(
             reqOpts.headers['Content-Range'],
-            `bytes ${OFFSET}-${ENDING_BYTE}/*`
+            `bytes ${OFFSET}-${ENDING_BYTE}/*`,
           );
           assert.ok(
-            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client']),
           );
           assert.ok(USER_AGENT_REGEX.test(reqOpts.headers['User-Agent']));
 
@@ -1270,14 +1270,14 @@ describe('resumable-upload', () => {
           assert(reqOpts.headers);
           assert.equal(
             reqOpts.headers['Content-Length'],
-            CONTENT_LENGTH - NUM_BYTES_WRITTEN
+            CONTENT_LENGTH - NUM_BYTES_WRITTEN,
           );
           assert.equal(
             reqOpts.headers['Content-Range'],
-            `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`
+            `bytes ${OFFSET}-${endByte}/${CONTENT_LENGTH}`,
           );
           assert.ok(
-            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+            X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client']),
           );
           assert.ok(USER_AGENT_REGEX.test(reqOpts.headers['User-Agent']));
           const data = await getAllDataFromRequest();
@@ -1435,13 +1435,13 @@ describe('resumable-upload', () => {
         assert.equal(up.offset, lastByteReceived + 1);
         assert.equal(
           Buffer.concat(up.writeBuffers).byteLength,
-          UPSTREAM_BUFFER_LENGTH + expectedUnshiftAmount
+          UPSTREAM_BUFFER_LENGTH + expectedUnshiftAmount,
         );
         assert.equal(
           Buffer.concat(up.writeBuffers)
             .subarray(0, expectedUnshiftAmount)
             .toString(),
-          'a'.repeat(expectedUnshiftAmount)
+          'a'.repeat(expectedUnshiftAmount),
         );
 
         // we should discard part of the last chunk, as we know what the server
@@ -1485,7 +1485,7 @@ describe('resumable-upload', () => {
     await up.getAndSetOffset();
     assert.notEqual(
       beforeCallInvocationId,
-      up.currentInvocationId.checkUploadStatus
+      up.currentInvocationId.checkUploadStatus,
     );
   });
 
@@ -1494,7 +1494,7 @@ describe('resumable-upload', () => {
     up.destroy = () => {
       assert.equal(
         beforeCallInvocationId,
-        up.currentInvocationId.checkUploadStatus
+        up.currentInvocationId.checkUploadStatus,
       );
       done();
     };
@@ -1519,7 +1519,7 @@ describe('resumable-upload', () => {
         assert.equal(reqOpts.headers['Content-Length'], 0);
         assert.equal(reqOpts.headers['Content-Range'], 'bytes */*');
         assert.ok(
-          X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])
+          X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client']),
         );
         assert.ok(USER_AGENT_REGEX.test(reqOpts.headers['User-Agent']));
         done();
@@ -1580,7 +1580,7 @@ describe('resumable-upload', () => {
       assert.strictEqual(headers['x-goog-encryption-key'], up.encryption.key);
       assert.strictEqual(
         headers['x-goog-encryption-key-sha256'],
-        up.encryption.hash
+        up.encryption.hash,
       );
     });
 
@@ -1874,7 +1874,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            `Retry limit exceeded - ${JSON.stringify(RESP.data)}`
+            `Retry limit exceeded - ${JSON.stringify(RESP.data)}`,
           );
           done();
         };
@@ -1915,7 +1915,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              `Retry limit exceeded - ${JSON.stringify(RESP.data)}`
+              `Retry limit exceeded - ${JSON.stringify(RESP.data)}`,
             );
             done();
           });
@@ -2010,7 +2010,7 @@ describe('resumable-upload', () => {
         assert.equal(up.localWriteCache.length, 0);
         assert.equal(
           Buffer.concat(up.writeBuffers).toString(),
-          'a'.repeat(12) + 'b'.repeat(10)
+          'a'.repeat(12) + 'b'.repeat(10),
         );
         assert.equal(up.offset, undefined);
 
@@ -2091,7 +2091,7 @@ describe('resumable-upload', () => {
         assert.strictEqual(
           url.input.match(PROTOCOL_REGEX) &&
             url.input.match(PROTOCOL_REGEX)![1],
-          url.match
+          url.match,
         );
       }
     });
@@ -2111,7 +2111,7 @@ describe('resumable-upload', () => {
       const endpoint = up.sanitizeEndpoint(USER_DEFINED_FULL_API_ENDPOINT);
       assert.strictEqual(
         endpoint.match(PROTOCOL_REGEX)![1],
-        USER_DEFINED_PROTOCOL
+        USER_DEFINED_PROTOCOL,
       );
     });
 
@@ -2183,7 +2183,7 @@ describe('resumable-upload', () => {
 
         up.contentLength = CHUNK_SIZE_MULTIPLE * 8;
         up.createURI = (
-          callback: (error: Error | null, uri: string) => void
+          callback: (error: Error | null, uri: string) => void,
         ) => {
           up.uri = uri;
           up.offset = 0;
@@ -2301,12 +2301,12 @@ describe('resumable-upload', () => {
           assert(request.opts.headers);
           assert.equal(
             request.opts.headers['Content-Range'],
-            `bytes 0-*/${CONTENT_LENGTH}`
+            `bytes 0-*/${CONTENT_LENGTH}`,
           );
           assert.ok(
             X_GOOG_API_HEADER_REGEX.test(
-              request.opts.headers['x-goog-api-client']
-            )
+              request.opts.headers['x-goog-api-client'],
+            ),
           );
           assert.ok(USER_AGENT_REGEX.test(request.opts.headers['User-Agent']));
 
@@ -2327,7 +2327,7 @@ describe('resumable-upload', () => {
         up.chunkSize = CHUNK_SIZE_MULTIPLE;
         up.contentLength = CHUNK_SIZE_MULTIPLE * 8;
         up.createURI = (
-          callback: (error: Error | null, uri: string) => void
+          callback: (error: Error | null, uri: string) => void,
         ) => {
           up.uri = uri;
           up.offset = 0;
@@ -2469,19 +2469,19 @@ describe('resumable-upload', () => {
               assert(request.opts.headers);
               assert.equal(
                 request.opts.headers['Content-Length'],
-                LAST_REQUEST_SIZE
+                LAST_REQUEST_SIZE,
               );
               assert.equal(
                 request.opts.headers['Content-Range'],
-                `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`
+                `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`,
               );
               assert.ok(
                 X_GOOG_API_HEADER_REGEX.test(
-                  request.opts.headers['x-goog-api-client']
-                )
+                  request.opts.headers['x-goog-api-client'],
+                ),
               );
               assert.ok(
-                USER_AGENT_REGEX.test(request.opts.headers['User-Agent'])
+                USER_AGENT_REGEX.test(request.opts.headers['User-Agent']),
               );
             } else {
               // The preceding chunks
@@ -2492,15 +2492,15 @@ describe('resumable-upload', () => {
               assert.equal(request.opts.headers['Content-Length'], CHUNK_SIZE);
               assert.equal(
                 request.opts.headers['Content-Range'],
-                `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`
+                `bytes ${offset}-${endByte}/${CONTENT_LENGTH}`,
               );
               assert.ok(
                 X_GOOG_API_HEADER_REGEX.test(
-                  request.opts.headers['x-goog-api-client']
-                )
+                  request.opts.headers['x-goog-api-client'],
+                ),
               );
               assert.ok(
-                USER_AGENT_REGEX.test(request.opts.headers['User-Agent'])
+                USER_AGENT_REGEX.test(request.opts.headers['User-Agent']),
               );
             }
           }
@@ -2521,7 +2521,7 @@ describe('resumable-upload', () => {
 
         up.contentLength = 0;
         up.createURI = (
-          callback: (error: Error | null, uri: string) => void
+          callback: (error: Error | null, uri: string) => void,
         ) => {
           up.uri = uri;
           up.offset = 0;
@@ -2593,12 +2593,12 @@ describe('resumable-upload', () => {
 
           assert.equal(
             request.opts.headers['Content-Range'],
-            `bytes 0-*/${CONTENT_LENGTH}`
+            `bytes 0-*/${CONTENT_LENGTH}`,
           );
           assert.ok(
             X_GOOG_API_HEADER_REGEX.test(
-              request.opts.headers['x-goog-api-client']
-            )
+              request.opts.headers['x-goog-api-client'],
+            ),
           );
           assert.ok(USER_AGENT_REGEX.test(request.opts.headers['User-Agent']));
 

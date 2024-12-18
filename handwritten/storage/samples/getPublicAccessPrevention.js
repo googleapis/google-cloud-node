@@ -38,7 +38,7 @@ function main(bucketName = 'my-bucket') {
     // Gets Bucket Metadata and prints publicAccessPrevention value (either 'inherited' or 'enforced').
     const [metadata] = await storage.bucket(bucketName).getMetadata();
     console.log(
-      `Public access prevention is ${metadata.iamConfiguration.publicAccessPrevention} for ${bucketName}.`
+      `Public access prevention is ${metadata.iamConfiguration.publicAccessPrevention} for ${bucketName}.`,
     );
   }
 

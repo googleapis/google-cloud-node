@@ -57,11 +57,11 @@ it('should generate a key', () => {
 
 it('should upload a file', async () => {
   const output = execSync(
-    `node uploadEncryptedFile.js ${bucketName} ${filePath} ${fileName} ${key} ${doesNotExistPrecondition}`
+    `node uploadEncryptedFile.js ${bucketName} ${filePath} ${fileName} ${key} ${doesNotExistPrecondition}`,
   );
   assert.match(
     output,
-    new RegExp(`File ${filePath} uploaded to gs://${bucketName}/${fileName}`)
+    new RegExp(`File ${filePath} uploaded to gs://${bucketName}/${fileName}`),
   );
   const [exists] = await bucket.file(fileName).exists();
   assert.strictEqual(exists, true);
@@ -69,11 +69,11 @@ it('should upload a file', async () => {
 
 it('should download a file', () => {
   const output = execSync(
-    `node downloadEncryptedFile.js ${bucketName} ${fileName} ${downloadFilePath} ${key}`
+    `node downloadEncryptedFile.js ${bucketName} ${fileName} ${downloadFilePath} ${key}`,
   );
   assert.match(
     output,
-    new RegExp(`File ${fileName} downloaded to ${downloadFilePath}`)
+    new RegExp(`File ${fileName} downloaded to ${downloadFilePath}`),
   );
   fs.statSync(downloadFilePath);
 });
@@ -85,7 +85,7 @@ it('should rotate keys', async () => {
     .file(fileName)
     .getMetadata();
   const output = execSync(
-    `node rotateEncryptionKey.js ${bucketName} ${fileName} ${key} ${newKey} ${metadata.generation}`
+    `node rotateEncryptionKey.js ${bucketName} ${fileName} ${key} ${newKey} ${metadata.generation}`,
   );
   assert.include(output, 'Encryption key rotated successfully');
 });
@@ -101,10 +101,10 @@ it('should convert CSEK to KMS key', async () => {
     .getMetadata();
   await file.save('secret data', {resumable: false});
   const output = execSync(
-    `node changeFileCSEKToCMEK.js ${bucketName} ${encryptedFileName} ${key} ${kmsKeyName} ${metadata.generation}`
+    `node changeFileCSEKToCMEK.js ${bucketName} ${encryptedFileName} ${key} ${kmsKeyName} ${metadata.generation}`,
   );
   assert.include(
     output,
-    `file ${encryptedFileName} in bucket ${bucketName} is now managed by KMS key ${kmsKeyName} instead of customer-supplied encryption key`
+    `file ${encryptedFileName} in bucket ${bucketName} is now managed by KMS key ${kmsKeyName} instead of customer-supplied encryption key`,
   );
 });
