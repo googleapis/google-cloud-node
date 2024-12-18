@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   destFileName = 'file.txt',
-  contents = 'this is the file content'
+  contents = 'this is the file content',
 ) {
   // [START storage_stream_file_upload]
   /**

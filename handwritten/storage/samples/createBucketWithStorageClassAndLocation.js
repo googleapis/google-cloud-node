@@ -24,7 +24,7 @@
 function main(
   bucketName = 'my-bucket',
   storageClass = 'coldline',
-  location = 'ASIA'
+  location = 'ASIA',
 ) {
   // [START storage_create_bucket_class_location]
   /**
@@ -60,7 +60,7 @@ function main(
     });
 
     console.log(
-      `${bucket.name} created with ${storageClass} class in ${location}`
+      `${bucket.name} created with ${storageClass} class in ${location}`,
     );
   }
 

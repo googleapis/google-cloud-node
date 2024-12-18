@@ -24,7 +24,7 @@ function main(
   maxAgeSeconds = 3600,
   method = 'POST',
   origin = 'http://example.appspot.com',
-  responseHeader = 'content-type'
+  responseHeader = 'content-type',
 ) {
   // [START storage_cors_configuration]
   // Imports the Google Cloud client library

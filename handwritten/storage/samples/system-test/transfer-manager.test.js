@@ -46,69 +46,69 @@ describe('transfer manager', () => {
 
   it('should upload multiple files', async () => {
     const output = execSync(
-      `node uploadManyFilesWithTransferManager.js ${bucketName} ${firstFilePath} ${secondFilePath}`
+      `node uploadManyFilesWithTransferManager.js ${bucketName} ${firstFilePath} ${secondFilePath}`,
     );
     assert.match(
       output,
       new RegExp(
-        `${firstFilePath} uploaded to ${bucketName}.\n${secondFilePath} uploaded to ${bucketName}`
-      )
+        `${firstFilePath} uploaded to ${bucketName}.\n${secondFilePath} uploaded to ${bucketName}`,
+      ),
     );
   });
 
   it('should download mulitple files', async () => {
     const output = execSync(
-      `node downloadManyFilesWithTransferManager.js ${bucketName} ${firstFilePath} ${secondFilePath}`
+      `node downloadManyFilesWithTransferManager.js ${bucketName} ${firstFilePath} ${secondFilePath}`,
     );
     assert.match(
       output,
       new RegExp(
-        `gs://${bucketName}/${firstFilePath} downloaded to ${firstFilePath}.\ngs://${bucketName}/${secondFilePath} downloaded to ${secondFilePath}.`
-      )
+        `gs://${bucketName}/${firstFilePath} downloaded to ${firstFilePath}.\ngs://${bucketName}/${secondFilePath} downloaded to ${secondFilePath}.`,
+      ),
     );
   });
 
   it('should download a file utilizing chunked download', async () => {
     const output = execSync(
-      `node downloadFileInChunksWithTransferManager.js ${bucketName} ${firstFilePath} ${downloadFilePath} ${chunkSize}`
+      `node downloadFileInChunksWithTransferManager.js ${bucketName} ${firstFilePath} ${downloadFilePath} ${chunkSize}`,
     );
     assert.match(
       output,
       new RegExp(
-        `gs://${bucketName}/${firstFilePath} downloaded to ${downloadFilePath}.`
-      )
+        `gs://${bucketName}/${firstFilePath} downloaded to ${downloadFilePath}.`,
+      ),
     );
   });
 
   it('should upload a file utilizing chunked upload', async () => {
     const output = execSync(
-      `node uploadFileInChunksWithTransferManager.js ${bucketName} ${firstFilePath} ${chunkSize}`
+      `node uploadFileInChunksWithTransferManager.js ${bucketName} ${firstFilePath} ${chunkSize}`,
     );
     assert.match(
       output,
-      new RegExp(`${firstFilePath} uploaded to ${bucketName}.`)
+      new RegExp(`${firstFilePath} uploaded to ${bucketName}.`),
     );
   });
 
   it('should upload a directory', async () => {
     const output = execSync(
-      `node uploadDirectoryWithTransferManager.js ${bucketName} ${resourcesPath}`
+      `node uploadDirectoryWithTransferManager.js ${bucketName} ${resourcesPath}`,
     );
     assert.match(
       output,
-      new RegExp(`${resourcesPath} uploaded to ${bucketName}.`)
+      new RegExp(`${resourcesPath} uploaded to ${bucketName}.`),
     );
   });
 
   it('should download a directory', async () => {
     const output = execSync(
-      `node downloadFolderWithTransferManager.js ${bucketName} ${resourcesPath}`
+      `node downloadFolderWithTransferManager.js ${bucketName} ${resourcesPath}`,
     );
     assert.match(
       output,
       new RegExp(
-        `gs://${bucketName}/${resourcesPath} downloaded to ${resourcesPath}.`
-      )
+        `gs://${bucketName}/${resourcesPath} downloaded to ${resourcesPath}.`,
+      ),
     );
   });
 });

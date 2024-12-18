@@ -15,7 +15,7 @@
 function main(
   bucketName = 'my-bucket',
   roleName = 'roles/storage.objectViewer',
-  members = 'user:test@example.com'
+  members = 'user:test@example.com',
 ) {
   //including this logic so as to not use yargs
   members = members.split(',');
@@ -59,7 +59,7 @@ function main(
     await bucket.iam.setPolicy(policy);
 
     console.log(
-      `Added the following member(s) with role ${roleName} to ${bucketName}:`
+      `Added the following member(s) with role ${roleName} to ${bucketName}:`,
     );
 
     members.forEach(member => {

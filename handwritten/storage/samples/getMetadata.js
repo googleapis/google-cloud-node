@@ -67,14 +67,14 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     console.log(`Last Metadata Update: ${new Date(metadata.updated)}`);
     console.log(`TurboReplication: ${metadata.rpo}`);
     console.log(
-      `temporaryHold: ${metadata.temporaryHold ? 'enabled' : 'disabled'}`
+      `temporaryHold: ${metadata.temporaryHold ? 'enabled' : 'disabled'}`,
     );
     console.log(
-      `eventBasedHold: ${metadata.eventBasedHold ? 'enabled' : 'disabled'}`
+      `eventBasedHold: ${metadata.eventBasedHold ? 'enabled' : 'disabled'}`,
     );
     if (metadata.retentionExpirationTime) {
       console.log(
-        `retentionExpirationTime: ${new Date(metadata.retentionExpirationTime)}`
+        `retentionExpirationTime: ${new Date(metadata.retentionExpirationTime)}`,
       );
     }
     if (metadata.metadata) {

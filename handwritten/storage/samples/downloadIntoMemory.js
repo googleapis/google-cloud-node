@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     const contents = await storage.bucket(bucketName).file(fileName).download();
 
     console.log(
-      `Contents of gs://${bucketName}/${fileName} are ${contents.toString()}.`
+      `Contents of gs://${bucketName}/${fileName} are ${contents.toString()}.`,
     );
   }
 

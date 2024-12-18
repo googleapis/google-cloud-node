@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket', retentionPeriod = 5) {
       .bucket(bucketName)
       .setRetentionPeriod(retentionPeriod);
     console.log(
-      `Bucket ${bucketName} retention period set for ${metadata.retentionPolicy.retentionPeriod} seconds.`
+      `Bucket ${bucketName} retention period set for ${metadata.retentionPolicy.retentionPeriod} seconds.`,
     );
   }
 

@@ -149,7 +149,7 @@ describe('storage/acl', () => {
         (err: Error, acls: {}, apiResponse: unknown) => {
           assert.deepStrictEqual(resp, apiResponse);
           done();
-        }
+        },
       );
     });
   });
@@ -443,7 +443,7 @@ describe('storage/acl', () => {
         (err: Error, acls: Array<{}>, apiResponse: unknown) => {
           assert.deepStrictEqual(resp, apiResponse);
           done();
-        }
+        },
       );
     });
   });
@@ -594,7 +594,7 @@ describe('storage/AclRoleAccessorMethods', () => {
           entity: 'user-' + fakeUser,
           role: fakeRole,
         },
-        fakeOptions
+        fakeOptions,
       );
 
       aclEntity.add = (options: {}) => {

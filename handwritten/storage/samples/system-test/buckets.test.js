@@ -34,7 +34,7 @@ const bucketNameHierarchicalNamespace = `${samplesTestBucketPrefix}-g`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const bucketWithClassAndLocation = storage.bucket(
-  bucketNameWithClassAndLocation
+  bucketNameWithClassAndLocation,
 );
 const dualRegionBucket = storage.bucket(bucketNameDualRegion);
 const dualRegionBucketTurbo = storage.bucket(bucketNameDualRegionTurbo);
@@ -90,14 +90,14 @@ it('should set autoclass terminal storage class to ARCHIVE', async () => {
     },
   });
   const output = execSync(
-    `node setAutoclass.js ${bucketNameAutoclass} ${true} ARCHIVE`
+    `node setAutoclass.js ${bucketNameAutoclass} ${true} ARCHIVE`,
   );
   assert.include(output, 'ARCHIVE');
 });
 
 it('should disable autoclass', async () => {
   const output = execSync(
-    `node setAutoclass.js ${bucketNameAutoclass} ${false}`
+    `node setAutoclass.js ${bucketNameAutoclass} ${false}`,
   );
   assert.include(output, 'Autoclass');
 });
@@ -109,16 +109,16 @@ it('should get autoclass', async () => {
 
 it('should set a buckets default KMS key', async () => {
   const output = execSync(
-    `node enableDefaultKMSKey.js ${bucketName} ${defaultKmsKeyName}`
+    `node enableDefaultKMSKey.js ${bucketName} ${defaultKmsKeyName}`,
   );
   assert.include(
     output,
-    `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}`
+    `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}`,
   );
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
     metadata[0].encryption.defaultKmsKeyName,
-    defaultKmsKeyName
+    defaultKmsKeyName,
   );
 });
 
@@ -131,17 +131,17 @@ it('should remove a buckets default KMS key', async () => {
 
 it("should enable a bucket's uniform bucket-level access", async () => {
   const output = execSync(
-    `node enableUniformBucketLevelAccess.js ${bucketName}`
+    `node enableUniformBucketLevelAccess.js ${bucketName}`,
   );
   assert.match(
     output,
-    new RegExp(`Uniform bucket-level access was enabled for ${bucketName}`)
+    new RegExp(`Uniform bucket-level access was enabled for ${bucketName}`),
   );
 
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
     metadata[0].iamConfiguration.uniformBucketLevelAccess.enabled,
-    true
+    true,
   );
 });
 
@@ -150,36 +150,36 @@ it("should get a bucket's uniform bucket-level access metadata", async () => {
 
   assert.match(
     output,
-    new RegExp(`Uniform bucket-level access is enabled for ${bucketName}`)
+    new RegExp(`Uniform bucket-level access is enabled for ${bucketName}`),
   );
 
   const [metadata] = await bucket.getMetadata();
   assert.ok(metadata.iamConfiguration.uniformBucketLevelAccess.enabled);
   assert.strictEqual(
     metadata.iamConfiguration.uniformBucketLevelAccess.lockedTime !== null,
-    true
+    true,
   );
 });
 
 it("should disable a bucket's uniform bucket-level access", async () => {
   const output = execSync(
-    `node disableUniformBucketLevelAccess.js ${bucketName}`
+    `node disableUniformBucketLevelAccess.js ${bucketName}`,
   );
   assert.match(
     output,
-    new RegExp(`Uniform bucket-level access was disabled for ${bucketName}`)
+    new RegExp(`Uniform bucket-level access was disabled for ${bucketName}`),
   );
 
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
     metadata[0].iamConfiguration.uniformBucketLevelAccess.enabled,
-    false
+    false,
   );
 });
 
 it('should configure a bucket cors', async () => {
   execSync(
-    `node configureBucketCors.js ${bucketName} 3600 POST http://example.appspot.com content-type`
+    `node configureBucketCors.js ${bucketName} 3600 POST http://example.appspot.com content-type`,
   );
   await bucket.getMetadata();
   assert.deepStrictEqual(bucket.metadata.cors[0], {
@@ -194,7 +194,7 @@ it('should remove a bucket cors configuration', async () => {
   const output = execSync(`node removeBucketCors.js ${bucketName}`);
   assert.include(
     output,
-    `Removed CORS configuration from bucket ${bucketName}`
+    `Removed CORS configuration from bucket ${bucketName}`,
   );
   await bucket.getMetadata();
   assert.ok(!bucket.metadata.cors);
@@ -202,17 +202,19 @@ it('should remove a bucket cors configuration', async () => {
 
 it('should set public access prevention to enforced', async () => {
   const output = execSync(
-    `node setPublicAccessPreventionEnforced.js ${bucketName}`
+    `node setPublicAccessPreventionEnforced.js ${bucketName}`,
   );
   assert.match(
     output,
-    new RegExp(`Public access prevention is set to enforced for ${bucketName}.`)
+    new RegExp(
+      `Public access prevention is set to enforced for ${bucketName}.`,
+    ),
   );
 
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
     metadata[0].iamConfiguration.publicAccessPrevention,
-    PUBLIC_ACCESS_PREVENTION_ENFORCED
+    PUBLIC_ACCESS_PREVENTION_ENFORCED,
   );
 });
 
@@ -227,7 +229,7 @@ it("should get a bucket's public access prevention metadata", async () => {
 
   assert.match(
     output,
-    new RegExp(`Public access prevention is enforced for ${bucketName}.`)
+    new RegExp(`Public access prevention is enforced for ${bucketName}.`),
   );
 
   const [metadata] = await bucket.getMetadata();
@@ -236,23 +238,23 @@ it("should get a bucket's public access prevention metadata", async () => {
 
 it('should set public access prevention to inherited', async () => {
   const output = execSync(
-    `node setPublicAccessPreventionInherited.js ${bucketName}`
+    `node setPublicAccessPreventionInherited.js ${bucketName}`,
   );
   assert.match(
     output,
-    new RegExp(`Public access prevention is 'inherited' for ${bucketName}.`)
+    new RegExp(`Public access prevention is 'inherited' for ${bucketName}.`),
   );
 
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
     metadata[0].iamConfiguration.publicAccessPrevention,
-    PUBLIC_ACCESS_PREVENTION_INHERITED
+    PUBLIC_ACCESS_PREVENTION_INHERITED,
   );
 });
 
 it('should create a dual-region bucket', async () => {
   const output = execSync(
-    `node createBucketWithDualRegion.js ${bucketNameDualRegion} ${DUAL_REGION.LOCATION} ${DUAL_REGION.REGIONS[0]} ${DUAL_REGION.REGIONS[1]}`
+    `node createBucketWithDualRegion.js ${bucketNameDualRegion} ${DUAL_REGION.LOCATION} ${DUAL_REGION.REGIONS[0]} ${DUAL_REGION.REGIONS[1]}`,
   );
 
   // Ensure the sample outputs the desired result
@@ -283,13 +285,13 @@ it('should create a dual-region bucket', async () => {
 
 it('should create a dual-region bucket with turbo replication enabled', async () => {
   const output = execSync(
-    `node createBucketWithTurboReplication.js ${bucketNameDualRegionTurbo}`
+    `node createBucketWithTurboReplication.js ${bucketNameDualRegionTurbo}`,
   );
   assert.match(
     output,
     new RegExp(
-      `${bucketNameDualRegionTurbo} created with the recovery point objective \\(RPO\\) set to ASYNC_TURBO in NAM4.`
-    )
+      `${bucketNameDualRegionTurbo} created with the recovery point objective \\(RPO\\) set to ASYNC_TURBO in NAM4.`,
+    ),
   );
   const [exists] = await dualRegionBucketTurbo.exists();
   assert.strictEqual(exists, true);
@@ -303,7 +305,7 @@ it("should get a bucket's RPO metadata", async () => {
   const output = execSync(`node getRPO.js ${bucketNameDualRegionTurbo}`);
   assert.match(
     output,
-    new RegExp(`RPO is ASYNC_TURBO for ${bucketNameDualRegionTurbo}.`)
+    new RegExp(`RPO is ASYNC_TURBO for ${bucketNameDualRegionTurbo}.`),
   );
 
   const metadata = await dualRegionBucketTurbo.getMetadata();
@@ -312,11 +314,11 @@ it("should get a bucket's RPO metadata", async () => {
 
 it("should set a bucket's RPO to ASYNC_TURBO", async () => {
   const output = execSync(
-    `node setRPOAsyncTurbo.js ${bucketNameDualRegionTurbo}`
+    `node setRPOAsyncTurbo.js ${bucketNameDualRegionTurbo}`,
   );
   assert.match(
     output,
-    new RegExp(`Turbo replication enabled for ${bucketNameDualRegionTurbo}.`)
+    new RegExp(`Turbo replication enabled for ${bucketNameDualRegionTurbo}.`),
   );
 
   const metadata = await dualRegionBucketTurbo.getMetadata();
@@ -327,7 +329,7 @@ it("should set a bucket's RPO to DEFAULT", async () => {
   const output = execSync(`node setRPODefault.js ${bucketNameDualRegionTurbo}`);
   assert.match(
     output,
-    new RegExp(`Turbo replication disabled for ${bucketNameDualRegionTurbo}.`)
+    new RegExp(`Turbo replication disabled for ${bucketNameDualRegionTurbo}.`),
   );
 
   const metadata = await dualRegionBucketTurbo.getMetadata();
@@ -336,13 +338,13 @@ it("should set a bucket's RPO to DEFAULT", async () => {
 
 it('should create a hierarchical namespace enabled bucket', async () => {
   const output = execSync(
-    `node createBucketWithHierarchicalNamespace.js ${bucketNameHierarchicalNamespace}`
+    `node createBucketWithHierarchicalNamespace.js ${bucketNameHierarchicalNamespace}`,
   );
   assert.match(
     output,
     new RegExp(
-      `Created '${bucketNameHierarchicalNamespace}' with hierarchical namespace enabled.`
-    )
+      `Created '${bucketNameHierarchicalNamespace}' with hierarchical namespace enabled.`,
+    ),
   );
 
   const metadata = await dualRegionBucketTurbo.getMetadata();
@@ -351,12 +353,12 @@ it('should create a hierarchical namespace enabled bucket', async () => {
 
 it("should add a bucket's website configuration", async () => {
   const output = execSync(
-    `node addBucketWebsiteConfiguration.js ${bucketName} http://example.com http://example.com/404.html`
+    `node addBucketWebsiteConfiguration.js ${bucketName} http://example.com http://example.com/404.html`,
   );
 
   assert.include(
     output,
-    `Static website bucket ${bucketName} is set up to use http://example.com as the index page and http://example.com/404.html as the 404 page`
+    `Static website bucket ${bucketName} is set up to use http://example.com as the index page and http://example.com/404.html as the 404 page`,
   );
 
   const [metadata] = await bucket.getMetadata();
@@ -370,7 +372,7 @@ it('should make bucket publicly readable', async () => {
   const output = execSync(`node makeBucketPublic.js ${bucketName}`);
   assert.match(
     output,
-    new RegExp(`Bucket ${bucketName} is now publicly readable`)
+    new RegExp(`Bucket ${bucketName} is now publicly readable`),
   );
   const [policy] = await bucket.iam.getPolicy();
   const objectViewerBinding = policy.bindings.filter(binding => {
@@ -396,7 +398,7 @@ it("should disable a bucket's versioning", async () => {
 
 it('should add label to bucket', async () => {
   const output = execSync(
-    `node addBucketLabel.js ${bucketName} labelone labelonevalue`
+    `node addBucketLabel.js ${bucketName} labelone labelonevalue`,
   );
   assert.include(output, `Added label to bucket ${bucketName}`);
   const [labels] = await storage.bucket(bucketName).getLabels();
@@ -412,7 +414,7 @@ it('should remove label to bucket', async () => {
 
 it("should change a bucket's default storage class", async () => {
   const output = execSync(
-    `node changeDefaultStorageClass.js ${bucketName} coldline`
+    `node changeDefaultStorageClass.js ${bucketName} coldline`,
   );
   assert.include(output, `${bucketName} has been set to coldline`);
   const [metadata] = await bucket.getMetadata();
@@ -421,11 +423,11 @@ it("should change a bucket's default storage class", async () => {
 
 it('should create bucket with storage class and location', async () => {
   const output = execSync(
-    `node createBucketWithStorageClassAndLocation.js ${bucketNameWithClassAndLocation} coldline ASIA`
+    `node createBucketWithStorageClassAndLocation.js ${bucketNameWithClassAndLocation} coldline ASIA`,
   );
   assert.include(
     output,
-    `${bucketNameWithClassAndLocation} created with coldline class in ASIA`
+    `${bucketNameWithClassAndLocation} created with coldline class in ASIA`,
   );
   const [metadata] = await bucketWithClassAndLocation.getMetadata();
   assert.strictEqual(metadata.storageClass, 'COLDLINE');
@@ -441,11 +443,11 @@ it('should delete a bucket', async () => {
 
 it('should create a bucket with object retention enabled', async () => {
   const output = execSync(
-    `node createBucketWithObjectRetention.js ${bucketNameObjectRetention}`
+    `node createBucketWithObjectRetention.js ${bucketNameObjectRetention}`,
   );
   assert.include(
     output,
-    `Created '${bucketNameObjectRetention}' with object retention enabled setting: Enabled`
+    `Created '${bucketNameObjectRetention}' with object retention enabled setting: Enabled`,
   );
   const [metadata] = await objectRetentionBucket.getMetadata();
   assert.strictEqual(metadata.objectRetention.mode, 'Enabled');

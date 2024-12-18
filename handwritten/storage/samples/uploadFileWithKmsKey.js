@@ -24,7 +24,7 @@ function main(
   bucketName = 'my-bucket',
   filePath = 'test.txt',
   kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US,
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_upload_with_kms_key]
   /**

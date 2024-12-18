@@ -23,7 +23,7 @@ function main(
   bucketName = 'my-bucket',
   fileName = 'file.txt',
   storageClass = 'standard',
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_change_file_storage_class]
   // Imports the Google Cloud client library

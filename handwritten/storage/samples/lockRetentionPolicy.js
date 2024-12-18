@@ -46,7 +46,7 @@ function main(bucketName = 'my-bucket') {
       .lock(unlockedMetadata.metageneration);
     console.log(`Retention policy for ${bucketName} is now locked`);
     console.log(
-      `Retention policy effective as of ${lockedMetadata.retentionPolicy.effectiveTime}`
+      `Retention policy effective as of ${lockedMetadata.retentionPolicy.effectiveTime}`,
     );
 
     return lockedMetadata;

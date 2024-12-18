@@ -26,8 +26,8 @@ s.copy(templates, excludes=['.jsdoc.js',
                             '.github/sync-repo-settings.yaml',
                             '.prettierrc.js',
                             '.mocharc.js',
-                            '.kokoro/continuous/node14/system-test.cfg',
-                            '.kokoro/presubmit/node14/system-test.cfg',
+                            '.kokoro/continuous/node18/system-test.cfg',
+                            '.kokoro/presubmit/node18/system-test.cfg',
                             '.kokoro/release/publish.cfg',
                             '.kokoro/system-test.sh'
                             ])

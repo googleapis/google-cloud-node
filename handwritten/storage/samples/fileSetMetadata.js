@@ -22,7 +22,7 @@
 function main(
   bucketName = 'my-bucket',
   fileName = 'file.txt',
-  metagenerationMatchPrecondition = 0
+  metagenerationMatchPrecondition = 0,
 ) {
   // [START storage_set_metadata]
   // Imports the Google Cloud client library
@@ -67,14 +67,14 @@ function main(
             modified: '1900-01-01',
           },
         },
-        options
+        options,
       );
 
     console.log(
       'Updated metadata for object',
       fileName,
       'in bucket ',
-      bucketName
+      bucketName,
     );
     console.log(metadata);
   }

@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   firstFilePath = './local/path/to/file1.txt',
-  secondFilePath = './local/path/to/file2.txt'
+  secondFilePath = './local/path/to/file2.txt',
 ) {
   // [START storage_transfer_manager_upload_many]
   /**

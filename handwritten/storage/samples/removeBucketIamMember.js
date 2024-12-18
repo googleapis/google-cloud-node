@@ -15,7 +15,7 @@
 function main(
   bucketName = 'my-bucket',
   roleName = 'roles/storage.objectViewer',
-  members = 'user:test@example.com'
+  members = 'user:test@example.com',
 ) {
   members = members.split(',');
   // [START storage_remove_bucket_iam_member]
@@ -50,13 +50,13 @@ function main(
 
     // Finds and updates the appropriate role-member group, without a condition.
     const index = policy.bindings.findIndex(
-      binding => binding.role === roleName && !binding.condition
+      binding => binding.role === roleName && !binding.condition,
     );
 
     const role = policy.bindings[index];
     if (role) {
       role.members = role.members.filter(
-        member => members.indexOf(member) === -1
+        member => members.indexOf(member) === -1,
       );
 
       // Updates the policy object with the new (or empty) role-member group
@@ -74,7 +74,7 @@ function main(
     }
 
     console.log(
-      `Removed the following member(s) with role ${roleName} from ${bucketName}:`
+      `Removed the following member(s) with role ${roleName} from ${bucketName}:`,
     );
     members.forEach(member => {
       console.log(`  ${member}`);

@@ -51,12 +51,12 @@ after(async () => {
 
 it.skip('should error on requester-pays requests if they are disabled', () => {
   const result = execSync(
-    `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`
+    `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`,
   );
   assert.ok(result.stderr);
   assert.match(
     result.stderr,
-    /User project prohibited for non requester pays bucket/
+    /User project prohibited for non requester pays bucket/,
   );
 });
 
@@ -64,7 +64,7 @@ it('should fetch requester-pays status on a default bucket', () => {
   const out = execSync(`node getRequesterPaysStatus.js ${bucketName}`);
   assert.include(
     out,
-    `Requester-pays requests are disabled for bucket ${bucketName}`
+    `Requester-pays requests are disabled for bucket ${bucketName}`,
   );
 });
 
@@ -72,7 +72,7 @@ it('should enable requester-pays requests', () => {
   const out = execSync(`node enableRequesterPays.js ${bucketName}`);
   assert.include(
     out,
-    `Requester-pays requests have been enabled for bucket ${bucketName}`
+    `Requester-pays requests have been enabled for bucket ${bucketName}`,
   );
 });
 
@@ -80,17 +80,17 @@ it('should fetch requester-pays status on a modified bucket', () => {
   const out = execSync(`node getRequesterPaysStatus.js ${bucketName}`);
   assert.include(
     out,
-    `Requester-pays requests are enabled for bucket ${bucketName}.`
+    `Requester-pays requests are enabled for bucket ${bucketName}.`,
   );
 });
 
 it('should download a file using requester-pays requests', () => {
   const out = execSync(
-    `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`
+    `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`,
   );
   assert.include(
     out,
-    `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} using requester-pays requests`
+    `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} using requester-pays requests`,
   );
   fs.statSync(downloadFilePath);
 });
@@ -99,7 +99,7 @@ it('should disable requester-pays requests', () => {
   const out = execSync(`node disableRequesterPays.js ${bucketName}`);
   assert.include(
     out,
-    `Requester-pays requests have been disabled for bucket ${bucketName}`
+    `Requester-pays requests have been disabled for bucket ${bucketName}`,
   );
 });
 

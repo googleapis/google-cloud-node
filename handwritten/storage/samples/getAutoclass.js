@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket') {
       } for ${metadata.name} at ${metadata.autoclass.toggleTime}.
    Autoclass terminal storage class is last updated to ${
      metadata.autoclass.terminalStorageClass
-   } at ${metadata.autoclass.terminalStorageClassUpdateTime}.`
+   } at ${metadata.autoclass.terminalStorageClassUpdateTime}.`,
     );
   }
 

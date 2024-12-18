@@ -58,7 +58,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     console.log('You can use this URL with any user agent, for example:');
     console.log(
       "curl -X PUT -H 'Content-Type: application/octet-stream' " +
-        `--upload-file my-file '${url}'`
+        `--upload-file my-file '${url}'`,
     );
   }
 

@@ -15,7 +15,7 @@
 function main(
   bucketName = 'my-bucket',
   contents = 'these are my file contents',
-  destFileName = 'file.txt'
+  destFileName = 'file.txt',
 ) {
   // [START storage_upload_without_authentication_signed_url]
   /**

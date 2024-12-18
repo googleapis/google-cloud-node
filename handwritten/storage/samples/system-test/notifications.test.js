@@ -52,7 +52,7 @@ after(async () => {
 
 it('should create a notification', async () => {
   const output = execSync(
-    `node createNotification.js ${bucketName} ${topicName}`
+    `node createNotification.js ${bucketName} ${topicName}`,
   );
   assert.match(output, /Notification subscription created./);
   const [exists] = await notification.exists();
@@ -68,7 +68,7 @@ it('should list notifications', async () => {
 it('should get metadata', async () => {
   const metadata = await notification.getMetadata();
   const output = execSync(
-    `node getMetadataNotifications.js ${bucketName} ${notificationId}`
+    `node getMetadataNotifications.js ${bucketName} ${notificationId}`,
   );
   assert.match(output, /ID:/);
   assert.match(output, new RegExp(metadata.id));
@@ -91,7 +91,7 @@ it('should get metadata', async () => {
 
 it('should delete a notification', async () => {
   const output = execSync(
-    `node deleteNotification.js ${bucketName} ${notificationId}`
+    `node deleteNotification.js ${bucketName} ${notificationId}`,
   );
   assert.match(output, new RegExp(`Notification ${notificationId} deleted.`));
   const [exists] = await notification.exists();

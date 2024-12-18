@@ -25,6 +25,6 @@ it('should intialize storage with a custom api endpoint', async () => {
   const output = execSync(`node setClientEndpoint.js ${apiEndpoint}`);
   assert.match(
     output,
-    new RegExp(`Client initiated with endpoint: ${apiEndpoint}.`)
+    new RegExp(`Client initiated with endpoint: ${apiEndpoint}.`),
   );
 });

@@ -66,7 +66,7 @@ describe('file', () => {
 
   it('should upload a file', async () => {
     const output = execSync(
-      `node uploadFile.js ${bucketName} ${filePath} ${fileName} ${doesNotExistPrecondition}`
+      `node uploadFile.js ${bucketName} ${filePath} ${fileName} ${doesNotExistPrecondition}`,
     );
     assert.match(output, new RegExp(`${filePath} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
@@ -75,13 +75,13 @@ describe('file', () => {
 
   it('should upload a file from memory', async () => {
     const output = execSync(
-      `node uploadFromMemory.js ${bucketName} ${fileContents} ${memoryFileName}`
+      `node uploadFromMemory.js ${bucketName} ${fileContents} ${memoryFileName}`,
     );
     assert.match(
       output,
       new RegExp(
-        `${memoryFileName} with contents ${fileContents} uploaded to ${bucketName}.`
-      )
+        `${memoryFileName} with contents ${fileContents} uploaded to ${bucketName}.`,
+      ),
     );
     const [exists] = await bucket.file(memoryFileName).exists();
     assert.strictEqual(exists, true);
@@ -89,7 +89,7 @@ describe('file', () => {
 
   it('should upload a file without authentication', async () => {
     const output = execSync(
-      `node uploadWithoutAuthentication.js ${bucketName} ${fileContents} ${fileName} ${doesNotExistPrecondition}`
+      `node uploadWithoutAuthentication.js ${bucketName} ${fileContents} ${fileName} ${doesNotExistPrecondition}`,
     );
     assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
@@ -98,7 +98,7 @@ describe('file', () => {
 
   it('should upload a file without authentication using signed url strategy', async () => {
     const output = execSync(
-      `node uploadWithoutAuthenticationSignedUrl.js ${bucketName} ${fileContents} ${fileName}`
+      `node uploadWithoutAuthenticationSignedUrl.js ${bucketName} ${fileContents} ${fileName}`,
     );
     assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
@@ -107,7 +107,7 @@ describe('file', () => {
 
   it('should upload a file using a stream', async () => {
     const output = execSync(
-      `node streamFileUpload.js ${bucketName} ${fileName} ${fileContents}`
+      `node streamFileUpload.js ${bucketName} ${fileName} ${fileContents}`,
     );
     assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
@@ -119,11 +119,11 @@ describe('file', () => {
   it('should upload a file with a kms key', async () => {
     const [metadata] = await bucket.file(fileName).getMetadata();
     const output = execSync(
-      `node uploadFileWithKmsKey.js ${bucketName} ${filePath} ${kmsKeyName} ${metadata.generation}`
+      `node uploadFileWithKmsKey.js ${bucketName} ${filePath} ${kmsKeyName} ${metadata.generation}`,
     );
     assert.include(
       output,
-      `${filePath} uploaded to ${bucketName} using ${kmsKeyName}`
+      `${filePath} uploaded to ${bucketName} using ${kmsKeyName}`,
     );
     const [exists] = await bucket.file(fileName).exists();
     assert.strictEqual(exists, true);
@@ -131,7 +131,7 @@ describe('file', () => {
 
   it('should upload a local directory', done => {
     const output = execSync(
-      `node uploadDirectory.js ${bucketName} ${folderPath}`
+      `node uploadDirectory.js ${bucketName} ${folderPath}`,
     );
 
     const fileList = [];
@@ -153,18 +153,18 @@ describe('file', () => {
     assert.match(
       output,
       new RegExp(
-        `${fileList.length} files uploaded to ${bucketName} successfully.`
-      )
+        `${fileList.length} files uploaded to ${bucketName} successfully.`,
+      ),
     );
 
     Promise.all(
       fileList.map(file =>
         bucket
           .file(
-            path.relative(path.dirname(folderPath), file).replace(/\\/g, '/')
+            path.relative(path.dirname(folderPath), file).replace(/\\/g, '/'),
           )
-          .exists()
-      )
+          .exists(),
+      ),
     ).then(resps => {
       const ctr = resps.reduce((acc, cur) => {
         return acc + cur[0];
@@ -176,62 +176,62 @@ describe('file', () => {
 
   it('should download a file', () => {
     const output = execSync(
-      `node downloadFile.js ${bucketName} ${fileName} ${downloadFilePath}`
+      `node downloadFile.js ${bucketName} ${fileName} ${downloadFilePath}`,
     );
     assert.match(
       output,
       new RegExp(
-        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath}.`
-      )
+        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath}.`,
+      ),
     );
     fs.statSync(downloadFilePath);
   });
 
   it('should download a file into memory', () => {
     const output = execSync(
-      `node downloadIntoMemory.js ${bucketName} ${memoryFileName}`
+      `node downloadIntoMemory.js ${bucketName} ${memoryFileName}`,
     );
     assert.match(
       output,
       new RegExp(
-        `Contents of gs://${bucketName}/${memoryFileName} are ${fileContents}.`
-      )
+        `Contents of gs://${bucketName}/${memoryFileName} are ${fileContents}.`,
+      ),
     );
   });
 
   it('should download a file using a stream', () => {
     const output = execSync(
-      `node streamFileDownload.js ${bucketName} ${fileName} ${downloadFilePath}`
+      `node streamFileDownload.js ${bucketName} ${fileName} ${downloadFilePath}`,
     );
     assert.match(
       output,
       new RegExp(
-        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath}.`
-      )
+        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath}.`,
+      ),
     );
     fs.statSync(downloadFilePath);
   });
 
   it('should download a file using a given byte range', () => {
     const output = execSync(
-      `node downloadByteRange.js ${bucketName} ${fileName} ${startByte} ${endByte} ${downloadFilePath}`
+      `node downloadByteRange.js ${bucketName} ${fileName} ${startByte} ${endByte} ${downloadFilePath}`,
     );
     assert.match(
       output,
       new RegExp(
-        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} from byte ${startByte} to byte ${endByte}.`
-      )
+        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} from byte ${startByte} to byte ${endByte}.`,
+      ),
     );
     fs.statSync(downloadFilePath);
   });
 
   it('should move a file', async () => {
     const output = execSync(
-      `node moveFile.js ${bucketName} ${fileName} ${movedFileName} ${doesNotExistPrecondition}`
+      `node moveFile.js ${bucketName} ${fileName} ${movedFileName} ${doesNotExistPrecondition}`,
     );
     assert.include(
       output,
-      `gs://${bucketName}/${fileName} moved to gs://${bucketName}/${movedFileName}`
+      `gs://${bucketName}/${fileName} moved to gs://${bucketName}/${movedFileName}`,
     );
     const [exists] = await bucket.file(movedFileName).exists();
     assert.strictEqual(exists, true);
@@ -239,11 +239,11 @@ describe('file', () => {
 
   it('should copy a file', async () => {
     const output = execSync(
-      `node copyFile.js ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName} ${doesNotExistPrecondition}`
+      `node copyFile.js ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName} ${doesNotExistPrecondition}`,
     );
     assert.include(
       output,
-      `gs://${bucketName}/${movedFileName} copied to gs://${bucketName}/${copiedFileName}`
+      `gs://${bucketName}/${movedFileName} copied to gs://${bucketName}/${copiedFileName}`,
     );
     const [exists] = await bucket.file(copiedFileName).exists();
     assert.strictEqual(exists, true);
@@ -277,13 +277,13 @@ describe('file', () => {
 
   it('should rename a file', async () => {
     const output = execSync(
-      `node renameFile.js ${bucketName} ${movedFileName} ${renamedFileName}`
+      `node renameFile.js ${bucketName} ${movedFileName} ${renamedFileName}`,
     );
     assert.match(
       output,
       new RegExp(
-        `gs://${bucketName}/${movedFileName} renamed to gs://${bucketName}/${renamedFileName}.`
-      )
+        `gs://${bucketName}/${movedFileName} renamed to gs://${bucketName}/${renamedFileName}.`,
+      ),
     );
     const [exists] = await bucket.file(renamedFileName).exists();
     assert.strictEqual(exists, true);
@@ -317,21 +317,21 @@ describe('file', () => {
 
     it('should make a file public', () => {
       const output = execSync(
-        `node makePublic.js ${bucketName} ${publicFileName}`
+        `node makePublic.js ${bucketName} ${publicFileName}`,
       );
       assert.match(
         output,
-        new RegExp(`gs://${bucketName}/${publicFileName} is now public`)
+        new RegExp(`gs://${bucketName}/${publicFileName} is now public`),
       );
     });
 
     it('should download public file', () => {
       const output = execSync(
-        `node downloadPublicFile.js ${bucketName} ${publicFileName} ${downloadPublicFilePath}`
+        `node downloadPublicFile.js ${bucketName} ${publicFileName} ${downloadPublicFilePath}`,
       );
       assert.include(
         output,
-        `Downloaded public file ${publicFileName} from bucket name ${bucketName} to ${downloadPublicFilePath}`
+        `Downloaded public file ${publicFileName} from bucket name ${bucketName} to ${downloadPublicFilePath}`,
       );
       fs.statSync(downloadPublicFilePath);
     });
@@ -339,17 +339,17 @@ describe('file', () => {
 
   it('should generate a v2 signed URL for a file', async () => {
     const output = await execSync(
-      `node generateSignedUrl ${bucketName} ${copiedFileName}`
+      `node generateSignedUrl ${bucketName} ${copiedFileName}`,
     );
     assert.match(
       output,
-      new RegExp(`The signed url for ${copiedFileName} is `)
+      new RegExp(`The signed url for ${copiedFileName} is `),
     );
   });
 
   it('should generate a v4 signed URL and read a file', async () => {
     const output = await execSync(
-      `node generateV4ReadSignedUrl.js ${bucketName} ${copiedFileName}`
+      `node generateV4ReadSignedUrl.js ${bucketName} ${copiedFileName}`,
     );
 
     const expected = /URL:\n([^\s]+)/;
@@ -363,7 +363,7 @@ describe('file', () => {
 
   it('should generate a v4 signed URL and upload a file', async () => {
     const output = execSync(
-      `node generateV4UploadSignedUrl.js ${bucketName} ${signedFileName}`
+      `node generateV4UploadSignedUrl.js ${bucketName} ${signedFileName}`,
     );
 
     const expected = /URL:\n([^\s]+)/;
@@ -385,7 +385,7 @@ describe('file', () => {
         .on('response', res => {
           assert.strictEqual(
             res.headers['content-type'],
-            'application/octet-stream'
+            'application/octet-stream',
           );
         })
         .on('data', buf => (remoteContent += buf.toString()))
@@ -399,12 +399,12 @@ describe('file', () => {
 
   it('should generate a v4 signed policy', async () => {
     const output = execSync(
-      `node generateV4SignedPolicy.js ${bucketName} ${signedFileName}`
+      `node generateV4SignedPolicy.js ${bucketName} ${signedFileName}`,
     );
 
     assert.include(
       output,
-      `<form action="https://storage.googleapis.com/${bucketName}/`
+      `<form action="https://storage.googleapis.com/${bucketName}/`,
     );
     assert.include(output, `<input name="key" value="${signedFileName}"`);
     assert.include(output, '<input name="x-goog-signature"');
@@ -412,7 +412,7 @@ describe('file', () => {
     assert.include(output, '<input name="x-goog-credential"');
     assert.include(
       output,
-      '<input name="x-goog-algorithm" value="GOOG4-RSA-SHA256"'
+      '<input name="x-goog-algorithm" value="GOOG4-RSA-SHA256"',
     );
     assert.include(output, '<input name="policy"');
     assert.include(output, '<input name="x-goog-meta-test" value="data"');
@@ -421,7 +421,7 @@ describe('file', () => {
 
   it('should get metadata for a file', () => {
     const output = execSync(
-      `node getMetadata.js ${bucketName} ${copiedFileName}`
+      `node getMetadata.js ${bucketName} ${copiedFileName}`,
     );
     assert.include(output, `Bucket: ${bucketName}`);
     assert.include(output, `Name: ${copiedFileName}`);
@@ -436,19 +436,19 @@ describe('file', () => {
       modified: '1900-01-01',
     };
     const output = execSync(
-      `node fileSetMetadata.js ${bucketName} ${copiedFileName} ${metadata.metageneration} `
+      `node fileSetMetadata.js ${bucketName} ${copiedFileName} ${metadata.metageneration} `,
     );
 
     assert.match(
       output,
-      new RegExp(`description: '${userMetadata.description}'`)
+      new RegExp(`description: '${userMetadata.description}'`),
     );
     assert.match(output, new RegExp(`modified: '${userMetadata.modified}'`));
   });
 
   it('should set storage class for a file', async () => {
     const output = execSync(
-      `node fileChangeStorageClass.js ${bucketName} ${copiedFileName} standard ${doesNotExistPrecondition}`
+      `node fileChangeStorageClass.js ${bucketName} ${copiedFileName} standard ${doesNotExistPrecondition}`,
     );
     assert.include(output, `${copiedFileName} has been set to standard`);
     const [metadata] = await storage
@@ -472,28 +472,28 @@ describe('file', () => {
     const destinationFile = bucket.file(destinationFileName);
 
     const output = execSync(
-      `node composeFile.js ${bucketName} ${firstFileName} ${secondFileName} ${destinationFileName}`
+      `node composeFile.js ${bucketName} ${firstFileName} ${secondFileName} ${destinationFileName}`,
     );
     assert.include(
       output,
-      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}`
+      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}`,
     );
 
     const [contents] = await destinationFile.download();
     assert.strictEqual(
       contents.toString(),
-      files.map(x => x.contents).join('')
+      files.map(x => x.contents).join(''),
     );
   });
 
   it('should delete a file', async () => {
     const [metadata] = await bucket.file(copiedFileName).getMetadata();
     const output = execSync(
-      `node deleteFile.js ${bucketName} ${copiedFileName} ${metadata.generation}`
+      `node deleteFile.js ${bucketName} ${copiedFileName} ${metadata.generation}`,
     );
     assert.match(
       output,
-      new RegExp(`gs://${bucketName}/${copiedFileName} deleted`)
+      new RegExp(`gs://${bucketName}/${copiedFileName} deleted`),
     );
     const [exists] = await bucket.file(copiedFileName).exists();
     assert.strictEqual(exists, false);
@@ -528,7 +528,7 @@ describe('file', () => {
 
     it('should list file with old versions', async () => {
       const output = execSync(
-        `node listFilesWithOldVersions.js ${bucketNameWithVersioning}`
+        `node listFilesWithOldVersions.js ${bucketNameWithVersioning}`,
       );
       assert.notEqual(output.indexOf(fileName), output.lastIndexOf(fileName));
     });
@@ -538,13 +538,13 @@ describe('file', () => {
       const [files] = await bucketWithVersioning.getFiles({versions: true});
       const generation = files[0].metadata.generation;
       const output = execSync(
-        `node copyOldVersionOfFile.js ${bucketNameWithVersioning} ${fileName} ${bucketNameWithVersioning} ${destFileName} ${generation}`
+        `node copyOldVersionOfFile.js ${bucketNameWithVersioning} ${fileName} ${bucketNameWithVersioning} ${destFileName} ${generation}`,
       );
       assert.match(
         output,
         new RegExp(
-          `Generation ${generation} of file ${fileName} in bucket ${bucketNameWithVersioning} was copied to ${destFileName} in bucket ${bucketNameWithVersioning}`
-        )
+          `Generation ${generation} of file ${fileName} in bucket ${bucketNameWithVersioning} was copied to ${destFileName} in bucket ${bucketNameWithVersioning}`,
+        ),
       );
       const [exists] = await bucketWithVersioning.file(destFileName).exists();
       assert.strictEqual(exists, true);
@@ -552,11 +552,13 @@ describe('file', () => {
 
     it('should delete a file with customized retry settings', () => {
       const output = execSync(
-        `node configureRetries.js ${bucketName} ${fileName}`
+        `node configureRetries.js ${bucketName} ${fileName}`,
       );
       assert.match(
         output,
-        new RegExp(`File ${fileName} deleted with a customized retry strategy.`)
+        new RegExp(
+          `File ${fileName} deleted with a customized retry strategy.`,
+        ),
       );
     });
 
@@ -564,13 +566,13 @@ describe('file', () => {
       const [files] = await bucketWithVersioning.getFiles({versions: true});
       const generation = files[0].metadata.generation;
       const output = execSync(
-        `node deleteOldVersionOfFile.js ${bucketNameWithVersioning} ${fileName} ${generation}`
+        `node deleteOldVersionOfFile.js ${bucketNameWithVersioning} ${fileName} ${generation}`,
       );
       assert.match(
         output,
         new RegExp(
-          `Generation ${generation} of file ${fileName} was deleted from ${bucketNameWithVersioning}`
-        )
+          `Generation ${generation} of file ${fileName} was deleted from ${bucketNameWithVersioning}`,
+        ),
       );
       const [exists] = await bucketWithVersioning
         .file(fileName, {
@@ -590,7 +592,7 @@ describe('file', () => {
 
     it('should create a file with unlocked retention and then override it', async () => {
       const output = execSync(
-        `node setObjectRetentionPolicy.js ${objectRetentionBucketName} ${fileName} ${fileContent}`
+        `node setObjectRetentionPolicy.js ${objectRetentionBucketName} ${fileName} ${fileContent}`,
       );
       assert.include(output, 'Retention policy for file');
       const file = objectRetentionBucket.file(fileName);

@@ -56,7 +56,7 @@ async function main() {
 
   ({bucket, transferManager} = await performanceTestSetup(
     argv.project! as string,
-    argv.bucket! as string
+    argv.bucket! as string,
   ));
 
   switch (argv.test_type) {
@@ -82,12 +82,12 @@ async function performTestCleanup(fileOrFiles: File[] | File | string[]) {
   const filesToDelete = Array.isArray(fileOrFiles)
     ? fileOrFiles
     : [fileOrFiles];
-  const promises = filesToDelete.map(f => {
+  const promises = filesToDelete.map(async f => {
     let fileToDelete = f;
     if (typeof f === 'string') {
       fileToDelete = bucket.file(f);
     }
-    (fileToDelete as File).delete({ignoreNotFound: true});
+    await (fileToDelete as File).delete({ignoreNotFound: true});
   });
   return Promise.all(promises);
 }
@@ -104,7 +104,7 @@ async function performUploadManyFilesTest(): Promise<TestResult[]> {
     TEST_NAME_STRING,
     fileSizeRange.low,
     fileSizeRange.high,
-    DIRECTORY_PROBABILITY
+    DIRECTORY_PROBABILITY,
   );
 
   const start = performance.now();
@@ -153,7 +153,7 @@ async function performDownloadManyFilesTest(): Promise<TestResult[]> {
     TEST_NAME_STRING,
     fileSizeRange.low,
     fileSizeRange.high,
-    DIRECTORY_PROBABILITY
+    DIRECTORY_PROBABILITY,
   );
 
   await transferManager.uploadManyFiles(creationInfo.paths, {
@@ -210,7 +210,7 @@ async function performChunkUploadDownloadTest(): Promise<TestResult[]> {
     fileName,
     fileSizeRange.low,
     fileSizeRange.high,
-    getDirName()
+    getDirName(),
   );
   const file = bucket.file(`${fileName}`);
   let result: TestResult = {
@@ -276,4 +276,4 @@ async function performChunkUploadDownloadTest(): Promise<TestResult[]> {
   return results;
 }
 
-main();
+void main();

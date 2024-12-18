@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   filePath = './local/path/to/file.txt',
-  chunkSize = 32 * 1024 * 1024
+  chunkSize = 32 * 1024 * 1024,
 ) {
   // [START storage_transfer_manager_upload_chunks_concurrently]
   /**

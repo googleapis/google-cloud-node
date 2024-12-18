@@ -21,7 +21,7 @@
 
 function main(
   hmacKeyAccessId = 'GOOG0234230X00',
-  projectId = 'serviceAccountProjectId'
+  projectId = 'serviceAccountProjectId',
 ) {
   // [START storage_deactivate_hmac_key]
   /**

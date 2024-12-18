@@ -18,7 +18,7 @@ function main(
   filePath = path.join(__dirname, '../resources', 'test.txt'),
   destFileName = 'test.txt',
   key = process.env.GOOGLE_CLOUD_KMS_KEY_US,
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_upload_encrypted_file]
   /**
@@ -60,7 +60,7 @@ function main(
     await storage.bucket(bucketName).upload(filePath, options);
 
     console.log(
-      `File ${filePath} uploaded to gs://${bucketName}/${destFileName}`
+      `File ${filePath} uploaded to gs://${bucketName}/${destFileName}`,
     );
   }
 

@@ -52,7 +52,7 @@ describe('Common', () => {
           assert.ifError(err);
           assert.strictEqual(resp, mockResponse);
           mockServer.close(done);
-        }
+        },
       );
     });
 
@@ -77,7 +77,7 @@ describe('Common', () => {
           assert.strictEqual((err! as common.ApiError).code, 408);
           assert.strictEqual(numRequestAttempts, 4);
           mockServer.close(done);
-        }
+        },
       );
     });
 
@@ -105,7 +105,7 @@ describe('Common', () => {
           assert(err?.message.includes('ECONNREFUSED'));
           const timeResponse = Date.now();
           assert(timeResponse - timeRequest > minExpectedResponseTime);
-        }
+        },
       );
       done();
     });

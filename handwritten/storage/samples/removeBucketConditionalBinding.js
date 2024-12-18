@@ -25,7 +25,7 @@ function main(
   roleName = 'roles/storage.objectViewer',
   title = 'match-prefix',
   description = 'Applies to objects matching a prefix',
-  expression = 'resource.name.startsWith("projects/_/buckets/bucket-name/objects/prefix-a-")'
+  expression = 'resource.name.startsWith("projects/_/buckets/bucket-name/objects/prefix-a-")',
 ) {
   // [START storage_remove_bucket_conditional_iam_binding]
   /**
@@ -71,7 +71,7 @@ function main(
         binding.condition &&
         binding.condition.title === title &&
         binding.condition.description === description &&
-        binding.condition.expression === expression
+        binding.condition.expression === expression,
     );
 
     const binding = policy.bindings[index];

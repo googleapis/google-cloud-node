@@ -141,7 +141,7 @@ describe('signer', () => {
           assert.strictEqual(v2arg.contentType, CONFIG.contentType);
           assert.deepStrictEqual(
             v2arg.extensionHeaders,
-            CONFIG.extensionHeaders
+            CONFIG.extensionHeaders,
           );
         });
 
@@ -169,7 +169,7 @@ describe('signer', () => {
           assert.strictEqual(v4arg.contentType, CONFIG.contentType);
           assert.deepStrictEqual(
             v4arg.extensionHeaders,
-            CONFIG.extensionHeaders
+            CONFIG.extensionHeaders,
           );
         });
 
@@ -179,7 +179,7 @@ describe('signer', () => {
 
           assert.throws(
             () => signer.getSignedUrl(CONFIG),
-            /Invalid signed URL version: v42\. Supported versions are 'v2' and 'v4'\./
+            /Invalid signed URL version: v42\. Supported versions are 'v2' and 'v4'\./,
           );
         });
       });
@@ -208,6 +208,7 @@ describe('signer', () => {
           const expires = accessibleAt - 86400000;
 
           assert.throws(() => {
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
             signer.getSignedUrl({
               version: 'v4',
               method: 'GET',
@@ -260,6 +261,7 @@ describe('signer', () => {
             const accessibleAt = new Date('31-12-2019');
 
             assert.throws(() => {
+              // eslint-disable-next-line @typescript-eslint/no-floating-promises
               signer.getSignedUrl({
                 version: 'v4',
                 method: 'GET',
@@ -289,7 +291,7 @@ describe('signer', () => {
 
           assert(
             (v2.getCall(0).args[0] as SignedUrlArgs).expiration,
-            expiresInSeconds
+            expiresInSeconds,
           );
         });
       });
@@ -380,8 +382,8 @@ describe('signer', () => {
               qsStringify({
                 ...query,
                 ...CONFIG.queryParams,
-              })
-            )
+              }),
+            ),
           );
         });
       });
@@ -419,8 +421,8 @@ describe('signer', () => {
         const signedUrl = await signer.getSignedUrl(CONFIG);
         assert(
           signedUrl.startsWith(
-            `https://${bucket.name}.storage.googleapis.com/${file.name}`
-          )
+            `https://${bucket.name}.storage.googleapis.com/${file.name}`,
+          ),
         );
       });
 
@@ -547,7 +549,7 @@ describe('signer', () => {
               '',
               CONFIG.expiration,
               'canonical-headers' + '/resource/path',
-            ].join('\n')
+            ].join('\n'),
           );
         });
       });
@@ -561,12 +563,12 @@ describe('signer', () => {
         });
       });
 
-      it('rejects with SigningError on signing Error', () => {
+      it('rejects with SigningError on signing Error', async () => {
         const err = new Error('my-err');
         err.stack = 'some-stack-trace';
         sandbox.stub(authClient, 'sign').rejects(err);
 
-        assert.rejects(() => signer['getSignedUrlV2'](CONFIG), {
+        await assert.rejects(() => signer['getSignedUrlV2'](CONFIG), {
           name: 'SigningError',
           message: 'my-err',
           stack: 'some-stack-trace',
@@ -593,11 +595,12 @@ describe('signer', () => {
 
         assert.throws(
           () => {
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
             signer['getSignedUrlV4'](CONFIG);
           },
           {
             message: `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`,
-          }
+          },
         );
       });
 
@@ -618,10 +621,10 @@ describe('signer', () => {
             assert(err instanceof Error);
             assert.strictEqual(
               err.message,
-              `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS.toString()} seconds).`
+              `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS.toString()} seconds).`,
             );
             return true;
-          }
+          },
         );
       });
 
@@ -635,7 +638,7 @@ describe('signer', () => {
           const arg = getCanonicalHeaders.getCall(0).args[0];
           assert.strictEqual(
             arg.host,
-            PATH_STYLED_HOST.replace('https://', '')
+            PATH_STYLED_HOST.replace('https://', ''),
           );
         });
 
@@ -719,6 +722,7 @@ describe('signer', () => {
           };
 
           assert.throws(() => {
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
             signer['getSignedUrlV4'](CONFIG),
               SignerExceptionMessages.X_GOOG_CONTENT_SHA256;
           });
@@ -782,11 +786,11 @@ describe('signer', () => {
 
           assert.strictEqual(
             arg['X-Goog-SignedHeaders'],
-            'host;x-foo;x-goog-acl'
+            'host;x-foo;x-goog-acl',
           );
           assert.strictEqual(
             query['X-Goog-SignedHeaders'],
-            'host;x-foo;x-goog-acl'
+            'host;x-foo;x-goog-acl',
           );
         });
 
@@ -876,17 +880,17 @@ describe('signer', () => {
 
         assert(
           blobToSign.startsWith(
-            ['GOOG4-RSA-SHA256', dateISO, credentialScope].join('\n')
-          )
+            ['GOOG4-RSA-SHA256', dateISO, credentialScope].join('\n'),
+          ),
         );
       });
 
-      it('rejects with SigningError on signing Error', () => {
+      it('rejects with SigningError on signing Error', async () => {
         const err = new Error('my-err');
         err.stack = 'some-stack-trace';
         sinon.stub(authClient, 'sign').rejects(err);
 
-        assert.rejects(() => signer['getSignedUrlV4'](CONFIG), {
+        await assert.rejects(() => signer['getSignedUrlV4'](CONFIG), {
           name: 'SigningError',
           message: 'my-err',
           stack: 'some-stack-trace',
@@ -900,7 +904,7 @@ describe('signer', () => {
 
         const query = (await signer['getSignedUrlV4'](CONFIG)) as Query;
         const signatureInHex = Buffer.from('signature', 'base64').toString(
-          'hex'
+          'hex',
         );
         assert.strictEqual(query['X-Goog-Signature'], signatureInHex);
       });
@@ -974,7 +978,7 @@ describe('signer', () => {
           'query',
           'headers',
           'signedHeaders',
-          SHA
+          SHA,
         );
 
         const EXPECTED = [

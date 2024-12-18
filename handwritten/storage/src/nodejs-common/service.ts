@@ -176,7 +176,7 @@ export class Service {
   getProjectId(): Promise<string>;
   getProjectId(callback: (err: Error | null, projectId?: string) => void): void;
   getProjectId(
-    callback?: (err: Error | null, projectId?: string) => void
+    callback?: (err: Error | null, projectId?: string) => void,
   ): Promise<string> | void {
     if (!callback) {
       return this.getProjectIdAsync();
@@ -204,11 +204,11 @@ export class Service {
   private request_(reqOpts: StreamRequestOptions): r.Request;
   private request_(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback
+    callback: BodyResponseCallback,
   ): void;
   private request_(
     reqOpts: DecorateRequestOptions | StreamRequestOptions,
-    callback?: BodyResponseCallback
+    callback?: BodyResponseCallback,
   ): void | r.Request {
     reqOpts = {...reqOpts, timeout: this.timeout};
     const isAbsoluteUrl = reqOpts.uri.indexOf('http') === 0;
@@ -291,7 +291,7 @@ export class Service {
    */
   request(
     reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback
+    callback: BodyResponseCallback,
   ): void {
     Service.prototype.request_.call(this, reqOpts, callback);
   }

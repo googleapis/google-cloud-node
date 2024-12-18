@@ -52,13 +52,13 @@ after(async () => {
 it('should set a retention policy on a bucket', () => {
   const retentionPeriod = 5;
   const output = execSync(
-    `node setRetentionPolicy.js ${bucketName} ${retentionPeriod}`
+    `node setRetentionPolicy.js ${bucketName} ${retentionPeriod}`,
   );
   assert.match(
     output,
     new RegExp(
-      `Bucket ${bucketName} retention period set for ${retentionPeriod} seconds`
-    )
+      `Bucket ${bucketName} retention period set for ${retentionPeriod} seconds`,
+    ),
   );
 });
 
@@ -71,7 +71,7 @@ it('should enable default event-based hold on a bucket', () => {
   const output = execSync(`node enableDefaultEventBasedHold.js ${bucketName}`);
   assert.match(
     output,
-    new RegExp(`Default event-based hold was enabled for ${bucketName}.`)
+    new RegExp(`Default event-based hold was enabled for ${bucketName}.`),
   );
 });
 
@@ -84,14 +84,14 @@ it('should disable default event-based hold on a bucket', () => {
   const output = execSync(`node disableDefaultEventBasedHold.js ${bucketName}`);
   assert.match(
     output,
-    new RegExp(`Default event-based hold was disabled for ${bucketName}`)
+    new RegExp(`Default event-based hold was disabled for ${bucketName}`),
   );
 });
 
 it('should set an event-based hold on a file', async () => {
   const [metadata] = await bucket.file(fileName).getMetadata();
   const output = execSync(
-    `node setEventBasedHold.js ${bucketName} ${fileName} ${metadata.metageneration}`
+    `node setEventBasedHold.js ${bucketName} ${fileName} ${metadata.metageneration}`,
   );
   assert.match(output, new RegExp(`Event-based hold was set for ${fileName}`));
 });
@@ -99,11 +99,11 @@ it('should set an event-based hold on a file', async () => {
 it('should release an event-based hold on a file', async () => {
   const [metadata] = await bucket.file(fileName).getMetadata();
   const output = execSync(
-    `node releaseEventBasedHold.js ${bucketName} ${fileName} ${metadata.metageneration}`
+    `node releaseEventBasedHold.js ${bucketName} ${fileName} ${metadata.metageneration}`,
   );
   assert.match(
     output,
-    new RegExp(`Event-based hold was released for ${fileName}.`)
+    new RegExp(`Event-based hold was released for ${fileName}.`),
   );
 });
 
@@ -111,14 +111,14 @@ it('should remove a retention policy on a bucket', () => {
   const output = execSync(`node removeRetentionPolicy.js ${bucketName}`);
   assert.match(
     output,
-    new RegExp(`Removed bucket ${bucketName} retention policy.`)
+    new RegExp(`Removed bucket ${bucketName} retention policy.`),
   );
 });
 
 it('should set an temporary hold on a file', async () => {
   const [metadata] = await bucket.file(fileName).getMetadata();
   const output = execSync(
-    `node setTemporaryHold.js ${bucketName} ${fileName} ${metadata.metageneration}`
+    `node setTemporaryHold.js ${bucketName} ${fileName} ${metadata.metageneration}`,
   );
   assert.match(output, new RegExp(`Temporary hold was set for ${fileName}.`));
 });
@@ -126,11 +126,11 @@ it('should set an temporary hold on a file', async () => {
 it('should release an temporary hold on a file', async () => {
   const [metadata] = await bucket.file(fileName).getMetadata();
   const output = execSync(
-    `node releaseTemporaryHold.js ${bucketName} ${fileName} ${metadata.metageneration}`
+    `node releaseTemporaryHold.js ${bucketName} ${fileName} ${metadata.metageneration}`,
   );
   assert.match(
     output,
-    new RegExp(`Temporary hold was released for ${fileName}.`)
+    new RegExp(`Temporary hold was released for ${fileName}.`),
   );
 });
 
@@ -140,6 +140,6 @@ it('should lock a bucket with a retention policy', () => {
   const output = execSync(`node lockRetentionPolicy.js ${bucketName}`);
   assert.match(
     output,
-    new RegExp(`Retention policy for ${bucketName} is now locked`)
+    new RegExp(`Retention policy for ${bucketName} is now locked`),
   );
 });

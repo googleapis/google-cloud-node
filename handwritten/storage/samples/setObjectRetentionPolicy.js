@@ -22,7 +22,7 @@
 function main(
   bucketName = 'my-bucket',
   destFileName = 'file.txt',
-  contents = 'this is the file content'
+  contents = 'this is the file content',
 ) {
   // [START storage_set_object_retention_policy]
   /**
@@ -66,7 +66,7 @@ function main(
     });
 
     console.log(
-      `Retention policy for file ${file.name} was set to: ${metadata.retention.mode}`
+      `Retention policy for file ${file.name} was set to: ${metadata.retention.mode}`,
     );
 
     // To modify an existing policy on an unlocked file object, pass in the override parameter
@@ -78,7 +78,7 @@ function main(
     });
 
     console.log(
-      `Retention policy for file ${file.name} was updated to: ${metadata.retention.retainUntilTime}`
+      `Retention policy for file ${file.name} was updated to: ${metadata.retention.retainUntilTime}`,
     );
   }
 

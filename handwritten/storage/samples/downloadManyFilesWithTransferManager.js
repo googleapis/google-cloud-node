@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   firstFileName = 'file1.txt',
-  secondFileName = 'file2.txt'
+  secondFileName = 'file2.txt',
 ) {
   // [START storage_transfer_manager_download_many]
   /**

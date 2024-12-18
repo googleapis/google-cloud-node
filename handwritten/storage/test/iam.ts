@@ -140,7 +140,7 @@ describe('storage/iam', () => {
             {
               resourceId: iam.resourceId_,
             },
-            policy
+            policy,
           ),
           qs: {},
         });
@@ -211,7 +211,7 @@ describe('storage/iam', () => {
           assert.strictEqual(permissions, null);
           assert.strictEqual(apiResp, apiResponse);
           done();
-        }
+        },
       );
     });
 
@@ -236,7 +236,7 @@ describe('storage/iam', () => {
           assert.strictEqual(apiResp, apiResponse);
 
           done();
-        }
+        },
       );
     });
 
@@ -258,7 +258,7 @@ describe('storage/iam', () => {
           assert.strictEqual(apiResp, apiResponse);
 
           done();
-        }
+        },
       );
     });
 
@@ -272,7 +272,7 @@ describe('storage/iam', () => {
         {
           permissions,
         },
-        options
+        options,
       );
 
       iam.request_ = (reqOpts: DecorateRequestOptions) => {

@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
-  metagenerationMatchPrecondition = 0
+  metagenerationMatchPrecondition = 0,
 ) {
   // [START storage_set_temporary_hold]
   /**
@@ -53,7 +53,7 @@ function main(
       {
         temporaryHold: true,
       },
-      options
+      options,
     );
     console.log(`Temporary hold was set for ${fileName}.`);
   }

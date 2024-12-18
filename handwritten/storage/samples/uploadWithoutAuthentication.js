@@ -16,7 +16,7 @@ function main(
   bucketName = 'my-bucket',
   contents = 'these are my file contents',
   destFileName = 'file.txt',
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_upload_without_authentication]
   /**

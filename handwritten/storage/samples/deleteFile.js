@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
-  generationMatchPrecondition = 0
+  generationMatchPrecondition = 0,
 ) {
   // [START storage_delete_file]
   /**

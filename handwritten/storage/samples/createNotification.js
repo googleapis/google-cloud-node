@@ -23,7 +23,7 @@ const uuid = require('uuid');
 
 function main(
   bucketName = 'my-bucket',
-  topic = `nodejs-storage-samples-${uuid.v4()}`
+  topic = `nodejs-storage-samples-${uuid.v4()}`,
 ) {
   // [START storage_create_bucket_notifications]
   /**
