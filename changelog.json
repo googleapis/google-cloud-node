@@ -5,6 +5,419 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "0e5e132dca3d0b54301c66d264fd26bf04c7b3d2",
+          "message": "Add initial files for google.ads.admanager.v1",
+          "issues": [
+            "5885"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "c6a247f6-2faf-48e8-bd11-19a32fd0d99b",
+      "createTime": "2024-12-18T01:19:17.855Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ba6cead793f9664433916c29bde624c4257ffeea",
+          "message": "[merchantapi] Changed repeated flag of an existing field `gtin` in message `.google.shopping.merchant.products.v1beta.Attributes`",
+          "issues": [
+            "5871"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "d4523e97-61eb-4a6b-b04f-f78a04bf3183",
+      "createTime": "2024-12-18T01:19:17.841Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "59c05a038b42b0b01ec15131c3f5dee585757b83",
+          "message": "[managedkafka] A new field `satisfies_pzi` is added to message `.google.cloud.managedkafka.v1.Cluster`",
+          "issues": [
+            "5857"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "0526fef6-f250-4b86-9ba9-cf14998ec4ad",
+      "createTime": "2024-12-18T01:19:17.826Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0730fb1e6bce2ddb6e0cd0c38424ca03cf740cb5",
+          "message": "[chat] Add missing field annotations in space.proto, message.proto, reaction.proto, space_event.proto, membership.proto, attachment.proto",
+          "issues": [
+            "5870"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "02b43ef30f6e45488dfea3bf7b4c15a5641b0755",
+          "message": "[chat] Chat Apps can now retrieve the import mode expire time information to know when to complete the import mode properly",
+          "issues": [
+            "5860"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "059fe07f-b753-4ed7-8b53-3ac114892cab",
+      "createTime": "2024-12-18T01:19:17.812Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f8c0c2d583656d39d6e6ad6a4b206642e647178",
+          "message": "[parallelstore] A new enum `DeploymentType` is added",
+          "issues": [
+            "5863"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "b527c489-f2a3-493e-8144-21212ab188f5",
+      "createTime": "2024-12-18T01:19:17.795Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1a3f99fab38eb491c17f4407f9cf1676eeb2bdce",
+          "message": "[servicehealth] A new field `id` is added to message `.google.cloud.servicehealth.v1.Product`",
+          "issues": [
+            "5843"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "9d00fd3b-a748-463a-b5ea-ea23b2b81aac",
+      "createTime": "2024-12-18T01:19:17.780Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ad373612766920e82241e0ef609abc27be4ab9bb",
+          "message": "[storagetransfer] support cross-bucket replication",
+          "issues": [
+            "5891"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "f50b26fb-c8f9-4d0a-9008-d81312fb13a4",
+      "createTime": "2024-12-18T01:19:17.765Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "24d7341b387fc8f6d286ff945bc9aed54ddcc7df",
+          "message": "[routing] add API for experimental flyover and narrow road polyline details",
+          "issues": [
+            "5865"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "99b489f1170ceb45d3ce6cb8d56c8c7aa671ad03",
+          "message": "[routing] add API for shorter distance reference routes",
+          "issues": [
+            "5842"
+          ]
+        }
+      ],
+      "version": "1.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "616962e0-9d54-45f0-93d2-748a9e1ed76e",
+      "createTime": "2024-12-18T01:19:17.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c335f19bf4312b5552422877804bc5b032571d5a",
+          "message": "[texttospeech] StreamingSynthesize now supports opus",
+          "issues": [
+            "5887"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "3eb238dd-2545-4bbd-9374-50da0912dd86",
+      "createTime": "2024-12-18T01:19:17.731Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "8c8481a1a825d587ed0ca9957ea81ad94b14e772",
+          "message": "Update proto import path",
+          "issues": [
+            "5878"
+          ]
+        }
+      ],
+      "version": "5.5.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "4740e6d0-f30e-4ef7-8fea-6645d371191c",
+      "createTime": "2024-12-18T01:19:17.716Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "04c60cc25a3a1c002491b9c70bfd27c714a4262d",
+          "message": "[networkconnectivity] add Network Connectivity Center APIs for PSC connection propagation through NCC",
+          "issues": [
+            "5859"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "acdbb3a9-2dd1-4656-bec1-4c20f8b0cef5",
+      "createTime": "2024-12-18T01:19:17.702Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "068e9283c3d6066575a59a0a78c9eee96a67a5c0",
+          "message": "[netapp] Enable creation of Onprem Migration in CreateVolume",
+          "issues": [
+            "5837"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "c06a98ea-2a1f-4529-bb18-d9c9fec249f2",
+      "createTime": "2024-12-18T01:19:17.687Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7c8a115c88865b3aadfa649b3b2a89207d5502c2",
+          "message": "[dialogflow] add new fields for delivering intermediate transcriptions through PubSub",
+          "issues": [
+            "5881"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "522c389d50d175c26afcbe513e98824eb9e190e9",
+          "message": "[dialogflow] properly mark TrainingPhrase name field output-only",
+          "issues": [
+            "5862"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "72385303b7b0d8f3f5462d05c490f0200415fc20",
+          "message": "[dialogflow] make TrainingPhrase name field output-only",
+          "issues": [
+            "5861"
+          ]
+        }
+      ],
+      "version": "6.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "08d12c62-c116-4f8c-8200-cc637e6cdca5",
+      "createTime": "2024-12-18T01:19:17.670Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "932017559e975fbab4c0ce13fcc808e08425c117",
+          "message": "[deploy] A new field `dns_endpoint` is added to message `.google.cloud.deploy.v1.GkeCluster`",
+          "issues": [
+            "5849"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "55f9f0f1-61e0-44ee-a478-e56dd9153f23",
+      "createTime": "2024-12-18T01:19:17.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5564d0548d8681e7647c46e4e33df4af4da4d6aa",
+          "message": "[contactcenterinsights] A new resource pattern value `projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}` added to the resource definition `contactcenter...",
+          "issues": [
+            "5890"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "ffe1091a-d98f-467f-8fcf-4dc9ba98b83f",
+      "createTime": "2024-12-18T01:19:17.642Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d65537c9060f559b99b9e28f8a7f0af0e6f654a2",
+          "message": "[infra-manager] added annotations",
+          "issues": [
+            "5877"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "c99a9077-5b07-4b05-bbd6-e3eda115d3c5",
+      "createTime": "2024-12-18T01:19:17.628Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "338106af19815df0fdc95be0c38e689ded15f95d",
+          "message": "[confidentialcomputing] Add a token_type options proto to allow for customization of specific token types. Added the first token type option to hold principal tag token options",
+          "issues": [
+            "5839"
+          ]
+        }
+      ],
+      "version": "1.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "c2ef96ca-f777-4e5f-91bf-8dc7d1b454c5",
+      "createTime": "2024-12-18T01:19:17.610Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "21a76226793b5eaf5ef222dd8abb273fdf62d8be",
+          "message": "[compute] Update Compute Engine API to revision 20241201 (#971)",
+          "issues": [
+            "5880"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8bb5b1df5980f9f5ac5f30c2ee0e2bc9d825d73e",
+          "message": "[compute] Update Compute Engine API to revision 20241201 (#966)",
+          "issues": [
+            "5873"
+          ]
+        }
+      ],
+      "version": "4.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "19ba963e-28b7-4dae-bf4e-60ba54a00488",
+      "createTime": "2024-12-18T01:19:17.596Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c7e55d46da8f764b7cc5f971be866621f0d06d73",
+          "message": "[billing] added currency field to billing account message",
+          "issues": [
+            "5855"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "5bd9cb29-4a1b-467c-8098-f3021858be1d",
+      "createTime": "2024-12-18T01:19:17.582Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "11752f5200aea2f9e5fbf6a3aaab161afa1b3bce",
+          "message": "[bigquery-reservation] Add the managed disaster recovery API(https://cloud.google.com/bigquery/docs/managed-disaster-recovery)",
+          "issues": [
+            "5850"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "b3284841-1438-470b-9ffe-1d853a3dbefe",
+      "createTime": "2024-12-18T01:19:17.563Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1bcd2412bd72ce3c3d9b03128c44138964c8a0e6",
+          "message": "[analytics-data] add the `EmptyFilter` type to the Data API v1alpha",
+          "issues": [
+            "5845"
+          ]
+        }
+      ],
+      "version": "4.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "429610ff-798a-458d-94b5-de93fcd4d83f",
+      "createTime": "2024-12-18T01:19:17.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b80a7b7e6f97d9a07110adb27dcad28f0b5de341",
           "message": "[developerconnect] A new resource_definition `servicedirectory.googleapis.com/Service` is added",
           "issues": [
@@ -37943,5 +38356,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-11-21T17:29:23.584Z"
+  "updateTime": "2024-12-18T01:19:17.855Z"
 }

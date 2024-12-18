@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.5.2](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.5.1...tasks-v5.5.2) (2024-12-18)
+
+
+### Bug Fixes
+
+* Update proto import path ([#5878](https://github.com/googleapis/google-cloud-node/issues/5878)) ([8c8481a](https://github.com/googleapis/google-cloud-node/commit/8c8481a1a825d587ed0ca9957ea81ad94b14e772))
+
 ## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.5.0...tasks-v5.5.1) (2024-10-10)
 
 

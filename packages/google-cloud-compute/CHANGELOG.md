@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.8.0...compute-v4.9.0) (2024-12-18)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20241201 ([#966](https://github.com/googleapis/google-cloud-node/issues/966)) ([#5873](https://github.com/googleapis/google-cloud-node/issues/5873)) ([8bb5b1d](https://github.com/googleapis/google-cloud-node/commit/8bb5b1df5980f9f5ac5f30c2ee0e2bc9d825d73e))
+* [compute] Update Compute Engine API to revision 20241201 ([#971](https://github.com/googleapis/google-cloud-node/issues/971)) ([#5880](https://github.com/googleapis/google-cloud-node/issues/5880)) ([21a7622](https://github.com/googleapis/google-cloud-node/commit/21a76226793b5eaf5ef222dd8abb273fdf62d8be))
+
 ## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.7.0...compute-v4.8.0) (2024-11-14)
 
 

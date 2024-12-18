@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.10.0...chat-v0.11.0) (2024-12-18)
+
+
+### Features
+
+* [chat] Add missing field annotations in space.proto, message.proto, reaction.proto, space_event.proto, membership.proto, attachment.proto ([#5870](https://github.com/googleapis/google-cloud-node/issues/5870)) ([0730fb1](https://github.com/googleapis/google-cloud-node/commit/0730fb1e6bce2ddb6e0cd0c38424ca03cf740cb5))
+* [chat] Chat Apps can now retrieve the import mode expire time information to know when to complete the import mode properly ([#5860](https://github.com/googleapis/google-cloud-node/issues/5860)) ([02b43ef](https://github.com/googleapis/google-cloud-node/commit/02b43ef30f6e45488dfea3bf7b4c15a5641b0755))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.9.0...chat-v0.10.0) (2024-10-10)
 
 

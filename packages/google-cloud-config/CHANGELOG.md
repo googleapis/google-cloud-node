@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.6.0...config-v0.7.0) (2024-12-18)
+
+
+### Features
+
+* [infra-manager] added annotations ([#5877](https://github.com/googleapis/google-cloud-node/issues/5877)) ([d65537c](https://github.com/googleapis/google-cloud-node/commit/d65537c9060f559b99b9e28f8a7f0af0e6f654a2))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.5.0...config-v0.6.0) (2024-05-21)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/routing-v1.3.0...routing-v1.4.0) (2024-12-18)
+
+
+### Features
+
+* [routing] add API for experimental flyover and narrow road polyline details ([#5865](https://github.com/googleapis/google-cloud-node/issues/5865)) ([24d7341](https://github.com/googleapis/google-cloud-node/commit/24d7341b387fc8f6d286ff945bc9aed54ddcc7df))
+* [routing] add API for shorter distance reference routes ([#5842](https://github.com/googleapis/google-cloud-node/issues/5842)) ([99b489f](https://github.com/googleapis/google-cloud-node/commit/99b489f1170ceb45d3ce6cb8d56c8c7aa671ad03))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/routing-v1.2.0...routing-v1.3.0) (2024-05-21)
 
 

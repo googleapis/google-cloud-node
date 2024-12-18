@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.6.0...parallelstore-v0.7.0) (2024-12-18)
+
+
+### Features
+
+* [parallelstore] A new enum `DeploymentType` is added ([#5863](https://github.com/googleapis/google-cloud-node/issues/5863)) ([9f8c0c2](https://github.com/googleapis/google-cloud-node/commit/9f8c0c2d583656d39d6e6ad6a4b206642e647178))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.5.0...parallelstore-v0.6.0) (2024-08-09)
 
 
