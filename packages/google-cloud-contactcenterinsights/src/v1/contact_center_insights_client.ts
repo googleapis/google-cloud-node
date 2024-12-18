@@ -207,20 +207,11 @@ export class ContactCenterInsightsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      analysisPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}'
-      ),
       analysisRulePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/analysisRules/{analysis_rule}'
       ),
-      conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}'
-      ),
       encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/encryptionSpec'
-      ),
-      feedbackLabelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/feedbackLabels/{feedback_label}'
       ),
       issuePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/issueModels/{issue_model}/issues/{issue}'
@@ -234,6 +225,29 @@ export class ContactCenterInsightsClient {
       phraseMatcherPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/phraseMatchers/{phrase_matcher}'
       ),
+      projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}'
+        ),
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/analyses/{analysis}'
+        ),
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/feedbackLabels/{feedback_label}'
+        ),
+      projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}'
+      ),
+      projectLocationConversationAnalysisPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}'
+        ),
+      projectLocationConversationFeedbackLabelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/feedbackLabels/{feedback_label}'
+        ),
       qaQuestionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}/revisions/{revision}/qaQuestions/{qa_question}'
       ),
@@ -10459,74 +10473,6 @@ export class ContactCenterInsightsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified analysis resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} conversation
-   * @param {string} analysis
-   * @returns {string} Resource name string.
-   */
-  analysisPath(
-    project: string,
-    location: string,
-    conversation: string,
-    analysis: string
-  ) {
-    return this.pathTemplates.analysisPathTemplate.render({
-      project: project,
-      location: location,
-      conversation: conversation,
-      analysis: analysis,
-    });
-  }
-
-  /**
-   * Parse the project from Analysis resource.
-   *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName).project;
-  }
-
-  /**
-   * Parse the location from Analysis resource.
-   *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName).location;
-  }
-
-  /**
-   * Parse the conversation from Analysis resource.
-   *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName)
-      .conversation;
-  }
-
-  /**
-   * Parse the analysis from Analysis resource.
-   *
-   * @param {string} analysisName
-   *   A fully-qualified path representing Analysis resource.
-   * @returns {string} A string representing the analysis.
-   */
-  matchAnalysisFromAnalysisName(analysisName: string) {
-    return this.pathTemplates.analysisPathTemplate.match(analysisName).analysis;
-  }
-
-  /**
    * Return a fully-qualified analysisRule resource name string.
    *
    * @param {string} project
@@ -10579,58 +10525,6 @@ export class ContactCenterInsightsClient {
   }
 
   /**
-   * Return a fully-qualified conversation resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} conversation
-   * @returns {string} Resource name string.
-   */
-  conversationPath(project: string, location: string, conversation: string) {
-    return this.pathTemplates.conversationPathTemplate.render({
-      project: project,
-      location: location,
-      conversation: conversation,
-    });
-  }
-
-  /**
-   * Parse the project from Conversation resource.
-   *
-   * @param {string} conversationName
-   *   A fully-qualified path representing Conversation resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Conversation resource.
-   *
-   * @param {string} conversationName
-   *   A fully-qualified path representing Conversation resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .location;
-  }
-
-  /**
-   * Parse the conversation from Conversation resource.
-   *
-   * @param {string} conversationName
-   *   A fully-qualified path representing Conversation resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .conversation;
-  }
-
-  /**
    * Return a fully-qualified encryptionSpec resource name string.
    *
    * @param {string} project
@@ -10668,77 +10562,6 @@ export class ContactCenterInsightsClient {
     return this.pathTemplates.encryptionSpecPathTemplate.match(
       encryptionSpecName
     ).location;
-  }
-
-  /**
-   * Return a fully-qualified feedbackLabel resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} conversation
-   * @param {string} feedback_label
-   * @returns {string} Resource name string.
-   */
-  feedbackLabelPath(
-    project: string,
-    location: string,
-    conversation: string,
-    feedbackLabel: string
-  ) {
-    return this.pathTemplates.feedbackLabelPathTemplate.render({
-      project: project,
-      location: location,
-      conversation: conversation,
-      feedback_label: feedbackLabel,
-    });
-  }
-
-  /**
-   * Parse the project from FeedbackLabel resource.
-   *
-   * @param {string} feedbackLabelName
-   *   A fully-qualified path representing FeedbackLabel resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromFeedbackLabelName(feedbackLabelName: string) {
-    return this.pathTemplates.feedbackLabelPathTemplate.match(feedbackLabelName)
-      .project;
-  }
-
-  /**
-   * Parse the location from FeedbackLabel resource.
-   *
-   * @param {string} feedbackLabelName
-   *   A fully-qualified path representing FeedbackLabel resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFeedbackLabelName(feedbackLabelName: string) {
-    return this.pathTemplates.feedbackLabelPathTemplate.match(feedbackLabelName)
-      .location;
-  }
-
-  /**
-   * Parse the conversation from FeedbackLabel resource.
-   *
-   * @param {string} feedbackLabelName
-   *   A fully-qualified path representing FeedbackLabel resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromFeedbackLabelName(feedbackLabelName: string) {
-    return this.pathTemplates.feedbackLabelPathTemplate.match(feedbackLabelName)
-      .conversation;
-  }
-
-  /**
-   * Parse the feedback_label from FeedbackLabel resource.
-   *
-   * @param {string} feedbackLabelName
-   *   A fully-qualified path representing FeedbackLabel resource.
-   * @returns {string} A string representing the feedback_label.
-   */
-  matchFeedbackLabelFromFeedbackLabelName(feedbackLabelName: string) {
-    return this.pathTemplates.feedbackLabelPathTemplate.match(feedbackLabelName)
-      .feedback_label;
   }
 
   /**
@@ -10946,6 +10769,586 @@ export class ContactCenterInsightsClient {
   matchPhraseMatcherFromPhraseMatcherName(phraseMatcherName: string) {
     return this.pathTemplates.phraseMatcherPathTemplate.match(phraseMatcherName)
       .phrase_matcher;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAuthorizedViewSetAuthorizedViewConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authorized_view_set
+   * @param {string} authorized_view
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationAuthorizedViewSetAuthorizedViewConversationPath(
+    project: string,
+    location: string,
+    authorizedViewSet: string,
+    authorizedView: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        authorized_view_set: authorizedViewSet,
+        authorized_view: authorizedView,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the authorized_view_set from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the authorized_view_set.
+   */
+  matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).authorized_view_set;
+  }
+
+  /**
+   * Parse the authorized_view from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the authorized_view.
+   */
+  matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).authorized_view;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationAuthorizedViewSetAuthorizedViewConversation resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationName
+    ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authorized_view_set
+   * @param {string} authorized_view
+   * @param {string} conversation
+   * @param {string} analysis
+   * @returns {string} Resource name string.
+   */
+  projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPath(
+    project: string,
+    location: string,
+    authorizedViewSet: string,
+    authorizedView: string,
+    conversation: string,
+    analysis: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        authorized_view_set: authorizedViewSet,
+        authorized_view: authorizedView,
+        conversation: conversation,
+        analysis: analysis,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).location;
+  }
+
+  /**
+   * Parse the authorized_view_set from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the authorized_view_set.
+   */
+  matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).authorized_view_set;
+  }
+
+  /**
+   * Parse the authorized_view from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the authorized_view.
+   */
+  matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).authorized_view;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).conversation;
+  }
+
+  /**
+   * Parse the analysis from ProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_analysis resource.
+   * @returns {string} A string representing the analysis.
+   */
+  matchAnalysisFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName
+    ).analysis;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authorized_view_set
+   * @param {string} authorized_view
+   * @param {string} conversation
+   * @param {string} feedback_label
+   * @returns {string} Resource name string.
+   */
+  projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPath(
+    project: string,
+    location: string,
+    authorizedViewSet: string,
+    authorizedView: string,
+    conversation: string,
+    feedbackLabel: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        authorized_view_set: authorizedViewSet,
+        authorized_view: authorizedView,
+        conversation: conversation,
+        feedback_label: feedbackLabel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).location;
+  }
+
+  /**
+   * Parse the authorized_view_set from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the authorized_view_set.
+   */
+  matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).authorized_view_set;
+  }
+
+  /**
+   * Parse the authorized_view from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the authorized_view.
+   */
+  matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).authorized_view;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).conversation;
+  }
+
+  /**
+   * Parse the feedback_label from ProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_authorized_view_set_authorized_view_conversation_feedback_label resource.
+   * @returns {string} A string representing the feedback_label.
+   */
+  matchFeedbackLabelFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+    projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match(
+      projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName
+    ).feedback_label;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationPath(
+    project: string,
+    location: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.render({
+      project: project,
+      location: location,
+      conversation: conversation,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationAnalysis resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @param {string} analysis
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationAnalysisPath(
+    project: string,
+    location: string,
+    conversation: string,
+    analysis: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        analysis: analysis,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).conversation;
+  }
+
+  /**
+   * Parse the analysis from ProjectLocationConversationAnalysis resource.
+   *
+   * @param {string} projectLocationConversationAnalysisName
+   *   A fully-qualified path representing project_location_conversation_analysis resource.
+   * @returns {string} A string representing the analysis.
+   */
+  matchAnalysisFromProjectLocationConversationAnalysisName(
+    projectLocationConversationAnalysisName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationAnalysisPathTemplate.match(
+      projectLocationConversationAnalysisName
+    ).analysis;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationFeedbackLabel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @param {string} feedback_label
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationFeedbackLabelPath(
+    project: string,
+    location: string,
+    conversation: string,
+    feedbackLabel: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        feedback_label: feedbackLabel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).conversation;
+  }
+
+  /**
+   * Parse the feedback_label from ProjectLocationConversationFeedbackLabel resource.
+   *
+   * @param {string} projectLocationConversationFeedbackLabelName
+   *   A fully-qualified path representing project_location_conversation_feedback_label resource.
+   * @returns {string} A string representing the feedback_label.
+   */
+  matchFeedbackLabelFromProjectLocationConversationFeedbackLabelName(
+    projectLocationConversationFeedbackLabelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match(
+      projectLocationConversationFeedbackLabelName
+    ).feedback_label;
   }
 
   /**
