@@ -753,12 +753,16 @@
                           "responseType": "CalculateStatsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{location=projects/*/locations/*}/conversations:calculateStats",
+                            "(google.api.http).additional_bindings.get": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:calculateStats",
                             "(google.api.method_signature)": "location"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{location=projects/*/locations/*}/conversations:calculateStats"
+                                "get": "/v1/{location=projects/*/locations/*}/conversations:calculateStats",
+                                "additional_bindings": {
+                                  "get": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:calculateStats"
+                                }
                               }
                             },
                             {
@@ -1044,6 +1048,8 @@
                           "options": {
                             "(google.api.http).post": "/v1/{location=projects/*/locations/*}:queryMetrics",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:queryMetrics",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "QueryMetricsResponse",
                             "(google.longrunning.operation_info).metadata_type": "QueryMetricsMetadata"
                           },
@@ -1051,7 +1057,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{location=projects/*/locations/*}:queryMetrics",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{location=projects/*/locations/*/authorizedViewSet/*/authorizedView/*}:queryMetrics",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -4550,7 +4560,7 @@
                     "Conversation": {
                       "options": {
                         "(google.api.resource).type": "contactcenterinsights.googleapis.com/Conversation",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversations/{conversation}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}",
                         "(google.api.resource).plural": "conversations",
                         "(google.api.resource).singular": "conversation"
                       },
@@ -4750,6 +4760,10 @@
                                 "dispositionCode": {
                                   "type": "string",
                                   "id": 4
+                                },
+                                "agentType": {
+                                  "type": "ConversationParticipant.Role",
+                                  "id": 5
                                 }
                               }
                             }
@@ -4849,7 +4863,7 @@
                     "Analysis": {
                       "options": {
                         "(google.api.resource).type": "contactcenterinsights.googleapis.com/Analysis",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/analyses/{analysis}",
                         "(google.api.resource).plural": "analyses",
                         "(google.api.resource).singular": "analysis"
                       },
@@ -5020,7 +5034,7 @@
                     "FeedbackLabel": {
                       "options": {
                         "(google.api.resource).type": "contactcenterinsights.googleapis.com/FeedbackLabel",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversations/{conversation}/feedbackLabels/{feedback_label}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/feedbackLabels/{feedback_label}",
                         "(google.api.resource).plural": "feedbackLabels",
                         "(google.api.resource).singular": "feedbackLabel"
                       },
