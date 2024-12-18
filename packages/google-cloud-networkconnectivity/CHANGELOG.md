@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v3.5.0...network-connectivity-v3.6.0) (2024-12-18)
+
+
+### Features
+
+* [networkconnectivity] add Network Connectivity Center APIs for PSC connection propagation through NCC ([#5859](https://github.com/googleapis/google-cloud-node/issues/5859)) ([04c60cc](https://github.com/googleapis/google-cloud-node/commit/04c60cc25a3a1c002491b9c70bfd27c714a4262d))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v3.4.0...network-connectivity-v3.5.0) (2024-05-21)
 
 

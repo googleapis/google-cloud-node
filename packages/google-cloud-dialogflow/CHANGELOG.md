@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.12.0...dialogflow-v6.13.0) (2024-12-18)
+
+
+### Features
+
+* [dialogflow] add new fields for delivering intermediate transcriptions through PubSub ([#5881](https://github.com/googleapis/google-cloud-node/issues/5881)) ([7c8a115](https://github.com/googleapis/google-cloud-node/commit/7c8a115c88865b3aadfa649b3b2a89207d5502c2))
+* [dialogflow] make TrainingPhrase name field output-only ([#5861](https://github.com/googleapis/google-cloud-node/issues/5861)) ([7238530](https://github.com/googleapis/google-cloud-node/commit/72385303b7b0d8f3f5462d05c490f0200415fc20))
+* [dialogflow] properly mark TrainingPhrase name field output-only ([#5862](https://github.com/googleapis/google-cloud-node/issues/5862)) ([522c389](https://github.com/googleapis/google-cloud-node/commit/522c389d50d175c26afcbe513e98824eb9e190e9))
+
 ## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.11.0...dialogflow-v6.12.0) (2024-11-21)
 
 

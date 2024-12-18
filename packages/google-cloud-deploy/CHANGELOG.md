@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.3.0...deploy-v4.4.0) (2024-12-18)
+
+
+### Features
+
+* [deploy] A new field `dns_endpoint` is added to message `.google.cloud.deploy.v1.GkeCluster` ([#5849](https://github.com/googleapis/google-cloud-node/issues/5849)) ([9320175](https://github.com/googleapis/google-cloud-node/commit/932017559e975fbab4c0ce13fcc808e08425c117))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.2.0...deploy-v4.3.0) (2024-11-14)
 
 
