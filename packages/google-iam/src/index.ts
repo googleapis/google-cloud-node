@@ -17,11 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v2 from './v2';
+import * as v3 from './v3';
 
 const PoliciesClient = v2.PoliciesClient;
 type PoliciesClient = v2.PoliciesClient;
 
-export {v2, PoliciesClient};
-export default {v2, PoliciesClient};
+export {v2, v3, PoliciesClient};
+export default {v2, v3, PoliciesClient};
 import * as protos from '../protos/protos';
 export {protos};
