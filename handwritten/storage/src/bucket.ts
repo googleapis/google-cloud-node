@@ -293,6 +293,10 @@ export interface GetLabelsCallback {
   (err: Error | null, labels: object | null): void;
 }
 
+export interface RestoreOptions {
+  generation: string;
+  projection?: 'full' | 'noAcl';
+}
 export interface BucketMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   autoclass?: {
@@ -335,6 +339,7 @@ export interface BucketMetadata extends BaseMetadata {
     logBucket?: string;
     logObjectPrefix?: string;
   };
+  generation?: string;
   metageneration?: string;
   name?: string;
   objectRetention?: {
@@ -351,6 +356,8 @@ export interface BucketMetadata extends BaseMetadata {
     retentionPeriod?: string | number;
   } | null;
   rpo?: string;
+  softDeleteTime?: string;
+  hardDeleteTime?: string;
   softDeletePolicy?: {
     retentionDurationSeconds?: string | number;
     readonly effectiveTime?: string;
@@ -3250,6 +3257,27 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     );
   }
 
+  /**
+   * @typedef {object} RestoreOptions Options for Bucket#restore(). See an
+   *     {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/restore#resource| Object resource}.
+   * @param {number} [generation] If present, selects a specific revision of this object.
+   * @param {string} [projection] Specifies the set of properties to return. If used, must be 'full' or 'noAcl'.
+   */
+  /**
+   * Restores a soft-deleted bucket
+   * @param {RestoreOptions} options Restore options.
+   * @returns {Promise<Bucket>}
+   */
+  async restore(options: RestoreOptions): Promise<Bucket> {
+    const [bucket] = await this.request({
+      method: 'POST',
+      uri: '/restore',
+      qs: options,
+    });
+
+    return bucket as Bucket;
+  }
+
   makePrivate(
     options?: MakeBucketPrivateOptions
   ): Promise<MakeBucketPrivateResponse>;
@@ -4550,7 +4578,7 @@ paginator.extend(Bucket, 'getFiles');
  * that a callback is omitted.
  */
 promisifyAll(Bucket, {
-  exclude: ['cloudStorageURI', 'request', 'file', 'notification'],
+  exclude: ['cloudStorageURI', 'request', 'file', 'notification', 'restore'],
 });
 
 /**

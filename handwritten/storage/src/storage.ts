@@ -105,6 +105,8 @@ export interface BucketOptions {
   kmsKeyName?: string;
   preconditionOpts?: PreconditionOptions;
   userProject?: string;
+  generation?: number;
+  softDeleted?: boolean;
 }
 
 export interface Cors {
@@ -185,6 +187,8 @@ export interface GetBucketsRequest {
   maxResults?: number;
   pageToken?: string;
   userProject?: string;
+  softDeleted?: boolean;
+  generation?: number;
 }
 
 export interface HmacKeyResourceResponse {
@@ -1242,6 +1246,8 @@ export class Storage extends Service {
    *     representing part of the larger set of results to view.
    * @property {string} [userProject] The ID of the project which will be billed
    *     for the request.
+   *  @param {boolean} [softDeleted] If true, returns the soft-deleted object.
+   *     Object `generation` is required if `softDeleted` is set to True.
    */
   /**
    * @typedef {array} GetBucketsResponse

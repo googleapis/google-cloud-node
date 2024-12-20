@@ -124,6 +124,7 @@ const fakePromisify = {
       'request',
       'file',
       'notification',
+      'restore',
     ]);
   },
 };
@@ -2422,6 +2423,26 @@ describe('Bucket', () => {
       };
 
       bucket.removeRetentionPeriod(done);
+    });
+  });
+
+  describe('restore', () => {
+    it('should pass options to underlying request call', async () => {
+      bucket.request = function (
+        reqOpts: DecorateRequestOptions,
+        callback_: Function
+      ) {
+        assert.strictEqual(this, bucket);
+        assert.deepStrictEqual(reqOpts, {
+          method: 'POST',
+          uri: '/restore',
+          qs: {generation: 123456789},
+        });
+        assert.strictEqual(callback_, undefined);
+        return [];
+      };
+
+      await bucket.restore({generation: 123456789});
     });
   });
 
