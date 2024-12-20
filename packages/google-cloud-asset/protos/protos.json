@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -3344,8 +3347,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p2beta1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1p2beta1",
-                    "cc_enable_arenas": true
+                    "php_namespace": "Google\\Cloud\\Asset\\V1p2beta1"
                   },
                   "nested": {
                     "AssetService": {
@@ -4265,8 +4267,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p5beta1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1p5beta1",
-                    "cc_enable_arenas": true
+                    "php_namespace": "Google\\Cloud\\Asset\\V1p5beta1"
                   },
                   "nested": {
                     "AssetService": {

@@ -14277,83 +14277,6 @@ describe('v1.ContactCenterInsightsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('analysis', () => {
-      const fakePath = '/rendered/path/analysis';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        conversation: 'conversationValue',
-        analysis: 'analysisValue',
-      };
-      const client =
-        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      client.pathTemplates.analysisPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.analysisPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('analysisPath', () => {
-        const result = client.analysisPath(
-          'projectValue',
-          'locationValue',
-          'conversationValue',
-          'analysisValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.analysisPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAnalysisName', () => {
-        const result = client.matchProjectFromAnalysisName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAnalysisName', () => {
-        const result = client.matchLocationFromAnalysisName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromAnalysisName', () => {
-        const result = client.matchConversationFromAnalysisName(fakePath);
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnalysisFromAnalysisName', () => {
-        const result = client.matchAnalysisFromAnalysisName(fakePath);
-        assert.strictEqual(result, 'analysisValue');
-        assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('analysisRule', () => {
       const fakePath = '/rendered/path/analysisRule';
       const expectedParameters = {
@@ -14419,71 +14342,6 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('conversation', () => {
-      const fakePath = '/rendered/path/conversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        conversation: 'conversationValue',
-      };
-      const client =
-        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      client.pathTemplates.conversationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.conversationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('conversationPath', () => {
-        const result = client.conversationPath(
-          'projectValue',
-          'locationValue',
-          'conversationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.conversationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConversationName', () => {
-        const result = client.matchProjectFromConversationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConversationName', () => {
-        const result = client.matchLocationFromConversationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromConversationName', () => {
-        const result = client.matchConversationFromConversationName(fakePath);
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('encryptionSpec', () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
@@ -14531,83 +14389,6 @@ describe('v1.ContactCenterInsightsClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.encryptionSpecPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('feedbackLabel', () => {
-      const fakePath = '/rendered/path/feedbackLabel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        conversation: 'conversationValue',
-        feedback_label: 'feedbackLabelValue',
-      };
-      const client =
-        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      client.pathTemplates.feedbackLabelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.feedbackLabelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('feedbackLabelPath', () => {
-        const result = client.feedbackLabelPath(
-          'projectValue',
-          'locationValue',
-          'conversationValue',
-          'feedbackLabelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.feedbackLabelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromFeedbackLabelName', () => {
-        const result = client.matchProjectFromFeedbackLabelName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.feedbackLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFeedbackLabelName', () => {
-        const result = client.matchLocationFromFeedbackLabelName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.feedbackLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromFeedbackLabelName', () => {
-        const result = client.matchConversationFromFeedbackLabelName(fakePath);
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (client.pathTemplates.feedbackLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFeedbackLabelFromFeedbackLabelName', () => {
-        const result = client.matchFeedbackLabelFromFeedbackLabelName(fakePath);
-        assert.strictEqual(result, 'feedbackLabelValue');
-        assert(
-          (client.pathTemplates.feedbackLabelPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -14865,6 +14646,717 @@ describe('v1.ContactCenterInsightsClient', () => {
         assert.strictEqual(result, 'phraseMatcherValue');
         assert(
           (client.pathTemplates.phraseMatcherPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversation', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authorized_view_set: 'authorizedViewSetValue',
+        authorized_view: 'authorizedViewValue',
+        conversation: 'conversationValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAuthorizedViewSetAuthorizedViewConversationPath', () => {
+        const result =
+          client.projectLocationAuthorizedViewSetAuthorizedViewConversationPath(
+            'projectValue',
+            'locationValue',
+            'authorizedViewSetValue',
+            'authorizedViewValue',
+            'conversationValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewSetValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authorized_view_set: 'authorizedViewSetValue',
+        authorized_view: 'authorizedViewValue',
+        conversation: 'conversationValue',
+        analysis: 'analysisValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPath', () => {
+        const result =
+          client.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPath(
+            'projectValue',
+            'locationValue',
+            'authorizedViewSetValue',
+            'authorizedViewValue',
+            'conversationValue',
+            'analysisValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewSetValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnalysisFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchAnalysisFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'analysisValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authorized_view_set: 'authorizedViewSetValue',
+        authorized_view: 'authorizedViewValue',
+        conversation: 'conversationValue',
+        feedback_label: 'feedbackLabelValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPath', () => {
+        const result =
+          client.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPath(
+            'projectValue',
+            'locationValue',
+            'authorizedViewSetValue',
+            'authorizedViewValue',
+            'conversationValue',
+            'feedbackLabelValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewSetValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeedbackLabelFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchFeedbackLabelFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'feedbackLabelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversation', () => {
+      const fakePath = '/rendered/path/projectLocationConversation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation: 'conversationValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationConversationPath', () => {
+        const result = client.projectLocationConversationPath(
+          'projectValue',
+          'locationValue',
+          'conversationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationConversationName', () => {
+        const result =
+          client.matchConversationFromProjectLocationConversationName(fakePath);
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationAnalysis', () => {
+      const fakePath = '/rendered/path/projectLocationConversationAnalysis';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation: 'conversationValue',
+        analysis: 'analysisValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationAnalysisPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationAnalysisPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationAnalysisPath', () => {
+        const result = client.projectLocationConversationAnalysisPath(
+          'projectValue',
+          'locationValue',
+          'conversationValue',
+          'analysisValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchConversationFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnalysisFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchAnalysisFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'analysisValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationFeedbackLabel', () => {
+      const fakePath =
+        '/rendered/path/projectLocationConversationFeedbackLabel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation: 'conversationValue',
+        feedback_label: 'feedbackLabelValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationFeedbackLabelPath', () => {
+        const result = client.projectLocationConversationFeedbackLabelPath(
+          'projectValue',
+          'locationValue',
+          'conversationValue',
+          'feedbackLabelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchConversationFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeedbackLabelFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchFeedbackLabelFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'feedbackLabelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

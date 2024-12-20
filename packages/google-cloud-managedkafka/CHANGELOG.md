@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.1.0...managedkafka-v0.2.0) (2024-12-18)
+
+
+### Features
+
+* [managedkafka] A new field `satisfies_pzi` is added to message `.google.cloud.managedkafka.v1.Cluster` ([#5857](https://github.com/googleapis/google-cloud-node/issues/5857)) ([59c05a0](https://github.com/googleapis/google-cloud-node/commit/59c05a038b42b0b01ec15131c3f5dee585757b83))
+
 ## 0.1.0 (2024-06-12)
 
 

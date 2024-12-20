@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.6.0...netapp-v0.7.0) (2024-12-18)
+
+
+### Features
+
+* [netapp] Enable creation of Onprem Migration in CreateVolume ([#5837](https://github.com/googleapis/google-cloud-node/issues/5837)) ([068e928](https://github.com/googleapis/google-cloud-node/commit/068e9283c3d6066575a59a0a78c9eee96a67a5c0))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.5.0...netapp-v0.6.0) (2024-09-24)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/billing-v4.5.0...billing-v4.6.0) (2024-12-18)
+
+
+### Features
+
+* [billing] added currency field to billing account message ([#5855](https://github.com/googleapis/google-cloud-node/issues/5855)) ([c7e55d4](https://github.com/googleapis/google-cloud-node/commit/c7e55d46da8f764b7cc5f971be866621f0d06d73))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/billing-v4.4.0...billing-v4.5.0) (2024-05-21)
 
 

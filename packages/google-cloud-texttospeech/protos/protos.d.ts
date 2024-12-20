@@ -2632,7 +2632,8 @@ export namespace google {
                     MP3_64_KBPS = 4,
                     OGG_OPUS = 3,
                     MULAW = 5,
-                    ALAW = 6
+                    ALAW = 6,
+                    PCM = 7
                 }
 
                 /** Properties of a ListVoicesRequest. */
@@ -4393,11 +4394,117 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a StreamingAudioConfig. */
+                interface IStreamingAudioConfig {
+
+                    /** StreamingAudioConfig audioEncoding */
+                    audioEncoding?: (google.cloud.texttospeech.v1beta1.AudioEncoding|keyof typeof google.cloud.texttospeech.v1beta1.AudioEncoding|null);
+
+                    /** StreamingAudioConfig sampleRateHertz */
+                    sampleRateHertz?: (number|null);
+                }
+
+                /** Represents a StreamingAudioConfig. */
+                class StreamingAudioConfig implements IStreamingAudioConfig {
+
+                    /**
+                     * Constructs a new StreamingAudioConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1beta1.IStreamingAudioConfig);
+
+                    /** StreamingAudioConfig audioEncoding. */
+                    public audioEncoding: (google.cloud.texttospeech.v1beta1.AudioEncoding|keyof typeof google.cloud.texttospeech.v1beta1.AudioEncoding);
+
+                    /** StreamingAudioConfig sampleRateHertz. */
+                    public sampleRateHertz: number;
+
+                    /**
+                     * Creates a new StreamingAudioConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingAudioConfig instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1beta1.IStreamingAudioConfig): google.cloud.texttospeech.v1beta1.StreamingAudioConfig;
+
+                    /**
+                     * Encodes the specified StreamingAudioConfig message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.StreamingAudioConfig.verify|verify} messages.
+                     * @param message StreamingAudioConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1beta1.IStreamingAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingAudioConfig message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.StreamingAudioConfig.verify|verify} messages.
+                     * @param message StreamingAudioConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1beta1.IStreamingAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingAudioConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingAudioConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1beta1.StreamingAudioConfig;
+
+                    /**
+                     * Decodes a StreamingAudioConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingAudioConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1beta1.StreamingAudioConfig;
+
+                    /**
+                     * Verifies a StreamingAudioConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingAudioConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingAudioConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1beta1.StreamingAudioConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingAudioConfig message. Also converts values to other types if specified.
+                     * @param message StreamingAudioConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1beta1.StreamingAudioConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingAudioConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StreamingAudioConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a StreamingSynthesizeConfig. */
                 interface IStreamingSynthesizeConfig {
 
                     /** StreamingSynthesizeConfig voice */
                     voice?: (google.cloud.texttospeech.v1beta1.IVoiceSelectionParams|null);
+
+                    /** StreamingSynthesizeConfig streamingAudioConfig */
+                    streamingAudioConfig?: (google.cloud.texttospeech.v1beta1.IStreamingAudioConfig|null);
                 }
 
                 /** Represents a StreamingSynthesizeConfig. */
@@ -4411,6 +4518,9 @@ export namespace google {
 
                     /** StreamingSynthesizeConfig voice. */
                     public voice?: (google.cloud.texttospeech.v1beta1.IVoiceSelectionParams|null);
+
+                    /** StreamingSynthesizeConfig streamingAudioConfig. */
+                    public streamingAudioConfig?: (google.cloud.texttospeech.v1beta1.IStreamingAudioConfig|null);
 
                     /**
                      * Creates a new StreamingSynthesizeConfig instance using the specified properties.

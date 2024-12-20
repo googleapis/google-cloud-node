@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.4.0...storage-transfer-v3.5.0) (2024-12-18)
+
+
+### Features
+
+* [storagetransfer] support cross-bucket replication ([#5891](https://github.com/googleapis/google-cloud-node/issues/5891)) ([ad37361](https://github.com/googleapis/google-cloud-node/commit/ad373612766920e82241e0ef609abc27be4ab9bb))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.3.0...storage-transfer-v3.4.0) (2024-08-19)
 
 

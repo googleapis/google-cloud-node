@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/products-v0.1.0...products-v0.1.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* [merchantapi] Changed repeated flag of an existing field `gtin` in message `.google.shopping.merchant.products.v1beta.Attributes` ([#5871](https://github.com/googleapis/google-cloud-node/issues/5871)) ([ba6cead](https://github.com/googleapis/google-cloud-node/commit/ba6cead793f9664433916c29bde624c4257ffeea))
+
 ## 0.1.0 (2024-07-22)
 
 
