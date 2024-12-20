@@ -11687,7 +11687,16 @@ export namespace google {
                         AUDIO_ENCODING_UNSPECIFIED = 0,
                         LINEAR16 = 1,
                         MULAW = 2,
-                        ALAW = 3
+                        ALAW = 3,
+                        AMR = 4,
+                        AMR_WB = 5,
+                        FLAC = 6,
+                        MP3 = 7,
+                        OGG_OPUS = 8,
+                        WEBM_OPUS = 9,
+                        MP4_AAC = 10,
+                        M4A_AAC = 11,
+                        MOV_AAC = 12
                     }
                 }
 
