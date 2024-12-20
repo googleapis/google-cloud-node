@@ -1167,6 +1167,7 @@ export class AttachedClustersClient {
    *    *   `proxy_config.kubernetes_secret.name`.
    *    *   `proxy_config.kubernetes_secret.namespace`.
    *    *   `security_posture_config.vulnerability_mode`
+   *    *   `monitoring_config.cloud_monitoring_config.enabled`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
