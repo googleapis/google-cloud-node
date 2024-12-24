@@ -28404,6 +28404,9 @@ export namespace google {
 
                     /** DeleteDataScanRequest name */
                     name?: (string|null);
+
+                    /** DeleteDataScanRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteDataScanRequest. */
@@ -28417,6 +28420,9 @@ export namespace google {
 
                     /** DeleteDataScanRequest name. */
                     public name: string;
+
+                    /** DeleteDataScanRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteDataScanRequest instance using the specified properties.
