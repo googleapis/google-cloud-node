@@ -41,15 +41,6 @@ body:
         - label: "Check out handwritten samples for many of our APIs:
             https://github.com/GoogleCloudPlatform/nodejs-docs-samples"
           required: true
-  - type: input
-    attributes:
-      label: >
-        Link to the code that reproduces this issue. A link to a **public** Github Repository or gist with a minimal
-        reproduction.
-      description: >
-        **Skipping this or providing an invalid link will result in the issue being closed**        
-    validations:
-      required: true
   - type: textarea
     attributes:
       label: >
@@ -67,6 +58,15 @@ body:
         issue in its issue tracker https://cloud.google.com/support/docs/issue-trackers), or by
         submitting an issue in its linked tracker in the .repo-metadata.json
         file in the API under packages/* (for example, https://github.com/googleapis/google-cloud-node/blob/58419684469e3900146c8e830543bf4dc0cbb2be/packages/google-cloud-batch/.repo-metadata.json#L6)        
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: >
+        Link to the code that reproduces this issue. A link to a **public** Github Repository or gist with a minimal
+        reproduction.
+      description: >
+        **Skipping this or providing an invalid link will result in the issue being closed**        
     validations:
       required: true
   - type: textarea
