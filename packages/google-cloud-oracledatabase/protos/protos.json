@@ -3607,7 +3607,7 @@
                           "type": "string",
                           "id": 27,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "scanIpIds": {
