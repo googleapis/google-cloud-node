@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.redis.cluster.v1beta1",
+  "libraryPackage": "@google-cloud/redis-cluster",
+  "services": {
+    "CloudRedisCluster": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudRedisClusterClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GetClusterCertificateAuthority": {
+              "methods": [
+                "getClusterCertificateAuthority"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudRedisClusterClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GetClusterCertificateAuthority": {
+              "methods": [
+                "getClusterCertificateAuthority"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
