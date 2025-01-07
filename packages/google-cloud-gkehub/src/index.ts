@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,14 +18,13 @@
 
 import * as v1 from './v1';
 import * as v1alpha from './v1alpha';
-import * as v1alpha2 from './v1alpha2';
 import * as v1beta from './v1beta';
 import * as v1beta1 from './v1beta1';
 
 const GkeHubClient = v1.GkeHubClient;
 type GkeHubClient = v1.GkeHubClient;
 
-export {v1, v1alpha, v1alpha2, v1beta, v1beta1, GkeHubClient};
-export default {v1, v1alpha, v1alpha2, v1beta, v1beta1, GkeHubClient};
+export {v1, v1alpha, v1beta, v1beta1, GkeHubClient};
+export default {v1, v1alpha, v1beta, v1beta1, GkeHubClient};
 import * as protos from '../protos/protos';
 export {protos};
