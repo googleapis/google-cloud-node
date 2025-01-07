@@ -32,7 +32,7 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/cloud_quotas_client_config.json`.
+ * `src/v1beta/cloud_quotas_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './cloud_quotas_client_config.json';
@@ -47,7 +47,7 @@ const version = require('../../../package.json').version;
  *  - Check the status of a quota preference request.
  *  - List/Get pending and historical quota preference.
  * @class
- * @memberof v1
+ * @memberof v1beta
  */
 export class CloudQuotasClient {
   private _terminated = false;
@@ -213,6 +213,9 @@ export class CloudQuotasClient {
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
         ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
       organizationLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/quotaPreferences/{quota_preference}'
@@ -221,8 +224,8 @@ export class CloudQuotasClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
         ),
-      projectLocationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
       ),
       projectLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -235,6 +238,9 @@ export class CloudQuotasClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
         ),
+      quotaAdjusterSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/quotaAdjusterSettings'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -255,7 +261,7 @@ export class CloudQuotasClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.api.cloudquotas.v1.CloudQuotas',
+      'google.api.cloudquotas.v1beta.CloudQuotas',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -288,14 +294,14 @@ export class CloudQuotasClient {
     }
 
     // Put together the "service stub" for
-    // google.api.cloudquotas.v1.CloudQuotas.
+    // google.api.cloudquotas.v1beta.CloudQuotas.
     this.cloudQuotasStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.api.cloudquotas.v1.CloudQuotas'
+            'google.api.cloudquotas.v1beta.CloudQuotas'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.api.cloudquotas.v1.CloudQuotas,
+          (this._protos as any).google.api.cloudquotas.v1beta.CloudQuotas,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
@@ -436,59 +442,65 @@ export class CloudQuotasClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1.QuotaInfo|QuotaInfo}.
+   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaInfo|QuotaInfo}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cloud_quotas.get_quota_info.js</caption>
-   * region_tag:cloudquotas_v1_generated_CloudQuotas_GetQuotaInfo_async
+   * @example <caption>include:samples/generated/v1beta/cloud_quotas.get_quota_info.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_CloudQuotas_GetQuotaInfo_async
    */
   getQuotaInfo(
-    request?: protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaInfo,
-      protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest | undefined,
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+      protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest | undefined,
       {} | undefined,
     ]
   >;
   getQuotaInfo(
-    request: protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest,
+    request: protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaInfo,
-      protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest | null | undefined,
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
   getQuotaInfo(
-    request: protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest,
+    request: protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaInfo,
-      protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest | null | undefined,
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
   getQuotaInfo(
-    request?: protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.api.cloudquotas.v1.IQuotaInfo,
-          | protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest
+          protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+          | protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaInfo,
-      protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest | null | undefined,
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaInfo,
-      protos.google.api.cloudquotas.v1.IGetQuotaInfoRequest | undefined,
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+      protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -523,65 +535,71 @@ export class CloudQuotasClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1.QuotaPreference|QuotaPreference}.
+   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaPreference|QuotaPreference}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cloud_quotas.get_quota_preference.js</caption>
-   * region_tag:cloudquotas_v1_generated_CloudQuotas_GetQuotaPreference_async
+   * @example <caption>include:samples/generated/v1beta/cloud_quotas.get_quota_preference.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_CloudQuotas_GetQuotaPreference_async
    */
   getQuotaPreference(
-    request?: protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest | undefined,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      (
+        | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   >;
   getQuotaPreference(
-    request: protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest,
+    request: protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getQuotaPreference(
-    request: protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest,
+    request: protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getQuotaPreference(
-    request?: protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.api.cloudquotas.v1.IQuotaPreference,
-          | protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      protos.google.api.cloudquotas.v1.IGetQuotaPreferenceRequest | undefined,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      (
+        | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   > | void {
@@ -616,76 +634,76 @@ export class CloudQuotasClient {
    * @param {string} [request.quotaPreferenceId]
    *   Optional. Id of the requesting object, must be unique under its parent.
    *   If client does not set this field, the service will generate one.
-   * @param {google.api.cloudquotas.v1.QuotaPreference} request.quotaPreference
+   * @param {google.api.cloudquotas.v1beta.QuotaPreference} request.quotaPreference
    *   Required. The resource being created
    * @param {number[]} request.ignoreSafetyChecks
    *   The list of quota safety checks to be ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1.QuotaPreference|QuotaPreference}.
+   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaPreference|QuotaPreference}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cloud_quotas.create_quota_preference.js</caption>
-   * region_tag:cloudquotas_v1_generated_CloudQuotas_CreateQuotaPreference_async
+   * @example <caption>include:samples/generated/v1beta/cloud_quotas.create_quota_preference.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_CloudQuotas_CreateQuotaPreference_async
    */
   createQuotaPreference(
-    request?: protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest,
+    request?: protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
       (
-        | protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest
+        | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
   createQuotaPreference(
-    request: protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest,
+    request: protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   createQuotaPreference(
-    request: protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest,
+    request: protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   createQuotaPreference(
-    request?: protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest,
+    request?: protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.api.cloudquotas.v1.IQuotaPreference,
-          | protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
       (
-        | protos.google.api.cloudquotas.v1.ICreateQuotaPreferenceRequest
+        | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
         | undefined
       ),
       {} | undefined,
@@ -721,7 +739,7 @@ export class CloudQuotasClient {
    *   The fields specified in the update_mask are relative to the resource, not
    *   the full request. A field will be overwritten if it is in the mask. If the
    *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.api.cloudquotas.v1.QuotaPreference} request.quotaPreference
+   * @param {google.api.cloudquotas.v1beta.QuotaPreference} request.quotaPreference
    *   Required. The resource being updated
    * @param {boolean} [request.allowMissing]
    *   Optional. If set to true, and the quota preference is not found, a new one
@@ -735,69 +753,69 @@ export class CloudQuotasClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1.QuotaPreference|QuotaPreference}.
+   *   The first element of the array is an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaPreference|QuotaPreference}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cloud_quotas.update_quota_preference.js</caption>
-   * region_tag:cloudquotas_v1_generated_CloudQuotas_UpdateQuotaPreference_async
+   * @example <caption>include:samples/generated/v1beta/cloud_quotas.update_quota_preference.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_CloudQuotas_UpdateQuotaPreference_async
    */
   updateQuotaPreference(
-    request?: protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
       (
-        | protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest
+        | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
   updateQuotaPreference(
-    request: protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest,
+    request: protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   updateQuotaPreference(
-    request: protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest,
+    request: protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest,
     callback: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   updateQuotaPreference(
-    request?: protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.api.cloudquotas.v1.IQuotaPreference,
-          | protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
-      | protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+      | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference,
       (
-        | protos.google.api.cloudquotas.v1.IUpdateQuotaPreferenceRequest
+        | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
         | undefined
       ),
       {} | undefined,
@@ -844,7 +862,7 @@ export class CloudQuotasClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.api.cloudquotas.v1.QuotaInfo|QuotaInfo}.
+   *   The first element of the array is Array of {@link protos.google.api.cloudquotas.v1beta.QuotaInfo|QuotaInfo}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -854,59 +872,59 @@ export class CloudQuotasClient {
    *   for more details and examples.
    */
   listQuotaInfos(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaInfo[],
-      protos.google.api.cloudquotas.v1.IListQuotaInfosRequest | null,
-      protos.google.api.cloudquotas.v1.IListQuotaInfosResponse,
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo[],
+      protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest | null,
+      protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse,
     ]
   >;
   listQuotaInfos(
-    request: protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
+    request: protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
-      | protos.google.api.cloudquotas.v1.IListQuotaInfosResponse
+      protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
+      | protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse
       | null
       | undefined,
-      protos.google.api.cloudquotas.v1.IQuotaInfo
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo
     >
   ): void;
   listQuotaInfos(
-    request: protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
+    request: protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
     callback: PaginationCallback<
-      protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
-      | protos.google.api.cloudquotas.v1.IListQuotaInfosResponse
+      protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
+      | protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse
       | null
       | undefined,
-      protos.google.api.cloudquotas.v1.IQuotaInfo
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo
     >
   ): void;
   listQuotaInfos(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
-          | protos.google.api.cloudquotas.v1.IListQuotaInfosResponse
+          protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
+          | protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse
           | null
           | undefined,
-          protos.google.api.cloudquotas.v1.IQuotaInfo
+          protos.google.api.cloudquotas.v1beta.IQuotaInfo
         >,
     callback?: PaginationCallback<
-      protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
-      | protos.google.api.cloudquotas.v1.IListQuotaInfosResponse
+      protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
+      | protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse
       | null
       | undefined,
-      protos.google.api.cloudquotas.v1.IQuotaInfo
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo
     >
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaInfo[],
-      protos.google.api.cloudquotas.v1.IListQuotaInfosRequest | null,
-      protos.google.api.cloudquotas.v1.IListQuotaInfosResponse,
+      protos.google.api.cloudquotas.v1beta.IQuotaInfo[],
+      protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest | null,
+      protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse,
     ]
   > | void {
     request = request || {};
@@ -949,7 +967,7 @@ export class CloudQuotasClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.api.cloudquotas.v1.QuotaInfo|QuotaInfo} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaInfo|QuotaInfo} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listQuotaInfosAsync()`
@@ -958,7 +976,7 @@ export class CloudQuotasClient {
    *   for more details and examples.
    */
   listQuotaInfosStream(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1004,17 +1022,17 @@ export class CloudQuotasClient {
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.api.cloudquotas.v1.QuotaInfo|QuotaInfo}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.api.cloudquotas.v1beta.QuotaInfo|QuotaInfo}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cloud_quotas.list_quota_infos.js</caption>
-   * region_tag:cloudquotas_v1_generated_CloudQuotas_ListQuotaInfos_async
+   * @example <caption>include:samples/generated/v1beta/cloud_quotas.list_quota_infos.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_CloudQuotas_ListQuotaInfos_async
    */
   listQuotaInfosAsync(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaInfosRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.api.cloudquotas.v1.IQuotaInfo> {
+  ): AsyncIterable<protos.google.api.cloudquotas.v1beta.IQuotaInfo> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1030,7 +1048,7 @@ export class CloudQuotasClient {
       this.innerApiCalls['listQuotaInfos'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.api.cloudquotas.v1.IQuotaInfo>;
+    ) as AsyncIterable<protos.google.api.cloudquotas.v1beta.IQuotaInfo>;
   }
   /**
    * Lists QuotaPreferences in a given project, folder or organization.
@@ -1070,7 +1088,7 @@ export class CloudQuotasClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.api.cloudquotas.v1.QuotaPreference|QuotaPreference}.
+   *   The first element of the array is Array of {@link protos.google.api.cloudquotas.v1beta.QuotaPreference|QuotaPreference}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1080,59 +1098,59 @@ export class CloudQuotasClient {
    *   for more details and examples.
    */
   listQuotaPreferences(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference[],
-      protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest | null,
-      protos.google.api.cloudquotas.v1.IListQuotaPreferencesResponse,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference[],
+      protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest | null,
+      protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse,
     ]
   >;
   listQuotaPreferences(
-    request: protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
+    request: protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
-      | protos.google.api.cloudquotas.v1.IListQuotaPreferencesResponse
+      protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
+      | protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse
       | null
       | undefined,
-      protos.google.api.cloudquotas.v1.IQuotaPreference
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference
     >
   ): void;
   listQuotaPreferences(
-    request: protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
+    request: protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
     callback: PaginationCallback<
-      protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
-      | protos.google.api.cloudquotas.v1.IListQuotaPreferencesResponse
+      protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
+      | protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse
       | null
       | undefined,
-      protos.google.api.cloudquotas.v1.IQuotaPreference
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference
     >
   ): void;
   listQuotaPreferences(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
-          | protos.google.api.cloudquotas.v1.IListQuotaPreferencesResponse
+          protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
+          | protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse
           | null
           | undefined,
-          protos.google.api.cloudquotas.v1.IQuotaPreference
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference
         >,
     callback?: PaginationCallback<
-      protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
-      | protos.google.api.cloudquotas.v1.IListQuotaPreferencesResponse
+      protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
+      | protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse
       | null
       | undefined,
-      protos.google.api.cloudquotas.v1.IQuotaPreference
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference
     >
   ): Promise<
     [
-      protos.google.api.cloudquotas.v1.IQuotaPreference[],
-      protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest | null,
-      protos.google.api.cloudquotas.v1.IListQuotaPreferencesResponse,
+      protos.google.api.cloudquotas.v1beta.IQuotaPreference[],
+      protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest | null,
+      protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse,
     ]
   > | void {
     request = request || {};
@@ -1191,7 +1209,7 @@ export class CloudQuotasClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.api.cloudquotas.v1.QuotaPreference|QuotaPreference} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.api.cloudquotas.v1beta.QuotaPreference|QuotaPreference} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listQuotaPreferencesAsync()`
@@ -1200,7 +1218,7 @@ export class CloudQuotasClient {
    *   for more details and examples.
    */
   listQuotaPreferencesStream(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1262,17 +1280,17 @@ export class CloudQuotasClient {
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.api.cloudquotas.v1.QuotaPreference|QuotaPreference}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.api.cloudquotas.v1beta.QuotaPreference|QuotaPreference}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cloud_quotas.list_quota_preferences.js</caption>
-   * region_tag:cloudquotas_v1_generated_CloudQuotas_ListQuotaPreferences_async
+   * @example <caption>include:samples/generated/v1beta/cloud_quotas.list_quota_preferences.js</caption>
+   * region_tag:cloudquotas_v1beta_generated_CloudQuotas_ListQuotaPreferences_async
    */
   listQuotaPreferencesAsync(
-    request?: protos.google.api.cloudquotas.v1.IListQuotaPreferencesRequest,
+    request?: protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.api.cloudquotas.v1.IQuotaPreference> {
+  ): AsyncIterable<protos.google.api.cloudquotas.v1beta.IQuotaPreference> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1288,7 +1306,7 @@ export class CloudQuotasClient {
       this.innerApiCalls['listQuotaPreferences'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.api.cloudquotas.v1.IQuotaPreference>;
+    ) as AsyncIterable<protos.google.api.cloudquotas.v1beta.IQuotaPreference>;
   }
   // --------------------
   // -- Path templates --
@@ -1445,6 +1463,42 @@ export class CloudQuotasClient {
   }
 
   /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
    * Return a fully-qualified organizationLocationQuotaPreference resource name string.
    *
    * @param {string} organization
@@ -1597,43 +1651,26 @@ export class CloudQuotasClient {
   }
 
   /**
-   * Return a fully-qualified projectLocation resource name string.
+   * Return a fully-qualified project resource name string.
    *
    * @param {string} project
-   * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationPath(project: string, location: string) {
-    return this.pathTemplates.projectLocationPathTemplate.render({
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
       project: project,
-      location: location,
     });
   }
 
   /**
-   * Parse the project from ProjectLocation resource.
+   * Parse the project from Project resource.
    *
-   * @param {string} projectLocationName
-   *   A fully-qualified path representing project_location resource.
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationName(projectLocationName: string) {
-    return this.pathTemplates.projectLocationPathTemplate.match(
-      projectLocationName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocation resource.
-   *
-   * @param {string} projectLocationName
-   *   A fully-qualified path representing project_location resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationName(projectLocationName: string) {
-    return this.pathTemplates.projectLocationPathTemplate.match(
-      projectLocationName
-    ).location;
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -1851,6 +1888,48 @@ export class CloudQuotasClient {
     return this.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match(
       projectLocationServiceQuotaInfoName
     ).quota_info;
+  }
+
+  /**
+   * Return a fully-qualified quotaAdjusterSettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  quotaAdjusterSettingsPath(project: string, location: string) {
+    return this.pathTemplates.quotaAdjusterSettingsPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from QuotaAdjusterSettings resource.
+   *
+   * @param {string} quotaAdjusterSettingsName
+   *   A fully-qualified path representing QuotaAdjusterSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromQuotaAdjusterSettingsName(quotaAdjusterSettingsName: string) {
+    return this.pathTemplates.quotaAdjusterSettingsPathTemplate.match(
+      quotaAdjusterSettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from QuotaAdjusterSettings resource.
+   *
+   * @param {string} quotaAdjusterSettingsName
+   *   A fully-qualified path representing QuotaAdjusterSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromQuotaAdjusterSettingsName(
+    quotaAdjusterSettingsName: string
+  ) {
+    return this.pathTemplates.quotaAdjusterSettingsPathTemplate.match(
+      quotaAdjusterSettingsName
+    ).location;
   }
 
   /**

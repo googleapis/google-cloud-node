@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5062,6 +5062,5895 @@
                     })();
     
                     return v1;
+                })();
+    
+                cloudquotas.v1beta = (function() {
+    
+                    /**
+                     * Namespace v1beta.
+                     * @memberof google.api.cloudquotas
+                     * @namespace
+                     */
+                    var v1beta = {};
+    
+                    v1beta.CloudQuotas = (function() {
+    
+                        /**
+                         * Constructs a new CloudQuotas service.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a CloudQuotas
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function CloudQuotas(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (CloudQuotas.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CloudQuotas;
+    
+                        /**
+                         * Creates new CloudQuotas service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {CloudQuotas} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        CloudQuotas.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|listQuotaInfos}.
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @typedef ListQuotaInfosCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.ListQuotaInfosResponse} [response] ListQuotaInfosResponse
+                         */
+    
+                        /**
+                         * Calls ListQuotaInfos.
+                         * @function listQuotaInfos
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosRequest} request ListQuotaInfosRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.CloudQuotas.ListQuotaInfosCallback} callback Node-style callback called with the error, if any, and ListQuotaInfosResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudQuotas.prototype.listQuotaInfos = function listQuotaInfos(request, callback) {
+                            return this.rpcCall(listQuotaInfos, $root.google.api.cloudquotas.v1beta.ListQuotaInfosRequest, $root.google.api.cloudquotas.v1beta.ListQuotaInfosResponse, request, callback);
+                        }, "name", { value: "ListQuotaInfos" });
+    
+                        /**
+                         * Calls ListQuotaInfos.
+                         * @function listQuotaInfos
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosRequest} request ListQuotaInfosRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.ListQuotaInfosResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|getQuotaInfo}.
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @typedef GetQuotaInfoCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.QuotaInfo} [response] QuotaInfo
+                         */
+    
+                        /**
+                         * Calls GetQuotaInfo.
+                         * @function getQuotaInfo
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaInfoRequest} request GetQuotaInfoRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.CloudQuotas.GetQuotaInfoCallback} callback Node-style callback called with the error, if any, and QuotaInfo
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudQuotas.prototype.getQuotaInfo = function getQuotaInfo(request, callback) {
+                            return this.rpcCall(getQuotaInfo, $root.google.api.cloudquotas.v1beta.GetQuotaInfoRequest, $root.google.api.cloudquotas.v1beta.QuotaInfo, request, callback);
+                        }, "name", { value: "GetQuotaInfo" });
+    
+                        /**
+                         * Calls GetQuotaInfo.
+                         * @function getQuotaInfo
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaInfoRequest} request GetQuotaInfoRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.QuotaInfo>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|listQuotaPreferences}.
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @typedef ListQuotaPreferencesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse} [response] ListQuotaPreferencesResponse
+                         */
+    
+                        /**
+                         * Calls ListQuotaPreferences.
+                         * @function listQuotaPreferences
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest} request ListQuotaPreferencesRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.CloudQuotas.ListQuotaPreferencesCallback} callback Node-style callback called with the error, if any, and ListQuotaPreferencesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudQuotas.prototype.listQuotaPreferences = function listQuotaPreferences(request, callback) {
+                            return this.rpcCall(listQuotaPreferences, $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest, $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse, request, callback);
+                        }, "name", { value: "ListQuotaPreferences" });
+    
+                        /**
+                         * Calls ListQuotaPreferences.
+                         * @function listQuotaPreferences
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest} request ListQuotaPreferencesRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|getQuotaPreference}.
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @typedef GetQuotaPreferenceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.QuotaPreference} [response] QuotaPreference
+                         */
+    
+                        /**
+                         * Calls GetQuotaPreference.
+                         * @function getQuotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest} request GetQuotaPreferenceRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.CloudQuotas.GetQuotaPreferenceCallback} callback Node-style callback called with the error, if any, and QuotaPreference
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudQuotas.prototype.getQuotaPreference = function getQuotaPreference(request, callback) {
+                            return this.rpcCall(getQuotaPreference, $root.google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest, $root.google.api.cloudquotas.v1beta.QuotaPreference, request, callback);
+                        }, "name", { value: "GetQuotaPreference" });
+    
+                        /**
+                         * Calls GetQuotaPreference.
+                         * @function getQuotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest} request GetQuotaPreferenceRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.QuotaPreference>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|createQuotaPreference}.
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @typedef CreateQuotaPreferenceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.QuotaPreference} [response] QuotaPreference
+                         */
+    
+                        /**
+                         * Calls CreateQuotaPreference.
+                         * @function createQuotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest} request CreateQuotaPreferenceRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.CloudQuotas.CreateQuotaPreferenceCallback} callback Node-style callback called with the error, if any, and QuotaPreference
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudQuotas.prototype.createQuotaPreference = function createQuotaPreference(request, callback) {
+                            return this.rpcCall(createQuotaPreference, $root.google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest, $root.google.api.cloudquotas.v1beta.QuotaPreference, request, callback);
+                        }, "name", { value: "CreateQuotaPreference" });
+    
+                        /**
+                         * Calls CreateQuotaPreference.
+                         * @function createQuotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest} request CreateQuotaPreferenceRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.QuotaPreference>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|updateQuotaPreference}.
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @typedef UpdateQuotaPreferenceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.QuotaPreference} [response] QuotaPreference
+                         */
+    
+                        /**
+                         * Calls UpdateQuotaPreference.
+                         * @function updateQuotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest} request UpdateQuotaPreferenceRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.CloudQuotas.UpdateQuotaPreferenceCallback} callback Node-style callback called with the error, if any, and QuotaPreference
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudQuotas.prototype.updateQuotaPreference = function updateQuotaPreference(request, callback) {
+                            return this.rpcCall(updateQuotaPreference, $root.google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest, $root.google.api.cloudquotas.v1beta.QuotaPreference, request, callback);
+                        }, "name", { value: "UpdateQuotaPreference" });
+    
+                        /**
+                         * Calls UpdateQuotaPreference.
+                         * @function updateQuotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.CloudQuotas
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest} request UpdateQuotaPreferenceRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.QuotaPreference>} Promise
+                         * @variation 2
+                         */
+    
+                        return CloudQuotas;
+                    })();
+    
+                    v1beta.ListQuotaInfosRequest = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaInfosRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IListQuotaInfosRequest
+                         * @property {string|null} [parent] ListQuotaInfosRequest parent
+                         * @property {number|null} [pageSize] ListQuotaInfosRequest pageSize
+                         * @property {string|null} [pageToken] ListQuotaInfosRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaInfosRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a ListQuotaInfosRequest.
+                         * @implements IListQuotaInfosRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosRequest=} [properties] Properties to set
+                         */
+                        function ListQuotaInfosRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaInfosRequest parent.
+                         * @member {string} parent
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @instance
+                         */
+                        ListQuotaInfosRequest.prototype.parent = "";
+    
+                        /**
+                         * ListQuotaInfosRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @instance
+                         */
+                        ListQuotaInfosRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListQuotaInfosRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @instance
+                         */
+                        ListQuotaInfosRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListQuotaInfosRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosRequest} ListQuotaInfosRequest instance
+                         */
+                        ListQuotaInfosRequest.create = function create(properties) {
+                            return new ListQuotaInfosRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaInfosRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosRequest} message ListQuotaInfosRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaInfosRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaInfosRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosRequest} message ListQuotaInfosRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaInfosRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaInfosRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosRequest} ListQuotaInfosRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaInfosRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.ListQuotaInfosRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaInfosRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosRequest} ListQuotaInfosRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaInfosRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaInfosRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaInfosRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaInfosRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosRequest} ListQuotaInfosRequest
+                         */
+                        ListQuotaInfosRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.ListQuotaInfosRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.ListQuotaInfosRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaInfosRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.ListQuotaInfosRequest} message ListQuotaInfosRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaInfosRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaInfosRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaInfosRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaInfosRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaInfosRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.ListQuotaInfosRequest";
+                        };
+    
+                        return ListQuotaInfosRequest;
+                    })();
+    
+                    v1beta.ListQuotaInfosResponse = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaInfosResponse.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IListQuotaInfosResponse
+                         * @property {Array.<google.api.cloudquotas.v1beta.IQuotaInfo>|null} [quotaInfos] ListQuotaInfosResponse quotaInfos
+                         * @property {string|null} [nextPageToken] ListQuotaInfosResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaInfosResponse.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a ListQuotaInfosResponse.
+                         * @implements IListQuotaInfosResponse
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosResponse=} [properties] Properties to set
+                         */
+                        function ListQuotaInfosResponse(properties) {
+                            this.quotaInfos = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaInfosResponse quotaInfos.
+                         * @member {Array.<google.api.cloudquotas.v1beta.IQuotaInfo>} quotaInfos
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @instance
+                         */
+                        ListQuotaInfosResponse.prototype.quotaInfos = $util.emptyArray;
+    
+                        /**
+                         * ListQuotaInfosResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @instance
+                         */
+                        ListQuotaInfosResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListQuotaInfosResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosResponse=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosResponse} ListQuotaInfosResponse instance
+                         */
+                        ListQuotaInfosResponse.create = function create(properties) {
+                            return new ListQuotaInfosResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaInfosResponse message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosResponse} message ListQuotaInfosResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaInfosResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.quotaInfos != null && message.quotaInfos.length)
+                                for (var i = 0; i < message.quotaInfos.length; ++i)
+                                    $root.google.api.cloudquotas.v1beta.QuotaInfo.encode(message.quotaInfos[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaInfosResponse message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaInfosResponse} message ListQuotaInfosResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaInfosResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaInfosResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosResponse} ListQuotaInfosResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaInfosResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.ListQuotaInfosResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.quotaInfos && message.quotaInfos.length))
+                                            message.quotaInfos = [];
+                                        message.quotaInfos.push($root.google.api.cloudquotas.v1beta.QuotaInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaInfosResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosResponse} ListQuotaInfosResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaInfosResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaInfosResponse message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaInfosResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.quotaInfos != null && message.hasOwnProperty("quotaInfos")) {
+                                if (!Array.isArray(message.quotaInfos))
+                                    return "quotaInfos: array expected";
+                                for (var i = 0; i < message.quotaInfos.length; ++i) {
+                                    var error = $root.google.api.cloudquotas.v1beta.QuotaInfo.verify(message.quotaInfos[i]);
+                                    if (error)
+                                        return "quotaInfos." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaInfosResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaInfosResponse} ListQuotaInfosResponse
+                         */
+                        ListQuotaInfosResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.ListQuotaInfosResponse)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.ListQuotaInfosResponse();
+                            if (object.quotaInfos) {
+                                if (!Array.isArray(object.quotaInfos))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.ListQuotaInfosResponse.quotaInfos: array expected");
+                                message.quotaInfos = [];
+                                for (var i = 0; i < object.quotaInfos.length; ++i) {
+                                    if (typeof object.quotaInfos[i] !== "object")
+                                        throw TypeError(".google.api.cloudquotas.v1beta.ListQuotaInfosResponse.quotaInfos: object expected");
+                                    message.quotaInfos[i] = $root.google.api.cloudquotas.v1beta.QuotaInfo.fromObject(object.quotaInfos[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaInfosResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.ListQuotaInfosResponse} message ListQuotaInfosResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaInfosResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.quotaInfos = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.quotaInfos && message.quotaInfos.length) {
+                                object.quotaInfos = [];
+                                for (var j = 0; j < message.quotaInfos.length; ++j)
+                                    object.quotaInfos[j] = $root.google.api.cloudquotas.v1beta.QuotaInfo.toObject(message.quotaInfos[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaInfosResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaInfosResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaInfosResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaInfosResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaInfosResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.ListQuotaInfosResponse";
+                        };
+    
+                        return ListQuotaInfosResponse;
+                    })();
+    
+                    v1beta.GetQuotaInfoRequest = (function() {
+    
+                        /**
+                         * Properties of a GetQuotaInfoRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IGetQuotaInfoRequest
+                         * @property {string|null} [name] GetQuotaInfoRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetQuotaInfoRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a GetQuotaInfoRequest.
+                         * @implements IGetQuotaInfoRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaInfoRequest=} [properties] Properties to set
+                         */
+                        function GetQuotaInfoRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetQuotaInfoRequest name.
+                         * @member {string} name
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @instance
+                         */
+                        GetQuotaInfoRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetQuotaInfoRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaInfoRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaInfoRequest} GetQuotaInfoRequest instance
+                         */
+                        GetQuotaInfoRequest.create = function create(properties) {
+                            return new GetQuotaInfoRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaInfoRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaInfoRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaInfoRequest} message GetQuotaInfoRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaInfoRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaInfoRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaInfoRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaInfoRequest} message GetQuotaInfoRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaInfoRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaInfoRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaInfoRequest} GetQuotaInfoRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaInfoRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.GetQuotaInfoRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaInfoRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaInfoRequest} GetQuotaInfoRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaInfoRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetQuotaInfoRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetQuotaInfoRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetQuotaInfoRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaInfoRequest} GetQuotaInfoRequest
+                         */
+                        GetQuotaInfoRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.GetQuotaInfoRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.GetQuotaInfoRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetQuotaInfoRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.GetQuotaInfoRequest} message GetQuotaInfoRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetQuotaInfoRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetQuotaInfoRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetQuotaInfoRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetQuotaInfoRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaInfoRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetQuotaInfoRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.GetQuotaInfoRequest";
+                        };
+    
+                        return GetQuotaInfoRequest;
+                    })();
+    
+                    v1beta.ListQuotaPreferencesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaPreferencesRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IListQuotaPreferencesRequest
+                         * @property {string|null} [parent] ListQuotaPreferencesRequest parent
+                         * @property {number|null} [pageSize] ListQuotaPreferencesRequest pageSize
+                         * @property {string|null} [pageToken] ListQuotaPreferencesRequest pageToken
+                         * @property {string|null} [filter] ListQuotaPreferencesRequest filter
+                         * @property {string|null} [orderBy] ListQuotaPreferencesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaPreferencesRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a ListQuotaPreferencesRequest.
+                         * @implements IListQuotaPreferencesRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest=} [properties] Properties to set
+                         */
+                        function ListQuotaPreferencesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaPreferencesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @instance
+                         */
+                        ListQuotaPreferencesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListQuotaPreferencesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @instance
+                         */
+                        ListQuotaPreferencesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListQuotaPreferencesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @instance
+                         */
+                        ListQuotaPreferencesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListQuotaPreferencesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @instance
+                         */
+                        ListQuotaPreferencesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListQuotaPreferencesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @instance
+                         */
+                        ListQuotaPreferencesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListQuotaPreferencesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest} ListQuotaPreferencesRequest instance
+                         */
+                        ListQuotaPreferencesRequest.create = function create(properties) {
+                            return new ListQuotaPreferencesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaPreferencesRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest} message ListQuotaPreferencesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaPreferencesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaPreferencesRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest} message ListQuotaPreferencesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaPreferencesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaPreferencesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest} ListQuotaPreferencesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaPreferencesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaPreferencesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest} ListQuotaPreferencesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaPreferencesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaPreferencesRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaPreferencesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaPreferencesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest} ListQuotaPreferencesRequest
+                         */
+                        ListQuotaPreferencesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaPreferencesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest} message ListQuotaPreferencesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaPreferencesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaPreferencesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaPreferencesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaPreferencesRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaPreferencesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest";
+                        };
+    
+                        return ListQuotaPreferencesRequest;
+                    })();
+    
+                    v1beta.ListQuotaPreferencesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaPreferencesResponse.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IListQuotaPreferencesResponse
+                         * @property {Array.<google.api.cloudquotas.v1beta.IQuotaPreference>|null} [quotaPreferences] ListQuotaPreferencesResponse quotaPreferences
+                         * @property {string|null} [nextPageToken] ListQuotaPreferencesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListQuotaPreferencesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaPreferencesResponse.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a ListQuotaPreferencesResponse.
+                         * @implements IListQuotaPreferencesResponse
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse=} [properties] Properties to set
+                         */
+                        function ListQuotaPreferencesResponse(properties) {
+                            this.quotaPreferences = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaPreferencesResponse quotaPreferences.
+                         * @member {Array.<google.api.cloudquotas.v1beta.IQuotaPreference>} quotaPreferences
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @instance
+                         */
+                        ListQuotaPreferencesResponse.prototype.quotaPreferences = $util.emptyArray;
+    
+                        /**
+                         * ListQuotaPreferencesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @instance
+                         */
+                        ListQuotaPreferencesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListQuotaPreferencesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @instance
+                         */
+                        ListQuotaPreferencesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListQuotaPreferencesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse} ListQuotaPreferencesResponse instance
+                         */
+                        ListQuotaPreferencesResponse.create = function create(properties) {
+                            return new ListQuotaPreferencesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaPreferencesResponse message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse} message ListQuotaPreferencesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaPreferencesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.quotaPreferences != null && message.quotaPreferences.length)
+                                for (var i = 0; i < message.quotaPreferences.length; ++i)
+                                    $root.google.api.cloudquotas.v1beta.QuotaPreference.encode(message.quotaPreferences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaPreferencesResponse message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse} message ListQuotaPreferencesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaPreferencesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaPreferencesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse} ListQuotaPreferencesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaPreferencesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.quotaPreferences && message.quotaPreferences.length))
+                                            message.quotaPreferences = [];
+                                        message.quotaPreferences.push($root.google.api.cloudquotas.v1beta.QuotaPreference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaPreferencesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse} ListQuotaPreferencesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaPreferencesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaPreferencesResponse message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaPreferencesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.quotaPreferences != null && message.hasOwnProperty("quotaPreferences")) {
+                                if (!Array.isArray(message.quotaPreferences))
+                                    return "quotaPreferences: array expected";
+                                for (var i = 0; i < message.quotaPreferences.length; ++i) {
+                                    var error = $root.google.api.cloudquotas.v1beta.QuotaPreference.verify(message.quotaPreferences[i]);
+                                    if (error)
+                                        return "quotaPreferences." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaPreferencesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse} ListQuotaPreferencesResponse
+                         */
+                        ListQuotaPreferencesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse();
+                            if (object.quotaPreferences) {
+                                if (!Array.isArray(object.quotaPreferences))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse.quotaPreferences: array expected");
+                                message.quotaPreferences = [];
+                                for (var i = 0; i < object.quotaPreferences.length; ++i) {
+                                    if (typeof object.quotaPreferences[i] !== "object")
+                                        throw TypeError(".google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse.quotaPreferences: object expected");
+                                    message.quotaPreferences[i] = $root.google.api.cloudquotas.v1beta.QuotaPreference.fromObject(object.quotaPreferences[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaPreferencesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse} message ListQuotaPreferencesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaPreferencesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.quotaPreferences = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.quotaPreferences && message.quotaPreferences.length) {
+                                object.quotaPreferences = [];
+                                for (var j = 0; j < message.quotaPreferences.length; ++j)
+                                    object.quotaPreferences[j] = $root.google.api.cloudquotas.v1beta.QuotaPreference.toObject(message.quotaPreferences[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaPreferencesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaPreferencesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaPreferencesResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaPreferencesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse";
+                        };
+    
+                        return ListQuotaPreferencesResponse;
+                    })();
+    
+                    v1beta.GetQuotaPreferenceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetQuotaPreferenceRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IGetQuotaPreferenceRequest
+                         * @property {string|null} [name] GetQuotaPreferenceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetQuotaPreferenceRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a GetQuotaPreferenceRequest.
+                         * @implements IGetQuotaPreferenceRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest=} [properties] Properties to set
+                         */
+                        function GetQuotaPreferenceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetQuotaPreferenceRequest name.
+                         * @member {string} name
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @instance
+                         */
+                        GetQuotaPreferenceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetQuotaPreferenceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest} GetQuotaPreferenceRequest instance
+                         */
+                        GetQuotaPreferenceRequest.create = function create(properties) {
+                            return new GetQuotaPreferenceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaPreferenceRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest} message GetQuotaPreferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaPreferenceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaPreferenceRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest} message GetQuotaPreferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaPreferenceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaPreferenceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest} GetQuotaPreferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaPreferenceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaPreferenceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest} GetQuotaPreferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaPreferenceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetQuotaPreferenceRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetQuotaPreferenceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetQuotaPreferenceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest} GetQuotaPreferenceRequest
+                         */
+                        GetQuotaPreferenceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetQuotaPreferenceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest} message GetQuotaPreferenceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetQuotaPreferenceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetQuotaPreferenceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetQuotaPreferenceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetQuotaPreferenceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetQuotaPreferenceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest";
+                        };
+    
+                        return GetQuotaPreferenceRequest;
+                    })();
+    
+                    v1beta.CreateQuotaPreferenceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateQuotaPreferenceRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface ICreateQuotaPreferenceRequest
+                         * @property {string|null} [parent] CreateQuotaPreferenceRequest parent
+                         * @property {string|null} [quotaPreferenceId] CreateQuotaPreferenceRequest quotaPreferenceId
+                         * @property {google.api.cloudquotas.v1beta.IQuotaPreference|null} [quotaPreference] CreateQuotaPreferenceRequest quotaPreference
+                         * @property {Array.<google.api.cloudquotas.v1beta.QuotaSafetyCheck>|null} [ignoreSafetyChecks] CreateQuotaPreferenceRequest ignoreSafetyChecks
+                         */
+    
+                        /**
+                         * Constructs a new CreateQuotaPreferenceRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a CreateQuotaPreferenceRequest.
+                         * @implements ICreateQuotaPreferenceRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest=} [properties] Properties to set
+                         */
+                        function CreateQuotaPreferenceRequest(properties) {
+                            this.ignoreSafetyChecks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateQuotaPreferenceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        CreateQuotaPreferenceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateQuotaPreferenceRequest quotaPreferenceId.
+                         * @member {string} quotaPreferenceId
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        CreateQuotaPreferenceRequest.prototype.quotaPreferenceId = "";
+    
+                        /**
+                         * CreateQuotaPreferenceRequest quotaPreference.
+                         * @member {google.api.cloudquotas.v1beta.IQuotaPreference|null|undefined} quotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        CreateQuotaPreferenceRequest.prototype.quotaPreference = null;
+    
+                        /**
+                         * CreateQuotaPreferenceRequest ignoreSafetyChecks.
+                         * @member {Array.<google.api.cloudquotas.v1beta.QuotaSafetyCheck>} ignoreSafetyChecks
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        CreateQuotaPreferenceRequest.prototype.ignoreSafetyChecks = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CreateQuotaPreferenceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest} CreateQuotaPreferenceRequest instance
+                         */
+                        CreateQuotaPreferenceRequest.create = function create(properties) {
+                            return new CreateQuotaPreferenceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateQuotaPreferenceRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest} message CreateQuotaPreferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateQuotaPreferenceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.quotaPreferenceId != null && Object.hasOwnProperty.call(message, "quotaPreferenceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.quotaPreferenceId);
+                            if (message.quotaPreference != null && Object.hasOwnProperty.call(message, "quotaPreference"))
+                                $root.google.api.cloudquotas.v1beta.QuotaPreference.encode(message.quotaPreference, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.ignoreSafetyChecks != null && message.ignoreSafetyChecks.length) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                for (var i = 0; i < message.ignoreSafetyChecks.length; ++i)
+                                    writer.int32(message.ignoreSafetyChecks[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateQuotaPreferenceRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest} message CreateQuotaPreferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateQuotaPreferenceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateQuotaPreferenceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest} CreateQuotaPreferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateQuotaPreferenceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.quotaPreferenceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.quotaPreference = $root.google.api.cloudquotas.v1beta.QuotaPreference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.ignoreSafetyChecks && message.ignoreSafetyChecks.length))
+                                            message.ignoreSafetyChecks = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.ignoreSafetyChecks.push(reader.int32());
+                                        } else
+                                            message.ignoreSafetyChecks.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateQuotaPreferenceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest} CreateQuotaPreferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateQuotaPreferenceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateQuotaPreferenceRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateQuotaPreferenceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.quotaPreferenceId != null && message.hasOwnProperty("quotaPreferenceId"))
+                                if (!$util.isString(message.quotaPreferenceId))
+                                    return "quotaPreferenceId: string expected";
+                            if (message.quotaPreference != null && message.hasOwnProperty("quotaPreference")) {
+                                var error = $root.google.api.cloudquotas.v1beta.QuotaPreference.verify(message.quotaPreference);
+                                if (error)
+                                    return "quotaPreference." + error;
+                            }
+                            if (message.ignoreSafetyChecks != null && message.hasOwnProperty("ignoreSafetyChecks")) {
+                                if (!Array.isArray(message.ignoreSafetyChecks))
+                                    return "ignoreSafetyChecks: array expected";
+                                for (var i = 0; i < message.ignoreSafetyChecks.length; ++i)
+                                    switch (message.ignoreSafetyChecks[i]) {
+                                    default:
+                                        return "ignoreSafetyChecks: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateQuotaPreferenceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest} CreateQuotaPreferenceRequest
+                         */
+                        CreateQuotaPreferenceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.quotaPreferenceId != null)
+                                message.quotaPreferenceId = String(object.quotaPreferenceId);
+                            if (object.quotaPreference != null) {
+                                if (typeof object.quotaPreference !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest.quotaPreference: object expected");
+                                message.quotaPreference = $root.google.api.cloudquotas.v1beta.QuotaPreference.fromObject(object.quotaPreference);
+                            }
+                            if (object.ignoreSafetyChecks) {
+                                if (!Array.isArray(object.ignoreSafetyChecks))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest.ignoreSafetyChecks: array expected");
+                                message.ignoreSafetyChecks = [];
+                                for (var i = 0; i < object.ignoreSafetyChecks.length; ++i)
+                                    switch (object.ignoreSafetyChecks[i]) {
+                                    default:
+                                        if (typeof object.ignoreSafetyChecks[i] === "number") {
+                                            message.ignoreSafetyChecks[i] = object.ignoreSafetyChecks[i];
+                                            break;
+                                        }
+                                    case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
+                                    case 0:
+                                        message.ignoreSafetyChecks[i] = 0;
+                                        break;
+                                    case "QUOTA_DECREASE_BELOW_USAGE":
+                                    case 1:
+                                        message.ignoreSafetyChecks[i] = 1;
+                                        break;
+                                    case "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH":
+                                    case 2:
+                                        message.ignoreSafetyChecks[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateQuotaPreferenceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest} message CreateQuotaPreferenceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateQuotaPreferenceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ignoreSafetyChecks = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.quotaPreferenceId = "";
+                                object.quotaPreference = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.quotaPreferenceId != null && message.hasOwnProperty("quotaPreferenceId"))
+                                object.quotaPreferenceId = message.quotaPreferenceId;
+                            if (message.quotaPreference != null && message.hasOwnProperty("quotaPreference"))
+                                object.quotaPreference = $root.google.api.cloudquotas.v1beta.QuotaPreference.toObject(message.quotaPreference, options);
+                            if (message.ignoreSafetyChecks && message.ignoreSafetyChecks.length) {
+                                object.ignoreSafetyChecks = [];
+                                for (var j = 0; j < message.ignoreSafetyChecks.length; ++j)
+                                    object.ignoreSafetyChecks[j] = options.enums === String ? $root.google.api.cloudquotas.v1beta.QuotaSafetyCheck[message.ignoreSafetyChecks[j]] === undefined ? message.ignoreSafetyChecks[j] : $root.google.api.cloudquotas.v1beta.QuotaSafetyCheck[message.ignoreSafetyChecks[j]] : message.ignoreSafetyChecks[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateQuotaPreferenceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateQuotaPreferenceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateQuotaPreferenceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateQuotaPreferenceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest";
+                        };
+    
+                        return CreateQuotaPreferenceRequest;
+                    })();
+    
+                    v1beta.UpdateQuotaPreferenceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateQuotaPreferenceRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IUpdateQuotaPreferenceRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateQuotaPreferenceRequest updateMask
+                         * @property {google.api.cloudquotas.v1beta.IQuotaPreference|null} [quotaPreference] UpdateQuotaPreferenceRequest quotaPreference
+                         * @property {boolean|null} [allowMissing] UpdateQuotaPreferenceRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateQuotaPreferenceRequest validateOnly
+                         * @property {Array.<google.api.cloudquotas.v1beta.QuotaSafetyCheck>|null} [ignoreSafetyChecks] UpdateQuotaPreferenceRequest ignoreSafetyChecks
+                         */
+    
+                        /**
+                         * Constructs a new UpdateQuotaPreferenceRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents an UpdateQuotaPreferenceRequest.
+                         * @implements IUpdateQuotaPreferenceRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest=} [properties] Properties to set
+                         */
+                        function UpdateQuotaPreferenceRequest(properties) {
+                            this.ignoreSafetyChecks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateQuotaPreferenceRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        UpdateQuotaPreferenceRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateQuotaPreferenceRequest quotaPreference.
+                         * @member {google.api.cloudquotas.v1beta.IQuotaPreference|null|undefined} quotaPreference
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        UpdateQuotaPreferenceRequest.prototype.quotaPreference = null;
+    
+                        /**
+                         * UpdateQuotaPreferenceRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        UpdateQuotaPreferenceRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateQuotaPreferenceRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        UpdateQuotaPreferenceRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * UpdateQuotaPreferenceRequest ignoreSafetyChecks.
+                         * @member {Array.<google.api.cloudquotas.v1beta.QuotaSafetyCheck>} ignoreSafetyChecks
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @instance
+                         */
+                        UpdateQuotaPreferenceRequest.prototype.ignoreSafetyChecks = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UpdateQuotaPreferenceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest} UpdateQuotaPreferenceRequest instance
+                         */
+                        UpdateQuotaPreferenceRequest.create = function create(properties) {
+                            return new UpdateQuotaPreferenceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateQuotaPreferenceRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest} message UpdateQuotaPreferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateQuotaPreferenceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.quotaPreference != null && Object.hasOwnProperty.call(message, "quotaPreference"))
+                                $root.google.api.cloudquotas.v1beta.QuotaPreference.encode(message.quotaPreference, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            if (message.ignoreSafetyChecks != null && message.ignoreSafetyChecks.length) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                for (var i = 0; i < message.ignoreSafetyChecks.length; ++i)
+                                    writer.int32(message.ignoreSafetyChecks[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateQuotaPreferenceRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest} message UpdateQuotaPreferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateQuotaPreferenceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateQuotaPreferenceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest} UpdateQuotaPreferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateQuotaPreferenceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.quotaPreference = $root.google.api.cloudquotas.v1beta.QuotaPreference.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.ignoreSafetyChecks && message.ignoreSafetyChecks.length))
+                                            message.ignoreSafetyChecks = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.ignoreSafetyChecks.push(reader.int32());
+                                        } else
+                                            message.ignoreSafetyChecks.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateQuotaPreferenceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest} UpdateQuotaPreferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateQuotaPreferenceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateQuotaPreferenceRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateQuotaPreferenceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.quotaPreference != null && message.hasOwnProperty("quotaPreference")) {
+                                var error = $root.google.api.cloudquotas.v1beta.QuotaPreference.verify(message.quotaPreference);
+                                if (error)
+                                    return "quotaPreference." + error;
+                            }
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.ignoreSafetyChecks != null && message.hasOwnProperty("ignoreSafetyChecks")) {
+                                if (!Array.isArray(message.ignoreSafetyChecks))
+                                    return "ignoreSafetyChecks: array expected";
+                                for (var i = 0; i < message.ignoreSafetyChecks.length; ++i)
+                                    switch (message.ignoreSafetyChecks[i]) {
+                                    default:
+                                        return "ignoreSafetyChecks: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateQuotaPreferenceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest} UpdateQuotaPreferenceRequest
+                         */
+                        UpdateQuotaPreferenceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.quotaPreference != null) {
+                                if (typeof object.quotaPreference !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest.quotaPreference: object expected");
+                                message.quotaPreference = $root.google.api.cloudquotas.v1beta.QuotaPreference.fromObject(object.quotaPreference);
+                            }
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.ignoreSafetyChecks) {
+                                if (!Array.isArray(object.ignoreSafetyChecks))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest.ignoreSafetyChecks: array expected");
+                                message.ignoreSafetyChecks = [];
+                                for (var i = 0; i < object.ignoreSafetyChecks.length; ++i)
+                                    switch (object.ignoreSafetyChecks[i]) {
+                                    default:
+                                        if (typeof object.ignoreSafetyChecks[i] === "number") {
+                                            message.ignoreSafetyChecks[i] = object.ignoreSafetyChecks[i];
+                                            break;
+                                        }
+                                    case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
+                                    case 0:
+                                        message.ignoreSafetyChecks[i] = 0;
+                                        break;
+                                    case "QUOTA_DECREASE_BELOW_USAGE":
+                                    case 1:
+                                        message.ignoreSafetyChecks[i] = 1;
+                                        break;
+                                    case "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH":
+                                    case 2:
+                                        message.ignoreSafetyChecks[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateQuotaPreferenceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest} message UpdateQuotaPreferenceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateQuotaPreferenceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ignoreSafetyChecks = [];
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.quotaPreference = null;
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.quotaPreference != null && message.hasOwnProperty("quotaPreference"))
+                                object.quotaPreference = $root.google.api.cloudquotas.v1beta.QuotaPreference.toObject(message.quotaPreference, options);
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.ignoreSafetyChecks && message.ignoreSafetyChecks.length) {
+                                object.ignoreSafetyChecks = [];
+                                for (var j = 0; j < message.ignoreSafetyChecks.length; ++j)
+                                    object.ignoreSafetyChecks[j] = options.enums === String ? $root.google.api.cloudquotas.v1beta.QuotaSafetyCheck[message.ignoreSafetyChecks[j]] === undefined ? message.ignoreSafetyChecks[j] : $root.google.api.cloudquotas.v1beta.QuotaSafetyCheck[message.ignoreSafetyChecks[j]] : message.ignoreSafetyChecks[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateQuotaPreferenceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateQuotaPreferenceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateQuotaPreferenceRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateQuotaPreferenceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest";
+                        };
+    
+                        return UpdateQuotaPreferenceRequest;
+                    })();
+    
+                    /**
+                     * QuotaSafetyCheck enum.
+                     * @name google.api.cloudquotas.v1beta.QuotaSafetyCheck
+                     * @enum {number}
+                     * @property {number} QUOTA_SAFETY_CHECK_UNSPECIFIED=0 QUOTA_SAFETY_CHECK_UNSPECIFIED value
+                     * @property {number} QUOTA_DECREASE_BELOW_USAGE=1 QUOTA_DECREASE_BELOW_USAGE value
+                     * @property {number} QUOTA_DECREASE_PERCENTAGE_TOO_HIGH=2 QUOTA_DECREASE_PERCENTAGE_TOO_HIGH value
+                     */
+                    v1beta.QuotaSafetyCheck = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "QUOTA_SAFETY_CHECK_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "QUOTA_DECREASE_BELOW_USAGE"] = 1;
+                        values[valuesById[2] = "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH"] = 2;
+                        return values;
+                    })();
+    
+                    v1beta.QuotaInfo = (function() {
+    
+                        /**
+                         * Properties of a QuotaInfo.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IQuotaInfo
+                         * @property {string|null} [name] QuotaInfo name
+                         * @property {string|null} [quotaId] QuotaInfo quotaId
+                         * @property {string|null} [metric] QuotaInfo metric
+                         * @property {string|null} [service] QuotaInfo service
+                         * @property {boolean|null} [isPrecise] QuotaInfo isPrecise
+                         * @property {string|null} [refreshInterval] QuotaInfo refreshInterval
+                         * @property {google.api.cloudquotas.v1beta.QuotaInfo.ContainerType|null} [containerType] QuotaInfo containerType
+                         * @property {Array.<string>|null} [dimensions] QuotaInfo dimensions
+                         * @property {string|null} [metricDisplayName] QuotaInfo metricDisplayName
+                         * @property {string|null} [quotaDisplayName] QuotaInfo quotaDisplayName
+                         * @property {string|null} [metricUnit] QuotaInfo metricUnit
+                         * @property {google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility|null} [quotaIncreaseEligibility] QuotaInfo quotaIncreaseEligibility
+                         * @property {boolean|null} [isFixed] QuotaInfo isFixed
+                         * @property {Array.<google.api.cloudquotas.v1beta.IDimensionsInfo>|null} [dimensionsInfos] QuotaInfo dimensionsInfos
+                         * @property {boolean|null} [isConcurrent] QuotaInfo isConcurrent
+                         * @property {string|null} [serviceRequestQuotaUri] QuotaInfo serviceRequestQuotaUri
+                         */
+    
+                        /**
+                         * Constructs a new QuotaInfo.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a QuotaInfo.
+                         * @implements IQuotaInfo
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IQuotaInfo=} [properties] Properties to set
+                         */
+                        function QuotaInfo(properties) {
+                            this.dimensions = [];
+                            this.dimensionsInfos = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaInfo name.
+                         * @member {string} name
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.name = "";
+    
+                        /**
+                         * QuotaInfo quotaId.
+                         * @member {string} quotaId
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.quotaId = "";
+    
+                        /**
+                         * QuotaInfo metric.
+                         * @member {string} metric
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.metric = "";
+    
+                        /**
+                         * QuotaInfo service.
+                         * @member {string} service
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.service = "";
+    
+                        /**
+                         * QuotaInfo isPrecise.
+                         * @member {boolean} isPrecise
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.isPrecise = false;
+    
+                        /**
+                         * QuotaInfo refreshInterval.
+                         * @member {string} refreshInterval
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.refreshInterval = "";
+    
+                        /**
+                         * QuotaInfo containerType.
+                         * @member {google.api.cloudquotas.v1beta.QuotaInfo.ContainerType} containerType
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.containerType = 0;
+    
+                        /**
+                         * QuotaInfo dimensions.
+                         * @member {Array.<string>} dimensions
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * QuotaInfo metricDisplayName.
+                         * @member {string} metricDisplayName
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.metricDisplayName = "";
+    
+                        /**
+                         * QuotaInfo quotaDisplayName.
+                         * @member {string} quotaDisplayName
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.quotaDisplayName = "";
+    
+                        /**
+                         * QuotaInfo metricUnit.
+                         * @member {string} metricUnit
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.metricUnit = "";
+    
+                        /**
+                         * QuotaInfo quotaIncreaseEligibility.
+                         * @member {google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility|null|undefined} quotaIncreaseEligibility
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.quotaIncreaseEligibility = null;
+    
+                        /**
+                         * QuotaInfo isFixed.
+                         * @member {boolean} isFixed
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.isFixed = false;
+    
+                        /**
+                         * QuotaInfo dimensionsInfos.
+                         * @member {Array.<google.api.cloudquotas.v1beta.IDimensionsInfo>} dimensionsInfos
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.dimensionsInfos = $util.emptyArray;
+    
+                        /**
+                         * QuotaInfo isConcurrent.
+                         * @member {boolean} isConcurrent
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.isConcurrent = false;
+    
+                        /**
+                         * QuotaInfo serviceRequestQuotaUri.
+                         * @member {string} serviceRequestQuotaUri
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         */
+                        QuotaInfo.prototype.serviceRequestQuotaUri = "";
+    
+                        /**
+                         * Creates a new QuotaInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaInfo=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.QuotaInfo} QuotaInfo instance
+                         */
+                        QuotaInfo.create = function create(properties) {
+                            return new QuotaInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaInfo message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaInfo} message QuotaInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.quotaId != null && Object.hasOwnProperty.call(message, "quotaId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.quotaId);
+                            if (message.metric != null && Object.hasOwnProperty.call(message, "metric"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.metric);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.service);
+                            if (message.isPrecise != null && Object.hasOwnProperty.call(message, "isPrecise"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.isPrecise);
+                            if (message.refreshInterval != null && Object.hasOwnProperty.call(message, "refreshInterval"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.refreshInterval);
+                            if (message.containerType != null && Object.hasOwnProperty.call(message, "containerType"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.containerType);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.dimensions[i]);
+                            if (message.metricDisplayName != null && Object.hasOwnProperty.call(message, "metricDisplayName"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.metricDisplayName);
+                            if (message.quotaDisplayName != null && Object.hasOwnProperty.call(message, "quotaDisplayName"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.quotaDisplayName);
+                            if (message.metricUnit != null && Object.hasOwnProperty.call(message, "metricUnit"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.metricUnit);
+                            if (message.quotaIncreaseEligibility != null && Object.hasOwnProperty.call(message, "quotaIncreaseEligibility"))
+                                $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.encode(message.quotaIncreaseEligibility, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.isFixed != null && Object.hasOwnProperty.call(message, "isFixed"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.isFixed);
+                            if (message.dimensionsInfos != null && message.dimensionsInfos.length)
+                                for (var i = 0; i < message.dimensionsInfos.length; ++i)
+                                    $root.google.api.cloudquotas.v1beta.DimensionsInfo.encode(message.dimensionsInfos[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.isConcurrent != null && Object.hasOwnProperty.call(message, "isConcurrent"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.isConcurrent);
+                            if (message.serviceRequestQuotaUri != null && Object.hasOwnProperty.call(message, "serviceRequestQuotaUri"))
+                                writer.uint32(/* id 17, wireType 2 =*/138).string(message.serviceRequestQuotaUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaInfo} message QuotaInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.QuotaInfo} QuotaInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.QuotaInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.quotaId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.metric = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.isPrecise = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.refreshInterval = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.containerType = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push(reader.string());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.metricDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.quotaDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.metricUnit = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.quotaIncreaseEligibility = $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.isFixed = reader.bool();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.dimensionsInfos && message.dimensionsInfos.length))
+                                            message.dimensionsInfos = [];
+                                        message.dimensionsInfos.push($root.google.api.cloudquotas.v1beta.DimensionsInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 15: {
+                                        message.isConcurrent = reader.bool();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.serviceRequestQuotaUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.QuotaInfo} QuotaInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaInfo message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.quotaId != null && message.hasOwnProperty("quotaId"))
+                                if (!$util.isString(message.quotaId))
+                                    return "quotaId: string expected";
+                            if (message.metric != null && message.hasOwnProperty("metric"))
+                                if (!$util.isString(message.metric))
+                                    return "metric: string expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.isPrecise != null && message.hasOwnProperty("isPrecise"))
+                                if (typeof message.isPrecise !== "boolean")
+                                    return "isPrecise: boolean expected";
+                            if (message.refreshInterval != null && message.hasOwnProperty("refreshInterval"))
+                                if (!$util.isString(message.refreshInterval))
+                                    return "refreshInterval: string expected";
+                            if (message.containerType != null && message.hasOwnProperty("containerType"))
+                                switch (message.containerType) {
+                                default:
+                                    return "containerType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    if (!$util.isString(message.dimensions[i]))
+                                        return "dimensions: string[] expected";
+                            }
+                            if (message.metricDisplayName != null && message.hasOwnProperty("metricDisplayName"))
+                                if (!$util.isString(message.metricDisplayName))
+                                    return "metricDisplayName: string expected";
+                            if (message.quotaDisplayName != null && message.hasOwnProperty("quotaDisplayName"))
+                                if (!$util.isString(message.quotaDisplayName))
+                                    return "quotaDisplayName: string expected";
+                            if (message.metricUnit != null && message.hasOwnProperty("metricUnit"))
+                                if (!$util.isString(message.metricUnit))
+                                    return "metricUnit: string expected";
+                            if (message.quotaIncreaseEligibility != null && message.hasOwnProperty("quotaIncreaseEligibility")) {
+                                var error = $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.verify(message.quotaIncreaseEligibility);
+                                if (error)
+                                    return "quotaIncreaseEligibility." + error;
+                            }
+                            if (message.isFixed != null && message.hasOwnProperty("isFixed"))
+                                if (typeof message.isFixed !== "boolean")
+                                    return "isFixed: boolean expected";
+                            if (message.dimensionsInfos != null && message.hasOwnProperty("dimensionsInfos")) {
+                                if (!Array.isArray(message.dimensionsInfos))
+                                    return "dimensionsInfos: array expected";
+                                for (var i = 0; i < message.dimensionsInfos.length; ++i) {
+                                    var error = $root.google.api.cloudquotas.v1beta.DimensionsInfo.verify(message.dimensionsInfos[i]);
+                                    if (error)
+                                        return "dimensionsInfos." + error;
+                                }
+                            }
+                            if (message.isConcurrent != null && message.hasOwnProperty("isConcurrent"))
+                                if (typeof message.isConcurrent !== "boolean")
+                                    return "isConcurrent: boolean expected";
+                            if (message.serviceRequestQuotaUri != null && message.hasOwnProperty("serviceRequestQuotaUri"))
+                                if (!$util.isString(message.serviceRequestQuotaUri))
+                                    return "serviceRequestQuotaUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.QuotaInfo} QuotaInfo
+                         */
+                        QuotaInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.QuotaInfo)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.QuotaInfo();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.quotaId != null)
+                                message.quotaId = String(object.quotaId);
+                            if (object.metric != null)
+                                message.metric = String(object.metric);
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.isPrecise != null)
+                                message.isPrecise = Boolean(object.isPrecise);
+                            if (object.refreshInterval != null)
+                                message.refreshInterval = String(object.refreshInterval);
+                            switch (object.containerType) {
+                            default:
+                                if (typeof object.containerType === "number") {
+                                    message.containerType = object.containerType;
+                                    break;
+                                }
+                                break;
+                            case "CONTAINER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.containerType = 0;
+                                break;
+                            case "PROJECT":
+                            case 1:
+                                message.containerType = 1;
+                                break;
+                            case "FOLDER":
+                            case 2:
+                                message.containerType = 2;
+                                break;
+                            case "ORGANIZATION":
+                            case 3:
+                                message.containerType = 3;
+                                break;
+                            }
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaInfo.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i)
+                                    message.dimensions[i] = String(object.dimensions[i]);
+                            }
+                            if (object.metricDisplayName != null)
+                                message.metricDisplayName = String(object.metricDisplayName);
+                            if (object.quotaDisplayName != null)
+                                message.quotaDisplayName = String(object.quotaDisplayName);
+                            if (object.metricUnit != null)
+                                message.metricUnit = String(object.metricUnit);
+                            if (object.quotaIncreaseEligibility != null) {
+                                if (typeof object.quotaIncreaseEligibility !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaInfo.quotaIncreaseEligibility: object expected");
+                                message.quotaIncreaseEligibility = $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.fromObject(object.quotaIncreaseEligibility);
+                            }
+                            if (object.isFixed != null)
+                                message.isFixed = Boolean(object.isFixed);
+                            if (object.dimensionsInfos) {
+                                if (!Array.isArray(object.dimensionsInfos))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaInfo.dimensionsInfos: array expected");
+                                message.dimensionsInfos = [];
+                                for (var i = 0; i < object.dimensionsInfos.length; ++i) {
+                                    if (typeof object.dimensionsInfos[i] !== "object")
+                                        throw TypeError(".google.api.cloudquotas.v1beta.QuotaInfo.dimensionsInfos: object expected");
+                                    message.dimensionsInfos[i] = $root.google.api.cloudquotas.v1beta.DimensionsInfo.fromObject(object.dimensionsInfos[i]);
+                                }
+                            }
+                            if (object.isConcurrent != null)
+                                message.isConcurrent = Boolean(object.isConcurrent);
+                            if (object.serviceRequestQuotaUri != null)
+                                message.serviceRequestQuotaUri = String(object.serviceRequestQuotaUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.QuotaInfo} message QuotaInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.dimensionsInfos = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.quotaId = "";
+                                object.metric = "";
+                                object.service = "";
+                                object.isPrecise = false;
+                                object.refreshInterval = "";
+                                object.containerType = options.enums === String ? "CONTAINER_TYPE_UNSPECIFIED" : 0;
+                                object.metricDisplayName = "";
+                                object.quotaDisplayName = "";
+                                object.metricUnit = "";
+                                object.quotaIncreaseEligibility = null;
+                                object.isFixed = false;
+                                object.isConcurrent = false;
+                                object.serviceRequestQuotaUri = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.quotaId != null && message.hasOwnProperty("quotaId"))
+                                object.quotaId = message.quotaId;
+                            if (message.metric != null && message.hasOwnProperty("metric"))
+                                object.metric = message.metric;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.isPrecise != null && message.hasOwnProperty("isPrecise"))
+                                object.isPrecise = message.isPrecise;
+                            if (message.refreshInterval != null && message.hasOwnProperty("refreshInterval"))
+                                object.refreshInterval = message.refreshInterval;
+                            if (message.containerType != null && message.hasOwnProperty("containerType"))
+                                object.containerType = options.enums === String ? $root.google.api.cloudquotas.v1beta.QuotaInfo.ContainerType[message.containerType] === undefined ? message.containerType : $root.google.api.cloudquotas.v1beta.QuotaInfo.ContainerType[message.containerType] : message.containerType;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = message.dimensions[j];
+                            }
+                            if (message.metricDisplayName != null && message.hasOwnProperty("metricDisplayName"))
+                                object.metricDisplayName = message.metricDisplayName;
+                            if (message.quotaDisplayName != null && message.hasOwnProperty("quotaDisplayName"))
+                                object.quotaDisplayName = message.quotaDisplayName;
+                            if (message.metricUnit != null && message.hasOwnProperty("metricUnit"))
+                                object.metricUnit = message.metricUnit;
+                            if (message.quotaIncreaseEligibility != null && message.hasOwnProperty("quotaIncreaseEligibility"))
+                                object.quotaIncreaseEligibility = $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.toObject(message.quotaIncreaseEligibility, options);
+                            if (message.isFixed != null && message.hasOwnProperty("isFixed"))
+                                object.isFixed = message.isFixed;
+                            if (message.dimensionsInfos && message.dimensionsInfos.length) {
+                                object.dimensionsInfos = [];
+                                for (var j = 0; j < message.dimensionsInfos.length; ++j)
+                                    object.dimensionsInfos[j] = $root.google.api.cloudquotas.v1beta.DimensionsInfo.toObject(message.dimensionsInfos[j], options);
+                            }
+                            if (message.isConcurrent != null && message.hasOwnProperty("isConcurrent"))
+                                object.isConcurrent = message.isConcurrent;
+                            if (message.serviceRequestQuotaUri != null && message.hasOwnProperty("serviceRequestQuotaUri"))
+                                object.serviceRequestQuotaUri = message.serviceRequestQuotaUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaInfo
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.QuotaInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.QuotaInfo";
+                        };
+    
+                        /**
+                         * ContainerType enum.
+                         * @name google.api.cloudquotas.v1beta.QuotaInfo.ContainerType
+                         * @enum {number}
+                         * @property {number} CONTAINER_TYPE_UNSPECIFIED=0 CONTAINER_TYPE_UNSPECIFIED value
+                         * @property {number} PROJECT=1 PROJECT value
+                         * @property {number} FOLDER=2 FOLDER value
+                         * @property {number} ORGANIZATION=3 ORGANIZATION value
+                         */
+                        QuotaInfo.ContainerType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONTAINER_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PROJECT"] = 1;
+                            values[valuesById[2] = "FOLDER"] = 2;
+                            values[valuesById[3] = "ORGANIZATION"] = 3;
+                            return values;
+                        })();
+    
+                        return QuotaInfo;
+                    })();
+    
+                    v1beta.QuotaIncreaseEligibility = (function() {
+    
+                        /**
+                         * Properties of a QuotaIncreaseEligibility.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IQuotaIncreaseEligibility
+                         * @property {boolean|null} [isEligible] QuotaIncreaseEligibility isEligible
+                         * @property {google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason|null} [ineligibilityReason] QuotaIncreaseEligibility ineligibilityReason
+                         */
+    
+                        /**
+                         * Constructs a new QuotaIncreaseEligibility.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a QuotaIncreaseEligibility.
+                         * @implements IQuotaIncreaseEligibility
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility=} [properties] Properties to set
+                         */
+                        function QuotaIncreaseEligibility(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaIncreaseEligibility isEligible.
+                         * @member {boolean} isEligible
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @instance
+                         */
+                        QuotaIncreaseEligibility.prototype.isEligible = false;
+    
+                        /**
+                         * QuotaIncreaseEligibility ineligibilityReason.
+                         * @member {google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason} ineligibilityReason
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @instance
+                         */
+                        QuotaIncreaseEligibility.prototype.ineligibilityReason = 0;
+    
+                        /**
+                         * Creates a new QuotaIncreaseEligibility instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.QuotaIncreaseEligibility} QuotaIncreaseEligibility instance
+                         */
+                        QuotaIncreaseEligibility.create = function create(properties) {
+                            return new QuotaIncreaseEligibility(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaIncreaseEligibility message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility} message QuotaIncreaseEligibility message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaIncreaseEligibility.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.isEligible != null && Object.hasOwnProperty.call(message, "isEligible"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.isEligible);
+                            if (message.ineligibilityReason != null && Object.hasOwnProperty.call(message, "ineligibilityReason"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.ineligibilityReason);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaIncreaseEligibility message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility} message QuotaIncreaseEligibility message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaIncreaseEligibility.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaIncreaseEligibility message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.QuotaIncreaseEligibility} QuotaIncreaseEligibility
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaIncreaseEligibility.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.isEligible = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ineligibilityReason = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaIncreaseEligibility message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.QuotaIncreaseEligibility} QuotaIncreaseEligibility
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaIncreaseEligibility.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaIncreaseEligibility message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaIncreaseEligibility.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.isEligible != null && message.hasOwnProperty("isEligible"))
+                                if (typeof message.isEligible !== "boolean")
+                                    return "isEligible: boolean expected";
+                            if (message.ineligibilityReason != null && message.hasOwnProperty("ineligibilityReason"))
+                                switch (message.ineligibilityReason) {
+                                default:
+                                    return "ineligibilityReason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaIncreaseEligibility message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.QuotaIncreaseEligibility} QuotaIncreaseEligibility
+                         */
+                        QuotaIncreaseEligibility.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility();
+                            if (object.isEligible != null)
+                                message.isEligible = Boolean(object.isEligible);
+                            switch (object.ineligibilityReason) {
+                            default:
+                                if (typeof object.ineligibilityReason === "number") {
+                                    message.ineligibilityReason = object.ineligibilityReason;
+                                    break;
+                                }
+                                break;
+                            case "INELIGIBILITY_REASON_UNSPECIFIED":
+                            case 0:
+                                message.ineligibilityReason = 0;
+                                break;
+                            case "NO_VALID_BILLING_ACCOUNT":
+                            case 1:
+                                message.ineligibilityReason = 1;
+                                break;
+                            case "NOT_SUPPORTED":
+                            case 3:
+                                message.ineligibilityReason = 3;
+                                break;
+                            case "NOT_ENOUGH_USAGE_HISTORY":
+                            case 4:
+                                message.ineligibilityReason = 4;
+                                break;
+                            case "OTHER":
+                            case 2:
+                                message.ineligibilityReason = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaIncreaseEligibility message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.QuotaIncreaseEligibility} message QuotaIncreaseEligibility
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaIncreaseEligibility.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.isEligible = false;
+                                object.ineligibilityReason = options.enums === String ? "INELIGIBILITY_REASON_UNSPECIFIED" : 0;
+                            }
+                            if (message.isEligible != null && message.hasOwnProperty("isEligible"))
+                                object.isEligible = message.isEligible;
+                            if (message.ineligibilityReason != null && message.hasOwnProperty("ineligibilityReason"))
+                                object.ineligibilityReason = options.enums === String ? $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason[message.ineligibilityReason] === undefined ? message.ineligibilityReason : $root.google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason[message.ineligibilityReason] : message.ineligibilityReason;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaIncreaseEligibility to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaIncreaseEligibility.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaIncreaseEligibility
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaIncreaseEligibility.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.QuotaIncreaseEligibility";
+                        };
+    
+                        /**
+                         * IneligibilityReason enum.
+                         * @name google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason
+                         * @enum {number}
+                         * @property {number} INELIGIBILITY_REASON_UNSPECIFIED=0 INELIGIBILITY_REASON_UNSPECIFIED value
+                         * @property {number} NO_VALID_BILLING_ACCOUNT=1 NO_VALID_BILLING_ACCOUNT value
+                         * @property {number} NOT_SUPPORTED=3 NOT_SUPPORTED value
+                         * @property {number} NOT_ENOUGH_USAGE_HISTORY=4 NOT_ENOUGH_USAGE_HISTORY value
+                         * @property {number} OTHER=2 OTHER value
+                         */
+                        QuotaIncreaseEligibility.IneligibilityReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INELIGIBILITY_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NO_VALID_BILLING_ACCOUNT"] = 1;
+                            values[valuesById[3] = "NOT_SUPPORTED"] = 3;
+                            values[valuesById[4] = "NOT_ENOUGH_USAGE_HISTORY"] = 4;
+                            values[valuesById[2] = "OTHER"] = 2;
+                            return values;
+                        })();
+    
+                        return QuotaIncreaseEligibility;
+                    })();
+    
+                    v1beta.QuotaPreference = (function() {
+    
+                        /**
+                         * Properties of a QuotaPreference.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IQuotaPreference
+                         * @property {string|null} [name] QuotaPreference name
+                         * @property {Object.<string,string>|null} [dimensions] QuotaPreference dimensions
+                         * @property {google.api.cloudquotas.v1beta.IQuotaConfig|null} [quotaConfig] QuotaPreference quotaConfig
+                         * @property {string|null} [etag] QuotaPreference etag
+                         * @property {google.protobuf.ITimestamp|null} [createTime] QuotaPreference createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] QuotaPreference updateTime
+                         * @property {string|null} [service] QuotaPreference service
+                         * @property {string|null} [quotaId] QuotaPreference quotaId
+                         * @property {boolean|null} [reconciling] QuotaPreference reconciling
+                         * @property {string|null} [justification] QuotaPreference justification
+                         * @property {string|null} [contactEmail] QuotaPreference contactEmail
+                         */
+    
+                        /**
+                         * Constructs a new QuotaPreference.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a QuotaPreference.
+                         * @implements IQuotaPreference
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IQuotaPreference=} [properties] Properties to set
+                         */
+                        function QuotaPreference(properties) {
+                            this.dimensions = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaPreference name.
+                         * @member {string} name
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.name = "";
+    
+                        /**
+                         * QuotaPreference dimensions.
+                         * @member {Object.<string,string>} dimensions
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.dimensions = $util.emptyObject;
+    
+                        /**
+                         * QuotaPreference quotaConfig.
+                         * @member {google.api.cloudquotas.v1beta.IQuotaConfig|null|undefined} quotaConfig
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.quotaConfig = null;
+    
+                        /**
+                         * QuotaPreference etag.
+                         * @member {string} etag
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.etag = "";
+    
+                        /**
+                         * QuotaPreference createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.createTime = null;
+    
+                        /**
+                         * QuotaPreference updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.updateTime = null;
+    
+                        /**
+                         * QuotaPreference service.
+                         * @member {string} service
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.service = "";
+    
+                        /**
+                         * QuotaPreference quotaId.
+                         * @member {string} quotaId
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.quotaId = "";
+    
+                        /**
+                         * QuotaPreference reconciling.
+                         * @member {boolean} reconciling
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.reconciling = false;
+    
+                        /**
+                         * QuotaPreference justification.
+                         * @member {string} justification
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.justification = "";
+    
+                        /**
+                         * QuotaPreference contactEmail.
+                         * @member {string} contactEmail
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         */
+                        QuotaPreference.prototype.contactEmail = "";
+    
+                        /**
+                         * Creates a new QuotaPreference instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaPreference=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.QuotaPreference} QuotaPreference instance
+                         */
+                        QuotaPreference.create = function create(properties) {
+                            return new QuotaPreference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaPreference message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaPreference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaPreference} message QuotaPreference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaPreference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dimensions != null && Object.hasOwnProperty.call(message, "dimensions"))
+                                for (var keys = Object.keys(message.dimensions), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.dimensions[keys[i]]).ldelim();
+                            if (message.quotaConfig != null && Object.hasOwnProperty.call(message, "quotaConfig"))
+                                $root.google.api.cloudquotas.v1beta.QuotaConfig.encode(message.quotaConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.service);
+                            if (message.quotaId != null && Object.hasOwnProperty.call(message, "quotaId"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.quotaId);
+                            if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.reconciling);
+                            if (message.justification != null && Object.hasOwnProperty.call(message, "justification"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.justification);
+                            if (message.contactEmail != null && Object.hasOwnProperty.call(message, "contactEmail"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.contactEmail);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaPreference message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaPreference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaPreference} message QuotaPreference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaPreference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaPreference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.QuotaPreference} QuotaPreference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaPreference.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.QuotaPreference(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.dimensions === $util.emptyObject)
+                                            message.dimensions = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.dimensions[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.quotaConfig = $root.google.api.cloudquotas.v1beta.QuotaConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.quotaId = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.reconciling = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.justification = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.contactEmail = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaPreference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.QuotaPreference} QuotaPreference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaPreference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaPreference message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaPreference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!$util.isObject(message.dimensions))
+                                    return "dimensions: object expected";
+                                var key = Object.keys(message.dimensions);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.dimensions[key[i]]))
+                                        return "dimensions: string{k:string} expected";
+                            }
+                            if (message.quotaConfig != null && message.hasOwnProperty("quotaConfig")) {
+                                var error = $root.google.api.cloudquotas.v1beta.QuotaConfig.verify(message.quotaConfig);
+                                if (error)
+                                    return "quotaConfig." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.quotaId != null && message.hasOwnProperty("quotaId"))
+                                if (!$util.isString(message.quotaId))
+                                    return "quotaId: string expected";
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                if (typeof message.reconciling !== "boolean")
+                                    return "reconciling: boolean expected";
+                            if (message.justification != null && message.hasOwnProperty("justification"))
+                                if (!$util.isString(message.justification))
+                                    return "justification: string expected";
+                            if (message.contactEmail != null && message.hasOwnProperty("contactEmail"))
+                                if (!$util.isString(message.contactEmail))
+                                    return "contactEmail: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaPreference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.QuotaPreference} QuotaPreference
+                         */
+                        QuotaPreference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.QuotaPreference)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.QuotaPreference();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dimensions) {
+                                if (typeof object.dimensions !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaPreference.dimensions: object expected");
+                                message.dimensions = {};
+                                for (var keys = Object.keys(object.dimensions), i = 0; i < keys.length; ++i)
+                                    message.dimensions[keys[i]] = String(object.dimensions[keys[i]]);
+                            }
+                            if (object.quotaConfig != null) {
+                                if (typeof object.quotaConfig !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaPreference.quotaConfig: object expected");
+                                message.quotaConfig = $root.google.api.cloudquotas.v1beta.QuotaConfig.fromObject(object.quotaConfig);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaPreference.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaPreference.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.quotaId != null)
+                                message.quotaId = String(object.quotaId);
+                            if (object.reconciling != null)
+                                message.reconciling = Boolean(object.reconciling);
+                            if (object.justification != null)
+                                message.justification = String(object.justification);
+                            if (object.contactEmail != null)
+                                message.contactEmail = String(object.contactEmail);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaPreference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.QuotaPreference} message QuotaPreference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaPreference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.dimensions = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.quotaConfig = null;
+                                object.etag = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.service = "";
+                                object.quotaId = "";
+                                object.reconciling = false;
+                                object.justification = "";
+                                object.contactEmail = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            var keys2;
+                            if (message.dimensions && (keys2 = Object.keys(message.dimensions)).length) {
+                                object.dimensions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.dimensions[keys2[j]] = message.dimensions[keys2[j]];
+                            }
+                            if (message.quotaConfig != null && message.hasOwnProperty("quotaConfig"))
+                                object.quotaConfig = $root.google.api.cloudquotas.v1beta.QuotaConfig.toObject(message.quotaConfig, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.quotaId != null && message.hasOwnProperty("quotaId"))
+                                object.quotaId = message.quotaId;
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                object.reconciling = message.reconciling;
+                            if (message.justification != null && message.hasOwnProperty("justification"))
+                                object.justification = message.justification;
+                            if (message.contactEmail != null && message.hasOwnProperty("contactEmail"))
+                                object.contactEmail = message.contactEmail;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaPreference to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaPreference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaPreference
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.QuotaPreference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaPreference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.QuotaPreference";
+                        };
+    
+                        return QuotaPreference;
+                    })();
+    
+                    v1beta.QuotaConfig = (function() {
+    
+                        /**
+                         * Properties of a QuotaConfig.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IQuotaConfig
+                         * @property {number|Long|null} [preferredValue] QuotaConfig preferredValue
+                         * @property {string|null} [stateDetail] QuotaConfig stateDetail
+                         * @property {google.protobuf.IInt64Value|null} [grantedValue] QuotaConfig grantedValue
+                         * @property {string|null} [traceId] QuotaConfig traceId
+                         * @property {Object.<string,string>|null} [annotations] QuotaConfig annotations
+                         * @property {google.api.cloudquotas.v1beta.QuotaConfig.Origin|null} [requestOrigin] QuotaConfig requestOrigin
+                         */
+    
+                        /**
+                         * Constructs a new QuotaConfig.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a QuotaConfig.
+                         * @implements IQuotaConfig
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IQuotaConfig=} [properties] Properties to set
+                         */
+                        function QuotaConfig(properties) {
+                            this.annotations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaConfig preferredValue.
+                         * @member {number|Long} preferredValue
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @instance
+                         */
+                        QuotaConfig.prototype.preferredValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QuotaConfig stateDetail.
+                         * @member {string} stateDetail
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @instance
+                         */
+                        QuotaConfig.prototype.stateDetail = "";
+    
+                        /**
+                         * QuotaConfig grantedValue.
+                         * @member {google.protobuf.IInt64Value|null|undefined} grantedValue
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @instance
+                         */
+                        QuotaConfig.prototype.grantedValue = null;
+    
+                        /**
+                         * QuotaConfig traceId.
+                         * @member {string} traceId
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @instance
+                         */
+                        QuotaConfig.prototype.traceId = "";
+    
+                        /**
+                         * QuotaConfig annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @instance
+                         */
+                        QuotaConfig.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * QuotaConfig requestOrigin.
+                         * @member {google.api.cloudquotas.v1beta.QuotaConfig.Origin} requestOrigin
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @instance
+                         */
+                        QuotaConfig.prototype.requestOrigin = 0;
+    
+                        /**
+                         * Creates a new QuotaConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaConfig=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.QuotaConfig} QuotaConfig instance
+                         */
+                        QuotaConfig.create = function create(properties) {
+                            return new QuotaConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaConfig message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaConfig} message QuotaConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.preferredValue != null && Object.hasOwnProperty.call(message, "preferredValue"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.preferredValue);
+                            if (message.stateDetail != null && Object.hasOwnProperty.call(message, "stateDetail"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.stateDetail);
+                            if (message.grantedValue != null && Object.hasOwnProperty.call(message, "grantedValue"))
+                                $root.google.protobuf.Int64Value.encode(message.grantedValue, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.traceId != null && Object.hasOwnProperty.call(message, "traceId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.traceId);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.requestOrigin != null && Object.hasOwnProperty.call(message, "requestOrigin"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.requestOrigin);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaConfig message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaConfig} message QuotaConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.QuotaConfig} QuotaConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.QuotaConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.preferredValue = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.stateDetail = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.grantedValue = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.traceId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestOrigin = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.QuotaConfig} QuotaConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaConfig message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.preferredValue != null && message.hasOwnProperty("preferredValue"))
+                                if (!$util.isInteger(message.preferredValue) && !(message.preferredValue && $util.isInteger(message.preferredValue.low) && $util.isInteger(message.preferredValue.high)))
+                                    return "preferredValue: integer|Long expected";
+                            if (message.stateDetail != null && message.hasOwnProperty("stateDetail"))
+                                if (!$util.isString(message.stateDetail))
+                                    return "stateDetail: string expected";
+                            if (message.grantedValue != null && message.hasOwnProperty("grantedValue")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.grantedValue);
+                                if (error)
+                                    return "grantedValue." + error;
+                            }
+                            if (message.traceId != null && message.hasOwnProperty("traceId"))
+                                if (!$util.isString(message.traceId))
+                                    return "traceId: string expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.requestOrigin != null && message.hasOwnProperty("requestOrigin"))
+                                switch (message.requestOrigin) {
+                                default:
+                                    return "requestOrigin: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.QuotaConfig} QuotaConfig
+                         */
+                        QuotaConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.QuotaConfig)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.QuotaConfig();
+                            if (object.preferredValue != null)
+                                if ($util.Long)
+                                    (message.preferredValue = $util.Long.fromValue(object.preferredValue)).unsigned = false;
+                                else if (typeof object.preferredValue === "string")
+                                    message.preferredValue = parseInt(object.preferredValue, 10);
+                                else if (typeof object.preferredValue === "number")
+                                    message.preferredValue = object.preferredValue;
+                                else if (typeof object.preferredValue === "object")
+                                    message.preferredValue = new $util.LongBits(object.preferredValue.low >>> 0, object.preferredValue.high >>> 0).toNumber();
+                            if (object.stateDetail != null)
+                                message.stateDetail = String(object.stateDetail);
+                            if (object.grantedValue != null) {
+                                if (typeof object.grantedValue !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaConfig.grantedValue: object expected");
+                                message.grantedValue = $root.google.protobuf.Int64Value.fromObject(object.grantedValue);
+                            }
+                            if (object.traceId != null)
+                                message.traceId = String(object.traceId);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaConfig.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            switch (object.requestOrigin) {
+                            default:
+                                if (typeof object.requestOrigin === "number") {
+                                    message.requestOrigin = object.requestOrigin;
+                                    break;
+                                }
+                                break;
+                            case "ORIGIN_UNSPECIFIED":
+                            case 0:
+                                message.requestOrigin = 0;
+                                break;
+                            case "CLOUD_CONSOLE":
+                            case 1:
+                                message.requestOrigin = 1;
+                                break;
+                            case "AUTO_ADJUSTER":
+                            case 2:
+                                message.requestOrigin = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.QuotaConfig} message QuotaConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.annotations = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.preferredValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.preferredValue = options.longs === String ? "0" : 0;
+                                object.stateDetail = "";
+                                object.grantedValue = null;
+                                object.traceId = "";
+                                object.requestOrigin = options.enums === String ? "ORIGIN_UNSPECIFIED" : 0;
+                            }
+                            if (message.preferredValue != null && message.hasOwnProperty("preferredValue"))
+                                if (typeof message.preferredValue === "number")
+                                    object.preferredValue = options.longs === String ? String(message.preferredValue) : message.preferredValue;
+                                else
+                                    object.preferredValue = options.longs === String ? $util.Long.prototype.toString.call(message.preferredValue) : options.longs === Number ? new $util.LongBits(message.preferredValue.low >>> 0, message.preferredValue.high >>> 0).toNumber() : message.preferredValue;
+                            if (message.stateDetail != null && message.hasOwnProperty("stateDetail"))
+                                object.stateDetail = message.stateDetail;
+                            if (message.grantedValue != null && message.hasOwnProperty("grantedValue"))
+                                object.grantedValue = $root.google.protobuf.Int64Value.toObject(message.grantedValue, options);
+                            if (message.traceId != null && message.hasOwnProperty("traceId"))
+                                object.traceId = message.traceId;
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.requestOrigin != null && message.hasOwnProperty("requestOrigin"))
+                                object.requestOrigin = options.enums === String ? $root.google.api.cloudquotas.v1beta.QuotaConfig.Origin[message.requestOrigin] === undefined ? message.requestOrigin : $root.google.api.cloudquotas.v1beta.QuotaConfig.Origin[message.requestOrigin] : message.requestOrigin;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaConfig
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.QuotaConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.QuotaConfig";
+                        };
+    
+                        /**
+                         * Origin enum.
+                         * @name google.api.cloudquotas.v1beta.QuotaConfig.Origin
+                         * @enum {number}
+                         * @property {number} ORIGIN_UNSPECIFIED=0 ORIGIN_UNSPECIFIED value
+                         * @property {number} CLOUD_CONSOLE=1 CLOUD_CONSOLE value
+                         * @property {number} AUTO_ADJUSTER=2 AUTO_ADJUSTER value
+                         */
+                        QuotaConfig.Origin = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ORIGIN_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLOUD_CONSOLE"] = 1;
+                            values[valuesById[2] = "AUTO_ADJUSTER"] = 2;
+                            return values;
+                        })();
+    
+                        return QuotaConfig;
+                    })();
+    
+                    v1beta.DimensionsInfo = (function() {
+    
+                        /**
+                         * Properties of a DimensionsInfo.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IDimensionsInfo
+                         * @property {Object.<string,string>|null} [dimensions] DimensionsInfo dimensions
+                         * @property {google.api.cloudquotas.v1beta.IQuotaDetails|null} [details] DimensionsInfo details
+                         * @property {Array.<string>|null} [applicableLocations] DimensionsInfo applicableLocations
+                         */
+    
+                        /**
+                         * Constructs a new DimensionsInfo.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a DimensionsInfo.
+                         * @implements IDimensionsInfo
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IDimensionsInfo=} [properties] Properties to set
+                         */
+                        function DimensionsInfo(properties) {
+                            this.dimensions = {};
+                            this.applicableLocations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DimensionsInfo dimensions.
+                         * @member {Object.<string,string>} dimensions
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @instance
+                         */
+                        DimensionsInfo.prototype.dimensions = $util.emptyObject;
+    
+                        /**
+                         * DimensionsInfo details.
+                         * @member {google.api.cloudquotas.v1beta.IQuotaDetails|null|undefined} details
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @instance
+                         */
+                        DimensionsInfo.prototype.details = null;
+    
+                        /**
+                         * DimensionsInfo applicableLocations.
+                         * @member {Array.<string>} applicableLocations
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @instance
+                         */
+                        DimensionsInfo.prototype.applicableLocations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DimensionsInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IDimensionsInfo=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.DimensionsInfo} DimensionsInfo instance
+                         */
+                        DimensionsInfo.create = function create(properties) {
+                            return new DimensionsInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionsInfo message. Does not implicitly {@link google.api.cloudquotas.v1beta.DimensionsInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IDimensionsInfo} message DimensionsInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionsInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensions != null && Object.hasOwnProperty.call(message, "dimensions"))
+                                for (var keys = Object.keys(message.dimensions), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.dimensions[keys[i]]).ldelim();
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                $root.google.api.cloudquotas.v1beta.QuotaDetails.encode(message.details, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.applicableLocations != null && message.applicableLocations.length)
+                                for (var i = 0; i < message.applicableLocations.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.applicableLocations[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionsInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.DimensionsInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IDimensionsInfo} message DimensionsInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionsInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DimensionsInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.DimensionsInfo} DimensionsInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionsInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.DimensionsInfo(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.dimensions === $util.emptyObject)
+                                            message.dimensions = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.dimensions[key] = value;
+                                        break;
+                                    }
+                                case 2: {
+                                        message.details = $root.google.api.cloudquotas.v1beta.QuotaDetails.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.applicableLocations && message.applicableLocations.length))
+                                            message.applicableLocations = [];
+                                        message.applicableLocations.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DimensionsInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.DimensionsInfo} DimensionsInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionsInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DimensionsInfo message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DimensionsInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!$util.isObject(message.dimensions))
+                                    return "dimensions: object expected";
+                                var key = Object.keys(message.dimensions);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.dimensions[key[i]]))
+                                        return "dimensions: string{k:string} expected";
+                            }
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                var error = $root.google.api.cloudquotas.v1beta.QuotaDetails.verify(message.details);
+                                if (error)
+                                    return "details." + error;
+                            }
+                            if (message.applicableLocations != null && message.hasOwnProperty("applicableLocations")) {
+                                if (!Array.isArray(message.applicableLocations))
+                                    return "applicableLocations: array expected";
+                                for (var i = 0; i < message.applicableLocations.length; ++i)
+                                    if (!$util.isString(message.applicableLocations[i]))
+                                        return "applicableLocations: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DimensionsInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.DimensionsInfo} DimensionsInfo
+                         */
+                        DimensionsInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.DimensionsInfo)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.DimensionsInfo();
+                            if (object.dimensions) {
+                                if (typeof object.dimensions !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.DimensionsInfo.dimensions: object expected");
+                                message.dimensions = {};
+                                for (var keys = Object.keys(object.dimensions), i = 0; i < keys.length; ++i)
+                                    message.dimensions[keys[i]] = String(object.dimensions[keys[i]]);
+                            }
+                            if (object.details != null) {
+                                if (typeof object.details !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.DimensionsInfo.details: object expected");
+                                message.details = $root.google.api.cloudquotas.v1beta.QuotaDetails.fromObject(object.details);
+                            }
+                            if (object.applicableLocations) {
+                                if (!Array.isArray(object.applicableLocations))
+                                    throw TypeError(".google.api.cloudquotas.v1beta.DimensionsInfo.applicableLocations: array expected");
+                                message.applicableLocations = [];
+                                for (var i = 0; i < object.applicableLocations.length; ++i)
+                                    message.applicableLocations[i] = String(object.applicableLocations[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DimensionsInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.DimensionsInfo} message DimensionsInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DimensionsInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.applicableLocations = [];
+                            if (options.objects || options.defaults)
+                                object.dimensions = {};
+                            if (options.defaults)
+                                object.details = null;
+                            var keys2;
+                            if (message.dimensions && (keys2 = Object.keys(message.dimensions)).length) {
+                                object.dimensions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.dimensions[keys2[j]] = message.dimensions[keys2[j]];
+                            }
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = $root.google.api.cloudquotas.v1beta.QuotaDetails.toObject(message.details, options);
+                            if (message.applicableLocations && message.applicableLocations.length) {
+                                object.applicableLocations = [];
+                                for (var j = 0; j < message.applicableLocations.length; ++j)
+                                    object.applicableLocations[j] = message.applicableLocations[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DimensionsInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DimensionsInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DimensionsInfo
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.DimensionsInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DimensionsInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.DimensionsInfo";
+                        };
+    
+                        return DimensionsInfo;
+                    })();
+    
+                    v1beta.QuotaDetails = (function() {
+    
+                        /**
+                         * Properties of a QuotaDetails.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IQuotaDetails
+                         * @property {number|Long|null} [value] QuotaDetails value
+                         * @property {google.api.cloudquotas.v1beta.IRolloutInfo|null} [rolloutInfo] QuotaDetails rolloutInfo
+                         */
+    
+                        /**
+                         * Constructs a new QuotaDetails.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a QuotaDetails.
+                         * @implements IQuotaDetails
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IQuotaDetails=} [properties] Properties to set
+                         */
+                        function QuotaDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaDetails value.
+                         * @member {number|Long} value
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @instance
+                         */
+                        QuotaDetails.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QuotaDetails rolloutInfo.
+                         * @member {google.api.cloudquotas.v1beta.IRolloutInfo|null|undefined} rolloutInfo
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @instance
+                         */
+                        QuotaDetails.prototype.rolloutInfo = null;
+    
+                        /**
+                         * Creates a new QuotaDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaDetails=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.QuotaDetails} QuotaDetails instance
+                         */
+                        QuotaDetails.create = function create(properties) {
+                            return new QuotaDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaDetails message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaDetails} message QuotaDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.value);
+                            if (message.rolloutInfo != null && Object.hasOwnProperty.call(message, "rolloutInfo"))
+                                $root.google.api.cloudquotas.v1beta.RolloutInfo.encode(message.rolloutInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaDetails message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaDetails} message QuotaDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.QuotaDetails} QuotaDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.QuotaDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.value = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rolloutInfo = $root.google.api.cloudquotas.v1beta.RolloutInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.QuotaDetails} QuotaDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaDetails message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                                    return "value: integer|Long expected";
+                            if (message.rolloutInfo != null && message.hasOwnProperty("rolloutInfo")) {
+                                var error = $root.google.api.cloudquotas.v1beta.RolloutInfo.verify(message.rolloutInfo);
+                                if (error)
+                                    return "rolloutInfo." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.QuotaDetails} QuotaDetails
+                         */
+                        QuotaDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.QuotaDetails)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.QuotaDetails();
+                            if (object.value != null)
+                                if ($util.Long)
+                                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                                else if (typeof object.value === "string")
+                                    message.value = parseInt(object.value, 10);
+                                else if (typeof object.value === "number")
+                                    message.value = object.value;
+                                else if (typeof object.value === "object")
+                                    message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+                            if (object.rolloutInfo != null) {
+                                if (typeof object.rolloutInfo !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaDetails.rolloutInfo: object expected");
+                                message.rolloutInfo = $root.google.api.cloudquotas.v1beta.RolloutInfo.fromObject(object.rolloutInfo);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.QuotaDetails} message QuotaDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.value = options.longs === String ? "0" : 0;
+                                object.rolloutInfo = null;
+                            }
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (typeof message.value === "number")
+                                    object.value = options.longs === String ? String(message.value) : message.value;
+                                else
+                                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                            if (message.rolloutInfo != null && message.hasOwnProperty("rolloutInfo"))
+                                object.rolloutInfo = $root.google.api.cloudquotas.v1beta.RolloutInfo.toObject(message.rolloutInfo, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaDetails
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.QuotaDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.QuotaDetails";
+                        };
+    
+                        return QuotaDetails;
+                    })();
+    
+                    v1beta.RolloutInfo = (function() {
+    
+                        /**
+                         * Properties of a RolloutInfo.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IRolloutInfo
+                         * @property {boolean|null} [ongoingRollout] RolloutInfo ongoingRollout
+                         */
+    
+                        /**
+                         * Constructs a new RolloutInfo.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a RolloutInfo.
+                         * @implements IRolloutInfo
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IRolloutInfo=} [properties] Properties to set
+                         */
+                        function RolloutInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RolloutInfo ongoingRollout.
+                         * @member {boolean} ongoingRollout
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @instance
+                         */
+                        RolloutInfo.prototype.ongoingRollout = false;
+    
+                        /**
+                         * Creates a new RolloutInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IRolloutInfo=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.RolloutInfo} RolloutInfo instance
+                         */
+                        RolloutInfo.create = function create(properties) {
+                            return new RolloutInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutInfo message. Does not implicitly {@link google.api.cloudquotas.v1beta.RolloutInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IRolloutInfo} message RolloutInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ongoingRollout != null && Object.hasOwnProperty.call(message, "ongoingRollout"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.ongoingRollout);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.RolloutInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IRolloutInfo} message RolloutInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RolloutInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.RolloutInfo} RolloutInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.RolloutInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ongoingRollout = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RolloutInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.RolloutInfo} RolloutInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RolloutInfo message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RolloutInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ongoingRollout != null && message.hasOwnProperty("ongoingRollout"))
+                                if (typeof message.ongoingRollout !== "boolean")
+                                    return "ongoingRollout: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RolloutInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.RolloutInfo} RolloutInfo
+                         */
+                        RolloutInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.RolloutInfo)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.RolloutInfo();
+                            if (object.ongoingRollout != null)
+                                message.ongoingRollout = Boolean(object.ongoingRollout);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RolloutInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.RolloutInfo} message RolloutInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RolloutInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.ongoingRollout = false;
+                            if (message.ongoingRollout != null && message.hasOwnProperty("ongoingRollout"))
+                                object.ongoingRollout = message.ongoingRollout;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RolloutInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RolloutInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RolloutInfo
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.RolloutInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RolloutInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.RolloutInfo";
+                        };
+    
+                        return RolloutInfo;
+                    })();
+    
+                    v1beta.QuotaAdjusterSettingsManager = (function() {
+    
+                        /**
+                         * Constructs a new QuotaAdjusterSettingsManager service.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a QuotaAdjusterSettingsManager
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function QuotaAdjusterSettingsManager(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (QuotaAdjusterSettingsManager.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = QuotaAdjusterSettingsManager;
+    
+                        /**
+                         * Creates new QuotaAdjusterSettingsManager service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {QuotaAdjusterSettingsManager} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        QuotaAdjusterSettingsManager.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager|updateQuotaAdjusterSettings}.
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager
+                         * @typedef UpdateQuotaAdjusterSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} [response] QuotaAdjusterSettings
+                         */
+    
+                        /**
+                         * Calls UpdateQuotaAdjusterSettings.
+                         * @function updateQuotaAdjusterSettings
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest} request UpdateQuotaAdjusterSettingsRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager.UpdateQuotaAdjusterSettingsCallback} callback Node-style callback called with the error, if any, and QuotaAdjusterSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(QuotaAdjusterSettingsManager.prototype.updateQuotaAdjusterSettings = function updateQuotaAdjusterSettings(request, callback) {
+                            return this.rpcCall(updateQuotaAdjusterSettings, $root.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest, $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings, request, callback);
+                        }, "name", { value: "UpdateQuotaAdjusterSettings" });
+    
+                        /**
+                         * Calls UpdateQuotaAdjusterSettings.
+                         * @function updateQuotaAdjusterSettings
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest} request UpdateQuotaAdjusterSettingsRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.QuotaAdjusterSettings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager|getQuotaAdjusterSettings}.
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager
+                         * @typedef GetQuotaAdjusterSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} [response] QuotaAdjusterSettings
+                         */
+    
+                        /**
+                         * Calls GetQuotaAdjusterSettings.
+                         * @function getQuotaAdjusterSettings
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest} request GetQuotaAdjusterSettingsRequest message or plain object
+                         * @param {google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager.GetQuotaAdjusterSettingsCallback} callback Node-style callback called with the error, if any, and QuotaAdjusterSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(QuotaAdjusterSettingsManager.prototype.getQuotaAdjusterSettings = function getQuotaAdjusterSettings(request, callback) {
+                            return this.rpcCall(getQuotaAdjusterSettings, $root.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest, $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings, request, callback);
+                        }, "name", { value: "GetQuotaAdjusterSettings" });
+    
+                        /**
+                         * Calls GetQuotaAdjusterSettings.
+                         * @function getQuotaAdjusterSettings
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager
+                         * @instance
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest} request GetQuotaAdjusterSettingsRequest message or plain object
+                         * @returns {Promise<google.api.cloudquotas.v1beta.QuotaAdjusterSettings>} Promise
+                         * @variation 2
+                         */
+    
+                        return QuotaAdjusterSettingsManager;
+                    })();
+    
+                    v1beta.GetQuotaAdjusterSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetQuotaAdjusterSettingsRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IGetQuotaAdjusterSettingsRequest
+                         * @property {string|null} [name] GetQuotaAdjusterSettingsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetQuotaAdjusterSettingsRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a GetQuotaAdjusterSettingsRequest.
+                         * @implements IGetQuotaAdjusterSettingsRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest=} [properties] Properties to set
+                         */
+                        function GetQuotaAdjusterSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetQuotaAdjusterSettingsRequest name.
+                         * @member {string} name
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @instance
+                         */
+                        GetQuotaAdjusterSettingsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetQuotaAdjusterSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest} GetQuotaAdjusterSettingsRequest instance
+                         */
+                        GetQuotaAdjusterSettingsRequest.create = function create(properties) {
+                            return new GetQuotaAdjusterSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaAdjusterSettingsRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest} message GetQuotaAdjusterSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaAdjusterSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaAdjusterSettingsRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest} message GetQuotaAdjusterSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaAdjusterSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaAdjusterSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest} GetQuotaAdjusterSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaAdjusterSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaAdjusterSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest} GetQuotaAdjusterSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaAdjusterSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetQuotaAdjusterSettingsRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetQuotaAdjusterSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetQuotaAdjusterSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest} GetQuotaAdjusterSettingsRequest
+                         */
+                        GetQuotaAdjusterSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetQuotaAdjusterSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest} message GetQuotaAdjusterSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetQuotaAdjusterSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetQuotaAdjusterSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetQuotaAdjusterSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetQuotaAdjusterSettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetQuotaAdjusterSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest";
+                        };
+    
+                        return GetQuotaAdjusterSettingsRequest;
+                    })();
+    
+                    v1beta.UpdateQuotaAdjusterSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateQuotaAdjusterSettingsRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IUpdateQuotaAdjusterSettingsRequest
+                         * @property {google.api.cloudquotas.v1beta.IQuotaAdjusterSettings|null} [quotaAdjusterSettings] UpdateQuotaAdjusterSettingsRequest quotaAdjusterSettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateQuotaAdjusterSettingsRequest updateMask
+                         * @property {boolean|null} [validateOnly] UpdateQuotaAdjusterSettingsRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateQuotaAdjusterSettingsRequest.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents an UpdateQuotaAdjusterSettingsRequest.
+                         * @implements IUpdateQuotaAdjusterSettingsRequest
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest=} [properties] Properties to set
+                         */
+                        function UpdateQuotaAdjusterSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateQuotaAdjusterSettingsRequest quotaAdjusterSettings.
+                         * @member {google.api.cloudquotas.v1beta.IQuotaAdjusterSettings|null|undefined} quotaAdjusterSettings
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @instance
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.prototype.quotaAdjusterSettings = null;
+    
+                        /**
+                         * UpdateQuotaAdjusterSettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @instance
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateQuotaAdjusterSettingsRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @instance
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateQuotaAdjusterSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest} UpdateQuotaAdjusterSettingsRequest instance
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.create = function create(properties) {
+                            return new UpdateQuotaAdjusterSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateQuotaAdjusterSettingsRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest} message UpdateQuotaAdjusterSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.quotaAdjusterSettings != null && Object.hasOwnProperty.call(message, "quotaAdjusterSettings"))
+                                $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings.encode(message.quotaAdjusterSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateQuotaAdjusterSettingsRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest} message UpdateQuotaAdjusterSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateQuotaAdjusterSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest} UpdateQuotaAdjusterSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.quotaAdjusterSettings = $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateQuotaAdjusterSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest} UpdateQuotaAdjusterSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateQuotaAdjusterSettingsRequest message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.quotaAdjusterSettings != null && message.hasOwnProperty("quotaAdjusterSettings")) {
+                                var error = $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings.verify(message.quotaAdjusterSettings);
+                                if (error)
+                                    return "quotaAdjusterSettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateQuotaAdjusterSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest} UpdateQuotaAdjusterSettingsRequest
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest();
+                            if (object.quotaAdjusterSettings != null) {
+                                if (typeof object.quotaAdjusterSettings !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest.quotaAdjusterSettings: object expected");
+                                message.quotaAdjusterSettings = $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings.fromObject(object.quotaAdjusterSettings);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateQuotaAdjusterSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest} message UpdateQuotaAdjusterSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.quotaAdjusterSettings = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.quotaAdjusterSettings != null && message.hasOwnProperty("quotaAdjusterSettings"))
+                                object.quotaAdjusterSettings = $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings.toObject(message.quotaAdjusterSettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateQuotaAdjusterSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateQuotaAdjusterSettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateQuotaAdjusterSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest";
+                        };
+    
+                        return UpdateQuotaAdjusterSettingsRequest;
+                    })();
+    
+                    v1beta.QuotaAdjusterSettings = (function() {
+    
+                        /**
+                         * Properties of a QuotaAdjusterSettings.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @interface IQuotaAdjusterSettings
+                         * @property {string|null} [name] QuotaAdjusterSettings name
+                         * @property {google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement|null} [enablement] QuotaAdjusterSettings enablement
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] QuotaAdjusterSettings updateTime
+                         * @property {string|null} [etag] QuotaAdjusterSettings etag
+                         */
+    
+                        /**
+                         * Constructs a new QuotaAdjusterSettings.
+                         * @memberof google.api.cloudquotas.v1beta
+                         * @classdesc Represents a QuotaAdjusterSettings.
+                         * @implements IQuotaAdjusterSettings
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1beta.IQuotaAdjusterSettings=} [properties] Properties to set
+                         */
+                        function QuotaAdjusterSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaAdjusterSettings name.
+                         * @member {string} name
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @instance
+                         */
+                        QuotaAdjusterSettings.prototype.name = "";
+    
+                        /**
+                         * QuotaAdjusterSettings enablement.
+                         * @member {google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement} enablement
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @instance
+                         */
+                        QuotaAdjusterSettings.prototype.enablement = 0;
+    
+                        /**
+                         * QuotaAdjusterSettings updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @instance
+                         */
+                        QuotaAdjusterSettings.prototype.updateTime = null;
+    
+                        /**
+                         * QuotaAdjusterSettings etag.
+                         * @member {string} etag
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @instance
+                         */
+                        QuotaAdjusterSettings.prototype.etag = "";
+    
+                        /**
+                         * Creates a new QuotaAdjusterSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaAdjusterSettings=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} QuotaAdjusterSettings instance
+                         */
+                        QuotaAdjusterSettings.create = function create(properties) {
+                            return new QuotaAdjusterSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaAdjusterSettings message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaAdjusterSettings} message QuotaAdjusterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaAdjusterSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.enablement != null && Object.hasOwnProperty.call(message, "enablement"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.enablement);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaAdjusterSettings message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.IQuotaAdjusterSettings} message QuotaAdjusterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaAdjusterSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaAdjusterSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} QuotaAdjusterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaAdjusterSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enablement = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaAdjusterSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} QuotaAdjusterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaAdjusterSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaAdjusterSettings message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaAdjusterSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.enablement != null && message.hasOwnProperty("enablement"))
+                                switch (message.enablement) {
+                                default:
+                                    return "enablement: enum value expected";
+                                case 0:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaAdjusterSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} QuotaAdjusterSettings
+                         */
+                        QuotaAdjusterSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.enablement) {
+                            default:
+                                if (typeof object.enablement === "number") {
+                                    message.enablement = object.enablement;
+                                    break;
+                                }
+                                break;
+                            case "ENABLEMENT_UNSPECIFIED":
+                            case 0:
+                                message.enablement = 0;
+                                break;
+                            case "ENABLED":
+                            case 2:
+                                message.enablement = 2;
+                                break;
+                            case "DISABLED":
+                            case 3:
+                                message.enablement = 3;
+                                break;
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1beta.QuotaAdjusterSettings.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaAdjusterSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {google.api.cloudquotas.v1beta.QuotaAdjusterSettings} message QuotaAdjusterSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaAdjusterSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.enablement = options.enums === String ? "ENABLEMENT_UNSPECIFIED" : 0;
+                                object.updateTime = null;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.enablement != null && message.hasOwnProperty("enablement"))
+                                object.enablement = options.enums === String ? $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement[message.enablement] === undefined ? message.enablement : $root.google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement[message.enablement] : message.enablement;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaAdjusterSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaAdjusterSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaAdjusterSettings
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1beta.QuotaAdjusterSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaAdjusterSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1beta.QuotaAdjusterSettings";
+                        };
+    
+                        /**
+                         * Enablement enum.
+                         * @name google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement
+                         * @enum {number}
+                         * @property {number} ENABLEMENT_UNSPECIFIED=0 ENABLEMENT_UNSPECIFIED value
+                         * @property {number} ENABLED=2 ENABLED value
+                         * @property {number} DISABLED=3 DISABLED value
+                         */
+                        QuotaAdjusterSettings.Enablement = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENABLEMENT_UNSPECIFIED"] = 0;
+                            values[valuesById[2] = "ENABLED"] = 2;
+                            values[valuesById[3] = "DISABLED"] = 3;
+                            return values;
+                        })();
+    
+                        return QuotaAdjusterSettings;
+                    })();
+    
+                    return v1beta;
                 })();
     
                 return cloudquotas;
