@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.15.0](https://github.com/googleapis/nodejs-storage/compare/v7.14.0...v7.15.0) (2024-12-20)
+
+
+### Features
+
+* Add ability to configure and utilize soft-delete and restore buckets ([#2566](https://github.com/googleapis/nodejs-storage/issues/2566)) ([25cdbb9](https://github.com/googleapis/nodejs-storage/commit/25cdbb918645362ce6994679e8a1c5e7cc666c87))
+
 ## [7.14.0](https://github.com/googleapis/nodejs-storage/compare/v7.13.0...v7.14.0) (2024-10-29)
 
 
