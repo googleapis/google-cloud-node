@@ -26172,6 +26172,9 @@ export namespace google {
 
                     /** Tool codeExecution */
                     codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
+
+                    /** Tool googleSearch */
+                    googleSearch?: (google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null);
                 }
 
                 /** Represents a Tool. */
@@ -26191,6 +26194,9 @@ export namespace google {
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
+
+                    /** Tool googleSearch. */
+                    public googleSearch?: (google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -26268,6 +26274,100 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Tool {
+
+                    /** Properties of a GoogleSearch. */
+                    interface IGoogleSearch {
+                    }
+
+                    /** Represents a GoogleSearch. */
+                    class GoogleSearch implements IGoogleSearch {
+
+                        /**
+                         * Constructs a new GoogleSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.Tool.IGoogleSearch);
+
+                        /**
+                         * Creates a new GoogleSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoogleSearch instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.Tool.IGoogleSearch): google.ai.generativelanguage.v1beta.Tool.GoogleSearch;
+
+                        /**
+                         * Encodes the specified GoogleSearch message. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.GoogleSearch.verify|verify} messages.
+                         * @param message GoogleSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.Tool.IGoogleSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoogleSearch message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.GoogleSearch.verify|verify} messages.
+                         * @param message GoogleSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.Tool.IGoogleSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoogleSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoogleSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.Tool.GoogleSearch;
+
+                        /**
+                         * Decodes a GoogleSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoogleSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.Tool.GoogleSearch;
+
+                        /**
+                         * Verifies a GoogleSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoogleSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoogleSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.Tool.GoogleSearch;
+
+                        /**
+                         * Creates a plain object from a GoogleSearch message. Also converts values to other types if specified.
+                         * @param message GoogleSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.Tool.GoogleSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoogleSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a GoogleSearchRetrieval. */
@@ -26795,6 +26895,9 @@ export namespace google {
 
                     /** FunctionDeclaration parameters */
                     parameters?: (google.ai.generativelanguage.v1beta.ISchema|null);
+
+                    /** FunctionDeclaration response */
+                    response?: (google.ai.generativelanguage.v1beta.ISchema|null);
                 }
 
                 /** Represents a FunctionDeclaration. */
@@ -26815,8 +26918,14 @@ export namespace google {
                     /** FunctionDeclaration parameters. */
                     public parameters?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
+                    /** FunctionDeclaration response. */
+                    public response?: (google.ai.generativelanguage.v1beta.ISchema|null);
+
                     /** FunctionDeclaration _parameters. */
                     public _parameters?: "parameters";
+
+                    /** FunctionDeclaration _response. */
+                    public _response?: "response";
 
                     /**
                      * Creates a new FunctionDeclaration instance using the specified properties.
@@ -26899,6 +27008,9 @@ export namespace google {
                 /** Properties of a FunctionCall. */
                 interface IFunctionCall {
 
+                    /** FunctionCall id */
+                    id?: (string|null);
+
                     /** FunctionCall name */
                     name?: (string|null);
 
@@ -26914,6 +27026,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.ai.generativelanguage.v1beta.IFunctionCall);
+
+                    /** FunctionCall id. */
+                    public id: string;
 
                     /** FunctionCall name. */
                     public name: string;
@@ -27005,6 +27120,9 @@ export namespace google {
                 /** Properties of a FunctionResponse. */
                 interface IFunctionResponse {
 
+                    /** FunctionResponse id */
+                    id?: (string|null);
+
                     /** FunctionResponse name */
                     name?: (string|null);
 
@@ -27020,6 +27138,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.ai.generativelanguage.v1beta.IFunctionResponse);
+
+                    /** FunctionResponse id. */
+                    public id: string;
 
                     /** FunctionResponse name. */
                     public name: string;
@@ -30279,6 +30400,303 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PrebuiltVoiceConfig. */
+                interface IPrebuiltVoiceConfig {
+
+                    /** PrebuiltVoiceConfig voiceName */
+                    voiceName?: (string|null);
+                }
+
+                /** Represents a PrebuiltVoiceConfig. */
+                class PrebuiltVoiceConfig implements IPrebuiltVoiceConfig {
+
+                    /**
+                     * Constructs a new PrebuiltVoiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IPrebuiltVoiceConfig);
+
+                    /** PrebuiltVoiceConfig voiceName. */
+                    public voiceName?: (string|null);
+
+                    /** PrebuiltVoiceConfig _voiceName. */
+                    public _voiceName?: "voiceName";
+
+                    /**
+                     * Creates a new PrebuiltVoiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrebuiltVoiceConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IPrebuiltVoiceConfig): google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig;
+
+                    /**
+                     * Encodes the specified PrebuiltVoiceConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig.verify|verify} messages.
+                     * @param message PrebuiltVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IPrebuiltVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrebuiltVoiceConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig.verify|verify} messages.
+                     * @param message PrebuiltVoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IPrebuiltVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrebuiltVoiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrebuiltVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig;
+
+                    /**
+                     * Decodes a PrebuiltVoiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrebuiltVoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig;
+
+                    /**
+                     * Verifies a PrebuiltVoiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrebuiltVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrebuiltVoiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig;
+
+                    /**
+                     * Creates a plain object from a PrebuiltVoiceConfig message. Also converts values to other types if specified.
+                     * @param message PrebuiltVoiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.PrebuiltVoiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrebuiltVoiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrebuiltVoiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VoiceConfig. */
+                interface IVoiceConfig {
+
+                    /** VoiceConfig prebuiltVoiceConfig */
+                    prebuiltVoiceConfig?: (google.ai.generativelanguage.v1beta.IPrebuiltVoiceConfig|null);
+                }
+
+                /** Represents a VoiceConfig. */
+                class VoiceConfig implements IVoiceConfig {
+
+                    /**
+                     * Constructs a new VoiceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IVoiceConfig);
+
+                    /** VoiceConfig prebuiltVoiceConfig. */
+                    public prebuiltVoiceConfig?: (google.ai.generativelanguage.v1beta.IPrebuiltVoiceConfig|null);
+
+                    /** VoiceConfig voiceConfig. */
+                    public voiceConfig?: "prebuiltVoiceConfig";
+
+                    /**
+                     * Creates a new VoiceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VoiceConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IVoiceConfig): google.ai.generativelanguage.v1beta.VoiceConfig;
+
+                    /**
+                     * Encodes the specified VoiceConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.VoiceConfig.verify|verify} messages.
+                     * @param message VoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VoiceConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.VoiceConfig.verify|verify} messages.
+                     * @param message VoiceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IVoiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VoiceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.VoiceConfig;
+
+                    /**
+                     * Decodes a VoiceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VoiceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.VoiceConfig;
+
+                    /**
+                     * Verifies a VoiceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VoiceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VoiceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.VoiceConfig;
+
+                    /**
+                     * Creates a plain object from a VoiceConfig message. Also converts values to other types if specified.
+                     * @param message VoiceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.VoiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VoiceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VoiceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SpeechConfig. */
+                interface ISpeechConfig {
+
+                    /** SpeechConfig voiceConfig */
+                    voiceConfig?: (google.ai.generativelanguage.v1beta.IVoiceConfig|null);
+                }
+
+                /** Represents a SpeechConfig. */
+                class SpeechConfig implements ISpeechConfig {
+
+                    /**
+                     * Constructs a new SpeechConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ISpeechConfig);
+
+                    /** SpeechConfig voiceConfig. */
+                    public voiceConfig?: (google.ai.generativelanguage.v1beta.IVoiceConfig|null);
+
+                    /**
+                     * Creates a new SpeechConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ISpeechConfig): google.ai.generativelanguage.v1beta.SpeechConfig;
+
+                    /**
+                     * Encodes the specified SpeechConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.SpeechConfig.verify|verify} messages.
+                     * @param message SpeechConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ISpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.SpeechConfig.verify|verify} messages.
+                     * @param message SpeechConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ISpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.SpeechConfig;
+
+                    /**
+                     * Decodes a SpeechConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.SpeechConfig;
+
+                    /**
+                     * Verifies a SpeechConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.SpeechConfig;
+
+                    /**
+                     * Creates a plain object from a SpeechConfig message. Also converts values to other types if specified.
+                     * @param message SpeechConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.SpeechConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpeechConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerationConfig. */
                 interface IGenerationConfig {
 
@@ -30317,6 +30735,15 @@ export namespace google {
 
                     /** GenerationConfig logprobs */
                     logprobs?: (number|null);
+
+                    /** GenerationConfig enableEnhancedCivicAnswers */
+                    enableEnhancedCivicAnswers?: (boolean|null);
+
+                    /** GenerationConfig responseModalities */
+                    responseModalities?: (google.ai.generativelanguage.v1beta.GenerationConfig.Modality[]|null);
+
+                    /** GenerationConfig speechConfig */
+                    speechConfig?: (google.ai.generativelanguage.v1beta.ISpeechConfig|null);
                 }
 
                 /** Represents a GenerationConfig. */
@@ -30364,6 +30791,15 @@ export namespace google {
                     /** GenerationConfig logprobs. */
                     public logprobs?: (number|null);
 
+                    /** GenerationConfig enableEnhancedCivicAnswers. */
+                    public enableEnhancedCivicAnswers?: (boolean|null);
+
+                    /** GenerationConfig responseModalities. */
+                    public responseModalities: google.ai.generativelanguage.v1beta.GenerationConfig.Modality[];
+
+                    /** GenerationConfig speechConfig. */
+                    public speechConfig?: (google.ai.generativelanguage.v1beta.ISpeechConfig|null);
+
                     /** GenerationConfig _candidateCount. */
                     public _candidateCount?: "candidateCount";
 
@@ -30390,6 +30826,12 @@ export namespace google {
 
                     /** GenerationConfig _logprobs. */
                     public _logprobs?: "logprobs";
+
+                    /** GenerationConfig _enableEnhancedCivicAnswers. */
+                    public _enableEnhancedCivicAnswers?: "enableEnhancedCivicAnswers";
+
+                    /** GenerationConfig _speechConfig. */
+                    public _speechConfig?: "speechConfig";
 
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
@@ -30467,6 +30909,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenerationConfig {
+
+                    /** Modality enum. */
+                    enum Modality {
+                        MODALITY_UNSPECIFIED = 0,
+                        TEXT = 1,
+                        IMAGE = 2,
+                        AUDIO = 3
+                    }
                 }
 
                 /** Properties of a SemanticRetrieverConfig. */
@@ -30824,7 +31277,8 @@ export namespace google {
                             SAFETY = 1,
                             OTHER = 2,
                             BLOCKLIST = 3,
-                            PROHIBITED_CONTENT = 4
+                            PROHIBITED_CONTENT = 4,
+                            IMAGE_SAFETY = 5
                         }
                     }
 
@@ -31112,7 +31566,8 @@ export namespace google {
                         BLOCKLIST = 7,
                         PROHIBITED_CONTENT = 8,
                         SPII = 9,
-                        MALFORMED_FUNCTION_CALL = 10
+                        MALFORMED_FUNCTION_CALL = 10,
+                        IMAGE_SAFETY = 11
                     }
                 }
 

@@ -7534,6 +7534,18 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "googleSearch": {
+                          "type": "GoogleSearch",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GoogleSearch": {
+                          "fields": {}
                         }
                       }
                     },
@@ -7624,6 +7636,11 @@
                           "oneof": [
                             "parameters"
                           ]
+                        },
+                        "_response": {
+                          "oneof": [
+                            "response"
+                          ]
                         }
                       },
                       "fields": {
@@ -7648,6 +7665,14 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "response": {
+                          "type": "Schema",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -7660,6 +7685,13 @@
                         }
                       },
                       "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -7679,6 +7711,13 @@
                     },
                     "FunctionResponse": {
                       "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -8737,6 +8776,47 @@
                         }
                       }
                     },
+                    "PrebuiltVoiceConfig": {
+                      "oneofs": {
+                        "_voiceName": {
+                          "oneof": [
+                            "voiceName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "voiceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "VoiceConfig": {
+                      "oneofs": {
+                        "voiceConfig": {
+                          "oneof": [
+                            "prebuiltVoiceConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "prebuiltVoiceConfig": {
+                          "type": "PrebuiltVoiceConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SpeechConfig": {
+                      "fields": {
+                        "voiceConfig": {
+                          "type": "VoiceConfig",
+                          "id": 1
+                        }
+                      }
+                    },
                     "GenerationConfig": {
                       "oneofs": {
                         "_candidateCount": {
@@ -8782,6 +8862,16 @@
                         "_logprobs": {
                           "oneof": [
                             "logprobs"
+                          ]
+                        },
+                        "_enableEnhancedCivicAnswers": {
+                          "oneof": [
+                            "enableEnhancedCivicAnswers"
+                          ]
+                        },
+                        "_speechConfig": {
+                          "oneof": [
+                            "speechConfig"
                           ]
                         }
                       },
@@ -8878,6 +8968,40 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "enableEnhancedCivicAnswers": {
+                          "type": "bool",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseModalities": {
+                          "rule": "repeated",
+                          "type": "Modality",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "speechConfig": {
+                          "type": "SpeechConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Modality": {
+                          "values": {
+                            "MODALITY_UNSPECIFIED": 0,
+                            "TEXT": 1,
+                            "IMAGE": 2,
+                            "AUDIO": 3
                           }
                         }
                       }
@@ -8985,7 +9109,8 @@
                                 "SAFETY": 1,
                                 "OTHER": 2,
                                 "BLOCKLIST": 3,
-                                "PROHIBITED_CONTENT": 4
+                                "PROHIBITED_CONTENT": 4,
+                                "IMAGE_SAFETY": 5
                               }
                             }
                           }
@@ -9105,7 +9230,8 @@
                             "BLOCKLIST": 7,
                             "PROHIBITED_CONTENT": 8,
                             "SPII": 9,
-                            "MALFORMED_FUNCTION_CALL": 10
+                            "MALFORMED_FUNCTION_CALL": 10,
+                            "IMAGE_SAFETY": 11
                           }
                         }
                       }
