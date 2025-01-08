@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -319,6 +319,8 @@
                              * @property {google.shopping.merchant.datasources.v1beta.ILocalInventoryDataSource|null} [localInventoryDataSource] DataSource localInventoryDataSource
                              * @property {google.shopping.merchant.datasources.v1beta.IRegionalInventoryDataSource|null} [regionalInventoryDataSource] DataSource regionalInventoryDataSource
                              * @property {google.shopping.merchant.datasources.v1beta.IPromotionDataSource|null} [promotionDataSource] DataSource promotionDataSource
+                             * @property {google.shopping.merchant.datasources.v1beta.IProductReviewDataSource|null} [productReviewDataSource] DataSource productReviewDataSource
+                             * @property {google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource|null} [merchantReviewDataSource] DataSource merchantReviewDataSource
                              * @property {string|null} [name] DataSource name
                              * @property {number|Long|null} [dataSourceId] DataSource dataSourceId
                              * @property {string|null} [displayName] DataSource displayName
@@ -382,6 +384,22 @@
                             DataSource.prototype.promotionDataSource = null;
     
                             /**
+                             * DataSource productReviewDataSource.
+                             * @member {google.shopping.merchant.datasources.v1beta.IProductReviewDataSource|null|undefined} productReviewDataSource
+                             * @memberof google.shopping.merchant.datasources.v1beta.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.productReviewDataSource = null;
+    
+                            /**
+                             * DataSource merchantReviewDataSource.
+                             * @member {google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource|null|undefined} merchantReviewDataSource
+                             * @memberof google.shopping.merchant.datasources.v1beta.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.merchantReviewDataSource = null;
+    
+                            /**
                              * DataSource name.
                              * @member {string} name
                              * @memberof google.shopping.merchant.datasources.v1beta.DataSource
@@ -426,12 +444,12 @@
     
                             /**
                              * DataSource Type.
-                             * @member {"primaryProductDataSource"|"supplementalProductDataSource"|"localInventoryDataSource"|"regionalInventoryDataSource"|"promotionDataSource"|undefined} Type
+                             * @member {"primaryProductDataSource"|"supplementalProductDataSource"|"localInventoryDataSource"|"regionalInventoryDataSource"|"promotionDataSource"|"productReviewDataSource"|"merchantReviewDataSource"|undefined} Type
                              * @memberof google.shopping.merchant.datasources.v1beta.DataSource
                              * @instance
                              */
                             Object.defineProperty(DataSource.prototype, "Type", {
-                                get: $util.oneOfGetter($oneOfFields = ["primaryProductDataSource", "supplementalProductDataSource", "localInventoryDataSource", "regionalInventoryDataSource", "promotionDataSource"]),
+                                get: $util.oneOfGetter($oneOfFields = ["primaryProductDataSource", "supplementalProductDataSource", "localInventoryDataSource", "regionalInventoryDataSource", "promotionDataSource", "productReviewDataSource", "merchantReviewDataSource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -475,10 +493,14 @@
                                     $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource.encode(message.regionalInventoryDataSource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource"))
                                     $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.encode(message.promotionDataSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.encode(message.productReviewDataSource, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 if (message.input != null && Object.hasOwnProperty.call(message, "input"))
                                     writer.uint32(/* id 10, wireType 0 =*/80).int32(message.input);
                                 if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput"))
                                     $root.google.shopping.merchant.datasources.v1beta.FileInput.encode(message.fileInput, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.encode(message.merchantReviewDataSource, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 return writer;
                             };
     
@@ -531,6 +553,14 @@
                                         }
                                     case 8: {
                                             message.promotionDataSource = $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.productReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 1: {
@@ -637,6 +667,26 @@
                                             return "promotionDataSource." + error;
                                     }
                                 }
+                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.verify(message.productReviewDataSource);
+                                        if (error)
+                                            return "productReviewDataSource." + error;
+                                    }
+                                }
+                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.verify(message.merchantReviewDataSource);
+                                        if (error)
+                                            return "merchantReviewDataSource." + error;
+                                    }
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -701,6 +751,16 @@
                                     if (typeof object.promotionDataSource !== "object")
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.promotionDataSource: object expected");
                                     message.promotionDataSource = $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource.fromObject(object.promotionDataSource);
+                                }
+                                if (object.productReviewDataSource != null) {
+                                    if (typeof object.productReviewDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.productReviewDataSource: object expected");
+                                    message.productReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.fromObject(object.productReviewDataSource);
+                                }
+                                if (object.merchantReviewDataSource != null) {
+                                    if (typeof object.merchantReviewDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1beta.DataSource.merchantReviewDataSource: object expected");
+                                    message.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.fromObject(object.merchantReviewDataSource);
                                 }
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -809,10 +869,20 @@
                                     if (options.oneofs)
                                         object.Type = "promotionDataSource";
                                 }
+                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
+                                    object.productReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.toObject(message.productReviewDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "productReviewDataSource";
+                                }
                                 if (message.input != null && message.hasOwnProperty("input"))
                                     object.input = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.DataSource.Input[message.input] === undefined ? message.input : $root.google.shopping.merchant.datasources.v1beta.DataSource.Input[message.input] : message.input;
                                 if (message.fileInput != null && message.hasOwnProperty("fileInput"))
                                     object.fileInput = $root.google.shopping.merchant.datasources.v1beta.FileInput.toObject(message.fileInput, options);
+                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
+                                    object.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.toObject(message.merchantReviewDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "merchantReviewDataSource";
+                                }
                                 return object;
                             };
     
@@ -4047,6 +4117,356 @@
                             };
     
                             return PromotionDataSource;
+                        })();
+    
+                        v1beta.ProductReviewDataSource = (function() {
+    
+                            /**
+                             * Properties of a ProductReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1beta
+                             * @interface IProductReviewDataSource
+                             */
+    
+                            /**
+                             * Constructs a new ProductReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1beta
+                             * @classdesc Represents a ProductReviewDataSource.
+                             * @implements IProductReviewDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1beta.IProductReviewDataSource=} [properties] Properties to set
+                             */
+                            function ProductReviewDataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ProductReviewDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.IProductReviewDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1beta.ProductReviewDataSource} ProductReviewDataSource instance
+                             */
+                            ProductReviewDataSource.create = function create(properties) {
+                                return new ProductReviewDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProductReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.IProductReviewDataSource} message ProductReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductReviewDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProductReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.IProductReviewDataSource} message ProductReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProductReviewDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1beta.ProductReviewDataSource} ProductReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductReviewDataSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProductReviewDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1beta.ProductReviewDataSource} ProductReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductReviewDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProductReviewDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProductReviewDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProductReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1beta.ProductReviewDataSource} ProductReviewDataSource
+                             */
+                            ProductReviewDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource)
+                                    return object;
+                                return new $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProductReviewDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.ProductReviewDataSource} message ProductReviewDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProductReviewDataSource.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ProductReviewDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProductReviewDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProductReviewDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1beta.ProductReviewDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProductReviewDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1beta.ProductReviewDataSource";
+                            };
+    
+                            return ProductReviewDataSource;
+                        })();
+    
+                        v1beta.MerchantReviewDataSource = (function() {
+    
+                            /**
+                             * Properties of a MerchantReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1beta
+                             * @interface IMerchantReviewDataSource
+                             */
+    
+                            /**
+                             * Constructs a new MerchantReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1beta
+                             * @classdesc Represents a MerchantReviewDataSource.
+                             * @implements IMerchantReviewDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource=} [properties] Properties to set
+                             */
+                            function MerchantReviewDataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new MerchantReviewDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource} MerchantReviewDataSource instance
+                             */
+                            MerchantReviewDataSource.create = function create(properties) {
+                                return new MerchantReviewDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MerchantReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource} message MerchantReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MerchantReviewDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MerchantReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource} message MerchantReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MerchantReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MerchantReviewDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource} MerchantReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MerchantReviewDataSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MerchantReviewDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource} MerchantReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MerchantReviewDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MerchantReviewDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MerchantReviewDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MerchantReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource} MerchantReviewDataSource
+                             */
+                            MerchantReviewDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource)
+                                    return object;
+                                return new $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource();
+                            };
+    
+                            /**
+                             * Creates a plain object from a MerchantReviewDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource} message MerchantReviewDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MerchantReviewDataSource.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this MerchantReviewDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MerchantReviewDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MerchantReviewDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MerchantReviewDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource";
+                            };
+    
+                            return MerchantReviewDataSource;
                         })();
     
                         v1beta.DataSourceReference = (function() {
