@@ -915,6 +915,25 @@
                         }
                       }
                     },
+                    "UploadedGoModule": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileHashes": {
+                          "type": "FileHashes",
+                          "id": 2
+                        },
+                        "pushTiming": {
+                          "type": "TimeSpan",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "UploadedNpmPackage": {
                       "fields": {
                         "uri": {
@@ -1088,6 +1107,14 @@
                           "rule": "repeated",
                           "type": "UploadedMavenArtifact",
                           "id": 9
+                        },
+                        "goModules": {
+                          "rule": "repeated",
+                          "type": "UploadedGoModule",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "npmPackages": {
                           "rule": "repeated",
@@ -1370,6 +1397,14 @@
                           "type": "MavenArtifact",
                           "id": 3
                         },
+                        "goModules": {
+                          "rule": "repeated",
+                          "type": "GoModule",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "pythonPackages": {
                           "rule": "repeated",
                           "type": "PythonPackage",
@@ -1423,6 +1458,52 @@
                             "version": {
                               "type": "string",
                               "id": 5
+                            }
+                          }
+                        },
+                        "GoModule": {
+                          "fields": {
+                            "repositoryName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "repositoryLocation": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "repositoryProjectId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sourcePath": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "modulePath": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "moduleVersion": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1523,6 +1604,7 @@
                             "NONE": 0,
                             "SHA256": 1,
                             "MD5": 2,
+                            "GO_MODULE_H1": 3,
                             "SHA512": 4
                           }
                         }
