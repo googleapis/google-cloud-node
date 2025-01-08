@@ -3160,7 +3160,8 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         ACCOUNT_NOT_LINKED = 1,
                         ACCOUNT_NOT_ACTIVE = 2,
-                        ACTIVE = 3
+                        ACTIVE = 3,
+                        ACCOUNT_SUSPENDED = 4
                     }
                 }
 
