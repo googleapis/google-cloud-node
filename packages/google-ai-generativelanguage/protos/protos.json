@@ -353,6 +353,11 @@
                           "oneof": [
                             "logprobs"
                           ]
+                        },
+                        "_enableEnhancedCivicAnswers": {
+                          "oneof": [
+                            "enableEnhancedCivicAnswers"
+                          ]
                         }
                       },
                       "fields": {
@@ -435,6 +440,14 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "enableEnhancedCivicAnswers": {
+                          "type": "bool",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -487,7 +500,8 @@
                                 "SAFETY": 1,
                                 "OTHER": 2,
                                 "BLOCKLIST": 3,
-                                "PROHIBITED_CONTENT": 4
+                                "PROHIBITED_CONTENT": 4,
+                                "IMAGE_SAFETY": 5
                               }
                             }
                           }
@@ -595,7 +609,8 @@
                             "BLOCKLIST": 7,
                             "PROHIBITED_CONTENT": 8,
                             "SPII": 9,
-                            "MALFORMED_FUNCTION_CALL": 10
+                            "MALFORMED_FUNCTION_CALL": 10,
+                            "IMAGE_SAFETY": 11
                           }
                         }
                       }

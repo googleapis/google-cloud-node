@@ -853,6 +853,9 @@ export namespace google {
 
                     /** GenerationConfig logprobs */
                     logprobs?: (number|null);
+
+                    /** GenerationConfig enableEnhancedCivicAnswers */
+                    enableEnhancedCivicAnswers?: (boolean|null);
                 }
 
                 /** Represents a GenerationConfig. */
@@ -894,6 +897,9 @@ export namespace google {
                     /** GenerationConfig logprobs. */
                     public logprobs?: (number|null);
 
+                    /** GenerationConfig enableEnhancedCivicAnswers. */
+                    public enableEnhancedCivicAnswers?: (boolean|null);
+
                     /** GenerationConfig _candidateCount. */
                     public _candidateCount?: "candidateCount";
 
@@ -920,6 +926,9 @@ export namespace google {
 
                     /** GenerationConfig _logprobs. */
                     public _logprobs?: "logprobs";
+
+                    /** GenerationConfig _enableEnhancedCivicAnswers. */
+                    public _enableEnhancedCivicAnswers?: "enableEnhancedCivicAnswers";
 
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
@@ -1227,7 +1236,8 @@ export namespace google {
                             SAFETY = 1,
                             OTHER = 2,
                             BLOCKLIST = 3,
-                            PROHIBITED_CONTENT = 4
+                            PROHIBITED_CONTENT = 4,
+                            IMAGE_SAFETY = 5
                         }
                     }
 
@@ -1503,7 +1513,8 @@ export namespace google {
                         BLOCKLIST = 7,
                         PROHIBITED_CONTENT = 8,
                         SPII = 9,
-                        MALFORMED_FUNCTION_CALL = 10
+                        MALFORMED_FUNCTION_CALL = 10,
+                        IMAGE_SAFETY = 11
                     }
                 }
 
