@@ -1032,6 +1032,30 @@
                             }
                           ]
                         },
+                        "ValidateDirectoryService": {
+                          "requestType": "ValidateDirectoryServiceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/storagePools/*}:validateDirectoryService",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/storagePools/*}:validateDirectoryService",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "SwitchActiveReplicaZone": {
                           "requestType": "SwitchActiveReplicaZoneRequest",
                           "responseType": "google.longrunning.Operation",
@@ -4163,6 +4187,12 @@
                         "CLOUD_KMS": 2
                       }
                     },
+                    "DirectoryServiceType": {
+                      "values": {
+                        "DIRECTORY_SERVICE_TYPE_UNSPECIFIED": 0,
+                        "ACTIVE_DIRECTORY": 1
+                      }
+                    },
                     "LocationMetadata": {
                       "fields": {
                         "supportedServiceLevels": {
@@ -4667,6 +4697,22 @@
                             "DISABLED": 6,
                             "ERROR": 7
                           }
+                        }
+                      }
+                    },
+                    "ValidateDirectoryServiceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        },
+                        "directoryServiceType": {
+                          "type": "DirectoryServiceType",
+                          "id": 2
                         }
                       }
                     }

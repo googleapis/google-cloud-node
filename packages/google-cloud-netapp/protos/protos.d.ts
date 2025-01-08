@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3390,6 +3390,20 @@ export namespace google {
                     public deleteStoragePool(request: google.cloud.netapp.v1.IDeleteStoragePoolRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ValidateDirectoryService.
+                     * @param request ValidateDirectoryServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public validateDirectoryService(request: google.cloud.netapp.v1.IValidateDirectoryServiceRequest, callback: google.cloud.netapp.v1.NetApp.ValidateDirectoryServiceCallback): void;
+
+                    /**
+                     * Calls ValidateDirectoryService.
+                     * @param request ValidateDirectoryServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public validateDirectoryService(request: google.cloud.netapp.v1.IValidateDirectoryServiceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls SwitchActiveReplicaZone.
                      * @param request SwitchActiveReplicaZoneRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -4112,6 +4126,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteStoragePoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|validateDirectoryService}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ValidateDirectoryServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.netapp.v1.NetApp|switchActiveReplicaZone}.
@@ -10146,6 +10167,12 @@ export namespace google {
                     CLOUD_KMS = 2
                 }
 
+                /** DirectoryServiceType enum. */
+                enum DirectoryServiceType {
+                    DIRECTORY_SERVICE_TYPE_UNSPECIFIED = 0,
+                    ACTIVE_DIRECTORY = 1
+                }
+
                 /** Properties of a LocationMetadata. */
                 interface ILocationMetadata {
 
@@ -11986,6 +12013,109 @@ export namespace google {
                         DISABLED = 6,
                         ERROR = 7
                     }
+                }
+
+                /** Properties of a ValidateDirectoryServiceRequest. */
+                interface IValidateDirectoryServiceRequest {
+
+                    /** ValidateDirectoryServiceRequest name */
+                    name?: (string|null);
+
+                    /** ValidateDirectoryServiceRequest directoryServiceType */
+                    directoryServiceType?: (google.cloud.netapp.v1.DirectoryServiceType|keyof typeof google.cloud.netapp.v1.DirectoryServiceType|null);
+                }
+
+                /** Represents a ValidateDirectoryServiceRequest. */
+                class ValidateDirectoryServiceRequest implements IValidateDirectoryServiceRequest {
+
+                    /**
+                     * Constructs a new ValidateDirectoryServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IValidateDirectoryServiceRequest);
+
+                    /** ValidateDirectoryServiceRequest name. */
+                    public name: string;
+
+                    /** ValidateDirectoryServiceRequest directoryServiceType. */
+                    public directoryServiceType: (google.cloud.netapp.v1.DirectoryServiceType|keyof typeof google.cloud.netapp.v1.DirectoryServiceType);
+
+                    /**
+                     * Creates a new ValidateDirectoryServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidateDirectoryServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IValidateDirectoryServiceRequest): google.cloud.netapp.v1.ValidateDirectoryServiceRequest;
+
+                    /**
+                     * Encodes the specified ValidateDirectoryServiceRequest message. Does not implicitly {@link google.cloud.netapp.v1.ValidateDirectoryServiceRequest.verify|verify} messages.
+                     * @param message ValidateDirectoryServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IValidateDirectoryServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidateDirectoryServiceRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ValidateDirectoryServiceRequest.verify|verify} messages.
+                     * @param message ValidateDirectoryServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IValidateDirectoryServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidateDirectoryServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidateDirectoryServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.ValidateDirectoryServiceRequest;
+
+                    /**
+                     * Decodes a ValidateDirectoryServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidateDirectoryServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.ValidateDirectoryServiceRequest;
+
+                    /**
+                     * Verifies a ValidateDirectoryServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidateDirectoryServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidateDirectoryServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.ValidateDirectoryServiceRequest;
+
+                    /**
+                     * Creates a plain object from a ValidateDirectoryServiceRequest message. Also converts values to other types if specified.
+                     * @param message ValidateDirectoryServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.ValidateDirectoryServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidateDirectoryServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ValidateDirectoryServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }
