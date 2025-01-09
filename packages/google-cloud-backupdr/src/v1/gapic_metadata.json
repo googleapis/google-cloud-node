@@ -110,6 +110,11 @@
                 "triggerBackup"
               ]
             },
+            "InitializeService": {
+              "methods": [
+                "initializeService"
+              ]
+            },
             "ListManagementServers": {
               "methods": [
                 "listManagementServers",
@@ -262,6 +267,11 @@
             "TriggerBackup": {
               "methods": [
                 "triggerBackup"
+              ]
+            },
+            "InitializeService": {
+              "methods": [
+                "initializeService"
               ]
             },
             "ListManagementServers": {

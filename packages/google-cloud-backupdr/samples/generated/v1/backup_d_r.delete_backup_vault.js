@@ -67,6 +67,11 @@ function main(name) {
    *  succeed but no action will be taken.
    */
   // const allowMissing = true
+  /**
+   *  Optional. If set to true, backupvault deletion will proceed even if there
+   *  are backup plans referencing the backupvault. The default is 'false'.
+   */
+  // const ignoreBackupPlanReferences = true
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;

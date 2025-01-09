@@ -423,6 +423,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public triggerBackup(request: google.cloud.backupdr.v1.ITriggerBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls InitializeService.
+                     * @param request InitializeServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public initializeService(request: google.cloud.backupdr.v1.IInitializeServiceRequest, callback: google.cloud.backupdr.v1.BackupDR.InitializeServiceCallback): void;
+
+                    /**
+                     * Calls InitializeService.
+                     * @param request InitializeServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public initializeService(request: google.cloud.backupdr.v1.IInitializeServiceRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace BackupDR {
@@ -615,6 +629,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type TriggerBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|initializeService}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type InitializeServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a NetworkConfig. */
@@ -1791,6 +1812,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteManagementServerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeServiceRequest. */
+                interface IInitializeServiceRequest {
+
+                    /** InitializeServiceRequest name */
+                    name?: (string|null);
+
+                    /** InitializeServiceRequest resourceType */
+                    resourceType?: (string|null);
+
+                    /** InitializeServiceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an InitializeServiceRequest. */
+                class InitializeServiceRequest implements IInitializeServiceRequest {
+
+                    /**
+                     * Constructs a new InitializeServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IInitializeServiceRequest);
+
+                    /** InitializeServiceRequest name. */
+                    public name: string;
+
+                    /** InitializeServiceRequest resourceType. */
+                    public resourceType: string;
+
+                    /** InitializeServiceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new InitializeServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IInitializeServiceRequest): google.cloud.backupdr.v1.InitializeServiceRequest;
+
+                    /**
+                     * Encodes the specified InitializeServiceRequest message. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceRequest.verify|verify} messages.
+                     * @param message InitializeServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IInitializeServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeServiceRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceRequest.verify|verify} messages.
+                     * @param message InitializeServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IInitializeServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.InitializeServiceRequest;
+
+                    /**
+                     * Decodes an InitializeServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.InitializeServiceRequest;
+
+                    /**
+                     * Verifies an InitializeServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.InitializeServiceRequest;
+
+                    /**
+                     * Creates a plain object from an InitializeServiceRequest message. Also converts values to other types if specified.
+                     * @param message InitializeServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.InitializeServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeServiceResponse. */
+                interface IInitializeServiceResponse {
+
+                    /** InitializeServiceResponse backupVaultName */
+                    backupVaultName?: (string|null);
+
+                    /** InitializeServiceResponse backupPlanName */
+                    backupPlanName?: (string|null);
+                }
+
+                /** Represents an InitializeServiceResponse. */
+                class InitializeServiceResponse implements IInitializeServiceResponse {
+
+                    /**
+                     * Constructs a new InitializeServiceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IInitializeServiceResponse);
+
+                    /** InitializeServiceResponse backupVaultName. */
+                    public backupVaultName: string;
+
+                    /** InitializeServiceResponse backupPlanName. */
+                    public backupPlanName: string;
+
+                    /**
+                     * Creates a new InitializeServiceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeServiceResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IInitializeServiceResponse): google.cloud.backupdr.v1.InitializeServiceResponse;
+
+                    /**
+                     * Encodes the specified InitializeServiceResponse message. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceResponse.verify|verify} messages.
+                     * @param message InitializeServiceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IInitializeServiceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeServiceResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceResponse.verify|verify} messages.
+                     * @param message InitializeServiceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IInitializeServiceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeServiceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeServiceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.InitializeServiceResponse;
+
+                    /**
+                     * Decodes an InitializeServiceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeServiceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.InitializeServiceResponse;
+
+                    /**
+                     * Verifies an InitializeServiceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeServiceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeServiceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.InitializeServiceResponse;
+
+                    /**
+                     * Creates a plain object from an InitializeServiceResponse message. Also converts values to other types if specified.
+                     * @param message InitializeServiceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.InitializeServiceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeServiceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeServiceResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4289,7 +4522,8 @@ export namespace google {
                         ACCESS_RESTRICTION_UNSPECIFIED = 0,
                         WITHIN_PROJECT = 1,
                         WITHIN_ORGANIZATION = 2,
-                        UNRESTRICTED = 3
+                        UNRESTRICTED = 3,
+                        WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA = 4
                     }
                 }
 
@@ -6633,6 +6867,9 @@ export namespace google {
 
                     /** DeleteBackupVaultRequest allowMissing */
                     allowMissing?: (boolean|null);
+
+                    /** DeleteBackupVaultRequest ignoreBackupPlanReferences */
+                    ignoreBackupPlanReferences?: (boolean|null);
                 }
 
                 /** Represents a DeleteBackupVaultRequest. */
@@ -6661,6 +6898,9 @@ export namespace google {
 
                     /** DeleteBackupVaultRequest allowMissing. */
                     public allowMissing: boolean;
+
+                    /** DeleteBackupVaultRequest ignoreBackupPlanReferences. */
+                    public ignoreBackupPlanReferences: boolean;
 
                     /**
                      * Creates a new DeleteBackupVaultRequest instance using the specified properties.

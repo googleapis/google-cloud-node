@@ -420,6 +420,12 @@ export class BackupDRClient {
     const triggerBackupMetadata = protoFilesRoot.lookup(
       '.google.cloud.backupdr.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const initializeServiceResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.InitializeServiceResponse'
+    ) as gax.protobuf.Type;
+    const initializeServiceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createManagementServer: new this._gaxModule.LongrunningDescriptor(
@@ -508,6 +514,11 @@ export class BackupDRClient {
         triggerBackupResponse.decode.bind(triggerBackupResponse),
         triggerBackupMetadata.decode.bind(triggerBackupMetadata)
       ),
+      initializeService: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        initializeServiceResponse.decode.bind(initializeServiceResponse),
+        initializeServiceMetadata.decode.bind(initializeServiceMetadata)
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -587,6 +598,7 @@ export class BackupDRClient {
       'listBackupPlanAssociations',
       'deleteBackupPlanAssociation',
       'triggerBackup',
+      'initializeService',
     ];
     for (const methodName of backupDRStubMethods) {
       const callPromise = this.backupDRStub.then(
@@ -1913,6 +1925,9 @@ export class BackupDRClient {
    * @param {boolean} [request.allowMissing]
    *   Optional. If true and the BackupVault is not found, the request will
    *   succeed but no action will be taken.
+   * @param {boolean} [request.ignoreBackupPlanReferences]
+   *   Optional. If set to true, backupvault deletion will proceed even if there
+   *   are backup plans referencing the backupvault. The default is 'false'.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3438,6 +3453,162 @@ export class BackupDRClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.backupdr.v1.BackupPlanAssociation,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Initializes the service related config for a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the serviceConfig used to initialize the
+   *   service. Format:
+   *   `projects/{project_id}/locations/{location}/serviceConfig`.
+   * @param {string} request.resourceType
+   *   Required. The resource type to which the default service config will be
+   *   applied. Examples include, "compute.googleapis.com/Instance" and
+   *   "storage.googleapis.com/Bucket".
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.initialize_service.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_InitializeService_async
+   */
+  initializeService(
+    request?: protos.google.cloud.backupdr.v1.IInitializeServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IInitializeServiceResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  initializeService(
+    request: protos.google.cloud.backupdr.v1.IInitializeServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IInitializeServiceResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  initializeService(
+    request: protos.google.cloud.backupdr.v1.IInitializeServiceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IInitializeServiceResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  initializeService(
+    request?: protos.google.cloud.backupdr.v1.IInitializeServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IInitializeServiceResponse,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IInitializeServiceResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IInitializeServiceResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.initializeService(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `initializeService()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.initialize_service.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_InitializeService_async
+   */
+  async checkInitializeServiceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.InitializeServiceResponse,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.initializeService,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.InitializeServiceResponse,
       protos.google.cloud.backupdr.v1.OperationMetadata
     >;
   }

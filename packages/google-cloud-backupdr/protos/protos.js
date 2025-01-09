@@ -989,6 +989,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|initializeService}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef InitializeServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls InitializeService.
+                         * @function initializeService
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceRequest} request InitializeServiceRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.InitializeServiceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.initializeService = function initializeService(request, callback) {
+                            return this.rpcCall(initializeService, $root.google.cloud.backupdr.v1.InitializeServiceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "InitializeService" });
+    
+                        /**
+                         * Calls InitializeService.
+                         * @function initializeService
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceRequest} request InitializeServiceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return BackupDR;
                     })();
     
@@ -4019,6 +4052,483 @@
                         };
     
                         return DeleteManagementServerRequest;
+                    })();
+    
+                    v1.InitializeServiceRequest = (function() {
+    
+                        /**
+                         * Properties of an InitializeServiceRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IInitializeServiceRequest
+                         * @property {string|null} [name] InitializeServiceRequest name
+                         * @property {string|null} [resourceType] InitializeServiceRequest resourceType
+                         * @property {string|null} [requestId] InitializeServiceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new InitializeServiceRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents an InitializeServiceRequest.
+                         * @implements IInitializeServiceRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceRequest=} [properties] Properties to set
+                         */
+                        function InitializeServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InitializeServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @instance
+                         */
+                        InitializeServiceRequest.prototype.name = "";
+    
+                        /**
+                         * InitializeServiceRequest resourceType.
+                         * @member {string} resourceType
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @instance
+                         */
+                        InitializeServiceRequest.prototype.resourceType = "";
+    
+                        /**
+                         * InitializeServiceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @instance
+                         */
+                        InitializeServiceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new InitializeServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceRequest} InitializeServiceRequest instance
+                         */
+                        InitializeServiceRequest.create = function create(properties) {
+                            return new InitializeServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeServiceRequest message. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceRequest} message InitializeServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceType);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeServiceRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceRequest} message InitializeServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializeServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceRequest} InitializeServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.InitializeServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resourceType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializeServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceRequest} InitializeServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializeServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializeServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (!$util.isString(message.resourceType))
+                                    return "resourceType: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializeServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceRequest} InitializeServiceRequest
+                         */
+                        InitializeServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.InitializeServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.InitializeServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.resourceType != null)
+                                message.resourceType = String(object.resourceType);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializeServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.InitializeServiceRequest} message InitializeServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializeServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.resourceType = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                object.resourceType = message.resourceType;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InitializeServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializeServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializeServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializeServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.InitializeServiceRequest";
+                        };
+    
+                        return InitializeServiceRequest;
+                    })();
+    
+                    v1.InitializeServiceResponse = (function() {
+    
+                        /**
+                         * Properties of an InitializeServiceResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IInitializeServiceResponse
+                         * @property {string|null} [backupVaultName] InitializeServiceResponse backupVaultName
+                         * @property {string|null} [backupPlanName] InitializeServiceResponse backupPlanName
+                         */
+    
+                        /**
+                         * Constructs a new InitializeServiceResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents an InitializeServiceResponse.
+                         * @implements IInitializeServiceResponse
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceResponse=} [properties] Properties to set
+                         */
+                        function InitializeServiceResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InitializeServiceResponse backupVaultName.
+                         * @member {string} backupVaultName
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @instance
+                         */
+                        InitializeServiceResponse.prototype.backupVaultName = "";
+    
+                        /**
+                         * InitializeServiceResponse backupPlanName.
+                         * @member {string} backupPlanName
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @instance
+                         */
+                        InitializeServiceResponse.prototype.backupPlanName = "";
+    
+                        /**
+                         * Creates a new InitializeServiceResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceResponse=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceResponse} InitializeServiceResponse instance
+                         */
+                        InitializeServiceResponse.create = function create(properties) {
+                            return new InitializeServiceResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeServiceResponse message. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceResponse} message InitializeServiceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeServiceResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupVaultName != null && Object.hasOwnProperty.call(message, "backupVaultName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.backupVaultName);
+                            if (message.backupPlanName != null && Object.hasOwnProperty.call(message, "backupPlanName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupPlanName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeServiceResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.InitializeServiceResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IInitializeServiceResponse} message InitializeServiceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeServiceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializeServiceResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceResponse} InitializeServiceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeServiceResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.InitializeServiceResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.backupVaultName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupPlanName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializeServiceResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceResponse} InitializeServiceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeServiceResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializeServiceResponse message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializeServiceResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupVaultName != null && message.hasOwnProperty("backupVaultName"))
+                                if (!$util.isString(message.backupVaultName))
+                                    return "backupVaultName: string expected";
+                            if (message.backupPlanName != null && message.hasOwnProperty("backupPlanName"))
+                                if (!$util.isString(message.backupPlanName))
+                                    return "backupPlanName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializeServiceResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.InitializeServiceResponse} InitializeServiceResponse
+                         */
+                        InitializeServiceResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.InitializeServiceResponse)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.InitializeServiceResponse();
+                            if (object.backupVaultName != null)
+                                message.backupVaultName = String(object.backupVaultName);
+                            if (object.backupPlanName != null)
+                                message.backupPlanName = String(object.backupPlanName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializeServiceResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.InitializeServiceResponse} message InitializeServiceResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializeServiceResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.backupVaultName = "";
+                                object.backupPlanName = "";
+                            }
+                            if (message.backupVaultName != null && message.hasOwnProperty("backupVaultName"))
+                                object.backupVaultName = message.backupVaultName;
+                            if (message.backupPlanName != null && message.hasOwnProperty("backupPlanName"))
+                                object.backupPlanName = message.backupPlanName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InitializeServiceResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializeServiceResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializeServiceResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializeServiceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.InitializeServiceResponse";
+                        };
+    
+                        return InitializeServiceResponse;
                     })();
     
                     v1.OperationMetadata = (function() {
@@ -10658,6 +11168,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -10789,6 +11300,10 @@
                             case "UNRESTRICTED":
                             case 3:
                                 message.accessRestriction = 3;
+                                break;
+                            case "WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA":
+                            case 4:
+                                message.accessRestriction = 4;
                                 break;
                             }
                             return message;
@@ -10951,6 +11466,7 @@
                          * @property {number} WITHIN_PROJECT=1 WITHIN_PROJECT value
                          * @property {number} WITHIN_ORGANIZATION=2 WITHIN_ORGANIZATION value
                          * @property {number} UNRESTRICTED=3 UNRESTRICTED value
+                         * @property {number} WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA=4 WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA value
                          */
                         BackupVault.AccessRestriction = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -10958,6 +11474,7 @@
                             values[valuesById[1] = "WITHIN_PROJECT"] = 1;
                             values[valuesById[2] = "WITHIN_ORGANIZATION"] = 2;
                             values[valuesById[3] = "UNRESTRICTED"] = 3;
+                            values[valuesById[4] = "WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA"] = 4;
                             return values;
                         })();
     
@@ -17556,6 +18073,7 @@
                          * @property {string|null} [etag] DeleteBackupVaultRequest etag
                          * @property {boolean|null} [validateOnly] DeleteBackupVaultRequest validateOnly
                          * @property {boolean|null} [allowMissing] DeleteBackupVaultRequest allowMissing
+                         * @property {boolean|null} [ignoreBackupPlanReferences] DeleteBackupVaultRequest ignoreBackupPlanReferences
                          */
     
                         /**
@@ -17622,6 +18140,14 @@
                         DeleteBackupVaultRequest.prototype.allowMissing = false;
     
                         /**
+                         * DeleteBackupVaultRequest ignoreBackupPlanReferences.
+                         * @member {boolean} ignoreBackupPlanReferences
+                         * @memberof google.cloud.backupdr.v1.DeleteBackupVaultRequest
+                         * @instance
+                         */
+                        DeleteBackupVaultRequest.prototype.ignoreBackupPlanReferences = false;
+    
+                        /**
                          * Creates a new DeleteBackupVaultRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.backupdr.v1.DeleteBackupVaultRequest
@@ -17657,6 +18183,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
                             if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.allowMissing);
+                            if (message.ignoreBackupPlanReferences != null && Object.hasOwnProperty.call(message, "ignoreBackupPlanReferences"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.ignoreBackupPlanReferences);
                             return writer;
                         };
     
@@ -17715,6 +18243,10 @@
                                         message.allowMissing = reader.bool();
                                         break;
                                     }
+                                case 7: {
+                                        message.ignoreBackupPlanReferences = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17768,6 +18300,9 @@
                             if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
                                 if (typeof message.allowMissing !== "boolean")
                                     return "allowMissing: boolean expected";
+                            if (message.ignoreBackupPlanReferences != null && message.hasOwnProperty("ignoreBackupPlanReferences"))
+                                if (typeof message.ignoreBackupPlanReferences !== "boolean")
+                                    return "ignoreBackupPlanReferences: boolean expected";
                             return null;
                         };
     
@@ -17795,6 +18330,8 @@
                                 message.validateOnly = Boolean(object.validateOnly);
                             if (object.allowMissing != null)
                                 message.allowMissing = Boolean(object.allowMissing);
+                            if (object.ignoreBackupPlanReferences != null)
+                                message.ignoreBackupPlanReferences = Boolean(object.ignoreBackupPlanReferences);
                             return message;
                         };
     
@@ -17818,6 +18355,7 @@
                                 object.etag = "";
                                 object.validateOnly = false;
                                 object.allowMissing = false;
+                                object.ignoreBackupPlanReferences = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -17831,6 +18369,8 @@
                                 object.validateOnly = message.validateOnly;
                             if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
                                 object.allowMissing = message.allowMissing;
+                            if (message.ignoreBackupPlanReferences != null && message.hasOwnProperty("ignoreBackupPlanReferences"))
+                                object.ignoreBackupPlanReferences = message.ignoreBackupPlanReferences;
                             return object;
                         };
     

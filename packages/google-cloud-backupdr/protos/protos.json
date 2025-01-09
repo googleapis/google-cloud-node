@@ -641,6 +641,30 @@
                               }
                             }
                           ]
+                        },
+                        "InitializeService": {
+                          "requestType": "InitializeServiceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/serviceConfig}:initialize",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "InitializeServiceResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/serviceConfig}:initialize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "InitializeServiceResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -801,7 +825,7 @@
                           "type": "NetworkConfig",
                           "id": 8,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "etag": {
@@ -1002,6 +1026,44 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "InitializeServiceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "InitializeServiceResponse": {
+                      "fields": {
+                        "backupVaultName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "backupPlanName": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1465,7 +1527,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "resource": {
@@ -1902,7 +1964,8 @@
                             "ACCESS_RESTRICTION_UNSPECIFIED": 0,
                             "WITHIN_PROJECT": 1,
                             "WITHIN_ORGANIZATION": 2,
-                            "UNRESTRICTED": 3
+                            "UNRESTRICTED": 3,
+                            "WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA": 4
                           }
                         }
                       }
@@ -2784,6 +2847,13 @@
                         "allowMissing": {
                           "type": "bool",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ignoreBackupPlanReferences": {
+                          "type": "bool",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

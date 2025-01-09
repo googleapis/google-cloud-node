@@ -31,6 +31,7 @@
   * [Backup_d_r.get_backup_vault](#backup_d_r.get_backup_vault)
   * [Backup_d_r.get_data_source](#backup_d_r.get_data_source)
   * [Backup_d_r.get_management_server](#backup_d_r.get_management_server)
+  * [Backup_d_r.initialize_service](#backup_d_r.initialize_service)
   * [Backup_d_r.initiate_backup](#backup_d_r.initiate_backup)
   * [Backup_d_r.list_backup_plan_associations](#backup_d_r.list_backup_plan_associations)
   * [Backup_d_r.list_backup_plans](#backup_d_r.list_backup_plans)
@@ -379,6 +380,23 @@ __Usage:__
 
 
 `node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_management_server.js`
+
+
+-----
+
+
+
+
+### Backup_d_r.initialize_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initialize_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initialize_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initialize_service.js`
 
 
 -----

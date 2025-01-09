@@ -486,7 +486,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 94,
                     "type": "FULL"
                 }
             ],
@@ -517,6 +517,10 @@
                     },
                     {
                         "name": "allow_missing",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "ignore_backup_plan_references",
                         "type": "TYPE_BOOL"
                     }
                 ],
@@ -1352,6 +1356,54 @@
                 "method": {
                     "shortName": "TriggerBackup",
                     "fullName": "google.cloud.backupdr.v1.BackupDR.TriggerBackup",
+                    "service": {
+                        "shortName": "BackupDR",
+                        "fullName": "google.cloud.backupdr.v1.BackupDR"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "backupdr_v1_generated_BackupDR_InitializeService_async",
+            "title": "BackupDR initializeService Sample",
+            "origin": "API_DEFINITION",
+            "description": " Initializes the service related config for a project.",
+            "canonical": true,
+            "file": "backup_d_r.initialize_service.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 77,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "InitializeService",
+                "fullName": "google.cloud.backupdr.v1.BackupDR.InitializeService",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BackupDRClient",
+                    "fullName": "google.cloud.backupdr.v1.BackupDRClient"
+                },
+                "method": {
+                    "shortName": "InitializeService",
+                    "fullName": "google.cloud.backupdr.v1.BackupDR.InitializeService",
                     "service": {
                         "shortName": "BackupDR",
                         "fullName": "google.cloud.backupdr.v1.BackupDR"
