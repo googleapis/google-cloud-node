@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3603,6 +3603,266 @@
                         return UploadedMavenArtifact;
                     })();
     
+                    v1.UploadedGoModule = (function() {
+    
+                        /**
+                         * Properties of an UploadedGoModule.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IUploadedGoModule
+                         * @property {string|null} [uri] UploadedGoModule uri
+                         * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedGoModule fileHashes
+                         * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedGoModule pushTiming
+                         */
+    
+                        /**
+                         * Constructs a new UploadedGoModule.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an UploadedGoModule.
+                         * @implements IUploadedGoModule
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IUploadedGoModule=} [properties] Properties to set
+                         */
+                        function UploadedGoModule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UploadedGoModule uri.
+                         * @member {string} uri
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @instance
+                         */
+                        UploadedGoModule.prototype.uri = "";
+    
+                        /**
+                         * UploadedGoModule fileHashes.
+                         * @member {google.devtools.cloudbuild.v1.IFileHashes|null|undefined} fileHashes
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @instance
+                         */
+                        UploadedGoModule.prototype.fileHashes = null;
+    
+                        /**
+                         * UploadedGoModule pushTiming.
+                         * @member {google.devtools.cloudbuild.v1.ITimeSpan|null|undefined} pushTiming
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @instance
+                         */
+                        UploadedGoModule.prototype.pushTiming = null;
+    
+                        /**
+                         * Creates a new UploadedGoModule instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedGoModule=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.UploadedGoModule} UploadedGoModule instance
+                         */
+                        UploadedGoModule.create = function create(properties) {
+                            return new UploadedGoModule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedGoModule message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedGoModule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedGoModule} message UploadedGoModule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedGoModule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.fileHashes != null && Object.hasOwnProperty.call(message, "fileHashes"))
+                                $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
+                                $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedGoModule message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedGoModule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedGoModule} message UploadedGoModule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedGoModule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UploadedGoModule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.UploadedGoModule} UploadedGoModule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedGoModule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedGoModule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UploadedGoModule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.UploadedGoModule} UploadedGoModule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedGoModule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UploadedGoModule message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UploadedGoModule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes")) {
+                                var error = $root.google.devtools.cloudbuild.v1.FileHashes.verify(message.fileHashes);
+                                if (error)
+                                    return "fileHashes." + error;
+                            }
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming")) {
+                                var error = $root.google.devtools.cloudbuild.v1.TimeSpan.verify(message.pushTiming);
+                                if (error)
+                                    return "pushTiming." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UploadedGoModule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.UploadedGoModule} UploadedGoModule
+                         */
+                        UploadedGoModule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.UploadedGoModule)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.UploadedGoModule();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.fileHashes != null) {
+                                if (typeof object.fileHashes !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedGoModule.fileHashes: object expected");
+                                message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.fromObject(object.fileHashes);
+                            }
+                            if (object.pushTiming != null) {
+                                if (typeof object.pushTiming !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedGoModule.pushTiming: object expected");
+                                message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UploadedGoModule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.UploadedGoModule} message UploadedGoModule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UploadedGoModule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uri = "";
+                                object.fileHashes = null;
+                                object.pushTiming = null;
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes"))
+                                object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
+                                object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UploadedGoModule to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UploadedGoModule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UploadedGoModule
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UploadedGoModule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.UploadedGoModule";
+                        };
+    
+                        return UploadedGoModule;
+                    })();
+    
                     v1.UploadedNpmPackage = (function() {
     
                         /**
@@ -4903,6 +5163,7 @@
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [artifactTiming] Results artifactTiming
                          * @property {Array.<google.devtools.cloudbuild.v1.IUploadedPythonPackage>|null} [pythonPackages] Results pythonPackages
                          * @property {Array.<google.devtools.cloudbuild.v1.IUploadedMavenArtifact>|null} [mavenArtifacts] Results mavenArtifacts
+                         * @property {Array.<google.devtools.cloudbuild.v1.IUploadedGoModule>|null} [goModules] Results goModules
                          * @property {Array.<google.devtools.cloudbuild.v1.IUploadedNpmPackage>|null} [npmPackages] Results npmPackages
                          */
     
@@ -4920,6 +5181,7 @@
                             this.buildStepOutputs = [];
                             this.pythonPackages = [];
                             this.mavenArtifacts = [];
+                            this.goModules = [];
                             this.npmPackages = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -4992,6 +5254,14 @@
                         Results.prototype.mavenArtifacts = $util.emptyArray;
     
                         /**
+                         * Results goModules.
+                         * @member {Array.<google.devtools.cloudbuild.v1.IUploadedGoModule>} goModules
+                         * @memberof google.devtools.cloudbuild.v1.Results
+                         * @instance
+                         */
+                        Results.prototype.goModules = $util.emptyArray;
+    
+                        /**
                          * Results npmPackages.
                          * @member {Array.<google.devtools.cloudbuild.v1.IUploadedNpmPackage>} npmPackages
                          * @memberof google.devtools.cloudbuild.v1.Results
@@ -5044,6 +5314,9 @@
                             if (message.mavenArtifacts != null && message.mavenArtifacts.length)
                                 for (var i = 0; i < message.mavenArtifacts.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.encode(message.mavenArtifacts[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.goModules != null && message.goModules.length)
+                                for (var i = 0; i < message.goModules.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.UploadedGoModule.encode(message.goModules[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.npmPackages != null && message.npmPackages.length)
                                 for (var i = 0; i < message.npmPackages.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.UploadedNpmPackage.encode(message.npmPackages[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
@@ -5121,6 +5394,12 @@
                                         if (!(message.mavenArtifacts && message.mavenArtifacts.length))
                                             message.mavenArtifacts = [];
                                         message.mavenArtifacts.push($root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.goModules && message.goModules.length))
+                                            message.goModules = [];
+                                        message.goModules.push($root.google.devtools.cloudbuild.v1.UploadedGoModule.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 12: {
@@ -5216,6 +5495,15 @@
                                         return "mavenArtifacts." + error;
                                 }
                             }
+                            if (message.goModules != null && message.hasOwnProperty("goModules")) {
+                                if (!Array.isArray(message.goModules))
+                                    return "goModules: array expected";
+                                for (var i = 0; i < message.goModules.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.UploadedGoModule.verify(message.goModules[i]);
+                                    if (error)
+                                        return "goModules." + error;
+                                }
+                            }
                             if (message.npmPackages != null && message.hasOwnProperty("npmPackages")) {
                                 if (!Array.isArray(message.npmPackages))
                                     return "npmPackages: array expected";
@@ -5303,6 +5591,16 @@
                                     message.mavenArtifacts[i] = $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.fromObject(object.mavenArtifacts[i]);
                                 }
                             }
+                            if (object.goModules) {
+                                if (!Array.isArray(object.goModules))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Results.goModules: array expected");
+                                message.goModules = [];
+                                for (var i = 0; i < object.goModules.length; ++i) {
+                                    if (typeof object.goModules[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Results.goModules: object expected");
+                                    message.goModules[i] = $root.google.devtools.cloudbuild.v1.UploadedGoModule.fromObject(object.goModules[i]);
+                                }
+                            }
                             if (object.npmPackages) {
                                 if (!Array.isArray(object.npmPackages))
                                     throw TypeError(".google.devtools.cloudbuild.v1.Results.npmPackages: array expected");
@@ -5335,6 +5633,7 @@
                                 object.buildStepOutputs = [];
                                 object.pythonPackages = [];
                                 object.mavenArtifacts = [];
+                                object.goModules = [];
                                 object.npmPackages = [];
                             }
                             if (options.defaults) {
@@ -5379,6 +5678,11 @@
                                 object.mavenArtifacts = [];
                                 for (var j = 0; j < message.mavenArtifacts.length; ++j)
                                     object.mavenArtifacts[j] = $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.toObject(message.mavenArtifacts[j], options);
+                            }
+                            if (message.goModules && message.goModules.length) {
+                                object.goModules = [];
+                                for (var j = 0; j < message.goModules.length; ++j)
+                                    object.goModules[j] = $root.google.devtools.cloudbuild.v1.UploadedGoModule.toObject(message.goModules[j], options);
                             }
                             if (message.npmPackages && message.npmPackages.length) {
                                 object.npmPackages = [];
@@ -7420,6 +7724,7 @@
                          * @property {Array.<string>|null} [images] Artifacts images
                          * @property {google.devtools.cloudbuild.v1.Artifacts.IArtifactObjects|null} [objects] Artifacts objects
                          * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact>|null} [mavenArtifacts] Artifacts mavenArtifacts
+                         * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.IGoModule>|null} [goModules] Artifacts goModules
                          * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.IPythonPackage>|null} [pythonPackages] Artifacts pythonPackages
                          * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.INpmPackage>|null} [npmPackages] Artifacts npmPackages
                          */
@@ -7435,6 +7740,7 @@
                         function Artifacts(properties) {
                             this.images = [];
                             this.mavenArtifacts = [];
+                            this.goModules = [];
                             this.pythonPackages = [];
                             this.npmPackages = [];
                             if (properties)
@@ -7466,6 +7772,14 @@
                          * @instance
                          */
                         Artifacts.prototype.mavenArtifacts = $util.emptyArray;
+    
+                        /**
+                         * Artifacts goModules.
+                         * @member {Array.<google.devtools.cloudbuild.v1.Artifacts.IGoModule>} goModules
+                         * @memberof google.devtools.cloudbuild.v1.Artifacts
+                         * @instance
+                         */
+                        Artifacts.prototype.goModules = $util.emptyArray;
     
                         /**
                          * Artifacts pythonPackages.
@@ -7515,6 +7829,9 @@
                             if (message.mavenArtifacts != null && message.mavenArtifacts.length)
                                 for (var i = 0; i < message.mavenArtifacts.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.encode(message.mavenArtifacts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.goModules != null && message.goModules.length)
+                                for (var i = 0; i < message.goModules.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.Artifacts.GoModule.encode(message.goModules[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.pythonPackages != null && message.pythonPackages.length)
                                 for (var i = 0; i < message.pythonPackages.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.encode(message.pythonPackages[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -7569,6 +7886,12 @@
                                         if (!(message.mavenArtifacts && message.mavenArtifacts.length))
                                             message.mavenArtifacts = [];
                                         message.mavenArtifacts.push($root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.goModules && message.goModules.length))
+                                            message.goModules = [];
+                                        message.goModules.push($root.google.devtools.cloudbuild.v1.Artifacts.GoModule.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 5: {
@@ -7639,6 +7962,15 @@
                                         return "mavenArtifacts." + error;
                                 }
                             }
+                            if (message.goModules != null && message.hasOwnProperty("goModules")) {
+                                if (!Array.isArray(message.goModules))
+                                    return "goModules: array expected";
+                                for (var i = 0; i < message.goModules.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.Artifacts.GoModule.verify(message.goModules[i]);
+                                    if (error)
+                                        return "goModules." + error;
+                                }
+                            }
                             if (message.pythonPackages != null && message.hasOwnProperty("pythonPackages")) {
                                 if (!Array.isArray(message.pythonPackages))
                                     return "pythonPackages: array expected";
@@ -7694,6 +8026,16 @@
                                     message.mavenArtifacts[i] = $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.fromObject(object.mavenArtifacts[i]);
                                 }
                             }
+                            if (object.goModules) {
+                                if (!Array.isArray(object.goModules))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.goModules: array expected");
+                                message.goModules = [];
+                                for (var i = 0; i < object.goModules.length; ++i) {
+                                    if (typeof object.goModules[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.goModules: object expected");
+                                    message.goModules[i] = $root.google.devtools.cloudbuild.v1.Artifacts.GoModule.fromObject(object.goModules[i]);
+                                }
+                            }
                             if (object.pythonPackages) {
                                 if (!Array.isArray(object.pythonPackages))
                                     throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.pythonPackages: array expected");
@@ -7733,6 +8075,7 @@
                             if (options.arrays || options.defaults) {
                                 object.images = [];
                                 object.mavenArtifacts = [];
+                                object.goModules = [];
                                 object.pythonPackages = [];
                                 object.npmPackages = [];
                             }
@@ -7749,6 +8092,11 @@
                                 object.mavenArtifacts = [];
                                 for (var j = 0; j < message.mavenArtifacts.length; ++j)
                                     object.mavenArtifacts[j] = $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.toObject(message.mavenArtifacts[j], options);
+                            }
+                            if (message.goModules && message.goModules.length) {
+                                object.goModules = [];
+                                for (var j = 0; j < message.goModules.length; ++j)
+                                    object.goModules[j] = $root.google.devtools.cloudbuild.v1.Artifacts.GoModule.toObject(message.goModules[j], options);
                             }
                             if (message.pythonPackages && message.pythonPackages.length) {
                                 object.pythonPackages = [];
@@ -8355,6 +8703,325 @@
                             };
     
                             return MavenArtifact;
+                        })();
+    
+                        Artifacts.GoModule = (function() {
+    
+                            /**
+                             * Properties of a GoModule.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @interface IGoModule
+                             * @property {string|null} [repositoryName] GoModule repositoryName
+                             * @property {string|null} [repositoryLocation] GoModule repositoryLocation
+                             * @property {string|null} [repositoryProjectId] GoModule repositoryProjectId
+                             * @property {string|null} [sourcePath] GoModule sourcePath
+                             * @property {string|null} [modulePath] GoModule modulePath
+                             * @property {string|null} [moduleVersion] GoModule moduleVersion
+                             */
+    
+                            /**
+                             * Constructs a new GoModule.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @classdesc Represents a GoModule.
+                             * @implements IGoModule
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IGoModule=} [properties] Properties to set
+                             */
+                            function GoModule(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GoModule repositoryName.
+                             * @member {string} repositoryName
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @instance
+                             */
+                            GoModule.prototype.repositoryName = "";
+    
+                            /**
+                             * GoModule repositoryLocation.
+                             * @member {string} repositoryLocation
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @instance
+                             */
+                            GoModule.prototype.repositoryLocation = "";
+    
+                            /**
+                             * GoModule repositoryProjectId.
+                             * @member {string} repositoryProjectId
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @instance
+                             */
+                            GoModule.prototype.repositoryProjectId = "";
+    
+                            /**
+                             * GoModule sourcePath.
+                             * @member {string} sourcePath
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @instance
+                             */
+                            GoModule.prototype.sourcePath = "";
+    
+                            /**
+                             * GoModule modulePath.
+                             * @member {string} modulePath
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @instance
+                             */
+                            GoModule.prototype.modulePath = "";
+    
+                            /**
+                             * GoModule moduleVersion.
+                             * @member {string} moduleVersion
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @instance
+                             */
+                            GoModule.prototype.moduleVersion = "";
+    
+                            /**
+                             * Creates a new GoModule instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IGoModule=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.GoModule} GoModule instance
+                             */
+                            GoModule.create = function create(properties) {
+                                return new GoModule(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GoModule message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.GoModule.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IGoModule} message GoModule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoModule.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.repositoryName != null && Object.hasOwnProperty.call(message, "repositoryName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.repositoryName);
+                                if (message.repositoryLocation != null && Object.hasOwnProperty.call(message, "repositoryLocation"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.repositoryLocation);
+                                if (message.repositoryProjectId != null && Object.hasOwnProperty.call(message, "repositoryProjectId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.repositoryProjectId);
+                                if (message.sourcePath != null && Object.hasOwnProperty.call(message, "sourcePath"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourcePath);
+                                if (message.modulePath != null && Object.hasOwnProperty.call(message, "modulePath"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.modulePath);
+                                if (message.moduleVersion != null && Object.hasOwnProperty.call(message, "moduleVersion"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.moduleVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GoModule message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.GoModule.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IGoModule} message GoModule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoModule.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GoModule message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.GoModule} GoModule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoModule.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.GoModule();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.repositoryName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.repositoryLocation = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.repositoryProjectId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.sourcePath = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.modulePath = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.moduleVersion = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GoModule message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.GoModule} GoModule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoModule.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GoModule message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GoModule.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.repositoryName != null && message.hasOwnProperty("repositoryName"))
+                                    if (!$util.isString(message.repositoryName))
+                                        return "repositoryName: string expected";
+                                if (message.repositoryLocation != null && message.hasOwnProperty("repositoryLocation"))
+                                    if (!$util.isString(message.repositoryLocation))
+                                        return "repositoryLocation: string expected";
+                                if (message.repositoryProjectId != null && message.hasOwnProperty("repositoryProjectId"))
+                                    if (!$util.isString(message.repositoryProjectId))
+                                        return "repositoryProjectId: string expected";
+                                if (message.sourcePath != null && message.hasOwnProperty("sourcePath"))
+                                    if (!$util.isString(message.sourcePath))
+                                        return "sourcePath: string expected";
+                                if (message.modulePath != null && message.hasOwnProperty("modulePath"))
+                                    if (!$util.isString(message.modulePath))
+                                        return "modulePath: string expected";
+                                if (message.moduleVersion != null && message.hasOwnProperty("moduleVersion"))
+                                    if (!$util.isString(message.moduleVersion))
+                                        return "moduleVersion: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GoModule message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.GoModule} GoModule
+                             */
+                            GoModule.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.Artifacts.GoModule)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.Artifacts.GoModule();
+                                if (object.repositoryName != null)
+                                    message.repositoryName = String(object.repositoryName);
+                                if (object.repositoryLocation != null)
+                                    message.repositoryLocation = String(object.repositoryLocation);
+                                if (object.repositoryProjectId != null)
+                                    message.repositoryProjectId = String(object.repositoryProjectId);
+                                if (object.sourcePath != null)
+                                    message.sourcePath = String(object.sourcePath);
+                                if (object.modulePath != null)
+                                    message.modulePath = String(object.modulePath);
+                                if (object.moduleVersion != null)
+                                    message.moduleVersion = String(object.moduleVersion);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GoModule message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.GoModule} message GoModule
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GoModule.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.repositoryName = "";
+                                    object.repositoryLocation = "";
+                                    object.repositoryProjectId = "";
+                                    object.sourcePath = "";
+                                    object.modulePath = "";
+                                    object.moduleVersion = "";
+                                }
+                                if (message.repositoryName != null && message.hasOwnProperty("repositoryName"))
+                                    object.repositoryName = message.repositoryName;
+                                if (message.repositoryLocation != null && message.hasOwnProperty("repositoryLocation"))
+                                    object.repositoryLocation = message.repositoryLocation;
+                                if (message.repositoryProjectId != null && message.hasOwnProperty("repositoryProjectId"))
+                                    object.repositoryProjectId = message.repositoryProjectId;
+                                if (message.sourcePath != null && message.hasOwnProperty("sourcePath"))
+                                    object.sourcePath = message.sourcePath;
+                                if (message.modulePath != null && message.hasOwnProperty("modulePath"))
+                                    object.modulePath = message.modulePath;
+                                if (message.moduleVersion != null && message.hasOwnProperty("moduleVersion"))
+                                    object.moduleVersion = message.moduleVersion;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GoModule to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GoModule.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GoModule
+                             * @function getTypeUrl
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.GoModule
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GoModule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devtools.cloudbuild.v1.Artifacts.GoModule";
+                            };
+    
+                            return GoModule;
                         })();
     
                         Artifacts.PythonPackage = (function() {
@@ -9983,6 +10650,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                 case 4:
                                     break;
                                 }
@@ -10022,6 +10690,10 @@
                             case "MD5":
                             case 2:
                                 message.type = 2;
+                                break;
+                            case "GO_MODULE_H1":
+                            case 3:
+                                message.type = 3;
                                 break;
                             case "SHA512":
                             case 4:
@@ -10099,6 +10771,7 @@
                          * @property {number} NONE=0 NONE value
                          * @property {number} SHA256=1 SHA256 value
                          * @property {number} MD5=2 MD5 value
+                         * @property {number} GO_MODULE_H1=3 GO_MODULE_H1 value
                          * @property {number} SHA512=4 SHA512 value
                          */
                         Hash.HashType = (function() {
@@ -10106,6 +10779,7 @@
                             values[valuesById[0] = "NONE"] = 0;
                             values[valuesById[1] = "SHA256"] = 1;
                             values[valuesById[2] = "MD5"] = 2;
+                            values[valuesById[3] = "GO_MODULE_H1"] = 3;
                             values[valuesById[4] = "SHA512"] = 4;
                             return values;
                         })();
@@ -18635,6 +19309,7 @@
                          * @property {Array.<string>|null} [secretEnv] BuildOptions secretEnv
                          * @property {Array.<google.devtools.cloudbuild.v1.IVolume>|null} [volumes] BuildOptions volumes
                          * @property {google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|null} [defaultLogsBucketBehavior] BuildOptions defaultLogsBucketBehavior
+                         * @property {boolean|null} [enableStructuredLogging] BuildOptions enableStructuredLogging
                          */
     
                         /**
@@ -18777,6 +19452,14 @@
                         BuildOptions.prototype.defaultLogsBucketBehavior = 0;
     
                         /**
+                         * BuildOptions enableStructuredLogging.
+                         * @member {boolean} enableStructuredLogging
+                         * @memberof google.devtools.cloudbuild.v1.BuildOptions
+                         * @instance
+                         */
+                        BuildOptions.prototype.enableStructuredLogging = false;
+    
+                        /**
                          * Creates a new BuildOptions instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.BuildOptions
@@ -18837,6 +19520,8 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.defaultLogsBucketBehavior);
                             if (message.automapSubstitutions != null && Object.hasOwnProperty.call(message, "automapSubstitutions"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).bool(message.automapSubstitutions);
+                            if (message.enableStructuredLogging != null && Object.hasOwnProperty.call(message, "enableStructuredLogging"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).bool(message.enableStructuredLogging);
                             return writer;
                         };
     
@@ -18944,6 +19629,10 @@
                                         message.defaultLogsBucketBehavior = reader.int32();
                                         break;
                                     }
+                                case 23: {
+                                        message.enableStructuredLogging = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18989,6 +19678,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                     case 4:
                                         break;
                                     }
@@ -19091,6 +19781,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.enableStructuredLogging != null && message.hasOwnProperty("enableStructuredLogging"))
+                                if (typeof message.enableStructuredLogging !== "boolean")
+                                    return "enableStructuredLogging: boolean expected";
                             return null;
                         };
     
@@ -19128,6 +19821,10 @@
                                     case "MD5":
                                     case 2:
                                         message.sourceProvenanceHash[i] = 2;
+                                        break;
+                                    case "GO_MODULE_H1":
+                                    case 3:
+                                        message.sourceProvenanceHash[i] = 3;
                                         break;
                                     case "SHA512":
                                     case 4:
@@ -19315,6 +20012,8 @@
                                 message.defaultLogsBucketBehavior = 2;
                                 break;
                             }
+                            if (object.enableStructuredLogging != null)
+                                message.enableStructuredLogging = Boolean(object.enableStructuredLogging);
                             return message;
                         };
     
@@ -19353,6 +20052,7 @@
                                 object.pool = null;
                                 object.defaultLogsBucketBehavior = options.enums === String ? "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED" : 0;
                                 object.automapSubstitutions = false;
+                                object.enableStructuredLogging = false;
                             }
                             if (message.sourceProvenanceHash && message.sourceProvenanceHash.length) {
                                 object.sourceProvenanceHash = [];
@@ -19399,6 +20099,8 @@
                                 object.defaultLogsBucketBehavior = options.enums === String ? $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] === undefined ? message.defaultLogsBucketBehavior : $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] : message.defaultLogsBucketBehavior;
                             if (message.automapSubstitutions != null && message.hasOwnProperty("automapSubstitutions"))
                                 object.automapSubstitutions = message.automapSubstitutions;
+                            if (message.enableStructuredLogging != null && message.hasOwnProperty("enableStructuredLogging"))
+                                object.enableStructuredLogging = message.enableStructuredLogging;
                             return object;
                         };
     
