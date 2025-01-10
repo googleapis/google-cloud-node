@@ -11,9 +11,9 @@ jobs:
         node: [14, 16, 18, 20]
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
-          version: ^6.24.1
+          version: ^7.0.0
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Run unit tests
