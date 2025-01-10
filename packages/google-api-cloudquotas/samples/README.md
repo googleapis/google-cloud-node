@@ -18,6 +18,14 @@
   * [Cloud_quotas.list_quota_infos](#cloud_quotas.list_quota_infos)
   * [Cloud_quotas.list_quota_preferences](#cloud_quotas.list_quota_preferences)
   * [Cloud_quotas.update_quota_preference](#cloud_quotas.update_quota_preference)
+  * [Cloud_quotas.create_quota_preference](#cloud_quotas.create_quota_preference)
+  * [Cloud_quotas.get_quota_info](#cloud_quotas.get_quota_info)
+  * [Cloud_quotas.get_quota_preference](#cloud_quotas.get_quota_preference)
+  * [Cloud_quotas.list_quota_infos](#cloud_quotas.list_quota_infos)
+  * [Cloud_quotas.list_quota_preferences](#cloud_quotas.list_quota_preferences)
+  * [Cloud_quotas.update_quota_preference](#cloud_quotas.update_quota_preference)
+  * [Quota_adjuster_settings_manager.get_quota_adjuster_settings](#quota_adjuster_settings_manager.get_quota_adjuster_settings)
+  * [Quota_adjuster_settings_manager.update_quota_adjuster_settings](#quota_adjuster_settings_manager.update_quota_adjuster_settings)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -130,6 +138,142 @@ __Usage:__
 
 
 `node packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.update_quota_preference.js`
+
+
+-----
+
+
+
+
+### Cloud_quotas.create_quota_preference
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.create_quota_preference.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.create_quota_preference.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.create_quota_preference.js`
+
+
+-----
+
+
+
+
+### Cloud_quotas.get_quota_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_info.js`
+
+
+-----
+
+
+
+
+### Cloud_quotas.get_quota_preference
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_preference.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_preference.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_preference.js`
+
+
+-----
+
+
+
+
+### Cloud_quotas.list_quota_infos
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_infos.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_infos.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_infos.js`
+
+
+-----
+
+
+
+
+### Cloud_quotas.list_quota_preferences
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_preferences.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_preferences.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.list_quota_preferences.js`
+
+
+-----
+
+
+
+
+### Cloud_quotas.update_quota_preference
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.update_quota_preference.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.update_quota_preference.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.update_quota_preference.js`
+
+
+-----
+
+
+
+
+### Quota_adjuster_settings_manager.get_quota_adjuster_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js`
+
+
+-----
+
+
+
+
+### Quota_adjuster_settings_manager.update_quota_adjuster_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js`
 
 
 -----

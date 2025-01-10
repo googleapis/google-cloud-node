@@ -75,6 +75,11 @@
                 "deleteStoragePool"
               ]
             },
+            "ValidateDirectoryService": {
+              "methods": [
+                "validateDirectoryService"
+              ]
+            },
             "SwitchActiveReplicaZone": {
               "methods": [
                 "switchActiveReplicaZone"
@@ -366,6 +371,11 @@
             "DeleteStoragePool": {
               "methods": [
                 "deleteStoragePool"
+              ]
+            },
+            "ValidateDirectoryService": {
+              "methods": [
+                "validateDirectoryService"
               ]
             },
             "SwitchActiveReplicaZone": {

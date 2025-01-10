@@ -156,45 +156,40 @@
                                 "supplementalProductDataSource",
                                 "localInventoryDataSource",
                                 "regionalInventoryDataSource",
-                                "promotionDataSource"
+                                "promotionDataSource",
+                                "productReviewDataSource",
+                                "merchantReviewDataSource"
                               ]
                             }
                           },
                           "fields": {
                             "primaryProductDataSource": {
                               "type": "PrimaryProductDataSource",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 4
                             },
                             "supplementalProductDataSource": {
                               "type": "SupplementalProductDataSource",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 5
                             },
                             "localInventoryDataSource": {
                               "type": "LocalInventoryDataSource",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 6
                             },
                             "regionalInventoryDataSource": {
                               "type": "RegionalInventoryDataSource",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 7
                             },
                             "promotionDataSource": {
                               "type": "PromotionDataSource",
-                              "id": 8,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 8
+                            },
+                            "productReviewDataSource": {
+                              "type": "ProductReviewDataSource",
+                              "id": 9
+                            },
+                            "merchantReviewDataSource": {
+                              "type": "MerchantReviewDataSource",
+                              "id": 12
                             },
                             "name": {
                               "type": "string",
@@ -525,6 +520,12 @@
                               }
                             }
                           }
+                        },
+                        "ProductReviewDataSource": {
+                          "fields": {}
+                        },
+                        "MerchantReviewDataSource": {
+                          "fields": {}
                         },
                         "DataSourceReference": {
                           "oneofs": {
