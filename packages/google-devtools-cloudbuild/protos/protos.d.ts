@@ -1582,6 +1582,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UploadedGoModule. */
+                interface IUploadedGoModule {
+
+                    /** UploadedGoModule uri */
+                    uri?: (string|null);
+
+                    /** UploadedGoModule fileHashes */
+                    fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedGoModule pushTiming */
+                    pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+                }
+
+                /** Represents an UploadedGoModule. */
+                class UploadedGoModule implements IUploadedGoModule {
+
+                    /**
+                     * Constructs a new UploadedGoModule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IUploadedGoModule);
+
+                    /** UploadedGoModule uri. */
+                    public uri: string;
+
+                    /** UploadedGoModule fileHashes. */
+                    public fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedGoModule pushTiming. */
+                    public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /**
+                     * Creates a new UploadedGoModule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadedGoModule instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IUploadedGoModule): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Encodes the specified UploadedGoModule message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedGoModule.verify|verify} messages.
+                     * @param message UploadedGoModule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IUploadedGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadedGoModule message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedGoModule.verify|verify} messages.
+                     * @param message UploadedGoModule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IUploadedGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadedGoModule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadedGoModule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Decodes an UploadedGoModule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadedGoModule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Verifies an UploadedGoModule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadedGoModule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadedGoModule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.UploadedGoModule;
+
+                    /**
+                     * Creates a plain object from an UploadedGoModule message. Also converts values to other types if specified.
+                     * @param message UploadedGoModule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.UploadedGoModule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadedGoModule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadedGoModule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an UploadedNpmPackage. */
                 interface IUploadedNpmPackage {
 
@@ -2023,6 +2132,9 @@ export namespace google {
                     /** Results mavenArtifacts */
                     mavenArtifacts?: (google.devtools.cloudbuild.v1.IUploadedMavenArtifact[]|null);
 
+                    /** Results goModules */
+                    goModules?: (google.devtools.cloudbuild.v1.IUploadedGoModule[]|null);
+
                     /** Results npmPackages */
                     npmPackages?: (google.devtools.cloudbuild.v1.IUploadedNpmPackage[]|null);
                 }
@@ -2059,6 +2171,9 @@ export namespace google {
 
                     /** Results mavenArtifacts. */
                     public mavenArtifacts: google.devtools.cloudbuild.v1.IUploadedMavenArtifact[];
+
+                    /** Results goModules. */
+                    public goModules: google.devtools.cloudbuild.v1.IUploadedGoModule[];
 
                     /** Results npmPackages. */
                     public npmPackages: google.devtools.cloudbuild.v1.IUploadedNpmPackage[];
@@ -2769,6 +2884,9 @@ export namespace google {
                     /** Artifacts mavenArtifacts */
                     mavenArtifacts?: (google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact[]|null);
 
+                    /** Artifacts goModules */
+                    goModules?: (google.devtools.cloudbuild.v1.Artifacts.IGoModule[]|null);
+
                     /** Artifacts pythonPackages */
                     pythonPackages?: (google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[]|null);
 
@@ -2793,6 +2911,9 @@ export namespace google {
 
                     /** Artifacts mavenArtifacts. */
                     public mavenArtifacts: google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact[];
+
+                    /** Artifacts goModules. */
+                    public goModules: google.devtools.cloudbuild.v1.Artifacts.IGoModule[];
 
                     /** Artifacts pythonPackages. */
                     public pythonPackages: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[];
@@ -3104,6 +3225,133 @@ export namespace google {
 
                         /**
                          * Gets the default type url for MavenArtifact
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GoModule. */
+                    interface IGoModule {
+
+                        /** GoModule repositoryName */
+                        repositoryName?: (string|null);
+
+                        /** GoModule repositoryLocation */
+                        repositoryLocation?: (string|null);
+
+                        /** GoModule repositoryProjectId */
+                        repositoryProjectId?: (string|null);
+
+                        /** GoModule sourcePath */
+                        sourcePath?: (string|null);
+
+                        /** GoModule modulePath */
+                        modulePath?: (string|null);
+
+                        /** GoModule moduleVersion */
+                        moduleVersion?: (string|null);
+                    }
+
+                    /** Represents a GoModule. */
+                    class GoModule implements IGoModule {
+
+                        /**
+                         * Constructs a new GoModule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Artifacts.IGoModule);
+
+                        /** GoModule repositoryName. */
+                        public repositoryName: string;
+
+                        /** GoModule repositoryLocation. */
+                        public repositoryLocation: string;
+
+                        /** GoModule repositoryProjectId. */
+                        public repositoryProjectId: string;
+
+                        /** GoModule sourcePath. */
+                        public sourcePath: string;
+
+                        /** GoModule modulePath. */
+                        public modulePath: string;
+
+                        /** GoModule moduleVersion. */
+                        public moduleVersion: string;
+
+                        /**
+                         * Creates a new GoModule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoModule instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Artifacts.IGoModule): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Encodes the specified GoModule message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.GoModule.verify|verify} messages.
+                         * @param message GoModule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Artifacts.IGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoModule message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.GoModule.verify|verify} messages.
+                         * @param message GoModule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Artifacts.IGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoModule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoModule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Decodes a GoModule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoModule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Verifies a GoModule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoModule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoModule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Artifacts.GoModule;
+
+                        /**
+                         * Creates a plain object from a GoModule message. Also converts values to other types if specified.
+                         * @param message GoModule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Artifacts.GoModule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoModule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoModule
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -3839,6 +4087,7 @@ export namespace google {
                         NONE = 0,
                         SHA256 = 1,
                         MD5 = 2,
+                        GO_MODULE_H1 = 3,
                         SHA512 = 4
                     }
                 }
@@ -7193,6 +7442,9 @@ export namespace google {
 
                     /** BuildOptions defaultLogsBucketBehavior */
                     defaultLogsBucketBehavior?: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|null);
+
+                    /** BuildOptions enableStructuredLogging */
+                    enableStructuredLogging?: (boolean|null);
                 }
 
                 /** Represents a BuildOptions. */
@@ -7248,6 +7500,9 @@ export namespace google {
 
                     /** BuildOptions defaultLogsBucketBehavior. */
                     public defaultLogsBucketBehavior: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior);
+
+                    /** BuildOptions enableStructuredLogging. */
+                    public enableStructuredLogging: boolean;
 
                     /**
                      * Creates a new BuildOptions instance using the specified properties.
