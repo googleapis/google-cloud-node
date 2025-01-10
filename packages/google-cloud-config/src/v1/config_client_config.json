@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -17,100 +20,132 @@
           "rpc_timeout_multiplier": 1,
           "max_rpc_timeout_millis": 60000,
           "total_timeout_millis": 600000
+        },
+        "ce5b960a6ed052e690863808e4f0deff3dc7d49f": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 10000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
         }
       },
       "methods": {
         "ListDeployments": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetDeployment": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateDeployment": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "UpdateDeployment": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeleteDeployment": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListRevisions": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetRevision": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetResource": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListResources": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ExportDeploymentStatefile": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ExportRevisionStatefile": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ImportStatefile": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeleteStatefile": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "LockDeployment": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "UnlockDeployment": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ExportLockInfo": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreatePreview": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetPreview": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListPreviews": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeletePreview": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ExportPreviewResult": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListTerraformVersions": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetTerraformVersion": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         }
       }
     }
