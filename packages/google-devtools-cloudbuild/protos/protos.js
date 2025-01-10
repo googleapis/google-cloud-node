@@ -19309,6 +19309,7 @@
                          * @property {Array.<string>|null} [secretEnv] BuildOptions secretEnv
                          * @property {Array.<google.devtools.cloudbuild.v1.IVolume>|null} [volumes] BuildOptions volumes
                          * @property {google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|null} [defaultLogsBucketBehavior] BuildOptions defaultLogsBucketBehavior
+                         * @property {boolean|null} [enableStructuredLogging] BuildOptions enableStructuredLogging
                          */
     
                         /**
@@ -19451,6 +19452,14 @@
                         BuildOptions.prototype.defaultLogsBucketBehavior = 0;
     
                         /**
+                         * BuildOptions enableStructuredLogging.
+                         * @member {boolean} enableStructuredLogging
+                         * @memberof google.devtools.cloudbuild.v1.BuildOptions
+                         * @instance
+                         */
+                        BuildOptions.prototype.enableStructuredLogging = false;
+    
+                        /**
                          * Creates a new BuildOptions instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.BuildOptions
@@ -19511,6 +19520,8 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.defaultLogsBucketBehavior);
                             if (message.automapSubstitutions != null && Object.hasOwnProperty.call(message, "automapSubstitutions"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).bool(message.automapSubstitutions);
+                            if (message.enableStructuredLogging != null && Object.hasOwnProperty.call(message, "enableStructuredLogging"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).bool(message.enableStructuredLogging);
                             return writer;
                         };
     
@@ -19616,6 +19627,10 @@
                                     }
                                 case 21: {
                                         message.defaultLogsBucketBehavior = reader.int32();
+                                        break;
+                                    }
+                                case 23: {
+                                        message.enableStructuredLogging = reader.bool();
                                         break;
                                     }
                                 default:
@@ -19766,6 +19781,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.enableStructuredLogging != null && message.hasOwnProperty("enableStructuredLogging"))
+                                if (typeof message.enableStructuredLogging !== "boolean")
+                                    return "enableStructuredLogging: boolean expected";
                             return null;
                         };
     
@@ -19994,6 +20012,8 @@
                                 message.defaultLogsBucketBehavior = 2;
                                 break;
                             }
+                            if (object.enableStructuredLogging != null)
+                                message.enableStructuredLogging = Boolean(object.enableStructuredLogging);
                             return message;
                         };
     
@@ -20032,6 +20052,7 @@
                                 object.pool = null;
                                 object.defaultLogsBucketBehavior = options.enums === String ? "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED" : 0;
                                 object.automapSubstitutions = false;
+                                object.enableStructuredLogging = false;
                             }
                             if (message.sourceProvenanceHash && message.sourceProvenanceHash.length) {
                                 object.sourceProvenanceHash = [];
@@ -20078,6 +20099,8 @@
                                 object.defaultLogsBucketBehavior = options.enums === String ? $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] === undefined ? message.defaultLogsBucketBehavior : $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] : message.defaultLogsBucketBehavior;
                             if (message.automapSubstitutions != null && message.hasOwnProperty("automapSubstitutions"))
                                 object.automapSubstitutions = message.automapSubstitutions;
+                            if (message.enableStructuredLogging != null && message.hasOwnProperty("enableStructuredLogging"))
+                                object.enableStructuredLogging = message.enableStructuredLogging;
                             return object;
                         };
     

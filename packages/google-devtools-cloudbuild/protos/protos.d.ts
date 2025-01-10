@@ -7442,6 +7442,9 @@ export namespace google {
 
                     /** BuildOptions defaultLogsBucketBehavior */
                     defaultLogsBucketBehavior?: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|null);
+
+                    /** BuildOptions enableStructuredLogging */
+                    enableStructuredLogging?: (boolean|null);
                 }
 
                 /** Represents a BuildOptions. */
@@ -7497,6 +7500,9 @@ export namespace google {
 
                     /** BuildOptions defaultLogsBucketBehavior. */
                     public defaultLogsBucketBehavior: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior);
+
+                    /** BuildOptions enableStructuredLogging. */
+                    public enableStructuredLogging: boolean;
 
                     /**
                      * Creates a new BuildOptions instance using the specified properties.
