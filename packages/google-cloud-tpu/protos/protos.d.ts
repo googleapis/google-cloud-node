@@ -710,7 +710,8 @@ export namespace google {
                         TERMINATED = 12,
                         HIDING = 13,
                         HIDDEN = 14,
-                        UNHIDING = 15
+                        UNHIDING = 15,
+                        UNKNOWN = 16
                     }
 
                     /** Health enum. */
