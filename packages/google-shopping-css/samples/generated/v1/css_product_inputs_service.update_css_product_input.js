@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, cssProductInput) {
-  // [START css_v1_generated_CssProductInputsService_InsertCssProductInput_async]
+function main(cssProductInput) {
+  // [START css_v1_generated_CssProductInputsService_UpdateCssProductInput_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,24 +29,24 @@ function main(parent, cssProductInput) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The account where this CSS Product will be inserted.
-   *  Format: accounts/{account}
-   */
-  // const parent = 'abc123'
-  /**
-   *  Required. The CSS Product Input to insert.
+   *  Required. The CSS product input resource to update. Information you submit
+   *  will be applied to the processed CSS product as well.
    */
   // const cssProductInput = {}
   /**
-   *  Optional. DEPRECATED. Feed id is not required for CSS Products.
-   *  The primary or supplemental feed id. If CSS Product already exists and
-   *  feed id provided is different, then the CSS Product will be moved to a
-   *  new feed.
-   *  Note: For now, CSSs do not need to provide feed ids as we create
-   *  feeds on the fly.
-   *  We do not have supplemental feed support for CSS Products yet.
+   *  The list of CSS product attributes to be updated.
+   *  If the update mask is omitted, then it is treated as implied field mask
+   *  equivalent to all fields that are populated (have a non-empty value).
+   *  Attributes specified in the update mask without a value specified in the
+   *  body will be deleted from the CSS product.
+   *  Update mask can only be specified for top level fields in
+   *  attributes and custom attributes.
+   *  To specify the update mask for custom attributes you need to add the
+   *  `custom_attribute.` prefix.
+   *  Providing special "*" value for full CSS product replacement is not
+   *  supported.
    */
-  // const feedId = 1234
+  // const updateMask = {}
 
   // Imports the Css library
   const {CssProductInputsServiceClient} = require('@google-shopping/css').v1;
@@ -54,20 +54,19 @@ function main(parent, cssProductInput) {
   // Instantiates a client
   const cssClient = new CssProductInputsServiceClient();
 
-  async function callInsertCssProductInput() {
+  async function callUpdateCssProductInput() {
     // Construct request
     const request = {
-      parent,
       cssProductInput,
     };
 
     // Run request
-    const response = await cssClient.insertCssProductInput(request);
+    const response = await cssClient.updateCssProductInput(request);
     console.log(response);
   }
 
-  callInsertCssProductInput();
-  // [END css_v1_generated_CssProductInputsService_InsertCssProductInput_async]
+  callUpdateCssProductInput();
+  // [END css_v1_generated_CssProductInputsService_UpdateCssProductInput_async]
 }
 
 process.on('unhandledRejection', err => {
