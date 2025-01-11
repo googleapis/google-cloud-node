@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -95,6 +95,7 @@
                          * @property {google.cloud.gkemulticloud.v1.IAttachedProxyConfig|null} [proxyConfig] AttachedCluster proxyConfig
                          * @property {google.cloud.gkemulticloud.v1.IBinaryAuthorization|null} [binaryAuthorization] AttachedCluster binaryAuthorization
                          * @property {google.cloud.gkemulticloud.v1.ISecurityPostureConfig|null} [securityPostureConfig] AttachedCluster securityPostureConfig
+                         * @property {Object.<string,string>|null} [tags] AttachedCluster tags
                          */
     
                         /**
@@ -108,6 +109,7 @@
                         function AttachedCluster(properties) {
                             this.annotations = {};
                             this.errors = [];
+                            this.tags = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -299,6 +301,14 @@
                         AttachedCluster.prototype.securityPostureConfig = null;
     
                         /**
+                         * AttachedCluster tags.
+                         * @member {Object.<string,string>} tags
+                         * @memberof google.cloud.gkemulticloud.v1.AttachedCluster
+                         * @instance
+                         */
+                        AttachedCluster.prototype.tags = $util.emptyObject;
+    
+                        /**
                          * Creates a new AttachedCluster instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkemulticloud.v1.AttachedCluster
@@ -370,6 +380,9 @@
                                 $root.google.cloud.gkemulticloud.v1.BinaryAuthorization.encode(message.binaryAuthorization, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             if (message.securityPostureConfig != null && Object.hasOwnProperty.call(message, "securityPostureConfig"))
                                 $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.encode(message.securityPostureConfig, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
+                                for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 27, wireType 2 =*/218).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -515,6 +528,29 @@
                                     }
                                 case 26: {
                                         message.securityPostureConfig = $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 27: {
+                                        if (message.tags === $util.emptyObject)
+                                            message.tags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.tags[key] = value;
                                         break;
                                     }
                                 default:
@@ -664,6 +700,14 @@
                                 if (error)
                                     return "securityPostureConfig." + error;
                             }
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!$util.isObject(message.tags))
+                                    return "tags: object expected";
+                                var key = Object.keys(message.tags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.tags[key[i]]))
+                                        return "tags: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -805,6 +849,13 @@
                                     throw TypeError(".google.cloud.gkemulticloud.v1.AttachedCluster.securityPostureConfig: object expected");
                                 message.securityPostureConfig = $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.fromObject(object.securityPostureConfig);
                             }
+                            if (object.tags) {
+                                if (typeof object.tags !== "object")
+                                    throw TypeError(".google.cloud.gkemulticloud.v1.AttachedCluster.tags: object expected");
+                                message.tags = {};
+                                for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
+                                    message.tags[keys[i]] = String(object.tags[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -823,8 +874,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.errors = [];
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.annotations = {};
+                                object.tags = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.description = "";
@@ -901,6 +954,11 @@
                                 object.binaryAuthorization = $root.google.cloud.gkemulticloud.v1.BinaryAuthorization.toObject(message.binaryAuthorization, options);
                             if (message.securityPostureConfig != null && message.hasOwnProperty("securityPostureConfig"))
                                 object.securityPostureConfig = $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.toObject(message.securityPostureConfig, options);
+                            if (message.tags && (keys2 = Object.keys(message.tags)).length) {
+                                object.tags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.tags[keys2[j]] = message.tags[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -5539,6 +5597,7 @@
                          * @memberof google.cloud.gkemulticloud.v1
                          * @interface IMonitoringConfig
                          * @property {google.cloud.gkemulticloud.v1.IManagedPrometheusConfig|null} [managedPrometheusConfig] MonitoringConfig managedPrometheusConfig
+                         * @property {google.cloud.gkemulticloud.v1.ICloudMonitoringConfig|null} [cloudMonitoringConfig] MonitoringConfig cloudMonitoringConfig
                          */
     
                         /**
@@ -5563,6 +5622,14 @@
                          * @instance
                          */
                         MonitoringConfig.prototype.managedPrometheusConfig = null;
+    
+                        /**
+                         * MonitoringConfig cloudMonitoringConfig.
+                         * @member {google.cloud.gkemulticloud.v1.ICloudMonitoringConfig|null|undefined} cloudMonitoringConfig
+                         * @memberof google.cloud.gkemulticloud.v1.MonitoringConfig
+                         * @instance
+                         */
+                        MonitoringConfig.prototype.cloudMonitoringConfig = null;
     
                         /**
                          * Creates a new MonitoringConfig instance using the specified properties.
@@ -5590,6 +5657,8 @@
                                 writer = $Writer.create();
                             if (message.managedPrometheusConfig != null && Object.hasOwnProperty.call(message, "managedPrometheusConfig"))
                                 $root.google.cloud.gkemulticloud.v1.ManagedPrometheusConfig.encode(message.managedPrometheusConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.cloudMonitoringConfig != null && Object.hasOwnProperty.call(message, "cloudMonitoringConfig"))
+                                $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig.encode(message.cloudMonitoringConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -5626,6 +5695,10 @@
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.managedPrometheusConfig = $root.google.cloud.gkemulticloud.v1.ManagedPrometheusConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.cloudMonitoringConfig = $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5668,6 +5741,11 @@
                                 if (error)
                                     return "managedPrometheusConfig." + error;
                             }
+                            if (message.cloudMonitoringConfig != null && message.hasOwnProperty("cloudMonitoringConfig")) {
+                                var error = $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig.verify(message.cloudMonitoringConfig);
+                                if (error)
+                                    return "cloudMonitoringConfig." + error;
+                            }
                             return null;
                         };
     
@@ -5688,6 +5766,11 @@
                                     throw TypeError(".google.cloud.gkemulticloud.v1.MonitoringConfig.managedPrometheusConfig: object expected");
                                 message.managedPrometheusConfig = $root.google.cloud.gkemulticloud.v1.ManagedPrometheusConfig.fromObject(object.managedPrometheusConfig);
                             }
+                            if (object.cloudMonitoringConfig != null) {
+                                if (typeof object.cloudMonitoringConfig !== "object")
+                                    throw TypeError(".google.cloud.gkemulticloud.v1.MonitoringConfig.cloudMonitoringConfig: object expected");
+                                message.cloudMonitoringConfig = $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig.fromObject(object.cloudMonitoringConfig);
+                            }
                             return message;
                         };
     
@@ -5704,10 +5787,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.managedPrometheusConfig = null;
+                                object.cloudMonitoringConfig = null;
+                            }
                             if (message.managedPrometheusConfig != null && message.hasOwnProperty("managedPrometheusConfig"))
                                 object.managedPrometheusConfig = $root.google.cloud.gkemulticloud.v1.ManagedPrometheusConfig.toObject(message.managedPrometheusConfig, options);
+                            if (message.cloudMonitoringConfig != null && message.hasOwnProperty("cloudMonitoringConfig"))
+                                object.cloudMonitoringConfig = $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig.toObject(message.cloudMonitoringConfig, options);
                             return object;
                         };
     
@@ -5941,6 +6028,227 @@
                         };
     
                         return ManagedPrometheusConfig;
+                    })();
+    
+                    v1.CloudMonitoringConfig = (function() {
+    
+                        /**
+                         * Properties of a CloudMonitoringConfig.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @interface ICloudMonitoringConfig
+                         * @property {boolean|null} [enabled] CloudMonitoringConfig enabled
+                         */
+    
+                        /**
+                         * Constructs a new CloudMonitoringConfig.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @classdesc Represents a CloudMonitoringConfig.
+                         * @implements ICloudMonitoringConfig
+                         * @constructor
+                         * @param {google.cloud.gkemulticloud.v1.ICloudMonitoringConfig=} [properties] Properties to set
+                         */
+                        function CloudMonitoringConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudMonitoringConfig enabled.
+                         * @member {boolean|null|undefined} enabled
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @instance
+                         */
+                        CloudMonitoringConfig.prototype.enabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CloudMonitoringConfig _enabled.
+                         * @member {"enabled"|undefined} _enabled
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @instance
+                         */
+                        Object.defineProperty(CloudMonitoringConfig.prototype, "_enabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["enabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CloudMonitoringConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.ICloudMonitoringConfig=} [properties] Properties to set
+                         * @returns {google.cloud.gkemulticloud.v1.CloudMonitoringConfig} CloudMonitoringConfig instance
+                         */
+                        CloudMonitoringConfig.create = function create(properties) {
+                            return new CloudMonitoringConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudMonitoringConfig message. Does not implicitly {@link google.cloud.gkemulticloud.v1.CloudMonitoringConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.ICloudMonitoringConfig} message CloudMonitoringConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudMonitoringConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudMonitoringConfig message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.CloudMonitoringConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.ICloudMonitoringConfig} message CloudMonitoringConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudMonitoringConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudMonitoringConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkemulticloud.v1.CloudMonitoringConfig} CloudMonitoringConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudMonitoringConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudMonitoringConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkemulticloud.v1.CloudMonitoringConfig} CloudMonitoringConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudMonitoringConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudMonitoringConfig message.
+                         * @function verify
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudMonitoringConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                properties._enabled = 1;
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudMonitoringConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkemulticloud.v1.CloudMonitoringConfig} CloudMonitoringConfig
+                         */
+                        CloudMonitoringConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig)
+                                return object;
+                            var message = new $root.google.cloud.gkemulticloud.v1.CloudMonitoringConfig();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudMonitoringConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.CloudMonitoringConfig} message CloudMonitoringConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudMonitoringConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                object.enabled = message.enabled;
+                                if (options.oneofs)
+                                    object._enabled = "enabled";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudMonitoringConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudMonitoringConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudMonitoringConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkemulticloud.v1.CloudMonitoringConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudMonitoringConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkemulticloud.v1.CloudMonitoringConfig";
+                        };
+    
+                        return CloudMonitoringConfig;
                     })();
     
                     v1.BinaryAuthorization = (function() {
