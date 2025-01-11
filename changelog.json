@@ -5,6 +5,245 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "5e0e4c19f006579e8808e21bcf0154d5e47669f8",
+          "message": "[oracledatabase] A new value `ACCOUNT_SUSPENDED` is added to enum `State`",
+          "issues": [
+            "5909"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "4bf42200-2976-4ed6-b52a-3819d1c548f3",
+      "createTime": "2025-01-11T01:02:37.468Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "866f6b008669065da0f50eccd445b18b6476fd12",
+          "message": "[merchantapi] New field `product_review_data_source` added in message `.google.shopping.merchant.datasources.v1beta.DataSource` to specify the datasource of the product review",
+          "issues": [
+            "5932"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "8ca4386b-f976-48ab-a6da-d1aa3fa70b10",
+      "createTime": "2025-01-11T01:02:37.453Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f9b684e096530a5e92c69402bbda9128006776fa",
+          "message": "[fleetengine] add active_only field to ListMetricDescriptorsRequest",
+          "issues": [
+            "5938"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "2ed7a6ff-9201-49bc-a842-0d1a5d115548",
+      "createTime": "2025-01-11T01:02:37.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "45fd1c9c4f638aed431d7da19e9ebc8d91528333",
+          "message": "[managedkafka] adds new resource_definition option",
+          "issues": [
+            "5928"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "6e6d604f-2f42-4ad9-a5f0-27aeaeeab79c",
+      "createTime": "2025-01-11T01:02:37.422Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e14659f200d28f9ea34258682ed781909b039ea5",
+          "message": "[cloudquotas] Add v1beta client libraries for cloudquotas API",
+          "issues": [
+            "5927"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "f2bf4e1f-4dfb-497f-8a33-c31625f284ca",
+      "createTime": "2025-01-11T01:02:37.408Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "03a1088042afdc6e48b4c0a0b29b22a76e687ccf",
+          "message": "[css] UpdateCssProduct is added to CssProductInput proto",
+          "issues": [
+            "5899"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "c4d6a62e-6bd5-455e-9bb3-23adab1030a9",
+      "createTime": "2025-01-11T01:02:37.394Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "36be8cdce58807b3ca02b31d9b4cf950ba386063",
+          "message": "[cloudbuild] Add option to enable structured logging",
+          "issues": [
+            "5934"
+          ]
+        }
+      ],
+      "version": "4.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "41561959-7659-461f-adee-4ab84fed1344",
+      "createTime": "2025-01-11T01:02:37.377Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e575e15101e34887731c4bab60e81bac504d7683",
+          "message": "[tpu] Add UNKNOWN to TPU node state, This state will be used to prevent a node from being marked as READY during diagnose after it has failed repair",
+          "issues": [
+            "5941"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "202ba7b1-0435-488e-ba86-baf03f495a64",
+      "createTime": "2025-01-11T01:02:37.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d8d7c9a602a787c490861d3fe386a2e651dfcae6",
+          "message": "[texttospeech] StreamingSynthesize now supports opus",
+          "issues": [
+            "5926"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "97c7c0ae-2703-473e-8a30-f3b279e38190",
+      "createTime": "2025-01-11T01:02:37.349Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cd9f3032466886d0ed61b7ff3c87a43278a64dac",
+          "message": "[talent] A new enum `RelevanceThreshold` is added",
+          "issues": [
+            "5910"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "3500cd26-d547-4f9d-a83d-d8b11b493303",
+      "createTime": "2025-01-11T01:02:37.334Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f058d7a475402e52f8e8d5d4f838d9423f33ffb4",
+          "message": "[netapp] Add ValidateDirectoryService API for testing AD connection of a storage pool",
+          "issues": [
+            "5931"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "e0894687-4de6-45fe-a4d2-442e18c0ddad",
+      "createTime": "2025-01-11T01:02:37.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95905ab973a7cc74540201eec9a889cb450c3a39",
+          "message": "[gkehub] Update the configmanagement feature",
+          "issues": [
+            "5925"
+          ],
+          "breakingChangeNote": "[gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "90c7205c-4377-410f-a86f-e0f445d82585",
+      "createTime": "2025-01-11T01:02:37.302Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cb0f5d4d13496f147d057c23fc7926bf4a133b7b",
+          "message": "[dataplex] A new field `force` is added to message `.google.cloud.dataplex.v1.DeleteDataScanRequest`",
+          "issues": [
+            "5902"
+          ]
+        }
+      ],
+      "version": "3.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "fcec8b19-8764-4da1-ac87-83886c96eebd",
+      "createTime": "2025-01-11T01:02:37.288Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e5a665a909fb52d2ec4d05f147ac2c7ebd8ceb01",
+          "message": "[generativelanguage] Add GoogleSearch tool type",
+          "issues": [
+            "5929"
+          ]
+        }
+      ],
+      "version": "2.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "ae955c13-2d5d-49e9-a6ca-4fa7657d2806",
+      "createTime": "2025-01-11T01:02:37.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "0e5e132dca3d0b54301c66d264fd26bf04c7b3d2",
           "message": "Add initial files for google.ads.admanager.v1",
           "issues": [
@@ -38356,5 +38595,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-12-18T01:19:17.855Z"
+  "updateTime": "2025-01-11T01:02:37.468Z"
 }

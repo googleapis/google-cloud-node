@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.8.0...generativelanguage-v2.9.0) (2025-01-11)
+
+
+### Features
+
+* [generativelanguage] Add GoogleSearch tool type ([#5929](https://github.com/googleapis/google-cloud-node/issues/5929)) ([e5a665a](https://github.com/googleapis/google-cloud-node/commit/e5a665a909fb52d2ec4d05f147ac2c7ebd8ceb01))
+
 ## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.7.0...generativelanguage-v2.8.0) (2024-11-21)
 
 
