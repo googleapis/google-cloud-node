@@ -43,7 +43,7 @@
     "@types/sinon": "^10.0.20",
     "c8": "^9.1.0",
     "gapic-tools": "^0.4.2",
-    "gts": "5.3.0",
+    "gts": "5.3.1",
     "jsdoc": "^4.0.3",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
