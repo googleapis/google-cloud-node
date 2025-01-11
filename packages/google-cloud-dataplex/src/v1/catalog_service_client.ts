@@ -1288,7 +1288,7 @@ export class CatalogServiceClient {
    *   specified path. For example, to attach an aspect to a field that is
    *   specified by the `schema` aspect, the path should have the format
    *   `Schema.<field_name>`.
-   *   * `<aspect_type_reference>*` - matches aspects of the given type for all
+   *   * `<aspect_type_reference>@*` - matches aspects of the given type for all
    *   paths.
    *   * `*@path` - matches aspects of all types on the given path.
    *
@@ -4251,6 +4251,8 @@ export class CatalogServiceClient {
    *   following form: `projects/{project}/locations/{location}`.
    * @param {string} request.query
    *   Required. The query against which entries in scope should be matched.
+   *   The query syntax is defined in [Search syntax for Dataplex
+   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
    * @param {number} [request.pageSize]
    *   Optional. Number of results in the search page. If <=0, then defaults
    *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
@@ -4260,6 +4262,10 @@ export class CatalogServiceClient {
    *   this to retrieve the subsequent page.
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results.
+   *   Supported values are:
+   *   * `relevance` (default)
+   *   * `last_modified_timestamp`
+   *   * `last_modified_timestamp asc`
    * @param {string} [request.scope]
    *   Optional. The scope under which the search should be operating. It must
    *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
@@ -4355,6 +4361,8 @@ export class CatalogServiceClient {
    *   following form: `projects/{project}/locations/{location}`.
    * @param {string} request.query
    *   Required. The query against which entries in scope should be matched.
+   *   The query syntax is defined in [Search syntax for Dataplex
+   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
    * @param {number} [request.pageSize]
    *   Optional. Number of results in the search page. If <=0, then defaults
    *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
@@ -4364,6 +4372,10 @@ export class CatalogServiceClient {
    *   this to retrieve the subsequent page.
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results.
+   *   Supported values are:
+   *   * `relevance` (default)
+   *   * `last_modified_timestamp`
+   *   * `last_modified_timestamp asc`
    * @param {string} [request.scope]
    *   Optional. The scope under which the search should be operating. It must
    *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
@@ -4413,6 +4425,8 @@ export class CatalogServiceClient {
    *   following form: `projects/{project}/locations/{location}`.
    * @param {string} request.query
    *   Required. The query against which entries in scope should be matched.
+   *   The query syntax is defined in [Search syntax for Dataplex
+   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
    * @param {number} [request.pageSize]
    *   Optional. Number of results in the search page. If <=0, then defaults
    *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
@@ -4422,6 +4436,10 @@ export class CatalogServiceClient {
    *   this to retrieve the subsequent page.
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results.
+   *   Supported values are:
+   *   * `relevance` (default)
+   *   * `last_modified_timestamp`
+   *   * `last_modified_timestamp asc`
    * @param {string} [request.scope]
    *   Optional. The scope under which the search should be operating. It must
    *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
