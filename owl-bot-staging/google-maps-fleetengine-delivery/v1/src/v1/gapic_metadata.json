@@ -1,0 +1,131 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "maps.fleetengine.delivery.v1",
+  "libraryPackage": "@googlemaps/fleetengine-delivery",
+  "services": {
+    "DeliveryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeliveryServiceClient",
+          "rpcs": {
+            "CreateDeliveryVehicle": {
+              "methods": [
+                "createDeliveryVehicle"
+              ]
+            },
+            "GetDeliveryVehicle": {
+              "methods": [
+                "getDeliveryVehicle"
+              ]
+            },
+            "UpdateDeliveryVehicle": {
+              "methods": [
+                "updateDeliveryVehicle"
+              ]
+            },
+            "BatchCreateTasks": {
+              "methods": [
+                "batchCreateTasks"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "createTask"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "UpdateTask": {
+              "methods": [
+                "updateTask"
+              ]
+            },
+            "GetTaskTrackingInfo": {
+              "methods": [
+                "getTaskTrackingInfo"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            },
+            "ListDeliveryVehicles": {
+              "methods": [
+                "listDeliveryVehicles",
+                "listDeliveryVehiclesStream",
+                "listDeliveryVehiclesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeliveryServiceClient",
+          "rpcs": {
+            "CreateDeliveryVehicle": {
+              "methods": [
+                "createDeliveryVehicle"
+              ]
+            },
+            "GetDeliveryVehicle": {
+              "methods": [
+                "getDeliveryVehicle"
+              ]
+            },
+            "UpdateDeliveryVehicle": {
+              "methods": [
+                "updateDeliveryVehicle"
+              ]
+            },
+            "BatchCreateTasks": {
+              "methods": [
+                "batchCreateTasks"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "createTask"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "UpdateTask": {
+              "methods": [
+                "updateTask"
+              ]
+            },
+            "GetTaskTrackingInfo": {
+              "methods": [
+                "getTaskTrackingInfo"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            },
+            "ListDeliveryVehicles": {
+              "methods": [
+                "listDeliveryVehicles",
+                "listDeliveryVehiclesStream",
+                "listDeliveryVehiclesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
