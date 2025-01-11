@@ -3048,6 +3048,24 @@
     "support_documentation": "https://cloud.google.com/anthos/multicluster-management/gateway/docs/getting-support"
   },
   {
+    "name": "admanager",
+    "name_pretty": "Google Ad Manager API",
+    "product_documentation": "https://developers.google.com/ad-manager/api/beta",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/admanager/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-ads/admanager",
+    "api_id": "admanager.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "admanager",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-ads-admanager",
+    "support_documentation": "https://developers.google.com/ad-manager/api/beta/docs/getting-support"
+  },
+  {
     "client_documentation": "https://googleapis.dev/nodejs/analytics-admin/latest/index.html",
     "api_id": "analyticsadmin.googleapis.com",
     "distribution_name": "@google-analytics/admin",
