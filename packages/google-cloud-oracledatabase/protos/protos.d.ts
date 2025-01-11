@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3160,7 +3160,8 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         ACCOUNT_NOT_LINKED = 1,
                         ACCOUNT_NOT_ACTIVE = 2,
-                        ACTIVE = 3
+                        ACTIVE = 3,
+                        ACCOUNT_SUSPENDED = 4
                     }
                 }
 
