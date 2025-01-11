@@ -15,6 +15,11 @@
                 "getNode"
               ]
             },
+            "GetQueuedResource": {
+              "methods": [
+                "getQueuedResource"
+              ]
+            },
             "GenerateServiceIdentity": {
               "methods": [
                 "generateServiceIdentity"
@@ -60,11 +65,33 @@
                 "updateNode"
               ]
             },
+            "CreateQueuedResource": {
+              "methods": [
+                "createQueuedResource"
+              ]
+            },
+            "DeleteQueuedResource": {
+              "methods": [
+                "deleteQueuedResource"
+              ]
+            },
+            "ResetQueuedResource": {
+              "methods": [
+                "resetQueuedResource"
+              ]
+            },
             "ListNodes": {
               "methods": [
                 "listNodes",
                 "listNodesStream",
                 "listNodesAsync"
+              ]
+            },
+            "ListQueuedResources": {
+              "methods": [
+                "listQueuedResources",
+                "listQueuedResourcesStream",
+                "listQueuedResourcesAsync"
               ]
             },
             "ListAcceleratorTypes": {
@@ -91,6 +118,11 @@
                 "getNode"
               ]
             },
+            "GetQueuedResource": {
+              "methods": [
+                "getQueuedResource"
+              ]
+            },
             "GenerateServiceIdentity": {
               "methods": [
                 "generateServiceIdentity"
@@ -136,11 +168,33 @@
                 "updateNode"
               ]
             },
+            "CreateQueuedResource": {
+              "methods": [
+                "createQueuedResource"
+              ]
+            },
+            "DeleteQueuedResource": {
+              "methods": [
+                "deleteQueuedResource"
+              ]
+            },
+            "ResetQueuedResource": {
+              "methods": [
+                "resetQueuedResource"
+              ]
+            },
             "ListNodes": {
               "methods": [
                 "listNodes",
                 "listNodesStream",
                 "listNodesAsync"
+              ]
+            },
+            "ListQueuedResources": {
+              "methods": [
+                "listQueuedResources",
+                "listQueuedResourcesStream",
+                "listQueuedResourcesAsync"
               ]
             },
             "ListAcceleratorTypes": {
