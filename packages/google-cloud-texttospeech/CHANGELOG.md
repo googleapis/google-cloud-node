@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.7.0...text-to-speech-v5.8.0) (2025-01-11)
+
+
+### Features
+
+* [texttospeech] StreamingSynthesize now supports opus ([#5926](https://github.com/googleapis/google-cloud-node/issues/5926)) ([d8d7c9a](https://github.com/googleapis/google-cloud-node/commit/d8d7c9a602a787c490861d3fe386a2e651dfcae6))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.6.0...text-to-speech-v5.7.0) (2024-12-18)
 
 

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START fleetengine_v1_generated_DeliveryService_GetTaskTrackingInfo_async]
+function main(parent, queuedResource) {
+  // [START tpu_v2_generated_Tpu_CreateQueuedResource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,37 +29,44 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. The standard Delivery API request header.
+   *  Required. The parent resource name.
    */
-  // const header = {}
+  // const parent = 'abc123'
   /**
-   *  Required. Must be in the format
-   *  `providers/{provider}/taskTrackingInfo/{tracking_id}`. The `provider`
-   *  must be the Google Cloud Project ID, and the `tracking_id` must be the
-   *  tracking ID associated with the task. An example name can be
-   *  `providers/sample-cloud-project/taskTrackingInfo/sample-tracking-id`.
+   *  Optional. The unqualified resource name. Should follow the
+   *  `^[A-Za-z0-9_.~+%-]+$` regex format.
    */
-  // const name = 'abc123'
+  // const queuedResourceId = 'abc123'
+  /**
+   *  Required. The queued resource.
+   */
+  // const queuedResource = {}
+  /**
+   *  Optional. Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
-  // Imports the Delivery library
-  const {DeliveryServiceClient} = require('@googlemaps/fleetengine-delivery').v1;
+  // Imports the Tpu library
+  const {TpuClient} = require('@google-cloud/tpu').v2;
 
   // Instantiates a client
-  const deliveryClient = new DeliveryServiceClient();
+  const tpuClient = new TpuClient();
 
-  async function callGetTaskTrackingInfo() {
+  async function callCreateQueuedResource() {
     // Construct request
     const request = {
-      name,
+      parent,
+      queuedResource,
     };
 
     // Run request
-    const response = await deliveryClient.getTaskTrackingInfo(request);
+    const [operation] = await tpuClient.createQueuedResource(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetTaskTrackingInfo();
-  // [END fleetengine_v1_generated_DeliveryService_GetTaskTrackingInfo_async]
+  callCreateQueuedResource();
+  // [END tpu_v2_generated_Tpu_CreateQueuedResource_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.6.0...css-v0.7.0) (2025-01-11)
+
+
+### Features
+
+* [css] UpdateCssProduct is added to CssProductInput proto ([#5899](https://github.com/googleapis/google-cloud-node/issues/5899)) ([03a1088](https://github.com/googleapis/google-cloud-node/commit/03a1088042afdc6e48b4c0a0b29b22a76e687ccf))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.5.0...css-v0.6.0) (2024-10-30)
 
 
