@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START iam_v2_generated_Policies_GetPolicy_async]
+function main(policyBinding) {
+  // [START iam_v3_generated_PolicyBindings_UpdatePolicyBinding_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,41 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the policy to retrieve. Format:
-   *  `policies/{attachment_point}/denypolicies/{policy_id}`
-   *  Use the URL-encoded full resource name, which means that the forward-slash
-   *  character, `/`, must be written as `%2F`. For example,
-   *  `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies/my-policy`.
-   *  For organizations and folders, use the numeric ID in the full resource
-   *  name. For projects, you can use the alphanumeric or the numeric ID.
+   *  Required. The policy binding to update.
+   *  The policy binding's `name` field is used to identify the policy binding to
+   *  update.
    */
-  // const name = 'abc123'
+  // const policyBinding = {}
+  /**
+   *  Optional. If set, validate the request and preview the update, but do not
+   *  actually post it.
+   */
+  // const validateOnly = true
+  /**
+   *  Optional. The list of fields to update
+   */
+  // const updateMask = {}
 
   // Imports the Iam library
-  const {PoliciesClient} = require('@google-cloud/iam').v2;
+  const {PolicyBindingsClient} = require('@google-cloud/iam').v3;
 
   // Instantiates a client
-  const iamClient = new PoliciesClient();
+  const iamClient = new PolicyBindingsClient();
 
-  async function callGetPolicy() {
+  async function callUpdatePolicyBinding() {
     // Construct request
     const request = {
-      name,
+      policyBinding,
     };
 
     // Run request
-    const response = await iamClient.getPolicy(request);
+    const [operation] = await iamClient.updatePolicyBinding(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetPolicy();
-  // [END iam_v2_generated_Policies_GetPolicy_async]
+  callUpdatePolicyBinding();
+  // [END iam_v3_generated_PolicyBindings_UpdatePolicyBinding_async]
 }
 
 process.on('unhandledRejection', err => {

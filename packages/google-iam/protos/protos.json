@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -357,6 +360,1044 @@
                   }
                 }
               }
+            },
+            "v3": {
+              "options": {
+                "csharp_namespace": "Google.Cloud.Iam.V3",
+                "go_package": "cloud.google.com/go/iam/apiv3/iampb;iampb",
+                "java_multiple_files": true,
+                "java_outer_classname": "PrincipalAccessBoundaryPolicyResourcesProto",
+                "java_package": "com.google.iam.v3",
+                "(google.api.resource_definition).type": "iam.googleapis.com/FolderLocation",
+                "(google.api.resource_definition).pattern": "folders/{folder}/locations/{location}"
+              },
+              "nested": {
+                "OperationMetadata": {
+                  "fields": {
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "target": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "verb": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "statusMessage": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "requestedCancellation": {
+                      "type": "bool",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "apiVersion": {
+                      "type": "string",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "PolicyBinding": {
+                  "options": {
+                    "(google.api.resource).type": "iam.googleapis.com/PolicyBinding",
+                    "(google.api.resource).pattern": "projects/{project}/locations/{location}/policyBindings/{policy_binding}",
+                    "(google.api.resource).plural": "policyBindings",
+                    "(google.api.resource).singular": "policyBinding"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "uid": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_info).format": "UUID4",
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "annotations": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "target": {
+                      "type": "Target",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "policyKind": {
+                      "type": "PolicyKind",
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "IMMUTABLE"
+                      }
+                    },
+                    "policy": {
+                      "type": "string",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "policyUid": {
+                      "type": "string",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "condition": {
+                      "type": "google.type.Expr",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Target": {
+                      "oneofs": {
+                        "target": {
+                          "oneof": [
+                            "principalSet"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "principalSet": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "PolicyKind": {
+                      "values": {
+                        "POLICY_KIND_UNSPECIFIED": 0,
+                        "PRINCIPAL_ACCESS_BOUNDARY": 1
+                      }
+                    }
+                  }
+                },
+                "PolicyBindings": {
+                  "options": {
+                    "(google.api.default_host)": "iam.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                  },
+                  "methods": {
+                    "CreatePolicyBinding": {
+                      "requestType": "CreatePolicyBindingRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/policyBindings",
+                        "(google.api.http).body": "policy_binding",
+                        "(google.api.http).additional_bindings.post": "/v3/{parent=organizations/*/locations/*}/policyBindings",
+                        "(google.api.http).additional_bindings.body": "policy_binding",
+                        "(google.api.method_signature)": "parent,policy_binding,policy_binding_id",
+                        "(google.longrunning.operation_info).response_type": "PolicyBinding",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{parent=projects/*/locations/*}/policyBindings",
+                            "body": "policy_binding",
+                            "additional_bindings": [
+                              {
+                                "post": "/v3/{parent=folders/*/locations/*}/policyBindings",
+                                "body": "policy_binding"
+                              },
+                              {
+                                "post": "/v3/{parent=organizations/*/locations/*}/policyBindings",
+                                "body": "policy_binding"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,policy_binding,policy_binding_id"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "PolicyBinding",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "GetPolicyBinding": {
+                      "requestType": "GetPolicyBindingRequest",
+                      "responseType": "PolicyBinding",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=projects/*/locations/*/policyBindings/*}",
+                        "(google.api.http).additional_bindings.get": "/v3/{name=organizations/*/locations/*/policyBindings/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/locations/*/policyBindings/*}",
+                            "additional_bindings": [
+                              {
+                                "get": "/v3/{name=folders/*/locations/*/policyBindings/*}"
+                              },
+                              {
+                                "get": "/v3/{name=organizations/*/locations/*/policyBindings/*}"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdatePolicyBinding": {
+                      "requestType": "UpdatePolicyBindingRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).patch": "/v3/{policy_binding.name=projects/*/locations/*/policyBindings/*}",
+                        "(google.api.http).body": "policy_binding",
+                        "(google.api.http).additional_bindings.patch": "/v3/{policy_binding.name=organizations/*/locations/*/policyBindings/*}",
+                        "(google.api.http).additional_bindings.body": "policy_binding",
+                        "(google.api.method_signature)": "policy_binding,update_mask",
+                        "(google.longrunning.operation_info).response_type": "PolicyBinding",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{policy_binding.name=projects/*/locations/*/policyBindings/*}",
+                            "body": "policy_binding",
+                            "additional_bindings": [
+                              {
+                                "patch": "/v3/{policy_binding.name=folders/*/locations/*/policyBindings/*}",
+                                "body": "policy_binding"
+                              },
+                              {
+                                "patch": "/v3/{policy_binding.name=organizations/*/locations/*/policyBindings/*}",
+                                "body": "policy_binding"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "policy_binding,update_mask"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "PolicyBinding",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "DeletePolicyBinding": {
+                      "requestType": "DeletePolicyBindingRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).delete": "/v3/{name=projects/*/locations/*/policyBindings/*}",
+                        "(google.api.http).additional_bindings.delete": "/v3/{name=organizations/*/locations/*/policyBindings/*}",
+                        "(google.api.method_signature)": "name",
+                        "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=projects/*/locations/*/policyBindings/*}",
+                            "additional_bindings": [
+                              {
+                                "delete": "/v3/{name=folders/*/locations/*/policyBindings/*}"
+                              },
+                              {
+                                "delete": "/v3/{name=organizations/*/locations/*/policyBindings/*}"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "google.protobuf.Empty",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "ListPolicyBindings": {
+                      "requestType": "ListPolicyBindingsRequest",
+                      "responseType": "ListPolicyBindingsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/policyBindings",
+                        "(google.api.http).additional_bindings.get": "/v3/{parent=organizations/*/locations/*}/policyBindings",
+                        "(google.api.method_signature)": "parent"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{parent=projects/*/locations/*}/policyBindings",
+                            "additional_bindings": [
+                              {
+                                "get": "/v3/{parent=folders/*/locations/*}/policyBindings"
+                              },
+                              {
+                                "get": "/v3/{parent=organizations/*/locations/*}/policyBindings"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
+                    },
+                    "SearchTargetPolicyBindings": {
+                      "requestType": "SearchTargetPolicyBindingsRequest",
+                      "responseType": "SearchTargetPolicyBindingsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/policyBindings:searchTargetPolicyBindings",
+                        "(google.api.http).additional_bindings.get": "/v3/{parent=organizations/*/locations/*}/policyBindings:searchTargetPolicyBindings",
+                        "(google.api.method_signature)": "parent,target"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{parent=projects/*/locations/*}/policyBindings:searchTargetPolicyBindings",
+                            "additional_bindings": [
+                              {
+                                "get": "/v3/{parent=folders/*/locations/*}/policyBindings:searchTargetPolicyBindings"
+                              },
+                              {
+                                "get": "/v3/{parent=organizations/*/locations/*}/policyBindings:searchTargetPolicyBindings"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,target"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "CreatePolicyBindingRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "iam.googleapis.com/PolicyBinding"
+                      }
+                    },
+                    "policyBindingId": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "policyBinding": {
+                      "type": "PolicyBinding",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "GetPolicyBindingRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/PolicyBinding"
+                      }
+                    }
+                  }
+                },
+                "UpdatePolicyBindingRequest": {
+                  "fields": {
+                    "policyBinding": {
+                      "type": "PolicyBinding",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "DeletePolicyBindingRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/PolicyBinding"
+                      }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListPolicyBindingsRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "iam.googleapis.com/PolicyBinding"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListPolicyBindingsResponse": {
+                  "fields": {
+                    "policyBindings": {
+                      "rule": "repeated",
+                      "type": "PolicyBinding",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "SearchTargetPolicyBindingsRequest": {
+                  "fields": {
+                    "target": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "parent": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "iam.googleapis.com/PolicyBinding"
+                      }
+                    }
+                  }
+                },
+                "SearchTargetPolicyBindingsResponse": {
+                  "fields": {
+                    "policyBindings": {
+                      "rule": "repeated",
+                      "type": "PolicyBinding",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "PrincipalAccessBoundaryPolicies": {
+                  "options": {
+                    "(google.api.default_host)": "iam.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                  },
+                  "methods": {
+                    "CreatePrincipalAccessBoundaryPolicy": {
+                      "requestType": "CreatePrincipalAccessBoundaryPolicyRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).post": "/v3/{parent=organizations/*/locations/*}/principalAccessBoundaryPolicies",
+                        "(google.api.http).body": "principal_access_boundary_policy",
+                        "(google.api.method_signature)": "parent,principal_access_boundary_policy,principal_access_boundary_policy_id",
+                        "(google.longrunning.operation_info).response_type": "PrincipalAccessBoundaryPolicy",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{parent=organizations/*/locations/*}/principalAccessBoundaryPolicies",
+                            "body": "principal_access_boundary_policy"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,principal_access_boundary_policy,principal_access_boundary_policy_id"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "PrincipalAccessBoundaryPolicy",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "GetPrincipalAccessBoundaryPolicy": {
+                      "requestType": "GetPrincipalAccessBoundaryPolicyRequest",
+                      "responseType": "PrincipalAccessBoundaryPolicy",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdatePrincipalAccessBoundaryPolicy": {
+                      "requestType": "UpdatePrincipalAccessBoundaryPolicyRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).patch": "/v3/{principal_access_boundary_policy.name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}",
+                        "(google.api.http).body": "principal_access_boundary_policy",
+                        "(google.api.method_signature)": "principal_access_boundary_policy,update_mask",
+                        "(google.longrunning.operation_info).response_type": "PrincipalAccessBoundaryPolicy",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{principal_access_boundary_policy.name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}",
+                            "body": "principal_access_boundary_policy"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "principal_access_boundary_policy,update_mask"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "PrincipalAccessBoundaryPolicy",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "DeletePrincipalAccessBoundaryPolicy": {
+                      "requestType": "DeletePrincipalAccessBoundaryPolicyRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).delete": "/v3/{name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}",
+                        "(google.api.method_signature)": "name",
+                        "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "google.protobuf.Empty",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "ListPrincipalAccessBoundaryPolicies": {
+                      "requestType": "ListPrincipalAccessBoundaryPoliciesRequest",
+                      "responseType": "ListPrincipalAccessBoundaryPoliciesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{parent=organizations/*/locations/*}/principalAccessBoundaryPolicies",
+                        "(google.api.method_signature)": "parent"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{parent=organizations/*/locations/*}/principalAccessBoundaryPolicies"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
+                    },
+                    "SearchPrincipalAccessBoundaryPolicyBindings": {
+                      "requestType": "SearchPrincipalAccessBoundaryPolicyBindingsRequest",
+                      "responseType": "SearchPrincipalAccessBoundaryPolicyBindingsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}:searchPolicyBindings",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=organizations/*/locations/*/principalAccessBoundaryPolicies/*}:searchPolicyBindings"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "CreatePrincipalAccessBoundaryPolicyRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "iam.googleapis.com/PrincipalAccessBoundaryPolicy"
+                      }
+                    },
+                    "principalAccessBoundaryPolicyId": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "principalAccessBoundaryPolicy": {
+                      "type": "PrincipalAccessBoundaryPolicy",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "GetPrincipalAccessBoundaryPolicyRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/PrincipalAccessBoundaryPolicy"
+                      }
+                    }
+                  }
+                },
+                "UpdatePrincipalAccessBoundaryPolicyRequest": {
+                  "fields": {
+                    "principalAccessBoundaryPolicy": {
+                      "type": "PrincipalAccessBoundaryPolicy",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "DeletePrincipalAccessBoundaryPolicyRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/PrincipalAccessBoundaryPolicy"
+                      }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "force": {
+                      "type": "bool",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListPrincipalAccessBoundaryPoliciesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "iam.googleapis.com/PrincipalAccessBoundaryPolicy"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListPrincipalAccessBoundaryPoliciesResponse": {
+                  "fields": {
+                    "principalAccessBoundaryPolicies": {
+                      "rule": "repeated",
+                      "type": "PrincipalAccessBoundaryPolicy",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "SearchPrincipalAccessBoundaryPolicyBindingsRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/PrincipalAccessBoundaryPolicy"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "SearchPrincipalAccessBoundaryPolicyBindingsResponse": {
+                  "fields": {
+                    "policyBindings": {
+                      "rule": "repeated",
+                      "type": "PolicyBinding",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "PrincipalAccessBoundaryPolicy": {
+                  "options": {
+                    "(google.api.resource).type": "iam.googleapis.com/PrincipalAccessBoundaryPolicy",
+                    "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy}",
+                    "(google.api.resource).plural": "principalAccessBoundaryPolicies",
+                    "(google.api.resource).singular": "principalAccessBoundaryPolicy"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "uid": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_info).format": "UUID4",
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "annotations": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "details": {
+                      "type": "PrincipalAccessBoundaryPolicyDetails",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "PrincipalAccessBoundaryPolicyDetails": {
+                  "fields": {
+                    "rules": {
+                      "rule": "repeated",
+                      "type": "PrincipalAccessBoundaryPolicyRule",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "enforcementVersion": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "PrincipalAccessBoundaryPolicyRule": {
+                  "fields": {
+                    "description": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "resources": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "effect": {
+                      "type": "Effect",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Effect": {
+                      "values": {
+                        "EFFECT_UNSPECIFIED": 0,
+                        "ALLOW": 1
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -395,7 +1436,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -800,6 +1841,107 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }
@@ -2115,6 +3257,15 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }

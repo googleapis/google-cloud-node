@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START iam_v2_generated_Policies_ListPolicies_async]
+  // [START iam_v3_generated_PrincipalAccessBoundaryPolicies_ListPrincipalAccessBoundaryPolicies_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,51 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource that the policy is attached to, along with the kind of policy
-   *  to list. Format:
-   *  `policies/{attachment_point}/denypolicies`
-   *  The attachment point is identified by its URL-encoded full resource name,
-   *  which means that the forward-slash character, `/`, must be written as
-   *  `%2F`. For example,
-   *  `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
-   *  For organizations and folders, use the numeric ID in the full resource
-   *  name. For projects, you can use the alphanumeric or the numeric ID.
+   *  Required. The parent resource, which owns the collection of principal
+   *  access boundary policies.
+   *  Format:
+   *    `organizations/{organization_id}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of policies to return. IAM ignores this value and uses
-   *  the value 1000.
+   *  Optional. The maximum number of principal access boundary policies to
+   *  return. The service may return fewer than this value.
+   *  If unspecified, at most 50 principal access boundary policies will be
+   *  returned. The maximum value is 1000; values above 1000 will be coerced to
+   *  1000.
    */
   // const pageSize = 1234
   /**
-   *  A page token received in a ListPoliciesResponse google.iam.v2.ListPoliciesResponse. Provide this token to
-   *  retrieve the next page.
+   *  Optional. A page token, received from a previous
+   *  `ListPrincipalAccessBoundaryPolicies` call. Provide this to retrieve the
+   *  subsequent page.
+   *  When paginating, all other parameters provided to
+   *  `ListPrincipalAccessBoundaryPolicies` must match the call that provided the
+   *  page token.
    */
   // const pageToken = 'abc123'
 
   // Imports the Iam library
-  const {PoliciesClient} = require('@google-cloud/iam').v2;
+  const {PrincipalAccessBoundaryPoliciesClient} = require('@google-cloud/iam').v3;
 
   // Instantiates a client
-  const iamClient = new PoliciesClient();
+  const iamClient = new PrincipalAccessBoundaryPoliciesClient();
 
-  async function callListPolicies() {
+  async function callListPrincipalAccessBoundaryPolicies() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = iamClient.listPoliciesAsync(request);
+    const iterable = iamClient.listPrincipalAccessBoundaryPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListPolicies();
-  // [END iam_v2_generated_Policies_ListPolicies_async]
+  callListPrincipalAccessBoundaryPolicies();
+  // [END iam_v3_generated_PrincipalAccessBoundaryPolicies_ListPrincipalAccessBoundaryPolicies_async]
 }
 
 process.on('unhandledRejection', err => {

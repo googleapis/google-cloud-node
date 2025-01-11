@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2981,6 +2981,6610 @@
                 })();
     
                 return v2;
+            })();
+    
+            iam.v3 = (function() {
+    
+                /**
+                 * Namespace v3.
+                 * @memberof google.iam
+                 * @namespace
+                 */
+                var v3 = {};
+    
+                v3.OperationMetadata = (function() {
+    
+                    /**
+                     * Properties of an OperationMetadata.
+                     * @memberof google.iam.v3
+                     * @interface IOperationMetadata
+                     * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                     * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                     * @property {string|null} [target] OperationMetadata target
+                     * @property {string|null} [verb] OperationMetadata verb
+                     * @property {string|null} [statusMessage] OperationMetadata statusMessage
+                     * @property {boolean|null} [requestedCancellation] OperationMetadata requestedCancellation
+                     * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                     */
+    
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents an OperationMetadata.
+                     * @implements IOperationMetadata
+                     * @constructor
+                     * @param {google.iam.v3.IOperationMetadata=} [properties] Properties to set
+                     */
+                    function OperationMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * OperationMetadata createTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     */
+                    OperationMetadata.prototype.createTime = null;
+    
+                    /**
+                     * OperationMetadata endTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     */
+                    OperationMetadata.prototype.endTime = null;
+    
+                    /**
+                     * OperationMetadata target.
+                     * @member {string} target
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     */
+                    OperationMetadata.prototype.target = "";
+    
+                    /**
+                     * OperationMetadata verb.
+                     * @member {string} verb
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     */
+                    OperationMetadata.prototype.verb = "";
+    
+                    /**
+                     * OperationMetadata statusMessage.
+                     * @member {string} statusMessage
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     */
+                    OperationMetadata.prototype.statusMessage = "";
+    
+                    /**
+                     * OperationMetadata requestedCancellation.
+                     * @member {boolean} requestedCancellation
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     */
+                    OperationMetadata.prototype.requestedCancellation = false;
+    
+                    /**
+                     * OperationMetadata apiVersion.
+                     * @member {string} apiVersion
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     */
+                    OperationMetadata.prototype.apiVersion = "";
+    
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {google.iam.v3.IOperationMetadata=} [properties] Properties to set
+                     * @returns {google.iam.v3.OperationMetadata} OperationMetadata instance
+                     */
+                    OperationMetadata.create = function create(properties) {
+                        return new OperationMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.iam.v3.OperationMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {google.iam.v3.IOperationMetadata} message OperationMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    OperationMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                            $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                        if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                        if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusMessage);
+                        if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.requestedCancellation);
+                        if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.iam.v3.OperationMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {google.iam.v3.IOperationMetadata} message OperationMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.OperationMetadata} OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    OperationMetadata.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.OperationMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.target = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.verb = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.statusMessage = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.requestedCancellation = reader.bool();
+                                    break;
+                                }
+                            case 7: {
+                                    message.apiVersion = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.OperationMetadata} OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @function verify
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    OperationMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                            if (error)
+                                return "createTime." + error;
+                        }
+                        if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                            if (error)
+                                return "endTime." + error;
+                        }
+                        if (message.target != null && message.hasOwnProperty("target"))
+                            if (!$util.isString(message.target))
+                                return "target: string expected";
+                        if (message.verb != null && message.hasOwnProperty("verb"))
+                            if (!$util.isString(message.verb))
+                                return "verb: string expected";
+                        if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                            if (!$util.isString(message.statusMessage))
+                                return "statusMessage: string expected";
+                        if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                            if (typeof message.requestedCancellation !== "boolean")
+                                return "requestedCancellation: boolean expected";
+                        if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                            if (!$util.isString(message.apiVersion))
+                                return "apiVersion: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.OperationMetadata} OperationMetadata
+                     */
+                    OperationMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.OperationMetadata)
+                            return object;
+                        var message = new $root.google.iam.v3.OperationMetadata();
+                        if (object.createTime != null) {
+                            if (typeof object.createTime !== "object")
+                                throw TypeError(".google.iam.v3.OperationMetadata.createTime: object expected");
+                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                        }
+                        if (object.endTime != null) {
+                            if (typeof object.endTime !== "object")
+                                throw TypeError(".google.iam.v3.OperationMetadata.endTime: object expected");
+                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                        }
+                        if (object.target != null)
+                            message.target = String(object.target);
+                        if (object.verb != null)
+                            message.verb = String(object.verb);
+                        if (object.statusMessage != null)
+                            message.statusMessage = String(object.statusMessage);
+                        if (object.requestedCancellation != null)
+                            message.requestedCancellation = Boolean(object.requestedCancellation);
+                        if (object.apiVersion != null)
+                            message.apiVersion = String(object.apiVersion);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {google.iam.v3.OperationMetadata} message OperationMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    OperationMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.createTime = null;
+                            object.endTime = null;
+                            object.target = "";
+                            object.verb = "";
+                            object.statusMessage = "";
+                            object.requestedCancellation = false;
+                            object.apiVersion = "";
+                        }
+                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                        if (message.endTime != null && message.hasOwnProperty("endTime"))
+                            object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                        if (message.target != null && message.hasOwnProperty("target"))
+                            object.target = message.target;
+                        if (message.verb != null && message.hasOwnProperty("verb"))
+                            object.verb = message.verb;
+                        if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                            object.statusMessage = message.statusMessage;
+                        if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                            object.requestedCancellation = message.requestedCancellation;
+                        if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                            object.apiVersion = message.apiVersion;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    OperationMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.OperationMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.OperationMetadata";
+                    };
+    
+                    return OperationMetadata;
+                })();
+    
+                v3.PolicyBinding = (function() {
+    
+                    /**
+                     * Properties of a PolicyBinding.
+                     * @memberof google.iam.v3
+                     * @interface IPolicyBinding
+                     * @property {string|null} [name] PolicyBinding name
+                     * @property {string|null} [uid] PolicyBinding uid
+                     * @property {string|null} [etag] PolicyBinding etag
+                     * @property {string|null} [displayName] PolicyBinding displayName
+                     * @property {Object.<string,string>|null} [annotations] PolicyBinding annotations
+                     * @property {google.iam.v3.PolicyBinding.ITarget|null} [target] PolicyBinding target
+                     * @property {google.iam.v3.PolicyBinding.PolicyKind|null} [policyKind] PolicyBinding policyKind
+                     * @property {string|null} [policy] PolicyBinding policy
+                     * @property {string|null} [policyUid] PolicyBinding policyUid
+                     * @property {google.type.IExpr|null} [condition] PolicyBinding condition
+                     * @property {google.protobuf.ITimestamp|null} [createTime] PolicyBinding createTime
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] PolicyBinding updateTime
+                     */
+    
+                    /**
+                     * Constructs a new PolicyBinding.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a PolicyBinding.
+                     * @implements IPolicyBinding
+                     * @constructor
+                     * @param {google.iam.v3.IPolicyBinding=} [properties] Properties to set
+                     */
+                    function PolicyBinding(properties) {
+                        this.annotations = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PolicyBinding name.
+                     * @member {string} name
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.name = "";
+    
+                    /**
+                     * PolicyBinding uid.
+                     * @member {string} uid
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.uid = "";
+    
+                    /**
+                     * PolicyBinding etag.
+                     * @member {string} etag
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.etag = "";
+    
+                    /**
+                     * PolicyBinding displayName.
+                     * @member {string} displayName
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.displayName = "";
+    
+                    /**
+                     * PolicyBinding annotations.
+                     * @member {Object.<string,string>} annotations
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.annotations = $util.emptyObject;
+    
+                    /**
+                     * PolicyBinding target.
+                     * @member {google.iam.v3.PolicyBinding.ITarget|null|undefined} target
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.target = null;
+    
+                    /**
+                     * PolicyBinding policyKind.
+                     * @member {google.iam.v3.PolicyBinding.PolicyKind} policyKind
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.policyKind = 0;
+    
+                    /**
+                     * PolicyBinding policy.
+                     * @member {string} policy
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.policy = "";
+    
+                    /**
+                     * PolicyBinding policyUid.
+                     * @member {string} policyUid
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.policyUid = "";
+    
+                    /**
+                     * PolicyBinding condition.
+                     * @member {google.type.IExpr|null|undefined} condition
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.condition = null;
+    
+                    /**
+                     * PolicyBinding createTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.createTime = null;
+    
+                    /**
+                     * PolicyBinding updateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     */
+                    PolicyBinding.prototype.updateTime = null;
+    
+                    /**
+                     * Creates a new PolicyBinding instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {google.iam.v3.IPolicyBinding=} [properties] Properties to set
+                     * @returns {google.iam.v3.PolicyBinding} PolicyBinding instance
+                     */
+                    PolicyBinding.create = function create(properties) {
+                        return new PolicyBinding(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PolicyBinding message. Does not implicitly {@link google.iam.v3.PolicyBinding.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {google.iam.v3.IPolicyBinding} message PolicyBinding message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PolicyBinding.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
+                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                            for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                        if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                            $root.google.iam.v3.PolicyBinding.Target.encode(message.target, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.policy);
+                        if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                            $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                            $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.policyKind != null && Object.hasOwnProperty.call(message, "policyKind"))
+                            writer.uint32(/* id 11, wireType 0 =*/88).int32(message.policyKind);
+                        if (message.policyUid != null && Object.hasOwnProperty.call(message, "policyUid"))
+                            writer.uint32(/* id 12, wireType 2 =*/98).string(message.policyUid);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PolicyBinding message, length delimited. Does not implicitly {@link google.iam.v3.PolicyBinding.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {google.iam.v3.IPolicyBinding} message PolicyBinding message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PolicyBinding.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PolicyBinding message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.PolicyBinding} PolicyBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PolicyBinding.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.PolicyBinding(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.uid = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.etag = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.displayName = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    if (message.annotations === $util.emptyObject)
+                                        message.annotations = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotations[key] = value;
+                                    break;
+                                }
+                            case 6: {
+                                    message.target = $root.google.iam.v3.PolicyBinding.Target.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 11: {
+                                    message.policyKind = reader.int32();
+                                    break;
+                                }
+                            case 7: {
+                                    message.policy = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    message.policyUid = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 10: {
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PolicyBinding message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.PolicyBinding} PolicyBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PolicyBinding.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PolicyBinding message.
+                     * @function verify
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PolicyBinding.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            if (!$util.isString(message.uid))
+                                return "uid: string expected";
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            if (!$util.isString(message.etag))
+                                return "etag: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                            if (!$util.isObject(message.annotations))
+                                return "annotations: object expected";
+                            var key = Object.keys(message.annotations);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.annotations[key[i]]))
+                                    return "annotations: string{k:string} expected";
+                        }
+                        if (message.target != null && message.hasOwnProperty("target")) {
+                            var error = $root.google.iam.v3.PolicyBinding.Target.verify(message.target);
+                            if (error)
+                                return "target." + error;
+                        }
+                        if (message.policyKind != null && message.hasOwnProperty("policyKind"))
+                            switch (message.policyKind) {
+                            default:
+                                return "policyKind: enum value expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            if (!$util.isString(message.policy))
+                                return "policy: string expected";
+                        if (message.policyUid != null && message.hasOwnProperty("policyUid"))
+                            if (!$util.isString(message.policyUid))
+                                return "policyUid: string expected";
+                        if (message.condition != null && message.hasOwnProperty("condition")) {
+                            var error = $root.google.type.Expr.verify(message.condition);
+                            if (error)
+                                return "condition." + error;
+                        }
+                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                            if (error)
+                                return "createTime." + error;
+                        }
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                            if (error)
+                                return "updateTime." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PolicyBinding message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.PolicyBinding} PolicyBinding
+                     */
+                    PolicyBinding.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.PolicyBinding)
+                            return object;
+                        var message = new $root.google.iam.v3.PolicyBinding();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.uid != null)
+                            message.uid = String(object.uid);
+                        if (object.etag != null)
+                            message.etag = String(object.etag);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        if (object.annotations) {
+                            if (typeof object.annotations !== "object")
+                                throw TypeError(".google.iam.v3.PolicyBinding.annotations: object expected");
+                            message.annotations = {};
+                            for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                        }
+                        if (object.target != null) {
+                            if (typeof object.target !== "object")
+                                throw TypeError(".google.iam.v3.PolicyBinding.target: object expected");
+                            message.target = $root.google.iam.v3.PolicyBinding.Target.fromObject(object.target);
+                        }
+                        switch (object.policyKind) {
+                        default:
+                            if (typeof object.policyKind === "number") {
+                                message.policyKind = object.policyKind;
+                                break;
+                            }
+                            break;
+                        case "POLICY_KIND_UNSPECIFIED":
+                        case 0:
+                            message.policyKind = 0;
+                            break;
+                        case "PRINCIPAL_ACCESS_BOUNDARY":
+                        case 1:
+                            message.policyKind = 1;
+                            break;
+                        }
+                        if (object.policy != null)
+                            message.policy = String(object.policy);
+                        if (object.policyUid != null)
+                            message.policyUid = String(object.policyUid);
+                        if (object.condition != null) {
+                            if (typeof object.condition !== "object")
+                                throw TypeError(".google.iam.v3.PolicyBinding.condition: object expected");
+                            message.condition = $root.google.type.Expr.fromObject(object.condition);
+                        }
+                        if (object.createTime != null) {
+                            if (typeof object.createTime !== "object")
+                                throw TypeError(".google.iam.v3.PolicyBinding.createTime: object expected");
+                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                        }
+                        if (object.updateTime != null) {
+                            if (typeof object.updateTime !== "object")
+                                throw TypeError(".google.iam.v3.PolicyBinding.updateTime: object expected");
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PolicyBinding message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {google.iam.v3.PolicyBinding} message PolicyBinding
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PolicyBinding.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.annotations = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.uid = "";
+                            object.etag = "";
+                            object.displayName = "";
+                            object.target = null;
+                            object.policy = "";
+                            object.condition = null;
+                            object.createTime = null;
+                            object.updateTime = null;
+                            object.policyKind = options.enums === String ? "POLICY_KIND_UNSPECIFIED" : 0;
+                            object.policyUid = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            object.uid = message.uid;
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            object.etag = message.etag;
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        var keys2;
+                        if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                            object.annotations = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                        }
+                        if (message.target != null && message.hasOwnProperty("target"))
+                            object.target = $root.google.iam.v3.PolicyBinding.Target.toObject(message.target, options);
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            object.policy = message.policy;
+                        if (message.condition != null && message.hasOwnProperty("condition"))
+                            object.condition = $root.google.type.Expr.toObject(message.condition, options);
+                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                        if (message.policyKind != null && message.hasOwnProperty("policyKind"))
+                            object.policyKind = options.enums === String ? $root.google.iam.v3.PolicyBinding.PolicyKind[message.policyKind] === undefined ? message.policyKind : $root.google.iam.v3.PolicyBinding.PolicyKind[message.policyKind] : message.policyKind;
+                        if (message.policyUid != null && message.hasOwnProperty("policyUid"))
+                            object.policyUid = message.policyUid;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PolicyBinding to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PolicyBinding.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PolicyBinding
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.PolicyBinding
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PolicyBinding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.PolicyBinding";
+                    };
+    
+                    PolicyBinding.Target = (function() {
+    
+                        /**
+                         * Properties of a Target.
+                         * @memberof google.iam.v3.PolicyBinding
+                         * @interface ITarget
+                         * @property {string|null} [principalSet] Target principalSet
+                         */
+    
+                        /**
+                         * Constructs a new Target.
+                         * @memberof google.iam.v3.PolicyBinding
+                         * @classdesc Represents a Target.
+                         * @implements ITarget
+                         * @constructor
+                         * @param {google.iam.v3.PolicyBinding.ITarget=} [properties] Properties to set
+                         */
+                        function Target(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Target principalSet.
+                         * @member {string|null|undefined} principalSet
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @instance
+                         */
+                        Target.prototype.principalSet = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Target target.
+                         * @member {"principalSet"|undefined} target
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @instance
+                         */
+                        Object.defineProperty(Target.prototype, "target", {
+                            get: $util.oneOfGetter($oneOfFields = ["principalSet"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Target instance using the specified properties.
+                         * @function create
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {google.iam.v3.PolicyBinding.ITarget=} [properties] Properties to set
+                         * @returns {google.iam.v3.PolicyBinding.Target} Target instance
+                         */
+                        Target.create = function create(properties) {
+                            return new Target(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Target message. Does not implicitly {@link google.iam.v3.PolicyBinding.Target.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {google.iam.v3.PolicyBinding.ITarget} message Target message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Target.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.principalSet != null && Object.hasOwnProperty.call(message, "principalSet"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.principalSet);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Target message, length delimited. Does not implicitly {@link google.iam.v3.PolicyBinding.Target.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {google.iam.v3.PolicyBinding.ITarget} message Target message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Target.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Target message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.iam.v3.PolicyBinding.Target} Target
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Target.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.PolicyBinding.Target();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.principalSet = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Target message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.iam.v3.PolicyBinding.Target} Target
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Target.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Target message.
+                         * @function verify
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Target.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.principalSet != null && message.hasOwnProperty("principalSet")) {
+                                properties.target = 1;
+                                if (!$util.isString(message.principalSet))
+                                    return "principalSet: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Target message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.iam.v3.PolicyBinding.Target} Target
+                         */
+                        Target.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.iam.v3.PolicyBinding.Target)
+                                return object;
+                            var message = new $root.google.iam.v3.PolicyBinding.Target();
+                            if (object.principalSet != null)
+                                message.principalSet = String(object.principalSet);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Target message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {google.iam.v3.PolicyBinding.Target} message Target
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Target.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.principalSet != null && message.hasOwnProperty("principalSet")) {
+                                object.principalSet = message.principalSet;
+                                if (options.oneofs)
+                                    object.target = "principalSet";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Target to JSON.
+                         * @function toJSON
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Target.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Target
+                         * @function getTypeUrl
+                         * @memberof google.iam.v3.PolicyBinding.Target
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Target.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.iam.v3.PolicyBinding.Target";
+                        };
+    
+                        return Target;
+                    })();
+    
+                    /**
+                     * PolicyKind enum.
+                     * @name google.iam.v3.PolicyBinding.PolicyKind
+                     * @enum {number}
+                     * @property {number} POLICY_KIND_UNSPECIFIED=0 POLICY_KIND_UNSPECIFIED value
+                     * @property {number} PRINCIPAL_ACCESS_BOUNDARY=1 PRINCIPAL_ACCESS_BOUNDARY value
+                     */
+                    PolicyBinding.PolicyKind = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "POLICY_KIND_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PRINCIPAL_ACCESS_BOUNDARY"] = 1;
+                        return values;
+                    })();
+    
+                    return PolicyBinding;
+                })();
+    
+                v3.PolicyBindings = (function() {
+    
+                    /**
+                     * Constructs a new PolicyBindings service.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a PolicyBindings
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function PolicyBindings(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (PolicyBindings.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PolicyBindings;
+    
+                    /**
+                     * Creates new PolicyBindings service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {PolicyBindings} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    PolicyBindings.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PolicyBindings|createPolicyBinding}.
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @typedef CreatePolicyBindingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls CreatePolicyBinding.
+                     * @function createPolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.ICreatePolicyBindingRequest} request CreatePolicyBindingRequest message or plain object
+                     * @param {google.iam.v3.PolicyBindings.CreatePolicyBindingCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PolicyBindings.prototype.createPolicyBinding = function createPolicyBinding(request, callback) {
+                        return this.rpcCall(createPolicyBinding, $root.google.iam.v3.CreatePolicyBindingRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "CreatePolicyBinding" });
+    
+                    /**
+                     * Calls CreatePolicyBinding.
+                     * @function createPolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.ICreatePolicyBindingRequest} request CreatePolicyBindingRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PolicyBindings|getPolicyBinding}.
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @typedef GetPolicyBindingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3.PolicyBinding} [response] PolicyBinding
+                     */
+    
+                    /**
+                     * Calls GetPolicyBinding.
+                     * @function getPolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IGetPolicyBindingRequest} request GetPolicyBindingRequest message or plain object
+                     * @param {google.iam.v3.PolicyBindings.GetPolicyBindingCallback} callback Node-style callback called with the error, if any, and PolicyBinding
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PolicyBindings.prototype.getPolicyBinding = function getPolicyBinding(request, callback) {
+                        return this.rpcCall(getPolicyBinding, $root.google.iam.v3.GetPolicyBindingRequest, $root.google.iam.v3.PolicyBinding, request, callback);
+                    }, "name", { value: "GetPolicyBinding" });
+    
+                    /**
+                     * Calls GetPolicyBinding.
+                     * @function getPolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IGetPolicyBindingRequest} request GetPolicyBindingRequest message or plain object
+                     * @returns {Promise<google.iam.v3.PolicyBinding>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PolicyBindings|updatePolicyBinding}.
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @typedef UpdatePolicyBindingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls UpdatePolicyBinding.
+                     * @function updatePolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IUpdatePolicyBindingRequest} request UpdatePolicyBindingRequest message or plain object
+                     * @param {google.iam.v3.PolicyBindings.UpdatePolicyBindingCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PolicyBindings.prototype.updatePolicyBinding = function updatePolicyBinding(request, callback) {
+                        return this.rpcCall(updatePolicyBinding, $root.google.iam.v3.UpdatePolicyBindingRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "UpdatePolicyBinding" });
+    
+                    /**
+                     * Calls UpdatePolicyBinding.
+                     * @function updatePolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IUpdatePolicyBindingRequest} request UpdatePolicyBindingRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PolicyBindings|deletePolicyBinding}.
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @typedef DeletePolicyBindingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls DeletePolicyBinding.
+                     * @function deletePolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IDeletePolicyBindingRequest} request DeletePolicyBindingRequest message or plain object
+                     * @param {google.iam.v3.PolicyBindings.DeletePolicyBindingCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PolicyBindings.prototype.deletePolicyBinding = function deletePolicyBinding(request, callback) {
+                        return this.rpcCall(deletePolicyBinding, $root.google.iam.v3.DeletePolicyBindingRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "DeletePolicyBinding" });
+    
+                    /**
+                     * Calls DeletePolicyBinding.
+                     * @function deletePolicyBinding
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IDeletePolicyBindingRequest} request DeletePolicyBindingRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PolicyBindings|listPolicyBindings}.
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @typedef ListPolicyBindingsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3.ListPolicyBindingsResponse} [response] ListPolicyBindingsResponse
+                     */
+    
+                    /**
+                     * Calls ListPolicyBindings.
+                     * @function listPolicyBindings
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IListPolicyBindingsRequest} request ListPolicyBindingsRequest message or plain object
+                     * @param {google.iam.v3.PolicyBindings.ListPolicyBindingsCallback} callback Node-style callback called with the error, if any, and ListPolicyBindingsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PolicyBindings.prototype.listPolicyBindings = function listPolicyBindings(request, callback) {
+                        return this.rpcCall(listPolicyBindings, $root.google.iam.v3.ListPolicyBindingsRequest, $root.google.iam.v3.ListPolicyBindingsResponse, request, callback);
+                    }, "name", { value: "ListPolicyBindings" });
+    
+                    /**
+                     * Calls ListPolicyBindings.
+                     * @function listPolicyBindings
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.IListPolicyBindingsRequest} request ListPolicyBindingsRequest message or plain object
+                     * @returns {Promise<google.iam.v3.ListPolicyBindingsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PolicyBindings|searchTargetPolicyBindings}.
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @typedef SearchTargetPolicyBindingsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3.SearchTargetPolicyBindingsResponse} [response] SearchTargetPolicyBindingsResponse
+                     */
+    
+                    /**
+                     * Calls SearchTargetPolicyBindings.
+                     * @function searchTargetPolicyBindings
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsRequest} request SearchTargetPolicyBindingsRequest message or plain object
+                     * @param {google.iam.v3.PolicyBindings.SearchTargetPolicyBindingsCallback} callback Node-style callback called with the error, if any, and SearchTargetPolicyBindingsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PolicyBindings.prototype.searchTargetPolicyBindings = function searchTargetPolicyBindings(request, callback) {
+                        return this.rpcCall(searchTargetPolicyBindings, $root.google.iam.v3.SearchTargetPolicyBindingsRequest, $root.google.iam.v3.SearchTargetPolicyBindingsResponse, request, callback);
+                    }, "name", { value: "SearchTargetPolicyBindings" });
+    
+                    /**
+                     * Calls SearchTargetPolicyBindings.
+                     * @function searchTargetPolicyBindings
+                     * @memberof google.iam.v3.PolicyBindings
+                     * @instance
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsRequest} request SearchTargetPolicyBindingsRequest message or plain object
+                     * @returns {Promise<google.iam.v3.SearchTargetPolicyBindingsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return PolicyBindings;
+                })();
+    
+                v3.CreatePolicyBindingRequest = (function() {
+    
+                    /**
+                     * Properties of a CreatePolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @interface ICreatePolicyBindingRequest
+                     * @property {string|null} [parent] CreatePolicyBindingRequest parent
+                     * @property {string|null} [policyBindingId] CreatePolicyBindingRequest policyBindingId
+                     * @property {google.iam.v3.IPolicyBinding|null} [policyBinding] CreatePolicyBindingRequest policyBinding
+                     * @property {boolean|null} [validateOnly] CreatePolicyBindingRequest validateOnly
+                     */
+    
+                    /**
+                     * Constructs a new CreatePolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a CreatePolicyBindingRequest.
+                     * @implements ICreatePolicyBindingRequest
+                     * @constructor
+                     * @param {google.iam.v3.ICreatePolicyBindingRequest=} [properties] Properties to set
+                     */
+                    function CreatePolicyBindingRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreatePolicyBindingRequest parent.
+                     * @member {string} parent
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @instance
+                     */
+                    CreatePolicyBindingRequest.prototype.parent = "";
+    
+                    /**
+                     * CreatePolicyBindingRequest policyBindingId.
+                     * @member {string} policyBindingId
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @instance
+                     */
+                    CreatePolicyBindingRequest.prototype.policyBindingId = "";
+    
+                    /**
+                     * CreatePolicyBindingRequest policyBinding.
+                     * @member {google.iam.v3.IPolicyBinding|null|undefined} policyBinding
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @instance
+                     */
+                    CreatePolicyBindingRequest.prototype.policyBinding = null;
+    
+                    /**
+                     * CreatePolicyBindingRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @instance
+                     */
+                    CreatePolicyBindingRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * Creates a new CreatePolicyBindingRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.ICreatePolicyBindingRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.CreatePolicyBindingRequest} CreatePolicyBindingRequest instance
+                     */
+                    CreatePolicyBindingRequest.create = function create(properties) {
+                        return new CreatePolicyBindingRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreatePolicyBindingRequest message. Does not implicitly {@link google.iam.v3.CreatePolicyBindingRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.ICreatePolicyBindingRequest} message CreatePolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreatePolicyBindingRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.policyBindingId != null && Object.hasOwnProperty.call(message, "policyBindingId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.policyBindingId);
+                        if (message.policyBinding != null && Object.hasOwnProperty.call(message, "policyBinding"))
+                            $root.google.iam.v3.PolicyBinding.encode(message.policyBinding, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreatePolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.CreatePolicyBindingRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.ICreatePolicyBindingRequest} message CreatePolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreatePolicyBindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreatePolicyBindingRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.CreatePolicyBindingRequest} CreatePolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreatePolicyBindingRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.CreatePolicyBindingRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.policyBindingId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.policyBinding = $root.google.iam.v3.PolicyBinding.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreatePolicyBindingRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.CreatePolicyBindingRequest} CreatePolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreatePolicyBindingRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreatePolicyBindingRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreatePolicyBindingRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.policyBindingId != null && message.hasOwnProperty("policyBindingId"))
+                            if (!$util.isString(message.policyBindingId))
+                                return "policyBindingId: string expected";
+                        if (message.policyBinding != null && message.hasOwnProperty("policyBinding")) {
+                            var error = $root.google.iam.v3.PolicyBinding.verify(message.policyBinding);
+                            if (error)
+                                return "policyBinding." + error;
+                        }
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreatePolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.CreatePolicyBindingRequest} CreatePolicyBindingRequest
+                     */
+                    CreatePolicyBindingRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.CreatePolicyBindingRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.CreatePolicyBindingRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.policyBindingId != null)
+                            message.policyBindingId = String(object.policyBindingId);
+                        if (object.policyBinding != null) {
+                            if (typeof object.policyBinding !== "object")
+                                throw TypeError(".google.iam.v3.CreatePolicyBindingRequest.policyBinding: object expected");
+                            message.policyBinding = $root.google.iam.v3.PolicyBinding.fromObject(object.policyBinding);
+                        }
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreatePolicyBindingRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.CreatePolicyBindingRequest} message CreatePolicyBindingRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreatePolicyBindingRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.policyBindingId = "";
+                            object.policyBinding = null;
+                            object.validateOnly = false;
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.policyBindingId != null && message.hasOwnProperty("policyBindingId"))
+                            object.policyBindingId = message.policyBindingId;
+                        if (message.policyBinding != null && message.hasOwnProperty("policyBinding"))
+                            object.policyBinding = $root.google.iam.v3.PolicyBinding.toObject(message.policyBinding, options);
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreatePolicyBindingRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreatePolicyBindingRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreatePolicyBindingRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.CreatePolicyBindingRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreatePolicyBindingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.CreatePolicyBindingRequest";
+                    };
+    
+                    return CreatePolicyBindingRequest;
+                })();
+    
+                v3.GetPolicyBindingRequest = (function() {
+    
+                    /**
+                     * Properties of a GetPolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @interface IGetPolicyBindingRequest
+                     * @property {string|null} [name] GetPolicyBindingRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetPolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a GetPolicyBindingRequest.
+                     * @implements IGetPolicyBindingRequest
+                     * @constructor
+                     * @param {google.iam.v3.IGetPolicyBindingRequest=} [properties] Properties to set
+                     */
+                    function GetPolicyBindingRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetPolicyBindingRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @instance
+                     */
+                    GetPolicyBindingRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetPolicyBindingRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IGetPolicyBindingRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.GetPolicyBindingRequest} GetPolicyBindingRequest instance
+                     */
+                    GetPolicyBindingRequest.create = function create(properties) {
+                        return new GetPolicyBindingRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyBindingRequest message. Does not implicitly {@link google.iam.v3.GetPolicyBindingRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IGetPolicyBindingRequest} message GetPolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyBindingRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.GetPolicyBindingRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IGetPolicyBindingRequest} message GetPolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyBindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyBindingRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.GetPolicyBindingRequest} GetPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyBindingRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.GetPolicyBindingRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyBindingRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.GetPolicyBindingRequest} GetPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyBindingRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetPolicyBindingRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetPolicyBindingRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetPolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.GetPolicyBindingRequest} GetPolicyBindingRequest
+                     */
+                    GetPolicyBindingRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.GetPolicyBindingRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.GetPolicyBindingRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetPolicyBindingRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.GetPolicyBindingRequest} message GetPolicyBindingRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetPolicyBindingRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetPolicyBindingRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetPolicyBindingRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetPolicyBindingRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.GetPolicyBindingRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetPolicyBindingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.GetPolicyBindingRequest";
+                    };
+    
+                    return GetPolicyBindingRequest;
+                })();
+    
+                v3.UpdatePolicyBindingRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdatePolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @interface IUpdatePolicyBindingRequest
+                     * @property {google.iam.v3.IPolicyBinding|null} [policyBinding] UpdatePolicyBindingRequest policyBinding
+                     * @property {boolean|null} [validateOnly] UpdatePolicyBindingRequest validateOnly
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePolicyBindingRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdatePolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents an UpdatePolicyBindingRequest.
+                     * @implements IUpdatePolicyBindingRequest
+                     * @constructor
+                     * @param {google.iam.v3.IUpdatePolicyBindingRequest=} [properties] Properties to set
+                     */
+                    function UpdatePolicyBindingRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdatePolicyBindingRequest policyBinding.
+                     * @member {google.iam.v3.IPolicyBinding|null|undefined} policyBinding
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @instance
+                     */
+                    UpdatePolicyBindingRequest.prototype.policyBinding = null;
+    
+                    /**
+                     * UpdatePolicyBindingRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @instance
+                     */
+                    UpdatePolicyBindingRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * UpdatePolicyBindingRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @instance
+                     */
+                    UpdatePolicyBindingRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdatePolicyBindingRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IUpdatePolicyBindingRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.UpdatePolicyBindingRequest} UpdatePolicyBindingRequest instance
+                     */
+                    UpdatePolicyBindingRequest.create = function create(properties) {
+                        return new UpdatePolicyBindingRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdatePolicyBindingRequest message. Does not implicitly {@link google.iam.v3.UpdatePolicyBindingRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IUpdatePolicyBindingRequest} message UpdatePolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdatePolicyBindingRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.policyBinding != null && Object.hasOwnProperty.call(message, "policyBinding"))
+                            $root.google.iam.v3.PolicyBinding.encode(message.policyBinding, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdatePolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.UpdatePolicyBindingRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IUpdatePolicyBindingRequest} message UpdatePolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdatePolicyBindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdatePolicyBindingRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.UpdatePolicyBindingRequest} UpdatePolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdatePolicyBindingRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.UpdatePolicyBindingRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.policyBinding = $root.google.iam.v3.PolicyBinding.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdatePolicyBindingRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.UpdatePolicyBindingRequest} UpdatePolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdatePolicyBindingRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdatePolicyBindingRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdatePolicyBindingRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.policyBinding != null && message.hasOwnProperty("policyBinding")) {
+                            var error = $root.google.iam.v3.PolicyBinding.verify(message.policyBinding);
+                            if (error)
+                                return "policyBinding." + error;
+                        }
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdatePolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.UpdatePolicyBindingRequest} UpdatePolicyBindingRequest
+                     */
+                    UpdatePolicyBindingRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.UpdatePolicyBindingRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.UpdatePolicyBindingRequest();
+                        if (object.policyBinding != null) {
+                            if (typeof object.policyBinding !== "object")
+                                throw TypeError(".google.iam.v3.UpdatePolicyBindingRequest.policyBinding: object expected");
+                            message.policyBinding = $root.google.iam.v3.PolicyBinding.fromObject(object.policyBinding);
+                        }
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.iam.v3.UpdatePolicyBindingRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdatePolicyBindingRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.UpdatePolicyBindingRequest} message UpdatePolicyBindingRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdatePolicyBindingRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.policyBinding = null;
+                            object.validateOnly = false;
+                            object.updateMask = null;
+                        }
+                        if (message.policyBinding != null && message.hasOwnProperty("policyBinding"))
+                            object.policyBinding = $root.google.iam.v3.PolicyBinding.toObject(message.policyBinding, options);
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdatePolicyBindingRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdatePolicyBindingRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdatePolicyBindingRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.UpdatePolicyBindingRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdatePolicyBindingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.UpdatePolicyBindingRequest";
+                    };
+    
+                    return UpdatePolicyBindingRequest;
+                })();
+    
+                v3.DeletePolicyBindingRequest = (function() {
+    
+                    /**
+                     * Properties of a DeletePolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @interface IDeletePolicyBindingRequest
+                     * @property {string|null} [name] DeletePolicyBindingRequest name
+                     * @property {string|null} [etag] DeletePolicyBindingRequest etag
+                     * @property {boolean|null} [validateOnly] DeletePolicyBindingRequest validateOnly
+                     */
+    
+                    /**
+                     * Constructs a new DeletePolicyBindingRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a DeletePolicyBindingRequest.
+                     * @implements IDeletePolicyBindingRequest
+                     * @constructor
+                     * @param {google.iam.v3.IDeletePolicyBindingRequest=} [properties] Properties to set
+                     */
+                    function DeletePolicyBindingRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeletePolicyBindingRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @instance
+                     */
+                    DeletePolicyBindingRequest.prototype.name = "";
+    
+                    /**
+                     * DeletePolicyBindingRequest etag.
+                     * @member {string} etag
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @instance
+                     */
+                    DeletePolicyBindingRequest.prototype.etag = "";
+    
+                    /**
+                     * DeletePolicyBindingRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @instance
+                     */
+                    DeletePolicyBindingRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * Creates a new DeletePolicyBindingRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IDeletePolicyBindingRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.DeletePolicyBindingRequest} DeletePolicyBindingRequest instance
+                     */
+                    DeletePolicyBindingRequest.create = function create(properties) {
+                        return new DeletePolicyBindingRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeletePolicyBindingRequest message. Does not implicitly {@link google.iam.v3.DeletePolicyBindingRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IDeletePolicyBindingRequest} message DeletePolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeletePolicyBindingRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeletePolicyBindingRequest message, length delimited. Does not implicitly {@link google.iam.v3.DeletePolicyBindingRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.IDeletePolicyBindingRequest} message DeletePolicyBindingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeletePolicyBindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeletePolicyBindingRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.DeletePolicyBindingRequest} DeletePolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeletePolicyBindingRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.DeletePolicyBindingRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.etag = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeletePolicyBindingRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.DeletePolicyBindingRequest} DeletePolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeletePolicyBindingRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeletePolicyBindingRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeletePolicyBindingRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            if (!$util.isString(message.etag))
+                                return "etag: string expected";
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeletePolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.DeletePolicyBindingRequest} DeletePolicyBindingRequest
+                     */
+                    DeletePolicyBindingRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.DeletePolicyBindingRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.DeletePolicyBindingRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.etag != null)
+                            message.etag = String(object.etag);
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeletePolicyBindingRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {google.iam.v3.DeletePolicyBindingRequest} message DeletePolicyBindingRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeletePolicyBindingRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.etag = "";
+                            object.validateOnly = false;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            object.etag = message.etag;
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeletePolicyBindingRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeletePolicyBindingRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeletePolicyBindingRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.DeletePolicyBindingRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeletePolicyBindingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.DeletePolicyBindingRequest";
+                    };
+    
+                    return DeletePolicyBindingRequest;
+                })();
+    
+                v3.ListPolicyBindingsRequest = (function() {
+    
+                    /**
+                     * Properties of a ListPolicyBindingsRequest.
+                     * @memberof google.iam.v3
+                     * @interface IListPolicyBindingsRequest
+                     * @property {string|null} [parent] ListPolicyBindingsRequest parent
+                     * @property {number|null} [pageSize] ListPolicyBindingsRequest pageSize
+                     * @property {string|null} [pageToken] ListPolicyBindingsRequest pageToken
+                     * @property {string|null} [filter] ListPolicyBindingsRequest filter
+                     */
+    
+                    /**
+                     * Constructs a new ListPolicyBindingsRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a ListPolicyBindingsRequest.
+                     * @implements IListPolicyBindingsRequest
+                     * @constructor
+                     * @param {google.iam.v3.IListPolicyBindingsRequest=} [properties] Properties to set
+                     */
+                    function ListPolicyBindingsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListPolicyBindingsRequest parent.
+                     * @member {string} parent
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @instance
+                     */
+                    ListPolicyBindingsRequest.prototype.parent = "";
+    
+                    /**
+                     * ListPolicyBindingsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @instance
+                     */
+                    ListPolicyBindingsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListPolicyBindingsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @instance
+                     */
+                    ListPolicyBindingsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * ListPolicyBindingsRequest filter.
+                     * @member {string} filter
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @instance
+                     */
+                    ListPolicyBindingsRequest.prototype.filter = "";
+    
+                    /**
+                     * Creates a new ListPolicyBindingsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.IListPolicyBindingsRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.ListPolicyBindingsRequest} ListPolicyBindingsRequest instance
+                     */
+                    ListPolicyBindingsRequest.create = function create(properties) {
+                        return new ListPolicyBindingsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3.ListPolicyBindingsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.IListPolicyBindingsRequest} message ListPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPolicyBindingsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3.ListPolicyBindingsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.IListPolicyBindingsRequest} message ListPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPolicyBindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListPolicyBindingsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.ListPolicyBindingsRequest} ListPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPolicyBindingsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.ListPolicyBindingsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.filter = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListPolicyBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.ListPolicyBindingsRequest} ListPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPolicyBindingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListPolicyBindingsRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListPolicyBindingsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.ListPolicyBindingsRequest} ListPolicyBindingsRequest
+                     */
+                    ListPolicyBindingsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.ListPolicyBindingsRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.ListPolicyBindingsRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListPolicyBindingsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.ListPolicyBindingsRequest} message ListPolicyBindingsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListPolicyBindingsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.filter = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListPolicyBindingsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListPolicyBindingsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListPolicyBindingsRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.ListPolicyBindingsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListPolicyBindingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.ListPolicyBindingsRequest";
+                    };
+    
+                    return ListPolicyBindingsRequest;
+                })();
+    
+                v3.ListPolicyBindingsResponse = (function() {
+    
+                    /**
+                     * Properties of a ListPolicyBindingsResponse.
+                     * @memberof google.iam.v3
+                     * @interface IListPolicyBindingsResponse
+                     * @property {Array.<google.iam.v3.IPolicyBinding>|null} [policyBindings] ListPolicyBindingsResponse policyBindings
+                     * @property {string|null} [nextPageToken] ListPolicyBindingsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListPolicyBindingsResponse.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a ListPolicyBindingsResponse.
+                     * @implements IListPolicyBindingsResponse
+                     * @constructor
+                     * @param {google.iam.v3.IListPolicyBindingsResponse=} [properties] Properties to set
+                     */
+                    function ListPolicyBindingsResponse(properties) {
+                        this.policyBindings = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListPolicyBindingsResponse policyBindings.
+                     * @member {Array.<google.iam.v3.IPolicyBinding>} policyBindings
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @instance
+                     */
+                    ListPolicyBindingsResponse.prototype.policyBindings = $util.emptyArray;
+    
+                    /**
+                     * ListPolicyBindingsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @instance
+                     */
+                    ListPolicyBindingsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListPolicyBindingsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.IListPolicyBindingsResponse=} [properties] Properties to set
+                     * @returns {google.iam.v3.ListPolicyBindingsResponse} ListPolicyBindingsResponse instance
+                     */
+                    ListPolicyBindingsResponse.create = function create(properties) {
+                        return new ListPolicyBindingsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3.ListPolicyBindingsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.IListPolicyBindingsResponse} message ListPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPolicyBindingsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.policyBindings != null && message.policyBindings.length)
+                            for (var i = 0; i < message.policyBindings.length; ++i)
+                                $root.google.iam.v3.PolicyBinding.encode(message.policyBindings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3.ListPolicyBindingsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.IListPolicyBindingsResponse} message ListPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPolicyBindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListPolicyBindingsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.ListPolicyBindingsResponse} ListPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPolicyBindingsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.ListPolicyBindingsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.policyBindings && message.policyBindings.length))
+                                        message.policyBindings = [];
+                                    message.policyBindings.push($root.google.iam.v3.PolicyBinding.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListPolicyBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.ListPolicyBindingsResponse} ListPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPolicyBindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListPolicyBindingsResponse message.
+                     * @function verify
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListPolicyBindingsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.policyBindings != null && message.hasOwnProperty("policyBindings")) {
+                            if (!Array.isArray(message.policyBindings))
+                                return "policyBindings: array expected";
+                            for (var i = 0; i < message.policyBindings.length; ++i) {
+                                var error = $root.google.iam.v3.PolicyBinding.verify(message.policyBindings[i]);
+                                if (error)
+                                    return "policyBindings." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.ListPolicyBindingsResponse} ListPolicyBindingsResponse
+                     */
+                    ListPolicyBindingsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.ListPolicyBindingsResponse)
+                            return object;
+                        var message = new $root.google.iam.v3.ListPolicyBindingsResponse();
+                        if (object.policyBindings) {
+                            if (!Array.isArray(object.policyBindings))
+                                throw TypeError(".google.iam.v3.ListPolicyBindingsResponse.policyBindings: array expected");
+                            message.policyBindings = [];
+                            for (var i = 0; i < object.policyBindings.length; ++i) {
+                                if (typeof object.policyBindings[i] !== "object")
+                                    throw TypeError(".google.iam.v3.ListPolicyBindingsResponse.policyBindings: object expected");
+                                message.policyBindings[i] = $root.google.iam.v3.PolicyBinding.fromObject(object.policyBindings[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListPolicyBindingsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.ListPolicyBindingsResponse} message ListPolicyBindingsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListPolicyBindingsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.policyBindings = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.policyBindings && message.policyBindings.length) {
+                            object.policyBindings = [];
+                            for (var j = 0; j < message.policyBindings.length; ++j)
+                                object.policyBindings[j] = $root.google.iam.v3.PolicyBinding.toObject(message.policyBindings[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListPolicyBindingsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListPolicyBindingsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListPolicyBindingsResponse
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.ListPolicyBindingsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListPolicyBindingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.ListPolicyBindingsResponse";
+                    };
+    
+                    return ListPolicyBindingsResponse;
+                })();
+    
+                v3.SearchTargetPolicyBindingsRequest = (function() {
+    
+                    /**
+                     * Properties of a SearchTargetPolicyBindingsRequest.
+                     * @memberof google.iam.v3
+                     * @interface ISearchTargetPolicyBindingsRequest
+                     * @property {string|null} [target] SearchTargetPolicyBindingsRequest target
+                     * @property {number|null} [pageSize] SearchTargetPolicyBindingsRequest pageSize
+                     * @property {string|null} [pageToken] SearchTargetPolicyBindingsRequest pageToken
+                     * @property {string|null} [parent] SearchTargetPolicyBindingsRequest parent
+                     */
+    
+                    /**
+                     * Constructs a new SearchTargetPolicyBindingsRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a SearchTargetPolicyBindingsRequest.
+                     * @implements ISearchTargetPolicyBindingsRequest
+                     * @constructor
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsRequest=} [properties] Properties to set
+                     */
+                    function SearchTargetPolicyBindingsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchTargetPolicyBindingsRequest target.
+                     * @member {string} target
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchTargetPolicyBindingsRequest.prototype.target = "";
+    
+                    /**
+                     * SearchTargetPolicyBindingsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchTargetPolicyBindingsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * SearchTargetPolicyBindingsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchTargetPolicyBindingsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * SearchTargetPolicyBindingsRequest parent.
+                     * @member {string} parent
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchTargetPolicyBindingsRequest.prototype.parent = "";
+    
+                    /**
+                     * Creates a new SearchTargetPolicyBindingsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsRequest} SearchTargetPolicyBindingsRequest instance
+                     */
+                    SearchTargetPolicyBindingsRequest.create = function create(properties) {
+                        return new SearchTargetPolicyBindingsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchTargetPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsRequest} message SearchTargetPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchTargetPolicyBindingsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.target);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.parent);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchTargetPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsRequest} message SearchTargetPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchTargetPolicyBindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchTargetPolicyBindingsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsRequest} SearchTargetPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchTargetPolicyBindingsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.SearchTargetPolicyBindingsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.target = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchTargetPolicyBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsRequest} SearchTargetPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchTargetPolicyBindingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchTargetPolicyBindingsRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchTargetPolicyBindingsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.target != null && message.hasOwnProperty("target"))
+                            if (!$util.isString(message.target))
+                                return "target: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchTargetPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsRequest} SearchTargetPolicyBindingsRequest
+                     */
+                    SearchTargetPolicyBindingsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.SearchTargetPolicyBindingsRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.SearchTargetPolicyBindingsRequest();
+                        if (object.target != null)
+                            message.target = String(object.target);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchTargetPolicyBindingsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.SearchTargetPolicyBindingsRequest} message SearchTargetPolicyBindingsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchTargetPolicyBindingsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.target = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.parent = "";
+                        }
+                        if (message.target != null && message.hasOwnProperty("target"))
+                            object.target = message.target;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchTargetPolicyBindingsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchTargetPolicyBindingsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchTargetPolicyBindingsRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchTargetPolicyBindingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.SearchTargetPolicyBindingsRequest";
+                    };
+    
+                    return SearchTargetPolicyBindingsRequest;
+                })();
+    
+                v3.SearchTargetPolicyBindingsResponse = (function() {
+    
+                    /**
+                     * Properties of a SearchTargetPolicyBindingsResponse.
+                     * @memberof google.iam.v3
+                     * @interface ISearchTargetPolicyBindingsResponse
+                     * @property {Array.<google.iam.v3.IPolicyBinding>|null} [policyBindings] SearchTargetPolicyBindingsResponse policyBindings
+                     * @property {string|null} [nextPageToken] SearchTargetPolicyBindingsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new SearchTargetPolicyBindingsResponse.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a SearchTargetPolicyBindingsResponse.
+                     * @implements ISearchTargetPolicyBindingsResponse
+                     * @constructor
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsResponse=} [properties] Properties to set
+                     */
+                    function SearchTargetPolicyBindingsResponse(properties) {
+                        this.policyBindings = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchTargetPolicyBindingsResponse policyBindings.
+                     * @member {Array.<google.iam.v3.IPolicyBinding>} policyBindings
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @instance
+                     */
+                    SearchTargetPolicyBindingsResponse.prototype.policyBindings = $util.emptyArray;
+    
+                    /**
+                     * SearchTargetPolicyBindingsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @instance
+                     */
+                    SearchTargetPolicyBindingsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new SearchTargetPolicyBindingsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsResponse=} [properties] Properties to set
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsResponse} SearchTargetPolicyBindingsResponse instance
+                     */
+                    SearchTargetPolicyBindingsResponse.create = function create(properties) {
+                        return new SearchTargetPolicyBindingsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchTargetPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsResponse} message SearchTargetPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchTargetPolicyBindingsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.policyBindings != null && message.policyBindings.length)
+                            for (var i = 0; i < message.policyBindings.length; ++i)
+                                $root.google.iam.v3.PolicyBinding.encode(message.policyBindings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchTargetPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3.SearchTargetPolicyBindingsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.ISearchTargetPolicyBindingsResponse} message SearchTargetPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchTargetPolicyBindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchTargetPolicyBindingsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsResponse} SearchTargetPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchTargetPolicyBindingsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.SearchTargetPolicyBindingsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.policyBindings && message.policyBindings.length))
+                                        message.policyBindings = [];
+                                    message.policyBindings.push($root.google.iam.v3.PolicyBinding.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchTargetPolicyBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsResponse} SearchTargetPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchTargetPolicyBindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchTargetPolicyBindingsResponse message.
+                     * @function verify
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchTargetPolicyBindingsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.policyBindings != null && message.hasOwnProperty("policyBindings")) {
+                            if (!Array.isArray(message.policyBindings))
+                                return "policyBindings: array expected";
+                            for (var i = 0; i < message.policyBindings.length; ++i) {
+                                var error = $root.google.iam.v3.PolicyBinding.verify(message.policyBindings[i]);
+                                if (error)
+                                    return "policyBindings." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchTargetPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.SearchTargetPolicyBindingsResponse} SearchTargetPolicyBindingsResponse
+                     */
+                    SearchTargetPolicyBindingsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.SearchTargetPolicyBindingsResponse)
+                            return object;
+                        var message = new $root.google.iam.v3.SearchTargetPolicyBindingsResponse();
+                        if (object.policyBindings) {
+                            if (!Array.isArray(object.policyBindings))
+                                throw TypeError(".google.iam.v3.SearchTargetPolicyBindingsResponse.policyBindings: array expected");
+                            message.policyBindings = [];
+                            for (var i = 0; i < object.policyBindings.length; ++i) {
+                                if (typeof object.policyBindings[i] !== "object")
+                                    throw TypeError(".google.iam.v3.SearchTargetPolicyBindingsResponse.policyBindings: object expected");
+                                message.policyBindings[i] = $root.google.iam.v3.PolicyBinding.fromObject(object.policyBindings[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchTargetPolicyBindingsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.SearchTargetPolicyBindingsResponse} message SearchTargetPolicyBindingsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchTargetPolicyBindingsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.policyBindings = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.policyBindings && message.policyBindings.length) {
+                            object.policyBindings = [];
+                            for (var j = 0; j < message.policyBindings.length; ++j)
+                                object.policyBindings[j] = $root.google.iam.v3.PolicyBinding.toObject(message.policyBindings[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchTargetPolicyBindingsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchTargetPolicyBindingsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchTargetPolicyBindingsResponse
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.SearchTargetPolicyBindingsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchTargetPolicyBindingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.SearchTargetPolicyBindingsResponse";
+                    };
+    
+                    return SearchTargetPolicyBindingsResponse;
+                })();
+    
+                v3.PrincipalAccessBoundaryPolicies = (function() {
+    
+                    /**
+                     * Constructs a new PrincipalAccessBoundaryPolicies service.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a PrincipalAccessBoundaryPolicies
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function PrincipalAccessBoundaryPolicies(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (PrincipalAccessBoundaryPolicies.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PrincipalAccessBoundaryPolicies;
+    
+                    /**
+                     * Creates new PrincipalAccessBoundaryPolicies service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {PrincipalAccessBoundaryPolicies} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    PrincipalAccessBoundaryPolicies.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|createPrincipalAccessBoundaryPolicy}.
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @typedef CreatePrincipalAccessBoundaryPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls CreatePrincipalAccessBoundaryPolicy.
+                     * @function createPrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest} request CreatePrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicies.CreatePrincipalAccessBoundaryPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PrincipalAccessBoundaryPolicies.prototype.createPrincipalAccessBoundaryPolicy = function createPrincipalAccessBoundaryPolicy(request, callback) {
+                        return this.rpcCall(createPrincipalAccessBoundaryPolicy, $root.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "CreatePrincipalAccessBoundaryPolicy" });
+    
+                    /**
+                     * Calls CreatePrincipalAccessBoundaryPolicy.
+                     * @function createPrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest} request CreatePrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|getPrincipalAccessBoundaryPolicy}.
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @typedef GetPrincipalAccessBoundaryPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicy} [response] PrincipalAccessBoundaryPolicy
+                     */
+    
+                    /**
+                     * Calls GetPrincipalAccessBoundaryPolicy.
+                     * @function getPrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest} request GetPrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicies.GetPrincipalAccessBoundaryPolicyCallback} callback Node-style callback called with the error, if any, and PrincipalAccessBoundaryPolicy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PrincipalAccessBoundaryPolicies.prototype.getPrincipalAccessBoundaryPolicy = function getPrincipalAccessBoundaryPolicy(request, callback) {
+                        return this.rpcCall(getPrincipalAccessBoundaryPolicy, $root.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest, $root.google.iam.v3.PrincipalAccessBoundaryPolicy, request, callback);
+                    }, "name", { value: "GetPrincipalAccessBoundaryPolicy" });
+    
+                    /**
+                     * Calls GetPrincipalAccessBoundaryPolicy.
+                     * @function getPrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest} request GetPrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v3.PrincipalAccessBoundaryPolicy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|updatePrincipalAccessBoundaryPolicy}.
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @typedef UpdatePrincipalAccessBoundaryPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls UpdatePrincipalAccessBoundaryPolicy.
+                     * @function updatePrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest} request UpdatePrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicies.UpdatePrincipalAccessBoundaryPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PrincipalAccessBoundaryPolicies.prototype.updatePrincipalAccessBoundaryPolicy = function updatePrincipalAccessBoundaryPolicy(request, callback) {
+                        return this.rpcCall(updatePrincipalAccessBoundaryPolicy, $root.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "UpdatePrincipalAccessBoundaryPolicy" });
+    
+                    /**
+                     * Calls UpdatePrincipalAccessBoundaryPolicy.
+                     * @function updatePrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest} request UpdatePrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|deletePrincipalAccessBoundaryPolicy}.
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @typedef DeletePrincipalAccessBoundaryPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls DeletePrincipalAccessBoundaryPolicy.
+                     * @function deletePrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest} request DeletePrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicies.DeletePrincipalAccessBoundaryPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PrincipalAccessBoundaryPolicies.prototype.deletePrincipalAccessBoundaryPolicy = function deletePrincipalAccessBoundaryPolicy(request, callback) {
+                        return this.rpcCall(deletePrincipalAccessBoundaryPolicy, $root.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "DeletePrincipalAccessBoundaryPolicy" });
+    
+                    /**
+                     * Calls DeletePrincipalAccessBoundaryPolicy.
+                     * @function deletePrincipalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest} request DeletePrincipalAccessBoundaryPolicyRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|listPrincipalAccessBoundaryPolicies}.
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @typedef ListPrincipalAccessBoundaryPoliciesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse} [response] ListPrincipalAccessBoundaryPoliciesResponse
+                     */
+    
+                    /**
+                     * Calls ListPrincipalAccessBoundaryPolicies.
+                     * @function listPrincipalAccessBoundaryPolicies
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest} request ListPrincipalAccessBoundaryPoliciesRequest message or plain object
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicies.ListPrincipalAccessBoundaryPoliciesCallback} callback Node-style callback called with the error, if any, and ListPrincipalAccessBoundaryPoliciesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PrincipalAccessBoundaryPolicies.prototype.listPrincipalAccessBoundaryPolicies = function listPrincipalAccessBoundaryPolicies(request, callback) {
+                        return this.rpcCall(listPrincipalAccessBoundaryPolicies, $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest, $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse, request, callback);
+                    }, "name", { value: "ListPrincipalAccessBoundaryPolicies" });
+    
+                    /**
+                     * Calls ListPrincipalAccessBoundaryPolicies.
+                     * @function listPrincipalAccessBoundaryPolicies
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest} request ListPrincipalAccessBoundaryPoliciesRequest message or plain object
+                     * @returns {Promise<google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3.PrincipalAccessBoundaryPolicies|searchPrincipalAccessBoundaryPolicyBindings}.
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @typedef SearchPrincipalAccessBoundaryPolicyBindingsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse} [response] SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     */
+    
+                    /**
+                     * Calls SearchPrincipalAccessBoundaryPolicyBindings.
+                     * @function searchPrincipalAccessBoundaryPolicyBindings
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest} request SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicies.SearchPrincipalAccessBoundaryPolicyBindingsCallback} callback Node-style callback called with the error, if any, and SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(PrincipalAccessBoundaryPolicies.prototype.searchPrincipalAccessBoundaryPolicyBindings = function searchPrincipalAccessBoundaryPolicyBindings(request, callback) {
+                        return this.rpcCall(searchPrincipalAccessBoundaryPolicyBindings, $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest, $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse, request, callback);
+                    }, "name", { value: "SearchPrincipalAccessBoundaryPolicyBindings" });
+    
+                    /**
+                     * Calls SearchPrincipalAccessBoundaryPolicyBindings.
+                     * @function searchPrincipalAccessBoundaryPolicyBindings
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicies
+                     * @instance
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest} request SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object
+                     * @returns {Promise<google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return PrincipalAccessBoundaryPolicies;
+                })();
+    
+                v3.CreatePrincipalAccessBoundaryPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a CreatePrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @interface ICreatePrincipalAccessBoundaryPolicyRequest
+                     * @property {string|null} [parent] CreatePrincipalAccessBoundaryPolicyRequest parent
+                     * @property {string|null} [principalAccessBoundaryPolicyId] CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicyId
+                     * @property {google.iam.v3.IPrincipalAccessBoundaryPolicy|null} [principalAccessBoundaryPolicy] CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy
+                     * @property {boolean|null} [validateOnly] CreatePrincipalAccessBoundaryPolicyRequest validateOnly
+                     */
+    
+                    /**
+                     * Constructs a new CreatePrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a CreatePrincipalAccessBoundaryPolicyRequest.
+                     * @implements ICreatePrincipalAccessBoundaryPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     */
+                    function CreatePrincipalAccessBoundaryPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreatePrincipalAccessBoundaryPolicyRequest parent.
+                     * @member {string} parent
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.prototype.parent = "";
+    
+                    /**
+                     * CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicyId.
+                     * @member {string} principalAccessBoundaryPolicyId
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.prototype.principalAccessBoundaryPolicyId = "";
+    
+                    /**
+                     * CreatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy.
+                     * @member {google.iam.v3.IPrincipalAccessBoundaryPolicy|null|undefined} principalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.prototype.principalAccessBoundaryPolicy = null;
+    
+                    /**
+                     * CreatePrincipalAccessBoundaryPolicyRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * Creates a new CreatePrincipalAccessBoundaryPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest} CreatePrincipalAccessBoundaryPolicyRequest instance
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.create = function create(properties) {
+                        return new CreatePrincipalAccessBoundaryPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreatePrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest} message CreatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.principalAccessBoundaryPolicyId != null && Object.hasOwnProperty.call(message, "principalAccessBoundaryPolicyId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.principalAccessBoundaryPolicyId);
+                        if (message.principalAccessBoundaryPolicy != null && Object.hasOwnProperty.call(message, "principalAccessBoundaryPolicy"))
+                            $root.google.iam.v3.PrincipalAccessBoundaryPolicy.encode(message.principalAccessBoundaryPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreatePrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest} message CreatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest} CreatePrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.principalAccessBoundaryPolicyId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.principalAccessBoundaryPolicy = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest} CreatePrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreatePrincipalAccessBoundaryPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.principalAccessBoundaryPolicyId != null && message.hasOwnProperty("principalAccessBoundaryPolicyId"))
+                            if (!$util.isString(message.principalAccessBoundaryPolicyId))
+                                return "principalAccessBoundaryPolicyId: string expected";
+                        if (message.principalAccessBoundaryPolicy != null && message.hasOwnProperty("principalAccessBoundaryPolicy")) {
+                            var error = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.verify(message.principalAccessBoundaryPolicy);
+                            if (error)
+                                return "principalAccessBoundaryPolicy." + error;
+                        }
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreatePrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest} CreatePrincipalAccessBoundaryPolicyRequest
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.principalAccessBoundaryPolicyId != null)
+                            message.principalAccessBoundaryPolicyId = String(object.principalAccessBoundaryPolicyId);
+                        if (object.principalAccessBoundaryPolicy != null) {
+                            if (typeof object.principalAccessBoundaryPolicy !== "object")
+                                throw TypeError(".google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest.principalAccessBoundaryPolicy: object expected");
+                            message.principalAccessBoundaryPolicy = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.fromObject(object.principalAccessBoundaryPolicy);
+                        }
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreatePrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest} message CreatePrincipalAccessBoundaryPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.principalAccessBoundaryPolicyId = "";
+                            object.principalAccessBoundaryPolicy = null;
+                            object.validateOnly = false;
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.principalAccessBoundaryPolicyId != null && message.hasOwnProperty("principalAccessBoundaryPolicyId"))
+                            object.principalAccessBoundaryPolicyId = message.principalAccessBoundaryPolicyId;
+                        if (message.principalAccessBoundaryPolicy != null && message.hasOwnProperty("principalAccessBoundaryPolicy"))
+                            object.principalAccessBoundaryPolicy = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.toObject(message.principalAccessBoundaryPolicy, options);
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreatePrincipalAccessBoundaryPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreatePrincipalAccessBoundaryPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreatePrincipalAccessBoundaryPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest";
+                    };
+    
+                    return CreatePrincipalAccessBoundaryPolicyRequest;
+                })();
+    
+                v3.GetPrincipalAccessBoundaryPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a GetPrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @interface IGetPrincipalAccessBoundaryPolicyRequest
+                     * @property {string|null} [name] GetPrincipalAccessBoundaryPolicyRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetPrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a GetPrincipalAccessBoundaryPolicyRequest.
+                     * @implements IGetPrincipalAccessBoundaryPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     */
+                    function GetPrincipalAccessBoundaryPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetPrincipalAccessBoundaryPolicyRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetPrincipalAccessBoundaryPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest} GetPrincipalAccessBoundaryPolicyRequest instance
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.create = function create(properties) {
+                        return new GetPrincipalAccessBoundaryPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetPrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest} message GetPrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetPrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest} message GetPrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetPrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest} GetPrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetPrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest} GetPrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetPrincipalAccessBoundaryPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetPrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest} GetPrincipalAccessBoundaryPolicyRequest
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetPrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest} message GetPrincipalAccessBoundaryPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetPrincipalAccessBoundaryPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetPrincipalAccessBoundaryPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetPrincipalAccessBoundaryPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest";
+                    };
+    
+                    return GetPrincipalAccessBoundaryPolicyRequest;
+                })();
+    
+                v3.UpdatePrincipalAccessBoundaryPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdatePrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @interface IUpdatePrincipalAccessBoundaryPolicyRequest
+                     * @property {google.iam.v3.IPrincipalAccessBoundaryPolicy|null} [principalAccessBoundaryPolicy] UpdatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy
+                     * @property {boolean|null} [validateOnly] UpdatePrincipalAccessBoundaryPolicyRequest validateOnly
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePrincipalAccessBoundaryPolicyRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdatePrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents an UpdatePrincipalAccessBoundaryPolicyRequest.
+                     * @implements IUpdatePrincipalAccessBoundaryPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     */
+                    function UpdatePrincipalAccessBoundaryPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdatePrincipalAccessBoundaryPolicyRequest principalAccessBoundaryPolicy.
+                     * @member {google.iam.v3.IPrincipalAccessBoundaryPolicy|null|undefined} principalAccessBoundaryPolicy
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.prototype.principalAccessBoundaryPolicy = null;
+    
+                    /**
+                     * UpdatePrincipalAccessBoundaryPolicyRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * UpdatePrincipalAccessBoundaryPolicyRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdatePrincipalAccessBoundaryPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest} UpdatePrincipalAccessBoundaryPolicyRequest instance
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.create = function create(properties) {
+                        return new UpdatePrincipalAccessBoundaryPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdatePrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest} message UpdatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.principalAccessBoundaryPolicy != null && Object.hasOwnProperty.call(message, "principalAccessBoundaryPolicy"))
+                            $root.google.iam.v3.PrincipalAccessBoundaryPolicy.encode(message.principalAccessBoundaryPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdatePrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest} message UpdatePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest} UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.principalAccessBoundaryPolicy = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdatePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest} UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdatePrincipalAccessBoundaryPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.principalAccessBoundaryPolicy != null && message.hasOwnProperty("principalAccessBoundaryPolicy")) {
+                            var error = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.verify(message.principalAccessBoundaryPolicy);
+                            if (error)
+                                return "principalAccessBoundaryPolicy." + error;
+                        }
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdatePrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest} UpdatePrincipalAccessBoundaryPolicyRequest
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest();
+                        if (object.principalAccessBoundaryPolicy != null) {
+                            if (typeof object.principalAccessBoundaryPolicy !== "object")
+                                throw TypeError(".google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest.principalAccessBoundaryPolicy: object expected");
+                            message.principalAccessBoundaryPolicy = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.fromObject(object.principalAccessBoundaryPolicy);
+                        }
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdatePrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest} message UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.principalAccessBoundaryPolicy = null;
+                            object.validateOnly = false;
+                            object.updateMask = null;
+                        }
+                        if (message.principalAccessBoundaryPolicy != null && message.hasOwnProperty("principalAccessBoundaryPolicy"))
+                            object.principalAccessBoundaryPolicy = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.toObject(message.principalAccessBoundaryPolicy, options);
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdatePrincipalAccessBoundaryPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdatePrincipalAccessBoundaryPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest";
+                    };
+    
+                    return UpdatePrincipalAccessBoundaryPolicyRequest;
+                })();
+    
+                v3.DeletePrincipalAccessBoundaryPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a DeletePrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @interface IDeletePrincipalAccessBoundaryPolicyRequest
+                     * @property {string|null} [name] DeletePrincipalAccessBoundaryPolicyRequest name
+                     * @property {string|null} [etag] DeletePrincipalAccessBoundaryPolicyRequest etag
+                     * @property {boolean|null} [validateOnly] DeletePrincipalAccessBoundaryPolicyRequest validateOnly
+                     * @property {boolean|null} [force] DeletePrincipalAccessBoundaryPolicyRequest force
+                     */
+    
+                    /**
+                     * Constructs a new DeletePrincipalAccessBoundaryPolicyRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a DeletePrincipalAccessBoundaryPolicyRequest.
+                     * @implements IDeletePrincipalAccessBoundaryPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     */
+                    function DeletePrincipalAccessBoundaryPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeletePrincipalAccessBoundaryPolicyRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.prototype.name = "";
+    
+                    /**
+                     * DeletePrincipalAccessBoundaryPolicyRequest etag.
+                     * @member {string} etag
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.prototype.etag = "";
+    
+                    /**
+                     * DeletePrincipalAccessBoundaryPolicyRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * DeletePrincipalAccessBoundaryPolicyRequest force.
+                     * @member {boolean} force
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.prototype.force = false;
+    
+                    /**
+                     * Creates a new DeletePrincipalAccessBoundaryPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest} DeletePrincipalAccessBoundaryPolicyRequest instance
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.create = function create(properties) {
+                        return new DeletePrincipalAccessBoundaryPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeletePrincipalAccessBoundaryPolicyRequest message. Does not implicitly {@link google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest} message DeletePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                        if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.force);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeletePrincipalAccessBoundaryPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest} message DeletePrincipalAccessBoundaryPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeletePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest} DeletePrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.etag = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            case 4: {
+                                    message.force = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeletePrincipalAccessBoundaryPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest} DeletePrincipalAccessBoundaryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeletePrincipalAccessBoundaryPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            if (!$util.isString(message.etag))
+                                return "etag: string expected";
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        if (message.force != null && message.hasOwnProperty("force"))
+                            if (typeof message.force !== "boolean")
+                                return "force: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeletePrincipalAccessBoundaryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest} DeletePrincipalAccessBoundaryPolicyRequest
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.etag != null)
+                            message.etag = String(object.etag);
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        if (object.force != null)
+                            message.force = Boolean(object.force);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeletePrincipalAccessBoundaryPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest} message DeletePrincipalAccessBoundaryPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.etag = "";
+                            object.validateOnly = false;
+                            object.force = false;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            object.etag = message.etag;
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        if (message.force != null && message.hasOwnProperty("force"))
+                            object.force = message.force;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeletePrincipalAccessBoundaryPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeletePrincipalAccessBoundaryPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeletePrincipalAccessBoundaryPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest";
+                    };
+    
+                    return DeletePrincipalAccessBoundaryPolicyRequest;
+                })();
+    
+                v3.ListPrincipalAccessBoundaryPoliciesRequest = (function() {
+    
+                    /**
+                     * Properties of a ListPrincipalAccessBoundaryPoliciesRequest.
+                     * @memberof google.iam.v3
+                     * @interface IListPrincipalAccessBoundaryPoliciesRequest
+                     * @property {string|null} [parent] ListPrincipalAccessBoundaryPoliciesRequest parent
+                     * @property {number|null} [pageSize] ListPrincipalAccessBoundaryPoliciesRequest pageSize
+                     * @property {string|null} [pageToken] ListPrincipalAccessBoundaryPoliciesRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListPrincipalAccessBoundaryPoliciesRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a ListPrincipalAccessBoundaryPoliciesRequest.
+                     * @implements IListPrincipalAccessBoundaryPoliciesRequest
+                     * @constructor
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest=} [properties] Properties to set
+                     */
+                    function ListPrincipalAccessBoundaryPoliciesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListPrincipalAccessBoundaryPoliciesRequest parent.
+                     * @member {string} parent
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @instance
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.prototype.parent = "";
+    
+                    /**
+                     * ListPrincipalAccessBoundaryPoliciesRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @instance
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListPrincipalAccessBoundaryPoliciesRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @instance
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new ListPrincipalAccessBoundaryPoliciesRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest} ListPrincipalAccessBoundaryPoliciesRequest instance
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.create = function create(properties) {
+                        return new ListPrincipalAccessBoundaryPoliciesRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListPrincipalAccessBoundaryPoliciesRequest message. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest} message ListPrincipalAccessBoundaryPoliciesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListPrincipalAccessBoundaryPoliciesRequest message, length delimited. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest} message ListPrincipalAccessBoundaryPoliciesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListPrincipalAccessBoundaryPoliciesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest} ListPrincipalAccessBoundaryPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListPrincipalAccessBoundaryPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest} ListPrincipalAccessBoundaryPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListPrincipalAccessBoundaryPoliciesRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListPrincipalAccessBoundaryPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest} ListPrincipalAccessBoundaryPoliciesRequest
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListPrincipalAccessBoundaryPoliciesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest} message ListPrincipalAccessBoundaryPoliciesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListPrincipalAccessBoundaryPoliciesRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListPrincipalAccessBoundaryPoliciesRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListPrincipalAccessBoundaryPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest";
+                    };
+    
+                    return ListPrincipalAccessBoundaryPoliciesRequest;
+                })();
+    
+                v3.ListPrincipalAccessBoundaryPoliciesResponse = (function() {
+    
+                    /**
+                     * Properties of a ListPrincipalAccessBoundaryPoliciesResponse.
+                     * @memberof google.iam.v3
+                     * @interface IListPrincipalAccessBoundaryPoliciesResponse
+                     * @property {Array.<google.iam.v3.IPrincipalAccessBoundaryPolicy>|null} [principalAccessBoundaryPolicies] ListPrincipalAccessBoundaryPoliciesResponse principalAccessBoundaryPolicies
+                     * @property {string|null} [nextPageToken] ListPrincipalAccessBoundaryPoliciesResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListPrincipalAccessBoundaryPoliciesResponse.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a ListPrincipalAccessBoundaryPoliciesResponse.
+                     * @implements IListPrincipalAccessBoundaryPoliciesResponse
+                     * @constructor
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse=} [properties] Properties to set
+                     */
+                    function ListPrincipalAccessBoundaryPoliciesResponse(properties) {
+                        this.principalAccessBoundaryPolicies = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListPrincipalAccessBoundaryPoliciesResponse principalAccessBoundaryPolicies.
+                     * @member {Array.<google.iam.v3.IPrincipalAccessBoundaryPolicy>} principalAccessBoundaryPolicies
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @instance
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.prototype.principalAccessBoundaryPolicies = $util.emptyArray;
+    
+                    /**
+                     * ListPrincipalAccessBoundaryPoliciesResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @instance
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListPrincipalAccessBoundaryPoliciesResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse=} [properties] Properties to set
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse} ListPrincipalAccessBoundaryPoliciesResponse instance
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.create = function create(properties) {
+                        return new ListPrincipalAccessBoundaryPoliciesResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListPrincipalAccessBoundaryPoliciesResponse message. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse} message ListPrincipalAccessBoundaryPoliciesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.principalAccessBoundaryPolicies != null && message.principalAccessBoundaryPolicies.length)
+                            for (var i = 0; i < message.principalAccessBoundaryPolicies.length; ++i)
+                                $root.google.iam.v3.PrincipalAccessBoundaryPolicy.encode(message.principalAccessBoundaryPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListPrincipalAccessBoundaryPoliciesResponse message, length delimited. Does not implicitly {@link google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse} message ListPrincipalAccessBoundaryPoliciesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListPrincipalAccessBoundaryPoliciesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse} ListPrincipalAccessBoundaryPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.principalAccessBoundaryPolicies && message.principalAccessBoundaryPolicies.length))
+                                        message.principalAccessBoundaryPolicies = [];
+                                    message.principalAccessBoundaryPolicies.push($root.google.iam.v3.PrincipalAccessBoundaryPolicy.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListPrincipalAccessBoundaryPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse} ListPrincipalAccessBoundaryPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListPrincipalAccessBoundaryPoliciesResponse message.
+                     * @function verify
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.principalAccessBoundaryPolicies != null && message.hasOwnProperty("principalAccessBoundaryPolicies")) {
+                            if (!Array.isArray(message.principalAccessBoundaryPolicies))
+                                return "principalAccessBoundaryPolicies: array expected";
+                            for (var i = 0; i < message.principalAccessBoundaryPolicies.length; ++i) {
+                                var error = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.verify(message.principalAccessBoundaryPolicies[i]);
+                                if (error)
+                                    return "principalAccessBoundaryPolicies." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListPrincipalAccessBoundaryPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse} ListPrincipalAccessBoundaryPoliciesResponse
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse)
+                            return object;
+                        var message = new $root.google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse();
+                        if (object.principalAccessBoundaryPolicies) {
+                            if (!Array.isArray(object.principalAccessBoundaryPolicies))
+                                throw TypeError(".google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse.principalAccessBoundaryPolicies: array expected");
+                            message.principalAccessBoundaryPolicies = [];
+                            for (var i = 0; i < object.principalAccessBoundaryPolicies.length; ++i) {
+                                if (typeof object.principalAccessBoundaryPolicies[i] !== "object")
+                                    throw TypeError(".google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse.principalAccessBoundaryPolicies: object expected");
+                                message.principalAccessBoundaryPolicies[i] = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.fromObject(object.principalAccessBoundaryPolicies[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListPrincipalAccessBoundaryPoliciesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse} message ListPrincipalAccessBoundaryPoliciesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.principalAccessBoundaryPolicies = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.principalAccessBoundaryPolicies && message.principalAccessBoundaryPolicies.length) {
+                            object.principalAccessBoundaryPolicies = [];
+                            for (var j = 0; j < message.principalAccessBoundaryPolicies.length; ++j)
+                                object.principalAccessBoundaryPolicies[j] = $root.google.iam.v3.PrincipalAccessBoundaryPolicy.toObject(message.principalAccessBoundaryPolicies[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListPrincipalAccessBoundaryPoliciesResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListPrincipalAccessBoundaryPoliciesResponse
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListPrincipalAccessBoundaryPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.ListPrincipalAccessBoundaryPoliciesResponse";
+                    };
+    
+                    return ListPrincipalAccessBoundaryPoliciesResponse;
+                })();
+    
+                v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest = (function() {
+    
+                    /**
+                     * Properties of a SearchPrincipalAccessBoundaryPolicyBindingsRequest.
+                     * @memberof google.iam.v3
+                     * @interface ISearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @property {string|null} [name] SearchPrincipalAccessBoundaryPolicyBindingsRequest name
+                     * @property {number|null} [pageSize] SearchPrincipalAccessBoundaryPolicyBindingsRequest pageSize
+                     * @property {string|null} [pageToken] SearchPrincipalAccessBoundaryPolicyBindingsRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new SearchPrincipalAccessBoundaryPolicyBindingsRequest.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a SearchPrincipalAccessBoundaryPolicyBindingsRequest.
+                     * @implements ISearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @constructor
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest=} [properties] Properties to set
+                     */
+                    function SearchPrincipalAccessBoundaryPolicyBindingsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchPrincipalAccessBoundaryPolicyBindingsRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.prototype.name = "";
+    
+                    /**
+                     * SearchPrincipalAccessBoundaryPolicyBindingsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * SearchPrincipalAccessBoundaryPolicyBindingsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new SearchPrincipalAccessBoundaryPolicyBindingsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest} SearchPrincipalAccessBoundaryPolicyBindingsRequest instance
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.create = function create(properties) {
+                        return new SearchPrincipalAccessBoundaryPolicyBindingsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest} message SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest} message SearchPrincipalAccessBoundaryPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest} SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest} SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchPrincipalAccessBoundaryPolicyBindingsRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchPrincipalAccessBoundaryPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest} SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest)
+                            return object;
+                        var message = new $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchPrincipalAccessBoundaryPolicyBindingsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest} message SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchPrincipalAccessBoundaryPolicyBindingsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest";
+                    };
+    
+                    return SearchPrincipalAccessBoundaryPolicyBindingsRequest;
+                })();
+    
+                v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse = (function() {
+    
+                    /**
+                     * Properties of a SearchPrincipalAccessBoundaryPolicyBindingsResponse.
+                     * @memberof google.iam.v3
+                     * @interface ISearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @property {Array.<google.iam.v3.IPolicyBinding>|null} [policyBindings] SearchPrincipalAccessBoundaryPolicyBindingsResponse policyBindings
+                     * @property {string|null} [nextPageToken] SearchPrincipalAccessBoundaryPolicyBindingsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new SearchPrincipalAccessBoundaryPolicyBindingsResponse.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a SearchPrincipalAccessBoundaryPolicyBindingsResponse.
+                     * @implements ISearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @constructor
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse=} [properties] Properties to set
+                     */
+                    function SearchPrincipalAccessBoundaryPolicyBindingsResponse(properties) {
+                        this.policyBindings = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchPrincipalAccessBoundaryPolicyBindingsResponse policyBindings.
+                     * @member {Array.<google.iam.v3.IPolicyBinding>} policyBindings
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @instance
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.prototype.policyBindings = $util.emptyArray;
+    
+                    /**
+                     * SearchPrincipalAccessBoundaryPolicyBindingsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @instance
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new SearchPrincipalAccessBoundaryPolicyBindingsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse=} [properties] Properties to set
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse} SearchPrincipalAccessBoundaryPolicyBindingsResponse instance
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.create = function create(properties) {
+                        return new SearchPrincipalAccessBoundaryPolicyBindingsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse} message SearchPrincipalAccessBoundaryPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.policyBindings != null && message.policyBindings.length)
+                            for (var i = 0; i < message.policyBindings.length; ++i)
+                                $root.google.iam.v3.PolicyBinding.encode(message.policyBindings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchPrincipalAccessBoundaryPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse} message SearchPrincipalAccessBoundaryPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse} SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.policyBindings && message.policyBindings.length))
+                                        message.policyBindings = [];
+                                    message.policyBindings.push($root.google.iam.v3.PolicyBinding.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchPrincipalAccessBoundaryPolicyBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse} SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchPrincipalAccessBoundaryPolicyBindingsResponse message.
+                     * @function verify
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.policyBindings != null && message.hasOwnProperty("policyBindings")) {
+                            if (!Array.isArray(message.policyBindings))
+                                return "policyBindings: array expected";
+                            for (var i = 0; i < message.policyBindings.length; ++i) {
+                                var error = $root.google.iam.v3.PolicyBinding.verify(message.policyBindings[i]);
+                                if (error)
+                                    return "policyBindings." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchPrincipalAccessBoundaryPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse} SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse)
+                            return object;
+                        var message = new $root.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse();
+                        if (object.policyBindings) {
+                            if (!Array.isArray(object.policyBindings))
+                                throw TypeError(".google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse.policyBindings: array expected");
+                            message.policyBindings = [];
+                            for (var i = 0; i < object.policyBindings.length; ++i) {
+                                if (typeof object.policyBindings[i] !== "object")
+                                    throw TypeError(".google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse.policyBindings: object expected");
+                                message.policyBindings[i] = $root.google.iam.v3.PolicyBinding.fromObject(object.policyBindings[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchPrincipalAccessBoundaryPolicyBindingsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse} message SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.policyBindings = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.policyBindings && message.policyBindings.length) {
+                            object.policyBindings = [];
+                            for (var j = 0; j < message.policyBindings.length; ++j)
+                                object.policyBindings[j] = $root.google.iam.v3.PolicyBinding.toObject(message.policyBindings[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchPrincipalAccessBoundaryPolicyBindingsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchPrincipalAccessBoundaryPolicyBindingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsResponse";
+                    };
+    
+                    return SearchPrincipalAccessBoundaryPolicyBindingsResponse;
+                })();
+    
+                v3.PrincipalAccessBoundaryPolicy = (function() {
+    
+                    /**
+                     * Properties of a PrincipalAccessBoundaryPolicy.
+                     * @memberof google.iam.v3
+                     * @interface IPrincipalAccessBoundaryPolicy
+                     * @property {string|null} [name] PrincipalAccessBoundaryPolicy name
+                     * @property {string|null} [uid] PrincipalAccessBoundaryPolicy uid
+                     * @property {string|null} [etag] PrincipalAccessBoundaryPolicy etag
+                     * @property {string|null} [displayName] PrincipalAccessBoundaryPolicy displayName
+                     * @property {Object.<string,string>|null} [annotations] PrincipalAccessBoundaryPolicy annotations
+                     * @property {google.protobuf.ITimestamp|null} [createTime] PrincipalAccessBoundaryPolicy createTime
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] PrincipalAccessBoundaryPolicy updateTime
+                     * @property {google.iam.v3.IPrincipalAccessBoundaryPolicyDetails|null} [details] PrincipalAccessBoundaryPolicy details
+                     */
+    
+                    /**
+                     * Constructs a new PrincipalAccessBoundaryPolicy.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a PrincipalAccessBoundaryPolicy.
+                     * @implements IPrincipalAccessBoundaryPolicy
+                     * @constructor
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicy=} [properties] Properties to set
+                     */
+                    function PrincipalAccessBoundaryPolicy(properties) {
+                        this.annotations = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy name.
+                     * @member {string} name
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.name = "";
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy uid.
+                     * @member {string} uid
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.uid = "";
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy etag.
+                     * @member {string} etag
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.etag = "";
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy displayName.
+                     * @member {string} displayName
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.displayName = "";
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy annotations.
+                     * @member {Object.<string,string>} annotations
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.annotations = $util.emptyObject;
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy createTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.createTime = null;
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy updateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.updateTime = null;
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicy details.
+                     * @member {google.iam.v3.IPrincipalAccessBoundaryPolicyDetails|null|undefined} details
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.details = null;
+    
+                    /**
+                     * Creates a new PrincipalAccessBoundaryPolicy instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicy=} [properties] Properties to set
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicy} PrincipalAccessBoundaryPolicy instance
+                     */
+                    PrincipalAccessBoundaryPolicy.create = function create(properties) {
+                        return new PrincipalAccessBoundaryPolicy(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PrincipalAccessBoundaryPolicy message. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicy.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicy} message PrincipalAccessBoundaryPolicy message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PrincipalAccessBoundaryPolicy.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
+                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                            for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                            $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                            $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails.encode(message.details, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PrincipalAccessBoundaryPolicy message, length delimited. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicy.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicy} message PrincipalAccessBoundaryPolicy message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PrincipalAccessBoundaryPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PrincipalAccessBoundaryPolicy message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicy} PrincipalAccessBoundaryPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PrincipalAccessBoundaryPolicy.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.PrincipalAccessBoundaryPolicy(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.uid = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.etag = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.displayName = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    if (message.annotations === $util.emptyObject)
+                                        message.annotations = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotations[key] = value;
+                                    break;
+                                }
+                            case 6: {
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 8: {
+                                    message.details = $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PrincipalAccessBoundaryPolicy message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicy} PrincipalAccessBoundaryPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PrincipalAccessBoundaryPolicy.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PrincipalAccessBoundaryPolicy message.
+                     * @function verify
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PrincipalAccessBoundaryPolicy.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            if (!$util.isString(message.uid))
+                                return "uid: string expected";
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            if (!$util.isString(message.etag))
+                                return "etag: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                            if (!$util.isObject(message.annotations))
+                                return "annotations: object expected";
+                            var key = Object.keys(message.annotations);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.annotations[key[i]]))
+                                    return "annotations: string{k:string} expected";
+                        }
+                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                            if (error)
+                                return "createTime." + error;
+                        }
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                            if (error)
+                                return "updateTime." + error;
+                        }
+                        if (message.details != null && message.hasOwnProperty("details")) {
+                            var error = $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails.verify(message.details);
+                            if (error)
+                                return "details." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PrincipalAccessBoundaryPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicy} PrincipalAccessBoundaryPolicy
+                     */
+                    PrincipalAccessBoundaryPolicy.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.PrincipalAccessBoundaryPolicy)
+                            return object;
+                        var message = new $root.google.iam.v3.PrincipalAccessBoundaryPolicy();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.uid != null)
+                            message.uid = String(object.uid);
+                        if (object.etag != null)
+                            message.etag = String(object.etag);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        if (object.annotations) {
+                            if (typeof object.annotations !== "object")
+                                throw TypeError(".google.iam.v3.PrincipalAccessBoundaryPolicy.annotations: object expected");
+                            message.annotations = {};
+                            for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                        }
+                        if (object.createTime != null) {
+                            if (typeof object.createTime !== "object")
+                                throw TypeError(".google.iam.v3.PrincipalAccessBoundaryPolicy.createTime: object expected");
+                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                        }
+                        if (object.updateTime != null) {
+                            if (typeof object.updateTime !== "object")
+                                throw TypeError(".google.iam.v3.PrincipalAccessBoundaryPolicy.updateTime: object expected");
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                        }
+                        if (object.details != null) {
+                            if (typeof object.details !== "object")
+                                throw TypeError(".google.iam.v3.PrincipalAccessBoundaryPolicy.details: object expected");
+                            message.details = $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails.fromObject(object.details);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PrincipalAccessBoundaryPolicy message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicy} message PrincipalAccessBoundaryPolicy
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PrincipalAccessBoundaryPolicy.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.annotations = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.uid = "";
+                            object.etag = "";
+                            object.displayName = "";
+                            object.createTime = null;
+                            object.updateTime = null;
+                            object.details = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            object.uid = message.uid;
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            object.etag = message.etag;
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        var keys2;
+                        if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                            object.annotations = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                        }
+                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                        if (message.details != null && message.hasOwnProperty("details"))
+                            object.details = $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails.toObject(message.details, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PrincipalAccessBoundaryPolicy to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PrincipalAccessBoundaryPolicy.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PrincipalAccessBoundaryPolicy
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicy
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PrincipalAccessBoundaryPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.PrincipalAccessBoundaryPolicy";
+                    };
+    
+                    return PrincipalAccessBoundaryPolicy;
+                })();
+    
+                v3.PrincipalAccessBoundaryPolicyDetails = (function() {
+    
+                    /**
+                     * Properties of a PrincipalAccessBoundaryPolicyDetails.
+                     * @memberof google.iam.v3
+                     * @interface IPrincipalAccessBoundaryPolicyDetails
+                     * @property {Array.<google.iam.v3.IPrincipalAccessBoundaryPolicyRule>|null} [rules] PrincipalAccessBoundaryPolicyDetails rules
+                     * @property {string|null} [enforcementVersion] PrincipalAccessBoundaryPolicyDetails enforcementVersion
+                     */
+    
+                    /**
+                     * Constructs a new PrincipalAccessBoundaryPolicyDetails.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a PrincipalAccessBoundaryPolicyDetails.
+                     * @implements IPrincipalAccessBoundaryPolicyDetails
+                     * @constructor
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyDetails=} [properties] Properties to set
+                     */
+                    function PrincipalAccessBoundaryPolicyDetails(properties) {
+                        this.rules = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicyDetails rules.
+                     * @member {Array.<google.iam.v3.IPrincipalAccessBoundaryPolicyRule>} rules
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.prototype.rules = $util.emptyArray;
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicyDetails enforcementVersion.
+                     * @member {string} enforcementVersion
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.prototype.enforcementVersion = "";
+    
+                    /**
+                     * Creates a new PrincipalAccessBoundaryPolicyDetails instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyDetails=} [properties] Properties to set
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyDetails} PrincipalAccessBoundaryPolicyDetails instance
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.create = function create(properties) {
+                        return new PrincipalAccessBoundaryPolicyDetails(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PrincipalAccessBoundaryPolicyDetails message. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyDetails.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyDetails} message PrincipalAccessBoundaryPolicyDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.rules != null && message.rules.length)
+                            for (var i = 0; i < message.rules.length; ++i)
+                                $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.enforcementVersion != null && Object.hasOwnProperty.call(message, "enforcementVersion"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.enforcementVersion);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PrincipalAccessBoundaryPolicyDetails message, length delimited. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyDetails.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyDetails} message PrincipalAccessBoundaryPolicyDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PrincipalAccessBoundaryPolicyDetails message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyDetails} PrincipalAccessBoundaryPolicyDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.rules && message.rules.length))
+                                        message.rules = [];
+                                    message.rules.push($root.google.iam.v3.PrincipalAccessBoundaryPolicyRule.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    message.enforcementVersion = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PrincipalAccessBoundaryPolicyDetails message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyDetails} PrincipalAccessBoundaryPolicyDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PrincipalAccessBoundaryPolicyDetails message.
+                     * @function verify
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.rules != null && message.hasOwnProperty("rules")) {
+                            if (!Array.isArray(message.rules))
+                                return "rules: array expected";
+                            for (var i = 0; i < message.rules.length; ++i) {
+                                var error = $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule.verify(message.rules[i]);
+                                if (error)
+                                    return "rules." + error;
+                            }
+                        }
+                        if (message.enforcementVersion != null && message.hasOwnProperty("enforcementVersion"))
+                            if (!$util.isString(message.enforcementVersion))
+                                return "enforcementVersion: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PrincipalAccessBoundaryPolicyDetails message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyDetails} PrincipalAccessBoundaryPolicyDetails
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails)
+                            return object;
+                        var message = new $root.google.iam.v3.PrincipalAccessBoundaryPolicyDetails();
+                        if (object.rules) {
+                            if (!Array.isArray(object.rules))
+                                throw TypeError(".google.iam.v3.PrincipalAccessBoundaryPolicyDetails.rules: array expected");
+                            message.rules = [];
+                            for (var i = 0; i < object.rules.length; ++i) {
+                                if (typeof object.rules[i] !== "object")
+                                    throw TypeError(".google.iam.v3.PrincipalAccessBoundaryPolicyDetails.rules: object expected");
+                                message.rules[i] = $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule.fromObject(object.rules[i]);
+                            }
+                        }
+                        if (object.enforcementVersion != null)
+                            message.enforcementVersion = String(object.enforcementVersion);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PrincipalAccessBoundaryPolicyDetails message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicyDetails} message PrincipalAccessBoundaryPolicyDetails
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.rules = [];
+                        if (options.defaults)
+                            object.enforcementVersion = "";
+                        if (message.rules && message.rules.length) {
+                            object.rules = [];
+                            for (var j = 0; j < message.rules.length; ++j)
+                                object.rules[j] = $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule.toObject(message.rules[j], options);
+                        }
+                        if (message.enforcementVersion != null && message.hasOwnProperty("enforcementVersion"))
+                            object.enforcementVersion = message.enforcementVersion;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PrincipalAccessBoundaryPolicyDetails to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PrincipalAccessBoundaryPolicyDetails
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PrincipalAccessBoundaryPolicyDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.PrincipalAccessBoundaryPolicyDetails";
+                    };
+    
+                    return PrincipalAccessBoundaryPolicyDetails;
+                })();
+    
+                v3.PrincipalAccessBoundaryPolicyRule = (function() {
+    
+                    /**
+                     * Properties of a PrincipalAccessBoundaryPolicyRule.
+                     * @memberof google.iam.v3
+                     * @interface IPrincipalAccessBoundaryPolicyRule
+                     * @property {string|null} [description] PrincipalAccessBoundaryPolicyRule description
+                     * @property {Array.<string>|null} [resources] PrincipalAccessBoundaryPolicyRule resources
+                     * @property {google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect|null} [effect] PrincipalAccessBoundaryPolicyRule effect
+                     */
+    
+                    /**
+                     * Constructs a new PrincipalAccessBoundaryPolicyRule.
+                     * @memberof google.iam.v3
+                     * @classdesc Represents a PrincipalAccessBoundaryPolicyRule.
+                     * @implements IPrincipalAccessBoundaryPolicyRule
+                     * @constructor
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyRule=} [properties] Properties to set
+                     */
+                    function PrincipalAccessBoundaryPolicyRule(properties) {
+                        this.resources = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicyRule description.
+                     * @member {string} description
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicyRule.prototype.description = "";
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicyRule resources.
+                     * @member {Array.<string>} resources
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicyRule.prototype.resources = $util.emptyArray;
+    
+                    /**
+                     * PrincipalAccessBoundaryPolicyRule effect.
+                     * @member {google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect} effect
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @instance
+                     */
+                    PrincipalAccessBoundaryPolicyRule.prototype.effect = 0;
+    
+                    /**
+                     * Creates a new PrincipalAccessBoundaryPolicyRule instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyRule=} [properties] Properties to set
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyRule} PrincipalAccessBoundaryPolicyRule instance
+                     */
+                    PrincipalAccessBoundaryPolicyRule.create = function create(properties) {
+                        return new PrincipalAccessBoundaryPolicyRule(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PrincipalAccessBoundaryPolicyRule message. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyRule.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyRule} message PrincipalAccessBoundaryPolicyRule message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PrincipalAccessBoundaryPolicyRule.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                        if (message.resources != null && message.resources.length)
+                            for (var i = 0; i < message.resources.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resources[i]);
+                        if (message.effect != null && Object.hasOwnProperty.call(message, "effect"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.effect);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PrincipalAccessBoundaryPolicyRule message, length delimited. Does not implicitly {@link google.iam.v3.PrincipalAccessBoundaryPolicyRule.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {google.iam.v3.IPrincipalAccessBoundaryPolicyRule} message PrincipalAccessBoundaryPolicyRule message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PrincipalAccessBoundaryPolicyRule.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PrincipalAccessBoundaryPolicyRule message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyRule} PrincipalAccessBoundaryPolicyRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PrincipalAccessBoundaryPolicyRule.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.description = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.resources && message.resources.length))
+                                        message.resources = [];
+                                    message.resources.push(reader.string());
+                                    break;
+                                }
+                            case 3: {
+                                    message.effect = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PrincipalAccessBoundaryPolicyRule message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyRule} PrincipalAccessBoundaryPolicyRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PrincipalAccessBoundaryPolicyRule.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PrincipalAccessBoundaryPolicyRule message.
+                     * @function verify
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PrincipalAccessBoundaryPolicyRule.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        if (message.resources != null && message.hasOwnProperty("resources")) {
+                            if (!Array.isArray(message.resources))
+                                return "resources: array expected";
+                            for (var i = 0; i < message.resources.length; ++i)
+                                if (!$util.isString(message.resources[i]))
+                                    return "resources: string[] expected";
+                        }
+                        if (message.effect != null && message.hasOwnProperty("effect"))
+                            switch (message.effect) {
+                            default:
+                                return "effect: enum value expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PrincipalAccessBoundaryPolicyRule message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3.PrincipalAccessBoundaryPolicyRule} PrincipalAccessBoundaryPolicyRule
+                     */
+                    PrincipalAccessBoundaryPolicyRule.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule)
+                            return object;
+                        var message = new $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule();
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        if (object.resources) {
+                            if (!Array.isArray(object.resources))
+                                throw TypeError(".google.iam.v3.PrincipalAccessBoundaryPolicyRule.resources: array expected");
+                            message.resources = [];
+                            for (var i = 0; i < object.resources.length; ++i)
+                                message.resources[i] = String(object.resources[i]);
+                        }
+                        switch (object.effect) {
+                        default:
+                            if (typeof object.effect === "number") {
+                                message.effect = object.effect;
+                                break;
+                            }
+                            break;
+                        case "EFFECT_UNSPECIFIED":
+                        case 0:
+                            message.effect = 0;
+                            break;
+                        case "ALLOW":
+                        case 1:
+                            message.effect = 1;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PrincipalAccessBoundaryPolicyRule message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {google.iam.v3.PrincipalAccessBoundaryPolicyRule} message PrincipalAccessBoundaryPolicyRule
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PrincipalAccessBoundaryPolicyRule.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.resources = [];
+                        if (options.defaults) {
+                            object.description = "";
+                            object.effect = options.enums === String ? "EFFECT_UNSPECIFIED" : 0;
+                        }
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
+                        if (message.resources && message.resources.length) {
+                            object.resources = [];
+                            for (var j = 0; j < message.resources.length; ++j)
+                                object.resources[j] = message.resources[j];
+                        }
+                        if (message.effect != null && message.hasOwnProperty("effect"))
+                            object.effect = options.enums === String ? $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect[message.effect] === undefined ? message.effect : $root.google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect[message.effect] : message.effect;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PrincipalAccessBoundaryPolicyRule to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PrincipalAccessBoundaryPolicyRule.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PrincipalAccessBoundaryPolicyRule
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3.PrincipalAccessBoundaryPolicyRule
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PrincipalAccessBoundaryPolicyRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3.PrincipalAccessBoundaryPolicyRule";
+                    };
+    
+                    /**
+                     * Effect enum.
+                     * @name google.iam.v3.PrincipalAccessBoundaryPolicyRule.Effect
+                     * @enum {number}
+                     * @property {number} EFFECT_UNSPECIFIED=0 EFFECT_UNSPECIFIED value
+                     * @property {number} ALLOW=1 ALLOW value
+                     */
+                    PrincipalAccessBoundaryPolicyRule.Effect = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EFFECT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ALLOW"] = 1;
+                        return values;
+                    })();
+    
+                    return PrincipalAccessBoundaryPolicyRule;
+                })();
+    
+                return v3;
             })();
     
             return iam;
@@ -8200,6 +14804,947 @@
                 return values;
             })();
     
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
+            })();
+    
             return api;
         })();
     
@@ -13207,6 +20752,7 @@
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {google.protobuf.IFeatureSet|null} [features] FileOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -13219,6 +20765,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -13394,6 +20941,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -13460,6 +21015,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -13580,6 +21138,12 @@
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                                 break;
                             }
+                        case 1053: {
+                                if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                    message[".google.api.resourceDefinition"] = [];
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -13692,6 +21256,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -13778,6 +21351,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -13794,8 +21377,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -13863,6 +21448,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -13924,6 +21514,7 @@
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
                  * @property {google.protobuf.IFeatureSet|null} [features] MessageOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -13999,6 +21590,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -14037,6 +21636,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -14099,6 +21700,10 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 1053: {
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -14165,6 +21770,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -14205,6 +21815,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -14230,6 +21845,7 @@
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
                         object.features = null;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -14248,6 +21864,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -14300,6 +21918,8 @@
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -14434,6 +22054,22 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -14492,6 +22128,10 @@
                             writer.int32(message[".google.api.fieldBehavior"][i]);
                         writer.ldelim();
                     }
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -14598,6 +22238,14 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -14741,6 +22389,16 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -14956,6 +22614,16 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -14989,6 +22657,8 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -15030,6 +22700,10 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     
@@ -21018,6 +28692,225 @@
                 };
     
                 return Timestamp;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             return protobuf;
