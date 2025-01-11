@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.5.0...tpu-v3.6.0) (2025-01-11)
+
+
+### Features
+
+* [tpu] Add UNKNOWN to TPU node state, This state will be used to prevent a node from being marked as READY during diagnose after it has failed repair ([#5941](https://github.com/googleapis/google-cloud-node/issues/5941)) ([e575e15](https://github.com/googleapis/google-cloud-node/commit/e575e15101e34887731c4bab60e81bac504d7683))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.4.0...tpu-v3.5.0) (2024-05-21)
 
 
