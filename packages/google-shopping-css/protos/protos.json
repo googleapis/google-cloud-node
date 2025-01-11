@@ -1214,6 +1214,26 @@
                             }
                           ]
                         },
+                        "UpdateCssProductInput": {
+                          "requestType": "UpdateCssProductInputRequest",
+                          "responseType": "CssProductInput",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{css_product_input.name=accounts/*/cssProductInputs/*}",
+                            "(google.api.http).body": "css_product_input",
+                            "(google.api.method_signature)": "css_product_input,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{css_product_input.name=accounts/*/cssProductInputs/*}",
+                                "body": "css_product_input"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "css_product_input,update_mask"
+                            }
+                          ]
+                        },
                         "DeleteCssProductInput": {
                           "requestType": "DeleteCssProductInputRequest",
                           "responseType": "google.protobuf.Empty",
@@ -1274,7 +1294,10 @@
                         },
                         "freshnessTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "attributes": {
                           "type": "Attributes",
@@ -1308,8 +1331,24 @@
                           "type": "int64",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCssProductInputRequest": {
+                      "fields": {
+                        "cssProductInput": {
+                          "type": "CssProductInput",
+                          "id": 1,
+                          "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
                         }
                       }
                     },
@@ -3444,6 +3483,15 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }

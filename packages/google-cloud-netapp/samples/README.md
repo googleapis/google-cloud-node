@@ -65,6 +65,7 @@
   * [Net_app.update_snapshot](#net_app.update_snapshot)
   * [Net_app.update_storage_pool](#net_app.update_storage_pool)
   * [Net_app.update_volume](#net_app.update_volume)
+  * [Net_app.validate_directory_service](#net_app.validate_directory_service)
   * [Net_app.verify_kms_config](#net_app.verify_kms_config)
   * [Quickstart](#quickstart)
 
@@ -977,6 +978,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.update_volume.js`
+
+
+-----
+
+
+
+
+### Net_app.validate_directory_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.validate_directory_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.validate_directory_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.validate_directory_service.js`
 
 
 -----

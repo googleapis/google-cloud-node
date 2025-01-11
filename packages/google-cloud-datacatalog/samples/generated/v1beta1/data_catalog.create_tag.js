@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,10 +30,11 @@ function main(parent, tag) {
    */
   /**
    *  Required. The name of the resource to attach this tag to. Tags can be
-   *  attached to Entries. Example:
-   *  * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
-   *  Note that this Tag and its child resources may not actually be stored in
-   *  the location in this name.
+   *  attached to
+   *   Entries. Example:
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *   Note that this Tag and its child resources may not actually be stored in
+   *   the location in this name.
    */
   // const parent = 'abc123'
   /**

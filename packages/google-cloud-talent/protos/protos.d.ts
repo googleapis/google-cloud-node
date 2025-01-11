@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5592,6 +5592,9 @@ export namespace google {
 
                     /** SearchJobsRequest keywordMatchMode */
                     keywordMatchMode?: (google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode|keyof typeof google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode|null);
+
+                    /** SearchJobsRequest relevanceThreshold */
+                    relevanceThreshold?: (google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold|keyof typeof google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold|null);
                 }
 
                 /** Represents a SearchJobsRequest. */
@@ -5647,6 +5650,9 @@ export namespace google {
 
                     /** SearchJobsRequest keywordMatchMode. */
                     public keywordMatchMode: (google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode|keyof typeof google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode);
+
+                    /** SearchJobsRequest relevanceThreshold. */
+                    public relevanceThreshold: (google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold|keyof typeof google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold);
 
                     /**
                      * Creates a new SearchJobsRequest instance using the specified properties.
@@ -5752,6 +5758,15 @@ export namespace google {
                         KEYWORD_MATCH_DISABLED = 1,
                         KEYWORD_MATCH_ALL = 2,
                         KEYWORD_MATCH_TITLE_ONLY = 3
+                    }
+
+                    /** RelevanceThreshold enum. */
+                    enum RelevanceThreshold {
+                        RELEVANCE_THRESHOLD_UNSPECIFIED = 0,
+                        LOWEST = 1,
+                        LOW = 2,
+                        MEDIUM = 3,
+                        HIGH = 4
                     }
 
                     /** Properties of a CustomRankingInfo. */
@@ -13484,6 +13499,9 @@ export namespace google {
 
                     /** SearchJobsRequest keywordMatchMode */
                     keywordMatchMode?: (google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode|null);
+
+                    /** SearchJobsRequest relevanceThreshold */
+                    relevanceThreshold?: (google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold|null);
                 }
 
                 /** Represents a SearchJobsRequest. */
@@ -13542,6 +13560,9 @@ export namespace google {
 
                     /** SearchJobsRequest keywordMatchMode. */
                     public keywordMatchMode: (google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode);
+
+                    /** SearchJobsRequest relevanceThreshold. */
+                    public relevanceThreshold: (google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold|keyof typeof google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold);
 
                     /**
                      * Creates a new SearchJobsRequest instance using the specified properties.
@@ -13643,6 +13664,15 @@ export namespace google {
                         KEYWORD_MATCH_DISABLED = 1,
                         KEYWORD_MATCH_ALL = 2,
                         KEYWORD_MATCH_TITLE_ONLY = 3
+                    }
+
+                    /** RelevanceThreshold enum. */
+                    enum RelevanceThreshold {
+                        RELEVANCE_THRESHOLD_UNSPECIFIED = 0,
+                        LOWEST = 1,
+                        LOW = 2,
+                        MEDIUM = 3,
+                        HIGH = 4
                     }
 
                     /** Properties of a CustomRankingInfo. */

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1382,6 +1382,7 @@
                                 case 13:
                                 case 14:
                                 case 15:
+                                case 16:
                                     break;
                                 }
                             if (message.healthDescription != null && message.hasOwnProperty("healthDescription"))
@@ -1551,6 +1552,10 @@
                             case "UNHIDING":
                             case 15:
                                 message.state = 15;
+                                break;
+                            case "UNKNOWN":
+                            case 16:
+                                message.state = 16;
                                 break;
                             }
                             if (object.healthDescription != null)
@@ -1794,6 +1799,7 @@
                          * @property {number} HIDING=13 HIDING value
                          * @property {number} HIDDEN=14 HIDDEN value
                          * @property {number} UNHIDING=15 UNHIDING value
+                         * @property {number} UNKNOWN=16 UNKNOWN value
                          */
                         Node.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -1812,6 +1818,7 @@
                             values[valuesById[13] = "HIDING"] = 13;
                             values[valuesById[14] = "HIDDEN"] = 14;
                             values[valuesById[15] = "UNHIDING"] = 15;
+                            values[valuesById[16] = "UNKNOWN"] = 16;
                             return values;
                         })();
     

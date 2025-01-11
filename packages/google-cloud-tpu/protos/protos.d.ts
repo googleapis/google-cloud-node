@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -710,7 +710,8 @@ export namespace google {
                         TERMINATED = 12,
                         HIDING = 13,
                         HIDDEN = 14,
-                        UNHIDING = 15
+                        UNHIDING = 15,
+                        UNKNOWN = 16
                     }
 
                     /** Health enum. */

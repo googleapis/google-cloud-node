@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -176,7 +176,6 @@ export class CloudTasksClient {
     }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    // @ts-ignore
     this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
@@ -204,12 +203,9 @@ export class CloudTasksClient {
     );
 
     // Determine the client header string.
-    // Add ESM headers
-    const isEsm = true;
-    const isEsmString = isEsm ? '-esm' : '-cjs';
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
-      clientHeader.push(`gl-node/${process.versions.node}${isEsmString}`);
+      clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
@@ -220,6 +216,11 @@ export class CloudTasksClient {
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
+    }
+    // Add ESM headers
+    const isEsm = true;
+    if ((opts.libVersion || version) && isEsm) {
+      clientHeader.push(`${opts.libVersion ?? version}-esm`);
     }
 
     // Load the applicable protos.

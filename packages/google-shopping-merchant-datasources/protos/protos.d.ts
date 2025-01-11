@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -197,6 +197,12 @@ export namespace google {
                         /** DataSource promotionDataSource */
                         promotionDataSource?: (google.shopping.merchant.datasources.v1beta.IPromotionDataSource|null);
 
+                        /** DataSource productReviewDataSource */
+                        productReviewDataSource?: (google.shopping.merchant.datasources.v1beta.IProductReviewDataSource|null);
+
+                        /** DataSource merchantReviewDataSource */
+                        merchantReviewDataSource?: (google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource|null);
+
                         /** DataSource name */
                         name?: (string|null);
 
@@ -237,6 +243,12 @@ export namespace google {
                         /** DataSource promotionDataSource. */
                         public promotionDataSource?: (google.shopping.merchant.datasources.v1beta.IPromotionDataSource|null);
 
+                        /** DataSource productReviewDataSource. */
+                        public productReviewDataSource?: (google.shopping.merchant.datasources.v1beta.IProductReviewDataSource|null);
+
+                        /** DataSource merchantReviewDataSource. */
+                        public merchantReviewDataSource?: (google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource|null);
+
                         /** DataSource name. */
                         public name: string;
 
@@ -253,7 +265,7 @@ export namespace google {
                         public fileInput?: (google.shopping.merchant.datasources.v1beta.IFileInput|null);
 
                         /** DataSource Type. */
-                        public Type?: ("primaryProductDataSource"|"supplementalProductDataSource"|"localInventoryDataSource"|"regionalInventoryDataSource"|"promotionDataSource");
+                        public Type?: ("primaryProductDataSource"|"supplementalProductDataSource"|"localInventoryDataSource"|"regionalInventoryDataSource"|"promotionDataSource"|"productReviewDataSource"|"merchantReviewDataSource");
 
                         /**
                          * Creates a new DataSource instance using the specified properties.
@@ -1707,6 +1719,188 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PromotionDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProductReviewDataSource. */
+                    interface IProductReviewDataSource {
+                    }
+
+                    /** Represents a ProductReviewDataSource. */
+                    class ProductReviewDataSource implements IProductReviewDataSource {
+
+                        /**
+                         * Constructs a new ProductReviewDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1beta.IProductReviewDataSource);
+
+                        /**
+                         * Creates a new ProductReviewDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductReviewDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1beta.IProductReviewDataSource): google.shopping.merchant.datasources.v1beta.ProductReviewDataSource;
+
+                        /**
+                         * Encodes the specified ProductReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.verify|verify} messages.
+                         * @param message ProductReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1beta.IProductReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.ProductReviewDataSource.verify|verify} messages.
+                         * @param message ProductReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1beta.IProductReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductReviewDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1beta.ProductReviewDataSource;
+
+                        /**
+                         * Decodes a ProductReviewDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1beta.ProductReviewDataSource;
+
+                        /**
+                         * Verifies a ProductReviewDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductReviewDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1beta.ProductReviewDataSource;
+
+                        /**
+                         * Creates a plain object from a ProductReviewDataSource message. Also converts values to other types if specified.
+                         * @param message ProductReviewDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1beta.ProductReviewDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductReviewDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductReviewDataSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MerchantReviewDataSource. */
+                    interface IMerchantReviewDataSource {
+                    }
+
+                    /** Represents a MerchantReviewDataSource. */
+                    class MerchantReviewDataSource implements IMerchantReviewDataSource {
+
+                        /**
+                         * Constructs a new MerchantReviewDataSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource);
+
+                        /**
+                         * Creates a new MerchantReviewDataSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MerchantReviewDataSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource): google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource;
+
+                        /**
+                         * Encodes the specified MerchantReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.verify|verify} messages.
+                         * @param message MerchantReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MerchantReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource.verify|verify} messages.
+                         * @param message MerchantReviewDataSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1beta.IMerchantReviewDataSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MerchantReviewDataSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MerchantReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource;
+
+                        /**
+                         * Decodes a MerchantReviewDataSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MerchantReviewDataSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource;
+
+                        /**
+                         * Verifies a MerchantReviewDataSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MerchantReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MerchantReviewDataSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource;
+
+                        /**
+                         * Creates a plain object from a MerchantReviewDataSource message. Also converts values to other types if specified.
+                         * @param message MerchantReviewDataSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MerchantReviewDataSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MerchantReviewDataSource
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

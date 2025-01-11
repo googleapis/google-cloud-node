@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(dataScan, updateMask) {
+function main(dataScan) {
   // [START dataplex_v1_generated_DataScanService_UpdateDataScan_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -34,7 +34,7 @@ function main(dataScan, updateMask) {
    */
   // const dataScan = {}
   /**
-   *  Required. Mask of fields to update.
+   *  Optional. Mask of fields to update.
    */
   // const updateMask = {}
   /**
@@ -53,7 +53,6 @@ function main(dataScan, updateMask) {
     // Construct request
     const request = {
       dataScan,
-      updateMask,
     };
 
     // Run request

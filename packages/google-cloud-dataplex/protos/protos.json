@@ -8918,7 +8918,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "validateOnly": {
@@ -8938,6 +8938,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "dataplex.googleapis.com/DataScan"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -9168,13 +9175,14 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "uid": {
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -9313,11 +9321,17 @@
                           "fields": {
                             "latestJobStartTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "latestJobEndTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 5
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "latestJobCreateTime": {
                               "type": "google.protobuf.Timestamp",
@@ -9356,13 +9370,14 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "uid": {
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },

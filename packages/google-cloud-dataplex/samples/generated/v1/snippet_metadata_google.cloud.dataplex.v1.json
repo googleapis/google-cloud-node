@@ -1046,7 +1046,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 83,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -3266,7 +3266,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -3314,7 +3314,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -3326,6 +3326,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

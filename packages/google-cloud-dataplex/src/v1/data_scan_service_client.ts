@@ -1316,8 +1316,8 @@ export class DataScanServiceClient {
    *   Required. DataScan resource to be updated.
    *
    *   Only fields specified in `update_mask` are updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask of fields to update.
    * @param {boolean} [request.validateOnly]
    *   Optional. Only validate the request, but do not perform mutations.
    *   The default is `false`.
@@ -1460,6 +1460,10 @@ export class DataScanServiceClient {
    *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
    *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any child resources of this data scan will also
+   *   be deleted. (Otherwise, the request will only work if the data scan has no
+   *   child resources.)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

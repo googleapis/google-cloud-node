@@ -121,6 +121,11 @@
                 "insertCssProductInput"
               ]
             },
+            "UpdateCssProductInput": {
+              "methods": [
+                "updateCssProductInput"
+              ]
+            },
             "DeleteCssProductInput": {
               "methods": [
                 "deleteCssProductInput"
@@ -134,6 +139,11 @@
             "InsertCssProductInput": {
               "methods": [
                 "insertCssProductInput"
+              ]
+            },
+            "UpdateCssProductInput": {
+              "methods": [
+                "updateCssProductInput"
               ]
             },
             "DeleteCssProductInput": {

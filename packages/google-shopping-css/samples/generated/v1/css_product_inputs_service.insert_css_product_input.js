@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent, cssProductInput, feedId) {
+function main(parent, cssProductInput) {
   // [START css_v1_generated_CssProductInputsService_InsertCssProductInput_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -38,11 +38,13 @@ function main(parent, cssProductInput, feedId) {
    */
   // const cssProductInput = {}
   /**
-   *  Required. The primary or supplemental feed id. If CSS Product already
-   *  exists and feed id provided is different, then the CSS Product will be
-   *  moved to a new feed. Note: For now, CSSs do not need to provide feed ids as
-   *  we create feeds on the fly. We do not have supplemental feed support for
-   *  CSS Products yet.
+   *  Optional. DEPRECATED. Feed id is not required for CSS Products.
+   *  The primary or supplemental feed id. If CSS Product already exists and
+   *  feed id provided is different, then the CSS Product will be moved to a
+   *  new feed.
+   *  Note: For now, CSSs do not need to provide feed ids as we create
+   *  feeds on the fly.
+   *  We do not have supplemental feed support for CSS Products yet.
    */
   // const feedId = 1234
 
@@ -57,7 +59,6 @@ function main(parent, cssProductInput, feedId) {
     const request = {
       parent,
       cssProductInput,
-      feedId,
     };
 
     // Run request
