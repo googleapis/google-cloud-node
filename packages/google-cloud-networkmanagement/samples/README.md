@@ -18,6 +18,11 @@
   * [Reachability_service.list_connectivity_tests](#reachability_service.list_connectivity_tests)
   * [Reachability_service.rerun_connectivity_test](#reachability_service.rerun_connectivity_test)
   * [Reachability_service.update_connectivity_test](#reachability_service.update_connectivity_test)
+  * [Vpc_flow_logs_service.create_vpc_flow_logs_config](#vpc_flow_logs_service.create_vpc_flow_logs_config)
+  * [Vpc_flow_logs_service.delete_vpc_flow_logs_config](#vpc_flow_logs_service.delete_vpc_flow_logs_config)
+  * [Vpc_flow_logs_service.get_vpc_flow_logs_config](#vpc_flow_logs_service.get_vpc_flow_logs_config)
+  * [Vpc_flow_logs_service.list_vpc_flow_logs_configs](#vpc_flow_logs_service.list_vpc_flow_logs_configs)
+  * [Vpc_flow_logs_service.update_vpc_flow_logs_config](#vpc_flow_logs_service.update_vpc_flow_logs_config)
   * [Reachability_service.create_connectivity_test](#reachability_service.create_connectivity_test)
   * [Reachability_service.delete_connectivity_test](#reachability_service.delete_connectivity_test)
   * [Reachability_service.get_connectivity_test](#reachability_service.get_connectivity_test)
@@ -141,6 +146,91 @@ __Usage:__
 
 
 `node packages/google-cloud-networkmanagement/samples/generated/v1/reachability_service.update_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Vpc_flow_logs_service.create_vpc_flow_logs_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.create_vpc_flow_logs_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.create_vpc_flow_logs_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.create_vpc_flow_logs_config.js`
+
+
+-----
+
+
+
+
+### Vpc_flow_logs_service.delete_vpc_flow_logs_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js`
+
+
+-----
+
+
+
+
+### Vpc_flow_logs_service.get_vpc_flow_logs_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.get_vpc_flow_logs_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.get_vpc_flow_logs_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.get_vpc_flow_logs_config.js`
+
+
+-----
+
+
+
+
+### Vpc_flow_logs_service.list_vpc_flow_logs_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js`
+
+
+-----
+
+
+
+
+### Vpc_flow_logs_service.update_vpc_flow_logs_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js`
 
 
 -----
