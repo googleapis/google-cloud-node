@@ -4198,7 +4198,6 @@
                     "java_package": "com.google.cloud.datacatalog.v1beta1",
                     "php_namespace": "Google\\Cloud\\DataCatalog\\V1beta1",
                     "ruby_package": "Google::Cloud::DataCatalog::V1beta1",
-                    "cc_enable_arenas": true,
                     "(google.api.resource_definition).type": "datacatalog.googleapis.com/TagTemplateFieldEnumValue",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}",
                     "java_outer_classname": "PolicyTagManagerSerializationProto"

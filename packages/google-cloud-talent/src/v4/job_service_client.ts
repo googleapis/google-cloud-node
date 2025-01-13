@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1108,6 +1108,12 @@ export class JobServiceClient {
    *   Defaults to
    *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
    *   if no value is specified.
+   * @param {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold} [request.relevanceThreshold]
+   *   Optional. The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1471,6 +1477,12 @@ export class JobServiceClient {
    *   Defaults to
    *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
    *   if no value is specified.
+   * @param {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold} [request.relevanceThreshold]
+   *   Optional. The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1715,7 +1727,7 @@ export class JobServiceClient {
    *
    *   If {@link protos.google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
    *   is provided, The {@link protos.google.cloud.talent.v4.Job|Job} inside
-   *   {@link protos.JobOperationResult.JobResult|JobResult}
+   *   {@link protos.google.cloud.talent.v4.JobResult|JobResult}
    *   will only contains fields that is updated, plus the Id of the Job.
    *   Otherwise,  {@link protos.google.cloud.talent.v4.Job|Job} will include all fields,
    *   which can yield a very large response.

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.7.0...netapp-v0.8.0) (2025-01-11)
+
+
+### Features
+
+* [netapp] Add ValidateDirectoryService API for testing AD connection of a storage pool ([#5931](https://github.com/googleapis/google-cloud-node/issues/5931)) ([f058d7a](https://github.com/googleapis/google-cloud-node/commit/f058d7a475402e52f8e8d5d4f838d9423f33ffb4))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.6.0...netapp-v0.7.0) (2024-12-18)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-css",
-        "version": "0.6.0",
+        "version": "0.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -342,7 +342,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -372,6 +372,50 @@
                 "method": {
                     "shortName": "InsertCssProductInput",
                     "fullName": "google.shopping.css.v1.CssProductInputsService.InsertCssProductInput",
+                    "service": {
+                        "shortName": "CssProductInputsService",
+                        "fullName": "google.shopping.css.v1.CssProductInputsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "css_v1_generated_CssProductInputsService_UpdateCssProductInput_async",
+            "title": "AccountLabelsService updateCssProductInput Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the existing Css Product input in your CSS Center account. After inserting, updating, or deleting a CSS Product input, it may take several minutes before the processed Css Product can be retrieved.",
+            "canonical": true,
+            "file": "css_product_inputs_service.update_css_product_input.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateCssProductInput",
+                "fullName": "google.shopping.css.v1.CssProductInputsService.UpdateCssProductInput",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "css_product_input",
+                        "type": ".google.shopping.css.v1.CssProductInput"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.shopping.css.v1.CssProductInput",
+                "client": {
+                    "shortName": "CssProductInputsServiceClient",
+                    "fullName": "google.shopping.css.v1.CssProductInputsServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateCssProductInput",
+                    "fullName": "google.shopping.css.v1.CssProductInputsService.UpdateCssProductInput",
                     "service": {
                         "shortName": "CssProductInputsService",
                         "fullName": "google.shopping.css.v1.CssProductInputsService"

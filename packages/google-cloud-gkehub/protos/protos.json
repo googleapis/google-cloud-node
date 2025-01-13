@@ -2476,38 +2476,60 @@
                             "DEPLOYMENT_STATE_UNSPECIFIED": 0,
                             "NOT_INSTALLED": 1,
                             "INSTALLED": 2,
-                            "ERROR": 3
+                            "ERROR": 3,
+                            "PENDING": 4
                           }
                         },
                         "MembershipState": {
                           "fields": {
                             "clusterName": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "membershipSpec": {
                               "type": "MembershipSpec",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "operatorState": {
                               "type": "OperatorState",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "configSyncState": {
                               "type": "ConfigSyncState",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "policyControllerState": {
                               "type": "PolicyControllerState",
-                              "id": 5
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "binauthzState": {
                               "type": "BinauthzState",
-                              "id": 6
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "hierarchyControllerState": {
                               "type": "HierarchyControllerState",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -2515,35 +2537,118 @@
                           "fields": {
                             "configSync": {
                               "type": "ConfigSync",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "policyController": {
                               "type": "PolicyController",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "binauthz": {
                               "type": "BinauthzConfig",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "hierarchyController": {
                               "type": "HierarchyControllerConfig",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "version": {
                               "type": "string",
-                              "id": 10
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "cluster": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "management": {
+                              "type": "Management",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Management": {
+                              "values": {
+                                "MANAGEMENT_UNSPECIFIED": 0,
+                                "MANAGEMENT_AUTOMATIC": 1,
+                                "MANAGEMENT_MANUAL": 2
+                              }
                             }
                           }
                         },
                         "ConfigSync": {
+                          "oneofs": {
+                            "_enabled": {
+                              "oneof": [
+                                "enabled"
+                              ]
+                            }
+                          },
                           "fields": {
                             "git": {
                               "type": "GitConfig",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "sourceFormat": {
                               "type": "string",
-                              "id": 8
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enabled": {
+                              "type": "bool",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "preventDrift": {
+                              "type": "bool",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "oci": {
+                              "type": "OciConfig",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "stopSyncing": {
+                              "type": "bool",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2551,35 +2656,98 @@
                           "fields": {
                             "syncRepo": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "syncBranch": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "policyDir": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "syncWaitSecs": {
                               "type": "int64",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "syncRev": {
                               "type": "string",
-                              "id": 5
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "secretType": {
                               "type": "string",
-                              "id": 6
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "httpsProxy": {
                               "type": "string",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "gcpServiceAccountEmail": {
                               "type": "string",
-                              "id": 8
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "OciConfig": {
+                          "fields": {
+                            "syncRepo": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "policyDir": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "syncWaitSecs": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "secretType": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "gcpServiceAccountEmail": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2627,6 +2795,39 @@
                             "logDeniesEnabled": {
                               "type": "bool",
                               "id": 6
+                            },
+                            "mutationEnabled": {
+                              "type": "bool",
+                              "id": 7
+                            },
+                            "monitoring": {
+                              "type": "PolicyControllerMonitoring",
+                              "id": 8
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "PolicyControllerMonitoring": {
+                          "fields": {
+                            "backends": {
+                              "rule": "repeated",
+                              "type": "MonitoringBackend",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "MonitoringBackend": {
+                              "values": {
+                                "MONITORING_BACKEND_UNSPECIFIED": 0,
+                                "PROMETHEUS": 1,
+                                "CLOUD_MONITORING": 2
+                              }
                             }
                           }
                         },
@@ -2719,15 +2920,103 @@
                           "fields": {
                             "version": {
                               "type": "ConfigSyncVersion",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "deploymentState": {
                               "type": "ConfigSyncDeploymentState",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "syncState": {
                               "type": "SyncState",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errors": {
+                              "rule": "repeated",
+                              "type": "ConfigSyncError",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "rootsyncCrd": {
+                              "type": "CRDState",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "reposyncCrd": {
+                              "type": "CRDState",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "clusterLevelStopSyncingState": {
+                              "type": "StopSyncingState",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "crCount": {
+                              "type": "int32",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "CRDState": {
+                              "values": {
+                                "CRD_STATE_UNSPECIFIED": 0,
+                                "NOT_INSTALLED": 1,
+                                "INSTALLED": 2,
+                                "TERMINATING": 3,
+                                "INSTALLING": 4
+                              }
+                            },
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "CONFIG_SYNC_NOT_INSTALLED": 1,
+                                "CONFIG_SYNC_INSTALLED": 2,
+                                "CONFIG_SYNC_ERROR": 3,
+                                "CONFIG_SYNC_PENDING": 4
+                              }
+                            },
+                            "StopSyncingState": {
+                              "values": {
+                                "STOP_SYNCING_STATE_UNSPECIFIED": 0,
+                                "NOT_STOPPED": 1,
+                                "PENDING": 2,
+                                "STOPPED": 3
+                              }
+                            }
+                          }
+                        },
+                        "ConfigSyncError": {
+                          "fields": {
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 1
                             }
                           }
                         },
@@ -2756,6 +3045,18 @@
                             "rootReconciler": {
                               "type": "string",
                               "id": 6
+                            },
+                            "admissionWebhook": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "resourceGroupControllerManager": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "otelCollector": {
+                              "type": "string",
+                              "id": 9
                             }
                           }
                         },
@@ -2784,6 +3085,18 @@
                             "rootReconciler": {
                               "type": "DeploymentState",
                               "id": 6
+                            },
+                            "admissionWebhook": {
+                              "type": "DeploymentState",
+                              "id": 7
+                            },
+                            "resourceGroupControllerManager": {
+                              "type": "DeploymentState",
+                              "id": 8
+                            },
+                            "otelCollector": {
+                              "type": "DeploymentState",
+                              "id": 9
                             }
                           }
                         },
@@ -2899,6 +3212,10 @@
                             "deploymentState": {
                               "type": "GatekeeperDeploymentState",
                               "id": 2
+                            },
+                            "migration": {
+                              "type": "PolicyControllerMigration",
+                              "id": 4
                             }
                           }
                         },
@@ -2907,6 +3224,27 @@
                             "version": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "PolicyControllerMigration": {
+                          "fields": {
+                            "stage": {
+                              "type": "Stage",
+                              "id": 1
+                            },
+                            "copyTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Stage": {
+                              "values": {
+                                "STAGE_UNSPECIFIED": 0,
+                                "ACM_MANAGED": 1,
+                                "POCO_MANAGED": 2
+                              }
                             }
                           }
                         },
@@ -2939,6 +3277,10 @@
                             "gatekeeperAudit": {
                               "type": "DeploymentState",
                               "id": 2
+                            },
+                            "gatekeeperMutation": {
+                              "type": "DeploymentState",
+                              "id": 3
                             }
                           }
                         }

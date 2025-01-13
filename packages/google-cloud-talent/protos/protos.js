@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15004,6 +15004,7 @@
                          * @property {google.cloud.talent.v4.SearchJobsRequest.ICustomRankingInfo|null} [customRankingInfo] SearchJobsRequest customRankingInfo
                          * @property {boolean|null} [disableKeywordMatch] SearchJobsRequest disableKeywordMatch
                          * @property {google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode|null} [keywordMatchMode] SearchJobsRequest keywordMatchMode
+                         * @property {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold|null} [relevanceThreshold] SearchJobsRequest relevanceThreshold
                          */
     
                         /**
@@ -15143,6 +15144,14 @@
                         SearchJobsRequest.prototype.keywordMatchMode = 0;
     
                         /**
+                         * SearchJobsRequest relevanceThreshold.
+                         * @member {google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold} relevanceThreshold
+                         * @memberof google.cloud.talent.v4.SearchJobsRequest
+                         * @instance
+                         */
+                        SearchJobsRequest.prototype.relevanceThreshold = 0;
+    
+                        /**
                          * Creates a new SearchJobsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.talent.v4.SearchJobsRequest
@@ -15197,6 +15206,8 @@
                                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.disableKeywordMatch);
                             if (message.keywordMatchMode != null && Object.hasOwnProperty.call(message, "keywordMatchMode"))
                                 writer.uint32(/* id 18, wireType 0 =*/144).int32(message.keywordMatchMode);
+                            if (message.relevanceThreshold != null && Object.hasOwnProperty.call(message, "relevanceThreshold"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.relevanceThreshold);
                             return writer;
                         };
     
@@ -15291,6 +15302,10 @@
                                     }
                                 case 18: {
                                         message.keywordMatchMode = reader.int32();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.relevanceThreshold = reader.int32();
                                         break;
                                     }
                                 default:
@@ -15414,6 +15429,17 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                    break;
+                                }
+                            if (message.relevanceThreshold != null && message.hasOwnProperty("relevanceThreshold"))
+                                switch (message.relevanceThreshold) {
+                                default:
+                                    return "relevanceThreshold: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -15578,6 +15604,34 @@
                                 message.keywordMatchMode = 3;
                                 break;
                             }
+                            switch (object.relevanceThreshold) {
+                            default:
+                                if (typeof object.relevanceThreshold === "number") {
+                                    message.relevanceThreshold = object.relevanceThreshold;
+                                    break;
+                                }
+                                break;
+                            case "RELEVANCE_THRESHOLD_UNSPECIFIED":
+                            case 0:
+                                message.relevanceThreshold = 0;
+                                break;
+                            case "LOWEST":
+                            case 1:
+                                message.relevanceThreshold = 1;
+                                break;
+                            case "LOW":
+                            case 2:
+                                message.relevanceThreshold = 2;
+                                break;
+                            case "MEDIUM":
+                            case 3:
+                                message.relevanceThreshold = 3;
+                                break;
+                            case "HIGH":
+                            case 4:
+                                message.relevanceThreshold = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -15611,6 +15665,7 @@
                                 object.customRankingInfo = null;
                                 object.disableKeywordMatch = false;
                                 object.keywordMatchMode = options.enums === String ? "KEYWORD_MATCH_MODE_UNSPECIFIED" : 0;
+                                object.relevanceThreshold = options.enums === String ? "RELEVANCE_THRESHOLD_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -15645,6 +15700,8 @@
                                 object.disableKeywordMatch = message.disableKeywordMatch;
                             if (message.keywordMatchMode != null && message.hasOwnProperty("keywordMatchMode"))
                                 object.keywordMatchMode = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] === undefined ? message.keywordMatchMode : $root.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] : message.keywordMatchMode;
+                            if (message.relevanceThreshold != null && message.hasOwnProperty("relevanceThreshold"))
+                                object.relevanceThreshold = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold[message.relevanceThreshold] === undefined ? message.relevanceThreshold : $root.google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold[message.relevanceThreshold] : message.relevanceThreshold;
                             return object;
                         };
     
@@ -15729,6 +15786,26 @@
                             values[valuesById[1] = "KEYWORD_MATCH_DISABLED"] = 1;
                             values[valuesById[2] = "KEYWORD_MATCH_ALL"] = 2;
                             values[valuesById[3] = "KEYWORD_MATCH_TITLE_ONLY"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * RelevanceThreshold enum.
+                         * @name google.cloud.talent.v4.SearchJobsRequest.RelevanceThreshold
+                         * @enum {number}
+                         * @property {number} RELEVANCE_THRESHOLD_UNSPECIFIED=0 RELEVANCE_THRESHOLD_UNSPECIFIED value
+                         * @property {number} LOWEST=1 LOWEST value
+                         * @property {number} LOW=2 LOW value
+                         * @property {number} MEDIUM=3 MEDIUM value
+                         * @property {number} HIGH=4 HIGH value
+                         */
+                        SearchJobsRequest.RelevanceThreshold = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RELEVANCE_THRESHOLD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LOWEST"] = 1;
+                            values[valuesById[2] = "LOW"] = 2;
+                            values[valuesById[3] = "MEDIUM"] = 3;
+                            values[valuesById[4] = "HIGH"] = 4;
                             return values;
                         })();
     
@@ -35737,6 +35814,7 @@
                          * @property {google.cloud.talent.v4beta1.SearchJobsRequest.ICustomRankingInfo|null} [customRankingInfo] SearchJobsRequest customRankingInfo
                          * @property {boolean|null} [disableKeywordMatch] SearchJobsRequest disableKeywordMatch
                          * @property {google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode|null} [keywordMatchMode] SearchJobsRequest keywordMatchMode
+                         * @property {google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold|null} [relevanceThreshold] SearchJobsRequest relevanceThreshold
                          */
     
                         /**
@@ -35884,6 +35962,14 @@
                         SearchJobsRequest.prototype.keywordMatchMode = 0;
     
                         /**
+                         * SearchJobsRequest relevanceThreshold.
+                         * @member {google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold} relevanceThreshold
+                         * @memberof google.cloud.talent.v4beta1.SearchJobsRequest
+                         * @instance
+                         */
+                        SearchJobsRequest.prototype.relevanceThreshold = 0;
+    
+                        /**
                          * Creates a new SearchJobsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.talent.v4beta1.SearchJobsRequest
@@ -35940,6 +36026,8 @@
                                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.disableKeywordMatch);
                             if (message.keywordMatchMode != null && Object.hasOwnProperty.call(message, "keywordMatchMode"))
                                 writer.uint32(/* id 18, wireType 0 =*/144).int32(message.keywordMatchMode);
+                            if (message.relevanceThreshold != null && Object.hasOwnProperty.call(message, "relevanceThreshold"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.relevanceThreshold);
                             return writer;
                         };
     
@@ -36038,6 +36126,10 @@
                                     }
                                 case 18: {
                                         message.keywordMatchMode = reader.int32();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.relevanceThreshold = reader.int32();
                                         break;
                                     }
                                 default:
@@ -36160,6 +36252,17 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                    break;
+                                }
+                            if (message.relevanceThreshold != null && message.hasOwnProperty("relevanceThreshold"))
+                                switch (message.relevanceThreshold) {
+                                default:
+                                    return "relevanceThreshold: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -36310,6 +36413,34 @@
                                 message.keywordMatchMode = 3;
                                 break;
                             }
+                            switch (object.relevanceThreshold) {
+                            default:
+                                if (typeof object.relevanceThreshold === "number") {
+                                    message.relevanceThreshold = object.relevanceThreshold;
+                                    break;
+                                }
+                                break;
+                            case "RELEVANCE_THRESHOLD_UNSPECIFIED":
+                            case 0:
+                                message.relevanceThreshold = 0;
+                                break;
+                            case "LOWEST":
+                            case 1:
+                                message.relevanceThreshold = 1;
+                                break;
+                            case "LOW":
+                            case 2:
+                                message.relevanceThreshold = 2;
+                                break;
+                            case "MEDIUM":
+                            case 3:
+                                message.relevanceThreshold = 3;
+                                break;
+                            case "HIGH":
+                            case 4:
+                                message.relevanceThreshold = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -36344,6 +36475,7 @@
                                 object.customRankingInfo = null;
                                 object.disableKeywordMatch = false;
                                 object.keywordMatchMode = options.enums === String ? "KEYWORD_MATCH_MODE_UNSPECIFIED" : 0;
+                                object.relevanceThreshold = options.enums === String ? "RELEVANCE_THRESHOLD_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -36380,6 +36512,8 @@
                                 object.disableKeywordMatch = message.disableKeywordMatch;
                             if (message.keywordMatchMode != null && message.hasOwnProperty("keywordMatchMode"))
                                 object.keywordMatchMode = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] === undefined ? message.keywordMatchMode : $root.google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] : message.keywordMatchMode;
+                            if (message.relevanceThreshold != null && message.hasOwnProperty("relevanceThreshold"))
+                                object.relevanceThreshold = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold[message.relevanceThreshold] === undefined ? message.relevanceThreshold : $root.google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold[message.relevanceThreshold] : message.relevanceThreshold;
                             return object;
                         };
     
@@ -36456,6 +36590,26 @@
                             values[valuesById[1] = "KEYWORD_MATCH_DISABLED"] = 1;
                             values[valuesById[2] = "KEYWORD_MATCH_ALL"] = 2;
                             values[valuesById[3] = "KEYWORD_MATCH_TITLE_ONLY"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * RelevanceThreshold enum.
+                         * @name google.cloud.talent.v4beta1.SearchJobsRequest.RelevanceThreshold
+                         * @enum {number}
+                         * @property {number} RELEVANCE_THRESHOLD_UNSPECIFIED=0 RELEVANCE_THRESHOLD_UNSPECIFIED value
+                         * @property {number} LOWEST=1 LOWEST value
+                         * @property {number} LOW=2 LOW value
+                         * @property {number} MEDIUM=3 MEDIUM value
+                         * @property {number} HIGH=4 HIGH value
+                         */
+                        SearchJobsRequest.RelevanceThreshold = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RELEVANCE_THRESHOLD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LOWEST"] = 1;
+                            values[valuesById[2] = "LOW"] = 2;
+                            values[valuesById[3] = "MEDIUM"] = 3;
+                            values[valuesById[4] = "HIGH"] = 4;
                             return values;
                         })();
     

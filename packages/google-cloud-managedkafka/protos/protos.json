@@ -18,8 +18,8 @@
                     "java_package": "com.google.cloud.managedkafka.v1",
                     "php_namespace": "Google\\Cloud\\ManagedKafka\\V1",
                     "ruby_package": "Google::Cloud::ManagedKafka::V1",
-                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
+                    "(google.api.resource_definition).type": "secretmanager.googleapis.com/SecretVersion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/secrets/{secret}/versions/{secret_version}"
                   },
                   "nested": {
                     "ManagedKafka": {

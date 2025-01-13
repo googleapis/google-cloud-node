@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.12.0...dataplex-v3.13.0) (2025-01-11)
+
+
+### Features
+
+* [dataplex] A new field `force` is added to message `.google.cloud.dataplex.v1.DeleteDataScanRequest` ([#5902](https://github.com/googleapis/google-cloud-node/issues/5902)) ([cb0f5d4](https://github.com/googleapis/google-cloud-node/commit/cb0f5d4d13496f147d057c23fc7926bf4a133b7b))
+
 ## [3.12.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.11.0...dataplex-v3.12.0) (2024-11-21)
 
 

@@ -90,7 +90,8 @@
                         "MP3": 2,
                         "OGG_OPUS": 3,
                         "MULAW": 5,
-                        "ALAW": 6
+                        "ALAW": 6,
+                        "PCM": 7
                       }
                     },
                     "ListVoicesRequest": {
@@ -440,6 +441,24 @@
                         }
                       }
                     },
+                    "StreamingAudioConfig": {
+                      "fields": {
+                        "audioEncoding": {
+                          "type": "AudioEncoding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sampleRateHertz": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "StreamingSynthesizeConfig": {
                       "fields": {
                         "voice": {
@@ -447,6 +466,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "streamingAudioConfig": {
+                          "type": "StreamingAudioConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

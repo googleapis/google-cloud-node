@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28404,6 +28404,9 @@ export namespace google {
 
                     /** DeleteDataScanRequest name */
                     name?: (string|null);
+
+                    /** DeleteDataScanRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteDataScanRequest. */
@@ -28417,6 +28420,9 @@ export namespace google {
 
                     /** DeleteDataScanRequest name. */
                     public name: string;
+
+                    /** DeleteDataScanRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteDataScanRequest instance using the specified properties.

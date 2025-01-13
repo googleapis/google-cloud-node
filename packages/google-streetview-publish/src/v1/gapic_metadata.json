@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.streetview.publish.v1",
-  "libraryPackage": "@googlemaps/streetview-publish",
+  "libraryPackage": "@google-cloud/publish",
   "services": {
     "StreetViewPublishService": {
       "clients": {
