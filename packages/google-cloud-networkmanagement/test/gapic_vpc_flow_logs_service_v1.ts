@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as reachabilityserviceModule from '../src';
+import * as vpcflowlogsserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -165,18 +165,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.ReachabilityServiceClient', () => {
+describe('v1.VpcFlowLogsServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client =
-        new reachabilityserviceModule.v1.ReachabilityServiceClient();
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'networkmanagement.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client =
-        new reachabilityserviceModule.v1.ReachabilityServiceClient();
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -188,7 +186,7 @@ describe('v1.ReachabilityServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          reachabilityserviceModule.v1.ReachabilityServiceClient.servicePath;
+          vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient.servicePath;
         assert.strictEqual(servicePath, 'networkmanagement.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -197,24 +195,24 @@ describe('v1.ReachabilityServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          reachabilityserviceModule.v1.ReachabilityServiceClient.apiEndpoint;
+          vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'networkmanagement.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {universeDomain: 'example.com'}
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        universeDomain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'networkmanagement.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {universe_domain: 'example.com'}
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        universe_domain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'networkmanagement.example.com');
     });
@@ -225,7 +223,7 @@ describe('v1.ReachabilityServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new reachabilityserviceModule.v1.ReachabilityServiceClient();
+            new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'networkmanagement.example.com');
           if (saved) {
@@ -239,7 +237,7 @@ describe('v1.ReachabilityServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new reachabilityserviceModule.v1.ReachabilityServiceClient({
+            new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
               universeDomain: 'configured.example.com',
             });
           const servicePath = client.apiEndpoint;
@@ -257,7 +255,7 @@ describe('v1.ReachabilityServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new reachabilityserviceModule.v1.ReachabilityServiceClient({
+        new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -265,60 +263,51 @@ describe('v1.ReachabilityServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = reachabilityserviceModule.v1.ReachabilityServiceClient.port;
+      const port = vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new reachabilityserviceModule.v1.ReachabilityServiceClient();
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          fallback: true,
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.reachabilityServiceStub, undefined);
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.vpcFlowLogsServiceStub, undefined);
       await client.initialize();
-      assert(client.reachabilityServiceStub);
+      assert(client.vpcFlowLogsServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
-      assert(client.reachabilityServiceStub);
+      assert(client.vpcFlowLogsServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.reachabilityServiceStub, undefined);
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.vpcFlowLogsServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -326,12 +315,10 @@ describe('v1.ReachabilityServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -340,12 +327,10 @@ describe('v1.ReachabilityServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -363,69 +348,65 @@ describe('v1.ReachabilityServiceClient', () => {
     });
   });
 
-  describe('getConnectivityTest', () => {
-    it('invokes getConnectivityTest without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('getVpcFlowLogsConfig', () => {
+    it('invokes getVpcFlowLogsConfig without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+        new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
       );
-      client.innerApiCalls.getConnectivityTest =
+      client.innerApiCalls.getVpcFlowLogsConfig =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.getConnectivityTest(request);
+      const [response] = await client.getVpcFlowLogsConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getConnectivityTest as SinonStub
+        client.innerApiCalls.getVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getConnectivityTest as SinonStub
+        client.innerApiCalls.getVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getConnectivityTest without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getVpcFlowLogsConfig without error using callback', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+        new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
       );
-      client.innerApiCalls.getConnectivityTest =
+      client.innerApiCalls.getVpcFlowLogsConfig =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getConnectivityTest(
+        client.getVpcFlowLogsConfig(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.networkmanagement.v1.IConnectivityTest | null
+            result?: protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -438,84 +419,78 @@ describe('v1.ReachabilityServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getConnectivityTest as SinonStub
+        client.innerApiCalls.getVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getConnectivityTest as SinonStub
+        client.innerApiCalls.getVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getConnectivityTest with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getVpcFlowLogsConfig with error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getConnectivityTest = stubSimpleCall(
+      client.innerApiCalls.getVpcFlowLogsConfig = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getConnectivityTest(request), expectedError);
+      await assert.rejects(client.getVpcFlowLogsConfig(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getConnectivityTest as SinonStub
+        client.innerApiCalls.getVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getConnectivityTest as SinonStub
+        client.innerApiCalls.getVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getConnectivityTest with closed client', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getVpcFlowLogsConfig with closed client', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getConnectivityTest(request), expectedError);
+      await assert.rejects(client.getVpcFlowLogsConfig(request), expectedError);
     });
   });
 
-  describe('createConnectivityTest', () => {
-    it('invokes createConnectivityTest without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('createVpcFlowLogsConfig', () => {
+    it('invokes createVpcFlowLogsConfig without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -523,34 +498,32 @@ describe('v1.ReachabilityServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createConnectivityTest =
+      client.innerApiCalls.createVpcFlowLogsConfig =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createConnectivityTest(request);
+      const [operation] = await client.createVpcFlowLogsConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createConnectivityTest without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes createVpcFlowLogsConfig without error using callback', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -558,15 +531,15 @@ describe('v1.ReachabilityServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createConnectivityTest =
+      client.innerApiCalls.createVpcFlowLogsConfig =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createConnectivityTest(
+        client.createVpcFlowLogsConfig(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networkmanagement.v1.IConnectivityTest,
+              protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
               protos.google.cloud.networkmanagement.v1.IOperationMetadata
             > | null
           ) => {
@@ -579,99 +552,93 @@ describe('v1.ReachabilityServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createConnectivityTest with call error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes createVpcFlowLogsConfig with call error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createConnectivityTest = stubLongRunningCall(
+      client.innerApiCalls.createVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(
-        client.createConnectivityTest(request),
+        client.createVpcFlowLogsConfig(request),
         expectedError
       );
       const actualRequest = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createConnectivityTest with LRO error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes createVpcFlowLogsConfig with LRO error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createConnectivityTest = stubLongRunningCall(
+      client.innerApiCalls.createVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.createConnectivityTest(request);
+      const [operation] = await client.createVpcFlowLogsConfig(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createConnectivityTest as SinonStub
+        client.innerApiCalls.createVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkCreateConnectivityTestProgress without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes checkCreateVpcFlowLogsConfigProgress without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -681,21 +648,20 @@ describe('v1.ReachabilityServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateConnectivityTestProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkCreateVpcFlowLogsConfigProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkCreateConnectivityTestProgress with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes checkCreateVpcFlowLogsConfigProgress with error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -704,80 +670,76 @@ describe('v1.ReachabilityServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkCreateConnectivityTestProgress(''),
+        client.checkCreateVpcFlowLogsConfigProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('updateConnectivityTest', () => {
-    it('invokes updateConnectivityTest without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('updateVpcFlowLogsConfig', () => {
+    it('invokes updateVpcFlowLogsConfig without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest()
       );
-      request.resource ??= {};
+      request.vpcFlowLogsConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
-        ['resource', 'name']
+        '.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest',
+        ['vpcFlowLogsConfig', 'name']
       );
-      request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
+      request.vpcFlowLogsConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateConnectivityTest =
+      client.innerApiCalls.updateVpcFlowLogsConfig =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateConnectivityTest(request);
+      const [operation] = await client.updateVpcFlowLogsConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateConnectivityTest without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes updateVpcFlowLogsConfig without error using callback', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest()
       );
-      request.resource ??= {};
+      request.vpcFlowLogsConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
-        ['resource', 'name']
+        '.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest',
+        ['vpcFlowLogsConfig', 'name']
       );
-      request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
+      request.vpcFlowLogsConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateConnectivityTest =
+      client.innerApiCalls.updateVpcFlowLogsConfig =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateConnectivityTest(
+        client.updateVpcFlowLogsConfig(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.networkmanagement.v1.IConnectivityTest,
+              protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
               protos.google.cloud.networkmanagement.v1.IOperationMetadata
             > | null
           ) => {
@@ -790,310 +752,95 @@ describe('v1.ReachabilityServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateConnectivityTest with call error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
-      );
-      request.resource ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
-        ['resource', 'name']
-      );
-      request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConnectivityTest = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateConnectivityTest(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConnectivityTest with LRO error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
-      );
-      request.resource ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
-        ['resource', 'name']
-      );
-      request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConnectivityTest = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateConnectivityTest(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConnectivityTest as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateConnectivityTestProgress without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateConnectivityTestProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateConnectivityTestProgress with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateConnectivityTestProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('rerunConnectivityTest', () => {
-    it('invokes rerunConnectivityTest without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.rerunConnectivityTest =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.rerunConnectivityTest(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rerunConnectivityTest without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.rerunConnectivityTest =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.rerunConnectivityTest(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.networkmanagement.v1.IConnectivityTest,
-              protos.google.cloud.networkmanagement.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
+    it('invokes updateVpcFlowLogsConfig with call error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rerunConnectivityTest with call error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest()
       );
+      request.vpcFlowLogsConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
-        ['name']
+        '.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest',
+        ['vpcFlowLogsConfig', 'name']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.vpcFlowLogsConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.rerunConnectivityTest = stubLongRunningCall(
+      client.innerApiCalls.updateVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(
-        client.rerunConnectivityTest(request),
+        client.updateVpcFlowLogsConfig(request),
         expectedError
       );
       const actualRequest = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes rerunConnectivityTest with LRO error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes updateVpcFlowLogsConfig with LRO error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest()
       );
+      request.vpcFlowLogsConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
-        ['name']
+        '.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest',
+        ['vpcFlowLogsConfig', 'name']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.vpcFlowLogsConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `vpc_flow_logs_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.rerunConnectivityTest = stubLongRunningCall(
+      client.innerApiCalls.updateVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.rerunConnectivityTest(request);
+      const [operation] = await client.updateVpcFlowLogsConfig(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.rerunConnectivityTest as SinonStub
+        client.innerApiCalls.updateVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkRerunConnectivityTestProgress without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes checkUpdateVpcFlowLogsConfigProgress without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1103,21 +850,20 @@ describe('v1.ReachabilityServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRerunConnectivityTestProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkUpdateVpcFlowLogsConfigProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkRerunConnectivityTestProgress with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes checkUpdateVpcFlowLogsConfigProgress with error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1126,27 +872,25 @@ describe('v1.ReachabilityServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkRerunConnectivityTestProgress(''),
+        client.checkUpdateVpcFlowLogsConfigProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('deleteConnectivityTest', () => {
-    it('invokes deleteConnectivityTest without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('deleteVpcFlowLogsConfig', () => {
+    it('invokes deleteVpcFlowLogsConfig without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1154,34 +898,32 @@ describe('v1.ReachabilityServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteConnectivityTest =
+      client.innerApiCalls.deleteVpcFlowLogsConfig =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteConnectivityTest(request);
+      const [operation] = await client.deleteVpcFlowLogsConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteConnectivityTest without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes deleteVpcFlowLogsConfig without error using callback', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1189,10 +931,10 @@ describe('v1.ReachabilityServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteConnectivityTest =
+      client.innerApiCalls.deleteVpcFlowLogsConfig =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteConnectivityTest(
+        client.deleteVpcFlowLogsConfig(
           request,
           (
             err?: Error | null,
@@ -1216,93 +958,87 @@ describe('v1.ReachabilityServiceClient', () => {
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteConnectivityTest with call error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes deleteVpcFlowLogsConfig with call error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConnectivityTest = stubLongRunningCall(
+      client.innerApiCalls.deleteVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(
-        client.deleteConnectivityTest(request),
+        client.deleteVpcFlowLogsConfig(request),
         expectedError
       );
       const actualRequest = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteConnectivityTest with LRO error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes deleteVpcFlowLogsConfig with LRO error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
+        new protos.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConnectivityTest = stubLongRunningCall(
+      client.innerApiCalls.deleteVpcFlowLogsConfig = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.deleteConnectivityTest(request);
+      const [operation] = await client.deleteVpcFlowLogsConfig(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConnectivityTest as SinonStub
+        client.innerApiCalls.deleteVpcFlowLogsConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkDeleteConnectivityTestProgress without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes checkDeleteVpcFlowLogsConfigProgress without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1312,21 +1048,20 @@ describe('v1.ReachabilityServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteConnectivityTestProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkDeleteVpcFlowLogsConfigProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkDeleteConnectivityTestProgress with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes checkDeleteVpcFlowLogsConfigProgress with error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1335,93 +1070,89 @@ describe('v1.ReachabilityServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkDeleteConnectivityTestProgress(''),
+        client.checkDeleteVpcFlowLogsConfigProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('listConnectivityTests', () => {
-    it('invokes listConnectivityTests without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('listVpcFlowLogsConfigs', () => {
+    it('invokes listVpcFlowLogsConfigs without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
+        new protos.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
       ];
-      client.innerApiCalls.listConnectivityTests =
+      client.innerApiCalls.listVpcFlowLogsConfigs =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listConnectivityTests(request);
+      const [response] = await client.listVpcFlowLogsConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listConnectivityTests as SinonStub
+        client.innerApiCalls.listVpcFlowLogsConfigs as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listConnectivityTests as SinonStub
+        client.innerApiCalls.listVpcFlowLogsConfigs as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listConnectivityTests without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes listVpcFlowLogsConfigs without error using callback', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
+        new protos.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
       ];
-      client.innerApiCalls.listConnectivityTests =
+      client.innerApiCalls.listVpcFlowLogsConfigs =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listConnectivityTests(
+        client.listVpcFlowLogsConfigs(
           request,
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkmanagement.v1.IConnectivityTest[]
+              | protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[]
               | null
           ) => {
             if (err) {
@@ -1435,89 +1166,85 @@ describe('v1.ReachabilityServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listConnectivityTests as SinonStub
+        client.innerApiCalls.listVpcFlowLogsConfigs as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listConnectivityTests as SinonStub
+        client.innerApiCalls.listVpcFlowLogsConfigs as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listConnectivityTests with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes listVpcFlowLogsConfigs with error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
+        new protos.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listConnectivityTests = stubSimpleCall(
+      client.innerApiCalls.listVpcFlowLogsConfigs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(
-        client.listConnectivityTests(request),
+        client.listVpcFlowLogsConfigs(request),
         expectedError
       );
       const actualRequest = (
-        client.innerApiCalls.listConnectivityTests as SinonStub
+        client.innerApiCalls.listVpcFlowLogsConfigs as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listConnectivityTests as SinonStub
+        client.innerApiCalls.listVpcFlowLogsConfigs as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listConnectivityTestsStream without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes listVpcFlowLogsConfigsStream without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
+        new protos.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
       ];
-      client.descriptors.page.listConnectivityTests.createStream =
+      client.descriptors.page.listVpcFlowLogsConfigs.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listConnectivityTestsStream(request);
+      const stream = client.listVpcFlowLogsConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkmanagement.v1.ConnectivityTest[] =
+        const responses: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networkmanagement.v1.ConnectivityTest
+            response: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig
           ) => {
             responses.push(response);
           }
@@ -1533,15 +1260,15 @@ describe('v1.ReachabilityServiceClient', () => {
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .createStream as SinonStub
         )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listConnectivityTests, request)
+          .calledWith(client.innerApiCalls.listVpcFlowLogsConfigs, request)
       );
       assert(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .createStream as SinonStub
         )
           .getCall(0)
@@ -1551,34 +1278,32 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
 
-    it('invokes listConnectivityTestsStream with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes listVpcFlowLogsConfigsStream with error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
+        new protos.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listConnectivityTests.createStream =
+      client.descriptors.page.listVpcFlowLogsConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listConnectivityTestsStream(request);
+      const stream = client.listVpcFlowLogsConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkmanagement.v1.ConnectivityTest[] =
+        const responses: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.networkmanagement.v1.ConnectivityTest
+            response: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig
           ) => {
             responses.push(response);
           }
@@ -1593,15 +1318,15 @@ describe('v1.ReachabilityServiceClient', () => {
       await assert.rejects(promise, expectedError);
       assert(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .createStream as SinonStub
         )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listConnectivityTests, request)
+          .calledWith(client.innerApiCalls.listVpcFlowLogsConfigs, request)
       );
       assert(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .createStream as SinonStub
         )
           .getCall(0)
@@ -1611,53 +1336,51 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listConnectivityTests without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('uses async iteration with listVpcFlowLogsConfigs without error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
+        new protos.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
         generateSampleMessage(
-          new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
+          new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()
         ),
       ];
-      client.descriptors.page.listConnectivityTests.asyncIterate =
+      client.descriptors.page.listVpcFlowLogsConfigs.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.networkmanagement.v1.IConnectivityTest[] =
+      const responses: protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[] =
         [];
-      const iterable = client.listConnectivityTestsAsync(request);
+      const iterable = client.listVpcFlowLogsConfigsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .asyncIterate as SinonStub
         )
           .getCall(0)
@@ -1667,29 +1390,27 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listConnectivityTests with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('uses async iteration with listVpcFlowLogsConfigs with error', async () => {
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
+        new protos.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listConnectivityTests.asyncIterate =
+      client.descriptors.page.listVpcFlowLogsConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listConnectivityTestsAsync(request);
+      const iterable = client.listVpcFlowLogsConfigsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.networkmanagement.v1.IConnectivityTest[] =
+        const responses: protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1697,14 +1418,14 @@ describe('v1.ReachabilityServiceClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
         (
-          client.descriptors.page.listConnectivityTests
+          client.descriptors.page.listVpcFlowLogsConfigs
             .asyncIterate as SinonStub
         )
           .getCall(0)
@@ -1716,12 +1437,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1748,12 +1467,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1794,12 +1511,10 @@ describe('v1.ReachabilityServiceClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1828,12 +1543,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1860,12 +1573,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1906,12 +1617,10 @@ describe('v1.ReachabilityServiceClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1940,12 +1649,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1975,12 +1682,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -2021,12 +1726,10 @@ describe('v1.ReachabilityServiceClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -2058,12 +1761,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2090,12 +1791,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2136,12 +1835,10 @@ describe('v1.ReachabilityServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2173,12 +1870,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -2223,12 +1918,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -2266,12 +1959,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
@@ -2289,12 +1980,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2325,12 +2014,10 @@ describe('v1.ReachabilityServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2351,12 +2038,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
@@ -2375,12 +2060,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2411,12 +2094,10 @@ describe('v1.ReachabilityServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2437,12 +2118,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
@@ -2461,12 +2140,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2497,12 +2174,10 @@ describe('v1.ReachabilityServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2523,12 +2198,10 @@ describe('v1.ReachabilityServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2561,12 +2234,10 @@ describe('v1.ReachabilityServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
@@ -2599,12 +2270,10 @@ describe('v1.ReachabilityServiceClient', () => {
         project: 'projectValue',
         test: 'testValue',
       };
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.connectivityTestPathTemplate.render = sinon
         .stub()
@@ -2647,17 +2316,64 @@ describe('v1.ReachabilityServiceClient', () => {
       });
     });
 
+    describe('location', () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -2694,12 +2410,10 @@ describe('v1.ReachabilityServiceClient', () => {
         location: 'locationValue',
         vpc_flow_logs_config: 'vpcFlowLogsConfigValue',
       };
-      const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.vpcFlowLogsConfigPathTemplate.render = sinon
         .stub()
