@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-v0.2.0...fleetengine-v0.3.0) (2025-01-11)
+
+
+### Features
+
+* [fleetengine] add active_only field to ListMetricDescriptorsRequest ([#5938](https://github.com/googleapis/google-cloud-node/issues/5938)) ([f9b684e](https://github.com/googleapis/google-cloud-node/commit/f9b684e096530a5e92c69402bbda9128006776fa))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-v0.1.0...fleetengine-v0.2.0) (2024-10-10)
 
 

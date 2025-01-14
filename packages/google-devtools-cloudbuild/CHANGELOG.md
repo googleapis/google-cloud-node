@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.7.0...cloudbuild-v4.8.0) (2025-01-11)
+
+
+### Features
+
+* [cloudbuild] Add option to enable structured logging ([#5934](https://github.com/googleapis/google-cloud-node/issues/5934)) ([36be8cd](https://github.com/googleapis/google-cloud-node/commit/36be8cdce58807b3ca02b31d9b4cf950ba386063))
+
 ## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.6.0...cloudbuild-v4.7.0) (2024-10-30)
 
 

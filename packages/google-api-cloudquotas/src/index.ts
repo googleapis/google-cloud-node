@@ -17,11 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1beta from './v1beta';
 
 const CloudQuotasClient = v1.CloudQuotasClient;
 type CloudQuotasClient = v1.CloudQuotasClient;
 
-export {v1, CloudQuotasClient};
-export default {v1, CloudQuotasClient};
+export {v1, v1beta, CloudQuotasClient};
+export default {v1, v1beta, CloudQuotasClient};
 import * as protos from '../protos/protos';
 export {protos};

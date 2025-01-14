@@ -35,6 +35,8 @@ function main(name, query) {
   // const name = 'abc123'
   /**
    *  Required. The query against which entries in scope should be matched.
+   *  The query syntax is defined in Search syntax for Dataplex
+   *  Catalog (https://cloud.google.com/dataplex/docs/search-syntax).
    */
   // const query = 'abc123'
   /**
@@ -50,6 +52,10 @@ function main(name, query) {
   // const pageToken = 'abc123'
   /**
    *  Optional. Specifies the ordering of results.
+   *  Supported values are:
+   *  * `relevance` (default)
+   *  * `last_modified_timestamp`
+   *  * `last_modified_timestamp asc`
    */
   // const orderBy = 'abc123'
   /**

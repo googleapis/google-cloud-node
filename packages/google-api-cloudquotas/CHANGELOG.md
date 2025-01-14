@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.5.0...cloudquotas-v0.6.0) (2025-01-11)
+
+
+### Features
+
+* [cloudquotas] Add v1beta client libraries for cloudquotas API ([#5927](https://github.com/googleapis/google-cloud-node/issues/5927)) ([e14659f](https://github.com/googleapis/google-cloud-node/commit/e14659f200d28f9ea34258682ed781909b039ea5))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.4.0...cloudquotas-v0.5.0) (2024-11-14)
 
 

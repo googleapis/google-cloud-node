@@ -399,6 +399,151 @@ describe('v1.CssProductInputsServiceClient', () => {
     });
   });
 
+  describe('updateCssProductInput', () => {
+    it('invokes updateCssProductInput without error', async () => {
+      const client =
+        new cssproductinputsserviceModule.v1.CssProductInputsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.css.v1.UpdateCssProductInputRequest()
+      );
+      request.cssProductInput ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.css.v1.UpdateCssProductInputRequest',
+        ['cssProductInput', 'name']
+      );
+      request.cssProductInput.name = defaultValue1;
+      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.css.v1.CssProductInput()
+      );
+      client.innerApiCalls.updateCssProductInput =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCssProductInput(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCssProductInput as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCssProductInput as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCssProductInput without error using callback', async () => {
+      const client =
+        new cssproductinputsserviceModule.v1.CssProductInputsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.css.v1.UpdateCssProductInputRequest()
+      );
+      request.cssProductInput ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.css.v1.UpdateCssProductInputRequest',
+        ['cssProductInput', 'name']
+      );
+      request.cssProductInput.name = defaultValue1;
+      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.css.v1.CssProductInput()
+      );
+      client.innerApiCalls.updateCssProductInput =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCssProductInput(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.shopping.css.v1.ICssProductInput | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCssProductInput as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCssProductInput as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCssProductInput with error', async () => {
+      const client =
+        new cssproductinputsserviceModule.v1.CssProductInputsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.css.v1.UpdateCssProductInputRequest()
+      );
+      request.cssProductInput ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.css.v1.UpdateCssProductInputRequest',
+        ['cssProductInput', 'name']
+      );
+      request.cssProductInput.name = defaultValue1;
+      const expectedHeaderRequestParams = `css_product_input.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCssProductInput = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateCssProductInput(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateCssProductInput as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCssProductInput as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCssProductInput with closed client', async () => {
+      const client =
+        new cssproductinputsserviceModule.v1.CssProductInputsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.css.v1.UpdateCssProductInputRequest()
+      );
+      request.cssProductInput ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.css.v1.UpdateCssProductInputRequest',
+        ['cssProductInput', 'name']
+      );
+      request.cssProductInput.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateCssProductInput(request),
+        expectedError
+      );
+    });
+  });
+
   describe('deleteCssProductInput', () => {
     it('invokes deleteCssProductInput without error', async () => {
       const client =

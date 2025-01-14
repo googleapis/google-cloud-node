@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11687,7 +11687,16 @@ export namespace google {
                         AUDIO_ENCODING_UNSPECIFIED = 0,
                         LINEAR16 = 1,
                         MULAW = 2,
-                        ALAW = 3
+                        ALAW = 3,
+                        AMR = 4,
+                        AMR_WB = 5,
+                        FLAC = 6,
+                        MP3 = 7,
+                        OGG_OPUS = 8,
+                        WEBM_OPUS = 9,
+                        MP4_AAC = 10,
+                        M4A_AAC = 11,
+                        MOV_AAC = 12
                     }
                 }
 

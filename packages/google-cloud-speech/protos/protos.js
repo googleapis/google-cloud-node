@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28453,6 +28453,15 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
                                     break;
                                 }
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
@@ -28498,6 +28507,42 @@
                             case "ALAW":
                             case 3:
                                 message.encoding = 3;
+                                break;
+                            case "AMR":
+                            case 4:
+                                message.encoding = 4;
+                                break;
+                            case "AMR_WB":
+                            case 5:
+                                message.encoding = 5;
+                                break;
+                            case "FLAC":
+                            case 6:
+                                message.encoding = 6;
+                                break;
+                            case "MP3":
+                            case 7:
+                                message.encoding = 7;
+                                break;
+                            case "OGG_OPUS":
+                            case 8:
+                                message.encoding = 8;
+                                break;
+                            case "WEBM_OPUS":
+                            case 9:
+                                message.encoding = 9;
+                                break;
+                            case "MP4_AAC":
+                            case 10:
+                                message.encoding = 10;
+                                break;
+                            case "M4A_AAC":
+                            case 11:
+                                message.encoding = 11;
+                                break;
+                            case "MOV_AAC":
+                            case 12:
+                                message.encoding = 12;
                                 break;
                             }
                             if (object.sampleRateHertz != null)
@@ -28568,6 +28613,15 @@
                          * @property {number} LINEAR16=1 LINEAR16 value
                          * @property {number} MULAW=2 MULAW value
                          * @property {number} ALAW=3 ALAW value
+                         * @property {number} AMR=4 AMR value
+                         * @property {number} AMR_WB=5 AMR_WB value
+                         * @property {number} FLAC=6 FLAC value
+                         * @property {number} MP3=7 MP3 value
+                         * @property {number} OGG_OPUS=8 OGG_OPUS value
+                         * @property {number} WEBM_OPUS=9 WEBM_OPUS value
+                         * @property {number} MP4_AAC=10 MP4_AAC value
+                         * @property {number} M4A_AAC=11 M4A_AAC value
+                         * @property {number} MOV_AAC=12 MOV_AAC value
                          */
                         ExplicitDecodingConfig.AudioEncoding = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -28575,6 +28629,15 @@
                             values[valuesById[1] = "LINEAR16"] = 1;
                             values[valuesById[2] = "MULAW"] = 2;
                             values[valuesById[3] = "ALAW"] = 3;
+                            values[valuesById[4] = "AMR"] = 4;
+                            values[valuesById[5] = "AMR_WB"] = 5;
+                            values[valuesById[6] = "FLAC"] = 6;
+                            values[valuesById[7] = "MP3"] = 7;
+                            values[valuesById[8] = "OGG_OPUS"] = 8;
+                            values[valuesById[9] = "WEBM_OPUS"] = 9;
+                            values[valuesById[10] = "MP4_AAC"] = 10;
+                            values[valuesById[11] = "M4A_AAC"] = 11;
+                            values[valuesById[12] = "MOV_AAC"] = 12;
                             return values;
                         })();
     

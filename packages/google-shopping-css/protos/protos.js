@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8331,6 +8331,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.shopping.css.v1.CssProductInputsService|updateCssProductInput}.
+                         * @memberof google.shopping.css.v1.CssProductInputsService
+                         * @typedef UpdateCssProductInputCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.shopping.css.v1.CssProductInput} [response] CssProductInput
+                         */
+    
+                        /**
+                         * Calls UpdateCssProductInput.
+                         * @function updateCssProductInput
+                         * @memberof google.shopping.css.v1.CssProductInputsService
+                         * @instance
+                         * @param {google.shopping.css.v1.IUpdateCssProductInputRequest} request UpdateCssProductInputRequest message or plain object
+                         * @param {google.shopping.css.v1.CssProductInputsService.UpdateCssProductInputCallback} callback Node-style callback called with the error, if any, and CssProductInput
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CssProductInputsService.prototype.updateCssProductInput = function updateCssProductInput(request, callback) {
+                            return this.rpcCall(updateCssProductInput, $root.google.shopping.css.v1.UpdateCssProductInputRequest, $root.google.shopping.css.v1.CssProductInput, request, callback);
+                        }, "name", { value: "UpdateCssProductInput" });
+    
+                        /**
+                         * Calls UpdateCssProductInput.
+                         * @function updateCssProductInput
+                         * @memberof google.shopping.css.v1.CssProductInputsService
+                         * @instance
+                         * @param {google.shopping.css.v1.IUpdateCssProductInputRequest} request UpdateCssProductInputRequest message or plain object
+                         * @returns {Promise<google.shopping.css.v1.CssProductInput>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.shopping.css.v1.CssProductInputsService|deleteCssProductInput}.
                          * @memberof google.shopping.css.v1.CssProductInputsService
                          * @typedef DeleteCssProductInputCallback
@@ -9030,6 +9063,243 @@
                         };
     
                         return InsertCssProductInputRequest;
+                    })();
+    
+                    v1.UpdateCssProductInputRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCssProductInputRequest.
+                         * @memberof google.shopping.css.v1
+                         * @interface IUpdateCssProductInputRequest
+                         * @property {google.shopping.css.v1.ICssProductInput|null} [cssProductInput] UpdateCssProductInputRequest cssProductInput
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCssProductInputRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCssProductInputRequest.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents an UpdateCssProductInputRequest.
+                         * @implements IUpdateCssProductInputRequest
+                         * @constructor
+                         * @param {google.shopping.css.v1.IUpdateCssProductInputRequest=} [properties] Properties to set
+                         */
+                        function UpdateCssProductInputRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCssProductInputRequest cssProductInput.
+                         * @member {google.shopping.css.v1.ICssProductInput|null|undefined} cssProductInput
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @instance
+                         */
+                        UpdateCssProductInputRequest.prototype.cssProductInput = null;
+    
+                        /**
+                         * UpdateCssProductInputRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @instance
+                         */
+                        UpdateCssProductInputRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateCssProductInputRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {google.shopping.css.v1.IUpdateCssProductInputRequest=} [properties] Properties to set
+                         * @returns {google.shopping.css.v1.UpdateCssProductInputRequest} UpdateCssProductInputRequest instance
+                         */
+                        UpdateCssProductInputRequest.create = function create(properties) {
+                            return new UpdateCssProductInputRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCssProductInputRequest message. Does not implicitly {@link google.shopping.css.v1.UpdateCssProductInputRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {google.shopping.css.v1.IUpdateCssProductInputRequest} message UpdateCssProductInputRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCssProductInputRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cssProductInput != null && Object.hasOwnProperty.call(message, "cssProductInput"))
+                                $root.google.shopping.css.v1.CssProductInput.encode(message.cssProductInput, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCssProductInputRequest message, length delimited. Does not implicitly {@link google.shopping.css.v1.UpdateCssProductInputRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {google.shopping.css.v1.IUpdateCssProductInputRequest} message UpdateCssProductInputRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCssProductInputRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCssProductInputRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.shopping.css.v1.UpdateCssProductInputRequest} UpdateCssProductInputRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCssProductInputRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.css.v1.UpdateCssProductInputRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.cssProductInput = $root.google.shopping.css.v1.CssProductInput.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCssProductInputRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.shopping.css.v1.UpdateCssProductInputRequest} UpdateCssProductInputRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCssProductInputRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCssProductInputRequest message.
+                         * @function verify
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCssProductInputRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.cssProductInput != null && message.hasOwnProperty("cssProductInput")) {
+                                var error = $root.google.shopping.css.v1.CssProductInput.verify(message.cssProductInput);
+                                if (error)
+                                    return "cssProductInput." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCssProductInputRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.shopping.css.v1.UpdateCssProductInputRequest} UpdateCssProductInputRequest
+                         */
+                        UpdateCssProductInputRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.shopping.css.v1.UpdateCssProductInputRequest)
+                                return object;
+                            var message = new $root.google.shopping.css.v1.UpdateCssProductInputRequest();
+                            if (object.cssProductInput != null) {
+                                if (typeof object.cssProductInput !== "object")
+                                    throw TypeError(".google.shopping.css.v1.UpdateCssProductInputRequest.cssProductInput: object expected");
+                                message.cssProductInput = $root.google.shopping.css.v1.CssProductInput.fromObject(object.cssProductInput);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.shopping.css.v1.UpdateCssProductInputRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCssProductInputRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {google.shopping.css.v1.UpdateCssProductInputRequest} message UpdateCssProductInputRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCssProductInputRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.cssProductInput = null;
+                                object.updateMask = null;
+                            }
+                            if (message.cssProductInput != null && message.hasOwnProperty("cssProductInput"))
+                                object.cssProductInput = $root.google.shopping.css.v1.CssProductInput.toObject(message.cssProductInput, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCssProductInputRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCssProductInputRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateCssProductInputRequest
+                         * @function getTypeUrl
+                         * @memberof google.shopping.css.v1.UpdateCssProductInputRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateCssProductInputRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.shopping.css.v1.UpdateCssProductInputRequest";
+                        };
+    
+                        return UpdateCssProductInputRequest;
                     })();
     
                     v1.DeleteCssProductInputRequest = (function() {
@@ -30225,6 +30495,225 @@
                 };
     
                 return Timestamp;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             return protobuf;

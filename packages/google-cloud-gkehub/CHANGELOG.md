@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.5.0...gke-hub-v5.0.0) (2025-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* [gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925))
+
+### Features
+
+* [gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925)) ([95905ab](https://github.com/googleapis/google-cloud-node/commit/95905ab973a7cc74540201eec9a889cb450c3a39))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.4.0...gke-hub-v4.5.0) (2024-06-26)
 
 

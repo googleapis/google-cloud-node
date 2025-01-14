@@ -4,7 +4,6 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
     "lib": [
       "es2018",
       "dom"
