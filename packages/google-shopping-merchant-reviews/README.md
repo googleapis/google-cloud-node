@@ -82,7 +82,8 @@ npm install @google-shopping/reviews
 // const pageToken = 'abc123'
 
 // Imports the Reviews library
-const {ProductReviewsServiceClient} = require('@google-shopping/reviews').v1beta;
+const {ProductReviewsServiceClient} =
+  require('@google-shopping/reviews').v1beta;
 
 // Instantiates a client
 const reviewsClient = new ProductReviewsServiceClient();
@@ -96,7 +97,7 @@ async function callListProductReviews() {
   // Run request
   const iterable = reviewsClient.listProductReviewsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
