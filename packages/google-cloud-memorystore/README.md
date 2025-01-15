@@ -102,7 +102,7 @@ async function callListInstances() {
   // Run request
   const iterable = memorystoreClient.listInstancesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
