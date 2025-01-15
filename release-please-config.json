@@ -193,7 +193,8 @@
     "packages/google-cloud-apihub": {},
     "packages/google-marketingplatform-admin": {},
     "packages/google-cloud-oracledatabase": {},
-    "packages/google-ads-admanager": {}
+    "packages/google-ads-admanager": {},
+    "packages/google-shopping-merchant-reviews": {}
   },
   "plugins": [
     {
