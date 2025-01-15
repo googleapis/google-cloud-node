@@ -14,12 +14,8 @@
 
 'use strict';
 
-const assert = require('assert');
-const path = require('path');
-const cp = require('child_process');
 const {describe, it} = require('mocha');
 const closeInvalidLink = require('./close-invalid-link.cjs');
-const cwd = path.join(__dirname, '..');
 const fs = require('fs');
 
 describe('Quickstart', () => {

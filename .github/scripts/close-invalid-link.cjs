@@ -37,7 +37,6 @@ module.exports = async ({ github, context }) => {
       issue_number: number,
     });
 
-    console.log(issue);
     const isBugTemplate = issue.data.body.includes("Link to the code that reproduces this issue");
 
     if (isBugTemplate) {
@@ -46,9 +45,7 @@ module.exports = async ({ github, context }) => {
             const text = issue.data.body;
             const match = text.match(/Link to the code that reproduces this issue. A link to a \*\*public\*\* Github Repository with a minimal reproduction/);
             if (match) {
-                console.log(match.index)
                 const nextLineIndex = text.indexOf('http', match.index);
-                console.log(nextLineIndex)
                 const link = text.substring(nextLineIndex, text.indexOf('\n', nextLineIndex));
                 console.log(`Issue ${number} contains this link: ${link}`);
                 const isValidLink = (await fetch(link)).ok;
