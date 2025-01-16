@@ -11,7 +11,6 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.SecretManager.V1",
                     "go_package": "cloud.google.com/go/secretmanager/apiv1/secretmanagerpb;secretmanagerpb",
                     "java_multiple_files": true,
@@ -371,7 +370,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         }
                       }
