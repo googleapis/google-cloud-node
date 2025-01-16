@@ -5,6 +5,157 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "dc590363a9553d33db7e3fc2b933534239af4fc5",
+          "message": "Add initial files for google.cloud.memorystore.v1",
+          "issues": [
+            "5959"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "2fa042a4-1add-4d17-9982-656eb284c525",
+      "createTime": "2025-01-16T03:10:12.269Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "75e242bb0c613f77f0ef84bcb02784cbf48224d1",
+          "message": "Add initial files for google.shopping.merchant.reviews.v1beta",
+          "issues": [
+            "5958"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "b71edcbe-0531-4dc9-949b-ded9806dd22f",
+      "createTime": "2025-01-16T03:10:12.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b151be67e310998e5665d6d353cbef574d42f485",
+          "message": "[fleetengine] Promote network_configs field to v2 API",
+          "issues": [
+            "5943"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "66df7fa5-eb89-4b65-a2d6-30e27ae78050",
+      "createTime": "2025-01-16T03:10:12.236Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8577586e4ba05fd9099d4b580a31a30985b0611f",
+          "message": "[fleetengine-delivery] Promote network_configs field to v2 API",
+          "issues": [
+            "5944"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "28b6e7b8-d2d1-465f-ab14-0779863693fb",
+      "createTime": "2025-01-16T03:10:12.220Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "df0d2064ff860da7c2029de9dd3f9a1aab41b5c8",
+          "message": "[tpu] Promote network_configs field to v2 API",
+          "issues": [
+            "5945"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "40434aae-c26b-4553-a60e-3d24912faf9d",
+      "createTime": "2025-01-16T03:10:12.204Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79de654a6f6ec0e304419cd0fd9411f0864fcbb3",
+          "message": "[networkmanagement] expose the new v1 vpcflowlogs api proto",
+          "issues": [
+            "5947"
+          ]
+        }
+      ],
+      "version": "3.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "828790ed-8f0e-4100-87ed-1e31446b2964",
+      "createTime": "2025-01-16T03:10:12.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "50ecc133ebdda28636068abfe7e38d4d2666f7d8",
+          "message": "[compute] add Model Armor API",
+          "issues": [
+            "5953"
+          ]
+        }
+      ],
+      "version": "4.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "35400c56-ad6c-4edd-86ea-28ded0dffad6",
+      "createTime": "2025-01-16T03:10:12.171Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5e0e4c19f006579e8808e21bcf0154d5e47669f8",
           "message": "[oracledatabase] A new value `ACCOUNT_SUSPENDED` is added to enum `State`",
           "issues": [
@@ -38595,5 +38746,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-01-11T01:02:37.468Z"
+  "updateTime": "2025-01-16T03:10:12.269Z"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-delivery-v0.1.0...fleetengine-delivery-v0.2.0) (2025-01-16)
+
+
+### Features
+
+* [fleetengine-delivery] Promote network_configs field to v2 API ([#5944](https://github.com/googleapis/google-cloud-node/issues/5944)) ([8577586](https://github.com/googleapis/google-cloud-node/commit/8577586e4ba05fd9099d4b580a31a30985b0611f))
+
 ## 0.1.0 (2024-06-03)
 
 

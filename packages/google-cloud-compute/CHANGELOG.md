@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.9.0...compute-v4.10.0) (2025-01-16)
+
+
+### Features
+
+* [compute] add Model Armor API ([#5953](https://github.com/googleapis/google-cloud-node/issues/5953)) ([50ecc13](https://github.com/googleapis/google-cloud-node/commit/50ecc133ebdda28636068abfe7e38d4d2666f7d8))
+
 ## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.8.0...compute-v4.9.0) (2024-12-18)
 
 
