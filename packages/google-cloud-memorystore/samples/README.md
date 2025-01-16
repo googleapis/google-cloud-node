@@ -43,7 +43,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Memorystore.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1/memorystore.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1/memorystore.create_instance.js,samples/README.md)
 
@@ -60,7 +60,7 @@ __Usage:__
 
 ### Memorystore.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1/memorystore.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1/memorystore.delete_instance.js,samples/README.md)
 
@@ -77,7 +77,7 @@ __Usage:__
 
 ### Memorystore.get_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_certificate_authority.js,samples/README.md)
 
@@ -94,7 +94,7 @@ __Usage:__
 
 ### Memorystore.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_instance.js,samples/README.md)
 
@@ -111,7 +111,7 @@ __Usage:__
 
 ### Memorystore.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_instances.js,samples/README.md)
 
@@ -128,7 +128,7 @@ __Usage:__
 
 ### Memorystore.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1/memorystore.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1/memorystore.update_instance.js,samples/README.md)
 
@@ -145,7 +145,7 @@ __Usage:__
 
 ### Memorystore.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.create_instance.js,samples/README.md)
 
@@ -162,7 +162,7 @@ __Usage:__
 
 ### Memorystore.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.delete_instance.js,samples/README.md)
 
@@ -179,7 +179,7 @@ __Usage:__
 
 ### Memorystore.get_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_certificate_authority.js,samples/README.md)
 
@@ -196,7 +196,7 @@ __Usage:__
 
 ### Memorystore.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_instance.js,samples/README.md)
 
@@ -213,7 +213,7 @@ __Usage:__
 
 ### Memorystore.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.list_instances.js,samples/README.md)
 
@@ -230,7 +230,7 @@ __Usage:__
 
 ### Memorystore.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.update_instance.js,samples/README.md)
 
@@ -247,7 +247,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memorystore/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memorystore/samples/quickstart.js,samples/README.md)
 
