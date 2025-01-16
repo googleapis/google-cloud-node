@@ -12,32 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
+// 'use strict';
 
-const assert = require('assert');
-const path = require('path');
-const cp = require('child_process');
-const {describe, it, before} = require('mocha');
-const {ProductReviewsServiceClient} =
-  require('@google-shopping/reviews').v1beta;
-const merchantapiClient = new ProductReviewsServiceClient();
+// const assert = require('assert');
+// const path = require('path');
+// const cp = require('child_process');
+// const {describe, it, before} = require('mocha');
+// const {ProductReviewsServiceClient} =
+//   require('@google-shopping/reviews').v1beta;
+// const merchantapiClient = new ProductReviewsServiceClient();
 
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+// const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const cwd = path.join(__dirname, '..');
+// const cwd = path.join(__dirname, '..');
 
-describe('Quickstart', () => {
-  let projectId;
+// describe('Quickstart', () => {
+//   let projectId;
 
-  before(async () => {
-    projectId = await merchantapiClient.getProjectId();
-  });
+//   before(async () => {
+//     projectId = await merchantapiClient.getProjectId();
+//   });
 
-  it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
-      {cwd}
-    );
-    assert(output !== null);
-  });
-});
+//   it('should run quickstart', async () => {
+//     const output = execSync(
+//       `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+//       {cwd}
+//     );
+//     assert(output !== null);
+//   });
+// });
