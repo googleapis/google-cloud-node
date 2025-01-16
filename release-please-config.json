@@ -194,7 +194,8 @@
     "packages/google-marketingplatform-admin": {},
     "packages/google-cloud-oracledatabase": {},
     "packages/google-ads-admanager": {},
-    "packages/google-shopping-merchant-reviews": {}
+    "packages/google-shopping-merchant-reviews": {},
+    "packages/google-cloud-memorystore": {}
   },
   "plugins": [
     {
