@@ -73,6 +73,7 @@ fi
 subdirs=(
     containers
     packages
+    scripts
 )
 
 RETVAL=0
