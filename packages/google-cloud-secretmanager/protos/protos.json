@@ -1068,7 +1068,6 @@
                 },
                 "v1beta2": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.SecretManager.V1Beta2",
                     "go_package": "cloud.google.com/go/secretmanager/apiv1beta2/secretmanagerpb;secretmanagerpb",
                     "java_multiple_files": true,
