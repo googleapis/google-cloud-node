@@ -23,6 +23,14 @@
         "RetrieveContexts": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "AugmentPrompt": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CorroborateContent": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
