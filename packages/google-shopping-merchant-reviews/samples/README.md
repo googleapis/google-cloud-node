@@ -39,7 +39,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Merchant_reviews_service.delete_merchant_review
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.delete_merchant_review.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.delete_merchant_review.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.delete_merchant_review.js,samples/README.md)
 
@@ -56,7 +56,7 @@ __Usage:__
 
 ### Merchant_reviews_service.get_merchant_review
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.get_merchant_review.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.get_merchant_review.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.get_merchant_review.js,samples/README.md)
 
@@ -73,7 +73,7 @@ __Usage:__
 
 ### Merchant_reviews_service.insert_merchant_review
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.insert_merchant_review.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.insert_merchant_review.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.insert_merchant_review.js,samples/README.md)
 
@@ -90,7 +90,7 @@ __Usage:__
 
 ### Merchant_reviews_service.list_merchant_reviews
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.list_merchant_reviews.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.list_merchant_reviews.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.list_merchant_reviews.js,samples/README.md)
 
@@ -107,7 +107,7 @@ __Usage:__
 
 ### Product_reviews_service.delete_product_review
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.delete_product_review.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.delete_product_review.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.delete_product_review.js,samples/README.md)
 
@@ -124,7 +124,7 @@ __Usage:__
 
 ### Product_reviews_service.get_product_review
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.get_product_review.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.get_product_review.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.get_product_review.js,samples/README.md)
 
@@ -141,7 +141,7 @@ __Usage:__
 
 ### Product_reviews_service.insert_product_review
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.insert_product_review.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.insert_product_review.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.insert_product_review.js,samples/README.md)
 
@@ -158,7 +158,7 @@ __Usage:__
 
 ### Product_reviews_service.list_product_reviews
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.list_product_reviews.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.list_product_reviews.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.list_product_reviews.js,samples/README.md)
 
@@ -175,7 +175,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-reviews/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-reviews/samples/quickstart.js,samples/README.md)
 
