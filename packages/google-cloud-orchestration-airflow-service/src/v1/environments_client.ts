@@ -3226,7 +3226,7 @@ export class EnvironmentsClient {
    * runs a single Composer component.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-2.*.*-airflow-*.*.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
