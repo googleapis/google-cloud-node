@@ -2816,6 +2816,13 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       callback = queryOrCallback as GetFilesCallback;
     }
     query = Object.assign({}, query);
+    if (
+      query.fields &&
+      query.autoPaginate &&
+      !query.fields.includes('nextPageToken')
+    ) {
+      query.fields = `${query.fields},nextPageToken`;
+    }
 
     this.request(
       {

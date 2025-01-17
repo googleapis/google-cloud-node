@@ -1887,6 +1887,29 @@ describe('Bucket', () => {
       );
     });
 
+    it('should add nextPageToken to fields for autoPaginate', done => {
+      bucket.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.qs.fields, 'items(name),nextPageToken');
+        callback(null, {
+          items: [{name: 'fake-file-name'}],
+          nextPageToken: 'fake-page-token',
+        });
+      };
+
+      bucket.getFiles(
+        {fields: 'items(name)', autoPaginate: true},
+        (err: Error, files: FakeFile[], nextQuery: {pageToken: string}) => {
+          assert.ifError(err);
+          assert.strictEqual(files[0].name, 'fake-file-name');
+          assert.strictEqual(nextQuery.pageToken, 'fake-page-token');
+          done();
+        }
+      );
+    });
+
     it('should return soft-deleted Files if queried for softDeleted', done => {
       const softDeletedTime = new Date('1/1/2024').toISOString();
       bucket.request = (
