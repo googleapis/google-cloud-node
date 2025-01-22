@@ -336,6 +336,7 @@
   * [Network_endpoint_groups.test_iam_permissions](#network_endpoint_groups.test_iam_permissions)
   * [Network_firewall_policies.add_association](#network_firewall_policies.add_association)
   * [Network_firewall_policies.add_rule](#network_firewall_policies.add_rule)
+  * [Network_firewall_policies.aggregated_list](#network_firewall_policies.aggregated_list)
   * [Network_firewall_policies.clone_rules](#network_firewall_policies.clone_rules)
   * [Network_firewall_policies.delete](#network_firewall_policies.delete)
   * [Network_firewall_policies.get](#network_firewall_policies.get)
@@ -6314,6 +6315,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_rule.js`
+
+
+-----
+
+
+
+
+### Network_firewall_policies.aggregated_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.aggregated_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.aggregated_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.aggregated_list.js`
 
 
 -----
