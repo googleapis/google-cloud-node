@@ -26225,6 +26225,7 @@
                           "type": "bool",
                           "id": 4,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -26251,7 +26252,10 @@
                         },
                         "serviceAccount": {
                           "type": "string",
-                          "id": 13
+                          "id": 13,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "etag": {
                           "type": "string",
@@ -26425,9 +26429,44 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "machineSpec": {
+                          "type": "MachineSpec",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataPersistentDiskSpec": {
+                          "type": "PersistentDiskSpec",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "networkSpec": {
+                          "type": "NetworkSpec",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "idleShutdownConfig": {
                           "type": "NotebookIdleShutdownConfig",
                           "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "eucConfig": {
+                          "type": "NotebookEucConfig",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "shieldedVmConfig": {
+                          "type": "ShieldedVmConfig",
+                          "id": 32,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
