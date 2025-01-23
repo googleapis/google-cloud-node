@@ -5,6 +5,125 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "c326e40eda7c5cfeca4bab2837d8eb8139903341",
+          "message": "[redis] [Memorystore for Redis Cluster] Added support for maintenance window and rescheduling maintenance",
+          "issues": [
+            "5954"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "8c920773-1dad-4fac-84f3-a228c396323c",
+      "createTime": "2025-01-23T17:44:12.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "050db4d28f9a203ce2d41db21eb74b3ecb6b4a16",
+          "message": "[Many APIs] Reasoning Engine v1 GAPIC release",
+          "issues": [
+            "5965"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "ae32e644-9db7-4cc5-8bad-2de2aea8cd7e",
+      "createTime": "2025-01-23T17:44:12.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "03232b371a770205d488791bfcb3631f2291d9fb",
+          "message": "[tpu] Introduce PerformMaintenance API",
+          "issues": [
+            "5956"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "8e2eb559-e60b-4b95-8a1e-3ffdb339ea41",
+      "createTime": "2025-01-23T17:44:12.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d765c81cca8ce084f5a9505e717962e8ed649dfd",
+          "message": "[dialogflow] add Model Armor API",
+          "issues": [
+            "5952"
+          ]
+        }
+      ],
+      "version": "6.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "e18ab322-cbc4-4692-a71a-74e6c4d8a8f8",
+      "createTime": "2025-01-23T17:44:12.120Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "96d17834fa6cc727d4d79d082a3d457d7f70e295",
+          "message": "[datastream] A new field `ssl_config` is added to message `.google.cloud.datastream.v1.PostgresqlProfile`",
+          "issues": [
+            "5972"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "d574f57d-07c1-472e-b08f-01a373a9c25c",
+      "createTime": "2025-01-23T17:44:12.101Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "050db4d28f9a203ce2d41db21eb74b3ecb6b4a16",
+          "message": "[Many APIs] Reasoning Engine v1 GAPIC release",
+          "issues": [
+            "5965"
+          ]
+        }
+      ],
+      "version": "3.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "93316a13-a479-4c14-839e-4a5dadee2df1",
+      "createTime": "2025-01-23T17:44:12.085Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "752d41e737c1dd7c5ace18ceae4bf215b60e728f",
+          "message": "[compute] Update Compute Engine API to revision 20250107 (#975)",
+          "issues": [
+            "5976"
+          ]
+        }
+      ],
+      "version": "4.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "f4c988ef-5ced-4f09-ba4e-6a1524107a11",
+      "createTime": "2025-01-23T17:44:12.070Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "dc590363a9553d33db7e3fc2b933534239af4fc5",
           "message": "Add initial files for google.cloud.memorystore.v1",
           "issues": [
@@ -38746,5 +38865,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-01-16T03:10:12.269Z"
+  "updateTime": "2025-01-23T17:44:12.173Z"
 }

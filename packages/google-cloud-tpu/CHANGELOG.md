@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.7.0...tpu-v3.8.0) (2025-01-23)
+
+
+### Features
+
+* [tpu] Introduce PerformMaintenance API ([#5956](https://github.com/googleapis/google-cloud-node/issues/5956)) ([03232b3](https://github.com/googleapis/google-cloud-node/commit/03232b371a770205d488791bfcb3631f2291d9fb))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.6.0...tpu-v3.7.0) (2025-01-16)
 
 

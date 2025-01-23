@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v3.3.0...datastream-v3.4.0) (2025-01-23)
+
+
+### Features
+
+* [datastream] A new field `ssl_config` is added to message `.google.cloud.datastream.v1.PostgresqlProfile` ([#5972](https://github.com/googleapis/google-cloud-node/issues/5972)) ([96d1783](https://github.com/googleapis/google-cloud-node/commit/96d17834fa6cc727d4d79d082a3d457d7f70e295))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v3.2.0...datastream-v3.3.0) (2024-11-21)
 
 

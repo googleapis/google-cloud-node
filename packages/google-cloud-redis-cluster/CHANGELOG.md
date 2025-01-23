@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.5.0...redis-cluster-v0.6.0) (2025-01-23)
+
+
+### Features
+
+* [redis] [Memorystore for Redis Cluster] Added support for maintenance window and rescheduling maintenance ([#5954](https://github.com/googleapis/google-cloud-node/issues/5954)) ([c326e40](https://github.com/googleapis/google-cloud-node/commit/c326e40eda7c5cfeca4bab2837d8eb8139903341))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.4.0...redis-cluster-v0.5.0) (2024-06-05)
 
 
