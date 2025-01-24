@@ -6922,6 +6922,13 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 28
+                        },
+                        "speculativeDecodingSpec": {
+                          "type": "SpeculativeDecodingSpec",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -7000,6 +7007,14 @@
                         }
                       }
                     },
+                    "ClientConnectionConfig": {
+                      "fields": {
+                        "inferenceTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        }
+                      }
+                    },
                     "FasterDeploymentConfig": {
                       "fields": {
                         "fastTryoutEnabled": {
@@ -7008,11 +7023,49 @@
                         }
                       }
                     },
-                    "ClientConnectionConfig": {
+                    "SpeculativeDecodingSpec": {
+                      "oneofs": {
+                        "speculation": {
+                          "oneof": [
+                            "draftModelSpeculation",
+                            "ngramSpeculation"
+                          ]
+                        }
+                      },
                       "fields": {
-                        "inferenceTimeout": {
-                          "type": "google.protobuf.Duration",
+                        "draftModelSpeculation": {
+                          "type": "DraftModelSpeculation",
+                          "id": 2
+                        },
+                        "ngramSpeculation": {
+                          "type": "NgramSpeculation",
+                          "id": 3
+                        },
+                        "speculativeTokenCount": {
+                          "type": "int32",
                           "id": 1
+                        }
+                      },
+                      "nested": {
+                        "DraftModelSpeculation": {
+                          "fields": {
+                            "draftModel": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                              }
+                            }
+                          }
+                        },
+                        "NgramSpeculation": {
+                          "fields": {
+                            "ngramSize": {
+                              "type": "int32",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
