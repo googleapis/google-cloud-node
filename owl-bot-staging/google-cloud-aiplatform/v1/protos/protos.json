@@ -2593,6 +2593,16 @@
                         "HARM_CATEGORY_CIVIC_INTEGRITY": 5
                       }
                     },
+                    "Modality": {
+                      "values": {
+                        "MODALITY_UNSPECIFIED": 0,
+                        "TEXT": 1,
+                        "IMAGE": 2,
+                        "VIDEO": 3,
+                        "AUDIO": 4,
+                        "DOCUMENT": 5
+                      }
+                    },
                     "Content": {
                       "fields": {
                         "role": {
@@ -3542,6 +3552,18 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "ModalityTokenCount": {
+                      "fields": {
+                        "modality": {
+                          "type": "Modality",
+                          "id": 1
+                        },
+                        "tokenCount": {
+                          "type": "int32",
+                          "id": 2
                         }
                       }
                     },
@@ -21747,6 +21769,14 @@
                         "totalBillableCharacters": {
                           "type": "int32",
                           "id": 2
+                        },
+                        "promptTokensDetails": {
+                          "rule": "repeated",
+                          "type": "ModalityTokenCount",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -21914,6 +21944,30 @@
                             "cachedContentTokenCount": {
                               "type": "int32",
                               "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "promptTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "cacheTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "candidatesTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 11,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
