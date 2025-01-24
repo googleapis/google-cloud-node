@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.13.0...dialogflow-v6.14.0) (2025-01-23)
+
+
+### Features
+
+* [dialogflow] add Model Armor API ([#5952](https://github.com/googleapis/google-cloud-node/issues/5952)) ([d765c81](https://github.com/googleapis/google-cloud-node/commit/d765c81cca8ce084f5a9505e717962e8ed649dfd))
+
 ## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.12.0...dialogflow-v6.13.0) (2024-12-18)
 
 
