@@ -3524,6 +3524,50 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_UpdateFeatureMonitor_async",
+      "title": "DatasetService updateFeatureMonitor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single FeatureMonitor.",
+      "canonical": true,
+      "file": "feature_registry_service.update_feature_monitor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFeatureMonitor",
+        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.UpdateFeatureMonitor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "feature_monitor",
+            "type": ".google.cloud.aiplatform.v1beta1.FeatureMonitor"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FeatureRegistryServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateFeatureMonitor",
+          "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.UpdateFeatureMonitor",
+          "service": {
+            "shortName": "FeatureRegistryService",
+            "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_DeleteFeatureMonitor_async",
       "title": "DatasetService deleteFeatureMonitor Sample",
       "origin": "API_DEFINITION",

@@ -439,6 +439,10 @@ export class FeatureRegistryServiceClient {
       '.google.cloud.aiplatform.v1beta1.FeatureMonitor') as gax.protobuf.Type;
     const createFeatureMonitorMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateFeatureMonitorOperationMetadata') as gax.protobuf.Type;
+    const updateFeatureMonitorResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.FeatureMonitor') as gax.protobuf.Type;
+    const updateFeatureMonitorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorOperationMetadata') as gax.protobuf.Type;
     const deleteFeatureMonitorResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteFeatureMonitorMetadata = protoFilesRoot.lookup(
@@ -477,6 +481,10 @@ export class FeatureRegistryServiceClient {
         this.operationsClient,
         createFeatureMonitorResponse.decode.bind(createFeatureMonitorResponse),
         createFeatureMonitorMetadata.decode.bind(createFeatureMonitorMetadata)),
+      updateFeatureMonitor: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateFeatureMonitorResponse.decode.bind(updateFeatureMonitorResponse),
+        updateFeatureMonitorMetadata.decode.bind(updateFeatureMonitorMetadata)),
       deleteFeatureMonitor: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteFeatureMonitorResponse.decode.bind(deleteFeatureMonitorResponse),
@@ -526,7 +534,7 @@ export class FeatureRegistryServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const featureRegistryServiceStubMethods =
-        ['createFeatureGroup', 'getFeatureGroup', 'listFeatureGroups', 'updateFeatureGroup', 'deleteFeatureGroup', 'createFeature', 'batchCreateFeatures', 'getFeature', 'listFeatures', 'updateFeature', 'deleteFeature', 'createFeatureMonitor', 'getFeatureMonitor', 'listFeatureMonitors', 'deleteFeatureMonitor', 'createFeatureMonitorJob', 'getFeatureMonitorJob', 'listFeatureMonitorJobs'];
+        ['createFeatureGroup', 'getFeatureGroup', 'listFeatureGroups', 'updateFeatureGroup', 'deleteFeatureGroup', 'createFeature', 'batchCreateFeatures', 'getFeature', 'listFeatures', 'updateFeature', 'deleteFeature', 'createFeatureMonitor', 'getFeatureMonitor', 'listFeatureMonitors', 'updateFeatureMonitor', 'deleteFeatureMonitor', 'createFeatureMonitorJob', 'getFeatureMonitorJob', 'listFeatureMonitorJobs'];
     for (const methodName of featureRegistryServiceStubMethods) {
       const callPromise = this.featureRegistryServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1800,6 +1808,109 @@ export class FeatureRegistryServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createFeatureMonitor, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.FeatureMonitor, protos.google.cloud.aiplatform.v1beta1.CreateFeatureMonitorOperationMetadata>;
+  }
+/**
+ * Updates the parameters of a single FeatureMonitor.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1beta1.FeatureMonitor} request.featureMonitor
+ *   Required. The FeatureMonitor's `name` field is used to identify the
+ *   FeatureMonitor to be updated. Format:
+ *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}`
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   FeatureMonitor resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then only the non-empty fields present in the
+ *   request will be overwritten. Set the update_mask to `*` to override all
+ *   fields.
+ *
+ *   Updatable fields:
+ *
+ *     * `labels`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_UpdateFeatureMonitor_async
+ */
+  updateFeatureMonitor(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateFeatureMonitor(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateFeatureMonitor(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateFeatureMonitor(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'feature_monitor.name': request.featureMonitor!.name ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.updateFeatureMonitor(request, options, callback);
+  }
+/**
+ * Check the status of the long running operation returned by `updateFeatureMonitor()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_UpdateFeatureMonitor_async
+ */
+  async checkUpdateFeatureMonitorProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.FeatureMonitor, protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorOperationMetadata>>{
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateFeatureMonitor, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.FeatureMonitor, protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorOperationMetadata>;
   }
 /**
  * Deletes a single FeatureMonitor.

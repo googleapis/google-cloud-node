@@ -814,6 +814,11 @@
                 "createFeatureMonitor"
               ]
             },
+            "UpdateFeatureMonitor": {
+              "methods": [
+                "updateFeatureMonitor"
+              ]
+            },
             "DeleteFeatureMonitor": {
               "methods": [
                 "deleteFeatureMonitor"
@@ -915,6 +920,11 @@
             "CreateFeatureMonitor": {
               "methods": [
                 "createFeatureMonitor"
+              ]
+            },
+            "UpdateFeatureMonitor": {
+              "methods": [
+                "updateFeatureMonitor"
               ]
             },
             "DeleteFeatureMonitor": {

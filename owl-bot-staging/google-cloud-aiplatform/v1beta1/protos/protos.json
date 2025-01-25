@@ -16242,6 +16242,34 @@
                             }
                           ]
                         },
+                        "UpdateFeatureMonitor": {
+                          "requestType": "UpdateFeatureMonitorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{feature_monitor.name=projects/*/locations/*/featureGroups/*/featureMonitors/*}",
+                            "(google.api.http).body": "feature_monitor",
+                            "(google.api.method_signature)": "feature_monitor,update_mask",
+                            "(google.longrunning.operation_info).response_type": "FeatureMonitor",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateFeatureMonitorOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{feature_monitor.name=projects/*/locations/*/featureGroups/*/featureMonitors/*}",
+                                "body": "feature_monitor"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "feature_monitor,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "FeatureMonitor",
+                                "metadata_type": "UpdateFeatureMonitorOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteFeatureMonitor": {
                           "requestType": "DeleteFeatureMonitorRequest",
                           "responseType": "google.longrunning.Operation",
@@ -16514,6 +16542,24 @@
                         }
                       }
                     },
+                    "UpdateFeatureMonitorRequest": {
+                      "fields": {
+                        "featureMonitor": {
+                          "type": "FeatureMonitor",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "DeleteFeatureMonitorRequest": {
                       "fields": {
                         "name": {
@@ -16572,6 +16618,14 @@
                       }
                     },
                     "CreateFeatureMonitorOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateFeatureMonitorOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",

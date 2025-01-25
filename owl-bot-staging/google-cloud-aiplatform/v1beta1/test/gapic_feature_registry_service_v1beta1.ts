@@ -2055,6 +2055,164 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         });
     });
 
+    describe('updateFeatureMonitor', () => {
+        it('invokes updateFeatureMonitor without error', async () => {
+            const client = new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+            );
+            request.featureMonitor ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest', ['featureMonitor', 'name']);
+            request.featureMonitor.name = defaultValue1;
+            const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateFeatureMonitor = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateFeatureMonitor(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFeatureMonitor without error using callback', async () => {
+            const client = new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+            );
+            request.featureMonitor ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest', ['featureMonitor', 'name']);
+            request.featureMonitor.name = defaultValue1;
+            const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateFeatureMonitor = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateFeatureMonitor(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor, protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFeatureMonitor with call error', async () => {
+            const client = new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+            );
+            request.featureMonitor ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest', ['featureMonitor', 'name']);
+            request.featureMonitor.name = defaultValue1;
+            const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateFeatureMonitor = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateFeatureMonitor(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFeatureMonitor with LRO error', async () => {
+            const client = new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+            );
+            request.featureMonitor ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest', ['featureMonitor', 'name']);
+            request.featureMonitor.name = defaultValue1;
+            const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateFeatureMonitor = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateFeatureMonitor(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFeatureMonitor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateFeatureMonitorProgress without error', async () => {
+            const client = new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateFeatureMonitorProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateFeatureMonitorProgress with error', async () => {
+            const client = new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateFeatureMonitorProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('deleteFeatureMonitor', () => {
         it('invokes deleteFeatureMonitor without error', async () => {
             const client = new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
