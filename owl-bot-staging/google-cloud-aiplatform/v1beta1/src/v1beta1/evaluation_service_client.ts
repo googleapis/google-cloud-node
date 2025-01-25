@@ -567,6 +567,11 @@ export class EvaluationServiceClient {
  *   Input for tool parameter key match metric.
  * @param {google.cloud.aiplatform.v1beta1.ToolParameterKVMatchInput} request.toolParameterKvMatchInput
  *   Input for tool parameter key value match metric.
+ * @param {google.cloud.aiplatform.v1beta1.CometInput} request.cometInput
+ *   Translation metrics.
+ *   Input for Comet metric.
+ * @param {google.cloud.aiplatform.v1beta1.MetricxInput} request.metricxInput
+ *   Input for Metricx metric.
  * @param {google.cloud.aiplatform.v1beta1.TrajectoryExactMatchInput} request.trajectoryExactMatchInput
  *   Input for trajectory exact match metric.
  * @param {google.cloud.aiplatform.v1beta1.TrajectoryInOrderMatchInput} request.trajectoryInOrderMatchInput
@@ -582,6 +587,8 @@ export class EvaluationServiceClient {
  * @param {string} request.location
  *   Required. The resource name of the Location to evaluate the instances.
  *   Format: `projects/{project}/locations/{location}`
+ * @param {google.cloud.aiplatform.v1beta1.AutoraterConfig} [request.autoraterConfig]
+ *   Optional. Autorater config used for evaluation.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

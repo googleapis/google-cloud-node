@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 176,
+          "end": 189,
           "type": "FULL"
         }
       ],
@@ -1748,6 +1748,14 @@
             "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKVMatchInput"
           },
           {
+            "name": "comet_input",
+            "type": ".google.cloud.aiplatform.v1beta1.CometInput"
+          },
+          {
+            "name": "metricx_input",
+            "type": ".google.cloud.aiplatform.v1beta1.MetricxInput"
+          },
+          {
             "name": "trajectory_exact_match_input",
             "type": ".google.cloud.aiplatform.v1beta1.TrajectoryExactMatchInput"
           },
@@ -1774,6 +1782,10 @@
           {
             "name": "location",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "autorater_config",
+            "type": ".google.cloud.aiplatform.v1beta1.AutoraterConfig"
           }
         ],
         "resultType": ".google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse",

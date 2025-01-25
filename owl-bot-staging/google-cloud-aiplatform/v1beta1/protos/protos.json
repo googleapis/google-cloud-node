@@ -8811,6 +8811,45 @@
                         "TIE": 3
                       }
                     },
+                    "AutoraterConfig": {
+                      "oneofs": {
+                        "_samplingCount": {
+                          "oneof": [
+                            "samplingCount"
+                          ]
+                        },
+                        "_flipEnabled": {
+                          "oneof": [
+                            "flipEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "samplingCount": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "flipEnabled": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoraterModel": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "EvaluateInstancesRequest": {
                       "oneofs": {
                         "metricInputs": {
@@ -8838,6 +8877,8 @@
                             "toolNameMatchInput",
                             "toolParameterKeyMatchInput",
                             "toolParameterKvMatchInput",
+                            "cometInput",
+                            "metricxInput",
                             "trajectoryExactMatchInput",
                             "trajectoryInOrderMatchInput",
                             "trajectoryAnyOrderMatchInput",
@@ -8940,6 +8981,14 @@
                           "type": "ToolParameterKVMatchInput",
                           "id": 22
                         },
+                        "cometInput": {
+                          "type": "CometInput",
+                          "id": 31
+                        },
+                        "metricxInput": {
+                          "type": "MetricxInput",
+                          "id": 32
+                        },
                         "trajectoryExactMatchInput": {
                           "type": "TrajectoryExactMatchInput",
                           "id": 33
@@ -8971,6 +9020,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
+                        },
+                        "autoraterConfig": {
+                          "type": "AutoraterConfig",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9001,6 +9057,8 @@
                             "toolNameMatchResults",
                             "toolParameterKeyMatchResults",
                             "toolParameterKvMatchResults",
+                            "cometResult",
+                            "metricxResult",
                             "trajectoryExactMatchResults",
                             "trajectoryInOrderMatchResults",
                             "trajectoryAnyOrderMatchResults",
@@ -9102,6 +9160,14 @@
                         "toolParameterKvMatchResults": {
                           "type": "ToolParameterKVMatchResults",
                           "id": 21
+                        },
+                        "cometResult": {
+                          "type": "CometResult",
+                          "id": 29
+                        },
+                        "metricxResult": {
+                          "type": "MetricxResult",
+                          "id": 30
                         },
                         "trajectoryExactMatchResults": {
                           "type": "TrajectoryExactMatchResults",
@@ -11125,6 +11191,11 @@
                           "oneof": [
                             "metricPromptTemplate"
                           ]
+                        },
+                        "_systemInstruction": {
+                          "oneof": [
+                            "systemInstruction"
+                          ]
                         }
                       },
                       "fields": {
@@ -11133,6 +11204,14 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "systemInstruction": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -11203,6 +11282,11 @@
                           "oneof": [
                             "metricPromptTemplate"
                           ]
+                        },
+                        "_systemInstruction": {
+                          "oneof": [
+                            "systemInstruction"
+                          ]
                         }
                       },
                       "fields": {
@@ -11211,6 +11295,28 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "candidateResponseFieldName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "baselineResponseFieldName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "systemInstruction": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -11564,6 +11670,254 @@
                       }
                     },
                     "ToolParameterKVMatchMetricValue": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CometInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "CometSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "CometInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CometSpec": {
+                      "oneofs": {
+                        "_version": {
+                          "oneof": [
+                            "version"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "version": {
+                          "type": "CometVersion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceLanguage": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "targetLanguage": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CometVersion": {
+                          "values": {
+                            "COMET_VERSION_UNSPECIFIED": 0,
+                            "COMET_22_SRC_REF": 2
+                          }
+                        }
+                      }
+                    },
+                    "CometInstance": {
+                      "oneofs": {
+                        "_prediction": {
+                          "oneof": [
+                            "prediction"
+                          ]
+                        },
+                        "_reference": {
+                          "oneof": [
+                            "reference"
+                          ]
+                        },
+                        "_source": {
+                          "oneof": [
+                            "source"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "prediction": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reference": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CometResult": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MetricxInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "MetricxSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "MetricxInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MetricxSpec": {
+                      "oneofs": {
+                        "_version": {
+                          "oneof": [
+                            "version"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "version": {
+                          "type": "MetricxVersion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceLanguage": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "targetLanguage": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MetricxVersion": {
+                          "values": {
+                            "METRICX_VERSION_UNSPECIFIED": 0,
+                            "METRICX_24_REF": 1,
+                            "METRICX_24_SRC": 2,
+                            "METRICX_24_SRC_REF": 3
+                          }
+                        }
+                      }
+                    },
+                    "MetricxInstance": {
+                      "oneofs": {
+                        "_prediction": {
+                          "oneof": [
+                            "prediction"
+                          ]
+                        },
+                        "_reference": {
+                          "oneof": [
+                            "reference"
+                          ]
+                        },
+                        "_source": {
+                          "oneof": [
+                            "source"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "prediction": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reference": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MetricxResult": {
                       "oneofs": {
                         "_score": {
                           "oneof": [
