@@ -26500,6 +26500,7 @@
                      * @property {google.chat.v1.IUserMentionMetadata|null} [userMention] Annotation userMention
                      * @property {google.chat.v1.ISlashCommandMetadata|null} [slashCommand] Annotation slashCommand
                      * @property {google.chat.v1.IRichLinkMetadata|null} [richLinkMetadata] Annotation richLinkMetadata
+                     * @property {google.chat.v1.ICustomEmojiMetadata|null} [customEmojiMetadata] Annotation customEmojiMetadata
                      */
     
                     /**
@@ -26565,6 +26566,14 @@
                      */
                     Annotation.prototype.richLinkMetadata = null;
     
+                    /**
+                     * Annotation customEmojiMetadata.
+                     * @member {google.chat.v1.ICustomEmojiMetadata|null|undefined} customEmojiMetadata
+                     * @memberof google.chat.v1.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.customEmojiMetadata = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -26581,12 +26590,12 @@
     
                     /**
                      * Annotation metadata.
-                     * @member {"userMention"|"slashCommand"|"richLinkMetadata"|undefined} metadata
+                     * @member {"userMention"|"slashCommand"|"richLinkMetadata"|"customEmojiMetadata"|undefined} metadata
                      * @memberof google.chat.v1.Annotation
                      * @instance
                      */
                     Object.defineProperty(Annotation.prototype, "metadata", {
-                        get: $util.oneOfGetter($oneOfFields = ["userMention", "slashCommand", "richLinkMetadata"]),
+                        get: $util.oneOfGetter($oneOfFields = ["userMention", "slashCommand", "richLinkMetadata", "customEmojiMetadata"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -26626,6 +26635,8 @@
                             $root.google.chat.v1.SlashCommandMetadata.encode(message.slashCommand, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         if (message.richLinkMetadata != null && Object.hasOwnProperty.call(message, "richLinkMetadata"))
                             $root.google.chat.v1.RichLinkMetadata.encode(message.richLinkMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.customEmojiMetadata != null && Object.hasOwnProperty.call(message, "customEmojiMetadata"))
+                            $root.google.chat.v1.CustomEmojiMetadata.encode(message.customEmojiMetadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         return writer;
                     };
     
@@ -26684,6 +26695,10 @@
                                     message.richLinkMetadata = $root.google.chat.v1.RichLinkMetadata.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 7: {
+                                    message.customEmojiMetadata = $root.google.chat.v1.CustomEmojiMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -26728,6 +26743,7 @@
                             case 1:
                             case 2:
                             case 3:
+                            case 4:
                                 break;
                             }
                         if (message.startIndex != null && message.hasOwnProperty("startIndex")) {
@@ -26764,6 +26780,16 @@
                                 var error = $root.google.chat.v1.RichLinkMetadata.verify(message.richLinkMetadata);
                                 if (error)
                                     return "richLinkMetadata." + error;
+                            }
+                        }
+                        if (message.customEmojiMetadata != null && message.hasOwnProperty("customEmojiMetadata")) {
+                            if (properties.metadata === 1)
+                                return "metadata: multiple values";
+                            properties.metadata = 1;
+                            {
+                                var error = $root.google.chat.v1.CustomEmojiMetadata.verify(message.customEmojiMetadata);
+                                if (error)
+                                    return "customEmojiMetadata." + error;
                             }
                         }
                         return null;
@@ -26804,6 +26830,10 @@
                         case 3:
                             message.type = 3;
                             break;
+                        case "CUSTOM_EMOJI":
+                        case 4:
+                            message.type = 4;
+                            break;
                         }
                         if (object.startIndex != null)
                             message.startIndex = object.startIndex | 0;
@@ -26823,6 +26853,11 @@
                             if (typeof object.richLinkMetadata !== "object")
                                 throw TypeError(".google.chat.v1.Annotation.richLinkMetadata: object expected");
                             message.richLinkMetadata = $root.google.chat.v1.RichLinkMetadata.fromObject(object.richLinkMetadata);
+                        }
+                        if (object.customEmojiMetadata != null) {
+                            if (typeof object.customEmojiMetadata !== "object")
+                                throw TypeError(".google.chat.v1.Annotation.customEmojiMetadata: object expected");
+                            message.customEmojiMetadata = $root.google.chat.v1.CustomEmojiMetadata.fromObject(object.customEmojiMetadata);
                         }
                         return message;
                     };
@@ -26867,6 +26902,11 @@
                             object.richLinkMetadata = $root.google.chat.v1.RichLinkMetadata.toObject(message.richLinkMetadata, options);
                             if (options.oneofs)
                                 object.metadata = "richLinkMetadata";
+                        }
+                        if (message.customEmojiMetadata != null && message.hasOwnProperty("customEmojiMetadata")) {
+                            object.customEmojiMetadata = $root.google.chat.v1.CustomEmojiMetadata.toObject(message.customEmojiMetadata, options);
+                            if (options.oneofs)
+                                object.metadata = "customEmojiMetadata";
                         }
                         return object;
                     };
@@ -27877,6 +27917,214 @@
                     return RichLinkMetadata;
                 })();
     
+                v1.CustomEmojiMetadata = (function() {
+    
+                    /**
+                     * Properties of a CustomEmojiMetadata.
+                     * @memberof google.chat.v1
+                     * @interface ICustomEmojiMetadata
+                     * @property {google.chat.v1.ICustomEmoji|null} [customEmoji] CustomEmojiMetadata customEmoji
+                     */
+    
+                    /**
+                     * Constructs a new CustomEmojiMetadata.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CustomEmojiMetadata.
+                     * @implements ICustomEmojiMetadata
+                     * @constructor
+                     * @param {google.chat.v1.ICustomEmojiMetadata=} [properties] Properties to set
+                     */
+                    function CustomEmojiMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CustomEmojiMetadata customEmoji.
+                     * @member {google.chat.v1.ICustomEmoji|null|undefined} customEmoji
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @instance
+                     */
+                    CustomEmojiMetadata.prototype.customEmoji = null;
+    
+                    /**
+                     * Creates a new CustomEmojiMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {google.chat.v1.ICustomEmojiMetadata=} [properties] Properties to set
+                     * @returns {google.chat.v1.CustomEmojiMetadata} CustomEmojiMetadata instance
+                     */
+                    CustomEmojiMetadata.create = function create(properties) {
+                        return new CustomEmojiMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CustomEmojiMetadata message. Does not implicitly {@link google.chat.v1.CustomEmojiMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {google.chat.v1.ICustomEmojiMetadata} message CustomEmojiMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomEmojiMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.customEmoji != null && Object.hasOwnProperty.call(message, "customEmoji"))
+                            $root.google.chat.v1.CustomEmoji.encode(message.customEmoji, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CustomEmojiMetadata message, length delimited. Does not implicitly {@link google.chat.v1.CustomEmojiMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {google.chat.v1.ICustomEmojiMetadata} message CustomEmojiMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomEmojiMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CustomEmojiMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CustomEmojiMetadata} CustomEmojiMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomEmojiMetadata.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CustomEmojiMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.customEmoji = $root.google.chat.v1.CustomEmoji.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CustomEmojiMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CustomEmojiMetadata} CustomEmojiMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomEmojiMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CustomEmojiMetadata message.
+                     * @function verify
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CustomEmojiMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji")) {
+                            var error = $root.google.chat.v1.CustomEmoji.verify(message.customEmoji);
+                            if (error)
+                                return "customEmoji." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CustomEmojiMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CustomEmojiMetadata} CustomEmojiMetadata
+                     */
+                    CustomEmojiMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CustomEmojiMetadata)
+                            return object;
+                        var message = new $root.google.chat.v1.CustomEmojiMetadata();
+                        if (object.customEmoji != null) {
+                            if (typeof object.customEmoji !== "object")
+                                throw TypeError(".google.chat.v1.CustomEmojiMetadata.customEmoji: object expected");
+                            message.customEmoji = $root.google.chat.v1.CustomEmoji.fromObject(object.customEmoji);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CustomEmojiMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {google.chat.v1.CustomEmojiMetadata} message CustomEmojiMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CustomEmojiMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.customEmoji = null;
+                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji"))
+                            object.customEmoji = $root.google.chat.v1.CustomEmoji.toObject(message.customEmoji, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CustomEmojiMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CustomEmojiMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CustomEmojiMetadata
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CustomEmojiMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CustomEmojiMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CustomEmojiMetadata";
+                    };
+    
+                    return CustomEmojiMetadata;
+                })();
+    
                 v1.DriveLinkData = (function() {
     
                     /**
@@ -28367,6 +28615,7 @@
                  * @property {number} USER_MENTION=1 USER_MENTION value
                  * @property {number} SLASH_COMMAND=2 SLASH_COMMAND value
                  * @property {number} RICH_LINK=3 RICH_LINK value
+                 * @property {number} CUSTOM_EMOJI=4 CUSTOM_EMOJI value
                  */
                 v1.AnnotationType = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
@@ -28374,6 +28623,7 @@
                     values[valuesById[1] = "USER_MENTION"] = 1;
                     values[valuesById[2] = "SLASH_COMMAND"] = 2;
                     values[valuesById[3] = "RICH_LINK"] = 3;
+                    values[valuesById[4] = "CUSTOM_EMOJI"] = 4;
                     return values;
                 })();
     
@@ -29885,6 +30135,1931 @@
                     };
     
                     return UploadAttachmentResponse;
+                })();
+    
+                v1.Reaction = (function() {
+    
+                    /**
+                     * Properties of a Reaction.
+                     * @memberof google.chat.v1
+                     * @interface IReaction
+                     * @property {string|null} [name] Reaction name
+                     * @property {google.chat.v1.IUser|null} [user] Reaction user
+                     * @property {google.chat.v1.IEmoji|null} [emoji] Reaction emoji
+                     */
+    
+                    /**
+                     * Constructs a new Reaction.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a Reaction.
+                     * @implements IReaction
+                     * @constructor
+                     * @param {google.chat.v1.IReaction=} [properties] Properties to set
+                     */
+                    function Reaction(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Reaction name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.Reaction
+                     * @instance
+                     */
+                    Reaction.prototype.name = "";
+    
+                    /**
+                     * Reaction user.
+                     * @member {google.chat.v1.IUser|null|undefined} user
+                     * @memberof google.chat.v1.Reaction
+                     * @instance
+                     */
+                    Reaction.prototype.user = null;
+    
+                    /**
+                     * Reaction emoji.
+                     * @member {google.chat.v1.IEmoji|null|undefined} emoji
+                     * @memberof google.chat.v1.Reaction
+                     * @instance
+                     */
+                    Reaction.prototype.emoji = null;
+    
+                    /**
+                     * Creates a new Reaction instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {google.chat.v1.IReaction=} [properties] Properties to set
+                     * @returns {google.chat.v1.Reaction} Reaction instance
+                     */
+                    Reaction.create = function create(properties) {
+                        return new Reaction(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Reaction message. Does not implicitly {@link google.chat.v1.Reaction.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {google.chat.v1.IReaction} message Reaction message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Reaction.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.user != null && Object.hasOwnProperty.call(message, "user"))
+                            $root.google.chat.v1.User.encode(message.user, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.emoji != null && Object.hasOwnProperty.call(message, "emoji"))
+                            $root.google.chat.v1.Emoji.encode(message.emoji, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Reaction message, length delimited. Does not implicitly {@link google.chat.v1.Reaction.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {google.chat.v1.IReaction} message Reaction message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Reaction.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Reaction message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.Reaction} Reaction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Reaction.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Reaction();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.user = $root.google.chat.v1.User.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.emoji = $root.google.chat.v1.Emoji.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Reaction message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.Reaction} Reaction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Reaction.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Reaction message.
+                     * @function verify
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Reaction.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.user != null && message.hasOwnProperty("user")) {
+                            var error = $root.google.chat.v1.User.verify(message.user);
+                            if (error)
+                                return "user." + error;
+                        }
+                        if (message.emoji != null && message.hasOwnProperty("emoji")) {
+                            var error = $root.google.chat.v1.Emoji.verify(message.emoji);
+                            if (error)
+                                return "emoji." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Reaction message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.Reaction} Reaction
+                     */
+                    Reaction.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.Reaction)
+                            return object;
+                        var message = new $root.google.chat.v1.Reaction();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.user != null) {
+                            if (typeof object.user !== "object")
+                                throw TypeError(".google.chat.v1.Reaction.user: object expected");
+                            message.user = $root.google.chat.v1.User.fromObject(object.user);
+                        }
+                        if (object.emoji != null) {
+                            if (typeof object.emoji !== "object")
+                                throw TypeError(".google.chat.v1.Reaction.emoji: object expected");
+                            message.emoji = $root.google.chat.v1.Emoji.fromObject(object.emoji);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Reaction message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {google.chat.v1.Reaction} message Reaction
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Reaction.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.user = null;
+                            object.emoji = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.user != null && message.hasOwnProperty("user"))
+                            object.user = $root.google.chat.v1.User.toObject(message.user, options);
+                        if (message.emoji != null && message.hasOwnProperty("emoji"))
+                            object.emoji = $root.google.chat.v1.Emoji.toObject(message.emoji, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Reaction to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.Reaction
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Reaction.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Reaction
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.Reaction
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Reaction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.Reaction";
+                    };
+    
+                    return Reaction;
+                })();
+    
+                v1.Emoji = (function() {
+    
+                    /**
+                     * Properties of an Emoji.
+                     * @memberof google.chat.v1
+                     * @interface IEmoji
+                     * @property {string|null} [unicode] Emoji unicode
+                     * @property {google.chat.v1.ICustomEmoji|null} [customEmoji] Emoji customEmoji
+                     */
+    
+                    /**
+                     * Constructs a new Emoji.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an Emoji.
+                     * @implements IEmoji
+                     * @constructor
+                     * @param {google.chat.v1.IEmoji=} [properties] Properties to set
+                     */
+                    function Emoji(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Emoji unicode.
+                     * @member {string|null|undefined} unicode
+                     * @memberof google.chat.v1.Emoji
+                     * @instance
+                     */
+                    Emoji.prototype.unicode = null;
+    
+                    /**
+                     * Emoji customEmoji.
+                     * @member {google.chat.v1.ICustomEmoji|null|undefined} customEmoji
+                     * @memberof google.chat.v1.Emoji
+                     * @instance
+                     */
+                    Emoji.prototype.customEmoji = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Emoji content.
+                     * @member {"unicode"|"customEmoji"|undefined} content
+                     * @memberof google.chat.v1.Emoji
+                     * @instance
+                     */
+                    Object.defineProperty(Emoji.prototype, "content", {
+                        get: $util.oneOfGetter($oneOfFields = ["unicode", "customEmoji"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Emoji instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {google.chat.v1.IEmoji=} [properties] Properties to set
+                     * @returns {google.chat.v1.Emoji} Emoji instance
+                     */
+                    Emoji.create = function create(properties) {
+                        return new Emoji(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Emoji message. Does not implicitly {@link google.chat.v1.Emoji.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {google.chat.v1.IEmoji} message Emoji message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Emoji.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.unicode != null && Object.hasOwnProperty.call(message, "unicode"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.unicode);
+                        if (message.customEmoji != null && Object.hasOwnProperty.call(message, "customEmoji"))
+                            $root.google.chat.v1.CustomEmoji.encode(message.customEmoji, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Emoji message, length delimited. Does not implicitly {@link google.chat.v1.Emoji.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {google.chat.v1.IEmoji} message Emoji message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Emoji.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Emoji message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.Emoji} Emoji
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Emoji.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Emoji();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.unicode = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.customEmoji = $root.google.chat.v1.CustomEmoji.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Emoji message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.Emoji} Emoji
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Emoji.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Emoji message.
+                     * @function verify
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Emoji.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.unicode != null && message.hasOwnProperty("unicode")) {
+                            properties.content = 1;
+                            if (!$util.isString(message.unicode))
+                                return "unicode: string expected";
+                        }
+                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji")) {
+                            if (properties.content === 1)
+                                return "content: multiple values";
+                            properties.content = 1;
+                            {
+                                var error = $root.google.chat.v1.CustomEmoji.verify(message.customEmoji);
+                                if (error)
+                                    return "customEmoji." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Emoji message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.Emoji} Emoji
+                     */
+                    Emoji.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.Emoji)
+                            return object;
+                        var message = new $root.google.chat.v1.Emoji();
+                        if (object.unicode != null)
+                            message.unicode = String(object.unicode);
+                        if (object.customEmoji != null) {
+                            if (typeof object.customEmoji !== "object")
+                                throw TypeError(".google.chat.v1.Emoji.customEmoji: object expected");
+                            message.customEmoji = $root.google.chat.v1.CustomEmoji.fromObject(object.customEmoji);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Emoji message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {google.chat.v1.Emoji} message Emoji
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Emoji.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.unicode != null && message.hasOwnProperty("unicode")) {
+                            object.unicode = message.unicode;
+                            if (options.oneofs)
+                                object.content = "unicode";
+                        }
+                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji")) {
+                            object.customEmoji = $root.google.chat.v1.CustomEmoji.toObject(message.customEmoji, options);
+                            if (options.oneofs)
+                                object.content = "customEmoji";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Emoji to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.Emoji
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Emoji.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Emoji
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.Emoji
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Emoji.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.Emoji";
+                    };
+    
+                    return Emoji;
+                })();
+    
+                v1.CustomEmoji = (function() {
+    
+                    /**
+                     * Properties of a CustomEmoji.
+                     * @memberof google.chat.v1
+                     * @interface ICustomEmoji
+                     * @property {string|null} [uid] CustomEmoji uid
+                     */
+    
+                    /**
+                     * Constructs a new CustomEmoji.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CustomEmoji.
+                     * @implements ICustomEmoji
+                     * @constructor
+                     * @param {google.chat.v1.ICustomEmoji=} [properties] Properties to set
+                     */
+                    function CustomEmoji(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CustomEmoji uid.
+                     * @member {string} uid
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @instance
+                     */
+                    CustomEmoji.prototype.uid = "";
+    
+                    /**
+                     * Creates a new CustomEmoji instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {google.chat.v1.ICustomEmoji=} [properties] Properties to set
+                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji instance
+                     */
+                    CustomEmoji.create = function create(properties) {
+                        return new CustomEmoji(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CustomEmoji message. Does not implicitly {@link google.chat.v1.CustomEmoji.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {google.chat.v1.ICustomEmoji} message CustomEmoji message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomEmoji.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uid);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CustomEmoji message, length delimited. Does not implicitly {@link google.chat.v1.CustomEmoji.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {google.chat.v1.ICustomEmoji} message CustomEmoji message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomEmoji.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CustomEmoji message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomEmoji.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CustomEmoji();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.uid = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CustomEmoji message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomEmoji.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CustomEmoji message.
+                     * @function verify
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CustomEmoji.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            if (!$util.isString(message.uid))
+                                return "uid: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CustomEmoji message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji
+                     */
+                    CustomEmoji.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CustomEmoji)
+                            return object;
+                        var message = new $root.google.chat.v1.CustomEmoji();
+                        if (object.uid != null)
+                            message.uid = String(object.uid);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CustomEmoji message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {google.chat.v1.CustomEmoji} message CustomEmoji
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CustomEmoji.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.uid = "";
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            object.uid = message.uid;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CustomEmoji to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CustomEmoji.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CustomEmoji
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CustomEmoji
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CustomEmoji.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CustomEmoji";
+                    };
+    
+                    return CustomEmoji;
+                })();
+    
+                v1.EmojiReactionSummary = (function() {
+    
+                    /**
+                     * Properties of an EmojiReactionSummary.
+                     * @memberof google.chat.v1
+                     * @interface IEmojiReactionSummary
+                     * @property {google.chat.v1.IEmoji|null} [emoji] EmojiReactionSummary emoji
+                     * @property {number|null} [reactionCount] EmojiReactionSummary reactionCount
+                     */
+    
+                    /**
+                     * Constructs a new EmojiReactionSummary.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an EmojiReactionSummary.
+                     * @implements IEmojiReactionSummary
+                     * @constructor
+                     * @param {google.chat.v1.IEmojiReactionSummary=} [properties] Properties to set
+                     */
+                    function EmojiReactionSummary(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * EmojiReactionSummary emoji.
+                     * @member {google.chat.v1.IEmoji|null|undefined} emoji
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @instance
+                     */
+                    EmojiReactionSummary.prototype.emoji = null;
+    
+                    /**
+                     * EmojiReactionSummary reactionCount.
+                     * @member {number|null|undefined} reactionCount
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @instance
+                     */
+                    EmojiReactionSummary.prototype.reactionCount = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * EmojiReactionSummary _reactionCount.
+                     * @member {"reactionCount"|undefined} _reactionCount
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @instance
+                     */
+                    Object.defineProperty(EmojiReactionSummary.prototype, "_reactionCount", {
+                        get: $util.oneOfGetter($oneOfFields = ["reactionCount"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new EmojiReactionSummary instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {google.chat.v1.IEmojiReactionSummary=} [properties] Properties to set
+                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary instance
+                     */
+                    EmojiReactionSummary.create = function create(properties) {
+                        return new EmojiReactionSummary(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified EmojiReactionSummary message. Does not implicitly {@link google.chat.v1.EmojiReactionSummary.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {google.chat.v1.IEmojiReactionSummary} message EmojiReactionSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EmojiReactionSummary.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.emoji != null && Object.hasOwnProperty.call(message, "emoji"))
+                            $root.google.chat.v1.Emoji.encode(message.emoji, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.reactionCount != null && Object.hasOwnProperty.call(message, "reactionCount"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.reactionCount);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified EmojiReactionSummary message, length delimited. Does not implicitly {@link google.chat.v1.EmojiReactionSummary.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {google.chat.v1.IEmojiReactionSummary} message EmojiReactionSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EmojiReactionSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an EmojiReactionSummary message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EmojiReactionSummary.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.EmojiReactionSummary();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.emoji = $root.google.chat.v1.Emoji.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.reactionCount = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an EmojiReactionSummary message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EmojiReactionSummary.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an EmojiReactionSummary message.
+                     * @function verify
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    EmojiReactionSummary.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.emoji != null && message.hasOwnProperty("emoji")) {
+                            var error = $root.google.chat.v1.Emoji.verify(message.emoji);
+                            if (error)
+                                return "emoji." + error;
+                        }
+                        if (message.reactionCount != null && message.hasOwnProperty("reactionCount")) {
+                            properties._reactionCount = 1;
+                            if (!$util.isInteger(message.reactionCount))
+                                return "reactionCount: integer expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an EmojiReactionSummary message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary
+                     */
+                    EmojiReactionSummary.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.EmojiReactionSummary)
+                            return object;
+                        var message = new $root.google.chat.v1.EmojiReactionSummary();
+                        if (object.emoji != null) {
+                            if (typeof object.emoji !== "object")
+                                throw TypeError(".google.chat.v1.EmojiReactionSummary.emoji: object expected");
+                            message.emoji = $root.google.chat.v1.Emoji.fromObject(object.emoji);
+                        }
+                        if (object.reactionCount != null)
+                            message.reactionCount = object.reactionCount | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an EmojiReactionSummary message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {google.chat.v1.EmojiReactionSummary} message EmojiReactionSummary
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    EmojiReactionSummary.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.emoji = null;
+                        if (message.emoji != null && message.hasOwnProperty("emoji"))
+                            object.emoji = $root.google.chat.v1.Emoji.toObject(message.emoji, options);
+                        if (message.reactionCount != null && message.hasOwnProperty("reactionCount")) {
+                            object.reactionCount = message.reactionCount;
+                            if (options.oneofs)
+                                object._reactionCount = "reactionCount";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this EmojiReactionSummary to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    EmojiReactionSummary.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EmojiReactionSummary
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.EmojiReactionSummary
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EmojiReactionSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.EmojiReactionSummary";
+                    };
+    
+                    return EmojiReactionSummary;
+                })();
+    
+                v1.CreateReactionRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateReactionRequest.
+                     * @memberof google.chat.v1
+                     * @interface ICreateReactionRequest
+                     * @property {string|null} [parent] CreateReactionRequest parent
+                     * @property {google.chat.v1.IReaction|null} [reaction] CreateReactionRequest reaction
+                     */
+    
+                    /**
+                     * Constructs a new CreateReactionRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CreateReactionRequest.
+                     * @implements ICreateReactionRequest
+                     * @constructor
+                     * @param {google.chat.v1.ICreateReactionRequest=} [properties] Properties to set
+                     */
+                    function CreateReactionRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateReactionRequest parent.
+                     * @member {string} parent
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @instance
+                     */
+                    CreateReactionRequest.prototype.parent = "";
+    
+                    /**
+                     * CreateReactionRequest reaction.
+                     * @member {google.chat.v1.IReaction|null|undefined} reaction
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @instance
+                     */
+                    CreateReactionRequest.prototype.reaction = null;
+    
+                    /**
+                     * Creates a new CreateReactionRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateReactionRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest instance
+                     */
+                    CreateReactionRequest.create = function create(properties) {
+                        return new CreateReactionRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateReactionRequest message. Does not implicitly {@link google.chat.v1.CreateReactionRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateReactionRequest} message CreateReactionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateReactionRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.reaction != null && Object.hasOwnProperty.call(message, "reaction"))
+                            $root.google.chat.v1.Reaction.encode(message.reaction, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateReactionRequest message, length delimited. Does not implicitly {@link google.chat.v1.CreateReactionRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateReactionRequest} message CreateReactionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateReactionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateReactionRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateReactionRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateReactionRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.reaction = $root.google.chat.v1.Reaction.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateReactionRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateReactionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateReactionRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateReactionRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.reaction != null && message.hasOwnProperty("reaction")) {
+                            var error = $root.google.chat.v1.Reaction.verify(message.reaction);
+                            if (error)
+                                return "reaction." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateReactionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest
+                     */
+                    CreateReactionRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CreateReactionRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.CreateReactionRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.reaction != null) {
+                            if (typeof object.reaction !== "object")
+                                throw TypeError(".google.chat.v1.CreateReactionRequest.reaction: object expected");
+                            message.reaction = $root.google.chat.v1.Reaction.fromObject(object.reaction);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateReactionRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {google.chat.v1.CreateReactionRequest} message CreateReactionRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateReactionRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.reaction = null;
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.reaction != null && message.hasOwnProperty("reaction"))
+                            object.reaction = $root.google.chat.v1.Reaction.toObject(message.reaction, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateReactionRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateReactionRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreateReactionRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CreateReactionRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateReactionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CreateReactionRequest";
+                    };
+    
+                    return CreateReactionRequest;
+                })();
+    
+                v1.ListReactionsRequest = (function() {
+    
+                    /**
+                     * Properties of a ListReactionsRequest.
+                     * @memberof google.chat.v1
+                     * @interface IListReactionsRequest
+                     * @property {string|null} [parent] ListReactionsRequest parent
+                     * @property {number|null} [pageSize] ListReactionsRequest pageSize
+                     * @property {string|null} [pageToken] ListReactionsRequest pageToken
+                     * @property {string|null} [filter] ListReactionsRequest filter
+                     */
+    
+                    /**
+                     * Constructs a new ListReactionsRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListReactionsRequest.
+                     * @implements IListReactionsRequest
+                     * @constructor
+                     * @param {google.chat.v1.IListReactionsRequest=} [properties] Properties to set
+                     */
+                    function ListReactionsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListReactionsRequest parent.
+                     * @member {string} parent
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @instance
+                     */
+                    ListReactionsRequest.prototype.parent = "";
+    
+                    /**
+                     * ListReactionsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @instance
+                     */
+                    ListReactionsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListReactionsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @instance
+                     */
+                    ListReactionsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * ListReactionsRequest filter.
+                     * @member {string} filter
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @instance
+                     */
+                    ListReactionsRequest.prototype.filter = "";
+    
+                    /**
+                     * Creates a new ListReactionsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {google.chat.v1.IListReactionsRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest instance
+                     */
+                    ListReactionsRequest.create = function create(properties) {
+                        return new ListReactionsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListReactionsRequest message. Does not implicitly {@link google.chat.v1.ListReactionsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {google.chat.v1.IListReactionsRequest} message ListReactionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListReactionsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListReactionsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListReactionsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {google.chat.v1.IListReactionsRequest} message ListReactionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListReactionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListReactionsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListReactionsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListReactionsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.filter = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListReactionsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListReactionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListReactionsRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListReactionsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListReactionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest
+                     */
+                    ListReactionsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListReactionsRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.ListReactionsRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListReactionsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {google.chat.v1.ListReactionsRequest} message ListReactionsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListReactionsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.filter = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListReactionsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListReactionsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListReactionsRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListReactionsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListReactionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListReactionsRequest";
+                    };
+    
+                    return ListReactionsRequest;
+                })();
+    
+                v1.ListReactionsResponse = (function() {
+    
+                    /**
+                     * Properties of a ListReactionsResponse.
+                     * @memberof google.chat.v1
+                     * @interface IListReactionsResponse
+                     * @property {Array.<google.chat.v1.IReaction>|null} [reactions] ListReactionsResponse reactions
+                     * @property {string|null} [nextPageToken] ListReactionsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListReactionsResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListReactionsResponse.
+                     * @implements IListReactionsResponse
+                     * @constructor
+                     * @param {google.chat.v1.IListReactionsResponse=} [properties] Properties to set
+                     */
+                    function ListReactionsResponse(properties) {
+                        this.reactions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListReactionsResponse reactions.
+                     * @member {Array.<google.chat.v1.IReaction>} reactions
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @instance
+                     */
+                    ListReactionsResponse.prototype.reactions = $util.emptyArray;
+    
+                    /**
+                     * ListReactionsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @instance
+                     */
+                    ListReactionsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListReactionsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {google.chat.v1.IListReactionsResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse instance
+                     */
+                    ListReactionsResponse.create = function create(properties) {
+                        return new ListReactionsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListReactionsResponse message. Does not implicitly {@link google.chat.v1.ListReactionsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {google.chat.v1.IListReactionsResponse} message ListReactionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListReactionsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.reactions != null && message.reactions.length)
+                            for (var i = 0; i < message.reactions.length; ++i)
+                                $root.google.chat.v1.Reaction.encode(message.reactions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListReactionsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListReactionsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {google.chat.v1.IListReactionsResponse} message ListReactionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListReactionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListReactionsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListReactionsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListReactionsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.reactions && message.reactions.length))
+                                        message.reactions = [];
+                                    message.reactions.push($root.google.chat.v1.Reaction.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListReactionsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListReactionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListReactionsResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListReactionsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.reactions != null && message.hasOwnProperty("reactions")) {
+                            if (!Array.isArray(message.reactions))
+                                return "reactions: array expected";
+                            for (var i = 0; i < message.reactions.length; ++i) {
+                                var error = $root.google.chat.v1.Reaction.verify(message.reactions[i]);
+                                if (error)
+                                    return "reactions." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListReactionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse
+                     */
+                    ListReactionsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListReactionsResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.ListReactionsResponse();
+                        if (object.reactions) {
+                            if (!Array.isArray(object.reactions))
+                                throw TypeError(".google.chat.v1.ListReactionsResponse.reactions: array expected");
+                            message.reactions = [];
+                            for (var i = 0; i < object.reactions.length; ++i) {
+                                if (typeof object.reactions[i] !== "object")
+                                    throw TypeError(".google.chat.v1.ListReactionsResponse.reactions: object expected");
+                                message.reactions[i] = $root.google.chat.v1.Reaction.fromObject(object.reactions[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListReactionsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {google.chat.v1.ListReactionsResponse} message ListReactionsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListReactionsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.reactions = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.reactions && message.reactions.length) {
+                            object.reactions = [];
+                            for (var j = 0; j < message.reactions.length; ++j)
+                                object.reactions[j] = $root.google.chat.v1.Reaction.toObject(message.reactions[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListReactionsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListReactionsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListReactionsResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListReactionsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListReactionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListReactionsResponse";
+                    };
+    
+                    return ListReactionsResponse;
+                })();
+    
+                v1.DeleteReactionRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteReactionRequest.
+                     * @memberof google.chat.v1
+                     * @interface IDeleteReactionRequest
+                     * @property {string|null} [name] DeleteReactionRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteReactionRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a DeleteReactionRequest.
+                     * @implements IDeleteReactionRequest
+                     * @constructor
+                     * @param {google.chat.v1.IDeleteReactionRequest=} [properties] Properties to set
+                     */
+                    function DeleteReactionRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteReactionRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @instance
+                     */
+                    DeleteReactionRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteReactionRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteReactionRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest instance
+                     */
+                    DeleteReactionRequest.create = function create(properties) {
+                        return new DeleteReactionRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteReactionRequest message. Does not implicitly {@link google.chat.v1.DeleteReactionRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteReactionRequest} message DeleteReactionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteReactionRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteReactionRequest message, length delimited. Does not implicitly {@link google.chat.v1.DeleteReactionRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteReactionRequest} message DeleteReactionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteReactionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteReactionRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteReactionRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteReactionRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteReactionRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteReactionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteReactionRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteReactionRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteReactionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest
+                     */
+                    DeleteReactionRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.DeleteReactionRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.DeleteReactionRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteReactionRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {google.chat.v1.DeleteReactionRequest} message DeleteReactionRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteReactionRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteReactionRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteReactionRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteReactionRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.DeleteReactionRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteReactionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.DeleteReactionRequest";
+                    };
+    
+                    return DeleteReactionRequest;
                 })();
     
                 v1.User = (function() {
@@ -43590,1931 +45765,6 @@
                     return MatchedUrl;
                 })();
     
-                v1.Reaction = (function() {
-    
-                    /**
-                     * Properties of a Reaction.
-                     * @memberof google.chat.v1
-                     * @interface IReaction
-                     * @property {string|null} [name] Reaction name
-                     * @property {google.chat.v1.IUser|null} [user] Reaction user
-                     * @property {google.chat.v1.IEmoji|null} [emoji] Reaction emoji
-                     */
-    
-                    /**
-                     * Constructs a new Reaction.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents a Reaction.
-                     * @implements IReaction
-                     * @constructor
-                     * @param {google.chat.v1.IReaction=} [properties] Properties to set
-                     */
-                    function Reaction(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Reaction name.
-                     * @member {string} name
-                     * @memberof google.chat.v1.Reaction
-                     * @instance
-                     */
-                    Reaction.prototype.name = "";
-    
-                    /**
-                     * Reaction user.
-                     * @member {google.chat.v1.IUser|null|undefined} user
-                     * @memberof google.chat.v1.Reaction
-                     * @instance
-                     */
-                    Reaction.prototype.user = null;
-    
-                    /**
-                     * Reaction emoji.
-                     * @member {google.chat.v1.IEmoji|null|undefined} emoji
-                     * @memberof google.chat.v1.Reaction
-                     * @instance
-                     */
-                    Reaction.prototype.emoji = null;
-    
-                    /**
-                     * Creates a new Reaction instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {google.chat.v1.IReaction=} [properties] Properties to set
-                     * @returns {google.chat.v1.Reaction} Reaction instance
-                     */
-                    Reaction.create = function create(properties) {
-                        return new Reaction(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Reaction message. Does not implicitly {@link google.chat.v1.Reaction.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {google.chat.v1.IReaction} message Reaction message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Reaction.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                        if (message.user != null && Object.hasOwnProperty.call(message, "user"))
-                            $root.google.chat.v1.User.encode(message.user, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.emoji != null && Object.hasOwnProperty.call(message, "emoji"))
-                            $root.google.chat.v1.Emoji.encode(message.emoji, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Reaction message, length delimited. Does not implicitly {@link google.chat.v1.Reaction.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {google.chat.v1.IReaction} message Reaction message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Reaction.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Reaction message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.Reaction} Reaction
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Reaction.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Reaction();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.name = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.user = $root.google.chat.v1.User.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 3: {
-                                    message.emoji = $root.google.chat.v1.Emoji.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Reaction message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.Reaction} Reaction
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Reaction.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Reaction message.
-                     * @function verify
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Reaction.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        if (message.user != null && message.hasOwnProperty("user")) {
-                            var error = $root.google.chat.v1.User.verify(message.user);
-                            if (error)
-                                return "user." + error;
-                        }
-                        if (message.emoji != null && message.hasOwnProperty("emoji")) {
-                            var error = $root.google.chat.v1.Emoji.verify(message.emoji);
-                            if (error)
-                                return "emoji." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Reaction message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.Reaction} Reaction
-                     */
-                    Reaction.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.Reaction)
-                            return object;
-                        var message = new $root.google.chat.v1.Reaction();
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        if (object.user != null) {
-                            if (typeof object.user !== "object")
-                                throw TypeError(".google.chat.v1.Reaction.user: object expected");
-                            message.user = $root.google.chat.v1.User.fromObject(object.user);
-                        }
-                        if (object.emoji != null) {
-                            if (typeof object.emoji !== "object")
-                                throw TypeError(".google.chat.v1.Reaction.emoji: object expected");
-                            message.emoji = $root.google.chat.v1.Emoji.fromObject(object.emoji);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Reaction message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {google.chat.v1.Reaction} message Reaction
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Reaction.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.name = "";
-                            object.user = null;
-                            object.emoji = null;
-                        }
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        if (message.user != null && message.hasOwnProperty("user"))
-                            object.user = $root.google.chat.v1.User.toObject(message.user, options);
-                        if (message.emoji != null && message.hasOwnProperty("emoji"))
-                            object.emoji = $root.google.chat.v1.Emoji.toObject(message.emoji, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Reaction to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.Reaction
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Reaction.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Reaction
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.Reaction
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Reaction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.Reaction";
-                    };
-    
-                    return Reaction;
-                })();
-    
-                v1.Emoji = (function() {
-    
-                    /**
-                     * Properties of an Emoji.
-                     * @memberof google.chat.v1
-                     * @interface IEmoji
-                     * @property {string|null} [unicode] Emoji unicode
-                     * @property {google.chat.v1.ICustomEmoji|null} [customEmoji] Emoji customEmoji
-                     */
-    
-                    /**
-                     * Constructs a new Emoji.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents an Emoji.
-                     * @implements IEmoji
-                     * @constructor
-                     * @param {google.chat.v1.IEmoji=} [properties] Properties to set
-                     */
-                    function Emoji(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Emoji unicode.
-                     * @member {string|null|undefined} unicode
-                     * @memberof google.chat.v1.Emoji
-                     * @instance
-                     */
-                    Emoji.prototype.unicode = null;
-    
-                    /**
-                     * Emoji customEmoji.
-                     * @member {google.chat.v1.ICustomEmoji|null|undefined} customEmoji
-                     * @memberof google.chat.v1.Emoji
-                     * @instance
-                     */
-                    Emoji.prototype.customEmoji = null;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * Emoji content.
-                     * @member {"unicode"|"customEmoji"|undefined} content
-                     * @memberof google.chat.v1.Emoji
-                     * @instance
-                     */
-                    Object.defineProperty(Emoji.prototype, "content", {
-                        get: $util.oneOfGetter($oneOfFields = ["unicode", "customEmoji"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new Emoji instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {google.chat.v1.IEmoji=} [properties] Properties to set
-                     * @returns {google.chat.v1.Emoji} Emoji instance
-                     */
-                    Emoji.create = function create(properties) {
-                        return new Emoji(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Emoji message. Does not implicitly {@link google.chat.v1.Emoji.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {google.chat.v1.IEmoji} message Emoji message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Emoji.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.unicode != null && Object.hasOwnProperty.call(message, "unicode"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.unicode);
-                        if (message.customEmoji != null && Object.hasOwnProperty.call(message, "customEmoji"))
-                            $root.google.chat.v1.CustomEmoji.encode(message.customEmoji, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Emoji message, length delimited. Does not implicitly {@link google.chat.v1.Emoji.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {google.chat.v1.IEmoji} message Emoji message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Emoji.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an Emoji message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.Emoji} Emoji
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Emoji.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Emoji();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.unicode = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.customEmoji = $root.google.chat.v1.CustomEmoji.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an Emoji message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.Emoji} Emoji
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Emoji.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an Emoji message.
-                     * @function verify
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Emoji.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        var properties = {};
-                        if (message.unicode != null && message.hasOwnProperty("unicode")) {
-                            properties.content = 1;
-                            if (!$util.isString(message.unicode))
-                                return "unicode: string expected";
-                        }
-                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji")) {
-                            if (properties.content === 1)
-                                return "content: multiple values";
-                            properties.content = 1;
-                            {
-                                var error = $root.google.chat.v1.CustomEmoji.verify(message.customEmoji);
-                                if (error)
-                                    return "customEmoji." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an Emoji message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.Emoji} Emoji
-                     */
-                    Emoji.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.Emoji)
-                            return object;
-                        var message = new $root.google.chat.v1.Emoji();
-                        if (object.unicode != null)
-                            message.unicode = String(object.unicode);
-                        if (object.customEmoji != null) {
-                            if (typeof object.customEmoji !== "object")
-                                throw TypeError(".google.chat.v1.Emoji.customEmoji: object expected");
-                            message.customEmoji = $root.google.chat.v1.CustomEmoji.fromObject(object.customEmoji);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an Emoji message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {google.chat.v1.Emoji} message Emoji
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Emoji.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (message.unicode != null && message.hasOwnProperty("unicode")) {
-                            object.unicode = message.unicode;
-                            if (options.oneofs)
-                                object.content = "unicode";
-                        }
-                        if (message.customEmoji != null && message.hasOwnProperty("customEmoji")) {
-                            object.customEmoji = $root.google.chat.v1.CustomEmoji.toObject(message.customEmoji, options);
-                            if (options.oneofs)
-                                object.content = "customEmoji";
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Emoji to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.Emoji
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Emoji.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Emoji
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.Emoji
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Emoji.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.Emoji";
-                    };
-    
-                    return Emoji;
-                })();
-    
-                v1.CustomEmoji = (function() {
-    
-                    /**
-                     * Properties of a CustomEmoji.
-                     * @memberof google.chat.v1
-                     * @interface ICustomEmoji
-                     * @property {string|null} [uid] CustomEmoji uid
-                     */
-    
-                    /**
-                     * Constructs a new CustomEmoji.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents a CustomEmoji.
-                     * @implements ICustomEmoji
-                     * @constructor
-                     * @param {google.chat.v1.ICustomEmoji=} [properties] Properties to set
-                     */
-                    function CustomEmoji(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * CustomEmoji uid.
-                     * @member {string} uid
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @instance
-                     */
-                    CustomEmoji.prototype.uid = "";
-    
-                    /**
-                     * Creates a new CustomEmoji instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {google.chat.v1.ICustomEmoji=} [properties] Properties to set
-                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji instance
-                     */
-                    CustomEmoji.create = function create(properties) {
-                        return new CustomEmoji(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified CustomEmoji message. Does not implicitly {@link google.chat.v1.CustomEmoji.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {google.chat.v1.ICustomEmoji} message CustomEmoji message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    CustomEmoji.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uid);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified CustomEmoji message, length delimited. Does not implicitly {@link google.chat.v1.CustomEmoji.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {google.chat.v1.ICustomEmoji} message CustomEmoji message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    CustomEmoji.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a CustomEmoji message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    CustomEmoji.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CustomEmoji();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.uid = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a CustomEmoji message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    CustomEmoji.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a CustomEmoji message.
-                     * @function verify
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    CustomEmoji.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.uid != null && message.hasOwnProperty("uid"))
-                            if (!$util.isString(message.uid))
-                                return "uid: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a CustomEmoji message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.CustomEmoji} CustomEmoji
-                     */
-                    CustomEmoji.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.CustomEmoji)
-                            return object;
-                        var message = new $root.google.chat.v1.CustomEmoji();
-                        if (object.uid != null)
-                            message.uid = String(object.uid);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a CustomEmoji message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {google.chat.v1.CustomEmoji} message CustomEmoji
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    CustomEmoji.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.uid = "";
-                        if (message.uid != null && message.hasOwnProperty("uid"))
-                            object.uid = message.uid;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this CustomEmoji to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    CustomEmoji.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for CustomEmoji
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.CustomEmoji
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    CustomEmoji.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.CustomEmoji";
-                    };
-    
-                    return CustomEmoji;
-                })();
-    
-                v1.EmojiReactionSummary = (function() {
-    
-                    /**
-                     * Properties of an EmojiReactionSummary.
-                     * @memberof google.chat.v1
-                     * @interface IEmojiReactionSummary
-                     * @property {google.chat.v1.IEmoji|null} [emoji] EmojiReactionSummary emoji
-                     * @property {number|null} [reactionCount] EmojiReactionSummary reactionCount
-                     */
-    
-                    /**
-                     * Constructs a new EmojiReactionSummary.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents an EmojiReactionSummary.
-                     * @implements IEmojiReactionSummary
-                     * @constructor
-                     * @param {google.chat.v1.IEmojiReactionSummary=} [properties] Properties to set
-                     */
-                    function EmojiReactionSummary(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * EmojiReactionSummary emoji.
-                     * @member {google.chat.v1.IEmoji|null|undefined} emoji
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @instance
-                     */
-                    EmojiReactionSummary.prototype.emoji = null;
-    
-                    /**
-                     * EmojiReactionSummary reactionCount.
-                     * @member {number|null|undefined} reactionCount
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @instance
-                     */
-                    EmojiReactionSummary.prototype.reactionCount = null;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * EmojiReactionSummary _reactionCount.
-                     * @member {"reactionCount"|undefined} _reactionCount
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @instance
-                     */
-                    Object.defineProperty(EmojiReactionSummary.prototype, "_reactionCount", {
-                        get: $util.oneOfGetter($oneOfFields = ["reactionCount"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new EmojiReactionSummary instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {google.chat.v1.IEmojiReactionSummary=} [properties] Properties to set
-                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary instance
-                     */
-                    EmojiReactionSummary.create = function create(properties) {
-                        return new EmojiReactionSummary(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified EmojiReactionSummary message. Does not implicitly {@link google.chat.v1.EmojiReactionSummary.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {google.chat.v1.IEmojiReactionSummary} message EmojiReactionSummary message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    EmojiReactionSummary.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.emoji != null && Object.hasOwnProperty.call(message, "emoji"))
-                            $root.google.chat.v1.Emoji.encode(message.emoji, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.reactionCount != null && Object.hasOwnProperty.call(message, "reactionCount"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.reactionCount);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified EmojiReactionSummary message, length delimited. Does not implicitly {@link google.chat.v1.EmojiReactionSummary.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {google.chat.v1.IEmojiReactionSummary} message EmojiReactionSummary message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    EmojiReactionSummary.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an EmojiReactionSummary message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    EmojiReactionSummary.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.EmojiReactionSummary();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.emoji = $root.google.chat.v1.Emoji.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 2: {
-                                    message.reactionCount = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an EmojiReactionSummary message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    EmojiReactionSummary.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an EmojiReactionSummary message.
-                     * @function verify
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    EmojiReactionSummary.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        var properties = {};
-                        if (message.emoji != null && message.hasOwnProperty("emoji")) {
-                            var error = $root.google.chat.v1.Emoji.verify(message.emoji);
-                            if (error)
-                                return "emoji." + error;
-                        }
-                        if (message.reactionCount != null && message.hasOwnProperty("reactionCount")) {
-                            properties._reactionCount = 1;
-                            if (!$util.isInteger(message.reactionCount))
-                                return "reactionCount: integer expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an EmojiReactionSummary message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.EmojiReactionSummary} EmojiReactionSummary
-                     */
-                    EmojiReactionSummary.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.EmojiReactionSummary)
-                            return object;
-                        var message = new $root.google.chat.v1.EmojiReactionSummary();
-                        if (object.emoji != null) {
-                            if (typeof object.emoji !== "object")
-                                throw TypeError(".google.chat.v1.EmojiReactionSummary.emoji: object expected");
-                            message.emoji = $root.google.chat.v1.Emoji.fromObject(object.emoji);
-                        }
-                        if (object.reactionCount != null)
-                            message.reactionCount = object.reactionCount | 0;
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an EmojiReactionSummary message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {google.chat.v1.EmojiReactionSummary} message EmojiReactionSummary
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    EmojiReactionSummary.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.emoji = null;
-                        if (message.emoji != null && message.hasOwnProperty("emoji"))
-                            object.emoji = $root.google.chat.v1.Emoji.toObject(message.emoji, options);
-                        if (message.reactionCount != null && message.hasOwnProperty("reactionCount")) {
-                            object.reactionCount = message.reactionCount;
-                            if (options.oneofs)
-                                object._reactionCount = "reactionCount";
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this EmojiReactionSummary to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    EmojiReactionSummary.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for EmojiReactionSummary
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    EmojiReactionSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.EmojiReactionSummary";
-                    };
-    
-                    return EmojiReactionSummary;
-                })();
-    
-                v1.CreateReactionRequest = (function() {
-    
-                    /**
-                     * Properties of a CreateReactionRequest.
-                     * @memberof google.chat.v1
-                     * @interface ICreateReactionRequest
-                     * @property {string|null} [parent] CreateReactionRequest parent
-                     * @property {google.chat.v1.IReaction|null} [reaction] CreateReactionRequest reaction
-                     */
-    
-                    /**
-                     * Constructs a new CreateReactionRequest.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents a CreateReactionRequest.
-                     * @implements ICreateReactionRequest
-                     * @constructor
-                     * @param {google.chat.v1.ICreateReactionRequest=} [properties] Properties to set
-                     */
-                    function CreateReactionRequest(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * CreateReactionRequest parent.
-                     * @member {string} parent
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @instance
-                     */
-                    CreateReactionRequest.prototype.parent = "";
-    
-                    /**
-                     * CreateReactionRequest reaction.
-                     * @member {google.chat.v1.IReaction|null|undefined} reaction
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @instance
-                     */
-                    CreateReactionRequest.prototype.reaction = null;
-    
-                    /**
-                     * Creates a new CreateReactionRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {google.chat.v1.ICreateReactionRequest=} [properties] Properties to set
-                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest instance
-                     */
-                    CreateReactionRequest.create = function create(properties) {
-                        return new CreateReactionRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified CreateReactionRequest message. Does not implicitly {@link google.chat.v1.CreateReactionRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {google.chat.v1.ICreateReactionRequest} message CreateReactionRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    CreateReactionRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                        if (message.reaction != null && Object.hasOwnProperty.call(message, "reaction"))
-                            $root.google.chat.v1.Reaction.encode(message.reaction, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified CreateReactionRequest message, length delimited. Does not implicitly {@link google.chat.v1.CreateReactionRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {google.chat.v1.ICreateReactionRequest} message CreateReactionRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    CreateReactionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a CreateReactionRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    CreateReactionRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateReactionRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.parent = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.reaction = $root.google.chat.v1.Reaction.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a CreateReactionRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    CreateReactionRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a CreateReactionRequest message.
-                     * @function verify
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    CreateReactionRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.parent != null && message.hasOwnProperty("parent"))
-                            if (!$util.isString(message.parent))
-                                return "parent: string expected";
-                        if (message.reaction != null && message.hasOwnProperty("reaction")) {
-                            var error = $root.google.chat.v1.Reaction.verify(message.reaction);
-                            if (error)
-                                return "reaction." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a CreateReactionRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.CreateReactionRequest} CreateReactionRequest
-                     */
-                    CreateReactionRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.CreateReactionRequest)
-                            return object;
-                        var message = new $root.google.chat.v1.CreateReactionRequest();
-                        if (object.parent != null)
-                            message.parent = String(object.parent);
-                        if (object.reaction != null) {
-                            if (typeof object.reaction !== "object")
-                                throw TypeError(".google.chat.v1.CreateReactionRequest.reaction: object expected");
-                            message.reaction = $root.google.chat.v1.Reaction.fromObject(object.reaction);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a CreateReactionRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {google.chat.v1.CreateReactionRequest} message CreateReactionRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    CreateReactionRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.parent = "";
-                            object.reaction = null;
-                        }
-                        if (message.parent != null && message.hasOwnProperty("parent"))
-                            object.parent = message.parent;
-                        if (message.reaction != null && message.hasOwnProperty("reaction"))
-                            object.reaction = $root.google.chat.v1.Reaction.toObject(message.reaction, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this CreateReactionRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    CreateReactionRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for CreateReactionRequest
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.CreateReactionRequest
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    CreateReactionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.CreateReactionRequest";
-                    };
-    
-                    return CreateReactionRequest;
-                })();
-    
-                v1.ListReactionsRequest = (function() {
-    
-                    /**
-                     * Properties of a ListReactionsRequest.
-                     * @memberof google.chat.v1
-                     * @interface IListReactionsRequest
-                     * @property {string|null} [parent] ListReactionsRequest parent
-                     * @property {number|null} [pageSize] ListReactionsRequest pageSize
-                     * @property {string|null} [pageToken] ListReactionsRequest pageToken
-                     * @property {string|null} [filter] ListReactionsRequest filter
-                     */
-    
-                    /**
-                     * Constructs a new ListReactionsRequest.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents a ListReactionsRequest.
-                     * @implements IListReactionsRequest
-                     * @constructor
-                     * @param {google.chat.v1.IListReactionsRequest=} [properties] Properties to set
-                     */
-                    function ListReactionsRequest(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ListReactionsRequest parent.
-                     * @member {string} parent
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @instance
-                     */
-                    ListReactionsRequest.prototype.parent = "";
-    
-                    /**
-                     * ListReactionsRequest pageSize.
-                     * @member {number} pageSize
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @instance
-                     */
-                    ListReactionsRequest.prototype.pageSize = 0;
-    
-                    /**
-                     * ListReactionsRequest pageToken.
-                     * @member {string} pageToken
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @instance
-                     */
-                    ListReactionsRequest.prototype.pageToken = "";
-    
-                    /**
-                     * ListReactionsRequest filter.
-                     * @member {string} filter
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @instance
-                     */
-                    ListReactionsRequest.prototype.filter = "";
-    
-                    /**
-                     * Creates a new ListReactionsRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {google.chat.v1.IListReactionsRequest=} [properties] Properties to set
-                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest instance
-                     */
-                    ListReactionsRequest.create = function create(properties) {
-                        return new ListReactionsRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ListReactionsRequest message. Does not implicitly {@link google.chat.v1.ListReactionsRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {google.chat.v1.IListReactionsRequest} message ListReactionsRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ListReactionsRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
-                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ListReactionsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListReactionsRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {google.chat.v1.IListReactionsRequest} message ListReactionsRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ListReactionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a ListReactionsRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ListReactionsRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListReactionsRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.parent = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.pageSize = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.pageToken = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.filter = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a ListReactionsRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ListReactionsRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a ListReactionsRequest message.
-                     * @function verify
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ListReactionsRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.parent != null && message.hasOwnProperty("parent"))
-                            if (!$util.isString(message.parent))
-                                return "parent: string expected";
-                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                            if (!$util.isInteger(message.pageSize))
-                                return "pageSize: integer expected";
-                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                            if (!$util.isString(message.pageToken))
-                                return "pageToken: string expected";
-                        if (message.filter != null && message.hasOwnProperty("filter"))
-                            if (!$util.isString(message.filter))
-                                return "filter: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a ListReactionsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.ListReactionsRequest} ListReactionsRequest
-                     */
-                    ListReactionsRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.ListReactionsRequest)
-                            return object;
-                        var message = new $root.google.chat.v1.ListReactionsRequest();
-                        if (object.parent != null)
-                            message.parent = String(object.parent);
-                        if (object.pageSize != null)
-                            message.pageSize = object.pageSize | 0;
-                        if (object.pageToken != null)
-                            message.pageToken = String(object.pageToken);
-                        if (object.filter != null)
-                            message.filter = String(object.filter);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a ListReactionsRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {google.chat.v1.ListReactionsRequest} message ListReactionsRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ListReactionsRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.parent = "";
-                            object.pageSize = 0;
-                            object.pageToken = "";
-                            object.filter = "";
-                        }
-                        if (message.parent != null && message.hasOwnProperty("parent"))
-                            object.parent = message.parent;
-                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                            object.pageSize = message.pageSize;
-                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                            object.pageToken = message.pageToken;
-                        if (message.filter != null && message.hasOwnProperty("filter"))
-                            object.filter = message.filter;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ListReactionsRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ListReactionsRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ListReactionsRequest
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.ListReactionsRequest
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ListReactionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.ListReactionsRequest";
-                    };
-    
-                    return ListReactionsRequest;
-                })();
-    
-                v1.ListReactionsResponse = (function() {
-    
-                    /**
-                     * Properties of a ListReactionsResponse.
-                     * @memberof google.chat.v1
-                     * @interface IListReactionsResponse
-                     * @property {Array.<google.chat.v1.IReaction>|null} [reactions] ListReactionsResponse reactions
-                     * @property {string|null} [nextPageToken] ListReactionsResponse nextPageToken
-                     */
-    
-                    /**
-                     * Constructs a new ListReactionsResponse.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents a ListReactionsResponse.
-                     * @implements IListReactionsResponse
-                     * @constructor
-                     * @param {google.chat.v1.IListReactionsResponse=} [properties] Properties to set
-                     */
-                    function ListReactionsResponse(properties) {
-                        this.reactions = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ListReactionsResponse reactions.
-                     * @member {Array.<google.chat.v1.IReaction>} reactions
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @instance
-                     */
-                    ListReactionsResponse.prototype.reactions = $util.emptyArray;
-    
-                    /**
-                     * ListReactionsResponse nextPageToken.
-                     * @member {string} nextPageToken
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @instance
-                     */
-                    ListReactionsResponse.prototype.nextPageToken = "";
-    
-                    /**
-                     * Creates a new ListReactionsResponse instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {google.chat.v1.IListReactionsResponse=} [properties] Properties to set
-                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse instance
-                     */
-                    ListReactionsResponse.create = function create(properties) {
-                        return new ListReactionsResponse(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ListReactionsResponse message. Does not implicitly {@link google.chat.v1.ListReactionsResponse.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {google.chat.v1.IListReactionsResponse} message ListReactionsResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ListReactionsResponse.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.reactions != null && message.reactions.length)
-                            for (var i = 0; i < message.reactions.length; ++i)
-                                $root.google.chat.v1.Reaction.encode(message.reactions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ListReactionsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListReactionsResponse.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {google.chat.v1.IListReactionsResponse} message ListReactionsResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ListReactionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a ListReactionsResponse message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ListReactionsResponse.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListReactionsResponse();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    if (!(message.reactions && message.reactions.length))
-                                        message.reactions = [];
-                                    message.reactions.push($root.google.chat.v1.Reaction.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            case 2: {
-                                    message.nextPageToken = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a ListReactionsResponse message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ListReactionsResponse.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a ListReactionsResponse message.
-                     * @function verify
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ListReactionsResponse.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.reactions != null && message.hasOwnProperty("reactions")) {
-                            if (!Array.isArray(message.reactions))
-                                return "reactions: array expected";
-                            for (var i = 0; i < message.reactions.length; ++i) {
-                                var error = $root.google.chat.v1.Reaction.verify(message.reactions[i]);
-                                if (error)
-                                    return "reactions." + error;
-                            }
-                        }
-                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                            if (!$util.isString(message.nextPageToken))
-                                return "nextPageToken: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a ListReactionsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.ListReactionsResponse} ListReactionsResponse
-                     */
-                    ListReactionsResponse.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.ListReactionsResponse)
-                            return object;
-                        var message = new $root.google.chat.v1.ListReactionsResponse();
-                        if (object.reactions) {
-                            if (!Array.isArray(object.reactions))
-                                throw TypeError(".google.chat.v1.ListReactionsResponse.reactions: array expected");
-                            message.reactions = [];
-                            for (var i = 0; i < object.reactions.length; ++i) {
-                                if (typeof object.reactions[i] !== "object")
-                                    throw TypeError(".google.chat.v1.ListReactionsResponse.reactions: object expected");
-                                message.reactions[i] = $root.google.chat.v1.Reaction.fromObject(object.reactions[i]);
-                            }
-                        }
-                        if (object.nextPageToken != null)
-                            message.nextPageToken = String(object.nextPageToken);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a ListReactionsResponse message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {google.chat.v1.ListReactionsResponse} message ListReactionsResponse
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ListReactionsResponse.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.reactions = [];
-                        if (options.defaults)
-                            object.nextPageToken = "";
-                        if (message.reactions && message.reactions.length) {
-                            object.reactions = [];
-                            for (var j = 0; j < message.reactions.length; ++j)
-                                object.reactions[j] = $root.google.chat.v1.Reaction.toObject(message.reactions[j], options);
-                        }
-                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                            object.nextPageToken = message.nextPageToken;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ListReactionsResponse to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ListReactionsResponse.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ListReactionsResponse
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.ListReactionsResponse
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ListReactionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.ListReactionsResponse";
-                    };
-    
-                    return ListReactionsResponse;
-                })();
-    
-                v1.DeleteReactionRequest = (function() {
-    
-                    /**
-                     * Properties of a DeleteReactionRequest.
-                     * @memberof google.chat.v1
-                     * @interface IDeleteReactionRequest
-                     * @property {string|null} [name] DeleteReactionRequest name
-                     */
-    
-                    /**
-                     * Constructs a new DeleteReactionRequest.
-                     * @memberof google.chat.v1
-                     * @classdesc Represents a DeleteReactionRequest.
-                     * @implements IDeleteReactionRequest
-                     * @constructor
-                     * @param {google.chat.v1.IDeleteReactionRequest=} [properties] Properties to set
-                     */
-                    function DeleteReactionRequest(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * DeleteReactionRequest name.
-                     * @member {string} name
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @instance
-                     */
-                    DeleteReactionRequest.prototype.name = "";
-    
-                    /**
-                     * Creates a new DeleteReactionRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {google.chat.v1.IDeleteReactionRequest=} [properties] Properties to set
-                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest instance
-                     */
-                    DeleteReactionRequest.create = function create(properties) {
-                        return new DeleteReactionRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified DeleteReactionRequest message. Does not implicitly {@link google.chat.v1.DeleteReactionRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {google.chat.v1.IDeleteReactionRequest} message DeleteReactionRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    DeleteReactionRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified DeleteReactionRequest message, length delimited. Does not implicitly {@link google.chat.v1.DeleteReactionRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {google.chat.v1.IDeleteReactionRequest} message DeleteReactionRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    DeleteReactionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a DeleteReactionRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    DeleteReactionRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteReactionRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.name = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a DeleteReactionRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    DeleteReactionRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a DeleteReactionRequest message.
-                     * @function verify
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    DeleteReactionRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a DeleteReactionRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.DeleteReactionRequest} DeleteReactionRequest
-                     */
-                    DeleteReactionRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.DeleteReactionRequest)
-                            return object;
-                        var message = new $root.google.chat.v1.DeleteReactionRequest();
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a DeleteReactionRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {google.chat.v1.DeleteReactionRequest} message DeleteReactionRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    DeleteReactionRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.name = "";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this DeleteReactionRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    DeleteReactionRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for DeleteReactionRequest
-                     * @function getTypeUrl
-                     * @memberof google.chat.v1.DeleteReactionRequest
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    DeleteReactionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.chat.v1.DeleteReactionRequest";
-                    };
-    
-                    return DeleteReactionRequest;
-                })();
-    
                 v1.SlashCommand = (function() {
     
                     /**
@@ -58434,6 +58684,263 @@
                 return values;
             })();
     
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -63324,263 +63831,6 @@
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
                 return values;
-            })();
-    
-            api.FieldInfo = (function() {
-    
-                /**
-                 * Properties of a FieldInfo.
-                 * @memberof google.api
-                 * @interface IFieldInfo
-                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
-                 */
-    
-                /**
-                 * Constructs a new FieldInfo.
-                 * @memberof google.api
-                 * @classdesc Represents a FieldInfo.
-                 * @implements IFieldInfo
-                 * @constructor
-                 * @param {google.api.IFieldInfo=} [properties] Properties to set
-                 */
-                function FieldInfo(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldInfo format.
-                 * @member {google.api.FieldInfo.Format} format
-                 * @memberof google.api.FieldInfo
-                 * @instance
-                 */
-                FieldInfo.prototype.format = 0;
-    
-                /**
-                 * Creates a new FieldInfo instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.IFieldInfo=} [properties] Properties to set
-                 * @returns {google.api.FieldInfo} FieldInfo instance
-                 */
-                FieldInfo.create = function create(properties) {
-                    return new FieldInfo(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldInfo.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldInfo message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.FieldInfo} FieldInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldInfo.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.format = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.FieldInfo} FieldInfo
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldInfo message.
-                 * @function verify
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldInfo.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.format != null && message.hasOwnProperty("format"))
-                        switch (message.format) {
-                        default:
-                            return "format: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                            break;
-                        }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.FieldInfo} FieldInfo
-                 */
-                FieldInfo.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.FieldInfo)
-                        return object;
-                    var message = new $root.google.api.FieldInfo();
-                    switch (object.format) {
-                    default:
-                        if (typeof object.format === "number") {
-                            message.format = object.format;
-                            break;
-                        }
-                        break;
-                    case "FORMAT_UNSPECIFIED":
-                    case 0:
-                        message.format = 0;
-                        break;
-                    case "UUID4":
-                    case 1:
-                        message.format = 1;
-                        break;
-                    case "IPV4":
-                    case 2:
-                        message.format = 2;
-                        break;
-                    case "IPV6":
-                    case 3:
-                        message.format = 3;
-                        break;
-                    case "IPV4_OR_IPV6":
-                    case 4:
-                        message.format = 4;
-                        break;
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {google.api.FieldInfo} message FieldInfo
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldInfo.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults)
-                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
-                    if (message.format != null && message.hasOwnProperty("format"))
-                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldInfo to JSON.
-                 * @function toJSON
-                 * @memberof google.api.FieldInfo
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldInfo.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldInfo
-                 * @function getTypeUrl
-                 * @memberof google.api.FieldInfo
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.FieldInfo";
-                };
-    
-                /**
-                 * Format enum.
-                 * @name google.api.FieldInfo.Format
-                 * @enum {number}
-                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
-                 * @property {number} UUID4=1 UUID4 value
-                 * @property {number} IPV4=2 IPV4 value
-                 * @property {number} IPV6=3 IPV6 value
-                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
-                 */
-                FieldInfo.Format = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "UUID4"] = 1;
-                    values[valuesById[2] = "IPV4"] = 2;
-                    values[valuesById[3] = "IPV6"] = 3;
-                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
-                    return values;
-                })();
-    
-                return FieldInfo;
             })();
     
             return api;
