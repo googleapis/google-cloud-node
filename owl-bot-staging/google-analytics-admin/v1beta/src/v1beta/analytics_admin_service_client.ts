@@ -32,7 +32,7 @@ import * as gapicConfig from './analytics_admin_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service Interface for the Analytics Admin API (GA4).
+ *  Service Interface for the Google Analytics Admin API.
  * @class
  * @memberof v1beta
  */
@@ -691,7 +691,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.provisionAccountTicket(request, options, callback);
   }
 /**
- * Lookup for a single "GA4" Property.
+ * Lookup for a single GA Property.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -763,7 +763,8 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getProperty(request, options, callback);
   }
 /**
- * Creates an "GA4" property with the specified location and attributes.
+ * Creates a Google Analytics property with the specified location and
+ * attributes.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -839,7 +840,7 @@ export class AnalyticsAdminServiceClient {
  * will be permanently purged.
  * https://support.google.com/analytics/answer/6154772
  *
- * Returns an error if the target is not found, or is not a GA4 Property.
+ * Returns an error if the target is not found.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1427,7 +1428,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getDataSharingSettings(request, options, callback);
   }
 /**
- * Lookup for a single "GA4" MeasurementProtocolSecret.
+ * Lookup for a single MeasurementProtocolSecret.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -3420,12 +3421,17 @@ export class AnalyticsAdminServiceClient {
  * only be requested on Google Analytics 360 properties. This method is only
  * available to Administrators.
  *
- * These data access records include GA4 UI Reporting, GA4 UI Explorations,
- * GA4 Data API, and other products like Firebase & Admob that can retrieve
+ * These data access records include GA UI Reporting, GA UI Explorations,
+ * GA Data API, and other products like Firebase & Admob that can retrieve
  * data from Google Analytics through a linkage. These records don't include
  * property configuration changes like adding a stream or changing a
  * property's time zone. For configuration change history, see
  * [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+ *
+ * To give your feedback on this API, complete the [Google Analytics Access
+ * Reports
+ * feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform)
+ * form.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -3435,9 +3441,9 @@ export class AnalyticsAdminServiceClient {
  *   access for all properties under that account.
  *
  *   To request at the property level, entity should be for example
- *   'properties/123' if "123" is your GA4 property ID. To request at the
- *   account level, entity should be for example 'accounts/1234' if "1234" is
- *   your GA4 Account ID.
+ *   'properties/123' if "123" is your Google Analytics property ID. To request
+ *   at the account level, entity should be for example 'accounts/1234' if
+ *   "1234" is your Google Analytics Account ID.
  * @param {number[]} request.dimensions
  *   The dimensions requested and displayed in the response. Requests are
  *   allowed up to 9 dimensions.
@@ -3573,7 +3579,7 @@ export class AnalyticsAdminServiceClient {
  /**
  * Returns all accounts accessible by the caller.
  *
- * Note that these accounts might not currently have GA4 properties.
+ * Note that these accounts might not currently have GA properties.
  * Soft-deleted (ie: "trashed") accounts are excluded by default.
  * Returns an empty list if no relevant accounts are found.
  *
@@ -3923,7 +3929,6 @@ export class AnalyticsAdminServiceClient {
  /**
  * Returns child Properties under the specified parent Account.
  *
- * Only "GA4" properties will be returned.
  * Properties will be excluded if the caller does not have access.
  * Soft-deleted (ie: "trashed") properties are excluded by default.
  * Returns an empty list if no relevant properties are found.
@@ -4734,6 +4739,9 @@ export class AnalyticsAdminServiceClient {
  * Searches through all changes to an account or its children given the
  * specified set of filters.
  *
+ * Only returns the subset of changes supported by the API. The UI may return
+ * additional changes.
+ *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.account
@@ -4762,9 +4770,14 @@ export class AnalyticsAdminServiceClient {
  *   Optional. If set, only return changes made before this time (inclusive).
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of ChangeHistoryEvent items to return.
- *   The service may return fewer than this value, even if there are additional
- *   pages. If unspecified, at most 50 items will be returned.
- *   The maximum value is 200 (higher values will be coerced to the maximum).
+ *   If unspecified, at most 50 items will be returned. The maximum value is 200
+ *   (higher values will be coerced to the maximum).
+ *
+ *   Note that the service may return a page with fewer items than this value
+ *   specifies (potentially even zero), and that there still may be additional
+ *   pages. If you want a particular number of items, you'll need to continue
+ *   requesting additional pages using `page_token` until you get the needed
+ *   number.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous
  *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
@@ -4870,9 +4883,14 @@ export class AnalyticsAdminServiceClient {
  *   Optional. If set, only return changes made before this time (inclusive).
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of ChangeHistoryEvent items to return.
- *   The service may return fewer than this value, even if there are additional
- *   pages. If unspecified, at most 50 items will be returned.
- *   The maximum value is 200 (higher values will be coerced to the maximum).
+ *   If unspecified, at most 50 items will be returned. The maximum value is 200
+ *   (higher values will be coerced to the maximum).
+ *
+ *   Note that the service may return a page with fewer items than this value
+ *   specifies (potentially even zero), and that there still may be additional
+ *   pages. If you want a particular number of items, you'll need to continue
+ *   requesting additional pages using `page_token` until you get the needed
+ *   number.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous
  *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
@@ -4945,9 +4963,14 @@ export class AnalyticsAdminServiceClient {
  *   Optional. If set, only return changes made before this time (inclusive).
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of ChangeHistoryEvent items to return.
- *   The service may return fewer than this value, even if there are additional
- *   pages. If unspecified, at most 50 items will be returned.
- *   The maximum value is 200 (higher values will be coerced to the maximum).
+ *   If unspecified, at most 50 items will be returned. The maximum value is 200
+ *   (higher values will be coerced to the maximum).
+ *
+ *   Note that the service may return a page with fewer items than this value
+ *   specifies (potentially even zero), and that there still may be additional
+ *   pages. If you want a particular number of items, you'll need to continue
+ *   requesting additional pages using `page_token` until you get the needed
+ *   number.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous
  *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent

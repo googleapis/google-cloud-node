@@ -14572,6 +14572,8 @@
                                     case 8:
                                     case 9:
                                     case 10:
+                                    case 11:
+                                    case 12:
                                     case 13:
                                     case 14:
                                     case 15:
@@ -14678,6 +14680,14 @@
                                     case "MEASUREMENT_PROTOCOL_SECRET":
                                     case 10:
                                         message.resourceType[i] = 10;
+                                        break;
+                                    case "CUSTOM_DIMENSION":
+                                    case 11:
+                                        message.resourceType[i] = 11;
+                                        break;
+                                    case "CUSTOM_METRIC":
+                                    case 12:
+                                        message.resourceType[i] = 12;
                                         break;
                                     case "DATA_RETENTION_SETTINGS":
                                     case 13:
@@ -23893,6 +23903,8 @@
                      * @property {number} GOOGLE_SIGNALS_SETTINGS=8 GOOGLE_SIGNALS_SETTINGS value
                      * @property {number} CONVERSION_EVENT=9 CONVERSION_EVENT value
                      * @property {number} MEASUREMENT_PROTOCOL_SECRET=10 MEASUREMENT_PROTOCOL_SECRET value
+                     * @property {number} CUSTOM_DIMENSION=11 CUSTOM_DIMENSION value
+                     * @property {number} CUSTOM_METRIC=12 CUSTOM_METRIC value
                      * @property {number} DATA_RETENTION_SETTINGS=13 DATA_RETENTION_SETTINGS value
                      * @property {number} DISPLAY_VIDEO_360_ADVERTISER_LINK=14 DISPLAY_VIDEO_360_ADVERTISER_LINK value
                      * @property {number} DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL=15 DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL value
@@ -23909,6 +23921,8 @@
                         values[valuesById[8] = "GOOGLE_SIGNALS_SETTINGS"] = 8;
                         values[valuesById[9] = "CONVERSION_EVENT"] = 9;
                         values[valuesById[10] = "MEASUREMENT_PROTOCOL_SECRET"] = 10;
+                        values[valuesById[11] = "CUSTOM_DIMENSION"] = 11;
+                        values[valuesById[12] = "CUSTOM_METRIC"] = 12;
                         values[valuesById[13] = "DATA_RETENTION_SETTINGS"] = 13;
                         values[valuesById[14] = "DISPLAY_VIDEO_360_ADVERTISER_LINK"] = 14;
                         values[valuesById[15] = "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL"] = 15;
@@ -31296,6 +31310,7 @@
                          * @interface IDataRetentionSettings
                          * @property {string|null} [name] DataRetentionSettings name
                          * @property {google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|null} [eventDataRetention] DataRetentionSettings eventDataRetention
+                         * @property {google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|null} [userDataRetention] DataRetentionSettings userDataRetention
                          * @property {boolean|null} [resetUserDataOnNewActivity] DataRetentionSettings resetUserDataOnNewActivity
                          */
     
@@ -31329,6 +31344,14 @@
                          * @instance
                          */
                         DataRetentionSettings.prototype.eventDataRetention = 0;
+    
+                        /**
+                         * DataRetentionSettings userDataRetention.
+                         * @member {google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration} userDataRetention
+                         * @memberof google.analytics.admin.v1beta.DataRetentionSettings
+                         * @instance
+                         */
+                        DataRetentionSettings.prototype.userDataRetention = 0;
     
                         /**
                          * DataRetentionSettings resetUserDataOnNewActivity.
@@ -31368,6 +31391,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.eventDataRetention);
                             if (message.resetUserDataOnNewActivity != null && Object.hasOwnProperty.call(message, "resetUserDataOnNewActivity"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.resetUserDataOnNewActivity);
+                            if (message.userDataRetention != null && Object.hasOwnProperty.call(message, "userDataRetention"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.userDataRetention);
                             return writer;
                         };
     
@@ -31408,6 +31433,10 @@
                                     }
                                 case 2: {
                                         message.eventDataRetention = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.userDataRetention = reader.int32();
                                         break;
                                     }
                                 case 3: {
@@ -31456,6 +31485,18 @@
                                 switch (message.eventDataRetention) {
                                 default:
                                     return "eventDataRetention: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.userDataRetention != null && message.hasOwnProperty("userDataRetention"))
+                                switch (message.userDataRetention) {
+                                default:
+                                    return "userDataRetention: enum value expected";
                                 case 0:
                                 case 1:
                                 case 3:
@@ -31516,6 +31557,38 @@
                                 message.eventDataRetention = 6;
                                 break;
                             }
+                            switch (object.userDataRetention) {
+                            default:
+                                if (typeof object.userDataRetention === "number") {
+                                    message.userDataRetention = object.userDataRetention;
+                                    break;
+                                }
+                                break;
+                            case "RETENTION_DURATION_UNSPECIFIED":
+                            case 0:
+                                message.userDataRetention = 0;
+                                break;
+                            case "TWO_MONTHS":
+                            case 1:
+                                message.userDataRetention = 1;
+                                break;
+                            case "FOURTEEN_MONTHS":
+                            case 3:
+                                message.userDataRetention = 3;
+                                break;
+                            case "TWENTY_SIX_MONTHS":
+                            case 4:
+                                message.userDataRetention = 4;
+                                break;
+                            case "THIRTY_EIGHT_MONTHS":
+                            case 5:
+                                message.userDataRetention = 5;
+                                break;
+                            case "FIFTY_MONTHS":
+                            case 6:
+                                message.userDataRetention = 6;
+                                break;
+                            }
                             if (object.resetUserDataOnNewActivity != null)
                                 message.resetUserDataOnNewActivity = Boolean(object.resetUserDataOnNewActivity);
                             return message;
@@ -31538,6 +31611,7 @@
                                 object.name = "";
                                 object.eventDataRetention = options.enums === String ? "RETENTION_DURATION_UNSPECIFIED" : 0;
                                 object.resetUserDataOnNewActivity = false;
+                                object.userDataRetention = options.enums === String ? "RETENTION_DURATION_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -31545,6 +31619,8 @@
                                 object.eventDataRetention = options.enums === String ? $root.google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration[message.eventDataRetention] === undefined ? message.eventDataRetention : $root.google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration[message.eventDataRetention] : message.eventDataRetention;
                             if (message.resetUserDataOnNewActivity != null && message.hasOwnProperty("resetUserDataOnNewActivity"))
                                 object.resetUserDataOnNewActivity = message.resetUserDataOnNewActivity;
+                            if (message.userDataRetention != null && message.hasOwnProperty("userDataRetention"))
+                                object.userDataRetention = options.enums === String ? $root.google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration[message.userDataRetention] === undefined ? message.userDataRetention : $root.google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration[message.userDataRetention] : message.userDataRetention;
                             return object;
                         };
     

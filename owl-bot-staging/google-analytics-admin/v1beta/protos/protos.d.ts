@@ -10631,6 +10631,8 @@ export namespace google {
                     GOOGLE_SIGNALS_SETTINGS = 8,
                     CONVERSION_EVENT = 9,
                     MEASUREMENT_PROTOCOL_SECRET = 10,
+                    CUSTOM_DIMENSION = 11,
+                    CUSTOM_METRIC = 12,
                     DATA_RETENTION_SETTINGS = 13,
                     DISPLAY_VIDEO_360_ADVERTISER_LINK = 14,
                     DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL = 15,
@@ -13323,6 +13325,9 @@ export namespace google {
                     /** DataRetentionSettings eventDataRetention */
                     eventDataRetention?: (google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|keyof typeof google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|null);
 
+                    /** DataRetentionSettings userDataRetention */
+                    userDataRetention?: (google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|keyof typeof google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|null);
+
                     /** DataRetentionSettings resetUserDataOnNewActivity */
                     resetUserDataOnNewActivity?: (boolean|null);
                 }
@@ -13341,6 +13346,9 @@ export namespace google {
 
                     /** DataRetentionSettings eventDataRetention. */
                     public eventDataRetention: (google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|keyof typeof google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration);
+
+                    /** DataRetentionSettings userDataRetention. */
+                    public userDataRetention: (google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration|keyof typeof google.analytics.admin.v1beta.DataRetentionSettings.RetentionDuration);
 
                     /** DataRetentionSettings resetUserDataOnNewActivity. */
                     public resetUserDataOnNewActivity: boolean;
