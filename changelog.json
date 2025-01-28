@@ -5,6 +5,40 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "e5e13cb8af58de2a6dc9b8735e9cae045c0b551c",
+          "message": "[cloudcontrolspartner] A new method `CreateCustomer` is added to service `CloudControlsPartnerCore`",
+          "issues": [
+            "5980"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "6e508b64-4c51-4f02-9bbe-95a80410625e",
+      "createTime": "2025-01-28T01:11:23.868Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d0a1ba90bc3b411dfb404c5d1933650a9c46552a",
+          "message": "[places] add more fuel type enum values",
+          "issues": [
+            "5981"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "ab3a1b1b-783b-4f8c-ad7b-73252f46b217",
+      "createTime": "2025-01-28T01:11:23.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "c326e40eda7c5cfeca4bab2837d8eb8139903341",
           "message": "[redis] [Memorystore for Redis Cluster] Added support for maintenance window and rescheduling maintenance",
           "issues": [
@@ -38865,5 +38899,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-01-23T17:44:12.173Z"
+  "updateTime": "2025-01-28T01:11:23.868Z"
 }
