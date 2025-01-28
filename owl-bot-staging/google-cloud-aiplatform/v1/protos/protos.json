@@ -12301,6 +12301,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "optimizedConfig": {
+                          "type": "OptimizedConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "serviceAgentType": {
                           "type": "ServiceAgentType",
                           "id": 14,
@@ -12525,6 +12532,17 @@
                             "ragCorpusId": {
                               "type": "int64",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "OptimizedConfig": {
+                          "fields": {
+                            "automaticResources": {
+                              "type": "AutomaticResources",
+                              "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
