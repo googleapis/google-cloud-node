@@ -374,6 +374,8 @@ export class ModelServiceClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'models'),
       listModelVersions:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'models'),
+      listModelVersionCheckpoints:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'checkpoints'),
       listModelEvaluations:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'modelEvaluations'),
       listModelEvaluationSlices:
@@ -498,7 +500,7 @@ export class ModelServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const modelServiceStubMethods =
-        ['uploadModel', 'getModel', 'listModels', 'listModelVersions', 'updateModel', 'updateExplanationDataset', 'deleteModel', 'deleteModelVersion', 'mergeVersionAliases', 'exportModel', 'copyModel', 'importModelEvaluation', 'batchImportModelEvaluationSlices', 'batchImportEvaluatedAnnotations', 'getModelEvaluation', 'listModelEvaluations', 'getModelEvaluationSlice', 'listModelEvaluationSlices'];
+        ['uploadModel', 'getModel', 'listModels', 'listModelVersions', 'listModelVersionCheckpoints', 'updateModel', 'updateExplanationDataset', 'deleteModel', 'deleteModelVersion', 'mergeVersionAliases', 'exportModel', 'copyModel', 'importModelEvaluation', 'batchImportModelEvaluationSlices', 'batchImportEvaluatedAnnotations', 'getModelEvaluation', 'listModelEvaluations', 'getModelEvaluationSlice', 'listModelEvaluationSlices'];
     for (const methodName of modelServiceStubMethods) {
       const callPromise = this.modelServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -2337,6 +2339,209 @@ export class ModelServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModel>;
+  }
+ /**
+ * Lists checkpoints of the specified model version.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the model version to list checkpoints for.
+ *   `projects/{project}/locations/{location}/models/{model}@{version}`
+ *   Example: `projects/{project}/locations/{location}/models/{model}@2`
+ *   or
+ *   `projects/{project}/locations/{location}/models/{model}@golden`
+ *   If no version ID or alias is specified, the latest version will be
+ *   used.
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListModelVersionCheckpointsResponse.next_page_token|next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ModelService.ListModelVersionCheckpoints|ListModelVersionCheckpoints}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.ModelVersionCheckpoint|ModelVersionCheckpoint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listModelVersionCheckpointsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listModelVersionCheckpoints(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsResponse
+      ]>;
+  listModelVersionCheckpoints(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint>): void;
+  listModelVersionCheckpoints(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint>): void;
+  listModelVersionCheckpoints(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.listModelVersionCheckpoints(request, options, callback);
+  }
+
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the model version to list checkpoints for.
+ *   `projects/{project}/locations/{location}/models/{model}@{version}`
+ *   Example: `projects/{project}/locations/{location}/models/{model}@2`
+ *   or
+ *   `projects/{project}/locations/{location}/models/{model}@golden`
+ *   If no version ID or alias is specified, the latest version will be
+ *   used.
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListModelVersionCheckpointsResponse.next_page_token|next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ModelService.ListModelVersionCheckpoints|ListModelVersionCheckpoints}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.ModelVersionCheckpoint|ModelVersionCheckpoint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listModelVersionCheckpointsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listModelVersionCheckpointsStream(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModelVersionCheckpoints.createStream(
+      this.innerApiCalls.listModelVersionCheckpoints as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listModelVersionCheckpoints`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the model version to list checkpoints for.
+ *   `projects/{project}/locations/{location}/models/{model}@{version}`
+ *   Example: `projects/{project}/locations/{location}/models/{model}@2`
+ *   or
+ *   `projects/{project}/locations/{location}/models/{model}@golden`
+ *   If no version ID or alias is specified, the latest version will be
+ *   used.
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ListModelVersionCheckpointsResponse.next_page_token|next_page_token}
+ *   of the previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ModelService.ListModelVersionCheckpoints|ListModelVersionCheckpoints}
+ *   call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.ModelVersionCheckpoint|ModelVersionCheckpoint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/model_service.list_model_version_checkpoints.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_ModelService_ListModelVersionCheckpoints_async
+ */
+  listModelVersionCheckpointsAsync(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelVersionCheckpointsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModelVersionCheckpoints.asyncIterate(
+      this.innerApiCalls['listModelVersionCheckpoints'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelVersionCheckpoint>;
   }
  /**
  * Lists ModelEvaluations in a Model.
