@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.8.0...places-v1.9.0) (2025-01-28)
+
+
+### Features
+
+* [places] add more fuel type enum values ([#5981](https://github.com/googleapis/google-cloud-node/issues/5981)) ([d0a1ba9](https://github.com/googleapis/google-cloud-node/commit/d0a1ba90bc3b411dfb404c5d1933650a9c46552a))
+
 ## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.7.0...places-v1.8.0) (2024-11-14)
 
 
