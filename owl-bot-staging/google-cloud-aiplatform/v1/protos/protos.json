@@ -1935,6 +1935,10 @@
                           "type": "string",
                           "id": 30
                         },
+                        "defaultCheckpointId": {
+                          "type": "string",
+                          "id": 53
+                        },
                         "predictSchemata": {
                           "type": "PredictSchemata",
                           "id": 4
@@ -25248,6 +25252,24 @@
                             }
                           ]
                         },
+                        "ListModelVersionCheckpoints": {
+                          "requestType": "ListModelVersionCheckpointsRequest",
+                          "responseType": "ListModelVersionCheckpointsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/models/*}:listCheckpoints",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/models/*}:listCheckpoints"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "UpdateModel": {
                           "requestType": "UpdateModelRequest",
                           "responseType": "Model",
@@ -25718,6 +25740,61 @@
                         "models": {
                           "rule": "repeated",
                           "type": "Model",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListModelVersionCheckpointsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ModelVersionCheckpoint": {
+                      "fields": {
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "epoch": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "step": {
+                          "type": "int64",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListModelVersionCheckpointsResponse": {
+                      "fields": {
+                        "checkpoints": {
+                          "rule": "repeated",
+                          "type": "ModelVersionCheckpoint",
                           "id": 1
                         },
                         "nextPageToken": {
