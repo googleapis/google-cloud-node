@@ -203,6 +203,9 @@ export class ConferenceRecordsServiceClient {
       conferenceRecordPathTemplate: new this._gaxModule.PathTemplate(
         'conferenceRecords/{conference_record}'
       ),
+      memberPathTemplate: new this._gaxModule.PathTemplate(
+        'spaces/{space}/members/{member}'
+      ),
       participantPathTemplate: new this._gaxModule.PathTemplate(
         'conferenceRecords/{conference_record}/participants/{participant}'
       ),
@@ -412,7 +415,10 @@ export class ConferenceRecordsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [];
+    return [
+      'https://www.googleapis.com/auth/meetings.space.created',
+      'https://www.googleapis.com/auth/meetings.space.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -435,7 +441,6 @@ export class ConferenceRecordsServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
    * Gets a conference record by conference ID.
    *
    * @param {Object} request
@@ -526,7 +531,6 @@ export class ConferenceRecordsServiceClient {
     return this.innerApiCalls.getConferenceRecord(request, options, callback);
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
    * Gets a participant by participant ID.
    *
    * @param {Object} request
@@ -611,7 +615,6 @@ export class ConferenceRecordsServiceClient {
     return this.innerApiCalls.getParticipant(request, options, callback);
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
    * Gets a participant session by participant session ID.
    *
    * @param {Object} request
@@ -702,7 +705,6 @@ export class ConferenceRecordsServiceClient {
     return this.innerApiCalls.getParticipantSession(request, options, callback);
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
    * Gets a recording by recording ID.
    *
    * @param {Object} request
@@ -787,7 +789,6 @@ export class ConferenceRecordsServiceClient {
     return this.innerApiCalls.getRecording(request, options, callback);
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
    * Gets a transcript by transcript ID.
    *
    * @param {Object} request
@@ -872,7 +873,6 @@ export class ConferenceRecordsServiceClient {
     return this.innerApiCalls.getTranscript(request, options, callback);
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
    * Gets a `TranscriptEntry` resource by entry ID.
    *
    * Note: The transcript entries returned by the Google Meet API might not
@@ -968,8 +968,8 @@ export class ConferenceRecordsServiceClient {
   }
 
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
-   * Lists the conference records by start time and in descending order.
+   * Lists the conference records. By default, ordered by start time and in
+   * descending order.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -981,15 +981,22 @@ export class ConferenceRecordsServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `space.meeting_code`
    *   * `space.name`
    *   * `start_time`
    *   * `end_time`
    *
-   *   For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *   For example, consider the following filters:
+   *
+   *   * `space.name = "spaces/NAME"`
+   *   * `space.meeting_code = "abc-mnop-xyz"`
+   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *   start_time<="2024-01-02T00:00:00.000Z"`
+   *   * `end_time IS NULL`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1085,15 +1092,22 @@ export class ConferenceRecordsServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `space.meeting_code`
    *   * `space.name`
    *   * `start_time`
    *   * `end_time`
    *
-   *   For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *   For example, consider the following filters:
+   *
+   *   * `space.name = "spaces/NAME"`
+   *   * `space.meeting_code = "abc-mnop-xyz"`
+   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *   start_time<="2024-01-02T00:00:00.000Z"`
+   *   * `end_time IS NULL`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1137,15 +1151,22 @@ export class ConferenceRecordsServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `space.meeting_code`
    *   * `space.name`
    *   * `start_time`
    *   * `end_time`
    *
-   *   For example, `space.meeting_code = "abc-mnop-xyz"`.
+   *   For example, consider the following filters:
+   *
+   *   * `space.name = "spaces/NAME"`
+   *   * `space.meeting_code = "abc-mnop-xyz"`
+   *   * `start_time>="2024-01-01T00:00:00.000Z" AND
+   *   start_time<="2024-01-02T00:00:00.000Z"`
+   *   * `end_time IS NULL`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1176,8 +1197,7 @@ export class ConferenceRecordsServiceClient {
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IConferenceRecord>;
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
-   * Lists the participants in a conference record, by default ordered by join
+   * Lists the participants in a conference record. By default, ordered by join
    * time and in descending order. This API supports `fields` as standard
    * parameters like every other API. However, when the `fields` request
    * parameter is omitted, this API defaults to `'participants/*,
@@ -1196,8 +1216,9 @@ export class ConferenceRecordsServiceClient {
    * @param {string} request.pageToken
    *   Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `earliest_start_time`
    *   * `latest_end_time`
@@ -1306,8 +1327,9 @@ export class ConferenceRecordsServiceClient {
    * @param {string} request.pageToken
    *   Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `earliest_start_time`
    *   * `latest_end_time`
@@ -1364,8 +1386,9 @@ export class ConferenceRecordsServiceClient {
    * @param {string} request.pageToken
    *   Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `earliest_start_time`
    *   * `latest_end_time`
@@ -1406,9 +1429,8 @@ export class ConferenceRecordsServiceClient {
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IParticipant>;
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
-   * Lists the participant sessions of a participant in a conference record, by
-   * default ordered by join time and in descending order. This API supports
+   * Lists the participant sessions of a participant in a conference record. By
+   * default, ordered by join time and in descending order. This API supports
    * `fields` as standard parameters like every other API. However, when the
    * `fields` request parameter is omitted this API defaults to
    * `'participantsessions/*, next_page_token'`.
@@ -1426,8 +1448,9 @@ export class ConferenceRecordsServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `start_time`
    *   * `end_time`
@@ -1540,8 +1563,9 @@ export class ConferenceRecordsServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `start_time`
    *   * `end_time`
@@ -1598,8 +1622,9 @@ export class ConferenceRecordsServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Page token returned from previous List Call.
    * @param {string} [request.filter]
-   *   Optional. User specified filtering condition in EBNF format. The following
-   *   are the filterable fields:
+   *   Optional. User specified filtering condition in [EBNF
+   *   format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *   The following are the filterable fields:
    *
    *   * `start_time`
    *   * `end_time`
@@ -1640,8 +1665,8 @@ export class ConferenceRecordsServiceClient {
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IParticipantSession>;
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
-   * Lists the recording resources from the conference record.
+   * Lists the recording resources from the conference record. By default,
+   * ordered by start time and in ascending order.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1833,8 +1858,8 @@ export class ConferenceRecordsServiceClient {
     ) as AsyncIterable<protos.google.apps.meet.v2beta.IRecording>;
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
-   * Lists the set of transcripts from the conference record.
+   * Lists the set of transcripts from the conference record. By default,
+   * ordered by start time and in ascending order.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2032,7 +2057,6 @@ export class ConferenceRecordsServiceClient {
     ) as AsyncIterable<protos.google.apps.meet.v2beta.ITranscript>;
   }
   /**
-   * [Developer Preview](https://developers.google.com/workspace/preview).
    * Lists the structured transcript entries per transcript. By default, ordered
    * by start time and in ascending order.
    *
@@ -2265,6 +2289,42 @@ export class ConferenceRecordsServiceClient {
     return this.pathTemplates.conferenceRecordPathTemplate.match(
       conferenceRecordName
     ).conference_record;
+  }
+
+  /**
+   * Return a fully-qualified member resource name string.
+   *
+   * @param {string} space
+   * @param {string} member
+   * @returns {string} Resource name string.
+   */
+  memberPath(space: string, member: string) {
+    return this.pathTemplates.memberPathTemplate.render({
+      space: space,
+      member: member,
+    });
+  }
+
+  /**
+   * Parse the space from Member resource.
+   *
+   * @param {string} memberName
+   *   A fully-qualified path representing Member resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromMemberName(memberName: string) {
+    return this.pathTemplates.memberPathTemplate.match(memberName).space;
+  }
+
+  /**
+   * Parse the member from Member resource.
+   *
+   * @param {string} memberName
+   *   A fully-qualified path representing Member resource.
+   * @returns {string} A string representing the member.
+   */
+  matchMemberFromMemberName(memberName: string) {
+    return this.pathTemplates.memberPathTemplate.match(memberName).member;
   }
 
   /**

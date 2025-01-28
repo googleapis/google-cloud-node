@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START meet_v2beta_generated_SpacesService_GetSpace_async]
+function main(parent) {
+  // [START meet_v2beta_generated_SpacesService_ListMembers_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,22 +29,20 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the space.
-   *  Format: `spaces/{space}` or `spaces/{meetingCode}`.
-   *  `{space}` is the resource identifier for the space. It's a unique,
-   *  server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
-   *  `{meetingCode}` is an alias for the space. It's a typeable, unique
-   *  character string and is non-case sensitive. For example, `abc-mnop-xyz`.
-   *  The maximum length is 128 characters.
-   *  A `meetingCode` shouldn't be stored long term as it can become
-   *  dissociated from a meeting space and can be reused for different meeting
-   *  spaces in the future. Generally, a `meetingCode` expires 365 days after
-   *  last use. For more information, see Learn about meeting codes in Google
-   *  Meet (https://support.google.com/meet/answer/10710509).
-   *  For more information, see How Meet identifies a meeting
-   *  space (https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
+   *  Required. Format: spaces/{space}
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Optional. Maximum number of members to return. The service might return
+   *  fewer than this value. If unspecified, at most 25 members are returned. The
+   *  maximum value is 100; values above 100 are coerced to 100. Maximum might
+   *  change in the future.
+   */
+  // const pageSize = 1234
+  /**
+   *  Optional. Page token returned from previous List Call.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Meet library
   const {SpacesServiceClient} = require('@google-apps/meet').v2beta;
@@ -52,19 +50,21 @@ function main(name) {
   // Instantiates a client
   const meetClient = new SpacesServiceClient();
 
-  async function callGetSpace() {
+  async function callListMembers() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await meetClient.getSpace(request);
-    console.log(response);
+    const iterable = meetClient.listMembersAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callGetSpace();
-  // [END meet_v2beta_generated_SpacesService_GetSpace_async]
+  callListMembers();
+  // [END meet_v2beta_generated_SpacesService_ListMembers_async]
 }
 
 process.on('unhandledRejection', err => {

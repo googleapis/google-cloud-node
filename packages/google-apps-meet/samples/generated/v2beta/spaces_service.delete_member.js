@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START meet_v2beta_generated_SpacesService_GetSpace_async]
+  // [START meet_v2beta_generated_SpacesService_DeleteMember_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,20 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the space.
-   *  Format: `spaces/{space}` or `spaces/{meetingCode}`.
-   *  `{space}` is the resource identifier for the space. It's a unique,
-   *  server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
-   *  `{meetingCode}` is an alias for the space. It's a typeable, unique
-   *  character string and is non-case sensitive. For example, `abc-mnop-xyz`.
-   *  The maximum length is 128 characters.
-   *  A `meetingCode` shouldn't be stored long term as it can become
-   *  dissociated from a meeting space and can be reused for different meeting
-   *  spaces in the future. Generally, a `meetingCode` expires 365 days after
-   *  last use. For more information, see Learn about meeting codes in Google
-   *  Meet (https://support.google.com/meet/answer/10710509).
-   *  For more information, see How Meet identifies a meeting
-   *  space (https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
+   *  Required. Format: “spaces/{space}/members/{member}”
    */
   // const name = 'abc123'
 
@@ -52,19 +39,19 @@ function main(name) {
   // Instantiates a client
   const meetClient = new SpacesServiceClient();
 
-  async function callGetSpace() {
+  async function callDeleteMember() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await meetClient.getSpace(request);
+    const response = await meetClient.deleteMember(request);
     console.log(response);
   }
 
-  callGetSpace();
-  // [END meet_v2beta_generated_SpacesService_GetSpace_async]
+  callDeleteMember();
+  // [END meet_v2beta_generated_SpacesService_DeleteMember_async]
 }
 
 process.on('unhandledRejection', err => {
