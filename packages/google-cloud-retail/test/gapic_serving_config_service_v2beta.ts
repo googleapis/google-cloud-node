@@ -337,7 +337,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -370,7 +370,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -418,7 +418,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServingConfig = stubSimpleCall(
         undefined,
@@ -472,7 +472,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -505,7 +505,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -553,7 +553,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServingConfig = stubSimpleCall(
         undefined,
@@ -608,7 +608,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig', 'name']
       );
       request.servingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -642,7 +642,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig', 'name']
       );
       request.servingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -691,7 +691,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig', 'name']
       );
       request.servingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServingConfig = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -778,7 +778,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -826,7 +826,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServingConfig = stubSimpleCall(
         undefined,
@@ -880,7 +880,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -912,7 +912,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -960,7 +960,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addControl = stubSimpleCall(
         undefined,
@@ -1014,7 +1014,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -1046,7 +1046,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -1094,7 +1094,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeControl = stubSimpleCall(
         undefined,
@@ -1148,7 +1148,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1189,7 +1189,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1245,7 +1245,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServingConfigs = stubSimpleCall(
         undefined,
@@ -1277,7 +1277,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1338,7 +1338,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServingConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1388,7 +1388,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1438,7 +1438,7 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServingConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

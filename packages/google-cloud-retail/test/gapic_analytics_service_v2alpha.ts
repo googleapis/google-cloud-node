@@ -313,7 +313,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -346,7 +346,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -400,7 +400,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportAnalyticsMetrics = stubLongRunningCall(
         undefined,
@@ -434,7 +434,7 @@ describe('v2alpha.AnalyticsServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportAnalyticsMetrics = stubLongRunningCall(
         undefined,
