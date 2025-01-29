@@ -403,7 +403,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Space()
       );
@@ -434,7 +434,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Space()
       );
@@ -481,7 +481,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSpace = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSpace(request), expectedError);
@@ -531,7 +531,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['space', 'name']
       );
       request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Space()
       );
@@ -563,7 +563,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['space', 'name']
       );
       request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Space()
       );
@@ -611,7 +611,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['space', 'name']
       );
       request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSpace = stubSimpleCall(
         undefined,
@@ -664,7 +664,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -696,7 +696,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -743,7 +743,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.endActiveConference = stubSimpleCall(
         undefined,
@@ -795,7 +795,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Member()
       );
@@ -826,7 +826,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Member()
       );
@@ -873,7 +873,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMember = stubSimpleCall(
         undefined,
@@ -925,7 +925,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Member()
       );
@@ -956,7 +956,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.apps.meet.v2beta.Member()
       );
@@ -1003,7 +1003,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMember = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getMember(request), expectedError);
@@ -1052,7 +1052,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1083,7 +1083,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1130,7 +1130,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMember = stubSimpleCall(
         undefined,
@@ -1182,7 +1182,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
@@ -1215,7 +1215,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
@@ -1264,7 +1264,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMembers = stubSimpleCall(
         undefined,
@@ -1295,7 +1295,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
@@ -1346,7 +1346,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMembers.createStream = stubPageStreamingCall(
         undefined,
@@ -1394,7 +1394,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
         generateSampleMessage(new protos.google.apps.meet.v2beta.Member()),
@@ -1437,7 +1437,7 @@ describe('v2beta.SpacesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMembers.asyncIterate = stubAsyncIterationCall(
         undefined,

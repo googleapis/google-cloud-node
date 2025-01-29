@@ -260,7 +260,7 @@ describe('v1.QuotaControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.AllocateQuotaResponse()
       );
@@ -291,7 +291,7 @@ describe('v1.QuotaControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.AllocateQuotaResponse()
       );
@@ -338,7 +338,7 @@ describe('v1.QuotaControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.allocateQuota = stubSimpleCall(
         undefined,
