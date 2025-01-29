@@ -1,0 +1,155 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "maps.fleetengine.v1",
+  "libraryPackage": "@googlemaps/fleetengine",
+  "services": {
+    "TripService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TripServiceClient",
+          "rpcs": {
+            "CreateTrip": {
+              "methods": [
+                "createTrip"
+              ]
+            },
+            "GetTrip": {
+              "methods": [
+                "getTrip"
+              ]
+            },
+            "ReportBillableTrip": {
+              "methods": [
+                "reportBillableTrip"
+              ]
+            },
+            "UpdateTrip": {
+              "methods": [
+                "updateTrip"
+              ]
+            },
+            "SearchTrips": {
+              "methods": [
+                "searchTrips",
+                "searchTripsStream",
+                "searchTripsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TripServiceClient",
+          "rpcs": {
+            "CreateTrip": {
+              "methods": [
+                "createTrip"
+              ]
+            },
+            "GetTrip": {
+              "methods": [
+                "getTrip"
+              ]
+            },
+            "ReportBillableTrip": {
+              "methods": [
+                "reportBillableTrip"
+              ]
+            },
+            "UpdateTrip": {
+              "methods": [
+                "updateTrip"
+              ]
+            },
+            "SearchTrips": {
+              "methods": [
+                "searchTrips",
+                "searchTripsStream",
+                "searchTripsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VehicleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VehicleServiceClient",
+          "rpcs": {
+            "CreateVehicle": {
+              "methods": [
+                "createVehicle"
+              ]
+            },
+            "GetVehicle": {
+              "methods": [
+                "getVehicle"
+              ]
+            },
+            "UpdateVehicle": {
+              "methods": [
+                "updateVehicle"
+              ]
+            },
+            "UpdateVehicleAttributes": {
+              "methods": [
+                "updateVehicleAttributes"
+              ]
+            },
+            "SearchVehicles": {
+              "methods": [
+                "searchVehicles"
+              ]
+            },
+            "ListVehicles": {
+              "methods": [
+                "listVehicles",
+                "listVehiclesStream",
+                "listVehiclesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VehicleServiceClient",
+          "rpcs": {
+            "CreateVehicle": {
+              "methods": [
+                "createVehicle"
+              ]
+            },
+            "GetVehicle": {
+              "methods": [
+                "getVehicle"
+              ]
+            },
+            "UpdateVehicle": {
+              "methods": [
+                "updateVehicle"
+              ]
+            },
+            "UpdateVehicleAttributes": {
+              "methods": [
+                "updateVehicleAttributes"
+              ]
+            },
+            "SearchVehicles": {
+              "methods": [
+                "searchVehicles"
+              ]
+            },
+            "ListVehicles": {
+              "methods": [
+                "listVehicles",
+                "listVehiclesStream",
+                "listVehiclesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
