@@ -321,7 +321,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -361,7 +361,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -416,7 +416,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAuthorizedDomains = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -516,7 +516,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizedDomains.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -571,7 +571,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -624,7 +624,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizedDomains.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

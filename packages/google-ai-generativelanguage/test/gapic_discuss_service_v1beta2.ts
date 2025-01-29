@@ -261,7 +261,7 @@ describe('v1beta2.DiscussServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta2.GenerateMessageResponse()
       );
@@ -292,7 +292,7 @@ describe('v1beta2.DiscussServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta2.GenerateMessageResponse()
       );
@@ -339,7 +339,7 @@ describe('v1beta2.DiscussServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateMessage = stubSimpleCall(
         undefined,
@@ -391,7 +391,7 @@ describe('v1beta2.DiscussServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta2.CountMessageTokensResponse()
       );
@@ -423,7 +423,7 @@ describe('v1beta2.DiscussServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta2.CountMessageTokensResponse()
       );
@@ -470,7 +470,7 @@ describe('v1beta2.DiscussServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.countMessageTokens = stubSimpleCall(
         undefined,

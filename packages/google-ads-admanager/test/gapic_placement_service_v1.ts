@@ -333,7 +333,7 @@ describe('v1.PlacementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Placement()
       );
@@ -364,7 +364,7 @@ describe('v1.PlacementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Placement()
       );
@@ -411,7 +411,7 @@ describe('v1.PlacementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPlacement = stubSimpleCall(
         undefined,
@@ -463,7 +463,7 @@ describe('v1.PlacementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
@@ -496,7 +496,7 @@ describe('v1.PlacementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
@@ -545,7 +545,7 @@ describe('v1.PlacementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPlacements = stubSimpleCall(
         undefined,
@@ -576,7 +576,7 @@ describe('v1.PlacementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
@@ -630,7 +630,7 @@ describe('v1.PlacementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPlacements.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -679,7 +679,7 @@ describe('v1.PlacementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Placement()),
@@ -722,7 +722,7 @@ describe('v1.PlacementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPlacements.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

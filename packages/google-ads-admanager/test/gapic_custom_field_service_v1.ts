@@ -335,7 +335,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.CustomField()
       );
@@ -366,7 +366,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.CustomField()
       );
@@ -413,7 +413,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomField = stubSimpleCall(
         undefined,
@@ -465,7 +465,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
@@ -498,7 +498,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
@@ -547,7 +547,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomFields = stubSimpleCall(
         undefined,
@@ -578,7 +578,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
@@ -632,7 +632,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomFields.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -681,7 +681,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
         generateSampleMessage(new protos.google.ads.admanager.v1.CustomField()),
@@ -724,7 +724,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomFields.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
