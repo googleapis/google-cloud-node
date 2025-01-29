@@ -320,7 +320,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Generator()
       );
@@ -351,7 +351,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Generator()
       );
@@ -398,7 +398,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGenerator = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Generator()
       );
@@ -481,7 +481,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Generator()
       );
@@ -528,7 +528,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGenerator = stubSimpleCall(
         undefined,
@@ -580,7 +580,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -611,7 +611,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -658,7 +658,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGenerator = stubSimpleCall(
         undefined,
@@ -711,7 +711,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['generator', 'name']
       );
       request.generator.name = defaultValue1;
-      const expectedHeaderRequestParams = `generator.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generator.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Generator()
       );
@@ -743,7 +743,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['generator', 'name']
       );
       request.generator.name = defaultValue1;
-      const expectedHeaderRequestParams = `generator.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generator.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Generator()
       );
@@ -791,7 +791,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['generator', 'name']
       );
       request.generator.name = defaultValue1;
-      const expectedHeaderRequestParams = `generator.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generator.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGenerator = stubSimpleCall(
         undefined,
@@ -844,7 +844,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Generator()
@@ -883,7 +883,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Generator()
@@ -938,7 +938,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGenerators = stubSimpleCall(
         undefined,
@@ -969,7 +969,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Generator()
@@ -1030,7 +1030,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGenerators.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1080,7 +1080,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Generator()
@@ -1129,7 +1129,7 @@ describe('v2beta1.GeneratorsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGenerators.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
