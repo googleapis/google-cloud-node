@@ -357,7 +357,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v3.PolicyBinding()
       );
@@ -388,7 +388,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v3.PolicyBinding()
       );
@@ -435,7 +435,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPolicyBinding = stubSimpleCall(
         undefined,
@@ -487,7 +487,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -520,7 +520,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -574,7 +574,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPolicyBinding = stubLongRunningCall(
         undefined,
@@ -605,7 +605,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPolicyBinding = stubLongRunningCall(
         undefined,
@@ -682,7 +682,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['policyBinding', 'name']
       );
       request.policyBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -716,7 +716,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['policyBinding', 'name']
       );
       request.policyBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -771,7 +771,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['policyBinding', 'name']
       );
       request.policyBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePolicyBinding = stubLongRunningCall(
         undefined,
@@ -803,7 +803,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['policyBinding', 'name']
       );
       request.policyBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePolicyBinding = stubLongRunningCall(
         undefined,
@@ -879,7 +879,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -912,7 +912,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -966,7 +966,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePolicyBinding = stubLongRunningCall(
         undefined,
@@ -997,7 +997,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePolicyBinding = stubLongRunningCall(
         undefined,
@@ -1073,7 +1073,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1107,7 +1107,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1156,7 +1156,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPolicyBindings = stubSimpleCall(
         undefined,
@@ -1187,7 +1187,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1238,7 +1238,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicyBindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1284,7 +1284,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1327,7 +1327,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicyBindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1369,7 +1369,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1403,7 +1403,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1452,7 +1452,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchTargetPolicyBindings = stubSimpleCall(
         undefined,
@@ -1486,7 +1486,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1543,7 +1543,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchTargetPolicyBindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1595,7 +1595,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1642,7 +1642,7 @@ describe('v3.PolicyBindingsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchTargetPolicyBindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
