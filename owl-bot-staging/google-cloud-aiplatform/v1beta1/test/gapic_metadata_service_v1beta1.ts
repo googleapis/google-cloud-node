@@ -288,7 +288,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.MetadataStore()
             );
@@ -315,7 +315,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.MetadataStore()
             );
@@ -353,7 +353,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getMetadataStore = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getMetadataStore(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateArtifactRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Artifact()
             );
@@ -423,7 +423,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateArtifactRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Artifact()
             );
@@ -461,7 +461,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateArtifactRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createArtifact = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createArtifact(request), expectedError);
@@ -504,7 +504,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetArtifactRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Artifact()
             );
@@ -531,7 +531,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetArtifactRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Artifact()
             );
@@ -569,7 +569,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetArtifactRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getArtifact = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getArtifact(request), expectedError);
@@ -613,7 +613,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateArtifactRequest', ['artifact', 'name']);
             request.artifact.name = defaultValue1;
-            const expectedHeaderRequestParams = `artifact.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `artifact.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Artifact()
             );
@@ -641,7 +641,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateArtifactRequest', ['artifact', 'name']);
             request.artifact.name = defaultValue1;
-            const expectedHeaderRequestParams = `artifact.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `artifact.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Artifact()
             );
@@ -680,7 +680,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateArtifactRequest', ['artifact', 'name']);
             request.artifact.name = defaultValue1;
-            const expectedHeaderRequestParams = `artifact.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `artifact.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateArtifact = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateArtifact(request), expectedError);
@@ -724,7 +724,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateContextRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Context()
             );
@@ -751,7 +751,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateContextRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Context()
             );
@@ -789,7 +789,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateContextRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createContext = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createContext(request), expectedError);
@@ -832,7 +832,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetContextRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Context()
             );
@@ -859,7 +859,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetContextRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Context()
             );
@@ -897,7 +897,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetContextRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getContext = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getContext(request), expectedError);
@@ -941,7 +941,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateContextRequest', ['context', 'name']);
             request.context.name = defaultValue1;
-            const expectedHeaderRequestParams = `context.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Context()
             );
@@ -969,7 +969,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateContextRequest', ['context', 'name']);
             request.context.name = defaultValue1;
-            const expectedHeaderRequestParams = `context.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Context()
             );
@@ -1008,7 +1008,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateContextRequest', ['context', 'name']);
             request.context.name = defaultValue1;
-            const expectedHeaderRequestParams = `context.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateContext = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateContext(request), expectedError);
@@ -1052,7 +1052,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsResponse()
             );
@@ -1079,7 +1079,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsResponse()
             );
@@ -1117,7 +1117,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.addContextArtifactsAndExecutions = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.addContextArtifactsAndExecutions(request), expectedError);
@@ -1160,7 +1160,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextChildrenRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.AddContextChildrenResponse()
             );
@@ -1187,7 +1187,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextChildrenRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.AddContextChildrenResponse()
             );
@@ -1225,7 +1225,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextChildrenRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.addContextChildren = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.addContextChildren(request), expectedError);
@@ -1268,7 +1268,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.RemoveContextChildrenRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.RemoveContextChildrenResponse()
             );
@@ -1295,7 +1295,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.RemoveContextChildrenRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.RemoveContextChildrenResponse()
             );
@@ -1333,7 +1333,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.RemoveContextChildrenRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.removeContextChildren = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.removeContextChildren(request), expectedError);
@@ -1376,7 +1376,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryContextLineageSubgraphRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
             );
@@ -1403,7 +1403,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryContextLineageSubgraphRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
             );
@@ -1441,7 +1441,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryContextLineageSubgraphRequest', ['context']);
             request.context = defaultValue1;
-            const expectedHeaderRequestParams = `context=${defaultValue1}`;
+            const expectedHeaderRequestParams = `context=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.queryContextLineageSubgraph = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.queryContextLineageSubgraph(request), expectedError);
@@ -1484,7 +1484,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateExecutionRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Execution()
             );
@@ -1511,7 +1511,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateExecutionRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Execution()
             );
@@ -1549,7 +1549,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateExecutionRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createExecution = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createExecution(request), expectedError);
@@ -1592,7 +1592,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetExecutionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Execution()
             );
@@ -1619,7 +1619,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetExecutionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Execution()
             );
@@ -1657,7 +1657,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetExecutionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getExecution = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getExecution(request), expectedError);
@@ -1701,7 +1701,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateExecutionRequest', ['execution', 'name']);
             request.execution.name = defaultValue1;
-            const expectedHeaderRequestParams = `execution.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Execution()
             );
@@ -1729,7 +1729,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateExecutionRequest', ['execution', 'name']);
             request.execution.name = defaultValue1;
-            const expectedHeaderRequestParams = `execution.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Execution()
             );
@@ -1768,7 +1768,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateExecutionRequest', ['execution', 'name']);
             request.execution.name = defaultValue1;
-            const expectedHeaderRequestParams = `execution.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateExecution = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateExecution(request), expectedError);
@@ -1812,7 +1812,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddExecutionEventsRequest', ['execution']);
             request.execution = defaultValue1;
-            const expectedHeaderRequestParams = `execution=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.AddExecutionEventsResponse()
             );
@@ -1839,7 +1839,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddExecutionEventsRequest', ['execution']);
             request.execution = defaultValue1;
-            const expectedHeaderRequestParams = `execution=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.AddExecutionEventsResponse()
             );
@@ -1877,7 +1877,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddExecutionEventsRequest', ['execution']);
             request.execution = defaultValue1;
-            const expectedHeaderRequestParams = `execution=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.addExecutionEvents = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.addExecutionEvents(request), expectedError);
@@ -1920,7 +1920,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExecutionInputsAndOutputsRequest', ['execution']);
             request.execution = defaultValue1;
-            const expectedHeaderRequestParams = `execution=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
             );
@@ -1947,7 +1947,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExecutionInputsAndOutputsRequest', ['execution']);
             request.execution = defaultValue1;
-            const expectedHeaderRequestParams = `execution=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
             );
@@ -1985,7 +1985,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExecutionInputsAndOutputsRequest', ['execution']);
             request.execution = defaultValue1;
-            const expectedHeaderRequestParams = `execution=${defaultValue1}`;
+            const expectedHeaderRequestParams = `execution=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.queryExecutionInputsAndOutputs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.queryExecutionInputsAndOutputs(request), expectedError);
@@ -2028,7 +2028,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataSchemaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
             );
@@ -2055,7 +2055,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataSchemaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
             );
@@ -2093,7 +2093,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataSchemaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createMetadataSchema = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createMetadataSchema(request), expectedError);
@@ -2136,7 +2136,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataSchemaRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
             );
@@ -2163,7 +2163,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataSchemaRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
             );
@@ -2201,7 +2201,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataSchemaRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getMetadataSchema = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getMetadataSchema(request), expectedError);
@@ -2244,7 +2244,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryArtifactLineageSubgraphRequest', ['artifact']);
             request.artifact = defaultValue1;
-            const expectedHeaderRequestParams = `artifact=${defaultValue1}`;
+            const expectedHeaderRequestParams = `artifact=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
             );
@@ -2271,7 +2271,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryArtifactLineageSubgraphRequest', ['artifact']);
             request.artifact = defaultValue1;
-            const expectedHeaderRequestParams = `artifact=${defaultValue1}`;
+            const expectedHeaderRequestParams = `artifact=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
             );
@@ -2309,7 +2309,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryArtifactLineageSubgraphRequest', ['artifact']);
             request.artifact = defaultValue1;
-            const expectedHeaderRequestParams = `artifact=${defaultValue1}`;
+            const expectedHeaderRequestParams = `artifact=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.queryArtifactLineageSubgraph = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.queryArtifactLineageSubgraph(request), expectedError);
@@ -2352,7 +2352,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2380,7 +2380,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2421,7 +2421,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createMetadataStore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createMetadataStore(request), expectedError);
@@ -2445,7 +2445,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createMetadataStore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createMetadataStore(request);
@@ -2506,7 +2506,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2534,7 +2534,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2575,7 +2575,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteMetadataStore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteMetadataStore(request), expectedError);
@@ -2599,7 +2599,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteMetadataStore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteMetadataStore(request);
@@ -2660,7 +2660,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteArtifactRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2688,7 +2688,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteArtifactRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2729,7 +2729,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteArtifactRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteArtifact = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteArtifact(request), expectedError);
@@ -2753,7 +2753,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteArtifactRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteArtifact = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteArtifact(request);
@@ -2814,7 +2814,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2842,7 +2842,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2883,7 +2883,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.purgeArtifacts = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.purgeArtifacts(request), expectedError);
@@ -2907,7 +2907,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.purgeArtifacts = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.purgeArtifacts(request);
@@ -2968,7 +2968,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteContextRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2996,7 +2996,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteContextRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3037,7 +3037,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteContextRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteContext = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteContext(request), expectedError);
@@ -3061,7 +3061,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteContextRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteContext = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteContext(request);
@@ -3122,7 +3122,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3150,7 +3150,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3191,7 +3191,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.purgeContexts = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.purgeContexts(request), expectedError);
@@ -3215,7 +3215,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.purgeContexts = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.purgeContexts(request);
@@ -3276,7 +3276,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteExecutionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3304,7 +3304,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteExecutionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3345,7 +3345,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteExecutionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteExecution = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteExecution(request), expectedError);
@@ -3369,7 +3369,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteExecutionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteExecution = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteExecution(request);
@@ -3430,7 +3430,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3458,7 +3458,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3499,7 +3499,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.purgeExecutions = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.purgeExecutions(request), expectedError);
@@ -3523,7 +3523,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PurgeExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.purgeExecutions = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.purgeExecutions(request);
@@ -3584,7 +3584,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
@@ -3612,7 +3612,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
@@ -3651,7 +3651,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listMetadataStores = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listMetadataStores(request), expectedError);
@@ -3675,7 +3675,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
@@ -3719,7 +3719,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listMetadataStores.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listMetadataStoresStream(request);
@@ -3758,7 +3758,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataStore()),
@@ -3794,7 +3794,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listMetadataStores.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listMetadataStoresAsync(request);
@@ -3829,7 +3829,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
@@ -3857,7 +3857,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
@@ -3896,7 +3896,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listArtifacts = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listArtifacts(request), expectedError);
@@ -3920,7 +3920,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
@@ -3964,7 +3964,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listArtifacts.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listArtifactsStream(request);
@@ -4003,7 +4003,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Artifact()),
@@ -4039,7 +4039,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListArtifactsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listArtifacts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listArtifactsAsync(request);
@@ -4074,7 +4074,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
@@ -4102,7 +4102,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
@@ -4141,7 +4141,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listContexts = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listContexts(request), expectedError);
@@ -4165,7 +4165,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
@@ -4209,7 +4209,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listContexts.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listContextsStream(request);
@@ -4248,7 +4248,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Context()),
@@ -4284,7 +4284,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListContextsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listContexts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listContextsAsync(request);
@@ -4319,7 +4319,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
@@ -4347,7 +4347,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
@@ -4386,7 +4386,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listExecutions = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listExecutions(request), expectedError);
@@ -4410,7 +4410,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
@@ -4454,7 +4454,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listExecutions.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listExecutionsStream(request);
@@ -4493,7 +4493,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Execution()),
@@ -4529,7 +4529,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListExecutionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listExecutions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listExecutionsAsync(request);
@@ -4564,7 +4564,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataSchemasRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
@@ -4592,7 +4592,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataSchemasRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
@@ -4631,7 +4631,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataSchemasRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listMetadataSchemas = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listMetadataSchemas(request), expectedError);
@@ -4655,7 +4655,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataSchemasRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
@@ -4699,7 +4699,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataSchemasRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listMetadataSchemas.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listMetadataSchemasStream(request);
@@ -4738,7 +4738,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataSchemasRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()),
@@ -4774,7 +4774,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListMetadataSchemasRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listMetadataSchemas.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listMetadataSchemasAsync(request);

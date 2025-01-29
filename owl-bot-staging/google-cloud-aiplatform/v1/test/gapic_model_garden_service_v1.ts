@@ -245,7 +245,7 @@ describe('v1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPublisherModelRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.PublisherModel()
             );
@@ -272,7 +272,7 @@ describe('v1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPublisherModelRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.PublisherModel()
             );
@@ -310,7 +310,7 @@ describe('v1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPublisherModelRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getPublisherModel = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getPublisherModel(request), expectedError);

@@ -288,7 +288,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ReasoningEngine()
             );
@@ -315,7 +315,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ReasoningEngine()
             );
@@ -353,7 +353,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getReasoningEngine = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getReasoningEngine(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateReasoningEngineRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -424,7 +424,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateReasoningEngineRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -465,7 +465,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateReasoningEngineRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createReasoningEngine = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createReasoningEngine(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateReasoningEngineRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createReasoningEngine = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createReasoningEngine(request);
@@ -551,7 +551,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateReasoningEngineRequest', ['reasoningEngine', 'name']);
             request.reasoningEngine.name = defaultValue1;
-            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -580,7 +580,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateReasoningEngineRequest', ['reasoningEngine', 'name']);
             request.reasoningEngine.name = defaultValue1;
-            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -622,7 +622,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateReasoningEngineRequest', ['reasoningEngine', 'name']);
             request.reasoningEngine.name = defaultValue1;
-            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateReasoningEngine = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateReasoningEngine(request), expectedError);
@@ -647,7 +647,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateReasoningEngineRequest', ['reasoningEngine', 'name']);
             request.reasoningEngine.name = defaultValue1;
-            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `reasoning_engine.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateReasoningEngine = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateReasoningEngine(request);
@@ -708,7 +708,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -736,7 +736,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -777,7 +777,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteReasoningEngine = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteReasoningEngine(request), expectedError);
@@ -801,7 +801,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteReasoningEngine = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteReasoningEngine(request);
@@ -862,7 +862,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListReasoningEnginesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
@@ -890,7 +890,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListReasoningEnginesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
@@ -929,7 +929,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListReasoningEnginesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listReasoningEngines = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listReasoningEngines(request), expectedError);
@@ -953,7 +953,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListReasoningEnginesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
@@ -997,7 +997,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListReasoningEnginesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listReasoningEngines.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listReasoningEnginesStream(request);
@@ -1036,7 +1036,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListReasoningEnginesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ReasoningEngine()),
@@ -1072,7 +1072,7 @@ describe('v1.ReasoningEngineServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListReasoningEnginesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listReasoningEngines.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listReasoningEnginesAsync(request);

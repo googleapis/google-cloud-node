@@ -288,7 +288,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetIndexRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.Index()
             );
@@ -315,7 +315,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetIndexRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.Index()
             );
@@ -353,7 +353,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetIndexRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getIndex = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getIndex(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpsertDatapointsRequest', ['index']);
             request.index = defaultValue1;
-            const expectedHeaderRequestParams = `index=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.UpsertDatapointsResponse()
             );
@@ -423,7 +423,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpsertDatapointsRequest', ['index']);
             request.index = defaultValue1;
-            const expectedHeaderRequestParams = `index=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.UpsertDatapointsResponse()
             );
@@ -461,7 +461,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpsertDatapointsRequest', ['index']);
             request.index = defaultValue1;
-            const expectedHeaderRequestParams = `index=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.upsertDatapoints = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.upsertDatapoints(request), expectedError);
@@ -504,7 +504,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RemoveDatapointsRequest', ['index']);
             request.index = defaultValue1;
-            const expectedHeaderRequestParams = `index=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.RemoveDatapointsResponse()
             );
@@ -531,7 +531,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RemoveDatapointsRequest', ['index']);
             request.index = defaultValue1;
-            const expectedHeaderRequestParams = `index=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.RemoveDatapointsResponse()
             );
@@ -569,7 +569,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RemoveDatapointsRequest', ['index']);
             request.index = defaultValue1;
-            const expectedHeaderRequestParams = `index=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.removeDatapoints = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.removeDatapoints(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateIndexRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -640,7 +640,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateIndexRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -681,7 +681,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateIndexRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createIndex = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createIndex(request), expectedError);
@@ -705,7 +705,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateIndexRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createIndex = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createIndex(request);
@@ -767,7 +767,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateIndexRequest', ['index', 'name']);
             request.index.name = defaultValue1;
-            const expectedHeaderRequestParams = `index.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -796,7 +796,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateIndexRequest', ['index', 'name']);
             request.index.name = defaultValue1;
-            const expectedHeaderRequestParams = `index.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -838,7 +838,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateIndexRequest', ['index', 'name']);
             request.index.name = defaultValue1;
-            const expectedHeaderRequestParams = `index.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateIndex = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateIndex(request), expectedError);
@@ -863,7 +863,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateIndexRequest', ['index', 'name']);
             request.index.name = defaultValue1;
-            const expectedHeaderRequestParams = `index.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateIndex = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateIndex(request);
@@ -924,7 +924,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteIndexRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -952,7 +952,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteIndexRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -993,7 +993,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteIndexRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteIndex = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteIndex(request), expectedError);
@@ -1017,7 +1017,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteIndexRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteIndex = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteIndex(request);
@@ -1078,7 +1078,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListIndexesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
@@ -1106,7 +1106,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListIndexesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
@@ -1145,7 +1145,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListIndexesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listIndexes = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listIndexes(request), expectedError);
@@ -1169,7 +1169,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListIndexesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
@@ -1213,7 +1213,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListIndexesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listIndexes.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listIndexesStream(request);
@@ -1252,7 +1252,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListIndexesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Index()),
@@ -1288,7 +1288,7 @@ describe('v1.IndexServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListIndexesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listIndexes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listIndexesAsync(request);

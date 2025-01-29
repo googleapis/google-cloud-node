@@ -402,7 +402,7 @@ export class ReasoningEngineExecutionServiceClient {
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             if (methodName in this.descriptors.stream) {
-              const stream = new PassThrough();
+              const stream = new PassThrough({objectMode: true});
               setImmediate(() => {
                 stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
               });

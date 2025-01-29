@@ -259,7 +259,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.QueryReasoningEngineResponse()
             );
@@ -286,7 +286,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.QueryReasoningEngineResponse()
             );
@@ -324,7 +324,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.queryReasoningEngine = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.queryReasoningEngine(request), expectedError);
@@ -367,7 +367,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.api.HttpBody()
             );
@@ -400,7 +400,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.api.HttpBody()
             );
@@ -436,7 +436,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.streamQueryReasoningEngine = stubServerStreamingCall(undefined, expectedError);
             const stream = client.streamQueryReasoningEngine(request);

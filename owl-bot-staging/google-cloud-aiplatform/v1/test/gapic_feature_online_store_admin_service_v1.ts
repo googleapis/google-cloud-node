@@ -288,7 +288,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()
             );
@@ -315,7 +315,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()
             );
@@ -353,7 +353,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getFeatureOnlineStore = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getFeatureOnlineStore(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureViewRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FeatureView()
             );
@@ -423,7 +423,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureViewRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FeatureView()
             );
@@ -461,7 +461,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureViewRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getFeatureView = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getFeatureView(request), expectedError);
@@ -504,7 +504,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SyncFeatureViewRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.SyncFeatureViewResponse()
             );
@@ -531,7 +531,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SyncFeatureViewRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.SyncFeatureViewResponse()
             );
@@ -569,7 +569,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SyncFeatureViewRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.syncFeatureView = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.syncFeatureView(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureViewSyncRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FeatureViewSync()
             );
@@ -639,7 +639,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureViewSyncRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FeatureViewSync()
             );
@@ -677,7 +677,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureViewSyncRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getFeatureViewSync = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getFeatureViewSync(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureOnlineStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -748,7 +748,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureOnlineStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -789,7 +789,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureOnlineStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeatureOnlineStore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createFeatureOnlineStore(request), expectedError);
@@ -813,7 +813,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureOnlineStoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeatureOnlineStore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createFeatureOnlineStore(request);
@@ -875,7 +875,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureOnlineStoreRequest', ['featureOnlineStore', 'name']);
             request.featureOnlineStore.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -904,7 +904,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureOnlineStoreRequest', ['featureOnlineStore', 'name']);
             request.featureOnlineStore.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -946,7 +946,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureOnlineStoreRequest', ['featureOnlineStore', 'name']);
             request.featureOnlineStore.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateFeatureOnlineStore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateFeatureOnlineStore(request), expectedError);
@@ -971,7 +971,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureOnlineStoreRequest', ['featureOnlineStore', 'name']);
             request.featureOnlineStore.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_online_store.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateFeatureOnlineStore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateFeatureOnlineStore(request);
@@ -1032,7 +1032,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1060,7 +1060,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1101,7 +1101,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeatureOnlineStore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteFeatureOnlineStore(request), expectedError);
@@ -1125,7 +1125,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeatureOnlineStore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteFeatureOnlineStore(request);
@@ -1186,7 +1186,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureViewRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1214,7 +1214,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureViewRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1255,7 +1255,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureViewRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeatureView = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createFeatureView(request), expectedError);
@@ -1279,7 +1279,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateFeatureViewRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeatureView = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createFeatureView(request);
@@ -1341,7 +1341,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureViewRequest', ['featureView', 'name']);
             request.featureView.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1370,7 +1370,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureViewRequest', ['featureView', 'name']);
             request.featureView.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1412,7 +1412,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureViewRequest', ['featureView', 'name']);
             request.featureView.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateFeatureView = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateFeatureView(request), expectedError);
@@ -1437,7 +1437,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureViewRequest', ['featureView', 'name']);
             request.featureView.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateFeatureView = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateFeatureView(request);
@@ -1498,7 +1498,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureViewRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1526,7 +1526,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureViewRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1567,7 +1567,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureViewRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeatureView = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteFeatureView(request), expectedError);
@@ -1591,7 +1591,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteFeatureViewRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeatureView = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteFeatureView(request);
@@ -1652,7 +1652,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureOnlineStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
@@ -1680,7 +1680,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureOnlineStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
@@ -1719,7 +1719,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureOnlineStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listFeatureOnlineStores = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listFeatureOnlineStores(request), expectedError);
@@ -1743,7 +1743,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureOnlineStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
@@ -1787,7 +1787,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureOnlineStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatureOnlineStores.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listFeatureOnlineStoresStream(request);
@@ -1826,7 +1826,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureOnlineStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureOnlineStore()),
@@ -1862,7 +1862,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureOnlineStoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatureOnlineStores.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listFeatureOnlineStoresAsync(request);
@@ -1897,7 +1897,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
@@ -1925,7 +1925,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
@@ -1964,7 +1964,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listFeatureViews = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listFeatureViews(request), expectedError);
@@ -1988,7 +1988,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
@@ -2032,7 +2032,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatureViews.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listFeatureViewsStream(request);
@@ -2071,7 +2071,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureView()),
@@ -2107,7 +2107,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatureViews.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listFeatureViewsAsync(request);
@@ -2142,7 +2142,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewSyncsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
@@ -2170,7 +2170,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewSyncsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
@@ -2209,7 +2209,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewSyncsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listFeatureViewSyncs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listFeatureViewSyncs(request), expectedError);
@@ -2233,7 +2233,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewSyncsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
@@ -2277,7 +2277,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewSyncsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatureViewSyncs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listFeatureViewSyncsStream(request);
@@ -2316,7 +2316,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewSyncsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.FeatureViewSync()),
@@ -2352,7 +2352,7 @@ describe('v1.FeatureOnlineStoreAdminServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListFeatureViewSyncsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatureViewSyncs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listFeatureViewSyncsAsync(request);

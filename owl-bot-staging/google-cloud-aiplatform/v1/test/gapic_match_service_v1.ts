@@ -245,7 +245,7 @@ describe('v1.MatchServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.FindNeighborsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
-            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FindNeighborsResponse()
             );
@@ -272,7 +272,7 @@ describe('v1.MatchServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.FindNeighborsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
-            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.FindNeighborsResponse()
             );
@@ -310,7 +310,7 @@ describe('v1.MatchServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.FindNeighborsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
-            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.findNeighbors = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.findNeighbors(request), expectedError);
@@ -353,7 +353,7 @@ describe('v1.MatchServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadIndexDatapointsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
-            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ReadIndexDatapointsResponse()
             );
@@ -380,7 +380,7 @@ describe('v1.MatchServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadIndexDatapointsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
-            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ReadIndexDatapointsResponse()
             );
@@ -418,7 +418,7 @@ describe('v1.MatchServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadIndexDatapointsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
-            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.readIndexDatapoints = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.readIndexDatapoints(request), expectedError);

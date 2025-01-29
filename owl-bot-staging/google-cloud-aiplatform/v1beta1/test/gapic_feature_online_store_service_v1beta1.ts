@@ -256,7 +256,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesResponse()
             );
@@ -283,7 +283,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesResponse()
             );
@@ -321,7 +321,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.fetchFeatureValues = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.fetchFeatureValues(request), expectedError);
@@ -364,7 +364,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesResponse()
             );
@@ -391,7 +391,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesResponse()
             );
@@ -429,7 +429,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest', ['featureView']);
             request.featureView = defaultValue1;
-            const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.searchNearestEntities = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.searchNearestEntities(request), expectedError);

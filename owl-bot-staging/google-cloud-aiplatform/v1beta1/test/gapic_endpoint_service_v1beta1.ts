@@ -288,7 +288,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetEndpointRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Endpoint()
             );
@@ -315,7 +315,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetEndpointRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Endpoint()
             );
@@ -353,7 +353,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetEndpointRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getEndpoint = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getEndpoint(request), expectedError);
@@ -397,7 +397,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEndpointRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Endpoint()
             );
@@ -425,7 +425,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEndpointRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Endpoint()
             );
@@ -464,7 +464,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEndpointRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateEndpoint = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateEndpoint(request), expectedError);
@@ -508,7 +508,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEndpointRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -536,7 +536,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEndpointRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -577,7 +577,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEndpointRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createEndpoint = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createEndpoint(request), expectedError);
@@ -601,7 +601,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEndpointRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createEndpoint = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createEndpoint(request);
@@ -663,7 +663,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -692,7 +692,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -734,7 +734,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateEndpointLongRunning = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateEndpointLongRunning(request), expectedError);
@@ -759,7 +759,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEndpointLongRunningRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateEndpointLongRunning = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateEndpointLongRunning(request);
@@ -820,7 +820,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEndpointRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -848,7 +848,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEndpointRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -889,7 +889,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEndpointRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteEndpoint = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteEndpoint(request), expectedError);
@@ -913,7 +913,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEndpointRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteEndpoint = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteEndpoint(request);
@@ -974,7 +974,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1002,7 +1002,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1043,7 +1043,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deployModel = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deployModel(request), expectedError);
@@ -1067,7 +1067,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deployModel = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deployModel(request);
@@ -1128,7 +1128,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UndeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1156,7 +1156,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UndeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1197,7 +1197,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UndeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.undeployModel = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.undeployModel(request), expectedError);
@@ -1221,7 +1221,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UndeployModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.undeployModel = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.undeployModel(request);
@@ -1282,7 +1282,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.MutateDeployedModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1310,7 +1310,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.MutateDeployedModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1351,7 +1351,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.MutateDeployedModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.mutateDeployedModel = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.mutateDeployedModel(request), expectedError);
@@ -1375,7 +1375,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.MutateDeployedModelRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.mutateDeployedModel = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.mutateDeployedModel(request);
@@ -1436,7 +1436,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEndpointsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
@@ -1464,7 +1464,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEndpointsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
@@ -1503,7 +1503,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEndpointsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listEndpoints = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listEndpoints(request), expectedError);
@@ -1527,7 +1527,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEndpointsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
@@ -1571,7 +1571,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEndpointsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listEndpoints.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listEndpointsStream(request);
@@ -1610,7 +1610,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEndpointsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Endpoint()),
@@ -1646,7 +1646,7 @@ describe('v1beta1.EndpointServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEndpointsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listEndpoints.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listEndpointsAsync(request);

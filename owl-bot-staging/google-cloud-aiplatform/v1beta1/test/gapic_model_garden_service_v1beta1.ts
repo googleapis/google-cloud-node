@@ -288,7 +288,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
             );
@@ -315,7 +315,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
             );
@@ -353,7 +353,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getPublisherModel = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getPublisherModel(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest', ['destination']);
             request.destination = defaultValue1;
-            const expectedHeaderRequestParams = `destination=${defaultValue1}`;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -424,7 +424,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest', ['destination']);
             request.destination = defaultValue1;
-            const expectedHeaderRequestParams = `destination=${defaultValue1}`;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -465,7 +465,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest', ['destination']);
             request.destination = defaultValue1;
-            const expectedHeaderRequestParams = `destination=${defaultValue1}`;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deployPublisherModel = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deployPublisherModel(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeployPublisherModelRequest', ['destination']);
             request.destination = defaultValue1;
-            const expectedHeaderRequestParams = `destination=${defaultValue1}`;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deployPublisherModel = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deployPublisherModel(request);
@@ -550,7 +550,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
@@ -578,7 +578,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
@@ -617,7 +617,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listPublisherModels = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listPublisherModels(request), expectedError);
@@ -641,7 +641,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
@@ -685,7 +685,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listPublisherModels.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listPublisherModelsStream(request);
@@ -724,7 +724,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.PublisherModel()),
@@ -760,7 +760,7 @@ describe('v1beta1.ModelGardenServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListPublisherModelsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listPublisherModels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listPublisherModelsAsync(request);

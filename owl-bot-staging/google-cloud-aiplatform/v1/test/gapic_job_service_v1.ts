@@ -288,7 +288,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateCustomJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CustomJob()
             );
@@ -315,7 +315,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateCustomJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CustomJob()
             );
@@ -353,7 +353,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateCustomJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createCustomJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createCustomJob(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CustomJob()
             );
@@ -423,7 +423,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CustomJob()
             );
@@ -461,7 +461,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getCustomJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getCustomJob(request), expectedError);
@@ -504,7 +504,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -531,7 +531,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -569,7 +569,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.cancelCustomJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.cancelCustomJob(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDataLabelingJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DataLabelingJob()
             );
@@ -639,7 +639,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDataLabelingJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DataLabelingJob()
             );
@@ -677,7 +677,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDataLabelingJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createDataLabelingJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createDataLabelingJob(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DataLabelingJob()
             );
@@ -747,7 +747,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DataLabelingJob()
             );
@@ -785,7 +785,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getDataLabelingJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getDataLabelingJob(request), expectedError);
@@ -828,7 +828,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -855,7 +855,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -893,7 +893,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.cancelDataLabelingJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.cancelDataLabelingJob(request), expectedError);
@@ -936,7 +936,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateHyperparameterTuningJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
             );
@@ -963,7 +963,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateHyperparameterTuningJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
             );
@@ -1001,7 +1001,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateHyperparameterTuningJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createHyperparameterTuningJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createHyperparameterTuningJob(request), expectedError);
@@ -1044,7 +1044,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
             );
@@ -1071,7 +1071,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
             );
@@ -1109,7 +1109,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getHyperparameterTuningJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getHyperparameterTuningJob(request), expectedError);
@@ -1152,7 +1152,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -1179,7 +1179,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -1217,7 +1217,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.cancelHyperparameterTuningJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.cancelHyperparameterTuningJob(request), expectedError);
@@ -1260,7 +1260,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNasJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NasJob()
             );
@@ -1287,7 +1287,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNasJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NasJob()
             );
@@ -1325,7 +1325,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNasJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createNasJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createNasJob(request), expectedError);
@@ -1368,7 +1368,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NasJob()
             );
@@ -1395,7 +1395,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NasJob()
             );
@@ -1433,7 +1433,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getNasJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getNasJob(request), expectedError);
@@ -1476,7 +1476,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -1503,7 +1503,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -1541,7 +1541,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.cancelNasJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.cancelNasJob(request), expectedError);
@@ -1584,7 +1584,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasTrialDetailRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NasTrialDetail()
             );
@@ -1611,7 +1611,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasTrialDetailRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NasTrialDetail()
             );
@@ -1649,7 +1649,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasTrialDetailRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getNasTrialDetail = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getNasTrialDetail(request), expectedError);
@@ -1692,7 +1692,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
             );
@@ -1719,7 +1719,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
             );
@@ -1757,7 +1757,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createBatchPredictionJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createBatchPredictionJob(request), expectedError);
@@ -1800,7 +1800,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
             );
@@ -1827,7 +1827,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
             );
@@ -1865,7 +1865,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getBatchPredictionJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getBatchPredictionJob(request), expectedError);
@@ -1908,7 +1908,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -1935,7 +1935,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -1973,7 +1973,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.cancelBatchPredictionJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.cancelBatchPredictionJob(request), expectedError);
@@ -2016,7 +2016,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateModelDeploymentMonitoringJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
             );
@@ -2043,7 +2043,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateModelDeploymentMonitoringJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
             );
@@ -2081,7 +2081,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateModelDeploymentMonitoringJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createModelDeploymentMonitoringJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createModelDeploymentMonitoringJob(request), expectedError);
@@ -2124,7 +2124,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
             );
@@ -2151,7 +2151,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
             );
@@ -2189,7 +2189,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getModelDeploymentMonitoringJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getModelDeploymentMonitoringJob(request), expectedError);
@@ -2232,7 +2232,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PauseModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -2259,7 +2259,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PauseModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -2297,7 +2297,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PauseModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.pauseModelDeploymentMonitoringJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.pauseModelDeploymentMonitoringJob(request), expectedError);
@@ -2340,7 +2340,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ResumeModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -2367,7 +2367,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ResumeModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -2405,7 +2405,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ResumeModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.resumeModelDeploymentMonitoringJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.resumeModelDeploymentMonitoringJob(request), expectedError);
@@ -2448,7 +2448,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2476,7 +2476,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2517,7 +2517,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteCustomJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteCustomJob(request), expectedError);
@@ -2541,7 +2541,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteCustomJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteCustomJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteCustomJob(request);
@@ -2602,7 +2602,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2630,7 +2630,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2671,7 +2671,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDataLabelingJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteDataLabelingJob(request), expectedError);
@@ -2695,7 +2695,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDataLabelingJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteDataLabelingJob(request);
@@ -2756,7 +2756,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2784,7 +2784,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2825,7 +2825,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteHyperparameterTuningJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteHyperparameterTuningJob(request), expectedError);
@@ -2849,7 +2849,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteHyperparameterTuningJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteHyperparameterTuningJob(request);
@@ -2910,7 +2910,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2938,7 +2938,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2979,7 +2979,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNasJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteNasJob(request), expectedError);
@@ -3003,7 +3003,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNasJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNasJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteNasJob(request);
@@ -3064,7 +3064,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3092,7 +3092,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3133,7 +3133,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteBatchPredictionJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteBatchPredictionJob(request), expectedError);
@@ -3157,7 +3157,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteBatchPredictionJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteBatchPredictionJob(request);
@@ -3219,7 +3219,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest', ['modelDeploymentMonitoringJob', 'name']);
             request.modelDeploymentMonitoringJob.name = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3248,7 +3248,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest', ['modelDeploymentMonitoringJob', 'name']);
             request.modelDeploymentMonitoringJob.name = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3290,7 +3290,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest', ['modelDeploymentMonitoringJob', 'name']);
             request.modelDeploymentMonitoringJob.name = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateModelDeploymentMonitoringJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateModelDeploymentMonitoringJob(request), expectedError);
@@ -3315,7 +3315,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest', ['modelDeploymentMonitoringJob', 'name']);
             request.modelDeploymentMonitoringJob.name = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateModelDeploymentMonitoringJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateModelDeploymentMonitoringJob(request);
@@ -3376,7 +3376,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3404,7 +3404,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3445,7 +3445,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteModelDeploymentMonitoringJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteModelDeploymentMonitoringJob(request), expectedError);
@@ -3469,7 +3469,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteModelDeploymentMonitoringJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteModelDeploymentMonitoringJob(request);
@@ -3530,7 +3530,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListCustomJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
@@ -3558,7 +3558,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListCustomJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
@@ -3597,7 +3597,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListCustomJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listCustomJobs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listCustomJobs(request), expectedError);
@@ -3621,7 +3621,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListCustomJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
@@ -3665,7 +3665,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListCustomJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listCustomJobs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listCustomJobsStream(request);
@@ -3704,7 +3704,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListCustomJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.CustomJob()),
@@ -3740,7 +3740,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListCustomJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listCustomJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listCustomJobsAsync(request);
@@ -3775,7 +3775,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataLabelingJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
@@ -3803,7 +3803,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataLabelingJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
@@ -3842,7 +3842,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataLabelingJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listDataLabelingJobs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listDataLabelingJobs(request), expectedError);
@@ -3866,7 +3866,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataLabelingJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
@@ -3910,7 +3910,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataLabelingJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDataLabelingJobs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listDataLabelingJobsStream(request);
@@ -3949,7 +3949,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataLabelingJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataLabelingJob()),
@@ -3985,7 +3985,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataLabelingJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDataLabelingJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listDataLabelingJobsAsync(request);
@@ -4020,7 +4020,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
@@ -4048,7 +4048,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
@@ -4087,7 +4087,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listHyperparameterTuningJobs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listHyperparameterTuningJobs(request), expectedError);
@@ -4111,7 +4111,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
@@ -4155,7 +4155,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listHyperparameterTuningJobs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listHyperparameterTuningJobsStream(request);
@@ -4194,7 +4194,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()),
@@ -4230,7 +4230,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listHyperparameterTuningJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listHyperparameterTuningJobsAsync(request);
@@ -4265,7 +4265,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
@@ -4293,7 +4293,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
@@ -4332,7 +4332,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listNasJobs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listNasJobs(request), expectedError);
@@ -4356,7 +4356,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
@@ -4400,7 +4400,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNasJobs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listNasJobsStream(request);
@@ -4439,7 +4439,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasJob()),
@@ -4475,7 +4475,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNasJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listNasJobsAsync(request);
@@ -4510,7 +4510,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasTrialDetailsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
@@ -4538,7 +4538,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasTrialDetailsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
@@ -4577,7 +4577,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasTrialDetailsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listNasTrialDetails = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listNasTrialDetails(request), expectedError);
@@ -4601,7 +4601,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasTrialDetailsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
@@ -4645,7 +4645,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasTrialDetailsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNasTrialDetails.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listNasTrialDetailsStream(request);
@@ -4684,7 +4684,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasTrialDetailsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NasTrialDetail()),
@@ -4720,7 +4720,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNasTrialDetailsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNasTrialDetails.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listNasTrialDetailsAsync(request);
@@ -4755,7 +4755,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
@@ -4783,7 +4783,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
@@ -4822,7 +4822,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listBatchPredictionJobs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listBatchPredictionJobs(request), expectedError);
@@ -4846,7 +4846,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
@@ -4890,7 +4890,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listBatchPredictionJobs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listBatchPredictionJobsStream(request);
@@ -4929,7 +4929,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.BatchPredictionJob()),
@@ -4965,7 +4965,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listBatchPredictionJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listBatchPredictionJobsAsync(request);
@@ -5000,7 +5000,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest', ['modelDeploymentMonitoringJob']);
             request.modelDeploymentMonitoringJob = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
@@ -5028,7 +5028,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest', ['modelDeploymentMonitoringJob']);
             request.modelDeploymentMonitoringJob = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
@@ -5067,7 +5067,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest', ['modelDeploymentMonitoringJob']);
             request.modelDeploymentMonitoringJob = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.searchModelDeploymentMonitoringStatsAnomalies(request), expectedError);
@@ -5091,7 +5091,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest', ['modelDeploymentMonitoringJob']);
             request.modelDeploymentMonitoringJob = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
@@ -5135,7 +5135,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest', ['modelDeploymentMonitoringJob']);
             request.modelDeploymentMonitoringJob = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.searchModelDeploymentMonitoringStatsAnomaliesStream(request);
@@ -5174,7 +5174,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest', ['modelDeploymentMonitoringJob']);
             request.modelDeploymentMonitoringJob = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()),
@@ -5210,7 +5210,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest', ['modelDeploymentMonitoringJob']);
             request.modelDeploymentMonitoringJob = defaultValue1;
-            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1}`;
+            const expectedHeaderRequestParams = `model_deployment_monitoring_job=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
@@ -5245,7 +5245,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
@@ -5273,7 +5273,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
@@ -5312,7 +5312,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listModelDeploymentMonitoringJobs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listModelDeploymentMonitoringJobs(request), expectedError);
@@ -5336,7 +5336,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
@@ -5380,7 +5380,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listModelDeploymentMonitoringJobs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listModelDeploymentMonitoringJobsStream(request);
@@ -5419,7 +5419,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()),
@@ -5455,7 +5455,7 @@ describe('v1.JobServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listModelDeploymentMonitoringJobsAsync(request);

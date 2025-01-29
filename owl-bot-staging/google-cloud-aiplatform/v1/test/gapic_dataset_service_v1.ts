@@ -288,7 +288,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDatasetRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.Dataset()
             );
@@ -315,7 +315,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDatasetRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.Dataset()
             );
@@ -353,7 +353,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDatasetRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getDataset = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getDataset(request), expectedError);
@@ -397,7 +397,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDatasetRequest', ['dataset', 'name']);
             request.dataset.name = defaultValue1;
-            const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.Dataset()
             );
@@ -425,7 +425,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDatasetRequest', ['dataset', 'name']);
             request.dataset.name = defaultValue1;
-            const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.Dataset()
             );
@@ -464,7 +464,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDatasetRequest', ['dataset', 'name']);
             request.dataset.name = defaultValue1;
-            const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateDataset = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateDataset(request), expectedError);
@@ -509,7 +509,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest', ['datasetVersion', 'name']);
             request.datasetVersion.name = defaultValue1;
-            const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DatasetVersion()
             );
@@ -537,7 +537,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest', ['datasetVersion', 'name']);
             request.datasetVersion.name = defaultValue1;
-            const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DatasetVersion()
             );
@@ -576,7 +576,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest', ['datasetVersion', 'name']);
             request.datasetVersion.name = defaultValue1;
-            const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateDatasetVersion = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateDatasetVersion(request), expectedError);
@@ -620,7 +620,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DatasetVersion()
             );
@@ -647,7 +647,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DatasetVersion()
             );
@@ -685,7 +685,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getDatasetVersion = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getDatasetVersion(request), expectedError);
@@ -728,7 +728,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetAnnotationSpecRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.AnnotationSpec()
             );
@@ -755,7 +755,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetAnnotationSpecRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.AnnotationSpec()
             );
@@ -793,7 +793,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetAnnotationSpecRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getAnnotationSpec = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getAnnotationSpec(request), expectedError);
@@ -836,7 +836,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -864,7 +864,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -905,7 +905,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createDataset = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createDataset(request), expectedError);
@@ -929,7 +929,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createDataset = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createDataset(request);
@@ -990,7 +990,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1018,7 +1018,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1059,7 +1059,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDataset = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteDataset(request), expectedError);
@@ -1083,7 +1083,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDataset = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteDataset(request);
@@ -1144,7 +1144,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1172,7 +1172,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1213,7 +1213,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.importData = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.importData(request), expectedError);
@@ -1237,7 +1237,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.importData = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.importData(request);
@@ -1298,7 +1298,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1326,7 +1326,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1367,7 +1367,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.exportData = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.exportData(request), expectedError);
@@ -1391,7 +1391,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportDataRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.exportData = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.exportData(request);
@@ -1452,7 +1452,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetVersionRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1480,7 +1480,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetVersionRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1521,7 +1521,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetVersionRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createDatasetVersion = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createDatasetVersion(request), expectedError);
@@ -1545,7 +1545,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDatasetVersionRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createDatasetVersion = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createDatasetVersion(request);
@@ -1606,7 +1606,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1634,7 +1634,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1675,7 +1675,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteDatasetVersion(request), expectedError);
@@ -1699,7 +1699,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteDatasetVersion(request);
@@ -1760,7 +1760,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1788,7 +1788,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1829,7 +1829,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.restoreDatasetVersion(request), expectedError);
@@ -1853,7 +1853,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.restoreDatasetVersion(request);
@@ -1914,7 +1914,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteSavedQueryRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1942,7 +1942,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteSavedQueryRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1983,7 +1983,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteSavedQueryRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteSavedQuery = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteSavedQuery(request), expectedError);
@@ -2007,7 +2007,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteSavedQueryRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteSavedQuery = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteSavedQuery(request);
@@ -2068,7 +2068,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -2096,7 +2096,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -2135,7 +2135,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listDatasets = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listDatasets(request), expectedError);
@@ -2159,7 +2159,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -2203,7 +2203,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listDatasetsStream(request);
@@ -2242,7 +2242,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -2278,7 +2278,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listDatasetsAsync(request);
@@ -2313,7 +2313,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetVersionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
@@ -2341,7 +2341,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetVersionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
@@ -2380,7 +2380,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetVersionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listDatasetVersions = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listDatasetVersions(request), expectedError);
@@ -2404,7 +2404,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetVersionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
@@ -2448,7 +2448,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetVersionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDatasetVersions.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listDatasetVersionsStream(request);
@@ -2487,7 +2487,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetVersionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DatasetVersion()),
@@ -2523,7 +2523,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDatasetVersionsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDatasetVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listDatasetVersionsAsync(request);
@@ -2558,7 +2558,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataItemsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -2586,7 +2586,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataItemsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -2625,7 +2625,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataItemsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listDataItems = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listDataItems(request), expectedError);
@@ -2649,7 +2649,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataItemsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -2693,7 +2693,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataItemsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDataItems.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listDataItemsStream(request);
@@ -2732,7 +2732,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataItemsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -2768,7 +2768,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDataItemsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDataItems.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listDataItemsAsync(request);
@@ -2803,7 +2803,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchDataItemsRequest', ['dataset']);
             request.dataset = defaultValue1;
-            const expectedHeaderRequestParams = `dataset=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
@@ -2831,7 +2831,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchDataItemsRequest', ['dataset']);
             request.dataset = defaultValue1;
-            const expectedHeaderRequestParams = `dataset=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
@@ -2870,7 +2870,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchDataItemsRequest', ['dataset']);
             request.dataset = defaultValue1;
-            const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.searchDataItems = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.searchDataItems(request), expectedError);
@@ -2894,7 +2894,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchDataItemsRequest', ['dataset']);
             request.dataset = defaultValue1;
-            const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
@@ -2938,7 +2938,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchDataItemsRequest', ['dataset']);
             request.dataset = defaultValue1;
-            const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchDataItems.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.searchDataItemsStream(request);
@@ -2977,7 +2977,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchDataItemsRequest', ['dataset']);
             request.dataset = defaultValue1;
-            const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItemView()),
@@ -3013,7 +3013,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchDataItemsRequest', ['dataset']);
             request.dataset = defaultValue1;
-            const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchDataItems.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.searchDataItemsAsync(request);
@@ -3048,7 +3048,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListSavedQueriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
@@ -3076,7 +3076,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListSavedQueriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
@@ -3115,7 +3115,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListSavedQueriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listSavedQueries = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listSavedQueries(request), expectedError);
@@ -3139,7 +3139,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListSavedQueriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
@@ -3183,7 +3183,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListSavedQueriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listSavedQueries.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listSavedQueriesStream(request);
@@ -3222,7 +3222,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListSavedQueriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.SavedQuery()),
@@ -3258,7 +3258,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListSavedQueriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listSavedQueries.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listSavedQueriesAsync(request);
@@ -3293,7 +3293,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
@@ -3321,7 +3321,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
@@ -3360,7 +3360,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listAnnotations = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listAnnotations(request), expectedError);
@@ -3384,7 +3384,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
@@ -3428,7 +3428,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listAnnotations.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listAnnotationsStream(request);
@@ -3467,7 +3467,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.Annotation()),
@@ -3503,7 +3503,7 @@ describe('v1.DatasetServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listAnnotations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listAnnotationsAsync(request);

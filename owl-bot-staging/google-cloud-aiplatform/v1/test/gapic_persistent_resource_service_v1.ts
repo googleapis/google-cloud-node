@@ -288,7 +288,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.PersistentResource()
             );
@@ -315,7 +315,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.PersistentResource()
             );
@@ -353,7 +353,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getPersistentResource = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getPersistentResource(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreatePersistentResourceRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -424,7 +424,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreatePersistentResourceRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -465,7 +465,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreatePersistentResourceRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createPersistentResource = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createPersistentResource(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreatePersistentResourceRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createPersistentResource = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createPersistentResource(request);
@@ -550,7 +550,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeletePersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -578,7 +578,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeletePersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -619,7 +619,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeletePersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deletePersistentResource = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deletePersistentResource(request), expectedError);
@@ -643,7 +643,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeletePersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deletePersistentResource = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deletePersistentResource(request);
@@ -705,7 +705,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdatePersistentResourceRequest', ['persistentResource', 'name']);
             request.persistentResource.name = defaultValue1;
-            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -734,7 +734,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdatePersistentResourceRequest', ['persistentResource', 'name']);
             request.persistentResource.name = defaultValue1;
-            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -776,7 +776,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdatePersistentResourceRequest', ['persistentResource', 'name']);
             request.persistentResource.name = defaultValue1;
-            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updatePersistentResource = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updatePersistentResource(request), expectedError);
@@ -801,7 +801,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdatePersistentResourceRequest', ['persistentResource', 'name']);
             request.persistentResource.name = defaultValue1;
-            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updatePersistentResource = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updatePersistentResource(request);
@@ -862,7 +862,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RebootPersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -890,7 +890,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RebootPersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -931,7 +931,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RebootPersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.rebootPersistentResource = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.rebootPersistentResource(request), expectedError);
@@ -955,7 +955,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RebootPersistentResourceRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.rebootPersistentResource = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.rebootPersistentResource(request);
@@ -1016,7 +1016,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListPersistentResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
@@ -1044,7 +1044,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListPersistentResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
@@ -1083,7 +1083,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListPersistentResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listPersistentResources = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listPersistentResources(request), expectedError);
@@ -1107,7 +1107,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListPersistentResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
@@ -1151,7 +1151,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListPersistentResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listPersistentResources.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listPersistentResourcesStream(request);
@@ -1190,7 +1190,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListPersistentResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.PersistentResource()),
@@ -1226,7 +1226,7 @@ describe('v1.PersistentResourceServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListPersistentResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listPersistentResources.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listPersistentResourcesAsync(request);

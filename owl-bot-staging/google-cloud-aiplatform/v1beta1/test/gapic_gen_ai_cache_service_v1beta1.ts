@@ -272,7 +272,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.CachedContent()
             );
@@ -299,7 +299,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.CachedContent()
             );
@@ -337,7 +337,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createCachedContent = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createCachedContent(request), expectedError);
@@ -380,7 +380,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetCachedContentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.CachedContent()
             );
@@ -407,7 +407,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetCachedContentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.CachedContent()
             );
@@ -445,7 +445,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetCachedContentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getCachedContent = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getCachedContent(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest', ['cachedContent', 'name']);
             request.cachedContent.name = defaultValue1;
-            const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `cached_content.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.CachedContent()
             );
@@ -517,7 +517,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest', ['cachedContent', 'name']);
             request.cachedContent.name = defaultValue1;
-            const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `cached_content.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.CachedContent()
             );
@@ -556,7 +556,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest', ['cachedContent', 'name']);
             request.cachedContent.name = defaultValue1;
-            const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `cached_content.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateCachedContent = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateCachedContent(request), expectedError);
@@ -600,7 +600,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -627,7 +627,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.protobuf.Empty()
             );
@@ -665,7 +665,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteCachedContent = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.deleteCachedContent(request), expectedError);
@@ -708,7 +708,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
@@ -736,7 +736,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
@@ -775,7 +775,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listCachedContents = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listCachedContents(request), expectedError);
@@ -799,7 +799,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
@@ -843,7 +843,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listCachedContents.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listCachedContentsStream(request);
@@ -882,7 +882,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.CachedContent()),
@@ -918,7 +918,7 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listCachedContents.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listCachedContentsAsync(request);

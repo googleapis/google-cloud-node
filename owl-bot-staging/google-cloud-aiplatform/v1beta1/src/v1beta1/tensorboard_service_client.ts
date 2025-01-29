@@ -515,7 +515,7 @@ export class TensorboardServiceClient {
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             if (methodName in this.descriptors.stream) {
-              const stream = new PassThrough();
+              const stream = new PassThrough({objectMode: true});
               setImmediate(() => {
                 stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
               });
@@ -2700,7 +2700,7 @@ export class TensorboardServiceClient {
   }
 
 /**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * Equivalent to `listTensorboards`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
@@ -2921,7 +2921,7 @@ export class TensorboardServiceClient {
   }
 
 /**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * Equivalent to `listTensorboardExperiments`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
@@ -3142,7 +3142,7 @@ export class TensorboardServiceClient {
   }
 
 /**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * Equivalent to `listTensorboardRuns`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
@@ -3363,7 +3363,7 @@ export class TensorboardServiceClient {
   }
 
 /**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * Equivalent to `listTensorboardTimeSeries`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
@@ -3584,7 +3584,7 @@ export class TensorboardServiceClient {
   }
 
 /**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * Equivalent to `exportTensorboardTimeSeriesData`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.tensorboardTimeSeries
@@ -3966,6 +3966,13 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+    });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4002,6 +4009,13 @@ export class TensorboardServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+    });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4050,6 +4064,13 @@ export class TensorboardServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+    });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4093,6 +4114,13 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+    });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

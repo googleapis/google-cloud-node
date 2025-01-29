@@ -300,7 +300,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Tensorboard()
             );
@@ -327,7 +327,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Tensorboard()
             );
@@ -365,7 +365,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getTensorboard = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getTensorboard(request), expectedError);
@@ -408,7 +408,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardUsageRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardUsageResponse()
             );
@@ -435,7 +435,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardUsageRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardUsageResponse()
             );
@@ -473,7 +473,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardUsageRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.readTensorboardUsage = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.readTensorboardUsage(request), expectedError);
@@ -516,7 +516,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeResponse()
             );
@@ -543,7 +543,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeResponse()
             );
@@ -581,7 +581,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.readTensorboardSize = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.readTensorboardSize(request), expectedError);
@@ -624,7 +624,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
             );
@@ -651,7 +651,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
             );
@@ -689,7 +689,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createTensorboardExperiment = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createTensorboardExperiment(request), expectedError);
@@ -732,7 +732,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
             );
@@ -759,7 +759,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
             );
@@ -797,7 +797,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getTensorboardExperiment = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getTensorboardExperiment(request), expectedError);
@@ -841,7 +841,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
             request.tensorboardExperiment.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
             );
@@ -869,7 +869,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
             request.tensorboardExperiment.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
             );
@@ -908,7 +908,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
             request.tensorboardExperiment.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateTensorboardExperiment = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateTensorboardExperiment(request), expectedError);
@@ -952,7 +952,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
             );
@@ -979,7 +979,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
             );
@@ -1017,7 +1017,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createTensorboardRun = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createTensorboardRun(request), expectedError);
@@ -1060,7 +1060,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsResponse()
             );
@@ -1087,7 +1087,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsResponse()
             );
@@ -1125,7 +1125,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchCreateTensorboardRuns = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.batchCreateTensorboardRuns(request), expectedError);
@@ -1168,7 +1168,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
             );
@@ -1195,7 +1195,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
             );
@@ -1233,7 +1233,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getTensorboardRun = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getTensorboardRun(request), expectedError);
@@ -1277,7 +1277,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
             request.tensorboardRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
             );
@@ -1305,7 +1305,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
             request.tensorboardRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
             );
@@ -1344,7 +1344,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
             request.tensorboardRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateTensorboardRun = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateTensorboardRun(request), expectedError);
@@ -1388,7 +1388,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesResponse()
             );
@@ -1415,7 +1415,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesResponse()
             );
@@ -1453,7 +1453,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchCreateTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.batchCreateTensorboardTimeSeries(request), expectedError);
@@ -1496,7 +1496,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
             );
@@ -1523,7 +1523,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
             );
@@ -1561,7 +1561,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createTensorboardTimeSeries(request), expectedError);
@@ -1604,7 +1604,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
             );
@@ -1631,7 +1631,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
             );
@@ -1669,7 +1669,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getTensorboardTimeSeries(request), expectedError);
@@ -1713,7 +1713,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
             request.tensorboardTimeSeries.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
             );
@@ -1741,7 +1741,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
             request.tensorboardTimeSeries.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
             );
@@ -1780,7 +1780,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
             request.tensorboardTimeSeries.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateTensorboardTimeSeries(request), expectedError);
@@ -1824,7 +1824,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataResponse()
             );
@@ -1851,7 +1851,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataResponse()
             );
@@ -1889,7 +1889,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchReadTensorboardTimeSeriesData = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.batchReadTensorboardTimeSeriesData(request), expectedError);
@@ -1932,7 +1932,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataResponse()
             );
@@ -1959,7 +1959,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataResponse()
             );
@@ -1997,7 +1997,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.readTensorboardTimeSeriesData = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.readTensorboardTimeSeriesData(request), expectedError);
@@ -2040,7 +2040,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
             request.tensorboardExperiment = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataResponse()
             );
@@ -2067,7 +2067,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
             request.tensorboardExperiment = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataResponse()
             );
@@ -2105,7 +2105,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
             request.tensorboardExperiment = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.writeTensorboardExperimentData = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.writeTensorboardExperimentData(request), expectedError);
@@ -2148,7 +2148,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
             request.tensorboardRun = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataResponse()
             );
@@ -2175,7 +2175,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
             request.tensorboardRun = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataResponse()
             );
@@ -2213,7 +2213,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
             request.tensorboardRun = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.writeTensorboardRunData = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.writeTensorboardRunData(request), expectedError);
@@ -2256,7 +2256,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2284,7 +2284,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2325,7 +2325,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createTensorboard = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createTensorboard(request), expectedError);
@@ -2349,7 +2349,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createTensorboard = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createTensorboard(request);
@@ -2411,7 +2411,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest', ['tensorboard', 'name']);
             request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2440,7 +2440,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest', ['tensorboard', 'name']);
             request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2482,7 +2482,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest', ['tensorboard', 'name']);
             request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateTensorboard = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateTensorboard(request), expectedError);
@@ -2507,7 +2507,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest', ['tensorboard', 'name']);
             request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateTensorboard = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateTensorboard(request);
@@ -2568,7 +2568,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2596,7 +2596,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2637,7 +2637,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboard = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteTensorboard(request), expectedError);
@@ -2661,7 +2661,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboard = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteTensorboard(request);
@@ -2722,7 +2722,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2750,7 +2750,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2791,7 +2791,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteTensorboardExperiment(request), expectedError);
@@ -2815,7 +2815,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteTensorboardExperiment(request);
@@ -2876,7 +2876,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2904,7 +2904,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2945,7 +2945,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteTensorboardRun(request), expectedError);
@@ -2969,7 +2969,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteTensorboardRun(request);
@@ -3030,7 +3030,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3058,7 +3058,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -3099,7 +3099,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteTensorboardTimeSeries(request), expectedError);
@@ -3123,7 +3123,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteTensorboardTimeSeries(request);
@@ -3184,7 +3184,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest', ['timeSeries']);
             request.timeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataResponse()
             );
@@ -3217,7 +3217,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest', ['timeSeries']);
             request.timeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataResponse()
             );
@@ -3253,7 +3253,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest', ['timeSeries']);
             request.timeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.readTensorboardBlobData = stubServerStreamingCall(undefined, expectedError);
             const stream = client.readTensorboardBlobData(request);
@@ -3320,7 +3320,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
@@ -3348,7 +3348,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
@@ -3387,7 +3387,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listTensorboards = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listTensorboards(request), expectedError);
@@ -3411,7 +3411,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
@@ -3455,7 +3455,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboards.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listTensorboardsStream(request);
@@ -3494,7 +3494,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Tensorboard()),
@@ -3530,7 +3530,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboards.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listTensorboardsAsync(request);
@@ -3565,7 +3565,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
@@ -3593,7 +3593,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
@@ -3632,7 +3632,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listTensorboardExperiments = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listTensorboardExperiments(request), expectedError);
@@ -3656,7 +3656,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
@@ -3700,7 +3700,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboardExperiments.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listTensorboardExperimentsStream(request);
@@ -3739,7 +3739,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()),
@@ -3775,7 +3775,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboardExperiments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listTensorboardExperimentsAsync(request);
@@ -3810,7 +3810,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
@@ -3838,7 +3838,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
@@ -3877,7 +3877,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listTensorboardRuns = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listTensorboardRuns(request), expectedError);
@@ -3901,7 +3901,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
@@ -3945,7 +3945,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboardRuns.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listTensorboardRunsStream(request);
@@ -3984,7 +3984,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()),
@@ -4020,7 +4020,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboardRuns.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listTensorboardRunsAsync(request);
@@ -4055,7 +4055,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
@@ -4083,7 +4083,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
@@ -4122,7 +4122,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listTensorboardTimeSeries(request), expectedError);
@@ -4146,7 +4146,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
@@ -4190,7 +4190,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboardTimeSeries.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listTensorboardTimeSeriesStream(request);
@@ -4229,7 +4229,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()),
@@ -4265,7 +4265,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listTensorboardTimeSeries.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listTensorboardTimeSeriesAsync(request);
@@ -4300,7 +4300,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
@@ -4328,7 +4328,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
@@ -4367,7 +4367,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.exportTensorboardTimeSeriesData = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.exportTensorboardTimeSeriesData(request), expectedError);
@@ -4391,7 +4391,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
@@ -4435,7 +4435,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.exportTensorboardTimeSeriesData.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.exportTensorboardTimeSeriesDataStream(request);
@@ -4474,7 +4474,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()),
@@ -4510,7 +4510,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1}`;
+            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.exportTensorboardTimeSeriesDataAsync(request);

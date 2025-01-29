@@ -288,7 +288,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetSpecialistPoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()
             );
@@ -315,7 +315,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetSpecialistPoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()
             );
@@ -353,7 +353,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetSpecialistPoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getSpecialistPool = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getSpecialistPool(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -424,7 +424,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -465,7 +465,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createSpecialistPool = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createSpecialistPool(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createSpecialistPool = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createSpecialistPool(request);
@@ -550,7 +550,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -578,7 +578,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -619,7 +619,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteSpecialistPool = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteSpecialistPool(request), expectedError);
@@ -643,7 +643,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteSpecialistPool = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteSpecialistPool(request);
@@ -705,7 +705,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest', ['specialistPool', 'name']);
             request.specialistPool.name = defaultValue1;
-            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -734,7 +734,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest', ['specialistPool', 'name']);
             request.specialistPool.name = defaultValue1;
-            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -776,7 +776,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest', ['specialistPool', 'name']);
             request.specialistPool.name = defaultValue1;
-            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateSpecialistPool = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateSpecialistPool(request), expectedError);
@@ -801,7 +801,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest', ['specialistPool', 'name']);
             request.specialistPool.name = defaultValue1;
-            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateSpecialistPool = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateSpecialistPool(request);
@@ -862,7 +862,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
@@ -890,7 +890,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
@@ -929,7 +929,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listSpecialistPools = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listSpecialistPools(request), expectedError);
@@ -953,7 +953,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
@@ -997,7 +997,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listSpecialistPools.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listSpecialistPoolsStream(request);
@@ -1036,7 +1036,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()),
@@ -1072,7 +1072,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listSpecialistPools.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listSpecialistPoolsAsync(request);

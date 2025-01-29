@@ -288,7 +288,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Featurestore()
             );
@@ -315,7 +315,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Featurestore()
             );
@@ -353,7 +353,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getFeaturestore = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getFeaturestore(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetEntityTypeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.EntityType()
             );
@@ -423,7 +423,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetEntityTypeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.EntityType()
             );
@@ -461,7 +461,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetEntityTypeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getEntityType = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getEntityType(request), expectedError);
@@ -505,7 +505,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEntityTypeRequest', ['entityType', 'name']);
             request.entityType.name = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.EntityType()
             );
@@ -533,7 +533,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEntityTypeRequest', ['entityType', 'name']);
             request.entityType.name = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.EntityType()
             );
@@ -572,7 +572,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateEntityTypeRequest', ['entityType', 'name']);
             request.entityType.name = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateEntityType = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateEntityType(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeatureRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Feature()
             );
@@ -643,7 +643,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeatureRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Feature()
             );
@@ -681,7 +681,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeatureRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getFeature = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getFeature(request), expectedError);
@@ -725,7 +725,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeatureRequest', ['feature', 'name']);
             request.feature.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Feature()
             );
@@ -753,7 +753,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeatureRequest', ['feature', 'name']);
             request.feature.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.Feature()
             );
@@ -792,7 +792,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeatureRequest', ['feature', 'name']);
             request.feature.name = defaultValue1;
-            const expectedHeaderRequestParams = `feature.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `feature.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateFeature = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateFeature(request), expectedError);
@@ -836,7 +836,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -864,7 +864,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -905,7 +905,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeaturestore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createFeaturestore(request), expectedError);
@@ -929,7 +929,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeaturestore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createFeaturestore(request);
@@ -991,7 +991,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest', ['featurestore', 'name']);
             request.featurestore.name = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1020,7 +1020,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest', ['featurestore', 'name']);
             request.featurestore.name = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1062,7 +1062,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest', ['featurestore', 'name']);
             request.featurestore.name = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateFeaturestore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateFeaturestore(request), expectedError);
@@ -1087,7 +1087,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest', ['featurestore', 'name']);
             request.featurestore.name = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateFeaturestore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateFeaturestore(request);
@@ -1148,7 +1148,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1176,7 +1176,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1217,7 +1217,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeaturestore = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteFeaturestore(request), expectedError);
@@ -1241,7 +1241,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeaturestore = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteFeaturestore(request);
@@ -1302,7 +1302,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1330,7 +1330,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1371,7 +1371,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createEntityType = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createEntityType(request), expectedError);
@@ -1395,7 +1395,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createEntityType = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createEntityType(request);
@@ -1456,7 +1456,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1484,7 +1484,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1525,7 +1525,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteEntityType = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteEntityType(request), expectedError);
@@ -1549,7 +1549,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteEntityType = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteEntityType(request);
@@ -1610,7 +1610,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeatureRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1638,7 +1638,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeatureRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1679,7 +1679,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeatureRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeature = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createFeature(request), expectedError);
@@ -1703,7 +1703,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateFeatureRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createFeature = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createFeature(request);
@@ -1764,7 +1764,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1792,7 +1792,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1833,7 +1833,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchCreateFeatures = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.batchCreateFeatures(request), expectedError);
@@ -1857,7 +1857,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchCreateFeatures = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.batchCreateFeatures(request);
@@ -1918,7 +1918,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1946,7 +1946,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1987,7 +1987,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeature = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteFeature(request), expectedError);
@@ -2011,7 +2011,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeature = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteFeature(request);
@@ -2072,7 +2072,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2100,7 +2100,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2141,7 +2141,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.importFeatureValues = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.importFeatureValues(request), expectedError);
@@ -2165,7 +2165,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.importFeatureValues = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.importFeatureValues(request);
@@ -2226,7 +2226,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest', ['featurestore']);
             request.featurestore = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2254,7 +2254,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest', ['featurestore']);
             request.featurestore = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2295,7 +2295,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest', ['featurestore']);
             request.featurestore = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchReadFeatureValues = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.batchReadFeatureValues(request), expectedError);
@@ -2319,7 +2319,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest', ['featurestore']);
             request.featurestore = defaultValue1;
-            const expectedHeaderRequestParams = `featurestore=${defaultValue1}`;
+            const expectedHeaderRequestParams = `featurestore=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchReadFeatureValues = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.batchReadFeatureValues(request);
@@ -2380,7 +2380,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2408,7 +2408,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2449,7 +2449,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.exportFeatureValues = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.exportFeatureValues(request), expectedError);
@@ -2473,7 +2473,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.exportFeatureValues = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.exportFeatureValues(request);
@@ -2534,7 +2534,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2562,7 +2562,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2603,7 +2603,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeatureValues = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteFeatureValues(request), expectedError);
@@ -2627,7 +2627,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
-            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteFeatureValues = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteFeatureValues(request);
@@ -2688,7 +2688,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
@@ -2716,7 +2716,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
@@ -2755,7 +2755,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listFeaturestores = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listFeaturestores(request), expectedError);
@@ -2779,7 +2779,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
@@ -2823,7 +2823,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeaturestores.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listFeaturestoresStream(request);
@@ -2862,7 +2862,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Featurestore()),
@@ -2898,7 +2898,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeaturestores.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listFeaturestoresAsync(request);
@@ -2933,7 +2933,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
@@ -2961,7 +2961,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
@@ -3000,7 +3000,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listEntityTypes = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listEntityTypes(request), expectedError);
@@ -3024,7 +3024,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
@@ -3068,7 +3068,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listEntityTypes.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listEntityTypesStream(request);
@@ -3107,7 +3107,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.EntityType()),
@@ -3143,7 +3143,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listEntityTypes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listEntityTypesAsync(request);
@@ -3178,7 +3178,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3206,7 +3206,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3245,7 +3245,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listFeatures = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listFeatures(request), expectedError);
@@ -3269,7 +3269,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3313,7 +3313,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatures.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listFeaturesStream(request);
@@ -3352,7 +3352,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3388,7 +3388,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ListFeaturesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listFeatures.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listFeaturesAsync(request);
@@ -3423,7 +3423,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3451,7 +3451,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3490,7 +3490,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.searchFeatures = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.searchFeatures(request), expectedError);
@@ -3514,7 +3514,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3558,7 +3558,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchFeatures.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.searchFeaturesStream(request);
@@ -3597,7 +3597,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1beta1.Feature()),
@@ -3633,7 +3633,7 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchFeatures.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.searchFeaturesAsync(request);

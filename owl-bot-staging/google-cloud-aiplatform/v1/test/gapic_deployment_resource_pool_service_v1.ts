@@ -288,7 +288,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
             );
@@ -315,7 +315,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()
             );
@@ -353,7 +353,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getDeploymentResourcePool = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getDeploymentResourcePool(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -424,7 +424,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -465,7 +465,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createDeploymentResourcePool = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createDeploymentResourcePool(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createDeploymentResourcePool = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createDeploymentResourcePool(request);
@@ -551,7 +551,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolRequest', ['deploymentResourcePool', 'name']);
             request.deploymentResourcePool.name = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -580,7 +580,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolRequest', ['deploymentResourcePool', 'name']);
             request.deploymentResourcePool.name = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -622,7 +622,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolRequest', ['deploymentResourcePool', 'name']);
             request.deploymentResourcePool.name = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateDeploymentResourcePool = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateDeploymentResourcePool(request), expectedError);
@@ -647,7 +647,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolRequest', ['deploymentResourcePool', 'name']);
             request.deploymentResourcePool.name = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateDeploymentResourcePool = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateDeploymentResourcePool(request);
@@ -708,7 +708,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -736,7 +736,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -777,7 +777,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDeploymentResourcePool = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteDeploymentResourcePool(request), expectedError);
@@ -801,7 +801,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteDeploymentResourcePool = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteDeploymentResourcePool(request);
@@ -862,7 +862,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
@@ -890,7 +890,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
@@ -929,7 +929,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listDeploymentResourcePools = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listDeploymentResourcePools(request), expectedError);
@@ -953,7 +953,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
@@ -997,7 +997,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDeploymentResourcePools.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listDeploymentResourcePoolsStream(request);
@@ -1036,7 +1036,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeploymentResourcePool()),
@@ -1072,7 +1072,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListDeploymentResourcePoolsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listDeploymentResourcePools.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listDeploymentResourcePoolsAsync(request);
@@ -1107,7 +1107,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryDeployedModelsRequest', ['deploymentResourcePool']);
             request.deploymentResourcePool = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
@@ -1135,7 +1135,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryDeployedModelsRequest', ['deploymentResourcePool']);
             request.deploymentResourcePool = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
@@ -1174,7 +1174,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryDeployedModelsRequest', ['deploymentResourcePool']);
             request.deploymentResourcePool = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.queryDeployedModels = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.queryDeployedModels(request), expectedError);
@@ -1198,7 +1198,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryDeployedModelsRequest', ['deploymentResourcePool']);
             request.deploymentResourcePool = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
@@ -1242,7 +1242,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryDeployedModelsRequest', ['deploymentResourcePool']);
             request.deploymentResourcePool = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.queryDeployedModels.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.queryDeployedModelsStream(request);
@@ -1281,7 +1281,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryDeployedModelsRequest', ['deploymentResourcePool']);
             request.deploymentResourcePool = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.DeployedModel()),
@@ -1317,7 +1317,7 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryDeployedModelsRequest', ['deploymentResourcePool']);
             request.deploymentResourcePool = defaultValue1;
-            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
+            const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.queryDeployedModels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.queryDeployedModelsAsync(request);

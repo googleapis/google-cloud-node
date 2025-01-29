@@ -245,7 +245,7 @@ describe('v1.LlmUtilityServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CountTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CountTokensResponse()
             );
@@ -272,7 +272,7 @@ describe('v1.LlmUtilityServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CountTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CountTokensResponse()
             );
@@ -310,7 +310,7 @@ describe('v1.LlmUtilityServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CountTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.countTokens = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.countTokens(request), expectedError);
@@ -353,7 +353,7 @@ describe('v1.LlmUtilityServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ComputeTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ComputeTokensResponse()
             );
@@ -380,7 +380,7 @@ describe('v1.LlmUtilityServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ComputeTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ComputeTokensResponse()
             );
@@ -418,7 +418,7 @@ describe('v1.LlmUtilityServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ComputeTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
-            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.computeTokens = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.computeTokens(request), expectedError);

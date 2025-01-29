@@ -288,7 +288,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchMigrateResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -316,7 +316,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchMigrateResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -357,7 +357,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchMigrateResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchMigrateResources = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.batchMigrateResources(request), expectedError);
@@ -381,7 +381,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchMigrateResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.batchMigrateResources = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.batchMigrateResources(request);
@@ -442,7 +442,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchMigratableResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
@@ -470,7 +470,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchMigratableResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
@@ -509,7 +509,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchMigratableResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.searchMigratableResources = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.searchMigratableResources(request), expectedError);
@@ -533,7 +533,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchMigratableResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
@@ -577,7 +577,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchMigratableResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchMigratableResources.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.searchMigratableResourcesStream(request);
@@ -616,7 +616,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchMigratableResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.MigratableResource()),
@@ -652,7 +652,7 @@ describe('v1.MigrationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchMigratableResourcesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.searchMigratableResources.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.searchMigratableResourcesAsync(request);

@@ -288,7 +288,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagCorpusRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.RagCorpus()
             );
@@ -315,7 +315,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagCorpusRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.RagCorpus()
             );
@@ -353,7 +353,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagCorpusRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getRagCorpus = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getRagCorpus(request), expectedError);
@@ -396,7 +396,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UploadRagFileRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.UploadRagFileResponse()
             );
@@ -423,7 +423,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UploadRagFileRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.UploadRagFileResponse()
             );
@@ -461,7 +461,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UploadRagFileRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.uploadRagFile = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.uploadRagFile(request), expectedError);
@@ -504,7 +504,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagFileRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.RagFile()
             );
@@ -531,7 +531,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagFileRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.RagFile()
             );
@@ -569,7 +569,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagFileRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getRagFile = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getRagFile(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateRagCorpusRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -640,7 +640,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateRagCorpusRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -681,7 +681,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateRagCorpusRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createRagCorpus = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createRagCorpus(request), expectedError);
@@ -705,7 +705,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateRagCorpusRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createRagCorpus = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createRagCorpus(request);
@@ -767,7 +767,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagCorpusRequest', ['ragCorpus', 'name']);
             request.ragCorpus.name = defaultValue1;
-            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -796,7 +796,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagCorpusRequest', ['ragCorpus', 'name']);
             request.ragCorpus.name = defaultValue1;
-            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -838,7 +838,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagCorpusRequest', ['ragCorpus', 'name']);
             request.ragCorpus.name = defaultValue1;
-            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateRagCorpus = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.updateRagCorpus(request), expectedError);
@@ -863,7 +863,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagCorpusRequest', ['ragCorpus', 'name']);
             request.ragCorpus.name = defaultValue1;
-            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateRagCorpus = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.updateRagCorpus(request);
@@ -924,7 +924,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagCorpusRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -952,7 +952,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagCorpusRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -993,7 +993,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagCorpusRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteRagCorpus = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteRagCorpus(request), expectedError);
@@ -1017,7 +1017,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagCorpusRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteRagCorpus = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteRagCorpus(request);
@@ -1078,7 +1078,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1106,7 +1106,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1147,7 +1147,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.importRagFiles = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.importRagFiles(request), expectedError);
@@ -1171,7 +1171,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.importRagFiles = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.importRagFiles(request);
@@ -1232,7 +1232,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagFileRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1260,7 +1260,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagFileRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1301,7 +1301,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagFileRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteRagFile = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteRagFile(request), expectedError);
@@ -1325,7 +1325,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteRagFileRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteRagFile = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteRagFile(request);
@@ -1386,7 +1386,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagCorporaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
@@ -1414,7 +1414,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagCorporaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
@@ -1453,7 +1453,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagCorporaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listRagCorpora = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listRagCorpora(request), expectedError);
@@ -1477,7 +1477,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagCorporaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
@@ -1521,7 +1521,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagCorporaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listRagCorpora.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listRagCorporaStream(request);
@@ -1560,7 +1560,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagCorporaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagCorpus()),
@@ -1596,7 +1596,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagCorporaRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listRagCorpora.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listRagCorporaAsync(request);
@@ -1631,7 +1631,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
@@ -1659,7 +1659,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
@@ -1698,7 +1698,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listRagFiles = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listRagFiles(request), expectedError);
@@ -1722,7 +1722,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
@@ -1766,7 +1766,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listRagFiles.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listRagFilesStream(request);
@@ -1805,7 +1805,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.RagFile()),
@@ -1841,7 +1841,7 @@ describe('v1.VertexRagDataServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListRagFilesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listRagFiles.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listRagFilesAsync(request);

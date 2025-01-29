@@ -288,7 +288,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()
             );
@@ -315,7 +315,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()
             );
@@ -353,7 +353,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getNotebookRuntimeTemplate = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getNotebookRuntimeTemplate(request), expectedError);
@@ -397,7 +397,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
             request.notebookRuntimeTemplate.name = defaultValue1;
-            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()
             );
@@ -425,7 +425,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
             request.notebookRuntimeTemplate.name = defaultValue1;
-            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()
             );
@@ -464,7 +464,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
             request.notebookRuntimeTemplate.name = defaultValue1;
-            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.updateNotebookRuntimeTemplate = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.updateNotebookRuntimeTemplate(request), expectedError);
@@ -508,7 +508,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookRuntime()
             );
@@ -535,7 +535,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookRuntime()
             );
@@ -573,7 +573,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getNotebookRuntime = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getNotebookRuntime(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()
             );
@@ -643,7 +643,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()
             );
@@ -681,7 +681,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getNotebookExecutionJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.getNotebookExecutionJob(request), expectedError);
@@ -724,7 +724,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -752,7 +752,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -793,7 +793,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createNotebookRuntimeTemplate = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createNotebookRuntimeTemplate(request), expectedError);
@@ -817,7 +817,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createNotebookRuntimeTemplate = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createNotebookRuntimeTemplate(request);
@@ -878,7 +878,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -906,7 +906,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -947,7 +947,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNotebookRuntimeTemplate = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteNotebookRuntimeTemplate(request), expectedError);
@@ -971,7 +971,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNotebookRuntimeTemplate = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteNotebookRuntimeTemplate(request);
@@ -1032,7 +1032,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.AssignNotebookRuntimeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1060,7 +1060,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.AssignNotebookRuntimeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1101,7 +1101,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.AssignNotebookRuntimeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.assignNotebookRuntime = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.assignNotebookRuntime(request), expectedError);
@@ -1125,7 +1125,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.AssignNotebookRuntimeRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.assignNotebookRuntime = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.assignNotebookRuntime(request);
@@ -1186,7 +1186,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1214,7 +1214,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1255,7 +1255,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNotebookRuntime = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteNotebookRuntime(request), expectedError);
@@ -1279,7 +1279,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNotebookRuntime = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteNotebookRuntime(request);
@@ -1340,7 +1340,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1368,7 +1368,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1409,7 +1409,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.upgradeNotebookRuntime = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.upgradeNotebookRuntime(request), expectedError);
@@ -1433,7 +1433,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.upgradeNotebookRuntime = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.upgradeNotebookRuntime(request);
@@ -1494,7 +1494,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StartNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1522,7 +1522,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StartNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1563,7 +1563,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StartNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.startNotebookRuntime = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.startNotebookRuntime(request), expectedError);
@@ -1587,7 +1587,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StartNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.startNotebookRuntime = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.startNotebookRuntime(request);
@@ -1648,7 +1648,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StopNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1676,7 +1676,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StopNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1717,7 +1717,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StopNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.stopNotebookRuntime = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.stopNotebookRuntime(request), expectedError);
@@ -1741,7 +1741,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StopNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.stopNotebookRuntime = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.stopNotebookRuntime(request);
@@ -1802,7 +1802,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookExecutionJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1830,7 +1830,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookExecutionJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1871,7 +1871,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookExecutionJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createNotebookExecutionJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.createNotebookExecutionJob(request), expectedError);
@@ -1895,7 +1895,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNotebookExecutionJobRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.createNotebookExecutionJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.createNotebookExecutionJob(request);
@@ -1956,7 +1956,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -1984,7 +1984,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
@@ -2025,7 +2025,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNotebookExecutionJob = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.deleteNotebookExecutionJob(request), expectedError);
@@ -2049,7 +2049,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1}`;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.deleteNotebookExecutionJob = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.deleteNotebookExecutionJob(request);
@@ -2110,7 +2110,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
@@ -2138,7 +2138,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
@@ -2177,7 +2177,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listNotebookRuntimeTemplates = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listNotebookRuntimeTemplates(request), expectedError);
@@ -2201,7 +2201,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
@@ -2245,7 +2245,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNotebookRuntimeTemplates.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listNotebookRuntimeTemplatesStream(request);
@@ -2284,7 +2284,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()),
@@ -2320,7 +2320,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNotebookRuntimeTemplates.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listNotebookRuntimeTemplatesAsync(request);
@@ -2355,7 +2355,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
@@ -2383,7 +2383,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
@@ -2422,7 +2422,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listNotebookRuntimes = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listNotebookRuntimes(request), expectedError);
@@ -2446,7 +2446,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
@@ -2490,7 +2490,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNotebookRuntimes.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listNotebookRuntimesStream(request);
@@ -2529,7 +2529,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookRuntime()),
@@ -2565,7 +2565,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookRuntimesRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNotebookRuntimes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listNotebookRuntimesAsync(request);
@@ -2600,7 +2600,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
@@ -2628,7 +2628,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;const expectedResponse = [
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
@@ -2667,7 +2667,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.listNotebookExecutionJobs = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.listNotebookExecutionJobs(request), expectedError);
@@ -2691,7 +2691,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
@@ -2735,7 +2735,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNotebookExecutionJobs.createStream = stubPageStreamingCall(undefined, expectedError);
             const stream = client.listNotebookExecutionJobsStream(request);
@@ -2774,7 +2774,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
               generateSampleMessage(new protos.google.cloud.aiplatform.v1.NotebookExecutionJob()),
@@ -2810,7 +2810,7 @@ describe('v1.NotebookServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest', ['parent']);
             request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.descriptors.page.listNotebookExecutionJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
             const iterable = client.listNotebookExecutionJobsAsync(request);

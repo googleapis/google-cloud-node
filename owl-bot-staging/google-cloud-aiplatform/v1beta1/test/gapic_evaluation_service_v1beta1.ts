@@ -245,7 +245,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse()
             );
@@ -272,7 +272,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse()
             );
@@ -310,7 +310,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest', ['location']);
             request.location = defaultValue1;
-            const expectedHeaderRequestParams = `location=${defaultValue1}`;
+            const expectedHeaderRequestParams = `location=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.evaluateInstances = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.evaluateInstances(request), expectedError);
