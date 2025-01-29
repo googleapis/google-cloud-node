@@ -372,7 +372,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordResponse()
       );
@@ -405,7 +405,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordResponse()
       );
@@ -453,7 +453,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetAdminPassword = stubSimpleCall(
         undefined,
@@ -507,7 +507,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.Domain()
       );
@@ -539,7 +539,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.Domain()
       );
@@ -587,7 +587,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDomain = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getDomain(request), expectedError);
@@ -638,7 +638,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -672,7 +672,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -727,7 +727,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMicrosoftAdDomain = stubLongRunningCall(
         undefined,
@@ -762,7 +762,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMicrosoftAdDomain = stubLongRunningCall(
         undefined,
@@ -843,7 +843,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -877,7 +877,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -933,7 +933,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDomain = stubLongRunningCall(
         undefined,
@@ -966,7 +966,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDomain = stubLongRunningCall(
         undefined,
@@ -1042,7 +1042,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1075,7 +1075,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1130,7 +1130,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDomain = stubLongRunningCall(
         undefined,
@@ -1162,7 +1162,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDomain = stubLongRunningCall(
         undefined,
@@ -1238,7 +1238,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1271,7 +1271,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1326,7 +1326,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachTrust = stubLongRunningCall(
         undefined,
@@ -1358,7 +1358,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachTrust = stubLongRunningCall(
         undefined,
@@ -1434,7 +1434,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1468,7 +1468,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1523,7 +1523,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconfigureTrust = stubLongRunningCall(
         undefined,
@@ -1555,7 +1555,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconfigureTrust = stubLongRunningCall(
         undefined,
@@ -1634,7 +1634,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1667,7 +1667,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1722,7 +1722,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachTrust = stubLongRunningCall(
         undefined,
@@ -1754,7 +1754,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachTrust = stubLongRunningCall(
         undefined,
@@ -1830,7 +1830,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1864,7 +1864,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1919,7 +1919,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateTrust = stubLongRunningCall(
         undefined,
@@ -1951,7 +1951,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateTrust = stubLongRunningCall(
         undefined,
@@ -2030,7 +2030,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1.Domain()
@@ -2070,7 +2070,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1.Domain()
@@ -2126,7 +2126,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDomains = stubSimpleCall(
         undefined,
@@ -2158,7 +2158,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1.Domain()
@@ -2219,7 +2219,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDomains.createStream = stubPageStreamingCall(
         undefined,
@@ -2271,7 +2271,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1.Domain()
@@ -2321,7 +2321,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDomains.asyncIterate = stubAsyncIterationCall(
         undefined,
