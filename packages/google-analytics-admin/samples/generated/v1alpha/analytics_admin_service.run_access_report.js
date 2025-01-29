@@ -33,9 +33,9 @@ function main() {
    *  level. If requested at the account level, Data Access Reports include all
    *  access for all properties under that account.
    *  To request at the property level, entity should be for example
-   *  'properties/123' if "123" is your GA4 property ID. To request at the
-   *  account level, entity should be for example 'accounts/1234' if "1234" is
-   *  your GA4 Account ID.
+   *  'properties/123' if "123" is your Google Analytics property ID. To request
+   *  at the account level, entity should be for example 'accounts/1234' if
+   *  "1234" is your Google Analytics Account ID.
    */
   // const entity = 'abc123'
   /**
