@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -360,7 +360,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.Schema()
       );
@@ -391,7 +391,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.Schema()
       );
@@ -438,7 +438,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSchema = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSchema(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -519,7 +519,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -573,7 +573,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSchema = stubLongRunningCall(
         undefined,
@@ -604,7 +604,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSchema = stubLongRunningCall(
         undefined,
@@ -678,7 +678,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -711,7 +711,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -766,7 +766,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSchema = stubLongRunningCall(
         undefined,
@@ -798,7 +798,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['schema', 'name']
       );
       request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSchema = stubLongRunningCall(
         undefined,
@@ -871,7 +871,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -903,7 +903,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -957,7 +957,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSchema = stubLongRunningCall(
         undefined,
@@ -988,7 +988,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSchema = stubLongRunningCall(
         undefined,
@@ -1061,7 +1061,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Schema()
@@ -1100,7 +1100,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Schema()
@@ -1155,7 +1155,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSchemas = stubSimpleCall(
         undefined,
@@ -1186,7 +1186,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Schema()
@@ -1247,7 +1247,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSchemas.createStream = stubPageStreamingCall(
         undefined,
@@ -1299,7 +1299,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Schema()
@@ -1349,7 +1349,7 @@ describe('v1beta.SchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSchemas.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2017,6 +2017,71 @@ describe('v1beta.SchemaServiceClient', () => {
         assert.strictEqual(result, 'evaluationValue');
         assert(
           (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('groundingConfig', () => {
+      const fakePath = '/rendered/path/groundingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        grounding_config: 'groundingConfigValue',
+      };
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.groundingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.groundingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('groundingConfigPath', () => {
+        const result = client.groundingConfigPath(
+          'projectValue',
+          'locationValue',
+          'groundingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGroundingConfigName', () => {
+        const result = client.matchProjectFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGroundingConfigName', () => {
+        const result = client.matchLocationFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGroundingConfigFromGroundingConfigName', () => {
+        const result =
+          client.matchGroundingConfigFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'groundingConfigValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3586,6 +3651,133 @@ describe('v1beta.SchemaServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -5613,6 +5805,114 @@ describe('v1beta.SchemaServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

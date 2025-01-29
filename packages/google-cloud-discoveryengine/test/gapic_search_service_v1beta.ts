@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -323,7 +323,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -362,7 +362,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -419,7 +419,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.search = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.search(request), expectedError);
@@ -447,7 +447,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -510,7 +510,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.createStream = stubPageStreamingCall(
         undefined,
@@ -564,7 +564,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -613,7 +613,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -634,6 +634,345 @@ describe('v1beta.SearchServiceClient', () => {
       );
       assert(
         (client.descriptors.page.search.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('searchLite', () => {
+    it('invokes searchLite without error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.innerApiCalls.searchLite = stubSimpleCall(expectedResponse);
+      const [response] = await client.searchLite(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchLite as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchLite as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchLite without error using callback', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.innerApiCalls.searchLite =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchLite(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchLite as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchLite as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchLite with error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchLite = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.searchLite(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.searchLite as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchLite as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchLiteStream without error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.descriptors.page.searchLite.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchLiteStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.searchLite.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchLite, request)
+      );
+      assert(
+        (client.descriptors.page.searchLite.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes searchLiteStream with error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchLite.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.searchLiteStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.searchLite.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchLite, request)
+      );
+      assert(
+        (client.descriptors.page.searchLite.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with searchLite without error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.descriptors.page.searchLite.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[] =
+        [];
+      const iterable = client.searchLiteAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.searchLite.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.searchLite.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with searchLite with error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchLite.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.searchLiteAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.searchLite.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.searchLite.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -975,6 +1314,71 @@ describe('v1beta.SearchServiceClient', () => {
         assert.strictEqual(result, 'evaluationValue');
         assert(
           (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('groundingConfig', () => {
+      const fakePath = '/rendered/path/groundingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        grounding_config: 'groundingConfigValue',
+      };
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.groundingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.groundingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('groundingConfigPath', () => {
+        const result = client.groundingConfigPath(
+          'projectValue',
+          'locationValue',
+          'groundingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGroundingConfigName', () => {
+        const result = client.matchProjectFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGroundingConfigName', () => {
+        const result = client.matchLocationFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGroundingConfigFromGroundingConfigName', () => {
+        const result =
+          client.matchGroundingConfigFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'groundingConfigValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2670,6 +3074,133 @@ describe('v1beta.SearchServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -4790,6 +5321,114 @@ describe('v1beta.SearchServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

@@ -528,9 +528,19 @@
         "grpc": {
           "libraryClient": "GroundedGenerationServiceClient",
           "rpcs": {
+            "GenerateGroundedContent": {
+              "methods": [
+                "generateGroundedContent"
+              ]
+            },
             "CheckGrounding": {
               "methods": [
                 "checkGrounding"
+              ]
+            },
+            "StreamGenerateGroundedContent": {
+              "methods": [
+                "streamGenerateGroundedContent"
               ]
             }
           }
@@ -538,6 +548,11 @@
         "grpc-fallback": {
           "libraryClient": "GroundedGenerationServiceClient",
           "rpcs": {
+            "GenerateGroundedContent": {
+              "methods": [
+                "generateGroundedContent"
+              ]
+            },
             "CheckGrounding": {
               "methods": [
                 "checkGrounding"
@@ -698,6 +713,13 @@
                 "searchStream",
                 "searchAsync"
               ]
+            },
+            "SearchLite": {
+              "methods": [
+                "searchLite",
+                "searchLiteStream",
+                "searchLiteAsync"
+              ]
             }
           }
         },
@@ -709,6 +731,13 @@
                 "search",
                 "searchStream",
                 "searchAsync"
+              ]
+            },
+            "SearchLite": {
+              "methods": [
+                "searchLite",
+                "searchLiteStream",
+                "searchLiteAsync"
               ]
             }
           }

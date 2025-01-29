@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -410,7 +410,7 @@ export class DataStoreServiceClient {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/operations/*}'},
@@ -453,7 +453,7 @@ export class DataStoreServiceClient {
             },
             {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*}/operations'},
@@ -1310,7 +1310,7 @@ export class DataStoreServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDataStores`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1564,6 +1564,13 @@ export class DataStoreServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1600,6 +1607,13 @@ export class DataStoreServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1648,6 +1662,13 @@ export class DataStoreServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1691,6 +1712,13 @@ export class DataStoreServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
