@@ -330,7 +330,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse()
       );
@@ -365,7 +365,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.GenerateGroundedContentResponse()
       );
@@ -415,7 +415,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateGroundedContent = stubSimpleCall(
         undefined,
@@ -479,7 +479,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['groundingConfig']
       );
       request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
       );
@@ -513,7 +513,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['groundingConfig']
       );
       request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
       );
@@ -563,7 +563,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         ['groundingConfig']
       );
       request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkGrounding = stubSimpleCall(
         undefined,

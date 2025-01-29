@@ -362,7 +362,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.DataStore()
       );
@@ -393,7 +393,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.DataStore()
       );
@@ -440,7 +440,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataStore = stubSimpleCall(
         undefined,
@@ -493,7 +493,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['dataStore', 'name']
       );
       request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.DataStore()
       );
@@ -525,7 +525,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['dataStore', 'name']
       );
       request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.DataStore()
       );
@@ -573,7 +573,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['dataStore', 'name']
       );
       request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataStore = stubSimpleCall(
         undefined,
@@ -626,7 +626,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -659,7 +659,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -713,7 +713,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataStore = stubLongRunningCall(
         undefined,
@@ -744,7 +744,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataStore = stubLongRunningCall(
         undefined,
@@ -820,7 +820,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -853,7 +853,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -907,7 +907,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataStore = stubLongRunningCall(
         undefined,
@@ -938,7 +938,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataStore = stubLongRunningCall(
         undefined,
@@ -1014,7 +1014,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.DataStore()
@@ -1053,7 +1053,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.DataStore()
@@ -1110,7 +1110,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataStores = stubSimpleCall(
         undefined,
@@ -1141,7 +1141,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.DataStore()
@@ -1202,7 +1202,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataStores.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1252,7 +1252,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.DataStore()
@@ -1302,7 +1302,7 @@ describe('v1beta.DataStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataStores.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

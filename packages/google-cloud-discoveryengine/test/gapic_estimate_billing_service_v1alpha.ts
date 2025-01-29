@@ -328,7 +328,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -362,7 +362,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -417,7 +417,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.estimateDataSize = stubLongRunningCall(
         undefined,
@@ -449,7 +449,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.estimateDataSize = stubLongRunningCall(
         undefined,

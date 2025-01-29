@@ -379,7 +379,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.Evaluation()
       );
@@ -412,7 +412,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.Evaluation()
       );
@@ -461,7 +461,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEvaluation = stubSimpleCall(
         undefined,
@@ -517,7 +517,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -552,7 +552,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -608,7 +608,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEvaluation = stubLongRunningCall(
         undefined,
@@ -641,7 +641,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEvaluation = stubLongRunningCall(
         undefined,
@@ -723,7 +723,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Evaluation()
@@ -764,7 +764,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Evaluation()
@@ -823,7 +823,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEvaluations = stubSimpleCall(
         undefined,
@@ -856,7 +856,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Evaluation()
@@ -919,7 +919,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -971,7 +971,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.Evaluation()
@@ -1023,7 +1023,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1068,7 +1068,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['evaluation']
       );
       request.evaluation = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult()
@@ -1110,7 +1110,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['evaluation']
       );
       request.evaluation = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult()
@@ -1169,7 +1169,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['evaluation']
       );
       request.evaluation = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEvaluationResults = stubSimpleCall(
         undefined,
@@ -1205,7 +1205,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['evaluation']
       );
       request.evaluation = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult()
@@ -1276,7 +1276,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['evaluation']
       );
       request.evaluation = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluationResults.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1336,7 +1336,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['evaluation']
       );
       request.evaluation = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult()
@@ -1392,7 +1392,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         ['evaluation']
       );
       request.evaluation = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluationResults.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

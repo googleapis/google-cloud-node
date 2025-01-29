@@ -375,7 +375,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
@@ -407,7 +407,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
@@ -455,7 +455,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSampleQuery = stubSimpleCall(
         undefined,
@@ -509,7 +509,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
@@ -541,7 +541,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
@@ -589,7 +589,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSampleQuery = stubSimpleCall(
         undefined,
@@ -644,7 +644,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['sampleQuery', 'name']
       );
       request.sampleQuery.name = defaultValue1;
-      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
@@ -677,7 +677,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['sampleQuery', 'name']
       );
       request.sampleQuery.name = defaultValue1;
-      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
@@ -726,7 +726,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['sampleQuery', 'name']
       );
       request.sampleQuery.name = defaultValue1;
-      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSampleQuery = stubSimpleCall(
         undefined,
@@ -781,7 +781,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -813,7 +813,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -861,7 +861,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSampleQuery = stubSimpleCall(
         undefined,
@@ -915,7 +915,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -949,7 +949,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1004,7 +1004,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importSampleQueries = stubLongRunningCall(
         undefined,
@@ -1036,7 +1036,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importSampleQueries = stubLongRunningCall(
         undefined,
@@ -1115,7 +1115,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
@@ -1155,7 +1155,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
@@ -1213,7 +1213,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSampleQueries = stubSimpleCall(
         undefined,
@@ -1245,7 +1245,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
@@ -1309,7 +1309,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSampleQueries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1362,7 +1362,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
@@ -1413,7 +1413,7 @@ describe('v1beta.SampleQueryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSampleQueries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
