@@ -274,7 +274,7 @@ describe('v1alpha.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.PredictResponse()
       );
@@ -306,7 +306,7 @@ describe('v1alpha.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.PredictResponse()
       );
@@ -354,7 +354,7 @@ describe('v1alpha.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.predict = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.predict(request), expectedError);

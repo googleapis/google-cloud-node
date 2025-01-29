@@ -289,7 +289,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
         ['quotaAdjusterSettings', 'name']
       );
       request.quotaAdjusterSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
       );
@@ -325,7 +325,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
         ['quotaAdjusterSettings', 'name']
       );
       request.quotaAdjusterSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
       );
@@ -376,7 +376,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
         ['quotaAdjusterSettings', 'name']
       );
       request.quotaAdjusterSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_adjuster_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQuotaAdjusterSettings = stubSimpleCall(
         undefined,
@@ -441,7 +441,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
       );
@@ -476,7 +476,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaAdjusterSettings()
       );
@@ -526,7 +526,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQuotaAdjusterSettings = stubSimpleCall(
         undefined,

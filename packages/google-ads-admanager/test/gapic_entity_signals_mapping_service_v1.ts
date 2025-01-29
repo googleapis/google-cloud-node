@@ -364,7 +364,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.EntitySignalsMapping()
       );
@@ -399,7 +399,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.EntitySignalsMapping()
       );
@@ -449,7 +449,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntitySignalsMapping = stubSimpleCall(
         undefined,
@@ -513,7 +513,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.EntitySignalsMapping()
       );
@@ -548,7 +548,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.EntitySignalsMapping()
       );
@@ -598,7 +598,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntitySignalsMapping = stubSimpleCall(
         undefined,
@@ -663,7 +663,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['entitySignalsMapping', 'name']
       );
       request.entitySignalsMapping.name = defaultValue1;
-      const expectedHeaderRequestParams = `entity_signals_mapping.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_signals_mapping.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.EntitySignalsMapping()
       );
@@ -699,7 +699,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['entitySignalsMapping', 'name']
       );
       request.entitySignalsMapping.name = defaultValue1;
-      const expectedHeaderRequestParams = `entity_signals_mapping.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_signals_mapping.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.EntitySignalsMapping()
       );
@@ -750,7 +750,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['entitySignalsMapping', 'name']
       );
       request.entitySignalsMapping.name = defaultValue1;
-      const expectedHeaderRequestParams = `entity_signals_mapping.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_signals_mapping.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntitySignalsMapping = stubSimpleCall(
         undefined,
@@ -815,7 +815,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.BatchCreateEntitySignalsMappingsResponse()
       );
@@ -850,7 +850,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.BatchCreateEntitySignalsMappingsResponse()
       );
@@ -900,7 +900,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateEntitySignalsMappings = stubSimpleCall(
         undefined,
@@ -964,7 +964,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.BatchUpdateEntitySignalsMappingsResponse()
       );
@@ -999,7 +999,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.BatchUpdateEntitySignalsMappingsResponse()
       );
@@ -1049,7 +1049,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchUpdateEntitySignalsMappings = stubSimpleCall(
         undefined,
@@ -1113,7 +1113,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.EntitySignalsMapping()
@@ -1156,7 +1156,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.EntitySignalsMapping()
@@ -1216,7 +1216,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntitySignalsMappings = stubSimpleCall(
         undefined,
@@ -1253,7 +1253,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.EntitySignalsMapping()
@@ -1323,7 +1323,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntitySignalsMappings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1382,7 +1382,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.EntitySignalsMapping()
@@ -1439,7 +1439,7 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntitySignalsMappings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

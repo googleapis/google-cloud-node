@@ -320,7 +320,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaInfo()
       );
@@ -351,7 +351,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaInfo()
       );
@@ -398,7 +398,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQuotaInfo = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -482,7 +482,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -529,7 +529,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQuotaPreference = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -613,7 +613,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -660,7 +660,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQuotaPreference = stubSimpleCall(
         undefined,
@@ -719,7 +719,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['quotaPreference', 'name']
       );
       request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -752,7 +752,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['quotaPreference', 'name']
       );
       request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -800,7 +800,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['quotaPreference', 'name']
       );
       request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQuotaPreference = stubSimpleCall(
         undefined,
@@ -859,7 +859,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -898,7 +898,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -953,7 +953,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQuotaInfos = stubSimpleCall(
         undefined,
@@ -984,7 +984,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -1044,7 +1044,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaInfos.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1093,7 +1093,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -1142,7 +1142,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaInfos.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1184,7 +1184,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1224,7 +1224,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1281,7 +1281,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQuotaPreferences = stubSimpleCall(
         undefined,
@@ -1312,7 +1312,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1373,7 +1373,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaPreferences.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1423,7 +1423,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1473,7 +1473,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaPreferences.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
