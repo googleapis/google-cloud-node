@@ -274,7 +274,7 @@ describe('v1beta1.GatewayControlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse()
       );
@@ -306,7 +306,7 @@ describe('v1beta1.GatewayControlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse()
       );
@@ -353,7 +353,7 @@ describe('v1beta1.GatewayControlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateCredentials = stubSimpleCall(
         undefined,
