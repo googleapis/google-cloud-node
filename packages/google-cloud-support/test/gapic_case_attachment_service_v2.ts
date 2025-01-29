@@ -340,7 +340,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
@@ -374,7 +374,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
@@ -424,7 +424,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAttachments = stubSimpleCall(
         undefined,
@@ -456,7 +456,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
@@ -511,7 +511,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttachments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -561,7 +561,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
         generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
@@ -605,7 +605,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttachments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

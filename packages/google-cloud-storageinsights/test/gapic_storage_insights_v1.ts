@@ -323,7 +323,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportConfig()
       );
@@ -354,7 +354,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportConfig()
       );
@@ -401,7 +401,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReportConfig = stubSimpleCall(
         undefined,
@@ -453,7 +453,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportConfig()
       );
@@ -485,7 +485,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportConfig()
       );
@@ -532,7 +532,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReportConfig = stubSimpleCall(
         undefined,
@@ -585,7 +585,7 @@ describe('v1.StorageInsightsClient', () => {
         ['reportConfig', 'name']
       );
       request.reportConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `report_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `report_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportConfig()
       );
@@ -618,7 +618,7 @@ describe('v1.StorageInsightsClient', () => {
         ['reportConfig', 'name']
       );
       request.reportConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `report_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `report_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportConfig()
       );
@@ -666,7 +666,7 @@ describe('v1.StorageInsightsClient', () => {
         ['reportConfig', 'name']
       );
       request.reportConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `report_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `report_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateReportConfig = stubSimpleCall(
         undefined,
@@ -719,7 +719,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -751,7 +751,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -798,7 +798,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteReportConfig = stubSimpleCall(
         undefined,
@@ -850,7 +850,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportDetail()
       );
@@ -881,7 +881,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ReportDetail()
       );
@@ -928,7 +928,7 @@ describe('v1.StorageInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReportDetail = stubSimpleCall(
         undefined,
@@ -980,7 +980,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportConfig()
@@ -1019,7 +1019,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportConfig()
@@ -1076,7 +1076,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReportConfigs = stubSimpleCall(
         undefined,
@@ -1107,7 +1107,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportConfig()
@@ -1168,7 +1168,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReportConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1218,7 +1218,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportConfig()
@@ -1268,7 +1268,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReportConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1311,7 +1311,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportDetail()
@@ -1350,7 +1350,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportDetail()
@@ -1407,7 +1407,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReportDetails = stubSimpleCall(
         undefined,
@@ -1438,7 +1438,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportDetail()
@@ -1499,7 +1499,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReportDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1549,7 +1549,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.storageinsights.v1.ReportDetail()
@@ -1599,7 +1599,7 @@ describe('v1.StorageInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReportDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -255,7 +255,7 @@ describe('v4.CompletionClient', () => {
         ['tenant']
       );
       request.tenant = defaultValue1;
-      const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tenant=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryResponse()
       );
@@ -286,7 +286,7 @@ describe('v4.CompletionClient', () => {
         ['tenant']
       );
       request.tenant = defaultValue1;
-      const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tenant=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryResponse()
       );
@@ -333,7 +333,7 @@ describe('v4.CompletionClient', () => {
         ['tenant']
       );
       request.tenant = defaultValue1;
-      const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tenant=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeQuery = stubSimpleCall(
         undefined,
