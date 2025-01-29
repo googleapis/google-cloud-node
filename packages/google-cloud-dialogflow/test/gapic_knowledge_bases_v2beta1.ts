@@ -321,7 +321,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -352,7 +352,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -399,7 +399,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKnowledgeBase = stubSimpleCall(
         undefined,
@@ -451,7 +451,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -483,7 +483,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -530,7 +530,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKnowledgeBase = stubSimpleCall(
         undefined,
@@ -582,7 +582,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -614,7 +614,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -661,7 +661,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKnowledgeBase = stubSimpleCall(
         undefined,
@@ -714,7 +714,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['knowledgeBase', 'name']
       );
       request.knowledgeBase.name = defaultValue1;
-      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -747,7 +747,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['knowledgeBase', 'name']
       );
       request.knowledgeBase.name = defaultValue1;
-      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -795,7 +795,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['knowledgeBase', 'name']
       );
       request.knowledgeBase.name = defaultValue1;
-      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKnowledgeBase = stubSimpleCall(
         undefined,
@@ -848,7 +848,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -888,7 +888,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -945,7 +945,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKnowledgeBases = stubSimpleCall(
         undefined,
@@ -976,7 +976,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -1037,7 +1037,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKnowledgeBases.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1087,7 +1087,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -1137,7 +1137,7 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKnowledgeBases.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -351,7 +351,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -385,7 +385,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -435,7 +435,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -493,7 +493,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -527,7 +527,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -577,7 +577,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -635,7 +635,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -670,7 +670,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -720,7 +720,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -778,7 +778,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
@@ -812,7 +812,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
@@ -862,7 +862,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIapSettings = stubSimpleCall(
         undefined,
@@ -921,7 +921,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['iapSettings', 'name']
       );
       request.iapSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
@@ -956,7 +956,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['iapSettings', 'name']
       );
       request.iapSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
@@ -1007,7 +1007,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['iapSettings', 'name']
       );
       request.iapSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIapSettings = stubSimpleCall(
         undefined,
@@ -1066,7 +1066,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1101,7 +1101,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1151,7 +1151,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTunnelDestGroup = stubSimpleCall(
         undefined,
@@ -1215,7 +1215,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1250,7 +1250,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1300,7 +1300,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTunnelDestGroup = stubSimpleCall(
         undefined,
@@ -1358,7 +1358,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1393,7 +1393,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1443,7 +1443,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTunnelDestGroup = stubSimpleCall(
         undefined,
@@ -1508,7 +1508,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['tunnelDestGroup', 'name']
       );
       request.tunnelDestGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1544,7 +1544,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['tunnelDestGroup', 'name']
       );
       request.tunnelDestGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1595,7 +1595,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['tunnelDestGroup', 'name']
       );
       request.tunnelDestGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTunnelDestGroup = stubSimpleCall(
         undefined,
@@ -1660,7 +1660,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1697,7 +1697,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1749,7 +1749,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTunnelDestGroups = stubSimpleCall(
         undefined,
@@ -1783,7 +1783,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1840,7 +1840,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTunnelDestGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1892,7 +1892,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1938,7 +1938,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTunnelDestGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

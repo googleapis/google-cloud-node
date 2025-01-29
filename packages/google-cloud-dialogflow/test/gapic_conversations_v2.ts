@@ -320,7 +320,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.Conversation()
       );
@@ -352,7 +352,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.Conversation()
       );
@@ -399,7 +399,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversation = stubSimpleCall(
         undefined,
@@ -451,7 +451,7 @@ describe('v2.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.Conversation()
       );
@@ -482,7 +482,7 @@ describe('v2.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.Conversation()
       );
@@ -529,7 +529,7 @@ describe('v2.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversation = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v2.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.Conversation()
       );
@@ -613,7 +613,7 @@ describe('v2.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.Conversation()
       );
@@ -660,7 +660,7 @@ describe('v2.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeConversation = stubSimpleCall(
         undefined,
@@ -712,7 +712,7 @@ describe('v2.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue1;
-      const expectedHeaderRequestParams = `conversation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SuggestConversationSummaryResponse()
       );
@@ -744,7 +744,7 @@ describe('v2.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue1;
-      const expectedHeaderRequestParams = `conversation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SuggestConversationSummaryResponse()
       );
@@ -791,7 +791,7 @@ describe('v2.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue1;
-      const expectedHeaderRequestParams = `conversation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.suggestConversationSummary = stubSimpleCall(
         undefined,
@@ -850,7 +850,7 @@ describe('v2.ConversationsClient', () => {
         ['statelessConversation', 'parent']
       );
       request.statelessConversation.parent = defaultValue1;
-      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse()
       );
@@ -883,7 +883,7 @@ describe('v2.ConversationsClient', () => {
         ['statelessConversation', 'parent']
       );
       request.statelessConversation.parent = defaultValue1;
-      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse()
       );
@@ -931,7 +931,7 @@ describe('v2.ConversationsClient', () => {
         ['statelessConversation', 'parent']
       );
       request.statelessConversation.parent = defaultValue1;
-      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateStatelessSummary = stubSimpleCall(
         undefined,
@@ -990,7 +990,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GenerateStatelessSuggestionResponse()
       );
@@ -1022,7 +1022,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GenerateStatelessSuggestionResponse()
       );
@@ -1069,7 +1069,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateStatelessSuggestion = stubSimpleCall(
         undefined,
@@ -1132,7 +1132,7 @@ describe('v2.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue2;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&conversation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SearchKnowledgeResponse()
       );
@@ -1168,7 +1168,7 @@ describe('v2.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue2;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&conversation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SearchKnowledgeResponse()
       );
@@ -1220,7 +1220,7 @@ describe('v2.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue2;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&conversation=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchKnowledge = stubSimpleCall(
         undefined,
@@ -1277,7 +1277,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.Conversation()
@@ -1316,7 +1316,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.Conversation()
@@ -1371,7 +1371,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversations = stubSimpleCall(
         undefined,
@@ -1402,7 +1402,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.Conversation()
@@ -1462,7 +1462,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1511,7 +1511,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.Conversation()
@@ -1560,7 +1560,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1602,7 +1602,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
@@ -1635,7 +1635,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
@@ -1684,7 +1684,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMessages = stubSimpleCall(
         undefined,
@@ -1715,7 +1715,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
@@ -1769,7 +1769,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessages.createStream = stubPageStreamingCall(
         undefined,
@@ -1820,7 +1820,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
         generateSampleMessage(new protos.google.cloud.dialogflow.v2.Message()),
@@ -1863,7 +1863,7 @@ describe('v2.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

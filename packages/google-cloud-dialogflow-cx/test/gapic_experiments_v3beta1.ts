@@ -320,7 +320,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -351,7 +351,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -398,7 +398,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExperiment = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -481,7 +481,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -528,7 +528,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExperiment = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['experiment', 'name']
       );
       request.experiment.name = defaultValue1;
-      const expectedHeaderRequestParams = `experiment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `experiment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -613,7 +613,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['experiment', 'name']
       );
       request.experiment.name = defaultValue1;
-      const expectedHeaderRequestParams = `experiment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `experiment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -661,7 +661,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['experiment', 'name']
       );
       request.experiment.name = defaultValue1;
-      const expectedHeaderRequestParams = `experiment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `experiment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExperiment = stubSimpleCall(
         undefined,
@@ -714,7 +714,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -745,7 +745,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -792,7 +792,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExperiment = stubSimpleCall(
         undefined,
@@ -844,7 +844,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -875,7 +875,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -922,7 +922,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startExperiment = stubSimpleCall(
         undefined,
@@ -974,7 +974,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -1005,7 +1005,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
       );
@@ -1052,7 +1052,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopExperiment = stubSimpleCall(
         undefined,
@@ -1104,7 +1104,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
@@ -1143,7 +1143,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
@@ -1200,7 +1200,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExperiments = stubSimpleCall(
         undefined,
@@ -1231,7 +1231,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
@@ -1292,7 +1292,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExperiments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1342,7 +1342,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Experiment()
@@ -1392,7 +1392,7 @@ describe('v3beta1.ExperimentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExperiments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

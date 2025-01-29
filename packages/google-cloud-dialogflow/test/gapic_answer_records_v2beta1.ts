@@ -321,7 +321,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
       );
@@ -354,7 +354,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
       );
@@ -403,7 +403,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnswerRecord = stubSimpleCall(
         undefined,
@@ -459,7 +459,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['answerRecord', 'name']
       );
       request.answerRecord.name = defaultValue1;
-      const expectedHeaderRequestParams = `answer_record.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `answer_record.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
       );
@@ -492,7 +492,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['answerRecord', 'name']
       );
       request.answerRecord.name = defaultValue1;
-      const expectedHeaderRequestParams = `answer_record.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `answer_record.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
       );
@@ -540,7 +540,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['answerRecord', 'name']
       );
       request.answerRecord.name = defaultValue1;
-      const expectedHeaderRequestParams = `answer_record.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `answer_record.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAnswerRecord = stubSimpleCall(
         undefined,
@@ -593,7 +593,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
@@ -632,7 +632,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
@@ -689,7 +689,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnswerRecords = stubSimpleCall(
         undefined,
@@ -720,7 +720,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
@@ -781,7 +781,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnswerRecords.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -831,7 +831,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.AnswerRecord()
@@ -881,7 +881,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnswerRecords.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

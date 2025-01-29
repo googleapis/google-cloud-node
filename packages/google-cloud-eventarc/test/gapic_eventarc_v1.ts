@@ -356,7 +356,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Trigger()
       );
@@ -387,7 +387,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Trigger()
       );
@@ -434,7 +434,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTrigger = stubSimpleCall(
         undefined,
@@ -486,7 +486,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Channel()
       );
@@ -517,7 +517,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Channel()
       );
@@ -564,7 +564,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChannel = stubSimpleCall(
         undefined,
@@ -616,7 +616,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Provider()
       );
@@ -647,7 +647,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Provider()
       );
@@ -694,7 +694,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProvider = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ChannelConnection()
       );
@@ -778,7 +778,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ChannelConnection()
       );
@@ -825,7 +825,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChannelConnection = stubSimpleCall(
         undefined,
@@ -877,7 +877,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -909,7 +909,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -956,7 +956,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGoogleChannelConfig = stubSimpleCall(
         undefined,
@@ -1015,7 +1015,7 @@ describe('v1.EventarcClient', () => {
         ['googleChannelConfig', 'name']
       );
       request.googleChannelConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -1048,7 +1048,7 @@ describe('v1.EventarcClient', () => {
         ['googleChannelConfig', 'name']
       );
       request.googleChannelConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleChannelConfig()
       );
@@ -1096,7 +1096,7 @@ describe('v1.EventarcClient', () => {
         ['googleChannelConfig', 'name']
       );
       request.googleChannelConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_channel_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGoogleChannelConfig = stubSimpleCall(
         undefined,
@@ -1155,7 +1155,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.MessageBus()
       );
@@ -1186,7 +1186,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.MessageBus()
       );
@@ -1233,7 +1233,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMessageBus = stubSimpleCall(
         undefined,
@@ -1285,7 +1285,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Enrollment()
       );
@@ -1316,7 +1316,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Enrollment()
       );
@@ -1363,7 +1363,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEnrollment = stubSimpleCall(
         undefined,
@@ -1415,7 +1415,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Pipeline()
       );
@@ -1446,7 +1446,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.Pipeline()
       );
@@ -1493,7 +1493,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPipeline = stubSimpleCall(
         undefined,
@@ -1545,7 +1545,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleApiSource()
       );
@@ -1577,7 +1577,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GoogleApiSource()
       );
@@ -1624,7 +1624,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGoogleApiSource = stubSimpleCall(
         undefined,
@@ -1676,7 +1676,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1709,7 +1709,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1763,7 +1763,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrigger = stubLongRunningCall(
         undefined,
@@ -1794,7 +1794,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrigger = stubLongRunningCall(
         undefined,
@@ -1871,7 +1871,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1905,7 +1905,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1960,7 +1960,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTrigger = stubLongRunningCall(
         undefined,
@@ -1992,7 +1992,7 @@ describe('v1.EventarcClient', () => {
         ['trigger', 'name']
       );
       request.trigger.name = defaultValue1;
-      const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `trigger.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTrigger = stubLongRunningCall(
         undefined,
@@ -2068,7 +2068,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2101,7 +2101,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2155,7 +2155,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrigger = stubLongRunningCall(
         undefined,
@@ -2186,7 +2186,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrigger = stubLongRunningCall(
         undefined,
@@ -2262,7 +2262,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2295,7 +2295,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2349,7 +2349,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannel = stubLongRunningCall(
         undefined,
@@ -2380,7 +2380,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannel = stubLongRunningCall(
         undefined,
@@ -2457,7 +2457,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2491,7 +2491,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2546,7 +2546,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateChannel = stubLongRunningCall(
         undefined,
@@ -2578,7 +2578,7 @@ describe('v1.EventarcClient', () => {
         ['channel', 'name']
       );
       request.channel.name = defaultValue1;
-      const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateChannel = stubLongRunningCall(
         undefined,
@@ -2654,7 +2654,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2687,7 +2687,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2741,7 +2741,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannel = stubLongRunningCall(
         undefined,
@@ -2772,7 +2772,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannel = stubLongRunningCall(
         undefined,
@@ -2848,7 +2848,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2881,7 +2881,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2935,7 +2935,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannelConnection = stubLongRunningCall(
         undefined,
@@ -2969,7 +2969,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannelConnection = stubLongRunningCall(
         undefined,
@@ -3046,7 +3046,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3079,7 +3079,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3133,7 +3133,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannelConnection = stubLongRunningCall(
         undefined,
@@ -3167,7 +3167,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannelConnection = stubLongRunningCall(
         undefined,
@@ -3244,7 +3244,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3277,7 +3277,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3331,7 +3331,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMessageBus = stubLongRunningCall(
         undefined,
@@ -3362,7 +3362,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMessageBus = stubLongRunningCall(
         undefined,
@@ -3439,7 +3439,7 @@ describe('v1.EventarcClient', () => {
         ['messageBus', 'name']
       );
       request.messageBus.name = defaultValue1;
-      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3473,7 +3473,7 @@ describe('v1.EventarcClient', () => {
         ['messageBus', 'name']
       );
       request.messageBus.name = defaultValue1;
-      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3528,7 +3528,7 @@ describe('v1.EventarcClient', () => {
         ['messageBus', 'name']
       );
       request.messageBus.name = defaultValue1;
-      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMessageBus = stubLongRunningCall(
         undefined,
@@ -3560,7 +3560,7 @@ describe('v1.EventarcClient', () => {
         ['messageBus', 'name']
       );
       request.messageBus.name = defaultValue1;
-      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `message_bus.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMessageBus = stubLongRunningCall(
         undefined,
@@ -3636,7 +3636,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3669,7 +3669,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3723,7 +3723,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMessageBus = stubLongRunningCall(
         undefined,
@@ -3754,7 +3754,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMessageBus = stubLongRunningCall(
         undefined,
@@ -3830,7 +3830,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3863,7 +3863,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3917,7 +3917,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEnrollment = stubLongRunningCall(
         undefined,
@@ -3948,7 +3948,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEnrollment = stubLongRunningCall(
         undefined,
@@ -4025,7 +4025,7 @@ describe('v1.EventarcClient', () => {
         ['enrollment', 'name']
       );
       request.enrollment.name = defaultValue1;
-      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4059,7 +4059,7 @@ describe('v1.EventarcClient', () => {
         ['enrollment', 'name']
       );
       request.enrollment.name = defaultValue1;
-      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4114,7 +4114,7 @@ describe('v1.EventarcClient', () => {
         ['enrollment', 'name']
       );
       request.enrollment.name = defaultValue1;
-      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEnrollment = stubLongRunningCall(
         undefined,
@@ -4146,7 +4146,7 @@ describe('v1.EventarcClient', () => {
         ['enrollment', 'name']
       );
       request.enrollment.name = defaultValue1;
-      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `enrollment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEnrollment = stubLongRunningCall(
         undefined,
@@ -4222,7 +4222,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4255,7 +4255,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4309,7 +4309,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEnrollment = stubLongRunningCall(
         undefined,
@@ -4340,7 +4340,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEnrollment = stubLongRunningCall(
         undefined,
@@ -4416,7 +4416,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4449,7 +4449,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4503,7 +4503,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPipeline = stubLongRunningCall(
         undefined,
@@ -4534,7 +4534,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPipeline = stubLongRunningCall(
         undefined,
@@ -4611,7 +4611,7 @@ describe('v1.EventarcClient', () => {
         ['pipeline', 'name']
       );
       request.pipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4645,7 +4645,7 @@ describe('v1.EventarcClient', () => {
         ['pipeline', 'name']
       );
       request.pipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4700,7 +4700,7 @@ describe('v1.EventarcClient', () => {
         ['pipeline', 'name']
       );
       request.pipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePipeline = stubLongRunningCall(
         undefined,
@@ -4732,7 +4732,7 @@ describe('v1.EventarcClient', () => {
         ['pipeline', 'name']
       );
       request.pipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `pipeline.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePipeline = stubLongRunningCall(
         undefined,
@@ -4808,7 +4808,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4841,7 +4841,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4895,7 +4895,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePipeline = stubLongRunningCall(
         undefined,
@@ -4926,7 +4926,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePipeline = stubLongRunningCall(
         undefined,
@@ -5002,7 +5002,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5035,7 +5035,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5089,7 +5089,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGoogleApiSource = stubLongRunningCall(
         undefined,
@@ -5123,7 +5123,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGoogleApiSource = stubLongRunningCall(
         undefined,
@@ -5200,7 +5200,7 @@ describe('v1.EventarcClient', () => {
         ['googleApiSource', 'name']
       );
       request.googleApiSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5234,7 +5234,7 @@ describe('v1.EventarcClient', () => {
         ['googleApiSource', 'name']
       );
       request.googleApiSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5289,7 +5289,7 @@ describe('v1.EventarcClient', () => {
         ['googleApiSource', 'name']
       );
       request.googleApiSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGoogleApiSource = stubLongRunningCall(
         undefined,
@@ -5324,7 +5324,7 @@ describe('v1.EventarcClient', () => {
         ['googleApiSource', 'name']
       );
       request.googleApiSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `google_api_source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGoogleApiSource = stubLongRunningCall(
         undefined,
@@ -5400,7 +5400,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5433,7 +5433,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5487,7 +5487,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGoogleApiSource = stubLongRunningCall(
         undefined,
@@ -5521,7 +5521,7 @@ describe('v1.EventarcClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGoogleApiSource = stubLongRunningCall(
         undefined,
@@ -5597,7 +5597,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -5630,7 +5630,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -5679,7 +5679,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTriggers = stubSimpleCall(
         undefined,
@@ -5710,7 +5710,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -5764,7 +5764,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTriggers.createStream = stubPageStreamingCall(
         undefined,
@@ -5815,7 +5815,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Trigger()),
@@ -5858,7 +5858,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTriggers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5900,7 +5900,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -5933,7 +5933,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -5982,7 +5982,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChannels = stubSimpleCall(
         undefined,
@@ -6013,7 +6013,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -6067,7 +6067,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannels.createStream = stubPageStreamingCall(
         undefined,
@@ -6118,7 +6118,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
@@ -6161,7 +6161,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6203,7 +6203,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -6236,7 +6236,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -6285,7 +6285,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProviders = stubSimpleCall(
         undefined,
@@ -6316,7 +6316,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -6370,7 +6370,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProviders.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6419,7 +6419,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Provider()),
@@ -6462,7 +6462,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProviders.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6504,7 +6504,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -6544,7 +6544,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -6599,7 +6599,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChannelConnections = stubSimpleCall(
         undefined,
@@ -6633,7 +6633,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -6700,7 +6700,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6756,7 +6756,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.ChannelConnection()
@@ -6810,7 +6810,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6857,7 +6857,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
@@ -6890,7 +6890,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
@@ -6939,7 +6939,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMessageBuses = stubSimpleCall(
         undefined,
@@ -6970,7 +6970,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
@@ -7024,7 +7024,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessageBuses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7073,7 +7073,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.MessageBus()),
@@ -7116,7 +7116,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessageBuses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7158,7 +7158,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.listMessageBusEnrollments =
         stubSimpleCall(expectedResponse);
@@ -7188,7 +7188,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.listMessageBusEnrollments =
         stubSimpleCallWithCallback(expectedResponse);
@@ -7230,7 +7230,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMessageBusEnrollments = stubSimpleCall(
         undefined,
@@ -7264,7 +7264,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.listMessageBusEnrollments.createStream =
         stubPageStreamingCall(expectedResponse);
@@ -7317,7 +7317,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessageBusEnrollments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7369,7 +7369,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.listMessageBusEnrollments.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
@@ -7412,7 +7412,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessageBusEnrollments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7458,7 +7458,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
@@ -7491,7 +7491,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
@@ -7540,7 +7540,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEnrollments = stubSimpleCall(
         undefined,
@@ -7571,7 +7571,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
@@ -7625,7 +7625,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEnrollments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7674,7 +7674,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Enrollment()),
@@ -7717,7 +7717,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEnrollments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7759,7 +7759,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
@@ -7792,7 +7792,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
@@ -7841,7 +7841,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPipelines = stubSimpleCall(
         undefined,
@@ -7872,7 +7872,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
@@ -7926,7 +7926,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPipelines.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7975,7 +7975,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
         generateSampleMessage(new protos.google.cloud.eventarc.v1.Pipeline()),
@@ -8018,7 +8018,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPipelines.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8060,7 +8060,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.GoogleApiSource()
@@ -8100,7 +8100,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.GoogleApiSource()
@@ -8155,7 +8155,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGoogleApiSources = stubSimpleCall(
         undefined,
@@ -8186,7 +8186,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.GoogleApiSource()
@@ -8246,7 +8246,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGoogleApiSources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8295,7 +8295,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.eventarc.v1.GoogleApiSource()
@@ -8344,7 +8344,7 @@ describe('v1.EventarcClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGoogleApiSources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

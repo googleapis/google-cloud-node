@@ -355,7 +355,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -386,7 +386,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -433,7 +433,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTool = stubSimpleCall(
         undefined,
@@ -485,7 +485,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -516,7 +516,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -563,7 +563,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTool = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTool(request), expectedError);
@@ -613,7 +613,7 @@ describe('v3beta1.ToolsClient', () => {
         ['tool', 'name']
       );
       request.tool.name = defaultValue1;
-      const expectedHeaderRequestParams = `tool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -645,7 +645,7 @@ describe('v3beta1.ToolsClient', () => {
         ['tool', 'name']
       );
       request.tool.name = defaultValue1;
-      const expectedHeaderRequestParams = `tool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -693,7 +693,7 @@ describe('v3beta1.ToolsClient', () => {
         ['tool', 'name']
       );
       request.tool.name = defaultValue1;
-      const expectedHeaderRequestParams = `tool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTool = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -777,7 +777,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -824,7 +824,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTool = stubSimpleCall(
         undefined,
@@ -876,7 +876,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -908,7 +908,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -962,7 +962,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportTools = stubLongRunningCall(
         undefined,
@@ -993,7 +993,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportTools = stubLongRunningCall(
         undefined,
@@ -1066,7 +1066,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1105,7 +1105,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1160,7 +1160,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTools = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTools(request), expectedError);
@@ -1188,7 +1188,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1248,7 +1248,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTools.createStream = stubPageStreamingCall(
         undefined,
@@ -1299,7 +1299,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1347,7 +1347,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTools.asyncIterate = stubAsyncIterationCall(
         undefined,

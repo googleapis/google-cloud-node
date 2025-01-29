@@ -318,7 +318,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
       );
@@ -349,7 +349,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
       );
@@ -396,7 +396,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSipTrunk = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -479,7 +479,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -526,7 +526,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSipTrunk = stubSimpleCall(
         undefined,
@@ -578,7 +578,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
       );
@@ -609,7 +609,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
       );
@@ -656,7 +656,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSipTrunk = stubSimpleCall(
         undefined,
@@ -709,7 +709,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['sipTrunk', 'name']
       );
       request.sipTrunk.name = defaultValue1;
-      const expectedHeaderRequestParams = `sip_trunk.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sip_trunk.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
       );
@@ -741,7 +741,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['sipTrunk', 'name']
       );
       request.sipTrunk.name = defaultValue1;
-      const expectedHeaderRequestParams = `sip_trunk.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sip_trunk.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
       );
@@ -789,7 +789,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['sipTrunk', 'name']
       );
       request.sipTrunk.name = defaultValue1;
-      const expectedHeaderRequestParams = `sip_trunk.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sip_trunk.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSipTrunk = stubSimpleCall(
         undefined,
@@ -842,7 +842,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
@@ -881,7 +881,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
@@ -936,7 +936,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSipTrunks = stubSimpleCall(
         undefined,
@@ -967,7 +967,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
@@ -1027,7 +1027,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSipTrunks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1076,7 +1076,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SipTrunk()
@@ -1125,7 +1125,7 @@ describe('v2beta1.SipTrunksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSipTrunks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
