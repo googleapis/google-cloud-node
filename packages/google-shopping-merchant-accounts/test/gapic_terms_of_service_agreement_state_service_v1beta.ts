@@ -294,7 +294,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState()
       );
@@ -329,7 +329,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState()
       );
@@ -379,7 +379,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTermsOfServiceAgreementState = stubSimpleCall(
         undefined,
@@ -443,7 +443,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState()
       );
@@ -483,7 +483,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState()
       );
@@ -535,7 +535,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveForApplicationTermsOfServiceAgreementState =
         stubSimpleCall(undefined, expectedError);

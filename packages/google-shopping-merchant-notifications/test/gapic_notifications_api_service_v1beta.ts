@@ -337,7 +337,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
       );
@@ -370,7 +370,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
       );
@@ -418,7 +418,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNotificationSubscription = stubSimpleCall(
         undefined,
@@ -478,7 +478,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
       );
@@ -511,7 +511,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
       );
@@ -559,7 +559,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNotificationSubscription = stubSimpleCall(
         undefined,
@@ -620,7 +620,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['notificationSubscription', 'name']
       );
       request.notificationSubscription.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_subscription.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `notification_subscription.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
       );
@@ -654,7 +654,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['notificationSubscription', 'name']
       );
       request.notificationSubscription.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_subscription.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `notification_subscription.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
       );
@@ -703,7 +703,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['notificationSubscription', 'name']
       );
       request.notificationSubscription.name = defaultValue1;
-      const expectedHeaderRequestParams = `notification_subscription.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `notification_subscription.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNotificationSubscription = stubSimpleCall(
         undefined,
@@ -764,7 +764,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -797,7 +797,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -845,7 +845,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNotificationSubscription = stubSimpleCall(
         undefined,
@@ -905,7 +905,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
@@ -946,7 +946,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
@@ -1004,7 +1004,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNotificationSubscriptions = stubSimpleCall(
         undefined,
@@ -1039,7 +1039,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
@@ -1112,7 +1112,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationSubscriptions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1174,7 +1174,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription()
@@ -1229,7 +1229,7 @@ describe('v1beta.NotificationsApiServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotificationSubscriptions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
