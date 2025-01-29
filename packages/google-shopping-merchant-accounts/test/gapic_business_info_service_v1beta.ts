@@ -274,7 +274,7 @@ describe('v1beta.BusinessInfoServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.BusinessInfo()
       );
@@ -306,7 +306,7 @@ describe('v1beta.BusinessInfoServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.BusinessInfo()
       );
@@ -354,7 +354,7 @@ describe('v1beta.BusinessInfoServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBusinessInfo = stubSimpleCall(
         undefined,
@@ -409,7 +409,7 @@ describe('v1beta.BusinessInfoServiceClient', () => {
         ['businessInfo', 'name']
       );
       request.businessInfo.name = defaultValue1;
-      const expectedHeaderRequestParams = `business_info.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `business_info.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.BusinessInfo()
       );
@@ -443,7 +443,7 @@ describe('v1beta.BusinessInfoServiceClient', () => {
         ['businessInfo', 'name']
       );
       request.businessInfo.name = defaultValue1;
-      const expectedHeaderRequestParams = `business_info.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `business_info.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.BusinessInfo()
       );
@@ -492,7 +492,7 @@ describe('v1beta.BusinessInfoServiceClient', () => {
         ['businessInfo', 'name']
       );
       request.businessInfo.name = defaultValue1;
-      const expectedHeaderRequestParams = `business_info.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `business_info.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBusinessInfo = stubSimpleCall(
         undefined,
