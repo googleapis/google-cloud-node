@@ -300,7 +300,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.RecommendResponse()
       );
@@ -332,7 +332,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.RecommendResponse()
       );
@@ -380,7 +380,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.recommend = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.recommend(request), expectedError);

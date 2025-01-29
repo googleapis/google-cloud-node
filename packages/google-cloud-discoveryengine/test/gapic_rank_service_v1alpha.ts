@@ -283,7 +283,7 @@ describe('v1alpha.RankServiceClient', () => {
         ['rankingConfig']
       );
       request.rankingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `ranking_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ranking_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.RankResponse()
       );
@@ -313,7 +313,7 @@ describe('v1alpha.RankServiceClient', () => {
         ['rankingConfig']
       );
       request.rankingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `ranking_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ranking_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.RankResponse()
       );
@@ -358,7 +358,7 @@ describe('v1alpha.RankServiceClient', () => {
         ['rankingConfig']
       );
       request.rankingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `ranking_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `ranking_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rank = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.rank(request), expectedError);

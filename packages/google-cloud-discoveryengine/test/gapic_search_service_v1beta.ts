@@ -323,7 +323,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -362,7 +362,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -419,7 +419,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.search = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.search(request), expectedError);
@@ -447,7 +447,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -510,7 +510,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.createStream = stubPageStreamingCall(
         undefined,
@@ -564,7 +564,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -613,7 +613,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -657,7 +657,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -696,7 +696,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -753,7 +753,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchLite = stubSimpleCall(
         undefined,
@@ -784,7 +784,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -847,7 +847,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchLite.createStream = stubPageStreamingCall(
         undefined,
@@ -901,7 +901,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
@@ -951,7 +951,7 @@ describe('v1beta.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchLite.asyncIterate = stubAsyncIterationCall(
         undefined,

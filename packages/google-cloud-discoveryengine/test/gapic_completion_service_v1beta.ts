@@ -339,7 +339,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CompleteQueryResponse()
       );
@@ -372,7 +372,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CompleteQueryResponse()
       );
@@ -421,7 +421,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeQuery = stubSimpleCall(
         undefined,
@@ -477,7 +477,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['completionConfig']
       );
       request.completionConfig = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryResponse()
       );
@@ -511,7 +511,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['completionConfig']
       );
       request.completionConfig = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryResponse()
       );
@@ -560,7 +560,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['completionConfig']
       );
       request.completionConfig = defaultValue1;
-      const expectedHeaderRequestParams = `completion_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.advancedCompleteQuery = stubSimpleCall(
         undefined,
@@ -622,7 +622,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -657,7 +657,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -713,7 +713,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importSuggestionDenyListEntries =
         stubLongRunningCall(undefined, expectedError);
@@ -747,7 +747,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importSuggestionDenyListEntries =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -827,7 +827,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -862,7 +862,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -918,7 +918,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeSuggestionDenyListEntries = stubLongRunningCall(
         undefined,
@@ -954,7 +954,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeSuggestionDenyListEntries = stubLongRunningCall(
         undefined,
@@ -1037,7 +1037,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1072,7 +1072,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1128,7 +1128,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCompletionSuggestions = stubLongRunningCall(
         undefined,
@@ -1164,7 +1164,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCompletionSuggestions = stubLongRunningCall(
         undefined,
@@ -1247,7 +1247,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1282,7 +1282,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1338,7 +1338,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeCompletionSuggestions = stubLongRunningCall(
         undefined,
@@ -1374,7 +1374,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeCompletionSuggestions = stubLongRunningCall(
         undefined,

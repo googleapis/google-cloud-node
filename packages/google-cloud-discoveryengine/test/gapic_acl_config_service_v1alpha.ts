@@ -289,7 +289,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         ['aclConfig', 'name']
       );
       request.aclConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `acl_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `acl_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.AclConfig()
       );
@@ -321,7 +321,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         ['aclConfig', 'name']
       );
       request.aclConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `acl_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `acl_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.AclConfig()
       );
@@ -369,7 +369,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         ['aclConfig', 'name']
       );
       request.aclConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `acl_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `acl_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAclConfig = stubSimpleCall(
         undefined,
@@ -422,7 +422,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.AclConfig()
       );
@@ -453,7 +453,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1alpha.AclConfig()
       );
@@ -500,7 +500,7 @@ describe('v1alpha.AclConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAclConfig = stubSimpleCall(
         undefined,
