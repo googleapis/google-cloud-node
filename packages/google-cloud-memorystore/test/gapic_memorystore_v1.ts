@@ -369,7 +369,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.Instance()
       );
@@ -400,7 +400,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.Instance()
       );
@@ -447,7 +447,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInstance = stubSimpleCall(
         undefined,
@@ -499,7 +499,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.CertificateAuthority()
       );
@@ -531,7 +531,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.CertificateAuthority()
       );
@@ -578,7 +578,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateAuthority = stubSimpleCall(
         undefined,
@@ -636,7 +636,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -669,7 +669,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -723,7 +723,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstance = stubLongRunningCall(
         undefined,
@@ -754,7 +754,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstance = stubLongRunningCall(
         undefined,
@@ -831,7 +831,7 @@ describe('v1.MemorystoreClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -865,7 +865,7 @@ describe('v1.MemorystoreClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -920,7 +920,7 @@ describe('v1.MemorystoreClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -952,7 +952,7 @@ describe('v1.MemorystoreClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -1028,7 +1028,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1061,7 +1061,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1115,7 +1115,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstance = stubLongRunningCall(
         undefined,
@@ -1146,7 +1146,7 @@ describe('v1.MemorystoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstance = stubLongRunningCall(
         undefined,
@@ -1222,7 +1222,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.memorystore.v1.Instance()
@@ -1261,7 +1261,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.memorystore.v1.Instance()
@@ -1316,7 +1316,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInstances = stubSimpleCall(
         undefined,
@@ -1347,7 +1347,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.memorystore.v1.Instance()
@@ -1407,7 +1407,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1456,7 +1456,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.memorystore.v1.Instance()
@@ -1505,7 +1505,7 @@ describe('v1.MemorystoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
