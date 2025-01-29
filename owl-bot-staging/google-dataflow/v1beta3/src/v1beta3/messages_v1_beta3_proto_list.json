@@ -1,0 +1,9 @@
+[
+  "../../protos/google/dataflow/v1beta3/environment.proto",
+  "../../protos/google/dataflow/v1beta3/jobs.proto",
+  "../../protos/google/dataflow/v1beta3/messages.proto",
+  "../../protos/google/dataflow/v1beta3/metrics.proto",
+  "../../protos/google/dataflow/v1beta3/snapshots.proto",
+  "../../protos/google/dataflow/v1beta3/streaming.proto",
+  "../../protos/google/dataflow/v1beta3/templates.proto"
+]
