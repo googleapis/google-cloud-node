@@ -1,0 +1,337 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.chat.v1",
+  "libraryPackage": "@google-apps/chat",
+  "services": {
+    "ChatService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ChatServiceClient",
+          "rpcs": {
+            "CreateMessage": {
+              "methods": [
+                "createMessage"
+              ]
+            },
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GetMessage": {
+              "methods": [
+                "getMessage"
+              ]
+            },
+            "UpdateMessage": {
+              "methods": [
+                "updateMessage"
+              ]
+            },
+            "DeleteMessage": {
+              "methods": [
+                "deleteMessage"
+              ]
+            },
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
+            "UploadAttachment": {
+              "methods": [
+                "uploadAttachment"
+              ]
+            },
+            "GetSpace": {
+              "methods": [
+                "getSpace"
+              ]
+            },
+            "CreateSpace": {
+              "methods": [
+                "createSpace"
+              ]
+            },
+            "SetUpSpace": {
+              "methods": [
+                "setUpSpace"
+              ]
+            },
+            "UpdateSpace": {
+              "methods": [
+                "updateSpace"
+              ]
+            },
+            "DeleteSpace": {
+              "methods": [
+                "deleteSpace"
+              ]
+            },
+            "CompleteImportSpace": {
+              "methods": [
+                "completeImportSpace"
+              ]
+            },
+            "FindDirectMessage": {
+              "methods": [
+                "findDirectMessage"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "CreateReaction": {
+              "methods": [
+                "createReaction"
+              ]
+            },
+            "DeleteReaction": {
+              "methods": [
+                "deleteReaction"
+              ]
+            },
+            "GetSpaceReadState": {
+              "methods": [
+                "getSpaceReadState"
+              ]
+            },
+            "UpdateSpaceReadState": {
+              "methods": [
+                "updateSpaceReadState"
+              ]
+            },
+            "GetThreadReadState": {
+              "methods": [
+                "getThreadReadState"
+              ]
+            },
+            "GetSpaceEvent": {
+              "methods": [
+                "getSpaceEvent"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "listMessages",
+                "listMessagesStream",
+                "listMessagesAsync"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            },
+            "ListSpaces": {
+              "methods": [
+                "listSpaces",
+                "listSpacesStream",
+                "listSpacesAsync"
+              ]
+            },
+            "SearchSpaces": {
+              "methods": [
+                "searchSpaces",
+                "searchSpacesStream",
+                "searchSpacesAsync"
+              ]
+            },
+            "ListReactions": {
+              "methods": [
+                "listReactions",
+                "listReactionsStream",
+                "listReactionsAsync"
+              ]
+            },
+            "ListSpaceEvents": {
+              "methods": [
+                "listSpaceEvents",
+                "listSpaceEventsStream",
+                "listSpaceEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ChatServiceClient",
+          "rpcs": {
+            "CreateMessage": {
+              "methods": [
+                "createMessage"
+              ]
+            },
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GetMessage": {
+              "methods": [
+                "getMessage"
+              ]
+            },
+            "UpdateMessage": {
+              "methods": [
+                "updateMessage"
+              ]
+            },
+            "DeleteMessage": {
+              "methods": [
+                "deleteMessage"
+              ]
+            },
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
+            "UploadAttachment": {
+              "methods": [
+                "uploadAttachment"
+              ]
+            },
+            "GetSpace": {
+              "methods": [
+                "getSpace"
+              ]
+            },
+            "CreateSpace": {
+              "methods": [
+                "createSpace"
+              ]
+            },
+            "SetUpSpace": {
+              "methods": [
+                "setUpSpace"
+              ]
+            },
+            "UpdateSpace": {
+              "methods": [
+                "updateSpace"
+              ]
+            },
+            "DeleteSpace": {
+              "methods": [
+                "deleteSpace"
+              ]
+            },
+            "CompleteImportSpace": {
+              "methods": [
+                "completeImportSpace"
+              ]
+            },
+            "FindDirectMessage": {
+              "methods": [
+                "findDirectMessage"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "CreateReaction": {
+              "methods": [
+                "createReaction"
+              ]
+            },
+            "DeleteReaction": {
+              "methods": [
+                "deleteReaction"
+              ]
+            },
+            "GetSpaceReadState": {
+              "methods": [
+                "getSpaceReadState"
+              ]
+            },
+            "UpdateSpaceReadState": {
+              "methods": [
+                "updateSpaceReadState"
+              ]
+            },
+            "GetThreadReadState": {
+              "methods": [
+                "getThreadReadState"
+              ]
+            },
+            "GetSpaceEvent": {
+              "methods": [
+                "getSpaceEvent"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "listMessages",
+                "listMessagesStream",
+                "listMessagesAsync"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            },
+            "ListSpaces": {
+              "methods": [
+                "listSpaces",
+                "listSpacesStream",
+                "listSpacesAsync"
+              ]
+            },
+            "SearchSpaces": {
+              "methods": [
+                "searchSpaces",
+                "searchSpacesStream",
+                "searchSpacesAsync"
+              ]
+            },
+            "ListReactions": {
+              "methods": [
+                "listReactions",
+                "listReactionsStream",
+                "listReactionsAsync"
+              ]
+            },
+            "ListSpaceEvents": {
+              "methods": [
+                "listSpaceEvents",
+                "listSpaceEventsStream",
+                "listSpaceEventsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

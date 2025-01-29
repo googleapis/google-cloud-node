@@ -1,0 +1,5 @@
+[
+  "../../protos/google/analytics/admin/v1beta/access_report.proto",
+  "../../protos/google/analytics/admin/v1beta/analytics_admin.proto",
+  "../../protos/google/analytics/admin/v1beta/resources.proto"
+]

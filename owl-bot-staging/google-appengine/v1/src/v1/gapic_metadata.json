@@ -1,0 +1,489 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.appengine.v1",
+  "libraryPackage": "@google-cloud/appengine-admin",
+  "services": {
+    "Applications": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApplicationsClient",
+          "rpcs": {
+            "GetApplication": {
+              "methods": [
+                "getApplication"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "createApplication"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "updateApplication"
+              ]
+            },
+            "RepairApplication": {
+              "methods": [
+                "repairApplication"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApplicationsClient",
+          "rpcs": {
+            "GetApplication": {
+              "methods": [
+                "getApplication"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "createApplication"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "updateApplication"
+              ]
+            },
+            "RepairApplication": {
+              "methods": [
+                "repairApplication"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AuthorizedCertificates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AuthorizedCertificatesClient",
+          "rpcs": {
+            "GetAuthorizedCertificate": {
+              "methods": [
+                "getAuthorizedCertificate"
+              ]
+            },
+            "CreateAuthorizedCertificate": {
+              "methods": [
+                "createAuthorizedCertificate"
+              ]
+            },
+            "UpdateAuthorizedCertificate": {
+              "methods": [
+                "updateAuthorizedCertificate"
+              ]
+            },
+            "DeleteAuthorizedCertificate": {
+              "methods": [
+                "deleteAuthorizedCertificate"
+              ]
+            },
+            "ListAuthorizedCertificates": {
+              "methods": [
+                "listAuthorizedCertificates",
+                "listAuthorizedCertificatesStream",
+                "listAuthorizedCertificatesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AuthorizedCertificatesClient",
+          "rpcs": {
+            "GetAuthorizedCertificate": {
+              "methods": [
+                "getAuthorizedCertificate"
+              ]
+            },
+            "CreateAuthorizedCertificate": {
+              "methods": [
+                "createAuthorizedCertificate"
+              ]
+            },
+            "UpdateAuthorizedCertificate": {
+              "methods": [
+                "updateAuthorizedCertificate"
+              ]
+            },
+            "DeleteAuthorizedCertificate": {
+              "methods": [
+                "deleteAuthorizedCertificate"
+              ]
+            },
+            "ListAuthorizedCertificates": {
+              "methods": [
+                "listAuthorizedCertificates",
+                "listAuthorizedCertificatesStream",
+                "listAuthorizedCertificatesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AuthorizedDomains": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AuthorizedDomainsClient",
+          "rpcs": {
+            "ListAuthorizedDomains": {
+              "methods": [
+                "listAuthorizedDomains",
+                "listAuthorizedDomainsStream",
+                "listAuthorizedDomainsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AuthorizedDomainsClient",
+          "rpcs": {
+            "ListAuthorizedDomains": {
+              "methods": [
+                "listAuthorizedDomains",
+                "listAuthorizedDomainsStream",
+                "listAuthorizedDomainsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DomainMappings": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DomainMappingsClient",
+          "rpcs": {
+            "GetDomainMapping": {
+              "methods": [
+                "getDomainMapping"
+              ]
+            },
+            "CreateDomainMapping": {
+              "methods": [
+                "createDomainMapping"
+              ]
+            },
+            "UpdateDomainMapping": {
+              "methods": [
+                "updateDomainMapping"
+              ]
+            },
+            "DeleteDomainMapping": {
+              "methods": [
+                "deleteDomainMapping"
+              ]
+            },
+            "ListDomainMappings": {
+              "methods": [
+                "listDomainMappings",
+                "listDomainMappingsStream",
+                "listDomainMappingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DomainMappingsClient",
+          "rpcs": {
+            "GetDomainMapping": {
+              "methods": [
+                "getDomainMapping"
+              ]
+            },
+            "CreateDomainMapping": {
+              "methods": [
+                "createDomainMapping"
+              ]
+            },
+            "UpdateDomainMapping": {
+              "methods": [
+                "updateDomainMapping"
+              ]
+            },
+            "DeleteDomainMapping": {
+              "methods": [
+                "deleteDomainMapping"
+              ]
+            },
+            "ListDomainMappings": {
+              "methods": [
+                "listDomainMappings",
+                "listDomainMappingsStream",
+                "listDomainMappingsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Firewall": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FirewallClient",
+          "rpcs": {
+            "BatchUpdateIngressRules": {
+              "methods": [
+                "batchUpdateIngressRules"
+              ]
+            },
+            "CreateIngressRule": {
+              "methods": [
+                "createIngressRule"
+              ]
+            },
+            "GetIngressRule": {
+              "methods": [
+                "getIngressRule"
+              ]
+            },
+            "UpdateIngressRule": {
+              "methods": [
+                "updateIngressRule"
+              ]
+            },
+            "DeleteIngressRule": {
+              "methods": [
+                "deleteIngressRule"
+              ]
+            },
+            "ListIngressRules": {
+              "methods": [
+                "listIngressRules",
+                "listIngressRulesStream",
+                "listIngressRulesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FirewallClient",
+          "rpcs": {
+            "BatchUpdateIngressRules": {
+              "methods": [
+                "batchUpdateIngressRules"
+              ]
+            },
+            "CreateIngressRule": {
+              "methods": [
+                "createIngressRule"
+              ]
+            },
+            "GetIngressRule": {
+              "methods": [
+                "getIngressRule"
+              ]
+            },
+            "UpdateIngressRule": {
+              "methods": [
+                "updateIngressRule"
+              ]
+            },
+            "DeleteIngressRule": {
+              "methods": [
+                "deleteIngressRule"
+              ]
+            },
+            "ListIngressRules": {
+              "methods": [
+                "listIngressRules",
+                "listIngressRulesStream",
+                "listIngressRulesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Instances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "DebugInstance": {
+              "methods": [
+                "debugInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "DebugInstance": {
+              "methods": [
+                "debugInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Services": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServicesClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServicesClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Versions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VersionsClient",
+          "rpcs": {
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "createVersion"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "updateVersion"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VersionsClient",
+          "rpcs": {
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "createVersion"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "updateVersion"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

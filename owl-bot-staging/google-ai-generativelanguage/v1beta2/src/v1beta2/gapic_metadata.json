@@ -1,0 +1,115 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.ai.generativelanguage.v1beta2",
+  "libraryPackage": "@google-ai/generativelanguage",
+  "services": {
+    "DiscussService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DiscussServiceClient",
+          "rpcs": {
+            "GenerateMessage": {
+              "methods": [
+                "generateMessage"
+              ]
+            },
+            "CountMessageTokens": {
+              "methods": [
+                "countMessageTokens"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DiscussServiceClient",
+          "rpcs": {
+            "GenerateMessage": {
+              "methods": [
+                "generateMessage"
+              ]
+            },
+            "CountMessageTokens": {
+              "methods": [
+                "countMessageTokens"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TextService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TextServiceClient",
+          "rpcs": {
+            "GenerateText": {
+              "methods": [
+                "generateText"
+              ]
+            },
+            "EmbedText": {
+              "methods": [
+                "embedText"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TextServiceClient",
+          "rpcs": {
+            "GenerateText": {
+              "methods": [
+                "generateText"
+              ]
+            },
+            "EmbedText": {
+              "methods": [
+                "embedText"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

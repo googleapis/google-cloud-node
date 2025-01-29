@@ -1,0 +1,11 @@
+[
+  "../../protos/google/ai/generativelanguage/v1beta3/citation.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/discuss_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/model.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/model_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/permission.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/permission_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/safety.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/text_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta3/tuned_model.proto"
+]

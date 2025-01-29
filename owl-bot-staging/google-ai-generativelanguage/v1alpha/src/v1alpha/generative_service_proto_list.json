@@ -1,0 +1,20 @@
+[
+  "../../protos/google/ai/generativelanguage/v1alpha/cache_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/cached_content.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/citation.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/content.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/discuss_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/file.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/file_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/generative_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/model.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/model_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/permission.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/permission_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/prediction_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/retriever.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/retriever_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/safety.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/text_service.proto",
+  "../../protos/google/ai/generativelanguage/v1alpha/tuned_model.proto"
+]
