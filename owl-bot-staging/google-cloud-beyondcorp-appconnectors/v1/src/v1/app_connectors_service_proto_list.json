@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/beyondcorp/appconnectors/v1/app_connector_instance_config.proto",
+  "../../protos/google/cloud/beyondcorp/appconnectors/v1/app_connectors_service.proto",
+  "../../protos/google/cloud/beyondcorp/appconnectors/v1/resource_info.proto"
+]

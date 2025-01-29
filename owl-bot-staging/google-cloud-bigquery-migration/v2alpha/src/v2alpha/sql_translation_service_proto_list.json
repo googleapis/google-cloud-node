@@ -1,0 +1,9 @@
+[
+  "../../protos/google/cloud/bigquery/migration/v2alpha/assessment_task.proto",
+  "../../protos/google/cloud/bigquery/migration/v2alpha/migration_entities.proto",
+  "../../protos/google/cloud/bigquery/migration/v2alpha/migration_error_details.proto",
+  "../../protos/google/cloud/bigquery/migration/v2alpha/migration_metrics.proto",
+  "../../protos/google/cloud/bigquery/migration/v2alpha/migration_service.proto",
+  "../../protos/google/cloud/bigquery/migration/v2alpha/translation_service.proto",
+  "../../protos/google/cloud/bigquery/migration/v2alpha/translation_task.proto"
+]
