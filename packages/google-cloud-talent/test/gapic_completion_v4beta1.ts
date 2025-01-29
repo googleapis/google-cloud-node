@@ -257,7 +257,7 @@ describe('v4beta1.CompletionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CompleteQueryResponse()
       );
@@ -288,7 +288,7 @@ describe('v4beta1.CompletionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CompleteQueryResponse()
       );
@@ -335,7 +335,7 @@ describe('v4beta1.CompletionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeQuery = stubSimpleCall(
         undefined,
