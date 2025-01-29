@@ -1,9 +1,0 @@
-[
-  "../../protos/google/cloud/securitycenter/v1beta1/asset.proto",
-  "../../protos/google/cloud/securitycenter/v1beta1/finding.proto",
-  "../../protos/google/cloud/securitycenter/v1beta1/organization_settings.proto",
-  "../../protos/google/cloud/securitycenter/v1beta1/run_asset_discovery_response.proto",
-  "../../protos/google/cloud/securitycenter/v1beta1/security_marks.proto",
-  "../../protos/google/cloud/securitycenter/v1beta1/securitycenter_service.proto",
-  "../../protos/google/cloud/securitycenter/v1beta1/source.proto"
-]
