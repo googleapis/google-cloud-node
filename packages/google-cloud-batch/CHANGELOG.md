@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.15.0...batch-v1.16.0) (2025-01-29)
+
+
+### Features
+
+* [batch] Update Ruby version requirement to 3.0 ([#5983](https://github.com/googleapis/google-cloud-node/issues/5983)) ([8d63de7](https://github.com/googleapis/google-cloud-node/commit/8d63de785cdab8bab9ce870a6e5adbd007d04dd5))
+
 ## [1.15.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.14.0...batch-v1.15.0) (2024-09-13)
 
 

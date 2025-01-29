@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/googleapis/google-cloud-node/compare/places-v1.9.0...places-v1.9.1) (2025-01-29)
+
+
+### Bug Fixes
+
+* [places] add oauth scopes to Places proto ([#5990](https://github.com/googleapis/google-cloud-node/issues/5990)) ([e87d466](https://github.com/googleapis/google-cloud-node/commit/e87d466d7799eeb6964ba5611f212d961439e516))
+
 ## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.8.0...places-v1.9.0) (2025-01-28)
 
 

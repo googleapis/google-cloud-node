@@ -5,6 +5,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "8da9b835776d424f55b9d1c97eb8964224a50ac4",
+          "message": "[chat] A new field `custom_emoji_metadata` is added to message `.google.chat.v1.Annotation`",
+          "issues": [
+            "5988"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "054e7b57-96ab-47ba-92a0-fe1a85ed896e",
+      "createTime": "2025-01-29T17:59:49.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e87d466d7799eeb6964ba5611f212d961439e516",
+          "message": "[places] add oauth scopes to Places proto",
+          "issues": [
+            "5990"
+          ]
+        }
+      ],
+      "version": "1.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "dad25181-9673-4999-b4fc-047a9290b403",
+      "createTime": "2025-01-29T17:59:49.914Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d63de785cdab8bab9ce870a6e5adbd007d04dd5",
+          "message": "[batch] Update Ruby version requirement to 3.0",
+          "issues": [
+            "5983"
+          ]
+        }
+      ],
+      "version": "1.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "e5a3816a-1efc-4e77-8336-167154c02503",
+      "createTime": "2025-01-29T17:59:49.899Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "e5e13cb8af58de2a6dc9b8735e9cae045c0b551c",
           "message": "[cloudcontrolspartner] A new method `CreateCustomer` is added to service `CloudControlsPartnerCore`",
           "issues": [
@@ -38899,5 +38950,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-01-28T01:11:23.868Z"
+  "updateTime": "2025-01-29T17:59:49.929Z"
 }
