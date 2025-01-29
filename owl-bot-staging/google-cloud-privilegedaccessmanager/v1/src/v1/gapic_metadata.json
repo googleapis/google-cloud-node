@@ -1,0 +1,179 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.privilegedaccessmanager.v1",
+  "libraryPackage": "@google-cloud/privilegedaccessmanager",
+  "services": {
+    "PrivilegedAccessManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PrivilegedAccessManagerClient",
+          "rpcs": {
+            "CheckOnboardingStatus": {
+              "methods": [
+                "checkOnboardingStatus"
+              ]
+            },
+            "GetEntitlement": {
+              "methods": [
+                "getEntitlement"
+              ]
+            },
+            "GetGrant": {
+              "methods": [
+                "getGrant"
+              ]
+            },
+            "CreateGrant": {
+              "methods": [
+                "createGrant"
+              ]
+            },
+            "ApproveGrant": {
+              "methods": [
+                "approveGrant"
+              ]
+            },
+            "DenyGrant": {
+              "methods": [
+                "denyGrant"
+              ]
+            },
+            "CreateEntitlement": {
+              "methods": [
+                "createEntitlement"
+              ]
+            },
+            "DeleteEntitlement": {
+              "methods": [
+                "deleteEntitlement"
+              ]
+            },
+            "UpdateEntitlement": {
+              "methods": [
+                "updateEntitlement"
+              ]
+            },
+            "RevokeGrant": {
+              "methods": [
+                "revokeGrant"
+              ]
+            },
+            "ListEntitlements": {
+              "methods": [
+                "listEntitlements",
+                "listEntitlementsStream",
+                "listEntitlementsAsync"
+              ]
+            },
+            "SearchEntitlements": {
+              "methods": [
+                "searchEntitlements",
+                "searchEntitlementsStream",
+                "searchEntitlementsAsync"
+              ]
+            },
+            "ListGrants": {
+              "methods": [
+                "listGrants",
+                "listGrantsStream",
+                "listGrantsAsync"
+              ]
+            },
+            "SearchGrants": {
+              "methods": [
+                "searchGrants",
+                "searchGrantsStream",
+                "searchGrantsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PrivilegedAccessManagerClient",
+          "rpcs": {
+            "CheckOnboardingStatus": {
+              "methods": [
+                "checkOnboardingStatus"
+              ]
+            },
+            "GetEntitlement": {
+              "methods": [
+                "getEntitlement"
+              ]
+            },
+            "GetGrant": {
+              "methods": [
+                "getGrant"
+              ]
+            },
+            "CreateGrant": {
+              "methods": [
+                "createGrant"
+              ]
+            },
+            "ApproveGrant": {
+              "methods": [
+                "approveGrant"
+              ]
+            },
+            "DenyGrant": {
+              "methods": [
+                "denyGrant"
+              ]
+            },
+            "CreateEntitlement": {
+              "methods": [
+                "createEntitlement"
+              ]
+            },
+            "DeleteEntitlement": {
+              "methods": [
+                "deleteEntitlement"
+              ]
+            },
+            "UpdateEntitlement": {
+              "methods": [
+                "updateEntitlement"
+              ]
+            },
+            "RevokeGrant": {
+              "methods": [
+                "revokeGrant"
+              ]
+            },
+            "ListEntitlements": {
+              "methods": [
+                "listEntitlements",
+                "listEntitlementsStream",
+                "listEntitlementsAsync"
+              ]
+            },
+            "SearchEntitlements": {
+              "methods": [
+                "searchEntitlements",
+                "searchEntitlementsStream",
+                "searchEntitlementsAsync"
+              ]
+            },
+            "ListGrants": {
+              "methods": [
+                "listGrants",
+                "listGrantsStream",
+                "listGrantsAsync"
+              ]
+            },
+            "SearchGrants": {
+              "methods": [
+                "searchGrants",
+                "searchGrantsStream",
+                "searchGrantsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
