@@ -320,7 +320,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -359,7 +359,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -416,7 +416,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listImageVersions = stubSimpleCall(
         undefined,
@@ -447,7 +447,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -510,7 +510,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImageVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -562,7 +562,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -612,7 +612,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImageVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

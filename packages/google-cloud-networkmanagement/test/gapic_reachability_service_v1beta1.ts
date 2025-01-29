@@ -378,7 +378,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest()
       );
@@ -411,7 +411,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest()
       );
@@ -459,7 +459,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectivityTest = stubSimpleCall(
         undefined,
@@ -513,7 +513,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -547,7 +547,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -602,7 +602,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectivityTest = stubLongRunningCall(
         undefined,
@@ -637,7 +637,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectivityTest = stubLongRunningCall(
         undefined,
@@ -717,7 +717,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -752,7 +752,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -808,7 +808,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectivityTest = stubLongRunningCall(
         undefined,
@@ -844,7 +844,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
-      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectivityTest = stubLongRunningCall(
         undefined,
@@ -923,7 +923,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -957,7 +957,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1012,7 +1012,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rerunConnectivityTest = stubLongRunningCall(
         undefined,
@@ -1047,7 +1047,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rerunConnectivityTest = stubLongRunningCall(
         undefined,
@@ -1126,7 +1126,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1160,7 +1160,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1215,7 +1215,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectivityTest = stubLongRunningCall(
         undefined,
@@ -1250,7 +1250,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectivityTest = stubLongRunningCall(
         undefined,
@@ -1329,7 +1329,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest()
@@ -1370,7 +1370,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest()
@@ -1428,7 +1428,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnectivityTests = stubSimpleCall(
         undefined,
@@ -1463,7 +1463,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest()
@@ -1533,7 +1533,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectivityTests.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1592,7 +1592,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest()
@@ -1647,7 +1647,7 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectivityTests.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

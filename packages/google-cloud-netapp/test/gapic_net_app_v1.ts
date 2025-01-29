@@ -355,7 +355,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.StoragePool()
       );
@@ -386,7 +386,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.StoragePool()
       );
@@ -433,7 +433,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getStoragePool = stubSimpleCall(
         undefined,
@@ -485,7 +485,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Volume()
       );
@@ -516,7 +516,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Volume()
       );
@@ -563,7 +563,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVolume = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getVolume(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Snapshot()
       );
@@ -643,7 +643,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Snapshot()
       );
@@ -690,7 +690,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSnapshot = stubSimpleCall(
         undefined,
@@ -742,7 +742,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ActiveDirectory()
       );
@@ -774,7 +774,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ActiveDirectory()
       );
@@ -821,7 +821,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getActiveDirectory = stubSimpleCall(
         undefined,
@@ -873,7 +873,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.KmsConfig()
       );
@@ -904,7 +904,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.KmsConfig()
       );
@@ -951,7 +951,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKmsConfig = stubSimpleCall(
         undefined,
@@ -1003,7 +1003,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.VerifyKmsConfigResponse()
       );
@@ -1034,7 +1034,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.VerifyKmsConfigResponse()
       );
@@ -1081,7 +1081,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.verifyKmsConfig = stubSimpleCall(
         undefined,
@@ -1133,7 +1133,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Replication()
       );
@@ -1164,7 +1164,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Replication()
       );
@@ -1211,7 +1211,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReplication = stubSimpleCall(
         undefined,
@@ -1263,7 +1263,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.BackupVault()
       );
@@ -1294,7 +1294,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.BackupVault()
       );
@@ -1341,7 +1341,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBackupVault = stubSimpleCall(
         undefined,
@@ -1393,7 +1393,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Backup()
       );
@@ -1424,7 +1424,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.Backup()
       );
@@ -1471,7 +1471,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getBackup(request), expectedError);
@@ -1520,7 +1520,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.BackupPolicy()
       );
@@ -1551,7 +1551,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.netapp.v1.BackupPolicy()
       );
@@ -1598,7 +1598,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBackupPolicy = stubSimpleCall(
         undefined,
@@ -1650,7 +1650,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1683,7 +1683,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1737,7 +1737,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStoragePool = stubLongRunningCall(
         undefined,
@@ -1768,7 +1768,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStoragePool = stubLongRunningCall(
         undefined,
@@ -1845,7 +1845,7 @@ describe('v1.NetAppClient', () => {
         ['storagePool', 'name']
       );
       request.storagePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1879,7 +1879,7 @@ describe('v1.NetAppClient', () => {
         ['storagePool', 'name']
       );
       request.storagePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1934,7 +1934,7 @@ describe('v1.NetAppClient', () => {
         ['storagePool', 'name']
       );
       request.storagePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateStoragePool = stubLongRunningCall(
         undefined,
@@ -1966,7 +1966,7 @@ describe('v1.NetAppClient', () => {
         ['storagePool', 'name']
       );
       request.storagePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `storage_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateStoragePool = stubLongRunningCall(
         undefined,
@@ -2042,7 +2042,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2075,7 +2075,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2129,7 +2129,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStoragePool = stubLongRunningCall(
         undefined,
@@ -2160,7 +2160,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStoragePool = stubLongRunningCall(
         undefined,
@@ -2236,7 +2236,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2269,7 +2269,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2323,7 +2323,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateDirectoryService = stubLongRunningCall(
         undefined,
@@ -2357,7 +2357,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateDirectoryService = stubLongRunningCall(
         undefined,
@@ -2434,7 +2434,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2467,7 +2467,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2521,7 +2521,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.switchActiveReplicaZone = stubLongRunningCall(
         undefined,
@@ -2555,7 +2555,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.switchActiveReplicaZone = stubLongRunningCall(
         undefined,
@@ -2632,7 +2632,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2664,7 +2664,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2718,7 +2718,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVolume = stubLongRunningCall(
         undefined,
@@ -2749,7 +2749,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVolume = stubLongRunningCall(
         undefined,
@@ -2823,7 +2823,7 @@ describe('v1.NetAppClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2856,7 +2856,7 @@ describe('v1.NetAppClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2911,7 +2911,7 @@ describe('v1.NetAppClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVolume = stubLongRunningCall(
         undefined,
@@ -2943,7 +2943,7 @@ describe('v1.NetAppClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVolume = stubLongRunningCall(
         undefined,
@@ -3016,7 +3016,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3048,7 +3048,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3102,7 +3102,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVolume = stubLongRunningCall(
         undefined,
@@ -3133,7 +3133,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVolume = stubLongRunningCall(
         undefined,
@@ -3206,7 +3206,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3238,7 +3238,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3292,7 +3292,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revertVolume = stubLongRunningCall(
         undefined,
@@ -3323,7 +3323,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revertVolume = stubLongRunningCall(
         undefined,
@@ -3396,7 +3396,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3429,7 +3429,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3483,7 +3483,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSnapshot = stubLongRunningCall(
         undefined,
@@ -3514,7 +3514,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSnapshot = stubLongRunningCall(
         undefined,
@@ -3590,7 +3590,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3623,7 +3623,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3677,7 +3677,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSnapshot = stubLongRunningCall(
         undefined,
@@ -3708,7 +3708,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSnapshot = stubLongRunningCall(
         undefined,
@@ -3785,7 +3785,7 @@ describe('v1.NetAppClient', () => {
         ['snapshot', 'name']
       );
       request.snapshot.name = defaultValue1;
-      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3819,7 +3819,7 @@ describe('v1.NetAppClient', () => {
         ['snapshot', 'name']
       );
       request.snapshot.name = defaultValue1;
-      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3874,7 +3874,7 @@ describe('v1.NetAppClient', () => {
         ['snapshot', 'name']
       );
       request.snapshot.name = defaultValue1;
-      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSnapshot = stubLongRunningCall(
         undefined,
@@ -3906,7 +3906,7 @@ describe('v1.NetAppClient', () => {
         ['snapshot', 'name']
       );
       request.snapshot.name = defaultValue1;
-      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSnapshot = stubLongRunningCall(
         undefined,
@@ -3982,7 +3982,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4015,7 +4015,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4069,7 +4069,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createActiveDirectory = stubLongRunningCall(
         undefined,
@@ -4103,7 +4103,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createActiveDirectory = stubLongRunningCall(
         undefined,
@@ -4180,7 +4180,7 @@ describe('v1.NetAppClient', () => {
         ['activeDirectory', 'name']
       );
       request.activeDirectory.name = defaultValue1;
-      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4214,7 +4214,7 @@ describe('v1.NetAppClient', () => {
         ['activeDirectory', 'name']
       );
       request.activeDirectory.name = defaultValue1;
-      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4269,7 +4269,7 @@ describe('v1.NetAppClient', () => {
         ['activeDirectory', 'name']
       );
       request.activeDirectory.name = defaultValue1;
-      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateActiveDirectory = stubLongRunningCall(
         undefined,
@@ -4304,7 +4304,7 @@ describe('v1.NetAppClient', () => {
         ['activeDirectory', 'name']
       );
       request.activeDirectory.name = defaultValue1;
-      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `active_directory.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateActiveDirectory = stubLongRunningCall(
         undefined,
@@ -4380,7 +4380,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4413,7 +4413,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4467,7 +4467,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteActiveDirectory = stubLongRunningCall(
         undefined,
@@ -4501,7 +4501,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteActiveDirectory = stubLongRunningCall(
         undefined,
@@ -4577,7 +4577,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4610,7 +4610,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4664,7 +4664,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKmsConfig = stubLongRunningCall(
         undefined,
@@ -4695,7 +4695,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKmsConfig = stubLongRunningCall(
         undefined,
@@ -4772,7 +4772,7 @@ describe('v1.NetAppClient', () => {
         ['kmsConfig', 'name']
       );
       request.kmsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4806,7 +4806,7 @@ describe('v1.NetAppClient', () => {
         ['kmsConfig', 'name']
       );
       request.kmsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4861,7 +4861,7 @@ describe('v1.NetAppClient', () => {
         ['kmsConfig', 'name']
       );
       request.kmsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKmsConfig = stubLongRunningCall(
         undefined,
@@ -4893,7 +4893,7 @@ describe('v1.NetAppClient', () => {
         ['kmsConfig', 'name']
       );
       request.kmsConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `kms_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKmsConfig = stubLongRunningCall(
         undefined,
@@ -4969,7 +4969,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5002,7 +5002,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5056,7 +5056,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.encryptVolumes = stubLongRunningCall(
         undefined,
@@ -5087,7 +5087,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.encryptVolumes = stubLongRunningCall(
         undefined,
@@ -5163,7 +5163,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5196,7 +5196,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5250,7 +5250,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKmsConfig = stubLongRunningCall(
         undefined,
@@ -5281,7 +5281,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKmsConfig = stubLongRunningCall(
         undefined,
@@ -5357,7 +5357,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5390,7 +5390,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5444,7 +5444,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReplication = stubLongRunningCall(
         undefined,
@@ -5475,7 +5475,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReplication = stubLongRunningCall(
         undefined,
@@ -5551,7 +5551,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5584,7 +5584,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5638,7 +5638,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteReplication = stubLongRunningCall(
         undefined,
@@ -5669,7 +5669,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteReplication = stubLongRunningCall(
         undefined,
@@ -5746,7 +5746,7 @@ describe('v1.NetAppClient', () => {
         ['replication', 'name']
       );
       request.replication.name = defaultValue1;
-      const expectedHeaderRequestParams = `replication.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `replication.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5780,7 +5780,7 @@ describe('v1.NetAppClient', () => {
         ['replication', 'name']
       );
       request.replication.name = defaultValue1;
-      const expectedHeaderRequestParams = `replication.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `replication.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5835,7 +5835,7 @@ describe('v1.NetAppClient', () => {
         ['replication', 'name']
       );
       request.replication.name = defaultValue1;
-      const expectedHeaderRequestParams = `replication.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `replication.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateReplication = stubLongRunningCall(
         undefined,
@@ -5867,7 +5867,7 @@ describe('v1.NetAppClient', () => {
         ['replication', 'name']
       );
       request.replication.name = defaultValue1;
-      const expectedHeaderRequestParams = `replication.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `replication.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateReplication = stubLongRunningCall(
         undefined,
@@ -5943,7 +5943,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5976,7 +5976,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6030,7 +6030,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopReplication = stubLongRunningCall(
         undefined,
@@ -6061,7 +6061,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopReplication = stubLongRunningCall(
         undefined,
@@ -6137,7 +6137,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6170,7 +6170,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6224,7 +6224,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeReplication = stubLongRunningCall(
         undefined,
@@ -6255,7 +6255,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeReplication = stubLongRunningCall(
         undefined,
@@ -6331,7 +6331,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6364,7 +6364,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6418,7 +6418,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reverseReplicationDirection = stubLongRunningCall(
         undefined,
@@ -6452,7 +6452,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reverseReplicationDirection = stubLongRunningCall(
         undefined,
@@ -6529,7 +6529,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6562,7 +6562,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6616,7 +6616,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.establishPeering = stubLongRunningCall(
         undefined,
@@ -6647,7 +6647,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.establishPeering = stubLongRunningCall(
         undefined,
@@ -6723,7 +6723,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6756,7 +6756,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6810,7 +6810,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.syncReplication = stubLongRunningCall(
         undefined,
@@ -6841,7 +6841,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.syncReplication = stubLongRunningCall(
         undefined,
@@ -6917,7 +6917,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6950,7 +6950,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7004,7 +7004,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackupVault = stubLongRunningCall(
         undefined,
@@ -7035,7 +7035,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackupVault = stubLongRunningCall(
         undefined,
@@ -7112,7 +7112,7 @@ describe('v1.NetAppClient', () => {
         ['backupVault', 'name']
       );
       request.backupVault.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7146,7 +7146,7 @@ describe('v1.NetAppClient', () => {
         ['backupVault', 'name']
       );
       request.backupVault.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7201,7 +7201,7 @@ describe('v1.NetAppClient', () => {
         ['backupVault', 'name']
       );
       request.backupVault.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackupVault = stubLongRunningCall(
         undefined,
@@ -7233,7 +7233,7 @@ describe('v1.NetAppClient', () => {
         ['backupVault', 'name']
       );
       request.backupVault.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_vault.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackupVault = stubLongRunningCall(
         undefined,
@@ -7309,7 +7309,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7342,7 +7342,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7396,7 +7396,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackupVault = stubLongRunningCall(
         undefined,
@@ -7427,7 +7427,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackupVault = stubLongRunningCall(
         undefined,
@@ -7503,7 +7503,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7535,7 +7535,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7589,7 +7589,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackup = stubLongRunningCall(
         undefined,
@@ -7620,7 +7620,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackup = stubLongRunningCall(
         undefined,
@@ -7693,7 +7693,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7725,7 +7725,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7779,7 +7779,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackup = stubLongRunningCall(
         undefined,
@@ -7810,7 +7810,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackup = stubLongRunningCall(
         undefined,
@@ -7884,7 +7884,7 @@ describe('v1.NetAppClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7917,7 +7917,7 @@ describe('v1.NetAppClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7972,7 +7972,7 @@ describe('v1.NetAppClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackup = stubLongRunningCall(
         undefined,
@@ -8004,7 +8004,7 @@ describe('v1.NetAppClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackup = stubLongRunningCall(
         undefined,
@@ -8077,7 +8077,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8110,7 +8110,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8164,7 +8164,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackupPolicy = stubLongRunningCall(
         undefined,
@@ -8195,7 +8195,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackupPolicy = stubLongRunningCall(
         undefined,
@@ -8272,7 +8272,7 @@ describe('v1.NetAppClient', () => {
         ['backupPolicy', 'name']
       );
       request.backupPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8306,7 +8306,7 @@ describe('v1.NetAppClient', () => {
         ['backupPolicy', 'name']
       );
       request.backupPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8361,7 +8361,7 @@ describe('v1.NetAppClient', () => {
         ['backupPolicy', 'name']
       );
       request.backupPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackupPolicy = stubLongRunningCall(
         undefined,
@@ -8393,7 +8393,7 @@ describe('v1.NetAppClient', () => {
         ['backupPolicy', 'name']
       );
       request.backupPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackupPolicy = stubLongRunningCall(
         undefined,
@@ -8469,7 +8469,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8502,7 +8502,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8556,7 +8556,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackupPolicy = stubLongRunningCall(
         undefined,
@@ -8587,7 +8587,7 @@ describe('v1.NetAppClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackupPolicy = stubLongRunningCall(
         undefined,
@@ -8663,7 +8663,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
@@ -8696,7 +8696,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
@@ -8745,7 +8745,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listStoragePools = stubSimpleCall(
         undefined,
@@ -8776,7 +8776,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
@@ -8830,7 +8830,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStoragePools.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8879,7 +8879,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.StoragePool()),
@@ -8922,7 +8922,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStoragePools.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8964,7 +8964,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
@@ -8997,7 +8997,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
@@ -9046,7 +9046,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVolumes = stubSimpleCall(
         undefined,
@@ -9077,7 +9077,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
@@ -9128,7 +9128,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVolumes.createStream = stubPageStreamingCall(
         undefined,
@@ -9176,7 +9176,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Volume()),
@@ -9219,7 +9219,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVolumes.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -9263,7 +9263,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
@@ -9296,7 +9296,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
@@ -9345,7 +9345,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSnapshots = stubSimpleCall(
         undefined,
@@ -9376,7 +9376,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
@@ -9430,7 +9430,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSnapshots.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9479,7 +9479,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Snapshot()),
@@ -9522,7 +9522,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSnapshots.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9564,7 +9564,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.netapp.v1.ActiveDirectory()
@@ -9604,7 +9604,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.netapp.v1.ActiveDirectory()
@@ -9659,7 +9659,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listActiveDirectories = stubSimpleCall(
         undefined,
@@ -9693,7 +9693,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.netapp.v1.ActiveDirectory()
@@ -9759,7 +9759,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listActiveDirectories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9814,7 +9814,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.netapp.v1.ActiveDirectory()
@@ -9867,7 +9867,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listActiveDirectories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9913,7 +9913,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
@@ -9946,7 +9946,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
@@ -9995,7 +9995,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKmsConfigs = stubSimpleCall(
         undefined,
@@ -10026,7 +10026,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
@@ -10080,7 +10080,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKmsConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10129,7 +10129,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.KmsConfig()),
@@ -10172,7 +10172,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKmsConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10214,7 +10214,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
@@ -10247,7 +10247,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
@@ -10296,7 +10296,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReplications = stubSimpleCall(
         undefined,
@@ -10327,7 +10327,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
@@ -10381,7 +10381,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReplications.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10430,7 +10430,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Replication()),
@@ -10473,7 +10473,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReplications.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10515,7 +10515,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
@@ -10548,7 +10548,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
@@ -10597,7 +10597,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBackupVaults = stubSimpleCall(
         undefined,
@@ -10628,7 +10628,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
@@ -10682,7 +10682,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackupVaults.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10731,7 +10731,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupVault()),
@@ -10774,7 +10774,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackupVaults.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10816,7 +10816,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
@@ -10849,7 +10849,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
@@ -10898,7 +10898,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBackups = stubSimpleCall(
         undefined,
@@ -10929,7 +10929,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
@@ -10980,7 +10980,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
         undefined,
@@ -11028,7 +11028,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.Backup()),
@@ -11071,7 +11071,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -11115,7 +11115,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
@@ -11149,7 +11149,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
@@ -11198,7 +11198,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBackupPolicies = stubSimpleCall(
         undefined,
@@ -11229,7 +11229,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
@@ -11283,7 +11283,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackupPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11332,7 +11332,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
         generateSampleMessage(new protos.google.cloud.netapp.v1.BackupPolicy()),
@@ -11375,7 +11375,7 @@ describe('v1.NetAppClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackupPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
