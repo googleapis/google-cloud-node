@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.11.0...chat-v0.12.0) (2025-01-29)
+
+
+### Features
+
+* [chat] A new field `custom_emoji_metadata` is added to message `.google.chat.v1.Annotation` ([#5988](https://github.com/googleapis/google-cloud-node/issues/5988)) ([8da9b83](https://github.com/googleapis/google-cloud-node/commit/8da9b835776d424f55b9d1c97eb8964224a50ac4))
+
 ## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.10.0...chat-v0.11.0) (2024-12-18)
 
 
