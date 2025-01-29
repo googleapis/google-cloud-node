@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,7 +47,9 @@ function main(parent, algorithm, importJob) {
    *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion, the
    *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  must be a child of
    *  ImportCryptoKeyVersionRequest.parent google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent,
-   *  have been previously created via ImportCryptoKeyVersion , and be in
+   *  have been previously created via
+   *  ImportCryptoKeyVersion google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion,
+   *  and be in
    *  DESTROYED google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED 
    *  or
    *  IMPORT_FAILED google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED 

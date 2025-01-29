@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -525,6 +525,12 @@ export namespace google {
                     /** ListKeyHandlesRequest parent */
                     parent?: (string|null);
 
+                    /** ListKeyHandlesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListKeyHandlesRequest pageToken */
+                    pageToken?: (string|null);
+
                     /** ListKeyHandlesRequest filter */
                     filter?: (string|null);
                 }
@@ -540,6 +546,12 @@ export namespace google {
 
                     /** ListKeyHandlesRequest parent. */
                     public parent: string;
+
+                    /** ListKeyHandlesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListKeyHandlesRequest pageToken. */
+                    public pageToken: string;
 
                     /** ListKeyHandlesRequest filter. */
                     public filter: string;
@@ -627,6 +639,9 @@ export namespace google {
 
                     /** ListKeyHandlesResponse keyHandles */
                     keyHandles?: (google.cloud.kms.v1.IKeyHandle[]|null);
+
+                    /** ListKeyHandlesResponse nextPageToken */
+                    nextPageToken?: (string|null);
                 }
 
                 /** Represents a ListKeyHandlesResponse. */
@@ -640,6 +655,9 @@ export namespace google {
 
                     /** ListKeyHandlesResponse keyHandles. */
                     public keyHandles: google.cloud.kms.v1.IKeyHandle[];
+
+                    /** ListKeyHandlesResponse nextPageToken. */
+                    public nextPageToken: string;
 
                     /**
                      * Creates a new ListKeyHandlesResponse instance using the specified properties.
@@ -1014,6 +1032,9 @@ export namespace google {
 
                     /** AutokeyConfig keyProject */
                     keyProject?: (string|null);
+
+                    /** AutokeyConfig state */
+                    state?: (google.cloud.kms.v1.AutokeyConfig.State|keyof typeof google.cloud.kms.v1.AutokeyConfig.State|null);
                 }
 
                 /** Represents an AutokeyConfig. */
@@ -1030,6 +1051,9 @@ export namespace google {
 
                     /** AutokeyConfig keyProject. */
                     public keyProject: string;
+
+                    /** AutokeyConfig state. */
+                    public state: (google.cloud.kms.v1.AutokeyConfig.State|keyof typeof google.cloud.kms.v1.AutokeyConfig.State);
 
                     /**
                      * Creates a new AutokeyConfig instance using the specified properties.
@@ -1107,6 +1131,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutokeyConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        KEY_PROJECT_DELETED = 2,
+                        UNINITIALIZED = 3
+                    }
                 }
 
                 /** Properties of a ShowEffectiveAutokeyConfigRequest. */
@@ -4259,31 +4294,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** ProtectionLevel enum. */
-                enum ProtectionLevel {
-                    PROTECTION_LEVEL_UNSPECIFIED = 0,
-                    SOFTWARE = 1,
-                    HSM = 2,
-                    EXTERNAL = 3,
-                    EXTERNAL_VPC = 4
-                }
-
-                /** AccessReason enum. */
-                enum AccessReason {
-                    REASON_UNSPECIFIED = 0,
-                    CUSTOMER_INITIATED_SUPPORT = 1,
-                    GOOGLE_INITIATED_SERVICE = 2,
-                    THIRD_PARTY_DATA_REQUEST = 3,
-                    GOOGLE_INITIATED_REVIEW = 4,
-                    CUSTOMER_INITIATED_ACCESS = 5,
-                    GOOGLE_INITIATED_SYSTEM_OPERATION = 6,
-                    REASON_NOT_EXPECTED = 7,
-                    MODIFIED_CUSTOMER_INITIATED_ACCESS = 8,
-                    MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION = 9,
-                    GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 10,
-                    CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING = 11
-                }
-
                 /** Properties of a KeyAccessJustificationsPolicy. */
                 interface IKeyAccessJustificationsPolicy {
 
@@ -4379,6 +4389,31 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** ProtectionLevel enum. */
+                enum ProtectionLevel {
+                    PROTECTION_LEVEL_UNSPECIFIED = 0,
+                    SOFTWARE = 1,
+                    HSM = 2,
+                    EXTERNAL = 3,
+                    EXTERNAL_VPC = 4
+                }
+
+                /** AccessReason enum. */
+                enum AccessReason {
+                    REASON_UNSPECIFIED = 0,
+                    CUSTOMER_INITIATED_SUPPORT = 1,
+                    GOOGLE_INITIATED_SERVICE = 2,
+                    THIRD_PARTY_DATA_REQUEST = 3,
+                    GOOGLE_INITIATED_REVIEW = 4,
+                    CUSTOMER_INITIATED_ACCESS = 5,
+                    GOOGLE_INITIATED_SYSTEM_OPERATION = 6,
+                    REASON_NOT_EXPECTED = 7,
+                    MODIFIED_CUSTOMER_INITIATED_ACCESS = 8,
+                    MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION = 9,
+                    GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 10,
+                    CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING = 11
                 }
 
                 /** Represents a KeyManagementService */
