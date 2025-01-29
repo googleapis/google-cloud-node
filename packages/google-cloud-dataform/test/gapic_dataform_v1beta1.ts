@@ -318,7 +318,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Repository()
       );
@@ -349,7 +349,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Repository()
       );
@@ -396,7 +396,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRepository = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Repository()
       );
@@ -479,7 +479,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Repository()
       );
@@ -526,7 +526,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRepository = stubSimpleCall(
         undefined,
@@ -579,7 +579,7 @@ describe('v1beta1.DataformClient', () => {
         ['repository', 'name']
       );
       request.repository.name = defaultValue1;
-      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Repository()
       );
@@ -611,7 +611,7 @@ describe('v1beta1.DataformClient', () => {
         ['repository', 'name']
       );
       request.repository.name = defaultValue1;
-      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Repository()
       );
@@ -659,7 +659,7 @@ describe('v1beta1.DataformClient', () => {
         ['repository', 'name']
       );
       request.repository.name = defaultValue1;
-      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRepository = stubSimpleCall(
         undefined,
@@ -712,7 +712,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -743,7 +743,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -790,7 +790,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRepository = stubSimpleCall(
         undefined,
@@ -842,7 +842,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -874,7 +874,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -921,7 +921,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commitRepositoryChanges = stubSimpleCall(
         undefined,
@@ -979,7 +979,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse()
       );
@@ -1011,7 +1011,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadRepositoryFileResponse()
       );
@@ -1058,7 +1058,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readRepositoryFile = stubSimpleCall(
         undefined,
@@ -1110,7 +1110,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse()
       );
@@ -1143,7 +1143,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse()
       );
@@ -1190,7 +1190,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.computeRepositoryAccessTokenStatus = stubSimpleCall(
         undefined,
@@ -1248,7 +1248,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesResponse()
       );
@@ -1280,7 +1280,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesResponse()
       );
@@ -1327,7 +1327,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchRemoteBranches = stubSimpleCall(
         undefined,
@@ -1379,7 +1379,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Workspace()
       );
@@ -1410,7 +1410,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Workspace()
       );
@@ -1457,7 +1457,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkspace = stubSimpleCall(
         undefined,
@@ -1509,7 +1509,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Workspace()
       );
@@ -1540,7 +1540,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.Workspace()
       );
@@ -1587,7 +1587,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkspace = stubSimpleCall(
         undefined,
@@ -1639,7 +1639,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1670,7 +1670,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1717,7 +1717,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkspace = stubSimpleCall(
         undefined,
@@ -1769,7 +1769,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.InstallNpmPackagesResponse()
       );
@@ -1801,7 +1801,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.InstallNpmPackagesResponse()
       );
@@ -1848,7 +1848,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.installNpmPackages = stubSimpleCall(
         undefined,
@@ -1900,7 +1900,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1931,7 +1931,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1978,7 +1978,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pullGitCommits = stubSimpleCall(
         undefined,
@@ -2030,7 +2030,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2061,7 +2061,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2108,7 +2108,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pushGitCommits = stubSimpleCall(
         undefined,
@@ -2160,7 +2160,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesResponse()
       );
@@ -2192,7 +2192,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesResponse()
       );
@@ -2239,7 +2239,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchFileGitStatuses = stubSimpleCall(
         undefined,
@@ -2291,7 +2291,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse()
       );
@@ -2323,7 +2323,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse()
       );
@@ -2370,7 +2370,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchGitAheadBehind = stubSimpleCall(
         undefined,
@@ -2422,7 +2422,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2454,7 +2454,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2501,7 +2501,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commitWorkspaceChanges = stubSimpleCall(
         undefined,
@@ -2559,7 +2559,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2591,7 +2591,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2638,7 +2638,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetWorkspaceChanges = stubSimpleCall(
         undefined,
@@ -2696,7 +2696,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileDiffResponse()
       );
@@ -2727,7 +2727,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileDiffResponse()
       );
@@ -2774,7 +2774,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchFileDiff = stubSimpleCall(
         undefined,
@@ -2826,7 +2826,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MakeDirectoryResponse()
       );
@@ -2857,7 +2857,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MakeDirectoryResponse()
       );
@@ -2904,7 +2904,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.makeDirectory = stubSimpleCall(
         undefined,
@@ -2956,7 +2956,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2987,7 +2987,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3034,7 +3034,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeDirectory = stubSimpleCall(
         undefined,
@@ -3086,7 +3086,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveDirectoryResponse()
       );
@@ -3117,7 +3117,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveDirectoryResponse()
       );
@@ -3164,7 +3164,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveDirectory = stubSimpleCall(
         undefined,
@@ -3216,7 +3216,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadFileResponse()
       );
@@ -3247,7 +3247,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadFileResponse()
       );
@@ -3294,7 +3294,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readFile = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.readFile(request), expectedError);
@@ -3343,7 +3343,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3374,7 +3374,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3421,7 +3421,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeFile = stubSimpleCall(
         undefined,
@@ -3473,7 +3473,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveFileResponse()
       );
@@ -3504,7 +3504,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveFileResponse()
       );
@@ -3551,7 +3551,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveFile = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.moveFile(request), expectedError);
@@ -3600,7 +3600,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WriteFileResponse()
       );
@@ -3631,7 +3631,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WriteFileResponse()
       );
@@ -3678,7 +3678,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.writeFile = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.writeFile(request), expectedError);
@@ -3727,7 +3727,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
       );
@@ -3758,7 +3758,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
       );
@@ -3805,7 +3805,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReleaseConfig = stubSimpleCall(
         undefined,
@@ -3857,7 +3857,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
       );
@@ -3889,7 +3889,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
       );
@@ -3936,7 +3936,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReleaseConfig = stubSimpleCall(
         undefined,
@@ -3989,7 +3989,7 @@ describe('v1beta1.DataformClient', () => {
         ['releaseConfig', 'name']
       );
       request.releaseConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `release_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `release_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
       );
@@ -4022,7 +4022,7 @@ describe('v1beta1.DataformClient', () => {
         ['releaseConfig', 'name']
       );
       request.releaseConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `release_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `release_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
       );
@@ -4070,7 +4070,7 @@ describe('v1beta1.DataformClient', () => {
         ['releaseConfig', 'name']
       );
       request.releaseConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `release_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `release_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateReleaseConfig = stubSimpleCall(
         undefined,
@@ -4123,7 +4123,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4155,7 +4155,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4202,7 +4202,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteReleaseConfig = stubSimpleCall(
         undefined,
@@ -4254,7 +4254,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CompilationResult()
       );
@@ -4286,7 +4286,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CompilationResult()
       );
@@ -4333,7 +4333,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCompilationResult = stubSimpleCall(
         undefined,
@@ -4385,7 +4385,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CompilationResult()
       );
@@ -4417,7 +4417,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CompilationResult()
       );
@@ -4464,7 +4464,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCompilationResult = stubSimpleCall(
         undefined,
@@ -4522,7 +4522,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
       );
@@ -4553,7 +4553,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
       );
@@ -4600,7 +4600,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkflowConfig = stubSimpleCall(
         undefined,
@@ -4652,7 +4652,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
       );
@@ -4684,7 +4684,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
       );
@@ -4731,7 +4731,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkflowConfig = stubSimpleCall(
         undefined,
@@ -4784,7 +4784,7 @@ describe('v1beta1.DataformClient', () => {
         ['workflowConfig', 'name']
       );
       request.workflowConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `workflow_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workflow_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
       );
@@ -4817,7 +4817,7 @@ describe('v1beta1.DataformClient', () => {
         ['workflowConfig', 'name']
       );
       request.workflowConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `workflow_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workflow_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
       );
@@ -4865,7 +4865,7 @@ describe('v1beta1.DataformClient', () => {
         ['workflowConfig', 'name']
       );
       request.workflowConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `workflow_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workflow_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkflowConfig = stubSimpleCall(
         undefined,
@@ -4918,7 +4918,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4950,7 +4950,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4997,7 +4997,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkflowConfig = stubSimpleCall(
         undefined,
@@ -5049,7 +5049,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
       );
@@ -5081,7 +5081,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
       );
@@ -5128,7 +5128,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -5186,7 +5186,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
       );
@@ -5218,7 +5218,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
       );
@@ -5265,7 +5265,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -5323,7 +5323,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5355,7 +5355,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5402,7 +5402,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -5460,7 +5460,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5492,7 +5492,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5539,7 +5539,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -5597,7 +5597,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Repository()
@@ -5636,7 +5636,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Repository()
@@ -5691,7 +5691,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRepositories = stubSimpleCall(
         undefined,
@@ -5722,7 +5722,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Repository()
@@ -5782,7 +5782,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5831,7 +5831,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Repository()
@@ -5880,7 +5880,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5923,7 +5923,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -5963,7 +5963,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -6020,7 +6020,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryRepositoryDirectoryContents = stubSimpleCall(
         undefined,
@@ -6054,7 +6054,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -6124,7 +6124,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryRepositoryDirectoryContents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6183,7 +6183,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -6237,7 +6237,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryRepositoryDirectoryContents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6284,7 +6284,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CommitLogEntry()
@@ -6324,7 +6324,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CommitLogEntry()
@@ -6381,7 +6381,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchRepositoryHistory = stubSimpleCall(
         undefined,
@@ -6415,7 +6415,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CommitLogEntry()
@@ -6482,7 +6482,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchRepositoryHistory.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6538,7 +6538,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CommitLogEntry()
@@ -6592,7 +6592,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchRepositoryHistory.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6639,7 +6639,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Workspace()
@@ -6678,7 +6678,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Workspace()
@@ -6733,7 +6733,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkspaces = stubSimpleCall(
         undefined,
@@ -6764,7 +6764,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Workspace()
@@ -6824,7 +6824,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkspaces.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6873,7 +6873,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.Workspace()
@@ -6922,7 +6922,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkspaces.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6964,7 +6964,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -7004,7 +7004,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -7061,7 +7061,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryDirectoryContents = stubSimpleCall(
         undefined,
@@ -7095,7 +7095,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -7162,7 +7162,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryDirectoryContents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7218,7 +7218,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.DirectoryEntry()
@@ -7272,7 +7272,7 @@ describe('v1beta1.DataformClient', () => {
         ['workspace']
       );
       request.workspace = defaultValue1;
-      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryDirectoryContents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7319,7 +7319,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
@@ -7359,7 +7359,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
@@ -7416,7 +7416,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReleaseConfigs = stubSimpleCall(
         undefined,
@@ -7447,7 +7447,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
@@ -7508,7 +7508,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReleaseConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7558,7 +7558,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.ReleaseConfig()
@@ -7608,7 +7608,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReleaseConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7651,7 +7651,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResult()
@@ -7691,7 +7691,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResult()
@@ -7748,7 +7748,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCompilationResults = stubSimpleCall(
         undefined,
@@ -7782,7 +7782,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResult()
@@ -7851,7 +7851,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompilationResults.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7909,7 +7909,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResult()
@@ -7963,7 +7963,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompilationResults.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8010,7 +8010,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResultAction()
@@ -8050,7 +8050,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResultAction()
@@ -8107,7 +8107,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryCompilationResultActions = stubSimpleCall(
         undefined,
@@ -8141,7 +8141,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResultAction()
@@ -8213,7 +8213,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryCompilationResultActions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8274,7 +8274,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.CompilationResultAction()
@@ -8328,7 +8328,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryCompilationResultActions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8375,7 +8375,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
@@ -8415,7 +8415,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
@@ -8472,7 +8472,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkflowConfigs = stubSimpleCall(
         undefined,
@@ -8503,7 +8503,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
@@ -8564,7 +8564,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8614,7 +8614,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowConfig()
@@ -8664,7 +8664,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8707,7 +8707,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
@@ -8747,7 +8747,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
@@ -8804,7 +8804,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkflowInvocations = stubSimpleCall(
         undefined,
@@ -8838,7 +8838,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
@@ -8907,7 +8907,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowInvocations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8965,7 +8965,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocation()
@@ -9019,7 +9019,7 @@ describe('v1beta1.DataformClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowInvocations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9066,7 +9066,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction()
@@ -9106,7 +9106,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction()
@@ -9163,7 +9163,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryWorkflowInvocationActions = stubSimpleCall(
         undefined,
@@ -9197,7 +9197,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction()
@@ -9269,7 +9269,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryWorkflowInvocationActions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9330,7 +9330,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1beta1.WorkflowInvocationAction()
@@ -9384,7 +9384,7 @@ describe('v1beta1.DataformClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryWorkflowInvocationActions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
