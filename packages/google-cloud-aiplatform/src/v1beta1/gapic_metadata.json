@@ -2411,6 +2411,11 @@
                 "getPublisherModel"
               ]
             },
+            "DeployPublisherModel": {
+              "methods": [
+                "deployPublisherModel"
+              ]
+            },
             "ListPublisherModels": {
               "methods": [
                 "listPublisherModels",
@@ -2426,6 +2431,11 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "DeployPublisherModel": {
+              "methods": [
+                "deployPublisherModel"
               ]
             },
             "ListPublisherModels": {
@@ -3328,6 +3338,11 @@
               "methods": [
                 "queryReasoningEngine"
               ]
+            },
+            "StreamQueryReasoningEngine": {
+              "methods": [
+                "streamQueryReasoningEngine"
+              ]
             }
           }
         },
@@ -4027,6 +4042,16 @@
               "methods": [
                 "retrieveContexts"
               ]
+            },
+            "AugmentPrompt": {
+              "methods": [
+                "augmentPrompt"
+              ]
+            },
+            "CorroborateContent": {
+              "methods": [
+                "corroborateContent"
+              ]
             }
           }
         },
@@ -4036,6 +4061,16 @@
             "RetrieveContexts": {
               "methods": [
                 "retrieveContexts"
+              ]
+            },
+            "AugmentPrompt": {
+              "methods": [
+                "augmentPrompt"
+              ]
+            },
+            "CorroborateContent": {
+              "methods": [
+                "corroborateContent"
               ]
             }
           }

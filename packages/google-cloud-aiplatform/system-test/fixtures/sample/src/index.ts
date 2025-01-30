@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import {
   FeatureRegistryServiceClient,
   FeaturestoreOnlineServingServiceClient,
   FeaturestoreServiceClient,
+  GenAiCacheServiceClient,
   GenAiTuningServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
@@ -43,6 +44,8 @@ import {
   ScheduleServiceClient,
   SpecialistPoolServiceClient,
   TensorboardServiceClient,
+  VertexRagDataServiceClient,
+  VertexRagServiceClient,
   VizierServiceClient,
 } from '@google-cloud/aiplatform';
 
@@ -84,6 +87,9 @@ function doStuffWithFeaturestoreOnlineServingServiceClient(
 function doStuffWithFeaturestoreServiceClient(
   client: FeaturestoreServiceClient
 ) {
+  client.close();
+}
+function doStuffWithGenAiCacheServiceClient(client: GenAiCacheServiceClient) {
   client.close();
 }
 function doStuffWithGenAiTuningServiceClient(client: GenAiTuningServiceClient) {
@@ -143,6 +149,14 @@ function doStuffWithSpecialistPoolServiceClient(
 function doStuffWithTensorboardServiceClient(client: TensorboardServiceClient) {
   client.close();
 }
+function doStuffWithVertexRagDataServiceClient(
+  client: VertexRagDataServiceClient
+) {
+  client.close();
+}
+function doStuffWithVertexRagServiceClient(client: VertexRagServiceClient) {
+  client.close();
+}
 function doStuffWithVizierServiceClient(client: VizierServiceClient) {
   client.close();
 }
@@ -184,6 +198,9 @@ function main() {
   // check that the client instance can be created
   const featurestoreServiceClient = new FeaturestoreServiceClient();
   doStuffWithFeaturestoreServiceClient(featurestoreServiceClient);
+  // check that the client instance can be created
+  const genAiCacheServiceClient = new GenAiCacheServiceClient();
+  doStuffWithGenAiCacheServiceClient(genAiCacheServiceClient);
   // check that the client instance can be created
   const genAiTuningServiceClient = new GenAiTuningServiceClient();
   doStuffWithGenAiTuningServiceClient(genAiTuningServiceClient);
@@ -235,6 +252,12 @@ function main() {
   // check that the client instance can be created
   const tensorboardServiceClient = new TensorboardServiceClient();
   doStuffWithTensorboardServiceClient(tensorboardServiceClient);
+  // check that the client instance can be created
+  const vertexRagDataServiceClient = new VertexRagDataServiceClient();
+  doStuffWithVertexRagDataServiceClient(vertexRagDataServiceClient);
+  // check that the client instance can be created
+  const vertexRagServiceClient = new VertexRagServiceClient();
+  doStuffWithVertexRagServiceClient(vertexRagServiceClient);
   // check that the client instance can be created
   const vizierServiceClient = new VizierServiceClient();
   doStuffWithVizierServiceClient(vizierServiceClient);
