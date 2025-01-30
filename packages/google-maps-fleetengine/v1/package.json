@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.12.12",
+    "@types/node": "^22.0.0",
     "@types/sinon": "^10.0.20",
     "c8": "^9.1.0",
     "gapic-tools": "^0.4.2",

@@ -2580,8 +2580,7 @@ export class ChatServiceClient {
     return this.innerApiCalls.deleteMembership(request, options, callback);
   }
   /**
-   * Creates a reaction and adds it to a message. Only unicode emojis are
-   * supported. For an example, see
+   * Creates a reaction and adds it to a message. For an example, see
    * [Add a reaction to a
    * message](https://developers.google.com/workspace/chat/create-reactions).
    *
@@ -2672,8 +2671,7 @@ export class ChatServiceClient {
     return this.innerApiCalls.createReaction(request, options, callback);
   }
   /**
-   * Deletes a reaction to a message. Only unicode emojis are supported.
-   * For an example, see
+   * Deletes a reaction to a message. For an example, see
    * [Delete a
    * reaction](https://developers.google.com/workspace/chat/delete-reactions).
    *

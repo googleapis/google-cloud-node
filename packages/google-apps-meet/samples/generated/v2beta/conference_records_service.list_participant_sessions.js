@@ -45,8 +45,9 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. User specified filtering condition in EBNF format. The following
-   *  are the filterable fields:
+   *  Optional. User specified filtering condition in EBNF
+   *  format (https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *  The following are the filterable fields:
    *  * `start_time`
    *  * `end_time`
    *  For example, `end_time IS NULL` returns active participant sessions in

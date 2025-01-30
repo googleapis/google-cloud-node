@@ -312,7 +312,9 @@
                     "Job": {
                       "options": {
                         "(google.api.resource).type": "cloudscheduler.googleapis.com/Job",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}",
+                        "(google.api.resource).plural": "jobs",
+                        "(google.api.resource).singular": "job"
                       },
                       "oneofs": {
                         "target": {
@@ -354,23 +356,38 @@
                         },
                         "userUpdateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "state": {
                           "type": "State",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "status": {
                           "type": "google.rpc.Status",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "scheduleTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 17
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "lastAttemptTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 18
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "retryConfig": {
                           "type": "RetryConfig",

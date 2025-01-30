@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudcontrolspartner-v0.3.1...cloudcontrolspartner-v0.4.0) (2025-01-28)
+
+
+### Features
+
+* [cloudcontrolspartner] A new method `CreateCustomer` is added to service `CloudControlsPartnerCore` ([#5980](https://github.com/googleapis/google-cloud-node/issues/5980)) ([e5e13cb](https://github.com/googleapis/google-cloud-node/commit/e5e13cb8af58de2a6dc9b8735e9cae045c0b551c))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/cloudcontrolspartner-v0.3.0...cloudcontrolspartner-v0.3.1) (2024-09-24)
 
 

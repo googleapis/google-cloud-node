@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the project for which to get the Google Workspace Add-ons
+   *  Required. Name of the project for which to get the Google Workspace add-ons
    *  authorization information.
    *  Example: `projects/my_project/authorization`.
    */

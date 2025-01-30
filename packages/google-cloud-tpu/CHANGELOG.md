@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.7.0...tpu-v3.8.0) (2025-01-23)
+
+
+### Features
+
+* [tpu] Introduce PerformMaintenance API ([#5956](https://github.com/googleapis/google-cloud-node/issues/5956)) ([03232b3](https://github.com/googleapis/google-cloud-node/commit/03232b371a770205d488791bfcb3631f2291d9fb))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.6.0...tpu-v3.7.0) (2025-01-16)
+
+
+### Features
+
+* [tpu] Promote network_configs field to v2 API ([#5945](https://github.com/googleapis/google-cloud-node/issues/5945)) ([df0d206](https://github.com/googleapis/google-cloud-node/commit/df0d2064ff860da7c2029de9dd3f9a1aab41b5c8))
+
 ## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.5.0...tpu-v3.6.0) (2025-01-11)
 
 

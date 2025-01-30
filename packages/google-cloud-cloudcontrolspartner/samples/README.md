@@ -22,6 +22,8 @@
   * [Cloud_controls_partner_core.list_workloads](#cloud_controls_partner_core.list_workloads)
   * [Cloud_controls_partner_monitoring.get_violation](#cloud_controls_partner_monitoring.get_violation)
   * [Cloud_controls_partner_monitoring.list_violations](#cloud_controls_partner_monitoring.list_violations)
+  * [Cloud_controls_partner_core.create_customer](#cloud_controls_partner_core.create_customer)
+  * [Cloud_controls_partner_core.delete_customer](#cloud_controls_partner_core.delete_customer)
   * [Cloud_controls_partner_core.get_customer](#cloud_controls_partner_core.get_customer)
   * [Cloud_controls_partner_core.get_ekm_connections](#cloud_controls_partner_core.get_ekm_connections)
   * [Cloud_controls_partner_core.get_partner](#cloud_controls_partner_core.get_partner)
@@ -30,6 +32,7 @@
   * [Cloud_controls_partner_core.list_access_approval_requests](#cloud_controls_partner_core.list_access_approval_requests)
   * [Cloud_controls_partner_core.list_customers](#cloud_controls_partner_core.list_customers)
   * [Cloud_controls_partner_core.list_workloads](#cloud_controls_partner_core.list_workloads)
+  * [Cloud_controls_partner_core.update_customer](#cloud_controls_partner_core.update_customer)
   * [Cloud_controls_partner_monitoring.get_violation](#cloud_controls_partner_monitoring.get_violation)
   * [Cloud_controls_partner_monitoring.list_violations](#cloud_controls_partner_monitoring.list_violations)
   * [Quickstart](#quickstart)
@@ -219,6 +222,40 @@ __Usage:__
 
 
 
+### Cloud_controls_partner_core.create_customer
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js`
+
+
+-----
+
+
+
+
+### Cloud_controls_partner_core.delete_customer
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js`
+
+
+-----
+
+
+
+
 ### Cloud_controls_partner_core.get_customer
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js).
@@ -348,6 +385,23 @@ __Usage:__
 
 
 `node packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js`
+
+
+-----
+
+
+
+
+### Cloud_controls_partner_core.update_customer
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js`
 
 
 -----

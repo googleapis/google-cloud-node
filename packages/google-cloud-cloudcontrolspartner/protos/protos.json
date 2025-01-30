@@ -1469,6 +1469,64 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "CreateCustomer": {
+                          "requestType": "CreateCustomerRequest",
+                          "responseType": "Customer",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=organizations/*/locations/*}/customers",
+                            "(google.api.http).body": "customer",
+                            "(google.api.method_signature)": "parent,customer,customer_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=organizations/*/locations/*}/customers",
+                                "body": "customer"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,customer,customer_id"
+                            }
+                          ]
+                        },
+                        "UpdateCustomer": {
+                          "requestType": "UpdateCustomerRequest",
+                          "responseType": "Customer",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{customer.name=organizations/*/locations/*/customers/*}",
+                            "(google.api.http).body": "customer",
+                            "(google.api.method_signature)": "customer,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{customer.name=organizations/*/locations/*/customers/*}",
+                                "body": "customer"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "customer,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteCustomer": {
+                          "requestType": "DeleteCustomerRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=organizations/*/locations/*/customers/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=organizations/*/locations/*/customers/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1736,6 +1794,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "organizationDomain": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1791,6 +1856,32 @@
                         }
                       }
                     },
+                    "CreateCustomerRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudcontrolspartner.googleapis.com/Customer"
+                          }
+                        },
+                        "customer": {
+                          "type": "Customer",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customerId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetCustomerRequest": {
                       "fields": {
                         "name": {
@@ -1840,6 +1931,36 @@
                             "STEP_UNSPECIFIED": 0,
                             "KAJ_ENROLLMENT": 1,
                             "CUSTOMER_ENVIRONMENT": 2
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCustomerRequest": {
+                      "fields": {
+                        "customer": {
+                          "type": "Customer",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCustomerRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudcontrolspartner.googleapis.com/Customer"
                           }
                         }
                       }
@@ -2048,6 +2169,11 @@
                       },
                       "nested": {
                         "EkmSolution": {
+                          "valuesOptions": {
+                            "VIRTRU": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "EKM_SOLUTION_UNSPECIFIED": 0,
                             "FORTANIX": 1,
@@ -4147,6 +4273,18 @@
                   "id": 2
                 }
               }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
             }
           }
         },

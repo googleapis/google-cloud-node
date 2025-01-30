@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cloudcontrolspartner",
-        "version": "0.3.1",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -372,6 +372,138 @@
                 "method": {
                     "shortName": "GetPartner",
                     "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.GetPartner",
+                    "service": {
+                        "shortName": "CloudControlsPartnerCore",
+                        "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_CreateCustomer_async",
+            "title": "CloudControlsPartnerCore createCustomer Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new customer.",
+            "canonical": true,
+            "file": "cloud_controls_partner_core.create_customer.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateCustomer",
+                "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.CreateCustomer",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "customer",
+                        "type": ".google.cloud.cloudcontrolspartner.v1beta.Customer"
+                    },
+                    {
+                        "name": "customer_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.cloudcontrolspartner.v1beta.Customer",
+                "client": {
+                    "shortName": "CloudControlsPartnerCoreClient",
+                    "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCoreClient"
+                },
+                "method": {
+                    "shortName": "CreateCustomer",
+                    "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.CreateCustomer",
+                    "service": {
+                        "shortName": "CloudControlsPartnerCore",
+                        "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_UpdateCustomer_async",
+            "title": "CloudControlsPartnerCore updateCustomer Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update details of a single customer",
+            "canonical": true,
+            "file": "cloud_controls_partner_core.update_customer.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateCustomer",
+                "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.UpdateCustomer",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "customer",
+                        "type": ".google.cloud.cloudcontrolspartner.v1beta.Customer"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.cloudcontrolspartner.v1beta.Customer",
+                "client": {
+                    "shortName": "CloudControlsPartnerCoreClient",
+                    "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCoreClient"
+                },
+                "method": {
+                    "shortName": "UpdateCustomer",
+                    "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.UpdateCustomer",
+                    "service": {
+                        "shortName": "CloudControlsPartnerCore",
+                        "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_DeleteCustomer_async",
+            "title": "CloudControlsPartnerCore deleteCustomer Sample",
+            "origin": "API_DEFINITION",
+            "description": " Delete details of a single customer",
+            "canonical": true,
+            "file": "cloud_controls_partner_core.delete_customer.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteCustomer",
+                "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.DeleteCustomer",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "CloudControlsPartnerCoreClient",
+                    "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCoreClient"
+                },
+                "method": {
+                    "shortName": "DeleteCustomer",
+                    "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.DeleteCustomer",
                     "service": {
                         "shortName": "CloudControlsPartnerCore",
                         "fullName": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"

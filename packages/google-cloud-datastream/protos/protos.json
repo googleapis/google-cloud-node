@@ -1564,7 +1564,7 @@
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "asmService": {
@@ -1656,6 +1656,13 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sslConfig": {
+                          "type": "PostgresqlSslConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1975,6 +1982,64 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PostgresqlSslConfig": {
+                      "oneofs": {
+                        "encryptionSetting": {
+                          "oneof": [
+                            "serverVerification",
+                            "serverAndClientVerification"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "serverVerification": {
+                          "type": "ServerVerification",
+                          "id": 1
+                        },
+                        "serverAndClientVerification": {
+                          "type": "ServerAndClientVerification",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ServerVerification": {
+                          "fields": {
+                            "caCertificate": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ServerAndClientVerification": {
+                          "fields": {
+                            "clientCertificate": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "clientKey": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caCertificate": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
                           }
                         }
                       }
