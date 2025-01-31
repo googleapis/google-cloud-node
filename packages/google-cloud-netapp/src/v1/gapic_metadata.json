@@ -60,6 +60,11 @@
                 "getBackupPolicy"
               ]
             },
+            "GetQuotaRule": {
+              "methods": [
+                "getQuotaRule"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -240,6 +245,21 @@
                 "deleteBackupPolicy"
               ]
             },
+            "CreateQuotaRule": {
+              "methods": [
+                "createQuotaRule"
+              ]
+            },
+            "UpdateQuotaRule": {
+              "methods": [
+                "updateQuotaRule"
+              ]
+            },
+            "DeleteQuotaRule": {
+              "methods": [
+                "deleteQuotaRule"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -301,6 +321,13 @@
                 "listBackupPolicies",
                 "listBackupPoliciesStream",
                 "listBackupPoliciesAsync"
+              ]
+            },
+            "ListQuotaRules": {
+              "methods": [
+                "listQuotaRules",
+                "listQuotaRulesStream",
+                "listQuotaRulesAsync"
               ]
             }
           }
@@ -358,6 +385,11 @@
                 "getBackupPolicy"
               ]
             },
+            "GetQuotaRule": {
+              "methods": [
+                "getQuotaRule"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -538,6 +570,21 @@
                 "deleteBackupPolicy"
               ]
             },
+            "CreateQuotaRule": {
+              "methods": [
+                "createQuotaRule"
+              ]
+            },
+            "UpdateQuotaRule": {
+              "methods": [
+                "updateQuotaRule"
+              ]
+            },
+            "DeleteQuotaRule": {
+              "methods": [
+                "deleteQuotaRule"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -599,6 +646,13 @@
                 "listBackupPolicies",
                 "listBackupPoliciesStream",
                 "listBackupPoliciesAsync"
+              ]
+            },
+            "ListQuotaRules": {
+              "methods": [
+                "listQuotaRules",
+                "listQuotaRulesStream",
+                "listQuotaRulesAsync"
               ]
             }
           }

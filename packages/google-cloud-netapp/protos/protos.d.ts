@@ -932,6 +932,12 @@ export namespace google {
 
                     /** Backup chainStorageBytes */
                     chainStorageBytes?: (number|Long|string|null);
+
+                    /** Backup satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** Backup satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a Backup. */
@@ -972,6 +978,12 @@ export namespace google {
 
                     /** Backup chainStorageBytes. */
                     public chainStorageBytes: (number|Long|string);
+
+                    /** Backup satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** Backup satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Backup _sourceSnapshot. */
                     public _sourceSnapshot?: "sourceSnapshot";
@@ -4088,6 +4100,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteBackupPolicy(request: google.cloud.netapp.v1.IDeleteBackupPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListQuotaRules.
+                     * @param request ListQuotaRulesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListQuotaRulesResponse
+                     */
+                    public listQuotaRules(request: google.cloud.netapp.v1.IListQuotaRulesRequest, callback: google.cloud.netapp.v1.NetApp.ListQuotaRulesCallback): void;
+
+                    /**
+                     * Calls ListQuotaRules.
+                     * @param request ListQuotaRulesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listQuotaRules(request: google.cloud.netapp.v1.IListQuotaRulesRequest): Promise<google.cloud.netapp.v1.ListQuotaRulesResponse>;
+
+                    /**
+                     * Calls GetQuotaRule.
+                     * @param request GetQuotaRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaRule
+                     */
+                    public getQuotaRule(request: google.cloud.netapp.v1.IGetQuotaRuleRequest, callback: google.cloud.netapp.v1.NetApp.GetQuotaRuleCallback): void;
+
+                    /**
+                     * Calls GetQuotaRule.
+                     * @param request GetQuotaRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQuotaRule(request: google.cloud.netapp.v1.IGetQuotaRuleRequest): Promise<google.cloud.netapp.v1.QuotaRule>;
+
+                    /**
+                     * Calls CreateQuotaRule.
+                     * @param request CreateQuotaRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createQuotaRule(request: google.cloud.netapp.v1.ICreateQuotaRuleRequest, callback: google.cloud.netapp.v1.NetApp.CreateQuotaRuleCallback): void;
+
+                    /**
+                     * Calls CreateQuotaRule.
+                     * @param request CreateQuotaRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createQuotaRule(request: google.cloud.netapp.v1.ICreateQuotaRuleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateQuotaRule.
+                     * @param request UpdateQuotaRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateQuotaRule(request: google.cloud.netapp.v1.IUpdateQuotaRuleRequest, callback: google.cloud.netapp.v1.NetApp.UpdateQuotaRuleCallback): void;
+
+                    /**
+                     * Calls UpdateQuotaRule.
+                     * @param request UpdateQuotaRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateQuotaRule(request: google.cloud.netapp.v1.IUpdateQuotaRuleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteQuotaRule.
+                     * @param request DeleteQuotaRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteQuotaRule(request: google.cloud.netapp.v1.IDeleteQuotaRuleRequest, callback: google.cloud.netapp.v1.NetApp.DeleteQuotaRuleCallback): void;
+
+                    /**
+                     * Calls DeleteQuotaRule.
+                     * @param request DeleteQuotaRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteQuotaRule(request: google.cloud.netapp.v1.IDeleteQuotaRuleRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace NetApp {
@@ -4476,6 +4558,41 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteBackupPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|listQuotaRules}.
+                     * @param error Error, if any
+                     * @param [response] ListQuotaRulesResponse
+                     */
+                    type ListQuotaRulesCallback = (error: (Error|null), response?: google.cloud.netapp.v1.ListQuotaRulesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|getQuotaRule}.
+                     * @param error Error, if any
+                     * @param [response] QuotaRule
+                     */
+                    type GetQuotaRuleCallback = (error: (Error|null), response?: google.cloud.netapp.v1.QuotaRule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|createQuotaRule}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateQuotaRuleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|updateQuotaRule}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateQuotaRuleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|deleteQuotaRule}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteQuotaRuleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -5714,6 +5831,809 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ListQuotaRulesRequest. */
+                interface IListQuotaRulesRequest {
+
+                    /** ListQuotaRulesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListQuotaRulesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListQuotaRulesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListQuotaRulesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListQuotaRulesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListQuotaRulesRequest. */
+                class ListQuotaRulesRequest implements IListQuotaRulesRequest {
+
+                    /**
+                     * Constructs a new ListQuotaRulesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IListQuotaRulesRequest);
+
+                    /** ListQuotaRulesRequest parent. */
+                    public parent: string;
+
+                    /** ListQuotaRulesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListQuotaRulesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListQuotaRulesRequest filter. */
+                    public filter: string;
+
+                    /** ListQuotaRulesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListQuotaRulesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQuotaRulesRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IListQuotaRulesRequest): google.cloud.netapp.v1.ListQuotaRulesRequest;
+
+                    /**
+                     * Encodes the specified ListQuotaRulesRequest message. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesRequest.verify|verify} messages.
+                     * @param message ListQuotaRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IListQuotaRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQuotaRulesRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesRequest.verify|verify} messages.
+                     * @param message ListQuotaRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IListQuotaRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQuotaRulesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQuotaRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.ListQuotaRulesRequest;
+
+                    /**
+                     * Decodes a ListQuotaRulesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQuotaRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.ListQuotaRulesRequest;
+
+                    /**
+                     * Verifies a ListQuotaRulesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQuotaRulesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQuotaRulesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.ListQuotaRulesRequest;
+
+                    /**
+                     * Creates a plain object from a ListQuotaRulesRequest message. Also converts values to other types if specified.
+                     * @param message ListQuotaRulesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.ListQuotaRulesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQuotaRulesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQuotaRulesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQuotaRulesResponse. */
+                interface IListQuotaRulesResponse {
+
+                    /** ListQuotaRulesResponse quotaRules */
+                    quotaRules?: (google.cloud.netapp.v1.IQuotaRule[]|null);
+
+                    /** ListQuotaRulesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListQuotaRulesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListQuotaRulesResponse. */
+                class ListQuotaRulesResponse implements IListQuotaRulesResponse {
+
+                    /**
+                     * Constructs a new ListQuotaRulesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IListQuotaRulesResponse);
+
+                    /** ListQuotaRulesResponse quotaRules. */
+                    public quotaRules: google.cloud.netapp.v1.IQuotaRule[];
+
+                    /** ListQuotaRulesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListQuotaRulesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListQuotaRulesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQuotaRulesResponse instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IListQuotaRulesResponse): google.cloud.netapp.v1.ListQuotaRulesResponse;
+
+                    /**
+                     * Encodes the specified ListQuotaRulesResponse message. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesResponse.verify|verify} messages.
+                     * @param message ListQuotaRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IListQuotaRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQuotaRulesResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesResponse.verify|verify} messages.
+                     * @param message ListQuotaRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IListQuotaRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQuotaRulesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQuotaRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.ListQuotaRulesResponse;
+
+                    /**
+                     * Decodes a ListQuotaRulesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQuotaRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.ListQuotaRulesResponse;
+
+                    /**
+                     * Verifies a ListQuotaRulesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQuotaRulesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQuotaRulesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.ListQuotaRulesResponse;
+
+                    /**
+                     * Creates a plain object from a ListQuotaRulesResponse message. Also converts values to other types if specified.
+                     * @param message ListQuotaRulesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.ListQuotaRulesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQuotaRulesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQuotaRulesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetQuotaRuleRequest. */
+                interface IGetQuotaRuleRequest {
+
+                    /** GetQuotaRuleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQuotaRuleRequest. */
+                class GetQuotaRuleRequest implements IGetQuotaRuleRequest {
+
+                    /**
+                     * Constructs a new GetQuotaRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IGetQuotaRuleRequest);
+
+                    /** GetQuotaRuleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQuotaRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQuotaRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IGetQuotaRuleRequest): google.cloud.netapp.v1.GetQuotaRuleRequest;
+
+                    /**
+                     * Encodes the specified GetQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.GetQuotaRuleRequest.verify|verify} messages.
+                     * @param message GetQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IGetQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.GetQuotaRuleRequest.verify|verify} messages.
+                     * @param message GetQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IGetQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQuotaRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.GetQuotaRuleRequest;
+
+                    /**
+                     * Decodes a GetQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.GetQuotaRuleRequest;
+
+                    /**
+                     * Verifies a GetQuotaRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQuotaRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.GetQuotaRuleRequest;
+
+                    /**
+                     * Creates a plain object from a GetQuotaRuleRequest message. Also converts values to other types if specified.
+                     * @param message GetQuotaRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.GetQuotaRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQuotaRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQuotaRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateQuotaRuleRequest. */
+                interface ICreateQuotaRuleRequest {
+
+                    /** CreateQuotaRuleRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateQuotaRuleRequest quotaRule */
+                    quotaRule?: (google.cloud.netapp.v1.IQuotaRule|null);
+
+                    /** CreateQuotaRuleRequest quotaRuleId */
+                    quotaRuleId?: (string|null);
+                }
+
+                /** Represents a CreateQuotaRuleRequest. */
+                class CreateQuotaRuleRequest implements ICreateQuotaRuleRequest {
+
+                    /**
+                     * Constructs a new CreateQuotaRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.ICreateQuotaRuleRequest);
+
+                    /** CreateQuotaRuleRequest parent. */
+                    public parent: string;
+
+                    /** CreateQuotaRuleRequest quotaRule. */
+                    public quotaRule?: (google.cloud.netapp.v1.IQuotaRule|null);
+
+                    /** CreateQuotaRuleRequest quotaRuleId. */
+                    public quotaRuleId: string;
+
+                    /**
+                     * Creates a new CreateQuotaRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateQuotaRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.ICreateQuotaRuleRequest): google.cloud.netapp.v1.CreateQuotaRuleRequest;
+
+                    /**
+                     * Encodes the specified CreateQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.CreateQuotaRuleRequest.verify|verify} messages.
+                     * @param message CreateQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.ICreateQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CreateQuotaRuleRequest.verify|verify} messages.
+                     * @param message CreateQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.ICreateQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateQuotaRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.CreateQuotaRuleRequest;
+
+                    /**
+                     * Decodes a CreateQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.CreateQuotaRuleRequest;
+
+                    /**
+                     * Verifies a CreateQuotaRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateQuotaRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.CreateQuotaRuleRequest;
+
+                    /**
+                     * Creates a plain object from a CreateQuotaRuleRequest message. Also converts values to other types if specified.
+                     * @param message CreateQuotaRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.CreateQuotaRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateQuotaRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateQuotaRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateQuotaRuleRequest. */
+                interface IUpdateQuotaRuleRequest {
+
+                    /** UpdateQuotaRuleRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaRuleRequest quotaRule */
+                    quotaRule?: (google.cloud.netapp.v1.IQuotaRule|null);
+                }
+
+                /** Represents an UpdateQuotaRuleRequest. */
+                class UpdateQuotaRuleRequest implements IUpdateQuotaRuleRequest {
+
+                    /**
+                     * Constructs a new UpdateQuotaRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IUpdateQuotaRuleRequest);
+
+                    /** UpdateQuotaRuleRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaRuleRequest quotaRule. */
+                    public quotaRule?: (google.cloud.netapp.v1.IQuotaRule|null);
+
+                    /**
+                     * Creates a new UpdateQuotaRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateQuotaRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IUpdateQuotaRuleRequest): google.cloud.netapp.v1.UpdateQuotaRuleRequest;
+
+                    /**
+                     * Encodes the specified UpdateQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.UpdateQuotaRuleRequest.verify|verify} messages.
+                     * @param message UpdateQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IUpdateQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateQuotaRuleRequest.verify|verify} messages.
+                     * @param message UpdateQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IUpdateQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateQuotaRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.UpdateQuotaRuleRequest;
+
+                    /**
+                     * Decodes an UpdateQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.UpdateQuotaRuleRequest;
+
+                    /**
+                     * Verifies an UpdateQuotaRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateQuotaRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.UpdateQuotaRuleRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateQuotaRuleRequest message. Also converts values to other types if specified.
+                     * @param message UpdateQuotaRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.UpdateQuotaRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateQuotaRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateQuotaRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteQuotaRuleRequest. */
+                interface IDeleteQuotaRuleRequest {
+
+                    /** DeleteQuotaRuleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteQuotaRuleRequest. */
+                class DeleteQuotaRuleRequest implements IDeleteQuotaRuleRequest {
+
+                    /**
+                     * Constructs a new DeleteQuotaRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IDeleteQuotaRuleRequest);
+
+                    /** DeleteQuotaRuleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteQuotaRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteQuotaRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IDeleteQuotaRuleRequest): google.cloud.netapp.v1.DeleteQuotaRuleRequest;
+
+                    /**
+                     * Encodes the specified DeleteQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.DeleteQuotaRuleRequest.verify|verify} messages.
+                     * @param message DeleteQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IDeleteQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.DeleteQuotaRuleRequest.verify|verify} messages.
+                     * @param message DeleteQuotaRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IDeleteQuotaRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteQuotaRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.DeleteQuotaRuleRequest;
+
+                    /**
+                     * Decodes a DeleteQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteQuotaRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.DeleteQuotaRuleRequest;
+
+                    /**
+                     * Verifies a DeleteQuotaRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteQuotaRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.DeleteQuotaRuleRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteQuotaRuleRequest message. Also converts values to other types if specified.
+                     * @param message DeleteQuotaRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.DeleteQuotaRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteQuotaRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteQuotaRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QuotaRule. */
+                interface IQuotaRule {
+
+                    /** QuotaRule name */
+                    name?: (string|null);
+
+                    /** QuotaRule target */
+                    target?: (string|null);
+
+                    /** QuotaRule type */
+                    type?: (google.cloud.netapp.v1.QuotaRule.Type|keyof typeof google.cloud.netapp.v1.QuotaRule.Type|null);
+
+                    /** QuotaRule diskLimitMib */
+                    diskLimitMib?: (number|null);
+
+                    /** QuotaRule state */
+                    state?: (google.cloud.netapp.v1.QuotaRule.State|keyof typeof google.cloud.netapp.v1.QuotaRule.State|null);
+
+                    /** QuotaRule stateDetails */
+                    stateDetails?: (string|null);
+
+                    /** QuotaRule createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaRule description */
+                    description?: (string|null);
+
+                    /** QuotaRule labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a QuotaRule. */
+                class QuotaRule implements IQuotaRule {
+
+                    /**
+                     * Constructs a new QuotaRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IQuotaRule);
+
+                    /** QuotaRule name. */
+                    public name: string;
+
+                    /** QuotaRule target. */
+                    public target: string;
+
+                    /** QuotaRule type. */
+                    public type: (google.cloud.netapp.v1.QuotaRule.Type|keyof typeof google.cloud.netapp.v1.QuotaRule.Type);
+
+                    /** QuotaRule diskLimitMib. */
+                    public diskLimitMib: number;
+
+                    /** QuotaRule state. */
+                    public state: (google.cloud.netapp.v1.QuotaRule.State|keyof typeof google.cloud.netapp.v1.QuotaRule.State);
+
+                    /** QuotaRule stateDetails. */
+                    public stateDetails: string;
+
+                    /** QuotaRule createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaRule description. */
+                    public description: string;
+
+                    /** QuotaRule labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new QuotaRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaRule instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IQuotaRule): google.cloud.netapp.v1.QuotaRule;
+
+                    /**
+                     * Encodes the specified QuotaRule message. Does not implicitly {@link google.cloud.netapp.v1.QuotaRule.verify|verify} messages.
+                     * @param message QuotaRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IQuotaRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaRule message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.QuotaRule.verify|verify} messages.
+                     * @param message QuotaRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IQuotaRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.QuotaRule;
+
+                    /**
+                     * Decodes a QuotaRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.QuotaRule;
+
+                    /**
+                     * Verifies a QuotaRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.QuotaRule;
+
+                    /**
+                     * Creates a plain object from a QuotaRule message. Also converts values to other types if specified.
+                     * @param message QuotaRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.QuotaRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QuotaRule {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        INDIVIDUAL_USER_QUOTA = 1,
+                        INDIVIDUAL_GROUP_QUOTA = 2,
+                        DEFAULT_USER_QUOTA = 3,
+                        DEFAULT_GROUP_QUOTA = 4
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        UPDATING = 2,
+                        DELETING = 3,
+                        READY = 4,
+                        ERROR = 5
+                    }
+                }
+
                 /** Properties of a TransferStats. */
                 interface ITransferStats {
 
@@ -6138,6 +7058,15 @@ export namespace google {
 
                     /** HybridPeeringDetails passphrase */
                     passphrase?: (string|null);
+
+                    /** HybridPeeringDetails peerVolumeName */
+                    peerVolumeName?: (string|null);
+
+                    /** HybridPeeringDetails peerClusterName */
+                    peerClusterName?: (string|null);
+
+                    /** HybridPeeringDetails peerSvmName */
+                    peerSvmName?: (string|null);
                 }
 
                 /** Represents a HybridPeeringDetails. */
@@ -6160,6 +7089,15 @@ export namespace google {
 
                     /** HybridPeeringDetails passphrase. */
                     public passphrase: string;
+
+                    /** HybridPeeringDetails peerVolumeName. */
+                    public peerVolumeName: string;
+
+                    /** HybridPeeringDetails peerClusterName. */
+                    public peerClusterName: string;
+
+                    /** HybridPeeringDetails peerSvmName. */
+                    public peerSvmName: string;
 
                     /**
                      * Creates a new HybridPeeringDetails instance using the specified properties.
@@ -9565,6 +10503,9 @@ export namespace google {
 
                     /** MountOption instructions */
                     instructions?: (string|null);
+
+                    /** MountOption ipAddress */
+                    ipAddress?: (string|null);
                 }
 
                 /** Represents a MountOption. */
@@ -9587,6 +10528,9 @@ export namespace google {
 
                     /** MountOption instructions. */
                     public instructions: string;
+
+                    /** MountOption ipAddress. */
+                    public ipAddress: string;
 
                     /**
                      * Creates a new MountOption instance using the specified properties.
@@ -10160,6 +11104,13 @@ export namespace google {
                     FLEX = 4
                 }
 
+                /** FlexPerformance enum. */
+                enum FlexPerformance {
+                    FLEX_PERFORMANCE_UNSPECIFIED = 0,
+                    FLEX_PERFORMANCE_DEFAULT = 1,
+                    FLEX_PERFORMANCE_CUSTOM = 2
+                }
+
                 /** EncryptionType enum. */
                 enum EncryptionType {
                     ENCRYPTION_TYPE_UNSPECIFIED = 0,
@@ -10178,6 +11129,9 @@ export namespace google {
 
                     /** LocationMetadata supportedServiceLevels */
                     supportedServiceLevels?: (google.cloud.netapp.v1.ServiceLevel[]|null);
+
+                    /** LocationMetadata supportedFlexPerformance */
+                    supportedFlexPerformance?: (google.cloud.netapp.v1.FlexPerformance[]|null);
                 }
 
                 /** Represents a LocationMetadata. */
@@ -10191,6 +11145,9 @@ export namespace google {
 
                     /** LocationMetadata supportedServiceLevels. */
                     public supportedServiceLevels: google.cloud.netapp.v1.ServiceLevel[];
+
+                    /** LocationMetadata supportedFlexPerformance. */
+                    public supportedFlexPerformance: google.cloud.netapp.v1.FlexPerformance[];
 
                     /**
                      * Creates a new LocationMetadata instance using the specified properties.
@@ -11848,6 +12805,12 @@ export namespace google {
 
                     /** StoragePool zone */
                     zone?: (string|null);
+
+                    /** StoragePool satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** StoragePool satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a StoragePool. */
@@ -11918,6 +12881,12 @@ export namespace google {
 
                     /** StoragePool zone. */
                     public zone: string;
+
+                    /** StoragePool satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** StoragePool satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** StoragePool _globalAccessAllowed. */
                     public _globalAccessAllowed?: "globalAccessAllowed";
