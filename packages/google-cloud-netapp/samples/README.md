@@ -17,6 +17,7 @@
   * [Net_app.create_backup_policy](#net_app.create_backup_policy)
   * [Net_app.create_backup_vault](#net_app.create_backup_vault)
   * [Net_app.create_kms_config](#net_app.create_kms_config)
+  * [Net_app.create_quota_rule](#net_app.create_quota_rule)
   * [Net_app.create_replication](#net_app.create_replication)
   * [Net_app.create_snapshot](#net_app.create_snapshot)
   * [Net_app.create_storage_pool](#net_app.create_storage_pool)
@@ -26,6 +27,7 @@
   * [Net_app.delete_backup_policy](#net_app.delete_backup_policy)
   * [Net_app.delete_backup_vault](#net_app.delete_backup_vault)
   * [Net_app.delete_kms_config](#net_app.delete_kms_config)
+  * [Net_app.delete_quota_rule](#net_app.delete_quota_rule)
   * [Net_app.delete_replication](#net_app.delete_replication)
   * [Net_app.delete_snapshot](#net_app.delete_snapshot)
   * [Net_app.delete_storage_pool](#net_app.delete_storage_pool)
@@ -37,6 +39,7 @@
   * [Net_app.get_backup_policy](#net_app.get_backup_policy)
   * [Net_app.get_backup_vault](#net_app.get_backup_vault)
   * [Net_app.get_kms_config](#net_app.get_kms_config)
+  * [Net_app.get_quota_rule](#net_app.get_quota_rule)
   * [Net_app.get_replication](#net_app.get_replication)
   * [Net_app.get_snapshot](#net_app.get_snapshot)
   * [Net_app.get_storage_pool](#net_app.get_storage_pool)
@@ -46,6 +49,7 @@
   * [Net_app.list_backup_vaults](#net_app.list_backup_vaults)
   * [Net_app.list_backups](#net_app.list_backups)
   * [Net_app.list_kms_configs](#net_app.list_kms_configs)
+  * [Net_app.list_quota_rules](#net_app.list_quota_rules)
   * [Net_app.list_replications](#net_app.list_replications)
   * [Net_app.list_snapshots](#net_app.list_snapshots)
   * [Net_app.list_storage_pools](#net_app.list_storage_pools)
@@ -61,6 +65,7 @@
   * [Net_app.update_backup_policy](#net_app.update_backup_policy)
   * [Net_app.update_backup_vault](#net_app.update_backup_vault)
   * [Net_app.update_kms_config](#net_app.update_kms_config)
+  * [Net_app.update_quota_rule](#net_app.update_quota_rule)
   * [Net_app.update_replication](#net_app.update_replication)
   * [Net_app.update_snapshot](#net_app.update_snapshot)
   * [Net_app.update_storage_pool](#net_app.update_storage_pool)
@@ -162,6 +167,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.create_kms_config.js`
+
+
+-----
+
+
+
+
+### Net_app.create_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.create_quota_rule.js`
 
 
 -----
@@ -315,6 +337,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.delete_kms_config.js`
+
+
+-----
+
+
+
+
+### Net_app.delete_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.delete_quota_rule.js`
 
 
 -----
@@ -509,6 +548,23 @@ __Usage:__
 
 
 
+### Net_app.get_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.get_quota_rule.js`
+
+
+-----
+
+
+
+
 ### Net_app.get_replication
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_replication.js).
@@ -655,6 +711,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.list_kms_configs.js`
+
+
+-----
+
+
+
+
+### Net_app.list_quota_rules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_quota_rules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_quota_rules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.list_quota_rules.js`
 
 
 -----
@@ -910,6 +983,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.update_kms_config.js`
+
+
+-----
+
+
+
+
+### Net_app.update_quota_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_quota_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_quota_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.update_quota_rule.js`
 
 
 -----
