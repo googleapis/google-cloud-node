@@ -154,6 +154,58 @@ describe('topics', () => {
     }
   });
 
+  it('should create a topic with aws msk ingestion', async () => {
+    const testId = 'create-aws-msk-ingestion';
+    const name = topicName(testId);
+    const clusterArn = 'arn:aws:kafka:us-east-1:111111111111:cluster/fake-cluster-name/11111111-1111-1';
+    const mskTopic = 'fake-msk-topic';
+    const roleArn = 'arn:aws:iam::111111111111:role/fake-role-name';
+    const gcpServiceAccount = 'fake-service-account@fake-gcp-project.iam.gserviceaccount.com'
+
+    const output = execSync(
+      `${commandFor('createTopicWithAwsMskIngestion')} ${name} ${clusterArn} ${mskTopic} ${roleArn} ${gcpServiceAccount}`);
+      assert.include(output, `Topic ${name} created with AWS MSK ingestion.`)
+      const [topics] = await pubsub.getTopics();
+      const exists = topics.some(t => t.name === fullTopicName(name));
+      assert.ok(exists, 'Topic was created');
+  });
+
+  it('should create a topic with confluent cloud ingestion', async () => {
+    const testId = 'create-confluent-cloud-ingestion';
+    const name = topicName(testId);
+    const bootstrapServer = 'fake-bootstrap-server-id.us-south1.gcp.confluent.cloud:9092';
+    const clusterId = 'fake-cluster-id';
+    const confluentTopic = 'fake-confluent-topic';
+    const identityPoolId = 'fake-pool-id';
+    const gcpServiceAccount = 'fake-service-account@fake-gcp-project.iam.gserviceaccount.com'
+
+    const output = execSync(
+      `${commandFor('createTopicWithConfluentCloudIngestion')} ${name} ${bootstrapServer} ${clusterId} ${confluentTopic} ${identityPoolId} ${gcpServiceAccount}`);
+      assert.include(output, `Topic ${name} created with Confluent Cloud ingestion.`)
+      const [topics] = await pubsub.getTopics();
+      const exists = topics.some(t => t.name === fullTopicName(name));
+      assert.ok(exists, 'Topic was created');
+  });
+
+  it('should create a topic with azure event hubs ingestion', async () => {
+    const testId = 'create-azure-event-hubs-ingestion';
+    const name = topicName(testId);
+    const resourceGroup = 'fake-resource-group';
+    const namespace = 'fake-namespace';
+    const eventHub = 'fake-event-hub';
+    const clientId = 'fake-client-id';
+    const tenantId = 'fake-tenant-id';
+    const subscriptionId = 'fake-subscription-id';
+    const gcpServiceAccount = 'fake-service-account@fake-gcp-project.iam.gserviceaccount.com'
+
+    const output = execSync(
+      `${commandFor('createTopicWithAzureEventHubsIngestion')} ${name} ${resourceGroup} ${namespace} ${eventHub} ${clientId} ${tenantId} ${subscriptionId} ${gcpServiceAccount}`);
+      assert.include(output, `Topic ${name} created with Azure Event Hubs ingestion.`)
+      const [topics] = await pubsub.getTopics();
+      const exists = topics.some(t => t.name === fullTopicName(name));
+      assert.ok(exists, 'Topic was created');
+  });
+
   it('should update a topic with kinesis integration', async () => {
     const pair = await createPair('update-kinesis');
     const output = execSync(
