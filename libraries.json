@@ -2260,7 +2260,7 @@
     "distribution_name": "@google-cloud/spanner",
     "api_id": "spanner.googleapis.com",
     "requires_billing": true,
-    "codeowner_team": "@googleapis/api-spanner-nodejs",
+    "codeowner_team": "@googleapis/spanner-client-libraries-nodejs",
     "api_shortname": "spanner",
     "library_type": "GAPIC_COMBO",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-spanner",
