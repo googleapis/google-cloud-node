@@ -65,7 +65,7 @@ npm install @google-cloud/parametermanager
  */
 /**
  *  Required. Parent value for ListParametersRequest in the format
- *  `projects/*/ locations; /*`.
+ *  `projects/PROJECT/locations/LOCATION`.
  */
 // const parent = 'abc123'
 /**
