@@ -101,7 +101,7 @@ async function callListParameters() {
   // Run request
   const iterable = parametermanagerClient.listParametersAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
