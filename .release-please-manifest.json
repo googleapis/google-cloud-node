@@ -194,5 +194,6 @@
   "packages/google-cloud-oracledatabase": "0.2.0",
   "packages/google-ads-admanager": "0.1.0",
   "packages/google-shopping-merchant-reviews": "0.1.0",
-  "packages/google-cloud-memorystore": "0.1.0"
+  "packages/google-cloud-memorystore": "0.1.0",
+  "packages/google-cloud-parametermanager": "0.1.0"
 }
