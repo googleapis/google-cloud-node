@@ -28,7 +28,7 @@ function main(parent) {
    */
   /**
    *  Required. Parent value for ListParametersRequest in the format
-   *  `projects/*/locations/*`.
+   *  `projects/PROJECT/locations/LOCATION`.
    */
   // const parent = 'abc123'
   /**
