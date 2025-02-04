@@ -357,7 +357,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
@@ -388,7 +388,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
@@ -435,7 +435,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProduct = stubSimpleCall(
         undefined,
@@ -487,7 +487,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
@@ -518,7 +518,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
@@ -565,7 +565,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProduct = stubSimpleCall(
         undefined,
@@ -618,7 +618,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product', 'name']
       );
       request.product.name = defaultValue1;
-      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
@@ -650,7 +650,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product', 'name']
       );
       request.product.name = defaultValue1;
-      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
@@ -698,7 +698,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product', 'name']
       );
       request.product.name = defaultValue1;
-      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProduct = stubSimpleCall(
         undefined,
@@ -751,7 +751,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -782,7 +782,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -829,7 +829,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProduct = stubSimpleCall(
         undefined,
@@ -881,7 +881,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -914,7 +914,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -968,7 +968,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeProducts = stubLongRunningCall(
         undefined,
@@ -999,7 +999,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeProducts = stubLongRunningCall(
         undefined,
@@ -1075,7 +1075,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1108,7 +1108,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1162,7 +1162,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProducts = stubLongRunningCall(
         undefined,
@@ -1193,7 +1193,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProducts = stubLongRunningCall(
         undefined,
@@ -1269,7 +1269,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1302,7 +1302,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1356,7 +1356,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportProducts = stubLongRunningCall(
         undefined,
@@ -1387,7 +1387,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportProducts = stubLongRunningCall(
         undefined,
@@ -1464,7 +1464,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['inventory', 'name']
       );
       request.inventory.name = defaultValue1;
-      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1497,7 +1497,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['inventory', 'name']
       );
       request.inventory.name = defaultValue1;
-      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1552,7 +1552,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['inventory', 'name']
       );
       request.inventory.name = defaultValue1;
-      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setInventory = stubLongRunningCall(
         undefined,
@@ -1584,7 +1584,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['inventory', 'name']
       );
       request.inventory.name = defaultValue1;
-      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setInventory = stubLongRunningCall(
         undefined,
@@ -1657,7 +1657,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1690,7 +1690,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1744,7 +1744,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addFulfillmentPlaces = stubLongRunningCall(
         undefined,
@@ -1775,7 +1775,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addFulfillmentPlaces = stubLongRunningCall(
         undefined,
@@ -1851,7 +1851,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1884,7 +1884,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1938,7 +1938,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeFulfillmentPlaces = stubLongRunningCall(
         undefined,
@@ -1972,7 +1972,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeFulfillmentPlaces = stubLongRunningCall(
         undefined,
@@ -2049,7 +2049,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2082,7 +2082,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2136,7 +2136,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addLocalInventories = stubLongRunningCall(
         undefined,
@@ -2167,7 +2167,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addLocalInventories = stubLongRunningCall(
         undefined,
@@ -2243,7 +2243,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2276,7 +2276,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2330,7 +2330,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeLocalInventories = stubLongRunningCall(
         undefined,
@@ -2364,7 +2364,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['product']
       );
       request.product = defaultValue1;
-      const expectedHeaderRequestParams = `product=${defaultValue1}`;
+      const expectedHeaderRequestParams = `product=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeLocalInventories = stubLongRunningCall(
         undefined,
@@ -2440,7 +2440,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
@@ -2473,7 +2473,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
@@ -2522,7 +2522,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProducts = stubSimpleCall(
         undefined,
@@ -2553,7 +2553,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
@@ -2607,7 +2607,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.createStream = stubPageStreamingCall(
         undefined,
@@ -2658,7 +2658,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2beta.Product()),
@@ -2701,7 +2701,7 @@ describe('v2beta.ProductServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
