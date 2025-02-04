@@ -1,0 +1,57 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.commerce.consumer.procurement.v1alpha1",
+  "libraryPackage": "@google-cloud/procurement",
+  "services": {
+    "ConsumerProcurementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConsumerProcurementServiceClient",
+          "rpcs": {
+            "GetOrder": {
+              "methods": [
+                "getOrder"
+              ]
+            },
+            "PlaceOrder": {
+              "methods": [
+                "placeOrder"
+              ]
+            },
+            "ListOrders": {
+              "methods": [
+                "listOrders",
+                "listOrdersStream",
+                "listOrdersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConsumerProcurementServiceClient",
+          "rpcs": {
+            "GetOrder": {
+              "methods": [
+                "getOrder"
+              ]
+            },
+            "PlaceOrder": {
+              "methods": [
+                "placeOrder"
+              ]
+            },
+            "ListOrders": {
+              "methods": [
+                "listOrders",
+                "listOrdersStream",
+                "listOrdersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
