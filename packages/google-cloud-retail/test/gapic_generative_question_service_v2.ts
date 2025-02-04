@@ -298,7 +298,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['generativeQuestionsFeatureConfig', 'catalog']
       );
       request.generativeQuestionsFeatureConfig.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `generative_questions_feature_config.catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generative_questions_feature_config.catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.GenerativeQuestionsFeatureConfig()
       );
@@ -333,7 +333,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['generativeQuestionsFeatureConfig', 'catalog']
       );
       request.generativeQuestionsFeatureConfig.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `generative_questions_feature_config.catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generative_questions_feature_config.catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.GenerativeQuestionsFeatureConfig()
       );
@@ -382,7 +382,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['generativeQuestionsFeatureConfig', 'catalog']
       );
       request.generativeQuestionsFeatureConfig.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `generative_questions_feature_config.catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generative_questions_feature_config.catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGenerativeQuestionsFeatureConfig =
         stubSimpleCall(undefined, expectedError);
@@ -441,7 +441,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.GenerativeQuestionsFeatureConfig()
       );
@@ -475,7 +475,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.GenerativeQuestionsFeatureConfig()
       );
@@ -523,7 +523,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['catalog']
       );
       request.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGenerativeQuestionsFeatureConfig = stubSimpleCall(
         undefined,
@@ -583,7 +583,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListGenerativeQuestionConfigsResponse()
       );
@@ -616,7 +616,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListGenerativeQuestionConfigsResponse()
       );
@@ -664,7 +664,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGenerativeQuestionConfigs = stubSimpleCall(
         undefined,
@@ -725,7 +725,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['generativeQuestionConfig', 'catalog']
       );
       request.generativeQuestionConfig.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `generative_question_config.catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generative_question_config.catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.GenerativeQuestionConfig()
       );
@@ -759,7 +759,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['generativeQuestionConfig', 'catalog']
       );
       request.generativeQuestionConfig.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `generative_question_config.catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generative_question_config.catalog=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.GenerativeQuestionConfig()
       );
@@ -808,7 +808,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['generativeQuestionConfig', 'catalog']
       );
       request.generativeQuestionConfig.catalog = defaultValue1;
-      const expectedHeaderRequestParams = `generative_question_config.catalog=${defaultValue1}`;
+      const expectedHeaderRequestParams = `generative_question_config.catalog=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGenerativeQuestionConfig = stubSimpleCall(
         undefined,
@@ -869,7 +869,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.BatchUpdateGenerativeQuestionConfigsResponse()
       );
@@ -903,7 +903,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.BatchUpdateGenerativeQuestionConfigsResponse()
       );
@@ -951,7 +951,7 @@ describe('v2.GenerativeQuestionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchUpdateGenerativeQuestionConfigs =
         stubSimpleCall(undefined, expectedError);
