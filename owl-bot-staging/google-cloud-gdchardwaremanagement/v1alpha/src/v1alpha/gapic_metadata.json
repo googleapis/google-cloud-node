@@ -1,0 +1,405 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gdchardwaremanagement.v1alpha",
+  "libraryPackage": "@google-cloud/gdchardwaremanagement",
+  "services": {
+    "GDCHardwareManagement": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GDCHardwareManagementClient",
+          "rpcs": {
+            "GetOrder": {
+              "methods": [
+                "getOrder"
+              ]
+            },
+            "GetSite": {
+              "methods": [
+                "getSite"
+              ]
+            },
+            "GetHardwareGroup": {
+              "methods": [
+                "getHardwareGroup"
+              ]
+            },
+            "GetHardware": {
+              "methods": [
+                "getHardware"
+              ]
+            },
+            "GetComment": {
+              "methods": [
+                "getComment"
+              ]
+            },
+            "RecordActionOnComment": {
+              "methods": [
+                "recordActionOnComment"
+              ]
+            },
+            "GetChangeLogEntry": {
+              "methods": [
+                "getChangeLogEntry"
+              ]
+            },
+            "GetSku": {
+              "methods": [
+                "getSku"
+              ]
+            },
+            "GetZone": {
+              "methods": [
+                "getZone"
+              ]
+            },
+            "CreateOrder": {
+              "methods": [
+                "createOrder"
+              ]
+            },
+            "UpdateOrder": {
+              "methods": [
+                "updateOrder"
+              ]
+            },
+            "DeleteOrder": {
+              "methods": [
+                "deleteOrder"
+              ]
+            },
+            "SubmitOrder": {
+              "methods": [
+                "submitOrder"
+              ]
+            },
+            "CreateSite": {
+              "methods": [
+                "createSite"
+              ]
+            },
+            "UpdateSite": {
+              "methods": [
+                "updateSite"
+              ]
+            },
+            "DeleteSite": {
+              "methods": [
+                "deleteSite"
+              ]
+            },
+            "CreateHardwareGroup": {
+              "methods": [
+                "createHardwareGroup"
+              ]
+            },
+            "UpdateHardwareGroup": {
+              "methods": [
+                "updateHardwareGroup"
+              ]
+            },
+            "DeleteHardwareGroup": {
+              "methods": [
+                "deleteHardwareGroup"
+              ]
+            },
+            "CreateHardware": {
+              "methods": [
+                "createHardware"
+              ]
+            },
+            "UpdateHardware": {
+              "methods": [
+                "updateHardware"
+              ]
+            },
+            "DeleteHardware": {
+              "methods": [
+                "deleteHardware"
+              ]
+            },
+            "CreateComment": {
+              "methods": [
+                "createComment"
+              ]
+            },
+            "CreateZone": {
+              "methods": [
+                "createZone"
+              ]
+            },
+            "UpdateZone": {
+              "methods": [
+                "updateZone"
+              ]
+            },
+            "DeleteZone": {
+              "methods": [
+                "deleteZone"
+              ]
+            },
+            "SignalZoneState": {
+              "methods": [
+                "signalZoneState"
+              ]
+            },
+            "ListOrders": {
+              "methods": [
+                "listOrders",
+                "listOrdersStream",
+                "listOrdersAsync"
+              ]
+            },
+            "ListSites": {
+              "methods": [
+                "listSites",
+                "listSitesStream",
+                "listSitesAsync"
+              ]
+            },
+            "ListHardwareGroups": {
+              "methods": [
+                "listHardwareGroups",
+                "listHardwareGroupsStream",
+                "listHardwareGroupsAsync"
+              ]
+            },
+            "ListHardware": {
+              "methods": [
+                "listHardware",
+                "listHardwareStream",
+                "listHardwareAsync"
+              ]
+            },
+            "ListComments": {
+              "methods": [
+                "listComments",
+                "listCommentsStream",
+                "listCommentsAsync"
+              ]
+            },
+            "ListChangeLogEntries": {
+              "methods": [
+                "listChangeLogEntries",
+                "listChangeLogEntriesStream",
+                "listChangeLogEntriesAsync"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
+              ]
+            },
+            "ListZones": {
+              "methods": [
+                "listZones",
+                "listZonesStream",
+                "listZonesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GDCHardwareManagementClient",
+          "rpcs": {
+            "GetOrder": {
+              "methods": [
+                "getOrder"
+              ]
+            },
+            "GetSite": {
+              "methods": [
+                "getSite"
+              ]
+            },
+            "GetHardwareGroup": {
+              "methods": [
+                "getHardwareGroup"
+              ]
+            },
+            "GetHardware": {
+              "methods": [
+                "getHardware"
+              ]
+            },
+            "GetComment": {
+              "methods": [
+                "getComment"
+              ]
+            },
+            "RecordActionOnComment": {
+              "methods": [
+                "recordActionOnComment"
+              ]
+            },
+            "GetChangeLogEntry": {
+              "methods": [
+                "getChangeLogEntry"
+              ]
+            },
+            "GetSku": {
+              "methods": [
+                "getSku"
+              ]
+            },
+            "GetZone": {
+              "methods": [
+                "getZone"
+              ]
+            },
+            "CreateOrder": {
+              "methods": [
+                "createOrder"
+              ]
+            },
+            "UpdateOrder": {
+              "methods": [
+                "updateOrder"
+              ]
+            },
+            "DeleteOrder": {
+              "methods": [
+                "deleteOrder"
+              ]
+            },
+            "SubmitOrder": {
+              "methods": [
+                "submitOrder"
+              ]
+            },
+            "CreateSite": {
+              "methods": [
+                "createSite"
+              ]
+            },
+            "UpdateSite": {
+              "methods": [
+                "updateSite"
+              ]
+            },
+            "DeleteSite": {
+              "methods": [
+                "deleteSite"
+              ]
+            },
+            "CreateHardwareGroup": {
+              "methods": [
+                "createHardwareGroup"
+              ]
+            },
+            "UpdateHardwareGroup": {
+              "methods": [
+                "updateHardwareGroup"
+              ]
+            },
+            "DeleteHardwareGroup": {
+              "methods": [
+                "deleteHardwareGroup"
+              ]
+            },
+            "CreateHardware": {
+              "methods": [
+                "createHardware"
+              ]
+            },
+            "UpdateHardware": {
+              "methods": [
+                "updateHardware"
+              ]
+            },
+            "DeleteHardware": {
+              "methods": [
+                "deleteHardware"
+              ]
+            },
+            "CreateComment": {
+              "methods": [
+                "createComment"
+              ]
+            },
+            "CreateZone": {
+              "methods": [
+                "createZone"
+              ]
+            },
+            "UpdateZone": {
+              "methods": [
+                "updateZone"
+              ]
+            },
+            "DeleteZone": {
+              "methods": [
+                "deleteZone"
+              ]
+            },
+            "SignalZoneState": {
+              "methods": [
+                "signalZoneState"
+              ]
+            },
+            "ListOrders": {
+              "methods": [
+                "listOrders",
+                "listOrdersStream",
+                "listOrdersAsync"
+              ]
+            },
+            "ListSites": {
+              "methods": [
+                "listSites",
+                "listSitesStream",
+                "listSitesAsync"
+              ]
+            },
+            "ListHardwareGroups": {
+              "methods": [
+                "listHardwareGroups",
+                "listHardwareGroupsStream",
+                "listHardwareGroupsAsync"
+              ]
+            },
+            "ListHardware": {
+              "methods": [
+                "listHardware",
+                "listHardwareStream",
+                "listHardwareAsync"
+              ]
+            },
+            "ListComments": {
+              "methods": [
+                "listComments",
+                "listCommentsStream",
+                "listCommentsAsync"
+              ]
+            },
+            "ListChangeLogEntries": {
+              "methods": [
+                "listChangeLogEntries",
+                "listChangeLogEntriesStream",
+                "listChangeLogEntriesAsync"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
+              ]
+            },
+            "ListZones": {
+              "methods": [
+                "listZones",
+                "listZonesStream",
+                "listZonesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
