@@ -1,0 +1,10 @@
+[
+  "../../protos/google/cloud/bigquery/migration/v2/migration_entities.proto",
+  "../../protos/google/cloud/bigquery/migration/v2/migration_error_details.proto",
+  "../../protos/google/cloud/bigquery/migration/v2/migration_metrics.proto",
+  "../../protos/google/cloud/bigquery/migration/v2/migration_service.proto",
+  "../../protos/google/cloud/bigquery/migration/v2/translation_config.proto",
+  "../../protos/google/cloud/bigquery/migration/v2/translation_details.proto",
+  "../../protos/google/cloud/bigquery/migration/v2/translation_suggestion.proto",
+  "../../protos/google/cloud/bigquery/migration/v2/translation_usability.proto"
+]
