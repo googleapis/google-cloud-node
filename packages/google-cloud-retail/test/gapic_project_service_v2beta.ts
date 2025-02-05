@@ -280,7 +280,7 @@ describe('v2beta.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AlertConfig()
       );
@@ -311,7 +311,7 @@ describe('v2beta.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AlertConfig()
       );
@@ -358,7 +358,7 @@ describe('v2beta.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAlertConfig = stubSimpleCall(
         undefined,
@@ -411,7 +411,7 @@ describe('v2beta.ProjectServiceClient', () => {
         ['alertConfig', 'name']
       );
       request.alertConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AlertConfig()
       );
@@ -443,7 +443,7 @@ describe('v2beta.ProjectServiceClient', () => {
         ['alertConfig', 'name']
       );
       request.alertConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AlertConfig()
       );
@@ -491,7 +491,7 @@ describe('v2beta.ProjectServiceClient', () => {
         ['alertConfig', 'name']
       );
       request.alertConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `alert_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAlertConfig = stubSimpleCall(
         undefined,

@@ -281,7 +281,7 @@ describe('v2.PredictionServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.PredictResponse()
       );
@@ -312,7 +312,7 @@ describe('v2.PredictionServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.PredictResponse()
       );
@@ -359,7 +359,7 @@ describe('v2.PredictionServiceClient', () => {
         ['placement']
       );
       request.placement = defaultValue1;
-      const expectedHeaderRequestParams = `placement=${defaultValue1}`;
+      const expectedHeaderRequestParams = `placement=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.predict = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.predict(request), expectedError);
