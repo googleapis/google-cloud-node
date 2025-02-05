@@ -1,8 +1,0 @@
-[
-  "../../protos/google/cloud/backupdr/v1/backupdr.proto",
-  "../../protos/google/cloud/backupdr/v1/backupplan.proto",
-  "../../protos/google/cloud/backupdr/v1/backupplanassociation.proto",
-  "../../protos/google/cloud/backupdr/v1/backupvault.proto",
-  "../../protos/google/cloud/backupdr/v1/backupvault_ba.proto",
-  "../../protos/google/cloud/backupdr/v1/backupvault_gce.proto"
-]
