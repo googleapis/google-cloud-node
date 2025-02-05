@@ -2260,7 +2260,7 @@
     "distribution_name": "@google-cloud/spanner",
     "api_id": "spanner.googleapis.com",
     "requires_billing": true,
-    "codeowner_team": "@googleapis/api-spanner-nodejs",
+    "codeowner_team": "@googleapis/spanner-client-libraries-nodejs",
     "api_shortname": "spanner",
     "library_type": "GAPIC_COMBO",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-spanner",
@@ -3496,6 +3496,24 @@
     "api_shortname": "parallelstore",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-parallelstore",
     "support_documentation": "https://http://cloud/parallelstore?hl=en/docs/getting-support"
+  },
+  {
+    "name": "parametermanager",
+    "name_pretty": "Parameter Manager API",
+    "product_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parametermanager/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/parametermanager",
+    "api_id": "parametermanager.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "parametermanager",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-parametermanager",
+    "support_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs/getting-support"
   },
   {
     "name": "phishing-protection",
