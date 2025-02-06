@@ -365,7 +365,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Report()
       );
@@ -396,7 +396,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Report()
       );
@@ -443,7 +443,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReport = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getReport(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Report()
       );
@@ -523,7 +523,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Report()
       );
@@ -570,7 +570,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReport = stubSimpleCall(
         undefined,
@@ -623,7 +623,7 @@ describe('v1.ReportServiceClient', () => {
         ['report', 'name']
       );
       request.report.name = defaultValue1;
-      const expectedHeaderRequestParams = `report.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `report.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Report()
       );
@@ -655,7 +655,7 @@ describe('v1.ReportServiceClient', () => {
         ['report', 'name']
       );
       request.report.name = defaultValue1;
-      const expectedHeaderRequestParams = `report.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `report.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Report()
       );
@@ -703,7 +703,7 @@ describe('v1.ReportServiceClient', () => {
         ['report', 'name']
       );
       request.report.name = defaultValue1;
-      const expectedHeaderRequestParams = `report.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `report.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateReport = stubSimpleCall(
         undefined,
@@ -756,7 +756,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -788,7 +788,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -842,7 +842,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runReport = stubLongRunningCall(
         undefined,
@@ -873,7 +873,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runReport = stubLongRunningCall(
         undefined,
@@ -946,7 +946,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
@@ -979,7 +979,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
@@ -1028,7 +1028,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReports = stubSimpleCall(
         undefined,
@@ -1059,7 +1059,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
@@ -1110,7 +1110,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReports.createStream = stubPageStreamingCall(
         undefined,
@@ -1158,7 +1158,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Report()),
@@ -1201,7 +1201,7 @@ describe('v1.ReportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReports.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1245,7 +1245,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.Report.DataTable.Row()
@@ -1285,7 +1285,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.Report.DataTable.Row()
@@ -1342,7 +1342,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchReportResultRows = stubSimpleCall(
         undefined,
@@ -1376,7 +1376,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.Report.DataTable.Row()
@@ -1443,7 +1443,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchReportResultRows.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1499,7 +1499,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ads.admanager.v1.Report.DataTable.Row()
@@ -1553,7 +1553,7 @@ describe('v1.ReportServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchReportResultRows.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
