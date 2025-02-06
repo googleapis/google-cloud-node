@@ -360,7 +360,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.DockerImage()
       );
@@ -391,7 +391,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.DockerImage()
       );
@@ -438,7 +438,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDockerImage = stubSimpleCall(
         undefined,
@@ -490,7 +490,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.MavenArtifact()
       );
@@ -521,7 +521,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.MavenArtifact()
       );
@@ -568,7 +568,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMavenArtifact = stubSimpleCall(
         undefined,
@@ -620,7 +620,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.NpmPackage()
       );
@@ -651,7 +651,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.NpmPackage()
       );
@@ -698,7 +698,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNpmPackage = stubSimpleCall(
         undefined,
@@ -750,7 +750,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.PythonPackage()
       );
@@ -781,7 +781,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.PythonPackage()
       );
@@ -828,7 +828,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPythonPackage = stubSimpleCall(
         undefined,
@@ -880,7 +880,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Repository()
       );
@@ -911,7 +911,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Repository()
       );
@@ -958,7 +958,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRepository = stubSimpleCall(
         undefined,
@@ -1011,7 +1011,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['repository', 'name']
       );
       request.repository.name = defaultValue1;
-      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Repository()
       );
@@ -1043,7 +1043,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['repository', 'name']
       );
       request.repository.name = defaultValue1;
-      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Repository()
       );
@@ -1091,7 +1091,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['repository', 'name']
       );
       request.repository.name = defaultValue1;
-      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRepository = stubSimpleCall(
         undefined,
@@ -1144,7 +1144,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Package()
       );
@@ -1175,7 +1175,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Package()
       );
@@ -1222,7 +1222,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPackage = stubSimpleCall(
         undefined,
@@ -1274,7 +1274,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Version()
       );
@@ -1305,7 +1305,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Version()
       );
@@ -1352,7 +1352,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVersion = stubSimpleCall(
         undefined,
@@ -1405,7 +1405,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['version', 'name']
       );
       request.version.name = defaultValue1;
-      const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Version()
       );
@@ -1437,7 +1437,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['version', 'name']
       );
       request.version.name = defaultValue1;
-      const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Version()
       );
@@ -1485,7 +1485,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['version', 'name']
       );
       request.version.name = defaultValue1;
-      const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `version.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVersion = stubSimpleCall(
         undefined,
@@ -1538,7 +1538,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.File()
       );
@@ -1569,7 +1569,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.File()
       );
@@ -1616,7 +1616,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFile = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getFile(request), expectedError);
@@ -1666,7 +1666,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['file', 'name']
       );
       request.file.name = defaultValue1;
-      const expectedHeaderRequestParams = `file.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `file.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.File()
       );
@@ -1698,7 +1698,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['file', 'name']
       );
       request.file.name = defaultValue1;
-      const expectedHeaderRequestParams = `file.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `file.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.File()
       );
@@ -1746,7 +1746,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['file', 'name']
       );
       request.file.name = defaultValue1;
-      const expectedHeaderRequestParams = `file.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `file.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFile = stubSimpleCall(
         undefined,
@@ -1799,7 +1799,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Tag()
       );
@@ -1830,7 +1830,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Tag()
       );
@@ -1877,7 +1877,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTag(request), expectedError);
@@ -1926,7 +1926,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Tag()
       );
@@ -1957,7 +1957,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Tag()
       );
@@ -2004,7 +2004,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createTag(request), expectedError);
@@ -2054,7 +2054,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Tag()
       );
@@ -2086,7 +2086,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Tag()
       );
@@ -2134,7 +2134,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateTag(request), expectedError);
@@ -2184,7 +2184,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2215,7 +2215,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2262,7 +2262,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteTag(request), expectedError);
@@ -2311,7 +2311,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Rule()
       );
@@ -2342,7 +2342,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Rule()
       );
@@ -2389,7 +2389,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRule = stubSimpleCall(
         undefined,
@@ -2441,7 +2441,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Rule()
       );
@@ -2472,7 +2472,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Rule()
       );
@@ -2519,7 +2519,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRule(request), expectedError);
@@ -2569,7 +2569,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['rule', 'name']
       );
       request.rule.name = defaultValue1;
-      const expectedHeaderRequestParams = `rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Rule()
       );
@@ -2601,7 +2601,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['rule', 'name']
       );
       request.rule.name = defaultValue1;
-      const expectedHeaderRequestParams = `rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Rule()
       );
@@ -2649,7 +2649,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['rule', 'name']
       );
       request.rule.name = defaultValue1;
-      const expectedHeaderRequestParams = `rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rule.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRule = stubSimpleCall(
         undefined,
@@ -2702,7 +2702,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2733,7 +2733,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2780,7 +2780,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRule = stubSimpleCall(
         undefined,
@@ -2832,7 +2832,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2863,7 +2863,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2910,7 +2910,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -2962,7 +2962,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2993,7 +2993,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -3040,7 +3040,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -3092,7 +3092,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3124,7 +3124,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3171,7 +3171,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -3223,7 +3223,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.ProjectSettings()
       );
@@ -3255,7 +3255,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.ProjectSettings()
       );
@@ -3302,7 +3302,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProjectSettings = stubSimpleCall(
         undefined,
@@ -3355,7 +3355,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['projectSettings', 'name']
       );
       request.projectSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `project_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.ProjectSettings()
       );
@@ -3388,7 +3388,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['projectSettings', 'name']
       );
       request.projectSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `project_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.ProjectSettings()
       );
@@ -3436,7 +3436,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['projectSettings', 'name']
       );
       request.projectSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `project_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProjectSettings = stubSimpleCall(
         undefined,
@@ -3495,7 +3495,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
       );
@@ -3526,7 +3526,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
       );
@@ -3573,7 +3573,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVpcscConfig = stubSimpleCall(
         undefined,
@@ -3626,7 +3626,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['vpcscConfig', 'name']
       );
       request.vpcscConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
       );
@@ -3658,7 +3658,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['vpcscConfig', 'name']
       );
       request.vpcscConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
       );
@@ -3706,7 +3706,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['vpcscConfig', 'name']
       );
       request.vpcscConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVpcscConfig = stubSimpleCall(
         undefined,
@@ -3760,7 +3760,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['package', 'name']
       );
       request.package.name = defaultValue1;
-      const expectedHeaderRequestParams = `package.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `package.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Package()
       );
@@ -3792,7 +3792,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['package', 'name']
       );
       request.package.name = defaultValue1;
-      const expectedHeaderRequestParams = `package.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `package.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Package()
       );
@@ -3840,7 +3840,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['package', 'name']
       );
       request.package.name = defaultValue1;
-      const expectedHeaderRequestParams = `package.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `package.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePackage = stubSimpleCall(
         undefined,
@@ -3893,7 +3893,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Attachment()
       );
@@ -3924,7 +3924,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1.Attachment()
       );
@@ -3971,7 +3971,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttachment = stubSimpleCall(
         undefined,
@@ -4023,7 +4023,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4056,7 +4056,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4110,7 +4110,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importAptArtifacts = stubLongRunningCall(
         undefined,
@@ -4141,7 +4141,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importAptArtifacts = stubLongRunningCall(
         undefined,
@@ -4217,7 +4217,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4250,7 +4250,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4304,7 +4304,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importYumArtifacts = stubLongRunningCall(
         undefined,
@@ -4335,7 +4335,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importYumArtifacts = stubLongRunningCall(
         undefined,
@@ -4411,7 +4411,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4444,7 +4444,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4498,7 +4498,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRepository = stubLongRunningCall(
         undefined,
@@ -4529,7 +4529,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRepository = stubLongRunningCall(
         undefined,
@@ -4605,7 +4605,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4638,7 +4638,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4692,7 +4692,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRepository = stubLongRunningCall(
         undefined,
@@ -4723,7 +4723,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRepository = stubLongRunningCall(
         undefined,
@@ -4799,7 +4799,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4832,7 +4832,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4886,7 +4886,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePackage = stubLongRunningCall(
         undefined,
@@ -4917,7 +4917,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePackage = stubLongRunningCall(
         undefined,
@@ -4993,7 +4993,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5026,7 +5026,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5080,7 +5080,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVersion = stubLongRunningCall(
         undefined,
@@ -5111,7 +5111,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVersion = stubLongRunningCall(
         undefined,
@@ -5187,7 +5187,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5220,7 +5220,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5274,7 +5274,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteVersions = stubLongRunningCall(
         undefined,
@@ -5305,7 +5305,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteVersions = stubLongRunningCall(
         undefined,
@@ -5381,7 +5381,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5413,7 +5413,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5467,7 +5467,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFile = stubLongRunningCall(
         undefined,
@@ -5498,7 +5498,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFile = stubLongRunningCall(
         undefined,
@@ -5571,7 +5571,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5604,7 +5604,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5658,7 +5658,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAttachment = stubLongRunningCall(
         undefined,
@@ -5689,7 +5689,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAttachment = stubLongRunningCall(
         undefined,
@@ -5765,7 +5765,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5798,7 +5798,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5852,7 +5852,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAttachment = stubLongRunningCall(
         undefined,
@@ -5883,7 +5883,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAttachment = stubLongRunningCall(
         undefined,
@@ -5959,7 +5959,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.DockerImage()
@@ -5998,7 +5998,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.DockerImage()
@@ -6055,7 +6055,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDockerImages = stubSimpleCall(
         undefined,
@@ -6086,7 +6086,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.DockerImage()
@@ -6149,7 +6149,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDockerImages.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6201,7 +6201,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.DockerImage()
@@ -6251,7 +6251,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDockerImages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6294,7 +6294,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.MavenArtifact()
@@ -6334,7 +6334,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.MavenArtifact()
@@ -6391,7 +6391,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMavenArtifacts = stubSimpleCall(
         undefined,
@@ -6422,7 +6422,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.MavenArtifact()
@@ -6485,7 +6485,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMavenArtifacts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6537,7 +6537,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.MavenArtifact()
@@ -6587,7 +6587,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMavenArtifacts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6630,7 +6630,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.NpmPackage()
@@ -6669,7 +6669,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.NpmPackage()
@@ -6726,7 +6726,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNpmPackages = stubSimpleCall(
         undefined,
@@ -6757,7 +6757,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.NpmPackage()
@@ -6818,7 +6818,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNpmPackages.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6868,7 +6868,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.NpmPackage()
@@ -6918,7 +6918,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNpmPackages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6961,7 +6961,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.PythonPackage()
@@ -7001,7 +7001,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.PythonPackage()
@@ -7058,7 +7058,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPythonPackages = stubSimpleCall(
         undefined,
@@ -7089,7 +7089,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.PythonPackage()
@@ -7152,7 +7152,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPythonPackages.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7204,7 +7204,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.PythonPackage()
@@ -7254,7 +7254,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPythonPackages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7297,7 +7297,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Repository()
@@ -7336,7 +7336,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Repository()
@@ -7393,7 +7393,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRepositories = stubSimpleCall(
         undefined,
@@ -7424,7 +7424,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Repository()
@@ -7485,7 +7485,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7535,7 +7535,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Repository()
@@ -7585,7 +7585,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7628,7 +7628,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Package()
@@ -7667,7 +7667,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Package()
@@ -7724,7 +7724,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPackages = stubSimpleCall(
         undefined,
@@ -7755,7 +7755,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Package()
@@ -7816,7 +7816,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPackages.createStream = stubPageStreamingCall(
         undefined,
@@ -7868,7 +7868,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Package()
@@ -7918,7 +7918,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPackages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7961,7 +7961,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Version()
@@ -8000,7 +8000,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Version()
@@ -8057,7 +8057,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVersions = stubSimpleCall(
         undefined,
@@ -8088,7 +8088,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Version()
@@ -8149,7 +8149,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVersions.createStream = stubPageStreamingCall(
         undefined,
@@ -8201,7 +8201,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Version()
@@ -8251,7 +8251,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8294,7 +8294,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.File()
@@ -8333,7 +8333,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.File()
@@ -8388,7 +8388,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFiles = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listFiles(request), expectedError);
@@ -8416,7 +8416,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.File()
@@ -8476,7 +8476,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFiles.createStream = stubPageStreamingCall(
         undefined,
@@ -8527,7 +8527,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.File()
@@ -8575,7 +8575,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFiles.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8619,7 +8619,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Tag()
@@ -8658,7 +8658,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Tag()
@@ -8713,7 +8713,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTags = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTags(request), expectedError);
@@ -8741,7 +8741,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Tag()
@@ -8801,7 +8801,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTags.createStream = stubPageStreamingCall(
         undefined,
@@ -8852,7 +8852,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Tag()
@@ -8900,7 +8900,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTags.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8943,7 +8943,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Rule()
@@ -8982,7 +8982,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Rule()
@@ -9037,7 +9037,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRules = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listRules(request), expectedError);
@@ -9065,7 +9065,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Rule()
@@ -9125,7 +9125,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRules.createStream = stubPageStreamingCall(
         undefined,
@@ -9176,7 +9176,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Rule()
@@ -9224,7 +9224,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRules.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -9268,7 +9268,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Attachment()
@@ -9307,7 +9307,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Attachment()
@@ -9364,7 +9364,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAttachments = stubSimpleCall(
         undefined,
@@ -9395,7 +9395,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Attachment()
@@ -9456,7 +9456,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttachments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9506,7 +9506,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.artifactregistry.v1.Attachment()
@@ -9556,7 +9556,7 @@ describe('v1.ArtifactRegistryClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttachments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
