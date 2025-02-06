@@ -2417,6 +2417,8 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Backup createTime
                          * @property {Object.<string,string>|null} [labels] Backup labels
                          * @property {number|Long|null} [chainStorageBytes] Backup chainStorageBytes
+                         * @property {boolean|null} [satisfiesPzs] Backup satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Backup satisfiesPzi
                          */
     
                         /**
@@ -2515,6 +2517,22 @@
                          */
                         Backup.prototype.chainStorageBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
+                        /**
+                         * Backup satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.satisfiesPzs = false;
+    
+                        /**
+                         * Backup satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.satisfiesPzi = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -2574,6 +2592,10 @@
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.chainStorageBytes != null && Object.hasOwnProperty.call(message, "chainStorageBytes"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int64(message.chainStorageBytes);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.satisfiesPzs);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -2667,6 +2689,14 @@
                                         message.chainStorageBytes = reader.int64();
                                         break;
                                     }
+                                case 11: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2758,6 +2788,12 @@
                             if (message.chainStorageBytes != null && message.hasOwnProperty("chainStorageBytes"))
                                 if (!$util.isInteger(message.chainStorageBytes) && !(message.chainStorageBytes && $util.isInteger(message.chainStorageBytes.low) && $util.isInteger(message.chainStorageBytes.high)))
                                     return "chainStorageBytes: integer|Long expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             return null;
                         };
     
@@ -2867,6 +2903,10 @@
                                     message.chainStorageBytes = object.chainStorageBytes;
                                 else if (typeof object.chainStorageBytes === "object")
                                     message.chainStorageBytes = new $util.LongBits(object.chainStorageBytes.low >>> 0, object.chainStorageBytes.high >>> 0).toNumber();
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             return message;
                         };
     
@@ -2902,6 +2942,8 @@
                                     object.chainStorageBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.chainStorageBytes = options.longs === String ? "0" : 0;
+                                object.satisfiesPzs = false;
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2936,6 +2978,10 @@
                                     object.chainStorageBytes = options.longs === String ? String(message.chainStorageBytes) : message.chainStorageBytes;
                                 else
                                     object.chainStorageBytes = options.longs === String ? $util.Long.prototype.toString.call(message.chainStorageBytes) : options.longs === Number ? new $util.LongBits(message.chainStorageBytes.low >>> 0, message.chainStorageBytes.high >>> 0).toNumber() : message.chainStorageBytes;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     
@@ -10306,6 +10352,171 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|listQuotaRules}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ListQuotaRulesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ListQuotaRulesResponse} [response] ListQuotaRulesResponse
+                         */
+    
+                        /**
+                         * Calls ListQuotaRules.
+                         * @function listQuotaRules
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesRequest} request ListQuotaRulesRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ListQuotaRulesCallback} callback Node-style callback called with the error, if any, and ListQuotaRulesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.listQuotaRules = function listQuotaRules(request, callback) {
+                            return this.rpcCall(listQuotaRules, $root.google.cloud.netapp.v1.ListQuotaRulesRequest, $root.google.cloud.netapp.v1.ListQuotaRulesResponse, request, callback);
+                        }, "name", { value: "ListQuotaRules" });
+    
+                        /**
+                         * Calls ListQuotaRules.
+                         * @function listQuotaRules
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesRequest} request ListQuotaRulesRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ListQuotaRulesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|getQuotaRule}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef GetQuotaRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.QuotaRule} [response] QuotaRule
+                         */
+    
+                        /**
+                         * Calls GetQuotaRule.
+                         * @function getQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetQuotaRuleRequest} request GetQuotaRuleRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.GetQuotaRuleCallback} callback Node-style callback called with the error, if any, and QuotaRule
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.getQuotaRule = function getQuotaRule(request, callback) {
+                            return this.rpcCall(getQuotaRule, $root.google.cloud.netapp.v1.GetQuotaRuleRequest, $root.google.cloud.netapp.v1.QuotaRule, request, callback);
+                        }, "name", { value: "GetQuotaRule" });
+    
+                        /**
+                         * Calls GetQuotaRule.
+                         * @function getQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetQuotaRuleRequest} request GetQuotaRuleRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.QuotaRule>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|createQuotaRule}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef CreateQuotaRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateQuotaRule.
+                         * @function createQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateQuotaRuleRequest} request CreateQuotaRuleRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.CreateQuotaRuleCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.createQuotaRule = function createQuotaRule(request, callback) {
+                            return this.rpcCall(createQuotaRule, $root.google.cloud.netapp.v1.CreateQuotaRuleRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateQuotaRule" });
+    
+                        /**
+                         * Calls CreateQuotaRule.
+                         * @function createQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateQuotaRuleRequest} request CreateQuotaRuleRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|updateQuotaRule}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef UpdateQuotaRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateQuotaRule.
+                         * @function updateQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateQuotaRuleRequest} request UpdateQuotaRuleRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.UpdateQuotaRuleCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.updateQuotaRule = function updateQuotaRule(request, callback) {
+                            return this.rpcCall(updateQuotaRule, $root.google.cloud.netapp.v1.UpdateQuotaRuleRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateQuotaRule" });
+    
+                        /**
+                         * Calls UpdateQuotaRule.
+                         * @function updateQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateQuotaRuleRequest} request UpdateQuotaRuleRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|deleteQuotaRule}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef DeleteQuotaRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteQuotaRule.
+                         * @function deleteQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteQuotaRuleRequest} request DeleteQuotaRuleRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.DeleteQuotaRuleCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.deleteQuotaRule = function deleteQuotaRule(request, callback) {
+                            return this.rpcCall(deleteQuotaRule, $root.google.cloud.netapp.v1.DeleteQuotaRuleRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteQuotaRule" });
+    
+                        /**
+                         * Calls DeleteQuotaRule.
+                         * @function deleteQuotaRule
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteQuotaRuleRequest} request DeleteQuotaRuleRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return NetApp;
                     })();
     
@@ -13331,6 +13542,2032 @@
                         return KmsConfig;
                     })();
     
+                    v1.ListQuotaRulesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaRulesRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListQuotaRulesRequest
+                         * @property {string|null} [parent] ListQuotaRulesRequest parent
+                         * @property {number|null} [pageSize] ListQuotaRulesRequest pageSize
+                         * @property {string|null} [pageToken] ListQuotaRulesRequest pageToken
+                         * @property {string|null} [filter] ListQuotaRulesRequest filter
+                         * @property {string|null} [orderBy] ListQuotaRulesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaRulesRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListQuotaRulesRequest.
+                         * @implements IListQuotaRulesRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesRequest=} [properties] Properties to set
+                         */
+                        function ListQuotaRulesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaRulesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @instance
+                         */
+                        ListQuotaRulesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListQuotaRulesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @instance
+                         */
+                        ListQuotaRulesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListQuotaRulesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @instance
+                         */
+                        ListQuotaRulesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListQuotaRulesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @instance
+                         */
+                        ListQuotaRulesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListQuotaRulesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @instance
+                         */
+                        ListQuotaRulesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListQuotaRulesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesRequest} ListQuotaRulesRequest instance
+                         */
+                        ListQuotaRulesRequest.create = function create(properties) {
+                            return new ListQuotaRulesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaRulesRequest message. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesRequest} message ListQuotaRulesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaRulesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaRulesRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesRequest} message ListQuotaRulesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaRulesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaRulesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesRequest} ListQuotaRulesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaRulesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListQuotaRulesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaRulesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesRequest} ListQuotaRulesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaRulesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaRulesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaRulesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaRulesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesRequest} ListQuotaRulesRequest
+                         */
+                        ListQuotaRulesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListQuotaRulesRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListQuotaRulesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaRulesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListQuotaRulesRequest} message ListQuotaRulesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaRulesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaRulesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaRulesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaRulesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaRulesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListQuotaRulesRequest";
+                        };
+    
+                        return ListQuotaRulesRequest;
+                    })();
+    
+                    v1.ListQuotaRulesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaRulesResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListQuotaRulesResponse
+                         * @property {Array.<google.cloud.netapp.v1.IQuotaRule>|null} [quotaRules] ListQuotaRulesResponse quotaRules
+                         * @property {string|null} [nextPageToken] ListQuotaRulesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListQuotaRulesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaRulesResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListQuotaRulesResponse.
+                         * @implements IListQuotaRulesResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesResponse=} [properties] Properties to set
+                         */
+                        function ListQuotaRulesResponse(properties) {
+                            this.quotaRules = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaRulesResponse quotaRules.
+                         * @member {Array.<google.cloud.netapp.v1.IQuotaRule>} quotaRules
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @instance
+                         */
+                        ListQuotaRulesResponse.prototype.quotaRules = $util.emptyArray;
+    
+                        /**
+                         * ListQuotaRulesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @instance
+                         */
+                        ListQuotaRulesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListQuotaRulesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @instance
+                         */
+                        ListQuotaRulesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListQuotaRulesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesResponse} ListQuotaRulesResponse instance
+                         */
+                        ListQuotaRulesResponse.create = function create(properties) {
+                            return new ListQuotaRulesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaRulesResponse message. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesResponse} message ListQuotaRulesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaRulesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.quotaRules != null && message.quotaRules.length)
+                                for (var i = 0; i < message.quotaRules.length; ++i)
+                                    $root.google.cloud.netapp.v1.QuotaRule.encode(message.quotaRules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaRulesResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListQuotaRulesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListQuotaRulesResponse} message ListQuotaRulesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaRulesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaRulesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesResponse} ListQuotaRulesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaRulesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListQuotaRulesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.quotaRules && message.quotaRules.length))
+                                            message.quotaRules = [];
+                                        message.quotaRules.push($root.google.cloud.netapp.v1.QuotaRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaRulesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesResponse} ListQuotaRulesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaRulesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaRulesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaRulesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.quotaRules != null && message.hasOwnProperty("quotaRules")) {
+                                if (!Array.isArray(message.quotaRules))
+                                    return "quotaRules: array expected";
+                                for (var i = 0; i < message.quotaRules.length; ++i) {
+                                    var error = $root.google.cloud.netapp.v1.QuotaRule.verify(message.quotaRules[i]);
+                                    if (error)
+                                        return "quotaRules." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaRulesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListQuotaRulesResponse} ListQuotaRulesResponse
+                         */
+                        ListQuotaRulesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListQuotaRulesResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListQuotaRulesResponse();
+                            if (object.quotaRules) {
+                                if (!Array.isArray(object.quotaRules))
+                                    throw TypeError(".google.cloud.netapp.v1.ListQuotaRulesResponse.quotaRules: array expected");
+                                message.quotaRules = [];
+                                for (var i = 0; i < object.quotaRules.length; ++i) {
+                                    if (typeof object.quotaRules[i] !== "object")
+                                        throw TypeError(".google.cloud.netapp.v1.ListQuotaRulesResponse.quotaRules: object expected");
+                                    message.quotaRules[i] = $root.google.cloud.netapp.v1.QuotaRule.fromObject(object.quotaRules[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.netapp.v1.ListQuotaRulesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaRulesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListQuotaRulesResponse} message ListQuotaRulesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaRulesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.quotaRules = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.quotaRules && message.quotaRules.length) {
+                                object.quotaRules = [];
+                                for (var j = 0; j < message.quotaRules.length; ++j)
+                                    object.quotaRules[j] = $root.google.cloud.netapp.v1.QuotaRule.toObject(message.quotaRules[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaRulesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaRulesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaRulesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListQuotaRulesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaRulesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListQuotaRulesResponse";
+                        };
+    
+                        return ListQuotaRulesResponse;
+                    })();
+    
+                    v1.GetQuotaRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a GetQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IGetQuotaRuleRequest
+                         * @property {string|null} [name] GetQuotaRuleRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a GetQuotaRuleRequest.
+                         * @implements IGetQuotaRuleRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IGetQuotaRuleRequest=} [properties] Properties to set
+                         */
+                        function GetQuotaRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetQuotaRuleRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @instance
+                         */
+                        GetQuotaRuleRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetQuotaRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetQuotaRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.GetQuotaRuleRequest} GetQuotaRuleRequest instance
+                         */
+                        GetQuotaRuleRequest.create = function create(properties) {
+                            return new GetQuotaRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.GetQuotaRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetQuotaRuleRequest} message GetQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.GetQuotaRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetQuotaRuleRequest} message GetQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQuotaRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.GetQuotaRuleRequest} GetQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.GetQuotaRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.GetQuotaRuleRequest} GetQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQuotaRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetQuotaRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetQuotaRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.GetQuotaRuleRequest} GetQuotaRuleRequest
+                         */
+                        GetQuotaRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.GetQuotaRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.GetQuotaRuleRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetQuotaRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.GetQuotaRuleRequest} message GetQuotaRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetQuotaRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetQuotaRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetQuotaRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetQuotaRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.GetQuotaRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetQuotaRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.GetQuotaRuleRequest";
+                        };
+    
+                        return GetQuotaRuleRequest;
+                    })();
+    
+                    v1.CreateQuotaRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICreateQuotaRuleRequest
+                         * @property {string|null} [parent] CreateQuotaRuleRequest parent
+                         * @property {google.cloud.netapp.v1.IQuotaRule|null} [quotaRule] CreateQuotaRuleRequest quotaRule
+                         * @property {string|null} [quotaRuleId] CreateQuotaRuleRequest quotaRuleId
+                         */
+    
+                        /**
+                         * Constructs a new CreateQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CreateQuotaRuleRequest.
+                         * @implements ICreateQuotaRuleRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICreateQuotaRuleRequest=} [properties] Properties to set
+                         */
+                        function CreateQuotaRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateQuotaRuleRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @instance
+                         */
+                        CreateQuotaRuleRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateQuotaRuleRequest quotaRule.
+                         * @member {google.cloud.netapp.v1.IQuotaRule|null|undefined} quotaRule
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @instance
+                         */
+                        CreateQuotaRuleRequest.prototype.quotaRule = null;
+    
+                        /**
+                         * CreateQuotaRuleRequest quotaRuleId.
+                         * @member {string} quotaRuleId
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @instance
+                         */
+                        CreateQuotaRuleRequest.prototype.quotaRuleId = "";
+    
+                        /**
+                         * Creates a new CreateQuotaRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateQuotaRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CreateQuotaRuleRequest} CreateQuotaRuleRequest instance
+                         */
+                        CreateQuotaRuleRequest.create = function create(properties) {
+                            return new CreateQuotaRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.CreateQuotaRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateQuotaRuleRequest} message CreateQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateQuotaRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.quotaRule != null && Object.hasOwnProperty.call(message, "quotaRule"))
+                                $root.google.cloud.netapp.v1.QuotaRule.encode(message.quotaRule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.quotaRuleId != null && Object.hasOwnProperty.call(message, "quotaRuleId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.quotaRuleId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CreateQuotaRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateQuotaRuleRequest} message CreateQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateQuotaRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateQuotaRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CreateQuotaRuleRequest} CreateQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateQuotaRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CreateQuotaRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.quotaRule = $root.google.cloud.netapp.v1.QuotaRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.quotaRuleId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CreateQuotaRuleRequest} CreateQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateQuotaRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateQuotaRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateQuotaRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.quotaRule != null && message.hasOwnProperty("quotaRule")) {
+                                var error = $root.google.cloud.netapp.v1.QuotaRule.verify(message.quotaRule);
+                                if (error)
+                                    return "quotaRule." + error;
+                            }
+                            if (message.quotaRuleId != null && message.hasOwnProperty("quotaRuleId"))
+                                if (!$util.isString(message.quotaRuleId))
+                                    return "quotaRuleId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CreateQuotaRuleRequest} CreateQuotaRuleRequest
+                         */
+                        CreateQuotaRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CreateQuotaRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CreateQuotaRuleRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.quotaRule != null) {
+                                if (typeof object.quotaRule !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CreateQuotaRuleRequest.quotaRule: object expected");
+                                message.quotaRule = $root.google.cloud.netapp.v1.QuotaRule.fromObject(object.quotaRule);
+                            }
+                            if (object.quotaRuleId != null)
+                                message.quotaRuleId = String(object.quotaRuleId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateQuotaRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.CreateQuotaRuleRequest} message CreateQuotaRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateQuotaRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.quotaRule = null;
+                                object.quotaRuleId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.quotaRule != null && message.hasOwnProperty("quotaRule"))
+                                object.quotaRule = $root.google.cloud.netapp.v1.QuotaRule.toObject(message.quotaRule, options);
+                            if (message.quotaRuleId != null && message.hasOwnProperty("quotaRuleId"))
+                                object.quotaRuleId = message.quotaRuleId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateQuotaRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateQuotaRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateQuotaRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CreateQuotaRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateQuotaRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CreateQuotaRuleRequest";
+                        };
+    
+                        return CreateQuotaRuleRequest;
+                    })();
+    
+                    v1.UpdateQuotaRuleRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IUpdateQuotaRuleRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateQuotaRuleRequest updateMask
+                         * @property {google.cloud.netapp.v1.IQuotaRule|null} [quotaRule] UpdateQuotaRuleRequest quotaRule
+                         */
+    
+                        /**
+                         * Constructs a new UpdateQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an UpdateQuotaRuleRequest.
+                         * @implements IUpdateQuotaRuleRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IUpdateQuotaRuleRequest=} [properties] Properties to set
+                         */
+                        function UpdateQuotaRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateQuotaRuleRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @instance
+                         */
+                        UpdateQuotaRuleRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateQuotaRuleRequest quotaRule.
+                         * @member {google.cloud.netapp.v1.IQuotaRule|null|undefined} quotaRule
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @instance
+                         */
+                        UpdateQuotaRuleRequest.prototype.quotaRule = null;
+    
+                        /**
+                         * Creates a new UpdateQuotaRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateQuotaRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.UpdateQuotaRuleRequest} UpdateQuotaRuleRequest instance
+                         */
+                        UpdateQuotaRuleRequest.create = function create(properties) {
+                            return new UpdateQuotaRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.UpdateQuotaRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateQuotaRuleRequest} message UpdateQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateQuotaRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.quotaRule != null && Object.hasOwnProperty.call(message, "quotaRule"))
+                                $root.google.cloud.netapp.v1.QuotaRule.encode(message.quotaRule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateQuotaRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateQuotaRuleRequest} message UpdateQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateQuotaRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateQuotaRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.UpdateQuotaRuleRequest} UpdateQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateQuotaRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.UpdateQuotaRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.quotaRule = $root.google.cloud.netapp.v1.QuotaRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.UpdateQuotaRuleRequest} UpdateQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateQuotaRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateQuotaRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateQuotaRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.quotaRule != null && message.hasOwnProperty("quotaRule")) {
+                                var error = $root.google.cloud.netapp.v1.QuotaRule.verify(message.quotaRule);
+                                if (error)
+                                    return "quotaRule." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.UpdateQuotaRuleRequest} UpdateQuotaRuleRequest
+                         */
+                        UpdateQuotaRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.UpdateQuotaRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.UpdateQuotaRuleRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateQuotaRuleRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.quotaRule != null) {
+                                if (typeof object.quotaRule !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateQuotaRuleRequest.quotaRule: object expected");
+                                message.quotaRule = $root.google.cloud.netapp.v1.QuotaRule.fromObject(object.quotaRule);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateQuotaRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.UpdateQuotaRuleRequest} message UpdateQuotaRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateQuotaRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.quotaRule = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.quotaRule != null && message.hasOwnProperty("quotaRule"))
+                                object.quotaRule = $root.google.cloud.netapp.v1.QuotaRule.toObject(message.quotaRule, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateQuotaRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateQuotaRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateQuotaRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.UpdateQuotaRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateQuotaRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.UpdateQuotaRuleRequest";
+                        };
+    
+                        return UpdateQuotaRuleRequest;
+                    })();
+    
+                    v1.DeleteQuotaRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IDeleteQuotaRuleRequest
+                         * @property {string|null} [name] DeleteQuotaRuleRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteQuotaRuleRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a DeleteQuotaRuleRequest.
+                         * @implements IDeleteQuotaRuleRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IDeleteQuotaRuleRequest=} [properties] Properties to set
+                         */
+                        function DeleteQuotaRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteQuotaRuleRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @instance
+                         */
+                        DeleteQuotaRuleRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteQuotaRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteQuotaRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.DeleteQuotaRuleRequest} DeleteQuotaRuleRequest instance
+                         */
+                        DeleteQuotaRuleRequest.create = function create(properties) {
+                            return new DeleteQuotaRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteQuotaRuleRequest message. Does not implicitly {@link google.cloud.netapp.v1.DeleteQuotaRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteQuotaRuleRequest} message DeleteQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteQuotaRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteQuotaRuleRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.DeleteQuotaRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteQuotaRuleRequest} message DeleteQuotaRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteQuotaRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteQuotaRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.DeleteQuotaRuleRequest} DeleteQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteQuotaRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.DeleteQuotaRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteQuotaRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.DeleteQuotaRuleRequest} DeleteQuotaRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteQuotaRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteQuotaRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteQuotaRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteQuotaRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.DeleteQuotaRuleRequest} DeleteQuotaRuleRequest
+                         */
+                        DeleteQuotaRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.DeleteQuotaRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.DeleteQuotaRuleRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteQuotaRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.DeleteQuotaRuleRequest} message DeleteQuotaRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteQuotaRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteQuotaRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteQuotaRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteQuotaRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.DeleteQuotaRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteQuotaRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.DeleteQuotaRuleRequest";
+                        };
+    
+                        return DeleteQuotaRuleRequest;
+                    })();
+    
+                    v1.QuotaRule = (function() {
+    
+                        /**
+                         * Properties of a QuotaRule.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IQuotaRule
+                         * @property {string|null} [name] QuotaRule name
+                         * @property {string|null} [target] QuotaRule target
+                         * @property {google.cloud.netapp.v1.QuotaRule.Type|null} [type] QuotaRule type
+                         * @property {number|null} [diskLimitMib] QuotaRule diskLimitMib
+                         * @property {google.cloud.netapp.v1.QuotaRule.State|null} [state] QuotaRule state
+                         * @property {string|null} [stateDetails] QuotaRule stateDetails
+                         * @property {google.protobuf.ITimestamp|null} [createTime] QuotaRule createTime
+                         * @property {string|null} [description] QuotaRule description
+                         * @property {Object.<string,string>|null} [labels] QuotaRule labels
+                         */
+    
+                        /**
+                         * Constructs a new QuotaRule.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a QuotaRule.
+                         * @implements IQuotaRule
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IQuotaRule=} [properties] Properties to set
+                         */
+                        function QuotaRule(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaRule name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.name = "";
+    
+                        /**
+                         * QuotaRule target.
+                         * @member {string} target
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.target = "";
+    
+                        /**
+                         * QuotaRule type.
+                         * @member {google.cloud.netapp.v1.QuotaRule.Type} type
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.type = 0;
+    
+                        /**
+                         * QuotaRule diskLimitMib.
+                         * @member {number} diskLimitMib
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.diskLimitMib = 0;
+    
+                        /**
+                         * QuotaRule state.
+                         * @member {google.cloud.netapp.v1.QuotaRule.State} state
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.state = 0;
+    
+                        /**
+                         * QuotaRule stateDetails.
+                         * @member {string} stateDetails
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.stateDetails = "";
+    
+                        /**
+                         * QuotaRule createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.createTime = null;
+    
+                        /**
+                         * QuotaRule description.
+                         * @member {string} description
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.description = "";
+    
+                        /**
+                         * QuotaRule labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         */
+                        QuotaRule.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new QuotaRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {google.cloud.netapp.v1.IQuotaRule=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.QuotaRule} QuotaRule instance
+                         */
+                        QuotaRule.create = function create(properties) {
+                            return new QuotaRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaRule message. Does not implicitly {@link google.cloud.netapp.v1.QuotaRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {google.cloud.netapp.v1.IQuotaRule} message QuotaRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.target);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                            if (message.diskLimitMib != null && Object.hasOwnProperty.call(message, "diskLimitMib"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.diskLimitMib);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
+                            if (message.stateDetails != null && Object.hasOwnProperty.call(message, "stateDetails"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.stateDetails);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaRule message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.QuotaRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {google.cloud.netapp.v1.IQuotaRule} message QuotaRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.QuotaRule} QuotaRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.QuotaRule(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.diskLimitMib = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.stateDetails = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.QuotaRule} QuotaRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaRule message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.diskLimitMib != null && message.hasOwnProperty("diskLimitMib"))
+                                if (!$util.isInteger(message.diskLimitMib))
+                                    return "diskLimitMib: integer expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.stateDetails != null && message.hasOwnProperty("stateDetails"))
+                                if (!$util.isString(message.stateDetails))
+                                    return "stateDetails: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.QuotaRule} QuotaRule
+                         */
+                        QuotaRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.QuotaRule)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.QuotaRule();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "INDIVIDUAL_USER_QUOTA":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "INDIVIDUAL_GROUP_QUOTA":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "DEFAULT_USER_QUOTA":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "DEFAULT_GROUP_QUOTA":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.diskLimitMib != null)
+                                message.diskLimitMib = object.diskLimitMib | 0;
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "UPDATING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "READY":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "ERROR":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.stateDetails != null)
+                                message.stateDetails = String(object.stateDetails);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.QuotaRule.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.QuotaRule.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {google.cloud.netapp.v1.QuotaRule} message QuotaRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.target = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.diskLimitMib = 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateDetails = "";
+                                object.createTime = null;
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.netapp.v1.QuotaRule.Type[message.type] === undefined ? message.type : $root.google.cloud.netapp.v1.QuotaRule.Type[message.type] : message.type;
+                            if (message.diskLimitMib != null && message.hasOwnProperty("diskLimitMib"))
+                                object.diskLimitMib = message.diskLimitMib;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.netapp.v1.QuotaRule.State[message.state] === undefined ? message.state : $root.google.cloud.netapp.v1.QuotaRule.State[message.state] : message.state;
+                            if (message.stateDetails != null && message.hasOwnProperty("stateDetails"))
+                                object.stateDetails = message.stateDetails;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.QuotaRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.QuotaRule";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.netapp.v1.QuotaRule.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} INDIVIDUAL_USER_QUOTA=1 INDIVIDUAL_USER_QUOTA value
+                         * @property {number} INDIVIDUAL_GROUP_QUOTA=2 INDIVIDUAL_GROUP_QUOTA value
+                         * @property {number} DEFAULT_USER_QUOTA=3 DEFAULT_USER_QUOTA value
+                         * @property {number} DEFAULT_GROUP_QUOTA=4 DEFAULT_GROUP_QUOTA value
+                         */
+                        QuotaRule.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INDIVIDUAL_USER_QUOTA"] = 1;
+                            values[valuesById[2] = "INDIVIDUAL_GROUP_QUOTA"] = 2;
+                            values[valuesById[3] = "DEFAULT_USER_QUOTA"] = 3;
+                            values[valuesById[4] = "DEFAULT_GROUP_QUOTA"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.netapp.v1.QuotaRule.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} UPDATING=2 UPDATING value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} READY=4 READY value
+                         * @property {number} ERROR=5 ERROR value
+                         */
+                        QuotaRule.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "UPDATING"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "READY"] = 4;
+                            values[valuesById[5] = "ERROR"] = 5;
+                            return values;
+                        })();
+    
+                        return QuotaRule;
+                    })();
+    
                     v1.TransferStats = (function() {
     
                         /**
@@ -14810,6 +17047,9 @@
                          * @property {string|null} [command] HybridPeeringDetails command
                          * @property {google.protobuf.ITimestamp|null} [commandExpiryTime] HybridPeeringDetails commandExpiryTime
                          * @property {string|null} [passphrase] HybridPeeringDetails passphrase
+                         * @property {string|null} [peerVolumeName] HybridPeeringDetails peerVolumeName
+                         * @property {string|null} [peerClusterName] HybridPeeringDetails peerClusterName
+                         * @property {string|null} [peerSvmName] HybridPeeringDetails peerSvmName
                          */
     
                         /**
@@ -14860,6 +17100,30 @@
                         HybridPeeringDetails.prototype.passphrase = "";
     
                         /**
+                         * HybridPeeringDetails peerVolumeName.
+                         * @member {string} peerVolumeName
+                         * @memberof google.cloud.netapp.v1.HybridPeeringDetails
+                         * @instance
+                         */
+                        HybridPeeringDetails.prototype.peerVolumeName = "";
+    
+                        /**
+                         * HybridPeeringDetails peerClusterName.
+                         * @member {string} peerClusterName
+                         * @memberof google.cloud.netapp.v1.HybridPeeringDetails
+                         * @instance
+                         */
+                        HybridPeeringDetails.prototype.peerClusterName = "";
+    
+                        /**
+                         * HybridPeeringDetails peerSvmName.
+                         * @member {string} peerSvmName
+                         * @memberof google.cloud.netapp.v1.HybridPeeringDetails
+                         * @instance
+                         */
+                        HybridPeeringDetails.prototype.peerSvmName = "";
+    
+                        /**
                          * Creates a new HybridPeeringDetails instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.netapp.v1.HybridPeeringDetails
@@ -14891,6 +17155,12 @@
                                 $root.google.protobuf.Timestamp.encode(message.commandExpiryTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.passphrase != null && Object.hasOwnProperty.call(message, "passphrase"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.passphrase);
+                            if (message.peerVolumeName != null && Object.hasOwnProperty.call(message, "peerVolumeName"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.peerVolumeName);
+                            if (message.peerClusterName != null && Object.hasOwnProperty.call(message, "peerClusterName"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.peerClusterName);
+                            if (message.peerSvmName != null && Object.hasOwnProperty.call(message, "peerSvmName"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.peerSvmName);
                             return writer;
                         };
     
@@ -14939,6 +17209,18 @@
                                     }
                                 case 4: {
                                         message.passphrase = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.peerVolumeName = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.peerClusterName = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.peerSvmName = reader.string();
                                         break;
                                     }
                                 default:
@@ -14990,6 +17272,15 @@
                             if (message.passphrase != null && message.hasOwnProperty("passphrase"))
                                 if (!$util.isString(message.passphrase))
                                     return "passphrase: string expected";
+                            if (message.peerVolumeName != null && message.hasOwnProperty("peerVolumeName"))
+                                if (!$util.isString(message.peerVolumeName))
+                                    return "peerVolumeName: string expected";
+                            if (message.peerClusterName != null && message.hasOwnProperty("peerClusterName"))
+                                if (!$util.isString(message.peerClusterName))
+                                    return "peerClusterName: string expected";
+                            if (message.peerSvmName != null && message.hasOwnProperty("peerSvmName"))
+                                if (!$util.isString(message.peerSvmName))
+                                    return "peerSvmName: string expected";
                             return null;
                         };
     
@@ -15016,6 +17307,12 @@
                             }
                             if (object.passphrase != null)
                                 message.passphrase = String(object.passphrase);
+                            if (object.peerVolumeName != null)
+                                message.peerVolumeName = String(object.peerVolumeName);
+                            if (object.peerClusterName != null)
+                                message.peerClusterName = String(object.peerClusterName);
+                            if (object.peerSvmName != null)
+                                message.peerSvmName = String(object.peerSvmName);
                             return message;
                         };
     
@@ -15037,6 +17334,9 @@
                                 object.command = "";
                                 object.commandExpiryTime = null;
                                 object.passphrase = "";
+                                object.peerVolumeName = "";
+                                object.peerClusterName = "";
+                                object.peerSvmName = "";
                             }
                             if (message.subnetIp != null && message.hasOwnProperty("subnetIp"))
                                 object.subnetIp = message.subnetIp;
@@ -15046,6 +17346,12 @@
                                 object.commandExpiryTime = $root.google.protobuf.Timestamp.toObject(message.commandExpiryTime, options);
                             if (message.passphrase != null && message.hasOwnProperty("passphrase"))
                                 object.passphrase = message.passphrase;
+                            if (message.peerVolumeName != null && message.hasOwnProperty("peerVolumeName"))
+                                object.peerVolumeName = message.peerVolumeName;
+                            if (message.peerClusterName != null && message.hasOwnProperty("peerClusterName"))
+                                object.peerClusterName = message.peerClusterName;
+                            if (message.peerSvmName != null && message.hasOwnProperty("peerSvmName"))
+                                object.peerSvmName = message.peerSvmName;
                             return object;
                         };
     
@@ -23938,6 +26244,7 @@
                          * @property {string|null} [exportFull] MountOption exportFull
                          * @property {google.cloud.netapp.v1.Protocols|null} [protocol] MountOption protocol
                          * @property {string|null} [instructions] MountOption instructions
+                         * @property {string|null} [ipAddress] MountOption ipAddress
                          */
     
                         /**
@@ -23988,6 +26295,14 @@
                         MountOption.prototype.instructions = "";
     
                         /**
+                         * MountOption ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.netapp.v1.MountOption
+                         * @instance
+                         */
+                        MountOption.prototype.ipAddress = "";
+    
+                        /**
                          * Creates a new MountOption instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.netapp.v1.MountOption
@@ -24019,6 +26334,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.protocol);
                             if (message.instructions != null && Object.hasOwnProperty.call(message, "instructions"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.instructions);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.ipAddress);
                             return writer;
                         };
     
@@ -24067,6 +26384,10 @@
                                     }
                                 case 4: {
                                         message.instructions = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.ipAddress = reader.string();
                                         break;
                                     }
                                 default:
@@ -24123,6 +26444,9 @@
                             if (message.instructions != null && message.hasOwnProperty("instructions"))
                                 if (!$util.isString(message.instructions))
                                     return "instructions: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
                             return null;
                         };
     
@@ -24168,6 +26492,8 @@
                             }
                             if (object.instructions != null)
                                 message.instructions = String(object.instructions);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
                             return message;
                         };
     
@@ -24189,6 +26515,7 @@
                                 object.exportFull = "";
                                 object.protocol = options.enums === String ? "PROTOCOLS_UNSPECIFIED" : 0;
                                 object.instructions = "";
+                                object.ipAddress = "";
                             }
                             if (message["export"] != null && message.hasOwnProperty("export"))
                                 object["export"] = message["export"];
@@ -24198,6 +26525,8 @@
                                 object.protocol = options.enums === String ? $root.google.cloud.netapp.v1.Protocols[message.protocol] === undefined ? message.protocol : $root.google.cloud.netapp.v1.Protocols[message.protocol] : message.protocol;
                             if (message.instructions != null && message.hasOwnProperty("instructions"))
                                 object.instructions = message.instructions;
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
                             return object;
                         };
     
@@ -25551,6 +27880,22 @@
                     })();
     
                     /**
+                     * FlexPerformance enum.
+                     * @name google.cloud.netapp.v1.FlexPerformance
+                     * @enum {number}
+                     * @property {number} FLEX_PERFORMANCE_UNSPECIFIED=0 FLEX_PERFORMANCE_UNSPECIFIED value
+                     * @property {number} FLEX_PERFORMANCE_DEFAULT=1 FLEX_PERFORMANCE_DEFAULT value
+                     * @property {number} FLEX_PERFORMANCE_CUSTOM=2 FLEX_PERFORMANCE_CUSTOM value
+                     */
+                    v1.FlexPerformance = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FLEX_PERFORMANCE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FLEX_PERFORMANCE_DEFAULT"] = 1;
+                        values[valuesById[2] = "FLEX_PERFORMANCE_CUSTOM"] = 2;
+                        return values;
+                    })();
+    
+                    /**
                      * EncryptionType enum.
                      * @name google.cloud.netapp.v1.EncryptionType
                      * @enum {number}
@@ -25587,6 +27932,7 @@
                          * @memberof google.cloud.netapp.v1
                          * @interface ILocationMetadata
                          * @property {Array.<google.cloud.netapp.v1.ServiceLevel>|null} [supportedServiceLevels] LocationMetadata supportedServiceLevels
+                         * @property {Array.<google.cloud.netapp.v1.FlexPerformance>|null} [supportedFlexPerformance] LocationMetadata supportedFlexPerformance
                          */
     
                         /**
@@ -25599,6 +27945,7 @@
                          */
                         function LocationMetadata(properties) {
                             this.supportedServiceLevels = [];
+                            this.supportedFlexPerformance = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -25612,6 +27959,14 @@
                          * @instance
                          */
                         LocationMetadata.prototype.supportedServiceLevels = $util.emptyArray;
+    
+                        /**
+                         * LocationMetadata supportedFlexPerformance.
+                         * @member {Array.<google.cloud.netapp.v1.FlexPerformance>} supportedFlexPerformance
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.supportedFlexPerformance = $util.emptyArray;
     
                         /**
                          * Creates a new LocationMetadata instance using the specified properties.
@@ -25641,6 +27996,12 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).fork();
                                 for (var i = 0; i < message.supportedServiceLevels.length; ++i)
                                     writer.int32(message.supportedServiceLevels[i]);
+                                writer.ldelim();
+                            }
+                            if (message.supportedFlexPerformance != null && message.supportedFlexPerformance.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.supportedFlexPerformance.length; ++i)
+                                    writer.int32(message.supportedFlexPerformance[i]);
                                 writer.ldelim();
                             }
                             return writer;
@@ -25686,6 +28047,17 @@
                                                 message.supportedServiceLevels.push(reader.int32());
                                         } else
                                             message.supportedServiceLevels.push(reader.int32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.supportedFlexPerformance && message.supportedFlexPerformance.length))
+                                            message.supportedFlexPerformance = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.supportedFlexPerformance.push(reader.int32());
+                                        } else
+                                            message.supportedFlexPerformance.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -25738,6 +28110,19 @@
                                         break;
                                     }
                             }
+                            if (message.supportedFlexPerformance != null && message.hasOwnProperty("supportedFlexPerformance")) {
+                                if (!Array.isArray(message.supportedFlexPerformance))
+                                    return "supportedFlexPerformance: array expected";
+                                for (var i = 0; i < message.supportedFlexPerformance.length; ++i)
+                                    switch (message.supportedFlexPerformance[i]) {
+                                    default:
+                                        return "supportedFlexPerformance: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -25786,6 +28171,31 @@
                                         break;
                                     }
                             }
+                            if (object.supportedFlexPerformance) {
+                                if (!Array.isArray(object.supportedFlexPerformance))
+                                    throw TypeError(".google.cloud.netapp.v1.LocationMetadata.supportedFlexPerformance: array expected");
+                                message.supportedFlexPerformance = [];
+                                for (var i = 0; i < object.supportedFlexPerformance.length; ++i)
+                                    switch (object.supportedFlexPerformance[i]) {
+                                    default:
+                                        if (typeof object.supportedFlexPerformance[i] === "number") {
+                                            message.supportedFlexPerformance[i] = object.supportedFlexPerformance[i];
+                                            break;
+                                        }
+                                    case "FLEX_PERFORMANCE_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedFlexPerformance[i] = 0;
+                                        break;
+                                    case "FLEX_PERFORMANCE_DEFAULT":
+                                    case 1:
+                                        message.supportedFlexPerformance[i] = 1;
+                                        break;
+                                    case "FLEX_PERFORMANCE_CUSTOM":
+                                    case 2:
+                                        message.supportedFlexPerformance[i] = 2;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -25802,12 +28212,19 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.supportedServiceLevels = [];
+                                object.supportedFlexPerformance = [];
+                            }
                             if (message.supportedServiceLevels && message.supportedServiceLevels.length) {
                                 object.supportedServiceLevels = [];
                                 for (var j = 0; j < message.supportedServiceLevels.length; ++j)
                                     object.supportedServiceLevels[j] = options.enums === String ? $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] === undefined ? message.supportedServiceLevels[j] : $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] : message.supportedServiceLevels[j];
+                            }
+                            if (message.supportedFlexPerformance && message.supportedFlexPerformance.length) {
+                                object.supportedFlexPerformance = [];
+                                for (var j = 0; j < message.supportedFlexPerformance.length; ++j)
+                                    object.supportedFlexPerformance[j] = options.enums === String ? $root.google.cloud.netapp.v1.FlexPerformance[message.supportedFlexPerformance[j]] === undefined ? message.supportedFlexPerformance[j] : $root.google.cloud.netapp.v1.FlexPerformance[message.supportedFlexPerformance[j]] : message.supportedFlexPerformance[j];
                             }
                             return object;
                         };
@@ -29485,6 +31902,8 @@
                          * @property {boolean|null} [allowAutoTiering] StoragePool allowAutoTiering
                          * @property {string|null} [replicaZone] StoragePool replicaZone
                          * @property {string|null} [zone] StoragePool zone
+                         * @property {boolean|null} [satisfiesPzs] StoragePool satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] StoragePool satisfiesPzi
                          */
     
                         /**
@@ -29663,6 +32082,22 @@
                          */
                         StoragePool.prototype.zone = "";
     
+                        /**
+                         * StoragePool satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.satisfiesPzs = false;
+    
+                        /**
+                         * StoragePool satisfiesPzi.
+                         * @member {boolean} satisfiesPzi
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.satisfiesPzi = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -29742,6 +32177,10 @@
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.replicaZone);
                             if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.zone);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).bool(message.satisfiesPzs);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 24, wireType 0 =*/192).bool(message.satisfiesPzi);
                             return writer;
                         };
     
@@ -29875,6 +32314,14 @@
                                         message.zone = reader.string();
                                         break;
                                     }
+                                case 23: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30005,6 +32452,12 @@
                             if (message.zone != null && message.hasOwnProperty("zone"))
                                 if (!$util.isString(message.zone))
                                     return "zone: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
                             return null;
                         };
     
@@ -30164,6 +32617,10 @@
                                 message.replicaZone = String(object.replicaZone);
                             if (object.zone != null)
                                 message.zone = String(object.zone);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             return message;
                         };
     
@@ -30209,6 +32666,8 @@
                                 object.allowAutoTiering = false;
                                 object.replicaZone = "";
                                 object.zone = "";
+                                object.satisfiesPzs = false;
+                                object.satisfiesPzi = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -30263,6 +32722,10 @@
                                 object.replicaZone = message.replicaZone;
                             if (message.zone != null && message.hasOwnProperty("zone"))
                                 object.zone = message.zone;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                object.satisfiesPzi = message.satisfiesPzi;
                             return object;
                         };
     

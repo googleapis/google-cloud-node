@@ -358,7 +358,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.Cluster()
       );
@@ -389,7 +389,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.Cluster()
       );
@@ -436,7 +436,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
@@ -488,7 +488,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.Instance()
       );
@@ -519,7 +519,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.Instance()
       );
@@ -566,7 +566,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInstance = stubSimpleCall(
         undefined,
@@ -618,7 +618,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['instance']
       );
       request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.ExecuteSqlResponse()
       );
@@ -649,7 +649,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['instance']
       );
       request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.ExecuteSqlResponse()
       );
@@ -696,7 +696,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['instance']
       );
       request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.executeSql = stubSimpleCall(
         undefined,
@@ -748,7 +748,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.Backup()
       );
@@ -779,7 +779,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.Backup()
       );
@@ -826,7 +826,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getBackup(request), expectedError);
@@ -875,7 +875,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.GenerateClientCertificateResponse()
       );
@@ -907,7 +907,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.GenerateClientCertificateResponse()
       );
@@ -954,7 +954,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateClientCertificate = stubSimpleCall(
         undefined,
@@ -1012,7 +1012,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.ConnectionInfo()
       );
@@ -1043,7 +1043,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.ConnectionInfo()
       );
@@ -1090,7 +1090,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectionInfo = stubSimpleCall(
         undefined,
@@ -1142,7 +1142,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.User()
       );
@@ -1173,7 +1173,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.User()
       );
@@ -1220,7 +1220,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUser = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getUser(request), expectedError);
@@ -1269,7 +1269,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.User()
       );
@@ -1300,7 +1300,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.User()
       );
@@ -1347,7 +1347,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUser = stubSimpleCall(
         undefined,
@@ -1400,7 +1400,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['user', 'name']
       );
       request.user.name = defaultValue1;
-      const expectedHeaderRequestParams = `user.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.User()
       );
@@ -1432,7 +1432,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['user', 'name']
       );
       request.user.name = defaultValue1;
-      const expectedHeaderRequestParams = `user.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.alloydb.v1.User()
       );
@@ -1480,7 +1480,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['user', 'name']
       );
       request.user.name = defaultValue1;
-      const expectedHeaderRequestParams = `user.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `user.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateUser = stubSimpleCall(
         undefined,
@@ -1533,7 +1533,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1564,7 +1564,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1611,7 +1611,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUser = stubSimpleCall(
         undefined,
@@ -1663,7 +1663,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1696,7 +1696,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1750,7 +1750,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -1781,7 +1781,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -1858,7 +1858,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1892,7 +1892,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1947,7 +1947,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -1979,7 +1979,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -2055,7 +2055,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2088,7 +2088,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2142,7 +2142,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -2173,7 +2173,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -2249,7 +2249,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2282,7 +2282,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2336,7 +2336,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.promoteCluster = stubLongRunningCall(
         undefined,
@@ -2367,7 +2367,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.promoteCluster = stubLongRunningCall(
         undefined,
@@ -2443,7 +2443,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2476,7 +2476,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2530,7 +2530,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.switchoverCluster = stubLongRunningCall(
         undefined,
@@ -2561,7 +2561,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.switchoverCluster = stubLongRunningCall(
         undefined,
@@ -2637,7 +2637,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2670,7 +2670,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2724,7 +2724,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreCluster = stubLongRunningCall(
         undefined,
@@ -2755,7 +2755,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreCluster = stubLongRunningCall(
         undefined,
@@ -2831,7 +2831,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2864,7 +2864,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2918,7 +2918,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecondaryCluster = stubLongRunningCall(
         undefined,
@@ -2952,7 +2952,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecondaryCluster = stubLongRunningCall(
         undefined,
@@ -3028,7 +3028,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3061,7 +3061,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3115,7 +3115,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstance = stubLongRunningCall(
         undefined,
@@ -3146,7 +3146,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstance = stubLongRunningCall(
         undefined,
@@ -3222,7 +3222,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3255,7 +3255,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3309,7 +3309,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecondaryInstance = stubLongRunningCall(
         undefined,
@@ -3343,7 +3343,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecondaryInstance = stubLongRunningCall(
         undefined,
@@ -3420,7 +3420,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3453,7 +3453,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3507,7 +3507,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateInstances = stubLongRunningCall(
         undefined,
@@ -3538,7 +3538,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateInstances = stubLongRunningCall(
         undefined,
@@ -3615,7 +3615,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3649,7 +3649,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3704,7 +3704,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -3736,7 +3736,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -3812,7 +3812,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3845,7 +3845,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3899,7 +3899,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstance = stubLongRunningCall(
         undefined,
@@ -3930,7 +3930,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstance = stubLongRunningCall(
         undefined,
@@ -4006,7 +4006,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4039,7 +4039,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4093,7 +4093,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.failoverInstance = stubLongRunningCall(
         undefined,
@@ -4124,7 +4124,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.failoverInstance = stubLongRunningCall(
         undefined,
@@ -4200,7 +4200,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4232,7 +4232,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4286,7 +4286,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.injectFault = stubLongRunningCall(
         undefined,
@@ -4317,7 +4317,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.injectFault = stubLongRunningCall(
         undefined,
@@ -4390,7 +4390,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4423,7 +4423,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4477,7 +4477,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restartInstance = stubLongRunningCall(
         undefined,
@@ -4508,7 +4508,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restartInstance = stubLongRunningCall(
         undefined,
@@ -4584,7 +4584,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4616,7 +4616,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4670,7 +4670,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackup = stubLongRunningCall(
         undefined,
@@ -4701,7 +4701,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackup = stubLongRunningCall(
         undefined,
@@ -4775,7 +4775,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4808,7 +4808,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4863,7 +4863,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackup = stubLongRunningCall(
         undefined,
@@ -4895,7 +4895,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['backup', 'name']
       );
       request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBackup = stubLongRunningCall(
         undefined,
@@ -4968,7 +4968,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5000,7 +5000,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5054,7 +5054,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackup = stubLongRunningCall(
         undefined,
@@ -5085,7 +5085,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackup = stubLongRunningCall(
         undefined,
@@ -5158,7 +5158,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
@@ -5191,7 +5191,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
@@ -5240,7 +5240,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
@@ -5271,7 +5271,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
@@ -5325,7 +5325,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -5376,7 +5376,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Cluster()),
@@ -5419,7 +5419,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5461,7 +5461,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
@@ -5494,7 +5494,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
@@ -5543,7 +5543,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInstances = stubSimpleCall(
         undefined,
@@ -5574,7 +5574,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
@@ -5628,7 +5628,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5677,7 +5677,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Instance()),
@@ -5720,7 +5720,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5762,7 +5762,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
@@ -5795,7 +5795,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
@@ -5844,7 +5844,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBackups = stubSimpleCall(
         undefined,
@@ -5875,7 +5875,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
@@ -5926,7 +5926,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
         undefined,
@@ -5974,7 +5974,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Backup()),
@@ -6017,7 +6017,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6061,7 +6061,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.alloydb.v1.SupportedDatabaseFlag()
@@ -6101,7 +6101,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.alloydb.v1.SupportedDatabaseFlag()
@@ -6158,7 +6158,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSupportedDatabaseFlags = stubSimpleCall(
         undefined,
@@ -6192,7 +6192,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.alloydb.v1.SupportedDatabaseFlag()
@@ -6259,7 +6259,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSupportedDatabaseFlags.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6315,7 +6315,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.alloydb.v1.SupportedDatabaseFlag()
@@ -6369,7 +6369,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSupportedDatabaseFlags.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6416,7 +6416,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
@@ -6449,7 +6449,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
@@ -6498,7 +6498,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUsers = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listUsers(request), expectedError);
@@ -6526,7 +6526,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
@@ -6577,7 +6577,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsers.createStream = stubPageStreamingCall(
         undefined,
@@ -6625,7 +6625,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.User()),
@@ -6667,7 +6667,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsers.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6710,7 +6710,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
@@ -6743,7 +6743,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
@@ -6792,7 +6792,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatabases = stubSimpleCall(
         undefined,
@@ -6823,7 +6823,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
@@ -6877,7 +6877,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatabases.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6926,7 +6926,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
         generateSampleMessage(new protos.google.cloud.alloydb.v1.Database()),
@@ -6969,7 +6969,7 @@ describe('v1.AlloyDBAdminClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatabases.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
