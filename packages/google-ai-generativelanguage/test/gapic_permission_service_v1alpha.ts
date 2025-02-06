@@ -337,7 +337,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.Permission()
       );
@@ -369,7 +369,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.Permission()
       );
@@ -417,7 +417,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPermission = stubSimpleCall(
         undefined,
@@ -471,7 +471,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.Permission()
       );
@@ -503,7 +503,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.Permission()
       );
@@ -551,7 +551,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPermission = stubSimpleCall(
         undefined,
@@ -606,7 +606,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['permission', 'name']
       );
       request.permission.name = defaultValue1;
-      const expectedHeaderRequestParams = `permission.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.Permission()
       );
@@ -639,7 +639,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['permission', 'name']
       );
       request.permission.name = defaultValue1;
-      const expectedHeaderRequestParams = `permission.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.Permission()
       );
@@ -688,7 +688,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['permission', 'name']
       );
       request.permission.name = defaultValue1;
-      const expectedHeaderRequestParams = `permission.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `permission.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePermission = stubSimpleCall(
         undefined,
@@ -743,7 +743,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -775,7 +775,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -823,7 +823,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePermission = stubSimpleCall(
         undefined,
@@ -877,7 +877,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.TransferOwnershipResponse()
       );
@@ -909,7 +909,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.TransferOwnershipResponse()
       );
@@ -957,7 +957,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferOwnership = stubSimpleCall(
         undefined,
@@ -1011,7 +1011,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1alpha.Permission()
@@ -1051,7 +1051,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1alpha.Permission()
@@ -1109,7 +1109,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPermissions = stubSimpleCall(
         undefined,
@@ -1141,7 +1141,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1alpha.Permission()
@@ -1205,7 +1205,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPermissions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1258,7 +1258,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.ai.generativelanguage.v1alpha.Permission()
@@ -1309,7 +1309,7 @@ describe('v1alpha.PermissionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPermissions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
