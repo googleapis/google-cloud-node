@@ -6,6 +6,7 @@
   "../../protos/google/cloud/netapp/v1/cloud_netapp_service.proto",
   "../../protos/google/cloud/netapp/v1/common.proto",
   "../../protos/google/cloud/netapp/v1/kms.proto",
+  "../../protos/google/cloud/netapp/v1/quota_rule.proto",
   "../../protos/google/cloud/netapp/v1/replication.proto",
   "../../protos/google/cloud/netapp/v1/snapshot.proto",
   "../../protos/google/cloud/netapp/v1/storage_pool.proto",
