@@ -15,8 +15,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TaskProto",
                     "java_package": "com.google.cloud.run.v2",
-                    "(google.api.resource_definition).type": "networkservices.googleapis.com/Mesh",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/meshes/{mesh}"
+                    "(google.api.resource_definition).type": "cloudbuild.googleapis.com/Build",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/builds/{build}"
                   },
                   "nested": {
                     "Builds": {
@@ -156,6 +156,13 @@
                             "enableAutomaticUpdates": {
                               "type": "bool",
                               "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "projectDescriptor": {
+                              "type": "string",
+                              "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -532,6 +539,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "creator": {
+                          "type": "string",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "generation": {
                           "type": "int64",
                           "id": 3,
@@ -831,6 +845,17 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 12
+                        },
+                        "baseImageUri": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "buildInfo": {
+                          "type": "BuildInfo",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1213,6 +1238,24 @@
                         }
                       }
                     },
+                    "BuildInfo": {
+                      "fields": {
+                        "functionTarget": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceLocation": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "VpcAccess": {
                       "fields": {
                         "connector": {
@@ -1386,6 +1429,73 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BuildConfig": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Build"
+                          }
+                        },
+                        "sourceLocation": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "functionTarget": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "imageUri": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "baseImage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableAutomaticUpdates": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workerPool": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "environmentVariables": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3195,6 +3305,13 @@
                           "id": 38,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "buildConfig": {
+                          "type": "BuildConfig",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "reconciling": {
