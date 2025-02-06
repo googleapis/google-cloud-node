@@ -333,7 +333,7 @@ describe('v1.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Company()
       );
@@ -364,7 +364,7 @@ describe('v1.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.Company()
       );
@@ -411,7 +411,7 @@ describe('v1.CompanyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCompany = stubSimpleCall(
         undefined,
@@ -463,7 +463,7 @@ describe('v1.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
@@ -496,7 +496,7 @@ describe('v1.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
@@ -545,7 +545,7 @@ describe('v1.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCompanies = stubSimpleCall(
         undefined,
@@ -576,7 +576,7 @@ describe('v1.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
@@ -630,7 +630,7 @@ describe('v1.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompanies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -679,7 +679,7 @@ describe('v1.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
         generateSampleMessage(new protos.google.ads.admanager.v1.Company()),
@@ -722,7 +722,7 @@ describe('v1.CompanyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompanies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

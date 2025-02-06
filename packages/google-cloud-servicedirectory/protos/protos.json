@@ -19,8 +19,7 @@
                     "php_namespace": "Google\\Cloud\\ServiceDirectory\\V1",
                     "ruby_package": "Google::Cloud::ServiceDirectory::V1",
                     "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/global/networks/{network}",
-                    "cc_enable_arenas": true
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/global/networks/{network}"
                   },
                   "nested": {
                     "Endpoint": {

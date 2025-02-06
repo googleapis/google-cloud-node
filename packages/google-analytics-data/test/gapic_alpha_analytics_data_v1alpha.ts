@@ -370,7 +370,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportResponse()
       );
@@ -402,7 +402,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportResponse()
       );
@@ -450,7 +450,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['property']
       );
       request.property = defaultValue1;
-      const expectedHeaderRequestParams = `property=${defaultValue1}`;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runFunnelReport = stubSimpleCall(
         undefined,
@@ -504,7 +504,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryAudienceListResponse()
       );
@@ -536,7 +536,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryAudienceListResponse()
       );
@@ -584,7 +584,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryAudienceList = stubSimpleCall(
         undefined,
@@ -638,7 +638,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.SheetExportAudienceListResponse()
       );
@@ -671,7 +671,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.SheetExportAudienceListResponse()
       );
@@ -719,7 +719,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.sheetExportAudienceList = stubSimpleCall(
         undefined,
@@ -779,7 +779,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.AudienceList()
       );
@@ -811,7 +811,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.AudienceList()
       );
@@ -859,7 +859,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAudienceList = stubSimpleCall(
         undefined,
@@ -913,7 +913,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RecurringAudienceList()
       );
@@ -946,7 +946,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RecurringAudienceList()
       );
@@ -994,7 +994,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRecurringAudienceList = stubSimpleCall(
         undefined,
@@ -1054,7 +1054,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RecurringAudienceList()
       );
@@ -1087,7 +1087,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RecurringAudienceList()
       );
@@ -1135,7 +1135,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRecurringAudienceList = stubSimpleCall(
         undefined,
@@ -1195,7 +1195,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.PropertyQuotasSnapshot()
       );
@@ -1228,7 +1228,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.PropertyQuotasSnapshot()
       );
@@ -1276,7 +1276,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPropertyQuotasSnapshot = stubSimpleCall(
         undefined,
@@ -1336,7 +1336,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryReportTaskResponse()
       );
@@ -1368,7 +1368,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryReportTaskResponse()
       );
@@ -1416,7 +1416,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryReportTask = stubSimpleCall(
         undefined,
@@ -1470,7 +1470,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ReportTask()
       );
@@ -1502,7 +1502,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ReportTask()
       );
@@ -1550,7 +1550,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReportTask = stubSimpleCall(
         undefined,
@@ -1604,7 +1604,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1638,7 +1638,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1693,7 +1693,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAudienceList = stubLongRunningCall(
         undefined,
@@ -1725,7 +1725,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAudienceList = stubLongRunningCall(
         undefined,
@@ -1804,7 +1804,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1838,7 +1838,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1893,7 +1893,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReportTask = stubLongRunningCall(
         undefined,
@@ -1925,7 +1925,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReportTask = stubLongRunningCall(
         undefined,
@@ -2004,7 +2004,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.AudienceList()
@@ -2044,7 +2044,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.AudienceList()
@@ -2100,7 +2100,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAudienceLists = stubSimpleCall(
         undefined,
@@ -2132,7 +2132,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.AudienceList()
@@ -2194,7 +2194,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAudienceLists.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2245,7 +2245,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.AudienceList()
@@ -2296,7 +2296,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAudienceLists.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2340,7 +2340,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.RecurringAudienceList()
@@ -2381,7 +2381,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.RecurringAudienceList()
@@ -2439,7 +2439,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRecurringAudienceLists = stubSimpleCall(
         undefined,
@@ -2474,7 +2474,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.RecurringAudienceList()
@@ -2544,7 +2544,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecurringAudienceLists.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2603,7 +2603,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.RecurringAudienceList()
@@ -2658,7 +2658,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecurringAudienceLists.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2706,7 +2706,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.ReportTask()
@@ -2746,7 +2746,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.ReportTask()
@@ -2802,7 +2802,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReportTasks = stubSimpleCall(
         undefined,
@@ -2834,7 +2834,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.ReportTask()
@@ -2895,7 +2895,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReportTasks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2945,7 +2945,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.data.v1alpha.ReportTask()
@@ -2995,7 +2995,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReportTasks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
