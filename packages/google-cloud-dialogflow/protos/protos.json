@@ -11643,7 +11643,7 @@
                     "csharp_namespace": "Google.Cloud.Dialogflow.V2Beta1",
                     "go_package": "cloud.google.com/go/dialogflow/apiv2beta1/dialogflowpb;dialogflowpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "WebhookProto",
+                    "java_outer_classname": "PhoneNumberProto",
                     "java_package": "com.google.cloud.dialogflow.v2beta1",
                     "objc_class_prefix": "DF",
                     "(google.api.resource_definition).type": "dialogflow.googleapis.com/ConversationModel",
@@ -23003,6 +23003,243 @@
                         "payload": {
                           "type": "google.protobuf.Struct",
                           "id": 3
+                        }
+                      }
+                    },
+                    "PhoneNumbers": {
+                      "options": {
+                        "(google.api.default_host)": "dialogflow.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                      },
+                      "methods": {
+                        "ListPhoneNumbers": {
+                          "requestType": "ListPhoneNumbersRequest",
+                          "responseType": "ListPhoneNumbersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2beta1/{parent=projects/*}/phoneNumbers",
+                            "(google.api.http).additional_bindings.get": "/v2beta1/{parent=projects/*/locations/*}/phoneNumbers",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta1/{parent=projects/*}/phoneNumbers",
+                                "additional_bindings": {
+                                  "get": "/v2beta1/{parent=projects/*/locations/*}/phoneNumbers"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdatePhoneNumber": {
+                          "requestType": "UpdatePhoneNumberRequest",
+                          "responseType": "PhoneNumber",
+                          "options": {
+                            "(google.api.http).patch": "/v2beta1/{phone_number.name=projects/*/phoneNumbers/*}",
+                            "(google.api.http).body": "phone_number",
+                            "(google.api.http).additional_bindings.patch": "/v2beta1/{phone_number.name=projects/*/locations/*/phoneNumbers/*}",
+                            "(google.api.http).additional_bindings.body": "phone_number",
+                            "(google.api.method_signature)": "phone_number,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2beta1/{phone_number.name=projects/*/phoneNumbers/*}",
+                                "body": "phone_number",
+                                "additional_bindings": {
+                                  "patch": "/v2beta1/{phone_number.name=projects/*/locations/*/phoneNumbers/*}",
+                                  "body": "phone_number"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "phone_number,update_mask"
+                            }
+                          ]
+                        },
+                        "DeletePhoneNumber": {
+                          "requestType": "DeletePhoneNumberRequest",
+                          "responseType": "PhoneNumber",
+                          "options": {
+                            "(google.api.http).delete": "/v2beta1/{name=projects/*/phoneNumbers/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2beta1/{name=projects/*/locations/*/phoneNumbers/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2beta1/{name=projects/*/phoneNumbers/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2beta1/{name=projects/*/locations/*/phoneNumbers/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UndeletePhoneNumber": {
+                          "requestType": "UndeletePhoneNumberRequest",
+                          "responseType": "PhoneNumber",
+                          "options": {
+                            "(google.api.http).post": "/v2beta1/{name=projects/*/phoneNumbers/*}:undelete",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2beta1/{name=projects/*/locations/*/phoneNumbers/*}:undelete",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta1/{name=projects/*/phoneNumbers/*}:undelete",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2beta1/{name=projects/*/locations/*/phoneNumbers/*}:undelete",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "PhoneNumber": {
+                      "options": {
+                        "(google.api.resource).type": "dialogflow.googleapis.com/PhoneNumber",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/phoneNumbers/{phone_number}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "phoneNumber": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "conversationProfile": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lifecycleState": {
+                          "type": "LifecycleState",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "LifecycleState": {
+                          "values": {
+                            "LIFECYCLE_STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "DELETE_REQUESTED": 2
+                          }
+                        }
+                      }
+                    },
+                    "DeletePhoneNumberRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/PhoneNumber"
+                          }
+                        }
+                      }
+                    },
+                    "UndeletePhoneNumberRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/PhoneNumber"
+                          }
+                        }
+                      }
+                    },
+                    "ListPhoneNumbersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/PhoneNumber"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListPhoneNumbersResponse": {
+                      "fields": {
+                        "phoneNumbers": {
+                          "rule": "repeated",
+                          "type": "PhoneNumber",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdatePhoneNumberRequest": {
+                      "fields": {
+                        "phoneNumber": {
+                          "type": "PhoneNumber",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     }

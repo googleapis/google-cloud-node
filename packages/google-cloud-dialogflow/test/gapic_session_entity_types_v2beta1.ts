@@ -335,7 +335,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
       );
@@ -368,7 +368,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
       );
@@ -416,7 +416,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSessionEntityType = stubSimpleCall(
         undefined,
@@ -470,7 +470,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
       );
@@ -503,7 +503,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
       );
@@ -551,7 +551,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSessionEntityType = stubSimpleCall(
         undefined,
@@ -612,7 +612,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['sessionEntityType', 'name']
       );
       request.sessionEntityType.name = defaultValue1;
-      const expectedHeaderRequestParams = `session_entity_type.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session_entity_type.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
       );
@@ -646,7 +646,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['sessionEntityType', 'name']
       );
       request.sessionEntityType.name = defaultValue1;
-      const expectedHeaderRequestParams = `session_entity_type.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session_entity_type.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
       );
@@ -695,7 +695,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['sessionEntityType', 'name']
       );
       request.sessionEntityType.name = defaultValue1;
-      const expectedHeaderRequestParams = `session_entity_type.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session_entity_type.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSessionEntityType = stubSimpleCall(
         undefined,
@@ -756,7 +756,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -789,7 +789,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -837,7 +837,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSessionEntityType = stubSimpleCall(
         undefined,
@@ -897,7 +897,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
@@ -938,7 +938,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
@@ -996,7 +996,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSessionEntityTypes = stubSimpleCall(
         undefined,
@@ -1031,7 +1031,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
@@ -1101,7 +1101,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSessionEntityTypes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1160,7 +1160,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.SessionEntityType()
@@ -1215,7 +1215,7 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSessionEntityTypes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
