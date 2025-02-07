@@ -11332,7 +11332,8 @@ export namespace google {
                         enum SyncMode {
                             SYNC_MODE_UNSPECIFIED = 0,
                             FULL = 1,
-                            INCREMENTAL = 2
+                            INCREMENTAL = 2,
+                            NONE = 3
                         }
 
                         /** LogLevel enum. */

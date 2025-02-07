@@ -376,7 +376,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataTaxonomy()
       );
@@ -409,7 +409,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataTaxonomy()
       );
@@ -458,7 +458,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataTaxonomy = stubSimpleCall(
         undefined,
@@ -514,7 +514,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataAttributeBinding()
       );
@@ -548,7 +548,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataAttributeBinding()
       );
@@ -597,7 +597,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataAttributeBinding = stubSimpleCall(
         undefined,
@@ -659,7 +659,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataAttribute()
       );
@@ -692,7 +692,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataAttribute()
       );
@@ -741,7 +741,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataAttribute = stubSimpleCall(
         undefined,
@@ -797,7 +797,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -832,7 +832,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -888,7 +888,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataTaxonomy = stubLongRunningCall(
         undefined,
@@ -921,7 +921,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataTaxonomy = stubLongRunningCall(
         undefined,
@@ -1004,7 +1004,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataTaxonomy', 'name']
       );
       request.dataTaxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1040,7 +1040,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataTaxonomy', 'name']
       );
       request.dataTaxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1097,7 +1097,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataTaxonomy', 'name']
       );
       request.dataTaxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataTaxonomy = stubLongRunningCall(
         undefined,
@@ -1131,7 +1131,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataTaxonomy', 'name']
       );
       request.dataTaxonomy.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_taxonomy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataTaxonomy = stubLongRunningCall(
         undefined,
@@ -1213,7 +1213,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1248,7 +1248,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1304,7 +1304,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataTaxonomy = stubLongRunningCall(
         undefined,
@@ -1337,7 +1337,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataTaxonomy = stubLongRunningCall(
         undefined,
@@ -1419,7 +1419,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1454,7 +1454,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1510,7 +1510,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataAttributeBinding = stubLongRunningCall(
         undefined,
@@ -1546,7 +1546,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataAttributeBinding = stubLongRunningCall(
         undefined,
@@ -1630,7 +1630,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttributeBinding', 'name']
       );
       request.dataAttributeBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1666,7 +1666,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttributeBinding', 'name']
       );
       request.dataAttributeBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1723,7 +1723,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttributeBinding', 'name']
       );
       request.dataAttributeBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataAttributeBinding = stubLongRunningCall(
         undefined,
@@ -1760,7 +1760,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttributeBinding', 'name']
       );
       request.dataAttributeBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataAttributeBinding = stubLongRunningCall(
         undefined,
@@ -1843,7 +1843,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1878,7 +1878,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1934,7 +1934,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataAttributeBinding = stubLongRunningCall(
         undefined,
@@ -1970,7 +1970,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataAttributeBinding = stubLongRunningCall(
         undefined,
@@ -2053,7 +2053,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2088,7 +2088,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2144,7 +2144,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataAttribute = stubLongRunningCall(
         undefined,
@@ -2177,7 +2177,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataAttribute = stubLongRunningCall(
         undefined,
@@ -2260,7 +2260,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttribute', 'name']
       );
       request.dataAttribute.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2296,7 +2296,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttribute', 'name']
       );
       request.dataAttribute.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2353,7 +2353,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttribute', 'name']
       );
       request.dataAttribute.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataAttribute = stubLongRunningCall(
         undefined,
@@ -2387,7 +2387,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['dataAttribute', 'name']
       );
       request.dataAttribute.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_attribute.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataAttribute = stubLongRunningCall(
         undefined,
@@ -2469,7 +2469,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2504,7 +2504,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2560,7 +2560,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataAttribute = stubLongRunningCall(
         undefined,
@@ -2593,7 +2593,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataAttribute = stubLongRunningCall(
         undefined,
@@ -2675,7 +2675,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataTaxonomy()
@@ -2717,7 +2717,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataTaxonomy()
@@ -2774,7 +2774,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataTaxonomies = stubSimpleCall(
         undefined,
@@ -2807,7 +2807,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataTaxonomy()
@@ -2869,7 +2869,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataTaxonomies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2920,7 +2920,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataTaxonomy()
@@ -2971,7 +2971,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataTaxonomies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3015,7 +3015,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttributeBinding()
@@ -3057,7 +3057,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttributeBinding()
@@ -3116,7 +3116,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataAttributeBindings = stubSimpleCall(
         undefined,
@@ -3152,7 +3152,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttributeBinding()
@@ -3221,7 +3221,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataAttributeBindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3279,7 +3279,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttributeBinding()
@@ -3335,7 +3335,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataAttributeBindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3384,7 +3384,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttribute()
@@ -3426,7 +3426,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttribute()
@@ -3483,7 +3483,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataAttributes = stubSimpleCall(
         undefined,
@@ -3516,7 +3516,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttribute()
@@ -3578,7 +3578,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataAttributes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3629,7 +3629,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataAttribute()
@@ -3680,7 +3680,7 @@ describe('v1.DataTaxonomyServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataAttributes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
