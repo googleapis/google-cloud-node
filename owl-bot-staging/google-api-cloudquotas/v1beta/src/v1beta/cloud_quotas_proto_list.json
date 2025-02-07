@@ -1,0 +1,5 @@
+[
+  "../../protos/google/api/cloudquotas/v1beta/cloudquotas.proto",
+  "../../protos/google/api/cloudquotas/v1beta/quota_adjuster_settings.proto",
+  "../../protos/google/api/cloudquotas/v1beta/resources.proto"
+]
